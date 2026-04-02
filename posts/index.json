@@ -1,0 +1,37 @@
+[
+  {
+    "slug": "welcome-to-the-machine",
+    "title": "Welcome to the Machine: On Writing About AI in Public",
+    "date": "2026-03-22",
+    "description": "Why I'm starting a public blog about data science and GenAI — and what I hope to figure out by writing it.",
+    "tags": ["meta", "GenAI"]
+  },
+  {
+    "slug": "context",
+    "title": "Skills & Context Files for Coding Agents",
+    "date": "2026-03-28",
+    "description": "A comprehensive guide to CLAUDE.md, AGENTS.md, DESIGN.md, GitHub Copilot instructions, and the emerging science of context engineering for AI coding tools.",
+    "tags": ["GenAI", "claude-code", "context-engineering"]
+  },
+  {
+    "slug": "sr11-7",
+    "title": "SR 11-7 at fifteen: the guidance that built model risk management faces an AI reckoning",
+    "date": "2026-03-29",
+    "description": "How a 2011 supervisory letter transformed banking's approach to model risk — and why generative AI, agentic systems, and prompt injection are straining its core assumptions.",
+    "tags": ["GenAI", "MRM", "financial-AI", "SR11-7"]
+  },
+  {
+    "slug": "agent-harness-design",
+    "title": "Harness Design for Long-Running Agents",
+    "date": "2026-03-30",
+    "description": "The orchestration layer that context files alone can't provide: context management, error recovery, checkpointing, security, and framework comparisons for production agents.",
+    "tags": ["GenAI", "claude-code", "agentic-engineering"]
+  },
+  {
+    "slug": "guardrails",
+    "title": "What 'Guardrail' Actually Means for Agentic AI in Finance",
+    "date": "2026-04-02",
+    "description": "Everyone says 'guardrail.' Almost no one means the same thing. In an agentic system operating inside a bank, that ambiguity stops being academic.",
+    "tags": ["GenAI", "MRM", "agentic-engineering", "financial-AI", "SR11-7"]
+  }
+]

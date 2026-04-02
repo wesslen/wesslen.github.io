@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading… — wesslen.github.io</title>
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="./style.css" />
+
+    <!--
+    highlight.js themes — one active at a time.
+    JS swaps `disabled` based on the current theme.
+    Dark:  github-dark  (default)
+    Light: github       (loaded disabled, enabled on theme switch)
+  -->
+    <link
+      id="hljs-dark"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+    <link
+      id="hljs-light"
+      rel="stylesheet"
+      disabled
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>"
+    />
+  </head>
+  <body>
+    <!-- Reading progress bar -->
+    <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+    <!-- ── Site Header ────────────────────────────────────── -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="./index.html" class="site-title">
+          wesslen.github.io
+          <span class="cursor">_</span>
+        </a>
+        <div class="header-actions">
+          <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
+            <span id="theme-icon">☀️</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Post Layout ────────────────────────────────────── -->
+    <div class="post-layout container">
+      <!-- Main article column -->
+      <article id="article-col">
+        <!-- Back link -->
+        <a href="./index.html" class="back-link" id="back-link">
+          <svg
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M10 12L6 8l4-4" />
+          </svg>
+          all posts
+        </a>
+
+        <!-- Loading / error placeholders -->
+        <div id="loading-state" class="loading-state">
+          <span class="loading-dots">fetching post</span>
+        </div>
+        <div id="error-state" class="error-state" style="display: none">
+          <p>⚠ Post not found.</p>
+          <p style="font-size: 0.75rem; margin-top: 0.5rem; color: var(--muted)">
+            Make sure the slug is correct and you're serving the site (not opening as
+            <code>file://</code>
+            ).
+          </p>
+        </div>
+
+        <!-- Post content (rendered after fetch) -->
+        <div id="post-content" style="display: none">
+          <header class="post-header">
+            <div class="post-eyebrow">
+              <span class="post-date" id="post-date"></span>
+              <span class="post-read-time" id="post-read-time"></span>
+            </div>
+            <h1 class="post-title" id="post-title"></h1>
+            <p class="post-description" id="post-description"></p>
+            <div class="tags" id="post-tags"></div>
+          </header>
+
+          <!-- Mobile TOC (collapsible) -->
+          <div class="toc-mobile" id="toc-mobile">
+            <button class="toc-mobile-toggle" id="toc-mobile-toggle" aria-expanded="false">
+              <span>// table of contents</span>
+              <span class="toc-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="toc-mobile-body" id="toc-mobile-body">
+              <ul class="toc-list" id="toc-list-mobile"></ul>
+            </div>
+          </div>
+
+          <!-- Rendered markdown -->
+          <div class="prose" id="prose-body"></div>
+        </div>
+      </article>
+
+      <!-- ── TOC Sidebar (desktop only) ────────────────── -->
+      <aside class="toc-sidebar" id="toc-sidebar" aria-label="Table of contents">
+        <div class="toc-title">// contents</div>
+        <ul class="toc-list" id="toc-list-desktop"></ul>
+      </aside>
+    </div>
+
+    <!-- ── Footer ────────────────────────────────────────── -->
+    <footer class="site-footer">
+      <p>
+        built with ♥ and plain HTML ·
+        <a href="https://github.com/wesslen/wesslen.github.io" target="_blank" rel="noopener">github</a>
+      </p>
+      <p class="footer-disclaimer">
+        Views expressed here are strictly my own and do not represent those of my employer. Posts are drafted with AI
+        assistance (Claude, Gemini) and reviewed and edited by me.
+      </p>
+    </footer>
+
+    <!-- CDN: marked.js (markdown parser) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+    <!-- CDN: highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <script>
+      (() => {
+        "use strict";
+
+        /* ── Theme Persistence ──────────────────────────────────
+       Also swaps the highlight.js stylesheet so code blocks
+       always use an appropriate theme for the active mode.
+    ─────────────────────────────────────────────────────── */
+        const root = document.documentElement;
+        const toggleBtn = document.getElementById("theme-toggle");
+        const themeIcon = document.getElementById("theme-icon");
+        const hljsDark = document.getElementById("hljs-dark");
+        const hljsLight = document.getElementById("hljs-light");
+        const savedTheme = localStorage.getItem("theme") || "dark";
+
+        function applyTheme(theme) {
+          root.setAttribute("data-theme", theme);
+          themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
+          hljsDark.disabled = theme === "light";
+          hljsLight.disabled = theme === "dark";
+          localStorage.setItem("theme", theme);
+        }
+
+        applyTheme(savedTheme);
+        toggleBtn.addEventListener("click", () => {
+          applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+        });
+
+        /* ── Reading Progress Bar ───────────────────────────── */
+        const bar = document.getElementById("progress-bar");
+        function updateProgress() {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const pct = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+          bar.style.width = pct + "%";
+          bar.setAttribute("aria-valuenow", Math.round(pct));
+        }
+        window.addEventListener("scroll", updateProgress, { passive: true });
+
+        /* ── Tag Color (same algo as index.html) ────────────── */
+        function tagHue(tag) {
+          let hash = 0;
+          for (let i = 0; i < tag.length; i++) {
+            hash = (hash * 31 + tag.charCodeAt(i)) & 0xffffffff;
+          }
+          return Math.abs(hash) % 360;
+        }
+        function tagStyle(tag) {
+          const hue = tagHue(tag);
+          const isDark = root.getAttribute("data-theme") === "dark";
+          const bg = isDark ? `hsla(${hue},70%,60%,0.12)` : `hsla(${hue},60%,40%,0.10)`;
+          const border = isDark ? `hsla(${hue},70%,60%,0.4)` : `hsla(${hue},60%,40%,0.35)`;
+          const color = isDark ? `hsl(${hue},80%,72%)` : `hsl(${hue},50%,35%)`;
+          return `background:${bg};border-color:${border};color:${color}`;
+        }
+
+        /* ── Helpers ────────────────────────────────────────── */
+        function readTime(text) {
+          const words = text.trim().split(/\s+/).length;
+          return `${Math.max(1, Math.round(words / 225))} min read`;
+        }
+        function fmtDate(iso) {
+          return new Date(iso + "T00:00:00").toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+        }
+
+        /* ── Strip YAML Frontmatter ─────────────────────────── */
+        function stripFrontmatter(raw) {
+          const lines = raw.split("\n");
+          if (lines[0].trim() !== "---") return { meta: {}, body: raw };
+
+          let endIdx = -1;
+          for (let i = 1; i < lines.length; i++) {
+            if (lines[i].trim() === "---") {
+              endIdx = i;
+              break;
+            }
+          }
+          if (endIdx === -1) return { meta: {}, body: raw };
+
+          const fmLines = lines.slice(1, endIdx);
+          const meta = {};
+          fmLines.forEach((line) => {
+            const m = line.match(/^(\w+):\s*(.+)$/);
+            if (!m) return;
+            const [, key, val] = m;
+            if (val.startsWith("[") && val.endsWith("]")) {
+              meta[key] = val
+                .slice(1, -1)
+                .split(",")
+                .map((s) => s.trim().replace(/^["']|["']$/g, ""));
+            } else {
+              meta[key] = val.trim().replace(/^["']|["']$/g, "");
+            }
+          });
+
+          return { meta, body: lines.slice(endIdx + 1).join("\n") };
+        }
+
+        /* ── Footnote / Citation Pre-processor ─────────────────
+       Syntax in markdown:
+
+         Inline reference:  some text[^1] more text
+         Definition (anywhere, typically at end of post):
+           [^1]: Author, "Title," Journal, Year. https://...
+
+       Renders:
+         - Inline → superscript pill linking to #fn-1
+         - Definitions → styled References section at bottom
+         - Back-arrow link returns reader to inline citation
+
+       Definitions are stripped from the markdown body before
+       passing to marked, so they never appear as plain text.
+    ─────────────────────────────────────────────────────── */
+        function processFootnotes(body) {
+          const defs = {};
+          const order = []; // preserve definition order
+          const defRx = /^\[\^([^\]]+)\]:\s*(.+)$/gm;
+          let m;
+
+          while ((m = defRx.exec(body)) !== null) {
+            const id = m[1].trim();
+            const text = m[2].trim();
+            if (!defs[id]) {
+              defs[id] = text;
+              order.push(id);
+            }
+          }
+
+          if (order.length === 0) return { body, refsHtml: "" };
+
+          // Remove definition lines from body
+          let cleanBody = body.replace(/^\[\^[^\]]+\]:\s*.+$/gm, "").replace(/\n{3,}/g, "\n\n");
+
+          // Replace inline [^id] with superscript links
+          // Avoid replacing inside fenced code blocks
+          cleanBody = cleanBody.replace(/```[\s\S]*?```/g, (match) => match); // preserve code blocks
+          // Two-pass: protect code blocks, then replace refs
+          const codeBlocks = [];
+          cleanBody = cleanBody.replace(/```[\s\S]*?```|`[^`]+`/g, (block) => {
+            codeBlocks.push(block);
+            return `\x00CODE${codeBlocks.length - 1}\x00`;
+          });
+          cleanBody = cleanBody.replace(/\[\^([^\]]+)\]/g, (_, id) => {
+            const n = order.indexOf(id.trim()) + 1;
+            return `<sup class="cite-ref"><a href="#fn-${id}" id="fnref-${id}">${n || id}</a></sup>`;
+          });
+          // Restore code blocks
+          cleanBody = cleanBody.replace(/\x00CODE(\d+)\x00/g, (_, i) => codeBlocks[+i]);
+
+          // Build the references section HTML
+          const items = order
+            .map((id, i) => {
+              // Auto-linkify bare URLs in the definition text
+              const linkedText = defs[id].replace(
+                /(https?:\/\/[^\s,)]+)/g,
+                '<a href="$1" target="_blank" rel="noopener">$1</a>'
+              );
+              return `<li id="fn-${id}">
+          <span class="cite-num">${i + 1}.</span>
+          <span>${linkedText}&nbsp;<a href="#fnref-${id}" class="cite-back" aria-label="Return to text">↩</a></span>
+        </li>`;
+            })
+            .join("\n");
+
+          const refsHtml = `
+        <section class="citations" aria-label="References">
+          <h2 class="citations-heading">References</h2>
+          <ol class="cite-list">${items}</ol>
+        </section>`;
+
+          return { body: cleanBody, refsHtml };
+        }
+
+        /* ── YouTube Embed Processor ────────────────────────────
+       Syntax in markdown (standalone paragraph, nothing else on the line):
+
+         [youtube: VIDEO_ID]
+         [youtube: VIDEO_ID?t=90]          ← starts at 1m30s
+         [youtube: VIDEO_ID "Caption text"]
+         [youtube: VIDEO_ID?t=90 "Caption"]
+
+       Renders a responsive 16:9 iframe with optional caption.
+       The embed uses youtube-nocookie.com for privacy.
+    ─────────────────────────────────────────────────────── */
+        function processYouTube(proseEl) {
+          const ytRx = /^\[youtube:\s*([a-zA-Z0-9_-]+)(?:\?t=(\d+))?(?:\s+"([^"]*)")?\]$/;
+
+          proseEl.querySelectorAll("p").forEach((p) => {
+            const text = p.textContent.trim();
+            const match = text.match(ytRx);
+            if (!match) return;
+
+            const videoId = match[1];
+            const startT = match[2] ? parseInt(match[2], 10) : null;
+            const caption = match[3] || null;
+
+            // Build embed URL — use nocookie domain for reader privacy
+            let src = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`;
+            if (startT) src += `&start=${startT}`;
+
+            const wrapper = document.createElement("div");
+            wrapper.innerHTML = `
+          <div class="yt-embed">
+            <iframe
+              src="${src}"
+              title="${caption ? caption.replace(/"/g, "&quot;") : "YouTube video"}"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+          ${caption ? `<p class="yt-caption">${caption}</p>` : ""}`;
+
+            p.replaceWith(...wrapper.childNodes);
+          });
+        }
+
+        /* ── GitHub-style Alert Processor ──────────────────────────
+       Converts blockquotes whose first line is [!TYPE] into
+       styled alert divs. Supported: NOTE, TIP, IMPORTANT, WARNING, CAUTION.
+
+       Input (after marked renders):
+         <blockquote><p>[!NOTE]<br>Content here.</p></blockquote>
+
+       Output:
+         <div class="gh-alert gh-alert-note">
+           <div class="gh-alert-title"><span>ℹ</span> Note</div>
+           <p>Content here.</p>
+         </div>
+    ─────────────────────────────────────────────────────── */
+        const ALERT_META = {
+          NOTE: { icon: "ℹ", label: "Note" },
+          TIP: { icon: "💡", label: "Tip" },
+          IMPORTANT: { icon: "⚡", label: "Important" },
+          WARNING: { icon: "⚠", label: "Warning" },
+          CAUTION: { icon: "🔴", label: "Caution" },
+        };
+
+        function processAlerts(proseEl) {
+          proseEl.querySelectorAll("blockquote").forEach((bq) => {
+            const firstP = bq.querySelector("p");
+            if (!firstP) return;
+
+            // marked renders `> [!NOTE]\n> content` as:
+            // <p>[!NOTE]<br>content</p>  (single paragraph, <br> separator)
+            // OR as two separate paragraphs depending on the markdown layout.
+            const raw = firstP.innerHTML;
+            const match = raw.match(/^\[!([A-Z]+)\](<br\s*\/?>|<\/p><p>)?([\s\S]*)/i);
+            if (!match) return;
+
+            const type = match[1].toUpperCase();
+            const meta = ALERT_META[type];
+            if (!meta) return;
+
+            // Remaining content after the [!TYPE] token
+            let rest = (match[3] || "").trim();
+
+            // Collect any additional sibling paragraphs
+            const extraParas = [...bq.querySelectorAll("p")].slice(1);
+            const extraHtml = extraParas.map((p) => `<p>${p.innerHTML}</p>`).join("");
+
+            const div = document.createElement("div");
+            div.className = `gh-alert gh-alert-${type.toLowerCase()}`;
+            div.innerHTML = `
+          <div class="gh-alert-title"><span>${meta.icon}</span> ${meta.label}</div>
+          ${rest ? `<p>${rest}</p>` : ""}
+          ${extraHtml}
+        `.trim();
+
+            bq.replaceWith(div);
+          });
+        }
+
+        /* ── Language Labels on Code Blocks ─────────────────────
+       Reads the class applied by highlight.js (e.g. language-python)
+       and sets a data-lang attribute on the <pre> so CSS can render
+       a small language tab via ::before pseudo-element.
+    ─────────────────────────────────────────────────────── */
+        function labelCodeBlocks() {
+          document.querySelectorAll(".prose pre code[class]").forEach((codeEl) => {
+            const m = codeEl.className.match(/language-(\w+)/);
+            if (m) codeEl.closest("pre").setAttribute("data-lang", m[1]);
+          });
+        }
+
+        /* ── Configure marked.js ────────────────────────────── */
+        marked.setOptions({
+          breaks: true,
+          gfm: true,
+          highlight: function (code, lang) {
+            if (lang && hljs.getLanguage(lang)) {
+              try {
+                return hljs.highlight(code, { language: lang }).value;
+              } catch {}
+            }
+            return hljs.highlightAuto(code).value;
+          },
+        });
+
+        /* ── Inject copy buttons into code blocks ───────────── */
+        function injectCopyButtons() {
+          document.querySelectorAll(".prose pre").forEach((pre) => {
+            if (pre.querySelector(".copy-btn")) return;
+
+            const btn = document.createElement("button");
+            btn.className = "copy-btn";
+            btn.textContent = "copy";
+            btn.setAttribute("aria-label", "Copy code to clipboard");
+
+            btn.addEventListener("click", async () => {
+              const code = pre.querySelector("code");
+              if (!code) return;
+              try {
+                await navigator.clipboard.writeText(code.innerText);
+                btn.textContent = "copied!";
+                btn.classList.add("copied");
+                setTimeout(() => {
+                  btn.textContent = "copy";
+                  btn.classList.remove("copied");
+                }, 2000);
+              } catch {
+                btn.textContent = "error";
+                setTimeout(() => {
+                  btn.textContent = "copy";
+                }, 2000);
+              }
+            });
+
+            pre.appendChild(btn);
+          });
+        }
+
+        /* ── Build Table of Contents ────────────────────────── */
+        function buildTOC() {
+          const prose = document.getElementById("prose-body");
+          const headings = [...prose.querySelectorAll("h2, h3")];
+
+          if (headings.length < 2) {
+            document.getElementById("toc-mobile").style.display = "none";
+            return;
+          }
+
+          headings.forEach((h, idx) => {
+            if (!h.id) {
+              h.id =
+                h.textContent
+                  .toLowerCase()
+                  .replace(/[^\w\s-]/g, "")
+                  .replace(/\s+/g, "-")
+                  .replace(/-+/g, "-") +
+                "-" +
+                idx;
+            }
+          });
+
+          function renderTocList(container) {
+            headings.forEach((h) => {
+              const li = document.createElement("li");
+              li.className = `toc-item ${h.tagName.toLowerCase()}`;
+              const a = document.createElement("a");
+              a.href = `#${h.id}`;
+              a.textContent = h.textContent;
+              a.addEventListener("click", (e) => {
+                e.preventDefault();
+                document.getElementById(h.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+              });
+              li.appendChild(a);
+              container.appendChild(li);
+            });
+          }
+
+          renderTocList(document.getElementById("toc-list-desktop"));
+          renderTocList(document.getElementById("toc-list-mobile"));
+
+          const tocLinks = [...document.querySelectorAll(".toc-list a")];
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  const id = entry.target.id;
+                  tocLinks.forEach((a) => {
+                    a.classList.toggle("active", a.getAttribute("href") === `#${id}`);
+                  });
+                }
+              });
+            },
+            { rootMargin: "-20% 0px -70% 0px" }
+          );
+
+          headings.forEach((h) => observer.observe(h));
+        }
+
+        /* ── Mobile TOC Toggle ──────────────────────────────── */
+        document.getElementById("toc-mobile-toggle").addEventListener("click", () => {
+          const mobile = document.getElementById("toc-mobile");
+          const open = mobile.classList.toggle("open");
+          document.getElementById("toc-mobile-toggle").setAttribute("aria-expanded", open);
+        });
+
+        /* ── Load & Render Post ─────────────────────────────── */
+        async function loadPost() {
+          const params = new URLSearchParams(window.location.search);
+          const slug = params.get("slug");
+          const loadingEl = document.getElementById("loading-state");
+          const errorEl = document.getElementById("error-state");
+          const contentEl = document.getElementById("post-content");
+
+          if (!slug) {
+            loadingEl.style.display = "none";
+            errorEl.style.display = "block";
+            errorEl.querySelector("p").textContent = "⚠ No post slug provided.";
+            return;
+          }
+
+          try {
+            // Fetch post markdown
+            const mdRes = await fetch(`./posts/${encodeURIComponent(slug)}.md`);
+            if (!mdRes.ok) throw new Error(`HTTP ${mdRes.status}`);
+            const raw = await mdRes.text();
+
+            // Try to get metadata from manifest
+            let manifestMeta = {};
+            try {
+              const mRes = await fetch("./posts/index.json");
+              if (mRes.ok) {
+                const manifest = await mRes.json();
+                manifestMeta = manifest.find((p) => p.slug === slug) || {};
+              }
+            } catch {}
+
+            // Strip frontmatter
+            const { meta: fmMeta, body: rawBody } = stripFrontmatter(raw);
+            const meta = { ...fmMeta, ...manifestMeta };
+
+            // ── Pre-process footnotes/citations before marked ──
+            const { body, refsHtml } = processFootnotes(rawBody);
+
+            // Update page metadata
+            const title = meta.title || fmMeta.title || slug;
+            document.title = `${title} — wesslen.github.io`;
+            document.querySelector('meta[name="description"]').content = meta.description || "";
+
+            // Populate post header
+            document.getElementById("post-date").textContent = meta.date ? fmtDate(meta.date) : "";
+            document.getElementById("post-read-time").textContent = readTime(rawBody);
+            document.getElementById("post-title").textContent = title;
+            document.getElementById("post-description").textContent = meta.description || "";
+
+            // Tags
+            const tagsEl = document.getElementById("post-tags");
+            const tags = meta.tags || fmMeta.tags || [];
+            tagsEl.innerHTML = tags.map((t) => `<span class="tag" style="${tagStyle(t)}">${t}</span>`).join("");
+
+            // ── Render markdown → HTML, append references ──────
+            const html = marked.parse(body) + refsHtml;
+            const proseEl = document.getElementById("prose-body");
+            proseEl.innerHTML = html;
+
+            // Re-highlight any code blocks marked didn't catch
+            document.querySelectorAll(".prose pre code:not(.hljs)").forEach((el) => {
+              hljs.highlightElement(el);
+            });
+
+            // ── Post-render processors ─────────────────────────
+            processAlerts(proseEl); // must run before TOC (may change heading structure)
+            labelCodeBlocks();
+            injectCopyButtons();
+            processYouTube(proseEl);
+
+            // Build TOC
+            buildTOC();
+
+            // Show content
+            loadingEl.style.display = "none";
+            contentEl.style.display = "block";
+            updateProgress();
+          } catch (err) {
+            loadingEl.style.display = "none";
+            errorEl.style.display = "block";
+            console.error("Failed to load post:", err);
+          }
+        }
+
+        loadPost();
+      })();
+    </script>
+  </body>
+</html>
