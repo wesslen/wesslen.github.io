@@ -26,6 +26,7 @@
           <span class="cursor">_</span>
         </a>
         <div class="header-actions">
+          <a href="./about.html" class="nav-link">about</a>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
             <span id="theme-icon">☀️</span>
           </button>
@@ -54,6 +55,10 @@
       <div class="posts-header">
         <span class="section-label">// posts</span>
       </div>
+      <!-- Tag filter bar (populated by JS after posts load) -->
+      <div class="tag-filter-bar" id="tag-filter-bar" aria-label="Filter posts by tag" style="display: none">
+        <button class="tag-filter-btn active" data-tag="__all__">all</button>
+      </div>
       <ul class="post-list" id="post-list" aria-label="Blog posts">
         <li class="loading-state" id="loading-msg">
           <span class="loading-dots">loading posts</span>
@@ -65,7 +70,7 @@
     <footer class="site-footer">
       <p>
         built with ♥ and plain HTML ·
-        <a href="https://github.com/wesslen/wesslen.github.io" target="_blank" rel="noopener">github</a>
+        <a href="https://github.com/wesslen/wesslen.github.io" target="_blank" rel="noopener">view source on GitHub</a>
       </p>
       <p class="footer-disclaimer">
         Views expressed here are strictly my own and do not represent those of my employer. Posts are drafted with AI
@@ -143,9 +148,10 @@
         function renderCard(post, bodyText) {
           const rt = readTime(bodyText);
           const tags = (post.tags || []).map((t) => `<span class="tag" style="${tagStyle(t)}">${t}</span>`).join("");
+          const tagList = (post.tags || []).join(" ");
 
           return `
-        <li class="post-card">
+        <li class="post-card" data-tags="${tagList}">
           <a href="./post.html?slug=${encodeURIComponent(post.slug)}" aria-label="${post.title}">
             <div class="card-meta">
               <span class="card-date">${fmtDate(post.date)}</span>
@@ -156,6 +162,49 @@
             <div class="tags">${tags}</div>
           </a>
         </li>`;
+        }
+
+        /* ── Tag Filter Bar ─────────────────────────────── */
+        let activeTag = "__all__";
+
+        function buildTagFilter(manifest) {
+          const bar = document.getElementById("tag-filter-bar");
+          const allTags = [...new Set(manifest.flatMap((p) => p.tags || []))].sort();
+          if (allTags.length < 2) return; // not enough tags to filter
+
+          allTags.forEach((tag) => {
+            const btn = document.createElement("button");
+            btn.className = "tag-filter-btn";
+            btn.dataset.tag = tag;
+            btn.textContent = tag;
+            btn.style.cssText = tagStyle(tag);
+            bar.appendChild(btn);
+          });
+
+          bar.style.display = "flex";
+
+          bar.addEventListener("click", (e) => {
+            const btn = e.target.closest(".tag-filter-btn");
+            if (!btn) return;
+            activeTag = btn.dataset.tag;
+
+            // Update active state
+            bar.querySelectorAll(".tag-filter-btn").forEach((b) => {
+              b.classList.toggle("active", b.dataset.tag === activeTag);
+              // Reset inline style for active (all) btn, keep tag color for others
+              if (b.dataset.tag === "__all__") {
+                b.style.cssText = "";
+              } else {
+                b.style.cssText = b.classList.contains("active") ? tagStyle(b.dataset.tag) : tagStyle(b.dataset.tag);
+              }
+            });
+
+            // Show/hide post cards
+            document.querySelectorAll("#post-list .post-card").forEach((card) => {
+              const tags = card.dataset.tags ? card.dataset.tags.split(" ") : [];
+              card.style.display = activeTag === "__all__" || tags.includes(activeTag) ? "" : "none";
+            });
+          });
         }
 
         /* ── Fetch Manifest & Posts ─────────────────────── */
@@ -170,6 +219,9 @@
 
             // Sort newest first
             manifest.sort((a, b) => b.date.localeCompare(a.date));
+
+            // Build tag filter before rendering cards
+            buildTagFilter(manifest);
 
             // Fetch each post body to compute read time
             const cards = await Promise.all(

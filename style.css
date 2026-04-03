@@ -158,7 +158,7 @@ img {
   color: var(--muted);
   cursor: pointer;
   border-radius: var(--radius);
-  width: 44px;   /* 44px minimum touch target */
+  width: 44px; /* 44px minimum touch target */
   height: 44px;
   display: flex;
   align-items: center;
@@ -340,7 +340,7 @@ img {
 .card-meta {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;  /* let date + badge wrap on very small screens */
+  flex-wrap: wrap; /* let date + badge wrap on very small screens */
   gap: 0.5rem 1rem;
   margin-bottom: 0.6rem;
 }
@@ -741,16 +741,25 @@ img {
 }
 
 /* ── Tables ──────────────────────────────────────────────── */
+
+/* Wrapper div injected by wrapTables() — owns the scroll */
+.table-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.75rem 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
 .prose table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.75rem 0;
   font-size: 0.885rem;
-  display: block;
-  overflow-x: auto;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  -webkit-overflow-scrolling: touch;
+  /* margin/border/overflow now owned by wrapper */
+  margin: 0;
+  border: none;
+  border-radius: 0;
 }
 
 .prose thead {
@@ -1187,6 +1196,97 @@ img {
   .post-card {
     padding: 1rem;
   }
+}
+
+/* ── Nav Link (About etc. in site header) ────────────────── */
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  transition:
+    color var(--transition),
+    border-color var(--transition),
+    background var(--transition);
+  white-space: nowrap;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent);
+  border-color: var(--border);
+  background: var(--accent-dim);
+  opacity: 1;
+}
+
+/* ── Tag Filter Bar (index.html) ─────────────────────────── */
+.tag-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.75rem;
+}
+
+.tag-filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    color var(--transition),
+    border-color var(--transition),
+    background var(--transition);
+  touch-action: manipulation;
+}
+
+.tag-filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.tag-filter-btn.active[data-tag="__all__"] {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* ── Collapsible References (post.html) ──────────────────── */
+.citations-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.citations-toggle:hover .citations-heading {
+  color: var(--accent);
+}
+
+.citations-chevron {
+  font-size: 0.7rem;
+  color: var(--muted);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.citations-toggle[aria-expanded="false"] .citations-chevron {
+  transform: rotate(-90deg);
+}
+
+.cite-list.collapsed {
+  display: none;
 }
 
 /* ── Scrollbar ───────────────────────────────────────────── */
