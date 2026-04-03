@@ -43,6 +43,8 @@ Ongoing Monitoring is where guardrail KPIs live: frequency of intercepted jailbr
 
 Outcomes Analysis is the hardest translation. Backtesting a fraud detection agent means validating that guardrails didn't inadvertently suppress true positives or inflate false positives to a level that disrupts legitimate transactions. That's a materially different exercise than backtesting a point-estimate credit model, and nobody has fully worked out the methodology yet.
 
+One gap worth naming explicitly: SR 11-7 and the regulatory guidance that's followed it have nothing specific to say about behavioral guardrails — the controls that screen for prompt injection, jailbreaking, and goal hijacking. Structural and output controls map reasonably well onto existing validation frameworks. Behavioral controls don't, and regulators haven't said what they expect. Banks implementing these controls are doing so without supervisory guidance on what "effective challenge" looks like for an adversarial input classifier.
+
 Banks have developed risk tiering frameworks to calibrate control intensity across use cases:
 
 | Tier | Example | Guardrail Requirement | HITL? |

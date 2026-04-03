@@ -21,31 +21,11 @@ I'm also motivated by a quiet frustration with how GenAI gets discussed publicly
 
 ## What I Actually Do
 
-My day-to-day involves a mix of things: fine-tuning and evaluating language models, building retrieval pipelines, doing annotation studies, and generally trying to figure out when and why these systems fail. A lot of it is less glamorous than the demos suggest.
+My day-to-day involves a mix of things: building and evaluating language models, thinking about the organizational infrastructure for governing them, and lately working out what it means to design agents that are reliable enough to trust with real decisions. A lot of it is less glamorous than the demos suggest — and a lot of it sits at an uncomfortable intersection between technical engineering and institutional risk management that neither field has fully claimed.
 
-Here's the kind of thing I mean. Say you're evaluating a model for a classification task. You might write something like this:
+Here's the kind of thing I mean. A question I keep running into is how you apply fifteen-year-old governance frameworks to AI systems that didn't exist five years ago. In financial services, that's not rhetorical — banks are actively trying to apply model risk guidance written for linear regression models to large language models making underwriting recommendations. The technical and organizational problems are both real, and they compound each other in ways that don't get discussed much outside of narrow specialist audiences.
 
-```python
-from sklearn.metrics import classification_report
-from transformers import pipeline
-
-classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
-
-labels = ["positive", "negative", "neutral"]
-texts  = [
-    "The model performs surprisingly well on ambiguous inputs.",
-    "Latency in production is completely unacceptable.",
-    "Results were... mixed, I guess.",
-]
-
-for text in texts:
-    result = classifier(text, candidate_labels=labels)
-    top    = result["labels"][0]
-    score  = result["scores"][0]
-    print(f"{score:.2f}  {top:10s}  {text[:50]}")
-```
-
-The code is simple. The interesting part — the part that takes weeks — is deciding whether the labels are the right ones, whether the examples are representative, whether the score threshold you pick will hold up in deployment. That's where the actual thinking lives, and it's where I want to focus my writing.
+That intersection is what I want to write about. The people who understand the engineering often don't spend much time in governance conversations, and vice versa. I'm interested in what happens when you try to hold both at once.
 
 ## On the Weirdness of This Moment
 
@@ -57,11 +37,12 @@ But something real is happening. The models I work with today are qualitatively 
 
 I'm planning to write about:
 
-- **Evaluation and benchmarking** — how to actually know if a model is good, and for what
-- **RAG and retrieval** — the plumbing that makes LLMs useful in practice
-- **Annotation and labeling** — the underrated, unsexy foundation of all of this
-- **Tools and workflows** — what my actual working environment looks like
-- **The bigger picture** — occasionally, when I feel like I have something real to say
+- **Agentic engineering** — context files, harness design, multi-session continuity, and what it actually takes to build agents that hold up in production
+- **Financial AI and model risk** — what SR 11-7 requires, where it breaks down for modern AI, and what regulatory change is actually coming
+- **Guardrails and governance** — what runtime controls mean in an autonomous system operating inside a regulated institution
+- **GenAI evals** — how to actually know if a system is working, and for what
+
+The blog sits at an intersection that doesn't have a lot of native coverage. If you work in model risk or AI governance, I hope the technical posts are readable. If you're an ML engineer, I hope the governance posts don't feel like compliance theater. I'm trying to write for both — which may mean occasionally failing both.
 
 Posts will vary in length and formality. Some will be close to polished essays. Others will be working notes — me thinking through a problem in real time, with no guarantee I've resolved it by the end.
 
@@ -69,4 +50,4 @@ If that sounds useful to you, I'm glad you're here. If it sounds like a bad idea
 
 ---
 
-*Next up: a post on why I think the way we evaluate language model outputs is quietly broken, and what a more honest approach might look like.*
+*Next up: a post on context files — the Markdown files that give coding agents persistent project knowledge, why they go stale, and whether we're accidentally making codebases harder to understand in the process.*

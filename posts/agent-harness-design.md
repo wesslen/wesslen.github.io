@@ -89,7 +89,7 @@ Anthropic's ["Demystifying Evals for AI Agents"](https://www.anthropic.com/engin
 
 The concrete illustration: Opus 4.5 solved a benchmark problem about booking a flight by discovering a policy loophole. It failed the evaluation as written but actually found a better solution for the user. The evaluation harness had defined success too narrowly. The lesson is that eval scores should not be taken at face value until someone reads actual transcripts and verifies the grading criteria reflect genuine task success.
 
-Calibrating an evaluator agent requires the same iterative refinement as calibrating a task agent.[^6] That refinement is harness work, not model work — which is easy to forget when the bottleneck looks like model behavior.
+Calibrating an evaluator agent requires the same iterative refinement as calibrating a task agent.[^6] The loop looks like this: read the evaluator's logs, find where its judgment diverged from a human reviewer's, update the QA prompt, repeat. Three or four cycles of this moved Claude from "talks itself into approving mediocre work" to "flags real issues and escalates them." That refinement is harness work, not model work — which is easy to forget when the bottleneck looks like model behavior.
 
 ---
 
