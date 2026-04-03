@@ -1077,13 +1077,6 @@ img {
   line-height: 1.5;
 }
 
-@media (max-width: 640px) {
-  .footer-disclaimer {
-    font-size: 0.72rem; /* legible at mobile scale */
-    opacity: 0.75;
-  }
-}
-
 /* ── Loading / Error States ──────────────────────────────── */
 .loading-state,
 .error-state {

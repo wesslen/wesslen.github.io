@@ -290,24 +290,9 @@
           // Build the references section HTML
           const items = order
             .map((id, i) => {
-              // Step 1: convert markdown [text](url) links → <a> tags, stashing them
-              // so the bare-URL pass below doesn't double-process them.
-              const mdLinks = [];
-              let linkedText = defs[id].replace(
-                /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
-                (_, text, url) => {
-                  const idx = mdLinks.length;
-                  mdLinks.push(`<a href="${url}" target="_blank" rel="noopener">${text}</a>`);
-                  return `\x00MDLINK${idx}\x00`;
-                }
-              );
-              // Step 2: auto-linkify remaining bare URLs
-              linkedText = linkedText.replace(
-                /(https?:\/\/[^\s,)<]+)/g,
-                '<a href="$1" target="_blank" rel="noopener">$1</a>'
-              );
-              // Step 3: restore stashed markdown links
-              linkedText = linkedText.replace(/\x00MDLINK(\d+)\x00/g, (_, i) => mdLinks[+i]);
+              // Parse inline markdown in the footnote text so that [text](url)
+              // links, *italic*, bare URLs, etc. all render correctly.
+              const linkedText = marked.parseInline(defs[id]);
               return `<li id="fn-${id}">
           <span class="cite-num">${i + 1}.</span>
           <span>${linkedText}&nbsp;<a href="#fnref-${id}" class="cite-back" aria-label="Return to text">↩</a></span>
