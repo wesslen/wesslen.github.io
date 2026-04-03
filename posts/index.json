@@ -33,5 +33,12 @@
     "date": "2026-04-02",
     "description": "Everyone says 'guardrail.' Almost no one means the same thing. In an agentic system operating inside a bank, that ambiguity stops being academic.",
     "tags": ["GenAI", "MRM", "agentic-engineering", "financial-AI", "SR11-7"]
+  },
+  {
+    "slug": "metrics-metrics-metrics",
+    "title": "Metrics, Metrics, Metrics",
+    "date": "2026-04-03",
+    "description": "Everyone in GenAI wants a dashboard. The problem is that generic metrics aren't just uninformative — they actively mislead. Social scientists figured this out decades ago.",
+    "tags": ["GenAI", "evals", "psychometrics", "MRM"]
   }
 ]
