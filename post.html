@@ -42,6 +42,7 @@
           <span class="cursor">_</span>
         </a>
         <div class="header-actions">
+          <a href="./about.html" class="nav-link">about</a>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
             <span id="theme-icon">☀️</span>
           </button>
@@ -121,7 +122,7 @@
     <footer class="site-footer">
       <p>
         built with ♥ and plain HTML ·
-        <a href="https://github.com/wesslen/wesslen.github.io" target="_blank" rel="noopener">github</a>
+        <a href="https://github.com/wesslen/wesslen.github.io" target="_blank" rel="noopener">view source on GitHub</a>
       </p>
       <p class="footer-disclaimer">
         Views expressed here are strictly my own and do not represent those of my employer. Posts are drafted with AI
@@ -290,11 +291,9 @@
           // Build the references section HTML
           const items = order
             .map((id, i) => {
-              // Auto-linkify bare URLs in the definition text
-              const linkedText = defs[id].replace(
-                /(https?:\/\/[^\s,)]+)/g,
-                '<a href="$1" target="_blank" rel="noopener">$1</a>'
-              );
+              // Parse inline markdown in the footnote text so that [text](url)
+              // links, *italic*, bare URLs, etc. all render correctly.
+              const linkedText = marked.parseInline(defs[id]);
               return `<li id="fn-${id}">
           <span class="cite-num">${i + 1}.</span>
           <span>${linkedText}&nbsp;<a href="#fnref-${id}" class="cite-back" aria-label="Return to text">↩</a></span>
@@ -304,8 +303,11 @@
 
           const refsHtml = `
         <section class="citations" aria-label="References">
-          <h2 class="citations-heading">References</h2>
-          <ol class="cite-list">${items}</ol>
+          <button class="citations-toggle" aria-expanded="true" aria-controls="cite-list-body">
+            <span class="citations-heading">References</span>
+            <span class="citations-chevron" aria-hidden="true">▾</span>
+          </button>
+          <ol class="cite-list" id="cite-list-body">${items}</ol>
         </section>`;
 
           return { body: cleanBody, refsHtml };
@@ -423,6 +425,21 @@
           });
         }
 
+        /* ── Wrap Tables for Mobile Scroll ───────────────────────
+       Wraps each <table> in a <div class="table-scroll-wrapper">
+       so that overflow scrolling works reliably on iOS/Android
+       regardless of surrounding layout constraints.
+    ─────────────────────────────────────────────────────── */
+        function wrapTables(proseEl) {
+          proseEl.querySelectorAll("table").forEach((table) => {
+            if (table.closest(".table-scroll-wrapper")) return; // already wrapped
+            const wrapper = document.createElement("div");
+            wrapper.className = "table-scroll-wrapper";
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+          });
+        }
+
         /* ── Configure marked.js ────────────────────────────── */
         marked.setOptions({
           breaks: true,
@@ -433,7 +450,10 @@
                 return hljs.highlight(code, { language: lang }).value;
               } catch {}
             }
-            return hljs.highlightAuto(code).value;
+            // No recognised language: return code as plain text.
+            // Avoids hljs.highlightAuto() which uses new Function() internally
+            // and is flagged by Content-Security-Policy / Chrome DevTools.
+            return hljs.highlight(code, { language: "plaintext" }).value;
           },
         });
 
@@ -603,12 +623,26 @@
 
             // ── Post-render processors ─────────────────────────
             processAlerts(proseEl); // must run before TOC (may change heading structure)
+            wrapTables(proseEl);
             labelCodeBlocks();
             injectCopyButtons();
             processYouTube(proseEl);
 
             // Build TOC
             buildTOC();
+
+            // Collapsible references section
+            const citationsToggle = document.querySelector(".citations-toggle");
+            if (citationsToggle) {
+              citationsToggle.addEventListener("click", () => {
+                const expanded = citationsToggle.getAttribute("aria-expanded") === "true";
+                citationsToggle.setAttribute("aria-expanded", !expanded);
+                const body = document.getElementById("cite-list-body");
+                if (body) body.classList.toggle("collapsed", expanded);
+                const chevron = citationsToggle.querySelector(".citations-chevron");
+                if (chevron) chevron.textContent = expanded ? "▸" : "▾";
+              });
+            }
 
             // Show content
             loadingEl.style.display = "none";

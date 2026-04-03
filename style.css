@@ -158,12 +158,13 @@ img {
   color: var(--muted);
   cursor: pointer;
   border-radius: var(--radius);
-  width: 36px;
-  height: 36px;
+  width: 44px; /* 44px minimum touch target */
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1rem;
+  touch-action: manipulation; /* remove 300ms tap delay */
   transition:
     border-color var(--transition),
     color var(--transition),
@@ -339,7 +340,8 @@ img {
 .card-meta {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  flex-wrap: wrap; /* let date + badge wrap on very small screens */
+  gap: 0.5rem 1rem;
   margin-bottom: 0.6rem;
 }
 
@@ -484,6 +486,8 @@ img {
   font-size: 1rem;
   line-height: 1.8;
   color: var(--text);
+  word-break: break-word; /* prevent long URLs from blowing out mobile layout */
+  overflow-wrap: break-word;
 }
 
 /* h2: left accent bar — from Charlotte's content-slide title treatment */
@@ -700,6 +704,7 @@ img {
   font-size: 0.85rem;
   line-height: 1.65;
   background: var(--code-bg) !important;
+  -webkit-overflow-scrolling: touch; /* smooth momentum scroll on iOS */
 }
 
 /* Copy button */
@@ -736,16 +741,25 @@ img {
 }
 
 /* ── Tables ──────────────────────────────────────────────── */
+
+/* Wrapper div injected by wrapTables() — owns the scroll */
+.table-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.75rem 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
 .prose table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.75rem 0;
   font-size: 0.885rem;
-  display: block;
-  overflow-x: auto;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  -webkit-overflow-scrolling: touch;
+  /* margin/border/overflow now owned by wrapper */
+  margin: 0;
+  border: none;
+  border-radius: 0;
 }
 
 .prose thead {
@@ -780,6 +794,10 @@ img {
   padding: 0.65rem 1.1rem;
   vertical-align: top;
   line-height: 1.55;
+  /* Override the prose-level word-break so long table content
+     triggers horizontal scroll instead of mid-word breaking */
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 /* ── Callout / Key-Insight Box ───────────────────────────── */
@@ -1019,6 +1037,8 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+  touch-action: manipulation; /* remove 300ms tap delay */
+  min-height: 44px; /* minimum touch target height */
 }
 
 .toc-mobile-toggle .toc-chevron {
@@ -1110,7 +1130,32 @@ img {
 }
 
 /* ── Responsive tweaks ───────────────────────────────────── */
+
+/* Tablet: 641px – 1199px ---------------------------------- */
+@media (min-width: 641px) and (max-width: 1199px) {
+  /* Constrain line length so text doesn't span the full tablet width */
+  .prose {
+    max-width: 680px;
+  }
+  /* Give the hero a comfortable mid-range padding */
+  .hero {
+    padding: 3rem 2rem 2.5rem;
+  }
+  .posts-section {
+    padding: 2rem 2rem 4rem;
+  }
+  .post-layout {
+    padding: 2rem 2rem 5rem;
+  }
+}
+
+/* Small mobile: ≤ 640px ------------------------------------ */
 @media (max-width: 640px) {
+  /* Shrink site title so it fits alongside the 44px toggle */
+  .site-title {
+    font-size: 0.9rem;
+  }
+
   .post-layout {
     padding: 1.5rem 1rem 4rem;
   }
@@ -1131,6 +1176,117 @@ img {
   .yt-embed {
     margin: 1.5rem 0;
   }
+
+  /* Tighten blockquote / alert padding on narrow screens */
+  .prose blockquote,
+  .prose .gh-alert {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Tiny: ≤ 360px (Galaxy S8, SE 1st gen, etc.) ------------- */
+@media (max-width: 360px) {
+  .site-title {
+    font-size: 0.8rem;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 {
+    font-size: 1.35rem;
+  }
+  .post-card {
+    padding: 1rem;
+  }
+}
+
+/* ── Nav Link (About etc. in site header) ────────────────── */
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  transition:
+    color var(--transition),
+    border-color var(--transition),
+    background var(--transition);
+  white-space: nowrap;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent);
+  border-color: var(--border);
+  background: var(--accent-dim);
+  opacity: 1;
+}
+
+/* ── Tag Filter Bar (index.html) ─────────────────────────── */
+.tag-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.75rem;
+}
+
+.tag-filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    color var(--transition),
+    border-color var(--transition),
+    background var(--transition);
+  touch-action: manipulation;
+}
+
+.tag-filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.tag-filter-btn.active[data-tag="__all__"] {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* ── Collapsible References (post.html) ──────────────────── */
+.citations-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.citations-toggle:hover .citations-heading {
+  color: var(--accent);
+}
+
+.citations-chevron {
+  font-size: 0.7rem;
+  color: var(--muted);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.citations-toggle[aria-expanded="false"] .citations-chevron {
+  transform: rotate(-90deg);
+}
+
+.cite-list.collapsed {
+  display: none;
 }
 
 /* ── Scrollbar ───────────────────────────────────────────── */
