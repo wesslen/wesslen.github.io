@@ -47,5 +47,12 @@
     "date": "2026-04-04",
     "description": "A deep-dive into Google's Agent Development Kit and the Agent2Agent protocol — the six core primitives, the cooperative event loop, how agents communicate across frameworks, and where the abstraction lines actually sit.",
     "tags": ["GenAI", "agentic-engineering", "multi-agent", "protocols"]
+  },
+  {
+    "slug": "claude-code-harness",
+    "title": "Inside the Claude Code Harness",
+    "date": "2026-04-04",
+    "description": "Anthropic's source code leaked. Here's what it reveals about how a production-grade agent harness actually gets built — and how much of it looks like design versus survival.",
+    "tags": ["GenAI", "claude-code", "agentic-engineering"]
   }
 ]
