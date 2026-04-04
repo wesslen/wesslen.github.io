@@ -557,6 +557,60 @@
           document.getElementById("toc-mobile-toggle").setAttribute("aria-expanded", open);
         });
 
+        /* ── Post Navigation ─────────────────────────────────── */
+        function renderPostNav(manifest, currentSlug) {
+          if (!manifest || manifest.length < 2) return;
+          const idx = manifest.findIndex((p) => p.slug === currentSlug);
+          if (idx === -1) return;
+
+          const current = manifest[idx];
+          const currentTags = new Set(current.tags || []);
+          const picks = [];
+          const usedSlugs = new Set([currentSlug]);
+
+          // Next post (manifest is date-ascending, so idx+1 = newer)
+          if (idx < manifest.length - 1) {
+            const next = manifest[idx + 1];
+            picks.push({ post: next, label: "next" });
+            usedSlugs.add(next.slug);
+          }
+
+          // Fill to 2 with most tag-overlapping post, most recent as tiebreaker
+          if (picks.length < 2) {
+            const candidates = manifest
+              .filter((p) => !usedSlugs.has(p.slug))
+              .map((p) => ({
+                post: p,
+                overlap: (p.tags || []).filter((t) => currentTags.has(t)).length,
+              }))
+              .sort((a, b) => b.overlap - a.overlap || new Date(b.post.date) - new Date(a.post.date));
+            candidates.slice(0, 2 - picks.length).forEach(({ post }) => {
+              picks.push({ post, label: "related" });
+            });
+          }
+
+          if (picks.length === 0) return;
+
+          const nav = document.createElement("nav");
+          nav.className = "post-nav";
+          nav.setAttribute("aria-label", "More posts");
+          nav.innerHTML = `
+            <div class="post-nav-label">// more posts</div>
+            <div class="post-nav-cards">
+              ${picks
+                .map(
+                  ({ post, label }) => `
+                <a href="./post.html?slug=${encodeURIComponent(post.slug)}" class="post-nav-card">
+                  <span class="post-nav-meta">${label} · ${fmtDate(post.date)}</span>
+                  <span class="post-nav-title">${post.title}</span>
+                </a>`
+                )
+                .join("")}
+            </div>`;
+
+          document.getElementById("article-col").appendChild(nav);
+        }
+
         /* ── Load & Render Post ─────────────────────────────── */
         async function loadPost() {
           const params = new URLSearchParams(window.location.search);
@@ -580,11 +634,12 @@
 
             // Try to get metadata from manifest
             let manifestMeta = {};
+            let fullManifest = [];
             try {
               const mRes = await fetch("./posts/index.json");
               if (mRes.ok) {
-                const manifest = await mRes.json();
-                manifestMeta = manifest.find((p) => p.slug === slug) || {};
+                fullManifest = await mRes.json();
+                manifestMeta = fullManifest.find((p) => p.slug === slug) || {};
               }
             } catch {}
 
@@ -648,6 +703,9 @@
             loadingEl.style.display = "none";
             contentEl.style.display = "block";
             updateProgress();
+
+            // Post navigation
+            renderPostNav(fullManifest, slug);
           } catch (err) {
             loadingEl.style.display = "none";
             errorEl.style.display = "block";
