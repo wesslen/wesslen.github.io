@@ -1,0 +1,69 @@
+# narrate.yml — Phase 2: auto-narration on commit with [gen audio] in message.
+# Do NOT enable until Phase 1 (local script) is verified working.
+# Requires GitHub Secrets: GEMINI_API_KEY, GCP_SA_KEY
+# Requires Git LFS enabled on the repo (see AUDIO_TTS_PLAN.md).
+
+name: Narrate Blog Post
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "posts/**.md"
+
+jobs:
+  narrate:
+    # Only runs if the commit message explicitly contains [gen audio]
+    if: contains(github.event.head_commit.message, '[gen audio]')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout (with LFS)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Install ffmpeg (required by pydub for MP3 concat)
+        run: sudo apt-get install -y ffmpeg
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Get changed post files
+        id: changed
+        run: |
+          FILES=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} \
+            | grep '^posts/.*\.md$' | grep -v 'index\.json' || true)
+          echo "files=$FILES" >> $GITHUB_OUTPUT
+          echo "Changed posts: $FILES"
+
+      - name: Write GCP credentials to disk
+        if: steps.changed.outputs.files != ''
+        run: echo '${{ secrets.GCP_SA_KEY }}' > /tmp/gcp_key.json
+
+      - name: Generate narrations
+        if: steps.changed.outputs.files != ''
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/gcp_key.json
+        run: |
+          for f in ${{ steps.changed.outputs.files }}; do
+            echo "Narrating: $f"
+            python scripts/narrate.py "$f" --force
+          done
+
+      - name: Commit audio files and updated index.json
+        if: steps.changed.outputs.files != ''
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Actions [narrate]"
+          git add assets/audio/*.mp3 posts/index.json
+          # [skip ci] prevents this commit from re-triggering the action
+          git commit -m "chore: auto-narrate posts [skip ci]" || echo "Nothing to commit"
+          git push
