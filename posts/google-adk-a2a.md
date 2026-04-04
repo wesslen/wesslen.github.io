@@ -265,8 +265,6 @@ What I'm less sure about is the trust model between agents at the application la
 
 The `to_a2a()` and `RemoteA2aAgent` bridge is elegant enough that it makes the interoperability problem feel nearly solved. I suspect the hard part is still ahead.
 
----
-
 [^1]: ADK's Python GitHub repo: [github.com/google/adk-python](https://github.com/google/adk-python). The framework launched at Google Cloud NEXT on April 9, 2025, alongside the A2A protocol announcement. TypeScript and Go SDKs followed. The `pip install google-adk` package installs the core framework; `pip install google-adk[a2a]` adds the A2A integration layer (currently experimental).
 [^2]: The A2A spec lives at [a2a-protocol.org](https://a2a-protocol.org/latest/specification/) and is maintained at [github.com/a2aproject/A2A](https://github.com/a2aproject/A2A). V1.0 was reached in early 2026. The Linux Foundation governance move is what signaled the protocol crossing from Google-led proposal to genuine open standard — the same path MCP traveled, though MCP remains Anthropic-governed.
 [^3]: The state prefix scoping system is one of the more underappreciated design choices in ADK. The practical implication for financial applications: use `app:` prefix for policy parameters that should be set at configuration time and read-only at runtime. Use `user:` prefix for KYC status, preferences, risk tier — anything that should persist across sessions for the same user but be isolated between users. Use session-scoped state for the working scratchpad within a single workflow run.
