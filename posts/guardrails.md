@@ -5,6 +5,8 @@ description: "Everyone says 'guardrail.' Almost no one means the same thing. In 
 tags: [GenAI, MRM, agentic-engineering, financial-AI, SR11-7]
 ---
 
+> **TL;DR:** "Guardrail" means roughly four different things depending on who's in the room — and that definitional sprawl is a real governance problem, not just a communication one. The distinction that matters most is runtime vs. everything else: a guardrail intercepts live model behavior before it reaches a user or downstream system; tests and metrics are adjacent but different. In financial services, SR 11-7 maps onto guardrail design imperfectly — structural and output controls have established validation frameworks, but behavioral controls (prompt injection, jailbreaking, goal hijacking) don't, and in most institutions nobody owns them cleanly.
+
 The word "guardrail" appears in almost every serious conversation about AI safety in financial services. In my experience it means roughly four different things depending on who's in the room — sometimes it's a regex filter on model output, sometimes it's a Pydantic schema, sometimes it's a human approval workflow, and once, memorably, someone used it to describe a quarterly MRM review cycle. That definitional sprawl isn't just a communication problem. If your security team thinks guardrails are tests and your model risk team thinks they're monitoring metrics, you end up with systems that look governed and aren't.
 
 So what is a guardrail, actually — and what does it mean to design one for an autonomous agent operating inside a bank?

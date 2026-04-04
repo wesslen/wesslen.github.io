@@ -5,6 +5,8 @@ description: "What context files actually do, why they go stale, and whether the
 tags: [GenAI, claude-code, context-engineering]
 ---
 
+> **TL;DR:** Context files like `CLAUDE.md` and `AGENTS.md` solve the cold-start problem for coding agents by injecting persistent project knowledge at every new session. They work — but ETH Zurich research shows LLM-generated context files can reduce task success rates while increasing costs, because agents follow bad instructions as faithfully as good ones. The harder problem is staleness: projects change faster than context files do, and in large teams where everyone works through agents, a stale file may be the last thin layer between developers and a codebase nobody reads anymore.
+
 If you've used a GenAI coding tool — Claude Code, GitHub Copilot, Cursor — you've hit this wall: you start a new session, and the agent knows nothing. Which framework you're using, why you made that architectural call last week, that the port is 3002 not 3000. So you prompt it again.
 
 Context files are the answer. You write a Markdown file — `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md` — drop it in the right place, and the agent reads it at the start of every session. What used to be repeated conversation becomes persistent knowledge. This is what people call *context engineering*: instead of prompting the same things over and over, you codify them once in a version-controlled file.

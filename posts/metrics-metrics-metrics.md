@@ -5,6 +5,8 @@ description: "Everyone in GenAI wants a dashboard. The problem is that generic m
 tags: [GenAI, evals, psychometrics, MRM]
 ---
 
+> **TL;DR:** Generic GenAI metrics — helpfulness scores, coherence percentages, hallucination rates — produce the feeling of measurement without the reality of it. Finance learned this the hard way with VaR: even people who know a metric is imperfect anchor on it anyway, and the act of seeing a number tends to increase risk-taking rather than reduce it. The field practitioners most need to read isn't ML engineering literature — it's psychometrics, where social scientists spent a century developing tools for measuring latent constructs you can't observe directly, in contexts where the measurement instrument affects what it measures. That is also, vocabulary aside, an exact description of what GenAI evaluation is trying to do.
+
 If you've sat in a meeting where someone asked "can we just get a dashboard for this?" — you've met the instinct I want to write about. There's a particular kind of managerial comfort that comes from seeing a number. Helpfulness: 4.2 out of 5. Coherence: 87%. Hallucination rate: 3%. It feels like understanding. It often isn't.
 
 The question I keep stumbling over is this: if our metrics aren't measuring what we think they're measuring, are we better off with them or without them?

@@ -5,6 +5,8 @@ description: "What context files can't do: designing agent harnesses for context
 tags: [GenAI, claude-code, agentic-engineering]
 ---
 
+> **TL;DR:** Context files tell an agent what to know; the harness is what keeps it alive across a long session with a filling context window, repeated tool failures, and the temptation to cut corners as it runs out of room. A well-designed harness — with a deliberate compaction strategy, structured inter-session state, checkpoint artifacts, and error recovery patterns — is the single largest lever for agent reliability in production. The underappreciated corollary: eval scores that look like model capability may actually be measuring harness design choices, and separating the two is harder than most teams assume.
+
 Context files tell an agent what to know and how to behave. But there's a class of problems they simply can't solve — what happens when the context window fills at hour four of a six-hour coding session, a tool call fails three times in a row, and the model starts cutting corners to finish before it runs out of room. That's the harness's job.
 
 A harness is the orchestration layer that transforms a stateless LLM call into a persistent, tool-using agent. It manages the execution loop, context window, tool routing, error recovery, and inter-session continuity. If you're thinking carefully about [context files](/posts/context), the harness is the natural next question.
