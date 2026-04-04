@@ -130,8 +130,6 @@ I don't have a clean answer to whether context files help with this or accelerat
 
 ---
 
-*Context files tell an agent what to know. The other half of the equation — how to keep agents alive across long sessions, manage compaction, handle errors — is covered in [Harness Design for Long-Running Agents](/posts/agent-harness-design).*
-
 [^1]: ETH Zurich's AGENTbench study ([arXiv:2602.11988](https://arxiv.org/abs/2602.11988)) tested 138 repositories with developer-committed context files and found agents are "too obedient" — they follow instructions faithfully, but following unnecessary instructions consumes tokens and thinking time without improving task completion.
 [^2]: Skills use progressive disclosure: at startup, only metadata loads (~50–100 tokens per skill). When a skill matches the user's prompt, the full body loads. A project with 20 skills consumes roughly 2,000 tokens at startup versus loading everything upfront.
 [^3]: Matthew Honnibal's [Clownpocalypse post](https://honnibal.dev/blog/clownpocalypse) captured the early chaos well: everyone rushed to publish skills files, aggregator sites appeared overnight, and the shared templates couldn't handle HTML comments in Markdown. Moving faster than we're thinking.

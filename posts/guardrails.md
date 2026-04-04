@@ -37,7 +37,7 @@ The structural category tends to be undercounted. In financial workflows where a
 
 ## How SR 11-7 maps onto this
 
-[I've written about SR 11-7's history and limitations elsewhere](/posts/sr11-7), but the intersection with guardrails is specific enough to address directly. The mapping is messier than vendor whitepapers make it sound.
+[I've written about SR 11-7's history and limitations elsewhere](post.html?slug=sr11-7), but the intersection with guardrails is specific enough to address directly. The mapping is messier than vendor whitepapers make it sound.
 
 Conceptual Soundness governs the *choice* of guardrail mechanism. Using a second LLM as a real-time safety classifier is a fundamentally different design decision than a deterministic rule-based filter — different risk profile, different training data documentation, different threshold logic. Both are subject to validation, which means the guardrail system itself needs to go through the same MRM process as the model it's guarding. When I was doing NLP work in a banking context a few years before the current wave, I watched a simple text classifier spend eighteen months in review. A production LLM-based safety classifier today is categorically more complex than that. The review burden hasn't gotten easier.
 
@@ -73,13 +73,13 @@ The cost of that layering is latency and money:
 | Reasoning-based (flash LLM) | 200–500ms | Moderate | High |
 | Reasoning-based (strong LLM) | 1–3s | High | Very high |
 
-For customer-facing applications with latency budgets under 500ms, using a strong reasoning model as a real-time monitor generally isn't viable.[^4] The practical solution is a cascade: a fast internal probe catches clear violations; a more expensive classifier activates only when the fast probe flags something ambiguous. That design is itself an orchestration problem — the same kind of [harness architecture challenge I've written about](/posts/agent-harness-design), just applied to safety rather than task execution.
+For customer-facing applications with latency budgets under 500ms, using a strong reasoning model as a real-time monitor generally isn't viable.[^4] The practical solution is a cascade: a fast internal probe catches clear violations; a more expensive classifier activates only when the fast probe flags something ambiguous. That design is itself an orchestration problem — the same kind of [harness architecture challenge I've written about](post.html?slug=agent-harness-design), just applied to safety rather than task execution.
 
 ## What we don't know yet
 
 The guardrail research that keeps me up at night isn't about prompt injection or jailbreaking. Those are understood attack surfaces with active engineering investment. The frontier problems are structural.
 
-Memory poisoning is one. Standard injection attacks are session-scoped. An agentic system with persistent memory across sessions is vulnerable to a different class of attack: malicious instructions embedded in a document the agent retrieves, stores in its memory bank, and later acts on.[^5] The poisoned memory persists across sessions. This is a direct consequence of giving agents the long-term memory that makes them genuinely useful — the same [context engineering infrastructure](/posts/context) that underpins multi-session continuity creates a durable attack surface.
+Memory poisoning is one. Standard injection attacks are session-scoped. An agentic system with persistent memory across sessions is vulnerable to a different class of attack: malicious instructions embedded in a document the agent retrieves, stores in its memory bank, and later acts on.[^5] The poisoned memory persists across sessions. This is a direct consequence of giving agents the long-term memory that makes them genuinely useful — the same [context engineering infrastructure](post.html?slug=context) that underpins multi-session continuity creates a durable attack surface.
 
 The agent-to-agent (A2A) attack surface is another. As multi-agent systems become standard, a compromised low-privilege summarization agent becomes a potential vector for influencing a high-privilege transaction agent. Securing these interactions requires standardized capability declarations and authentication schemes that the field is only beginning to develop.
 

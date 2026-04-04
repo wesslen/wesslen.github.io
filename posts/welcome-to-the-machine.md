@@ -49,5 +49,3 @@ Posts will vary in length and formality. Some will be close to polished essays. 
 If that sounds useful to you, I'm glad you're here. If it sounds like a bad idea, I'd genuinely like to hear why.
 
 ---
-
-*Next up: a post on context files — the Markdown files that give coding agents persistent project knowledge, why they go stale, and whether we're accidentally making codebases harder to understand in the process.*

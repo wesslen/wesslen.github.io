@@ -9,7 +9,7 @@ tags: [GenAI, claude-code, agentic-engineering]
 
 Context files tell an agent what to know and how to behave. But there's a class of problems they simply can't solve — what happens when the context window fills at hour four of a six-hour coding session, a tool call fails three times in a row, and the model starts cutting corners to finish before it runs out of room. That's the harness's job.
 
-A harness is the orchestration layer that transforms a stateless LLM call into a persistent, tool-using agent. It manages the execution loop, context window, tool routing, error recovery, and inter-session continuity. If you're thinking carefully about [context files](/posts/context), the harness is the natural next question.
+A harness is the orchestration layer that transforms a stateless LLM call into a persistent, tool-using agent. It manages the execution loop, context window, tool routing, error recovery, and inter-session continuity. If you're thinking carefully about [context files](post.html?slug=context), the harness is the natural next question.
 
 Anthropic's two engineering posts on harness design — from November 2025 and March 2026 — make a compelling case that harness architecture is the single largest lever for agent reliability in production.[^1] A well-designed harness running a smaller model can outperform a naive setup with a much larger one.
 
@@ -94,8 +94,6 @@ The concrete illustration: Opus 4.5 solved a benchmark problem about booking a f
 Calibrating an evaluator agent requires the same iterative refinement as calibrating a task agent.[^6] The loop looks like this: read the evaluator's logs, find where its judgment diverged from a human reviewer's, update the QA prompt, repeat. Three or four cycles of this moved Claude from "talks itself into approving mediocre work" to "flags real issues and escalates them." That refinement is harness work, not model work — which is easy to forget when the bottleneck looks like model behavior.
 
 ---
-
-*For the context engineering side of this — what goes into `CLAUDE.md`, how skills work, and whether any of this actually improves agent performance — see [Skills & Context Files for Coding Agents](/posts/context).*
 
 [^1]: Anthropic Engineering, ["Effective Harnesses for Long-Running Agents"](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) (November 2025) and ["Harness Design for Long-Running Application Development"](https://www.anthropic.com/engineering/harness-design-long-running-apps) (March 2026). The March post also documents the three-agent planner/generator/evaluator pattern and concrete experience tuning evaluator agents.
 [^2]: Token scaling from Anthropic internal data. The [Manus team](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus) found tool responses alone account for 67.6% of total tokens in agent runs — which is why tool surface minimization is a first-order cost and context lever, not just a hygiene choice.
