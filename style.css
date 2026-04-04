@@ -1226,7 +1226,8 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
-  margin-bottom: 1.75rem;
+  max-width: 760px;
+  margin: 0 auto 1.75rem;
 }
 
 .tag-filter-btn {
