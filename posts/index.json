@@ -40,5 +40,12 @@
     "date": "2026-04-03",
     "description": "Everyone in GenAI wants a dashboard. The problem is that generic metrics aren't just uninformative — they actively mislead. Social scientists figured this out decades ago.",
     "tags": ["GenAI", "evals", "psychometrics", "MRM"]
+  },
+  {
+    "slug": "google-adk-a2a",
+    "title": "Google ADK and the A2A Protocol: A Technical Reference",
+    "date": "2026-04-04",
+    "description": "A deep-dive into Google's Agent Development Kit and the Agent2Agent protocol — the six core primitives, the cooperative event loop, how agents communicate across frameworks, and where the abstraction lines actually sit.",
+    "tags": ["GenAI", "agentic-engineering", "multi-agent", "protocols"]
   }
 ]
