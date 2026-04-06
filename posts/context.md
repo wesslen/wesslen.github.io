@@ -11,9 +11,9 @@ If you've used a GenAI coding tool — Claude Code, GitHub Copilot, Cursor — y
 
 Context files are the answer. You write a Markdown file — `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md` — drop it in the right place, and the agent reads it at the start of every session. What used to be repeated conversation becomes persistent knowledge. This is what people call *context engineering*: instead of prompting the same things over and over, you codify them once in a version-controlled file.
 
-The part that doesn't get discussed is that these files accumulate. Design directions get abandoned, but the file still says they're current. The agent reads faithfully and confidently does the wrong thing.[^1] And if you're moving between tools — which most teams are — you're maintaining multiple files with overlapping, occasionally conflicting instructions.
+The part that doesn't get discussed is that these files accumulate. Design directions get abandoned, but the file still says they're current. The agent reads it faithfully and confidently does the wrong thing.[^1] And if you're moving between tools (which most teams are), you're maintaining multiple files with overlapping, occasionally conflicting instructions.
 
-There's a framing I keep coming back to. The arc from ad-hoc prompting to version-controlled, self-updating knowledge systems could be read as: programming is becoming the art of managing Markdown files.
+There's a framing I keep coming back to. The arc from ad-hoc prompting to version-controlled, self-updating knowledge systems suggests that programming is becoming the art of managing Markdown files.
 
 Conventions in `CLAUDE.md`. Capabilities in `SKILL.md`. Visual systems in `DESIGN.md`. The agent reads; the agent builds. I'm not sure whether that's a breakthrough or a warning.
 
@@ -26,17 +26,17 @@ Beyond factual project knowledge, context files shape what the agent does and do
 When a context file is committed to version control, every team member's AI assistant works from the same baseline. New developers and new agents alike inherit the project's conventions immediately. That's the promise.
 
 > [!NOTE]
-> Context files are advisory, not deterministic. Claude exercises judgment about which instructions apply in context. For truly mandatory constraints — "never run `rm -rf` on production" — use hooks: shell commands that fire at specific lifecycle events regardless of what the model decides.
+> Context files are advisory. Claude exercises judgment about which instructions apply in context. For truly mandatory constraints — "never run `rm -rf` on production" — use hooks: shell commands that fire at specific lifecycle events regardless of what the model decides.
 
-## The landscape: from Copilot to AGENTS.md
+## From Copilot to AGENTS.md: how the tooling evolved
 
 The story starts with GitHub Copilot's 2021 launch: inline autocomplete with no persistent project knowledge. Developers who wanted to influence outputs used strategically placed code comments. Cursor introduced `.cursorrules` in 2023 — one of the first project-level context files. GitHub Copilot added `.github/copilot-instructions.md` in 2024.[^3]
 
-Claude Code arrived in February 2025, introducing `CLAUDE.md` with a sophisticated hierarchy — enterprise policies, user preferences, project conventions, directory-scoped rules — and popularizing the term "context engineering." July 2025 brought `AGENTS.md`, a vendor-neutral standard now stewarded by the [Linux Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation) and supported by Claude Code, Copilot, Cursor, Windsurf, Aider, and others. March 2026 added [`DESIGN.md` from Google Stitch](https://github.com/google-labs-code/stitch-skills/tree/main/skills/design-md), the first context file designed for visual design systems.
+Claude Code arrived in February 2025, introducing `CLAUDE.md` with a sophisticated hierarchy (enterprise policies, user preferences, project conventions, directory-scoped rules) and popularizing the term "context engineering." July 2025 brought `AGENTS.md`, a vendor-neutral standard now stewarded by the [Linux Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation) and supported by Claude Code, Copilot, Cursor, Windsurf, Aider, and others. March 2026 added [`DESIGN.md` from Google Stitch](https://github.com/google-labs-code/stitch-skills/tree/main/skills/design-md), the first context file designed for visual design systems.
 
-The practical tool landscape for someone starting today:
+The options available to someone starting today:
 
-| Tool | Context File | Notable |
+| Tool | Context File | Notes |
 |------|-------------|---------|
 | Claude Code | `CLAUDE.md` + hierarchy | Multi-level; survives compaction |
 | GitHub Copilot | `.github/copilot-instructions.md` | Auto-attached to all requests |
@@ -46,7 +46,7 @@ The practical tool landscape for someone starting today:
 
 ## Claude Code's hierarchy in practice
 
-Claude Code's context system is the one I've found most useful — and the one I spend the most time maintaining, which is an honest reflection of how powerful and how demanding the hierarchy is. Files load from highest to lowest precedence: managed enterprise policy → user global (`~/.claude/CLAUDE.md`) → project root (`./CLAUDE.md`) → local project (`./CLAUDE.local.md`) → subdirectories on demand.
+Claude Code's context system is the one I've found most useful, and the one I spend the most time maintaining. That's an honest reflection of how powerful and how demanding the hierarchy is. Files load from highest to lowest precedence: managed enterprise policy, then user global (`~/.claude/CLAUDE.md`), then project root (`./CLAUDE.md`), then local project (`./CLAUDE.local.md`), then subdirectories on demand.
 
 The `.claude/rules/` directory lets you split instructions across files with path-based activation:
 
@@ -81,16 +81,15 @@ A practical project-level `CLAUDE.md` is usually shorter than people expect:
 
 **The staleness problem** is the one I keep bumping into. Projects change fast; context files often don't. An architecture decision that was current in week two gets abandoned by week six, but the file still describes it as canonical. The agent reads faithfully and starts confidently doing the wrong thing. I've spent more time than I'd like debugging agent behavior that turned out to be perfectly rational given stale instructions.
 
-**Context window bloat** compounds it. You add rules because they seem useful; a few months later you have a sprawling file that the model is probably half-ignoring due to the "lost-in-the-middle" problem — a documented tendency for models to attend strongly to context boundaries and weakly to everything in the middle.[^4]
+**Context window bloat** compounds it. You add rules because they seem useful; a few months later you have a sprawling file that the model is probably half-ignoring due to the "lost-in-the-middle" problem, a documented tendency for models to attend strongly to context boundaries and weakly to everything in the middle.[^4]
 
 **Conflicting instructions** emerge in multi-tool setups. My workflow involves Claude Code as the primary tool, with Copilot and Cowork alongside it. Reconciling context files across multiple surfaces multiplies the maintenance burden by the number of tools you're using.
 
-> [!WARNING]
-> Security instructions appear in only 14.5% of context files in the wild. If you're defining what the agent *can* do, also define what it *can't* — especially around destructive operations and credential handling.
+One thing that doesn't show up enough: security instructions. Analysis of real-world repositories found them in only 14.5% of context files. If you're defining what the agent *can* do, also define what it *can't* — especially around destructive operations and credential handling.
 
 ## What the research actually found
 
-The most useful evaluation comes from an ETH Zurich study that tested whether context files actually improve agent performance across 138 real-world repositories.[^5] The headline finding surprised me: LLM-generated context files *reduced* success rates by ~2% while increasing costs by 20–23%. The problem wasn't disobedience — agents followed instructions faithfully — but that following unnecessary instructions (style guides, comprehensive directory overviews) consumed tokens and thinking time without benefit.
+The most useful evaluation comes from an ETH Zurich study that tested whether context files actually improve agent performance across 138 real-world repositories.[^5] The headline finding surprised me: LLM-generated context files *reduced* success rates by ~2% while increasing costs by 20–23%. The problem wasn't disobedience. Agents followed instructions faithfully, but following unnecessary instructions (style guides, sprawling directory overviews) consumed tokens and thinking time without benefit.
 
 The same obedience that makes guardrails effective also creates brittleness. When a context file mentions the `uv` package manager, agents use it 160 times more frequently than without the instruction. The mechanism works — which means bad instructions work just as reliably as good ones.
 
@@ -98,13 +97,13 @@ Which raises an uncomfortable question: how much of what we're putting into cont
 
 ## What actually belongs in a context file
 
-The research confirms: keep it surgical. Comprehensive overviews and style guides don't improve agent performance.[^6] What works: non-obvious tooling choices, project-specific gotchas, critical architectural constraints, and exact commands.
+The research confirms: keep it surgical. Sweeping overviews and style guides don't improve agent performance.[^6] What works: non-obvious tooling choices, project-specific gotchas, critical architectural constraints, and exact commands.
 
 | Type | Where it belongs |
 |------|-----------------|
 | Coding standards, conventions | Context file — survives compaction |
 | Tool usage guidelines | Context file — advisory |
-| Absolute tool prohibitions | Harness `disallowed_tools` — deterministic |
+| Absolute tool prohibitions | Agent runtime `disallowed_tools` — deterministic |
 | Build commands, gotchas | Context file — factual |
 | Human approval gates | Hooks — not expressible as model instructions |
 
@@ -124,9 +123,9 @@ Val Town's engineering blog made a point that stuck: [vibe coding is legacy codi
 
 Context files live uncomfortably close to this critique. At their best, a well-written `CLAUDE.md` is a forcing function — you can't write it without articulating why your conventions exist, what the tradeoffs were, where the bodies are buried. Done well, it's documentation-as-understanding. But I've also written context files that are closer to the ritual version: files that gesture at a codebase without capturing it, that make it easier to keep prompting without stopping to think about what the code is doing.
 
-The organizational version worries me more. In a large team where everyone works through agents, the context file may become the last thin layer between developers and a codebase they've already stopped reading closely. When that file goes stale — and we've established it will — there may be nobody left who can tell the difference. The specific failure I keep imagining is a production incident where nobody can triage it, not because the logs are missing, but because nobody has read this part of the codebase in months.
+The organizational version worries me more. In a large team where everyone works through agents, the context file may become the last thin layer between developers and a codebase they've already stopped reading closely. When that file goes stale — and we've established it will — there may be nobody left who can tell the difference. The specific failure I keep imagining is a production incident where nobody can triage it. The logs are present, but nobody has read this part of the codebase in months.
 
-I don't have a clean answer to whether context files help with this or accelerate it. What I keep asking myself is whether there's a version of this practice that genuinely closes the gap between what developers understand and what their agents are building — or whether the abstraction, however well-designed, always tends to widen it.
+I don't have a clean answer to whether context files help with this or accelerate it. What I keep asking myself is whether there's a version of this practice that genuinely closes the gap between what developers understand and what their agents are building — or whether the abstraction, even when well-designed, always tends to widen it.
 
 [^1]: ETH Zurich's AGENTbench study ([arXiv:2602.11988](https://arxiv.org/abs/2602.11988)) tested 138 repositories with developer-committed context files and found agents are "too obedient" — they follow instructions faithfully, but following unnecessary instructions consumes tokens and thinking time without improving task completion.
 [^2]: Skills use progressive disclosure: at startup, only metadata loads (~50–100 tokens per skill). When a skill matches the user's prompt, the full body loads. A project with 20 skills consumes roughly 2,000 tokens at startup versus loading everything upfront.

@@ -18,7 +18,7 @@ Every event — text chunks, tool calls, progress updates, errors, compaction bo
 > [!TIP]
 > **Plain terms:** A generator is a function that produces values one at a time, pausing between each — like a ticker tape printing one item at a time rather than dumping the whole roll at once. The `yield` keyword is what hands each value to whatever's listening. Claude Code builds its entire event loop on this pattern: every output (a word of text, a tool call, an error) passes through the same tape in order, and the terminal, IDE, and browser each just tap into it and display what arrives in their own way.
 
-This matters architecturally. You can chain smaller generators into the main one (`yield*`) — like splicing tributaries into a river without rerouting the whole channel — which is probably why the same core loop can serve such different surfaces without a separate implementation for each. It's composable by design, not by accident.
+This matters architecturally. You can chain smaller generators into the main one (`yield*`) — like splicing tributaries into a river without rerouting the whole channel — which is probably why the same core loop can serve such different surfaces without a separate implementation for each. Composability was baked in, not bolted on.
 
 The lifetime of a request follows what I'd expect from any sophisticated harness: input processing, system prompt assembly, file snapshotting, the agentic loop, transcript persistence. The interesting part is what happens inside each of those steps.
 
@@ -32,7 +32,7 @@ I mention this not because it's a harness decision exactly, but because it says 
 
 ## Four compaction layers, not one
 
-I wrote in the last post that compaction strategy isn't a permanent architectural decision. Apparently it's not even a single decision. Sebastian Raschka's breakdown of coding agent components identifies clipping and summarization as the two strategies a minimal coding harness needs to handle context bloat.[^5] Claude Code runs four.
+I wrote in the last post that compaction strategy isn't a permanent architectural decision. Apparently it isn't even a single decision. Sebastian Raschka's breakdown of coding agent components identifies clipping and summarization as the two strategies a minimal coding harness needs to handle context bloat.[^5] Claude Code uses four distinct layers.
 
 **Proactive compaction** monitors token count each turn. When it approaches the limit, it summarizes older messages into a compact boundary marker before sending to the API — so the user never sees a failure, just a brief summarization pass.
 
@@ -42,13 +42,13 @@ I wrote in the last post that compaction strategy isn't a permanent architectura
 
 **Context collapse** — internally flagged as `marble_origami` — is the most interesting. It compresses verbose tool results mid-conversation without triggering full compaction. If a tool returned 500 lines of output three turns ago and you don't need it anymore, this collapses it to a shorter representation. Collapse commits are persisted to the transcript as `ContextCollapseCommitEntry` records, meaning they can be selectively un-compacted later.
 
-Four layers is not elegant. It's exactly what you'd expect after years of watching users hit the context ceiling in different ways and patching each failure mode as it surfaced.
+Four layers is not elegant — it's the accumulated result of years of watching users hit the context ceiling in different ways and patching each failure mode as it surfaced.
 
 ## The prompt cache boundary trick
 
 The system prompt is assembled from roughly 15 composable functions. A marker called `__SYSTEM_PROMPT_DYNAMIC_BOUNDARY__` divides it into two halves.
 
-Everything above the boundary is static: behavioral instructions, coding style, safety guidelines. Everything below is per-session: the user's `CLAUDE.md` files, MCP server instructions, environment info. The static half is cached with `scope: 'global'` — about 3,000 tokens cached globally across users. They fingerprint the static content using a hash function (Blake2b), so the API can recognize "I've seen this exact prefix before" and skip reprocessing it, even across different users' sessions.[^2]
+Everything above the boundary is static: behavioral instructions, coding style, safety guidelines. Everything below is per-session: the user's `CLAUDE.md` files, MCP server instructions, environment info. The static half is cached with `scope: 'global'` — about 3,000 tokens cached globally across users. They fingerprint the static content using a hash function (Blake2b), so the API can recognize "I've seen this exact prefix before" and skip reprocessing it — even across completely separate users' sessions.[^2]
 
 This is a clever amortization move. A larger prompt paid for once, then hits the cache for every subsequent request. Per-session context gets injected after the boundary, keeping the dynamic portion small while the expensive static half is essentially free after the first hit.
 
@@ -78,7 +78,7 @@ This is a production scar. Someone lost a session. The fix is one targeted `awai
 
 There's a comment in `query.ts` that I keep coming back to:
 
-```
+```typescript
 The rules of thinking are lengthy and fortuitous. They
 require plenty of thinking of most long duration and deep
 meditation for a wizard to wrap one's noggin around.
@@ -90,7 +90,7 @@ ye will be punished with an entire day of debugging and
 hair pulling.
 ```
 
-This isn't documentation. It's a warning from someone who lost a day to a subtle API constraint around how thinking blocks must be preserved across a trajectory. The mock-medieval English is there to make sure nobody skims past it.
+This is a warning from someone who lost a day to a subtle API constraint around how thinking blocks must be preserved across a trajectory, written in a style designed to make sure no one skims past it. The mock-medieval English is there to make sure nobody skims past it.
 
 I find this more useful than any architecture diagram. The comments engineers write after something breaks tell you where the actual complexity lives — the parts that aren't obvious from first principles, that have to be learned through failure.
 

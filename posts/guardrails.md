@@ -5,7 +5,7 @@ description: "Everyone says 'guardrail.' Almost no one means the same thing. In 
 tags: [GenAI, MRM, agentic-engineering, financial-AI, SR11-7]
 ---
 
-> **TL;DR:** "Guardrail" means different things depending on who's in the room — and that definitional sprawl is a real governance problem, not just a communication one. The distinction that matters most is runtime vs. everything else: a guardrail intercepts live model behavior before it reaches a user or downstream system; tests and metrics are adjacent but different. In financial services, SR 11-7 maps onto guardrail design imperfectly — structural and output controls have established validation frameworks, but behavioral controls (prompt injection, jailbreaking, goal hijacking) don't, and in most institutions nobody owns them cleanly.
+> **TL;DR:** "Guardrail" means different things depending on who's in the room — and that definitional sprawl is a real governance problem, not merely a communication one. The distinction that matters most is runtime vs. everything else: a guardrail intercepts live model behavior before it reaches a user or downstream system; tests and metrics are adjacent but different. In financial services, SR 11-7 maps onto guardrail design imperfectly — structural and output controls have established validation frameworks, but behavioral controls (prompt injection, jailbreaking, goal hijacking) don't, and in most institutions nobody owns them cleanly.
 
 The word "guardrail" appears in almost every serious conversation about AI safety in financial services. In my experience it means several different things depending on who's in the room — sometimes it's a regex filter on model output, sometimes it's a Pydantic schema, sometimes it's a human approval workflow, and once, memorably, someone used it to describe a quarterly MRM review cycle. That definitional sprawl isn't just a communication problem. If your security team thinks guardrails are tests and your model risk team thinks they're monitoring metrics, you end up with systems that look governed and aren't.
 
@@ -13,11 +13,11 @@ So what is a guardrail, actually — and what does it mean to design one for an 
 
 ## The one distinction that matters
 
-At its most useful, a guardrail is a **runtime intervention mechanism**: a control that intercepts, evaluates, and either passes or blocks a model's behavior *while it's happening*, not after the fact. That word — runtime — is the whole thing. Everything else is something adjacent but different.
+At its most useful, a guardrail is a **runtime intervention mechanism**: a control that intercepts, evaluates, and either passes or blocks a model's behavior *while it's happening*, not after the fact. That single word, "runtime," is what separates guardrails from everything adjacent.
 
 Tests are development-phase activities that verify binary correctness against known inputs. Metrics — F1 scores, toxicity rates, hallucination frequencies — quantify aggregate performance and trust, typically for retraining or audit review. Both matter. Neither does what a guardrail does: intercept a live response before it reaches a user or a downstream system.
 
-In a RAG-based system, a metric might tell you that hallucination risk is elevated in 3% of responses. A guardrail is what actually stops that 3% from going out. In the language of SR 11-7, metrics provide the "Ongoing Monitoring" data; guardrails provide the "Control" mechanism.[^1] They're not interchangeable, and conflating them is how you end up with a beautifully instrumented system that still fails in production.
+In a RAG-based system, a metric might tell you that hallucination risk is elevated in 3% of responses. A guardrail is what actually stops that 3% from going out. In the language of SR 11-7, metrics provide the "Ongoing Monitoring" data while guardrails provide the "Control" mechanism.[^1] Conflating them is how you end up with a beautifully instrumented system that still fails in production.
 
 ## A taxonomy worth keeping
 
@@ -28,7 +28,7 @@ Within the runtime category, guardrails break down by where in an agent's execut
 | Input | Prompt integrity | Classifiers, regex, jailbreak detection | Blocking social engineering on loan eligibility rules |
 | Output | Safety & reliability | Hallucination checks, toxicity filters, PII redaction | Preventing account numbers from appearing in chatbot responses |
 | Tool | Execution safety | Allowlists, parameter validation, RBAC | Restricting wire transfers above threshold without human approval |
-| Structural | Data integrity | Schema validation (JSON/XML), type checking | Ensuring trade execution data is correctly formatted for settlement systems |
+| Structural | Data integrity | Schema validation (JSON/XML), type checking | Confirming trade execution data is correctly formatted for settlement systems |
 
 The structural category tends to be undercounted. In financial workflows where an agent's output is consumed directly by downstream automated systems — payment gateways, credit scoring engines — a malformed JSON object isn't an edge case, it's a production incident.[^2]
 
@@ -62,7 +62,7 @@ The tiering logic is sound. The harder question — one I don't think the indust
 
 The central paradox of agentic AI in banking is that the property making these models useful — probabilistic, contextual reasoning — is exactly what makes them unsafe for hard operational commitments. An LLM can produce a different response to the same prompt on successive calls. In a multi-step workflow, a small reasoning error at step one compounds across subsequent steps in ways that are genuinely difficult to anticipate.[^3]
 
-The practical response is layering: deterministic guards as the final outer boundary, probabilistic classifiers in the middle. A deterministic validation layer — schema checks, amount limits, recipient whitelists — executes *after* the LLM proposes an action and has no flexibility. It either passes or it doesn't. This is non-negotiable for anything touching execution.
+The practical response is layering: deterministic guards as the final outer boundary, probabilistic classifiers in the middle. A deterministic validation layer — schema checks, amount limits, recipient whitelists — executes *after* the LLM proposes an action and has no flexibility. Either the data passes the check or the transaction stops. That boundary is non-negotiable for anything touching execution.
 
 The cost of that layering is latency and money:
 
