@@ -13,3 +13,6 @@ Thumbs.db
 
 # Local dev
 *.local
+
+# Generated slop-guard fitted rule config (run scripts/fit-slop-rules.py to regenerate)
+scripts/slop-rules.jsonl

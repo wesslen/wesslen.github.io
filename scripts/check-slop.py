@@ -46,13 +46,32 @@ BAND_EMOJI = {
     "saturated": "💀",
 }
 
+# Auto-load a fitted custom pipeline if scripts/slop-rules.jsonl exists.
+# Generate it by running:  uv run --with slop-guard python scripts/fit-slop-rules.py
+_CUSTOM_RULES = Path(__file__).parent / "slop-rules.jsonl"
+
+def _load_pipeline():
+    """Return a fitted Pipeline if slop-rules.jsonl exists, else None."""
+    try:
+        from slop_guard.rules.pipeline import Pipeline
+        if _CUSTOM_RULES.exists():
+            return Pipeline.from_jsonl(_CUSTOM_RULES)
+    except Exception:
+        pass
+    return None
+
+_PIPELINE = _load_pipeline()
+if _PIPELINE and _CUSTOM_RULES.exists():
+    print(f"[slop-guard] using fitted rules: {_CUSTOM_RULES.name}", file=sys.stderr)
+
 
 def check_file(path: str) -> dict:
     text = Path(path).read_text(encoding="utf-8")
 
     # ── New API (>= 0.5, AnalysisPayload is a TypedDict / plain dict) ──
     if hasattr(slop_guard, "analyze_text"):
-        return slop_guard.analyze_text(text)
+        kwargs = {"pipeline": _PIPELINE} if _PIPELINE else {}
+        return slop_guard.analyze_text(text, **kwargs)
 
     # ── Old MCP API (0.4.x, functions live on slop_guard or .server) ──
     srv = getattr(slop_guard, "server", None)
