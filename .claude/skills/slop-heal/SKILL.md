@@ -116,6 +116,39 @@ Next step: Please review and revise these phrases manually, then re-run:
 
 ---
 
+## Known pitfalls and side-effects
+
+### Removing `---` horizontal rules leaves double blank lines (MD012)
+
+The `horizontal_rule` slop penalty fires when a post contains 4+ `---`
+section separators. The natural fix is to delete those lines — but each `---`
+is typically surrounded by one blank line on each side, so removing it leaves
+two consecutive blank lines. `markdownlint` (CI rule MD012) rejects this.
+
+**Fix:** after removing any `---` lines, collapse runs of 3+ newlines to 2:
+
+```python
+import re, pathlib
+p = pathlib.Path("posts/<filename>.md")
+text = p.read_text()
+p.write_text(re.sub(r'\n{3,}', '\n\n', text))
+```
+
+Or as a one-liner:
+
+```bash
+python3 -c "
+import re, pathlib
+p = pathlib.Path('posts/<filename>.md')
+p.write_text(re.sub(r'\n{3,}', '\n\n', p.read_text()))
+"
+```
+
+Run `npx markdownlint-cli "posts/<filename>.md"` to confirm no MD012 errors
+remain before committing.
+
+---
+
 ## Notes on the scoring model
 
 - Scoring uses exponential decay: `score = 100 × exp(−λ × density)`
@@ -127,18 +160,26 @@ Next step: Please review and revise these phrases manually, then re-run:
 - The linter is purely rule-based — no LLM, no API calls. It will not catch
   every stylistic issue, only the most common AI-slop fingerprints.
 
-## Current baseline scores (as of 2026-04-05)
+## Current baseline scores (as of 2026-04-07, with corpus suppression active)
+
+Corpus suppression (`scripts/slop-rules.jsonl`) suppresses `harness`,
+`orchestrate` (technical nouns, not slop verbs), and `blockquote_density`
+(TL;DR + `[!TIP]` alerts are intentional design, not thesis-statement slop).
 
 | Post                        | Score | Band     |
 |-----------------------------|-------|----------|
-| welcome-to-the-machine.md   | 52    | moderate |
-| sr11-7.md                   | 50    | moderate |
-| guardrails.md               | 63    | light ✅  |
-| metrics-metrics-metrics.md  | 50    | moderate |
+| sr11-7.md                   | 91    | clean ✅  |
+| welcome-to-the-machine.md   | 86    | clean ✅  |
+| context.md                  | 86    | clean ✅  |
+| metrics-metrics-metrics.md  | 86    | clean ✅  |
+| claude-code-harness.md      | 86    | clean ✅  |
+| agent-harness-design.md     | 85    | clean ✅  |
+| guardrails.md               | 82    | clean ✅  |
+| google-adk-a2a.md           | 77    | light ✅  |
 
-The three "moderate" posts need a cleanup pass before the CI threshold (60)
-would pass for those files if they were re-committed. `guardrails.md` already
-passes both the CI gate (60) and is close to the Cowork target (70).
+All posts pass the 70-point threshold. Without suppression, `harness`-heavy
+posts (`agent-harness-design.md`, `claude-code-harness.md`) score in the
+teens — the suppression is load-bearing for those two.
 
 ## Emergency bypass
 

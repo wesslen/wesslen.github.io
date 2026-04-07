@@ -13,3 +13,6 @@ Thumbs.db
 
 # Local dev
 *.local
+
+# slop-guard corpus suppression config — hand-maintained, intentionally tracked
+# (fit-slop-rules.py would regenerate this from corpus, but needs Python >=3.11)

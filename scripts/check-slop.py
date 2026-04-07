@@ -46,13 +46,100 @@ BAND_EMOJI = {
     "saturated": "💀",
 }
 
+# Auto-load a fitted custom pipeline if scripts/slop-rules.jsonl exists.
+# Generate it by running:  uv run --with slop-guard python scripts/fit-slop-rules.py
+_CUSTOM_RULES = Path(__file__).parent / "slop-rules.jsonl"
+
+def _load_pipeline():
+    """Return a fitted Pipeline if slop-rules.jsonl exists, else None."""
+    try:
+        from slop_guard.rules.pipeline import Pipeline
+        if _CUSTOM_RULES.exists():
+            return Pipeline.from_jsonl(_CUSTOM_RULES)
+    except Exception:
+        pass
+    return None
+
+_PIPELINE = _load_pipeline()
+if _PIPELINE and _CUSTOM_RULES.exists():
+    print(f"[slop-guard] using fitted rules: {_CUSTOM_RULES.name}", file=sys.stderr)
+
+
+def _apply_corpus_suppressions(rules_path: Path) -> None:
+    """Fallback for slop-guard < 0.4 / Python < 3.11.
+
+    When the Pipeline API isn't available, reads ``suppress_words`` and
+    ``suppress_checks`` from the first JSON object in slop-rules.jsonl and
+    monkey-patches the slop_guard.server module so those signals are never
+    penalised.
+
+    suppress_words: list[str]
+        Words to remove from the slop-word list + recompile the regex.
+        Words that appear throughout the legitimate corpus (technical nouns,
+        domain vocabulary) are down-weighted to zero.
+
+    suppress_checks: list[str]
+        Named structural checks to disable by raising their minimum-line
+        threshold to an unreachable value.  Currently supports:
+          "blockquote_density" — zeroes the blockquote penalty by setting
+          blockquote_min_lines=9999 on the HYPERPARAMETERS dataclass.
+          Useful when a blog's design conventions (TL;DR + [!TIP] alerts)
+          intentionally use blockquotes for readability rather than slop.
+    """
+    import re as _re
+    import dataclasses
+    try:
+        first_line = rules_path.read_text(encoding="utf-8").splitlines()[0]
+        config = json.loads(first_line)
+
+        import slop_guard.server as _sg
+
+        # ── suppress_words ────────────────────────────────────────────────
+        suppress_words = {w.lower() for w in config.get("suppress_words", [])}
+        if suppress_words:
+            original = _sg._ALL_SLOP_WORDS
+            patched = [w for w in original if w.lower() not in suppress_words]
+            removed = sorted(set(original) - set(patched))
+            if removed:
+                _sg._ALL_SLOP_WORDS = patched
+                _sg._SLOP_WORD_RE = _re.compile(
+                    r"\b(" + "|".join(_re.escape(w) for w in patched) + r")\b",
+                    _re.IGNORECASE,
+                )
+                print(
+                    f"[slop-guard] corpus suppression (fallback): removed {removed}",
+                    file=sys.stderr,
+                )
+
+        # ── suppress_checks ───────────────────────────────────────────────
+        suppress_checks = {c.lower() for c in config.get("suppress_checks", [])}
+        if suppress_checks and hasattr(_sg, "HYPERPARAMETERS"):
+            overrides: dict = {}
+            if "blockquote_density" in suppress_checks:
+                overrides["blockquote_min_lines"] = 9999
+            if overrides:
+                _sg.HYPERPARAMETERS = dataclasses.replace(_sg.HYPERPARAMETERS, **overrides)
+                print(
+                    f"[slop-guard] check suppression (fallback): {sorted(suppress_checks)}",
+                    file=sys.stderr,
+                )
+
+    except Exception as exc:
+        print(f"[slop-guard] corpus suppression failed: {exc}", file=sys.stderr)
+
+
+# Apply corpus suppressions when Pipeline isn't available (Python < 3.11 / sg < 0.4)
+if _PIPELINE is None and _CUSTOM_RULES.exists():
+    _apply_corpus_suppressions(_CUSTOM_RULES)
+
 
 def check_file(path: str) -> dict:
     text = Path(path).read_text(encoding="utf-8")
 
     # ── New API (>= 0.5, AnalysisPayload is a TypedDict / plain dict) ──
     if hasattr(slop_guard, "analyze_text"):
-        return slop_guard.analyze_text(text)
+        kwargs = {"pipeline": _PIPELINE} if _PIPELINE else {}
+        return slop_guard.analyze_text(text, **kwargs)
 
     # ── Old MCP API (0.4.x, functions live on slop_guard or .server) ──
     srv = getattr(slop_guard, "server", None)
