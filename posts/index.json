@@ -54,5 +54,19 @@
     "date": "2026-04-04",
     "description": "Anthropic's source code leaked. Here's what it reveals about how a production-grade agent harness actually gets built — and how much of it looks like design versus survival.",
     "tags": ["GenAI", "claude-code", "agentic-engineering"]
+  },
+  {
+    "slug": "a2a-risks",
+    "title": "When Agents Talk to Agents: The Risk Surface Nobody Has Fully Mapped",
+    "date": "2026-04-07",
+    "description": "Multi-agent AI systems compound the risks of individual models in ways that single-model guardrails weren't designed to handle. Here's what that threat surface actually looks like.",
+    "tags": ["GenAI", "agentic-engineering", "multi-agent", "security", "MRM", "financial-AI"]
+  },
+  {
+    "slug": "a2a-case-studies",
+    "title": "Five Failures That Explain the A2A Security Problem",
+    "date": "2026-04-07",
+    "description": "The threat surface for multi-agent AI systems isn't theoretical. Here's what five real incidents — from a $5 domain purchase to spontaneous model self-preservation — actually reveal.",
+    "tags": ["GenAI", "agentic-engineering", "multi-agent", "security", "MRM", "financial-AI"]
   }
 ]
