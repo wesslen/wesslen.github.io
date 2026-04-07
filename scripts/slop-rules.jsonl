@@ -1,0 +1,1 @@
+{"suppress_words": ["harness", "orchestrate"], "reason": "Technical nouns specific to this blog (agent harness design, orchestration layer). Not AI slop usage. Generated as corpus-calibration fallback for slop-guard <0.4 / Python <3.11."}

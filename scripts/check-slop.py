@@ -65,6 +65,49 @@ if _PIPELINE and _CUSTOM_RULES.exists():
     print(f"[slop-guard] using fitted rules: {_CUSTOM_RULES.name}", file=sys.stderr)
 
 
+def _apply_corpus_suppressions(rules_path: Path) -> None:
+    """Fallback for slop-guard < 0.4 / Python < 3.11.
+
+    When the Pipeline API isn't available, reads ``suppress_words`` from the
+    first JSON object in slop-rules.jsonl and monkey-patches the module-level
+    word list + compiled regex so those terms are never penalised.
+
+    This replicates what ``fit-slop-rules.py`` would do via the fitted Pipeline:
+    words that appear throughout the legitimate corpus are down-weighted to zero.
+    """
+    import re as _re
+    try:
+        first_line = rules_path.read_text(encoding="utf-8").splitlines()[0]
+        config = json.loads(first_line)
+        suppress = {w.lower() for w in config.get("suppress_words", [])}
+        if not suppress:
+            return
+
+        import slop_guard.server as _sg
+        original = _sg._ALL_SLOP_WORDS
+        patched = [w for w in original if w.lower() not in suppress]
+        removed = sorted(set(original) - set(patched))
+        if not removed:
+            return
+
+        _sg._ALL_SLOP_WORDS = patched
+        _sg._SLOP_WORD_RE = _re.compile(
+            r"\b(" + "|".join(_re.escape(w) for w in patched) + r")\b",
+            _re.IGNORECASE,
+        )
+        print(
+            f"[slop-guard] corpus suppression (fallback): removed {removed}",
+            file=sys.stderr,
+        )
+    except Exception as exc:
+        print(f"[slop-guard] corpus suppression failed: {exc}", file=sys.stderr)
+
+
+# Apply corpus suppressions when Pipeline isn't available (Python < 3.11 / sg < 0.4)
+if _PIPELINE is None and _CUSTOM_RULES.exists():
+    _apply_corpus_suppressions(_CUSTOM_RULES)
+
+
 def check_file(path: str) -> dict:
     text = Path(path).read_text(encoding="utf-8")
 
