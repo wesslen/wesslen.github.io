@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local dev
+*.local
+
+# slop-guard corpus suppression config — hand-maintained, intentionally tracked
+# (fit-slop-rules.py would regenerate this from corpus, but needs Python >=3.11)

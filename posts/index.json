@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "welcome-to-the-machine",
+    "title": "Welcome to the Machine: On Writing About AI in Public",
+    "date": "2026-03-22",
+    "description": "Why I'm starting a public blog about data science and GenAI — and what I hope to figure out by writing it.",
+    "tags": ["meta", "GenAI"]
+  },
+  {
+    "slug": "context",
+    "title": "Skills & Context Files for Coding Agents",
+    "date": "2026-03-28",
+    "description": "A comprehensive guide to CLAUDE.md, AGENTS.md, DESIGN.md, GitHub Copilot instructions, and the emerging science of context engineering for AI coding tools.",
+    "tags": ["GenAI", "claude-code", "context-engineering"]
+  },
+  {
+    "slug": "sr11-7",
+    "title": "SR 11-7 at fifteen: the guidance that built model risk management faces an AI reckoning",
+    "date": "2026-03-29",
+    "description": "How a 2011 supervisory letter transformed banking's approach to model risk — and why generative AI, agentic systems, and prompt injection are straining its core assumptions.",
+    "tags": ["GenAI", "MRM", "financial-AI", "SR11-7"]
+  },
+  {
+    "slug": "agent-harness-design",
+    "title": "Harness Design for Long-Running Agents",
+    "date": "2026-03-30",
+    "description": "The orchestration layer that context files alone can't provide: context management, error recovery, checkpointing, security, and framework comparisons for production agents.",
+    "tags": ["GenAI", "claude-code", "agentic-engineering"]
+  },
+  {
+    "slug": "guardrails",
+    "title": "What 'Guardrail' Actually Means for Agentic AI in Finance",
+    "date": "2026-04-02",
+    "description": "Everyone says 'guardrail.' Almost no one means the same thing. In an agentic system operating inside a bank, that ambiguity stops being academic.",
+    "tags": ["GenAI", "MRM", "agentic-engineering", "financial-AI", "SR11-7"]
+  },
+  {
+    "slug": "metrics-metrics-metrics",
+    "title": "Metrics, Metrics, Metrics",
+    "date": "2026-04-03",
+    "description": "Everyone in GenAI wants a dashboard. The problem is that generic metrics aren't just uninformative — they actively mislead. Social scientists figured this out decades ago.",
+    "tags": ["GenAI", "evals", "psychometrics", "MRM"]
+  },
+  {
+    "slug": "google-adk-a2a",
+    "title": "Google ADK and the A2A Protocol: A Technical Reference",
+    "date": "2026-04-04",
+    "description": "A deep-dive into Google's Agent Development Kit and the Agent2Agent protocol — the six core primitives, the cooperative event loop, how agents communicate across frameworks, and where the abstraction lines actually sit.",
+    "tags": ["GenAI", "agentic-engineering", "multi-agent", "protocols"]
+  },
+  {
+    "slug": "claude-code-harness",
+    "title": "Inside the Claude Code Harness",
+    "date": "2026-04-04",
+    "description": "Anthropic's source code leaked. Here's what it reveals about how a production-grade agent harness actually gets built — and how much of it looks like design versus survival.",
+    "tags": ["GenAI", "claude-code", "agentic-engineering"]
+  },
+  {
+    "slug": "a2a-risks",
+    "title": "When Agents Talk to Agents: The Risk Surface Nobody Has Fully Mapped",
+    "date": "2026-04-07",
+    "description": "Multi-agent AI systems compound the risks of individual models in ways that single-model guardrails weren't designed to handle. Here's what that threat surface actually looks like.",
+    "tags": ["GenAI", "agentic-engineering", "multi-agent", "security", "MRM", "financial-AI"]
+  },
+  {
+    "slug": "a2a-case-studies",
+    "title": "Five Failures That Explain the A2A Security Problem",
+    "date": "2026-04-07",
+    "description": "The threat surface for multi-agent AI systems isn't theoretical. Here's what five real incidents — from a $5 domain purchase to spontaneous model self-preservation — actually reveal.",
+    "tags": ["GenAI", "agentic-engineering", "multi-agent", "security", "MRM", "financial-AI"]
+  }
+]
