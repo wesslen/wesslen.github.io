@@ -14,5 +14,5 @@ Thumbs.db
 # Local dev
 *.local
 
-# Generated slop-guard fitted rule config (run scripts/fit-slop-rules.py to regenerate)
-scripts/slop-rules.jsonl
+# slop-guard corpus suppression config — hand-maintained, intentionally tracked
+# (fit-slop-rules.py would regenerate this from corpus, but needs Python >=3.11)
