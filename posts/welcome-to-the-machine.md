@@ -5,13 +5,13 @@ description: "Why I'm starting a public blog about data science and GenAI — an
 tags: [meta, GenAI]
 ---
 
-There's a particular kind of vertigo that comes from working inside a technology that's moving faster than anyone can document it. I've spent the better part of the last several years doing research and applied work with language models — and lately I've found myself reaching for words to describe what's happening that I simply don't have yet.
+There's a particular kind of vertigo that comes from working on a technology that's moving faster than anyone can document it. I've spent the better part of the last several years doing research and applied work with language models — and lately I've found myself reaching for words to describe what's happening that I simply don't have yet.
 
 This blog is my attempt to find those words.
 
 ## Why Write in Public?
 
-I've kept plenty of private notes: Notion documents, Obsidian vaults, markdown files scattered across three different machines. The problem with private notes is that they don't push back. They just sit there, agreeing with you.
+I've kept plenty of private notes: Google docs, Apple Notes, markdown files scattered across three different machines. The problem with private notes is that they don't push back. They just sit there, agreeing with you.
 
 Writing for an audience — even a small one, even an imaginary one — forces a different kind of honesty. You can't handwave past the part you don't quite understand. You can't leave a vague bullet point and promise yourself you'll come back to it. You have to say the thing, or admit you can't.
 
@@ -42,5 +42,3 @@ The blog sits at an intersection that doesn't have a lot of native coverage. If 
 Posts will vary in length and formality. Some will be close to polished essays. Others will be working notes — me thinking through a problem in real time, with no guarantee I've resolved it by the end.
 
 If that sounds useful to you, I'm glad you're here. If it sounds like a bad idea, I'd genuinely like to hear why.
-
----
