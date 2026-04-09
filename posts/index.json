@@ -58,7 +58,7 @@
   {
     "slug": "a2a-risks",
     "title": "When Agents Talk to Agents: The Risk Surface Nobody Has Fully Mapped",
-    "date": "2026-04-07",
+    "date": "2026-04-06",
     "description": "Multi-agent AI systems compound the risks of individual models in ways that single-model guardrails weren't designed to handle. Here's what that threat surface actually looks like.",
     "tags": ["GenAI", "agentic-engineering", "multi-agent", "security", "MRM", "financial-AI"]
   },
@@ -68,5 +68,12 @@
     "date": "2026-04-07",
     "description": "The threat surface for multi-agent AI systems isn't theoretical. Here's what five real incidents — from a $5 domain purchase to spontaneous model self-preservation — actually reveal.",
     "tags": ["GenAI", "agentic-engineering", "multi-agent", "security", "MRM", "financial-AI"]
+  },
+  {
+    "slug": "skills-supply-chain",
+    "title": "Skills Are Code: The Supply Chain Problem Nobody Wants to Own",
+    "date": "2026-04-09",
+    "description": "Skills marketplaces have reproduced every vulnerability pattern that took npm a decade to recognize — in about six months. Three attack surfaces, no platform-level governance.",
+    "tags": ["GenAI", "agentic-engineering", "context-engineering", "security"]
   }
 ]
