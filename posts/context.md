@@ -1,7 +1,7 @@
 ---
-title: "Skills & Context Files for Coding Agents"
+title: "Is the Future of Programming Just Managing Markdown?"
 date: 2026-03-28
-description: "What context files actually do, why they go stale, and whether the future of programming is just managing Markdown."
+description: "What context files actually do, why they go stale, and what it means when the agent knows your codebase better than you do."
 tags: [GenAI, claude-code, context-engineering]
 ---
 

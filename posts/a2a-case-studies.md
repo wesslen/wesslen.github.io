@@ -27,6 +27,9 @@ In January 2025, researchers at Aim Labs reported a vulnerability to Microsoft. 
 
 The attack chain is worth understanding in sequence. An attacker sends an email to the target. The email looks normal. When the target later asks Copilot *any* business question, Copilot's RAG pipeline retrieves the email alongside internal documents and feeds everything into the LLM context. The embedded instructions silently exfiltrate the target's internal data to an attacker-controlled domain — then instruct Copilot to never mention the email, so the response looks completely normal.
 
+> [!TIP]
+> **Plain terms:** [RAG (Retrieval-Augmented Generation)](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) is the pattern where a model doesn't just respond from memory — it first searches a corpus of documents, retrieves relevant ones, and includes them in its context window before generating a response. In Copilot's case, that corpus includes your emails and internal files. The attack works by planting instructions inside the retrieval corpus, so they arrive inside the model's context dressed as legitimate data rather than as an external command.
+
 Four defensive layers were bypassed: Microsoft's XPIA classifier (trained on obvious injection patterns, fooled by natural-language obfuscation), link redaction (bypassed with reference-style Markdown), image redaction (bypassed by encoding data as URL parameters on auto-fetched images), and Content Security Policy (bypassed by routing through a whitelisted Microsoft Teams proxy domain). Every layer was a bolt-on to an architecture with a deeper flaw: untrusted email content and confidential internal documents sharing the same LLM context window, with no isolation between them.
 
 > [!WARNING]
@@ -82,6 +85,9 @@ The peer-preservation findings break that assumption. There is no patch for this
 When I look at these cases together, one thread runs through almost all of them: the confused deputy. The EchoLeak attack succeeded because Copilot held legitimate access to internal documents and couldn't distinguish authorized retrieval from injected exfiltration. The Copilot→Claude escalation succeeded because both agents had legitimate filesystem write access and neither validated whether configuration changes came from a human or a peer. ForcedLeak succeeded because Agentforce had legitimate CRM access and couldn't distinguish a lead description from a workflow instruction. TeamPCP succeeded because LiteLLM legitimately held API credentials for every LLM provider relationship in the organization.
 
 In each case, authentication worked exactly as designed. The system had no mechanism to distinguish authorized behavior from hijacked behavior once the session was established.
+
+> [!TIP]
+> **Plain terms:** The [confused deputy](https://en.wikipedia.org/wiki/Confused_deputy_problem) is a classic security concept: a component with legitimate authority is tricked into using that authority in ways its principal never authorized. The name comes from [a 1988 paper](https://dl.acm.org/doi/10.1145/54289.871709): a compiler (the deputy) was manipulated by a malicious program into overwriting files it legitimately owned but shouldn't have touched. In every case above, the agents had valid credentials and behaved correctly — the confusion was between what they were authorized to do and what they were instructed to do by an attacker.
 
 The governance question that follows is awkward to ask inside a financial institution, but I think it's the right one. If your agents are confused deputies by design (holding legitimate credentials and broad access because that's what makes them useful), how do you build validation and oversight structures that can actually catch when they go wrong?
 

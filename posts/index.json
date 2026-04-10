@@ -1,30 +1,30 @@
 [
   {
     "slug": "welcome-to-the-machine",
-    "title": "Welcome to the Machine: On Writing About AI in Public",
+    "title": "Welcome to the Machine: On Writing About AI",
     "date": "2026-03-22",
     "description": "Why I'm starting a public blog about data science and GenAI — and what I hope to figure out by writing it.",
     "tags": ["meta", "GenAI"]
   },
   {
     "slug": "context",
-    "title": "Skills & Context Files for Coding Agents",
+    "title": "Is the Future of Programming Just Managing Markdown?",
     "date": "2026-03-28",
-    "description": "A comprehensive guide to CLAUDE.md, AGENTS.md, DESIGN.md, GitHub Copilot instructions, and the emerging science of context engineering for AI coding tools.",
+    "description": "What context files actually do, why they go stale, and what it means when the agent knows your codebase better than you do.",
     "tags": ["GenAI", "claude-code", "context-engineering"]
   },
   {
     "slug": "sr11-7",
-    "title": "SR 11-7 at fifteen: the guidance that built model risk management faces an AI reckoning",
-    "date": "2026-03-29",
-    "description": "How a 2011 supervisory letter transformed banking's approach to model risk — and why generative AI, agentic systems, and prompt injection are straining its core assumptions.",
+    "title": "SR 11-7 at Fifteen: Model Risk Management Faces an AI Reckoning",
+    "date": "2026-03-25",
+    "description": "The 2011 supervisory letter that built modern model risk management still governs banking AI in 2026. Here's why that's both reassuring and alarming.",
     "tags": ["GenAI", "MRM", "financial-AI", "SR11-7"]
   },
   {
     "slug": "agent-harness-design",
     "title": "Harness Design for Long-Running Agents",
     "date": "2026-03-30",
-    "description": "The orchestration layer that context files alone can't provide: context management, error recovery, checkpointing, security, and framework comparisons for production agents.",
+    "description": "What context files can't do: designing agent harnesses for context management, error recovery, and multi-session continuity.",
     "tags": ["GenAI", "claude-code", "agentic-engineering"]
   },
   {
