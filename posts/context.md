@@ -32,7 +32,7 @@ When a context file is committed to version control, every team member's AI assi
 
 The story starts with GitHub Copilot's 2021 launch: inline autocomplete with no persistent project knowledge. Developers who wanted to influence outputs used strategically placed code comments. Cursor introduced `.cursorrules` in 2023 — one of the first project-level context files. GitHub Copilot added `.github/copilot-instructions.md` in 2024.[^3]
 
-Claude Code arrived in February 2025, introducing `CLAUDE.md` with a sophisticated hierarchy (enterprise policies, user preferences, project conventions, directory-scoped rules) and popularizing the term "context engineering." July 2025 brought `AGENTS.md`, a vendor-neutral standard now stewarded by the [Linux Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation) and supported by Claude Code, Copilot, Cursor, Windsurf, Aider, and others. March 2026 added [`DESIGN.md` from Google Stitch](https://github.com/google-labs-code/stitch-skills/tree/main/skills/design-md), the first context file designed for visual design systems.
+Claude Code arrived in February 2025, introducing `CLAUDE.md` with a sophisticated hierarchy (enterprise policies, user preferences, project conventions, directory-scoped rules) and popularizing the term "context engineering." July 2025 brought `AGENTS.md`, a vendor-neutral standard now stewarded by the [Linux Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation) and supported across Claude Code and all major coding agents. March 2026 added [`DESIGN.md` from Google Stitch](https://github.com/google-labs-code/stitch-skills/tree/main/skills/design-md), the first context file designed for visual design systems.
 
 The options available to someone starting today:
 
@@ -65,7 +65,7 @@ A practical project-level `CLAUDE.md` is usually shorter than people expect:
 
 ```markdown
 ## Commands
-- Dev: `bun run dev` (port 3002, not 3000)
+- Dev: `bun run dev` (port 3002)
 - Build: `bun run build && bun run typecheck:fast`
 - Test: `bun test` (not npm test)
 
@@ -85,7 +85,7 @@ A practical project-level `CLAUDE.md` is usually shorter than people expect:
 
 **Conflicting instructions** emerge in multi-tool setups. My workflow involves Claude Code as the primary tool, with Copilot and Cowork alongside it. Reconciling context files across multiple surfaces multiplies the maintenance burden by the number of tools you're using.
 
-One thing that doesn't show up enough: security instructions. Analysis of real-world repositories found them in only 14.5% of context files. If you're defining what the agent *can* do, also define what it *can't* — especially around destructive operations and credential handling.
+One thing that doesn't show up enough: security instructions. [Analysis of real-world repositories](https://arxiv.org/abs/2511.12884v1) found them in only 14.5% of context files. If you're defining what the agent *can* do, also define what it *can't* — especially around destructive operations and credential handling.
 
 > [!CAUTION]
 > The security exposure from skills files runs deeper than what belongs in a context file. Skills marketplaces have grown to thousands of entries with minimal gatekeeping — one audit found 824 confirmed malicious skills in a single marketplace. Invisible Unicode codepoints can embed instructions that survive human code review entirely. And agents with filesystem access can write new skills into their own environment, establishing persistence across future sessions. For the full picture, [see the companion post on the skills supply chain problem](post.html?slug=skills-supply-chain).
@@ -128,11 +128,11 @@ Context files live uncomfortably close to this critique. At their best, a well-w
 
 The organizational version worries me more. In a large team where everyone works through agents, the context file may become the last thin layer between developers and a codebase they've already stopped reading closely. When that file goes stale — and we've established it will — there may be nobody left who can tell the difference. The specific failure I keep imagining is a production incident where nobody can triage it. The logs are present, but nobody has read this part of the codebase in months.
 
-I don't have a clean answer to whether context files help with this or accelerate it. What I keep asking myself is whether there's a version of this practice that genuinely closes the gap between what developers understand and what their agents are building — or whether the abstraction, even when well-designed, always tends to widen it.
+The context file works best when writing it forces you to understand the system you're describing. When it becomes a substitute for that understanding — when it makes prompting smoother without making the codebase less obscure — the file has optimized for the wrong thing.
 
 [^1]: ETH Zurich's AGENTbench study ([arXiv:2602.11988](https://arxiv.org/abs/2602.11988)) tested 138 repositories with developer-committed context files and found agents are "too obedient" — they follow instructions faithfully, but following unnecessary instructions consumes tokens and thinking time without improving task completion.
 [^2]: Skills use progressive disclosure: at startup, only metadata loads (~50–100 tokens per skill). When a skill matches the user's prompt, the full body loads. A project with 20 skills consumes roughly 2,000 tokens at startup versus loading everything upfront.
-[^3]: Matthew Honnibal's [Clownpocalypse post](https://honnibal.dev/blog/clownpocalypse) captures the early chaos well: aggregator sites appeared overnight, and the shared templates couldn't even handle HTML comments in Markdown — meaning any skill browsed on a website could contain hidden instructions not rendered to the human reader. His broader thesis is that the skills ecosystem is reproducing every supply chain vulnerability pattern from npm and PyPI, just faster. The [companion post on skills security](post.html?slug=skills-supply-chain) covers the full attack surface.
+[^3]: Matthew Honnibal's [Clownpocalypse post](https://honnibal.dev/blog/clownpocalypse) captures the early chaos well: aggregator sites appeared overnight, and the shared templates couldn't even handle HTML comments in Markdown — meaning any skill browsed on a website could contain hidden instructions not rendered to the human reader. His broader thesis is that the shared-skills pattern is reproducing every supply chain vulnerability from npm and PyPI, just faster. The [companion post on skills security](post.html?slug=skills-supply-chain) covers the full attack surface.
 [^4]: Liu et al. (2024) ["Lost in the Middle: How Language Models Use Long Contexts"](https://arxiv.org/abs/2307.03172) measured a 30%+ accuracy drop when critical information moved from position 1 to position 10 in a 20-document context. The practical implication: put the most critical constraints at the top of the file.
 [^5]: The full paper: ["Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?"](https://arxiv.org/abs/2602.11988) (ETH Zurich, arXiv:2602.11988, 2026). Human-written context files showed ~4% improvement over no context files, but only in poorly-documented codebases where they substitute for missing documentation.
 [^6]: Recommended sizes from the research: primary context files under 200 lines; directory-scoped rules under 60 lines; Agent Skills bodies under 5,000 tokens. Claude Code's [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) means `CLAUDE.md` content serves at roughly 90% lower token cost after the first turn.

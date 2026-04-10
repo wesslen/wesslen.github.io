@@ -85,13 +85,11 @@ The agent-to-agent (A2A) attack surface is another. As multi-agent systems becom
 
 Cascading failures are the one I find hardest to reason about clearly. When a single error propagates through an orchestrated multi-agent network faster than human incident response can contain it, you have a different kind of problem than a model producing a bad output. It's closer to a circuit breaker failure in electrical infrastructure than to anything in the traditional MRM playbook.
 
-I don't have clean answers to any of these. I'm not sure anyone does.
-
-## The question I keep coming back to
+## Who owns the attack surface
 
 Financial institutions have fifteen-plus years of practice building governance structures for model risk — SR 11-7 is old enough to drive a car. What's categorically new is that these models can be adversarially targeted in ways that previous generations couldn't. A logistic regression doesn't have an attack surface. An agentic system with memory, tool access, and multi-session continuity absolutely does.
 
-Which raises the question I can't quite resolve: are guardrails a technical problem with governance implications, or a governance problem that requires technical implementations? The answer probably determines who should own them inside a financial institution. And right now, in most places I'm aware of, nobody owns them cleanly.
+Whether guardrails are a technical problem with governance implications or a governance problem that requires technical implementation probably determines who should own them inside a financial institution. In most institutions I'm aware of, neither team has claimed it — and so far, that's been fine. That won't stay true.
 
 [^1]: The Federal Reserve's SR 11-7 guidance is available at [federalreserve.gov](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.pdf). For an end-to-end MRM framework alignment to SR 11-7 specifically for GenAI, see the arxiv paper [2503.15668](https://arxiv.org/pdf/2503.15668).
 [^2]: Structural and behavioral guardrail architecture patterns are covered in the [Galileo AI guardrails framework](https://galileo.ai/blog/ai-agent-guardrails-framework) and [Enkrypt AI's agent security framework](https://www.enkryptai.com/blog/securing-ai-agents-a-comprehensive-framework-for-agent-guardrails).
