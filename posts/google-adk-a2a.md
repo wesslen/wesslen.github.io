@@ -66,6 +66,9 @@ The eight-step cycle:
 
 The critical implication is about ordering: **state changes are only guaranteed persisted after the carrying event has been yielded and processed by the Runner.** An agent that writes to state and then immediately reads that same key in the next line — before yielding — is reading its own unpercolated change. Events with `partial=True` (streaming tokens) are forwarded to callers but may not be committed to the session store.
 
+> [!TIP]
+> **Plain terms:** "Cooperative" means agents voluntarily pause and hand back control at defined points — after yielding each event — rather than running until forcibly interrupted. It's the difference between colleagues who announce when they're done with a shared document versus people who just keep editing without signaling. That voluntary yield is what makes state changes predictable: when an agent resumes, it knows its previous writes have been committed and are safe to read. See [ADK's event loop documentation](https://adk.dev/runtime/event-loop/) for the full model.
+
 ```python
 # The Runner orchestrates everything
 from google.adk.runners import Runner
@@ -142,7 +145,7 @@ Six lifecycle hooks, each with precise return value semantics. The table matters
 | `before_tool_callback` | Before tool executes | Tool runs normally | Skips tool, uses returned dict |
 | `after_tool_callback` | After tool returns | Original result kept | Replaces result |
 
-The four context objects give hooks different access levels in order of expanding capability: `ReadonlyContext` → `CallbackContext` → `ToolContext` → `InvocationContext`. Custom agents implementing `_run_async_impl()` directly get `InvocationContext`, the most comprehensive one.
+The four context objects give hooks different access levels in order of expanding capability: `ReadonlyContext` → `CallbackContext` → `ToolContext` → `InvocationContext`. Custom agents implementing `_run_async_impl()` directly get `InvocationContext`, which exposes the full invocation state.
 
 `before_model_callback` is the right place to inject guardrail checks before spending tokens on an LLM call. `after_tool_callback` is where you'd audit or log tool invocations without modifying results. The return-value-as-interceptor pattern makes it clean to write short-circuit logic without needing to modify agent code.
 
@@ -165,13 +168,13 @@ The built-in **Gemini as a Judge Plugin** uses Gemini Flash Lite to evaluate inp
 Human-in-the-loop approval gates use `tool_context.request_confirmation()` inside a tool function. The agent pauses, transitions to an `input-required` state, and waits for external confirmation before proceeding. This is the right integration point for high-stakes actions — wire transfer approvals, irreversible operations.
 
 > [!WARNING]
-> App-scoped state (`app:` prefix) provides a useful but limited security boundary. An agent can read `app:` keys it has access to; it can't write them from a session context. But it can still pass their values as inputs to tools or sub-agents. Defense-in-depth still matters — `app:` prefix protects against session-level manipulation, not against an agent that reads the value and does something unexpected with it.
+> App-scoped state (`app:` prefix) provides a useful but limited security boundary. An agent can read `app:` keys it has access to; it can't write them from a session context. But it can still pass their values as inputs to tools or sub-agents. Defense-in-depth still matters — `app:` prefix prevents sessions from overwriting policy parameters directly, but an agent can still read those values and pass them to tools or sub-agents in unexpected ways.
 
 ## What the A2A protocol is
 
 A2A is an open protocol for communication between AI agent systems that don't share a codebase, a framework, or an operator.[^2] It was announced at Google Cloud Next in April 2025, reached v1.0 in early 2026, and is now governed by the Linux Foundation with 150+ supporting organizations — AWS, Microsoft, Salesforce, SAP, Adobe, and most of the major SIs.
 
-Five design principles drive the spec: embrace agentic capabilities (agents collaborate without needing to share memory or execution plans); build on open standards (HTTP, JSON-RPC 2.0, SSE — nothing proprietary); secure by default; support long-running tasks with lifecycle management; and remain modality-agnostic (text, audio, video, structured data all treated uniformly as `Part` objects).
+Five design principles drive the spec: agents collaborate without needing to share memory or execution plans; open standards throughout (HTTP, JSON-RPC 2.0, SSE — nothing proprietary); secure by default; lifecycle management for long-running tasks; and modality-agnostic design (text, audio, video, and structured data all treated uniformly as `Part` objects).
 
 The protocol has three layers: a data model (Task, Message, AgentCard, Part, Artifact), a set of operations (send message, stream, get/list/cancel tasks, push notification management), and protocol bindings (JSON-RPC 2.0, gRPC, HTTP/REST).
 
@@ -198,6 +201,9 @@ The `input-required` state is one of the more thoughtful design choices in the p
 | Request/response | `message/send` via JSON-RPC | Short tasks with near-immediate results |
 | Streaming | `message/stream` via SSE | Long outputs, real-time status updates |
 | Push notifications | Webhook registration via `tasks/pushNotificationConfig/create` | Hours-long tasks, disconnected clients |
+
+> [!TIP]
+> **Plain terms:** [SSE (Server-Sent Events)](https://en.wikipedia.org/wiki/Server-sent_events) is a one-way channel where the server pushes updates to the client continuously over a single open HTTP connection, rather than the client polling repeatedly. Think of it as a news ticker that updates automatically rather than a page you refresh. For long agent tasks, streaming over SSE means you see partial results in real time — status changes, incremental output — rather than waiting for the full task to complete before receiving anything.
 
 Streaming over SSE delivers two event types: `TaskStatusUpdateEvent` (state transitions) and `TaskArtifactUpdateEvent` (incremental content). The stream closes when the task reaches a terminal state. Push notifications flip the model — the server HTTP POSTs to a client-supplied webhook URL as task state changes, so the client doesn't need to maintain a connection or poll.
 

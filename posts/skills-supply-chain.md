@@ -5,7 +5,7 @@ description: "Skills marketplaces have reproduced every vulnerability pattern th
 tags: [GenAI, agentic-engineering, context-engineering, security]
 ---
 
-> **TL;DR:** Skills marketplaces have reproduced every supply chain vulnerability pattern that took npm and PyPI a decade to recognize — in roughly six months. Three distinct attack surfaces: 824+ confirmed malicious skills in one marketplace alone, invisible Unicode Tags that inject instructions no human code review can catch, and agents that can write new skills into their own running environment. What makes this structurally different from runtime injection is persistence: a poisoned skills file loads automatically before every session until someone explicitly removes it. Nobody currently owns the aggregate problem at the platform level, and the tooling to catch these attacks was built by the researchers who found them, not the platform operators.
+> **TL;DR:** Skills marketplaces have reproduced every supply chain vulnerability pattern that took npm and PyPI a decade to recognize — in roughly six months. Three distinct attack surfaces: 824+ confirmed malicious skills in one marketplace alone, invisible Unicode Tags that inject instructions no human code review can catch, and agents that can write new skills into their own running environment. What makes this structurally different from runtime injection is persistence: a poisoned skills file loads automatically before every session until someone explicitly removes it. Nobody currently owns the aggregate problem at the platform level, and the tooling to catch these attacks came from the researchers who found them. Platform operators have yet to fill that gap.
 
 The central bet of context engineering is obedience. You write a `SKILL.md`, drop it in the right directory, and your agent reads it faithfully at the start of every session — no arguing, no skipping, no judgment about whether the instructions look right. That obedience is the feature. It's also the attack surface.
 
@@ -36,7 +36,7 @@ Rehberger demonstrated this against a real skill from OpenAI's curated library: 
 
 Two things make this uncomfortable past the proof-of-concept stage. The attack is model-agnostic: Rehberger confirmed it against Claude and Gemini, with other vendors similarly affected. And the Unicode Tag technique had been reported to all major model vendors multiple times over the preceding two years without a coordinated fix.
 
-A poisoned skills file doesn't need to be retrieved like an injected document. It loads before every session, and removing it requires someone to first notice it exists.
+A compromised skill doesn't need to be retrieved like an injected document. It loads before every session, and removing it requires someone to first notice it exists.
 
 ## The agent that edits its own instructions
 
@@ -50,7 +50,7 @@ The `context: fork` option in the skills spec makes this worse. A skill configur
 
 Standard prompt injection is session-scoped. An attacker who embeds malicious instructions in a webpage your agent visits gets one session; when it ends, so does the attack.
 
-A poisoned skills file works the other way. It loads before the session starts and persists until someone removes it. In a team environment where skills are committed to a shared repository, a single compromised file affects every developer's agent runs until someone identifies it and takes it out. Skills are designed to be persistent — they survive context compaction, load automatically, and travel with the codebase. Those same properties are what make a compromised one hard to contain.
+A backdoored skills file works the other way. It loads before the session starts and persists until someone removes it. In a team environment where skills are committed to a shared repository, a single compromised file affects every developer's agent runs until someone identifies it and takes it out. Skills are designed to be persistent — they survive context compaction, load automatically, and travel with the codebase. Those same properties are what make a compromised one hard to contain.
 
 This maps to a structural point from the Knight Capital incident: dead code doesn't become inert through disuse; it just becomes invisible. A skill installed six months ago and forgotten is still loading metadata into the system prompt on every session. A skills directory that's never been audited is almost certainly doing some of this quietly right now.
 
