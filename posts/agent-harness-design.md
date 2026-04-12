@@ -51,6 +51,9 @@ Anthropic's foundational pattern for multi-session agents is a two-agent archite
 
 The March 2026 post evolves this into a three-agent GAN-inspired architecture: a planner that expands a brief into a full product spec, a generator that implements features sprint by sprint, and an evaluator that tests the running application. The adversarial relationship between generator and evaluator addresses a failure mode Anthropic observed directly: when asked to evaluate their own work, agents tend to praise it even when the quality is obviously mediocre. Tuning a standalone evaluator to be skeptical is far more tractable than making a generator critical of itself.
 
+> [!TIP]
+> **Plain terms:** [GANs (Generative Adversarial Networks)](https://en.wikipedia.org/wiki/Generative_adversarial_network) are a machine learning technique where two models compete: a generator tries to produce convincing output, and a discriminator tries to detect when the output is fake. Their adversarial relationship drives both to improve. The planner/generator/evaluator pattern borrows the same logic — an evaluator tuned to be skeptical pushes the generator toward better work more reliably than asking a single model to both produce and assess its own output.
+
 ## State persistence across sessions
 
 The choice of format for inter-session state matters more than it sounds. Anthropic's November 2025 post documents a deliberate decision to use JSON rather than Markdown for the feature list: "the model is less likely to inappropriately change or overwrite JSON files compared to Markdown files." Structured formats resist accidental agent modification.
@@ -62,6 +65,9 @@ The full set of inter-session artifacts in Anthropic's pattern: `claude-progress
 The same engineering post documents four specific failure modes. *Premature completion* — declaring a feature done because simpler tests passed — is solved by requiring end-to-end testing against full spec before marking anything as passing. *Broken environment state* is solved by git plus progress files that let a fresh agent diagnose the situation rather than fail silently. *Premature feature marking* requires strongly-worded instructions with explicit consequences. *Wasted startup time* is solved by `init.sh` establishing a reproducible baseline.
 
 Common patterns across frameworks: schema enforcement via Pydantic, step budgets with hard-kill thresholds, max three retries per agent with exponential backoff, and dead-letter queues for tasks failing past retry limits. Claude Code self-heals when a tool is denied — the agent receives the rejection as a tool result and attempts an alternative rather than halting.
+
+> [!TIP]
+> **Plain terms:** A [dead-letter queue](https://en.wikipedia.org/wiki/Dead_letter_queue) is where failed messages go after exhausting their retry budget — rather than disappearing silently or blocking the main queue, failed tasks get routed somewhere they can be inspected. The name comes from postal services: undeliverable mail goes to the dead letter office rather than getting destroyed. For agents, this means failed tasks are preserved for diagnosis and potential reprocessing rather than silently dropped, which matters when you need an audit trail.
 
 ## Security at the harness layer
 
