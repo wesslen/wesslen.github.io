@@ -7,7 +7,9 @@ tags: [GenAI, agentic-engineering, context-engineering, security]
 
 > **TL;DR:** Skills marketplaces have reproduced every supply chain vulnerability pattern that took npm and PyPI a decade to recognize — in roughly six months. Three distinct attack surfaces: 824+ confirmed malicious skills in one marketplace alone, invisible Unicode Tags that inject instructions no human code review can catch, and agents that can write new skills into their own running environment. What makes this structurally different from runtime injection is persistence: a poisoned skills file loads automatically before every session until someone explicitly removes it. Nobody currently owns the aggregate problem at the platform level, and the tooling to catch these attacks came from the researchers who found them. Platform operators have yet to fill that gap.
 
-The central bet of context engineering is obedience. You write a `SKILL.md`, drop it in the right directory, and your agent reads it faithfully at the start of every session — no arguing, no skipping, no judgment about whether the instructions look right. That obedience is the feature. It's also the attack surface.
+![](../img/Gemini_Generated_Image_ptas2uptas2uptas.jpg)
+
+The central bet of [context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) is obedience. You write a `SKILL.md`, drop it in the right directory, and your agent reads it faithfully at the start of every session — no arguing, no skipping, no judgment about whether the instructions look right. That obedience is the feature. It's also the attack surface.
 
 I wrote about context files and their staleness problem [in an earlier post](post.html?slug=context). The [ETH Zurich research group's finding](https://arxiv.org/abs/2602.11988v1) there was that agents are "too obedient" — they follow unnecessary instructions just as reliably as useful ones. This post is about what that same obedience produces when the instructions are malicious.
 

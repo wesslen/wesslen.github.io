@@ -7,6 +7,8 @@ tags: [GenAI, agentic-engineering, multi-agent, security, MRM, financial-AI]
 
 > **TL;DR:** Multi-agent AI systems don't just inherit the risks of their component models; they create new ones at the seams. Trust boundaries dissolve across agent handoffs, prompt injection propagates between agents like a pathogen through a network, and cascading failures can travel faster than any human incident response. The defenses that work for single models are necessary but not sufficient. What's missing is a coherent ownership model for who is actually responsible when a chain of agents produces a harmful outcome.
 
+![](../img/Gemini_Generated_Image_bayso2bayso2bays.jpg)
+
 Here's a question I've been sitting with for a while: if you chain three AI agents together, and the third one does something harmful, which of the three broke?
 
 The honest answer is that we don't have a reliable way to tell. That interpretability gap shapes governance design decisions before deployment, and incident attribution after something goes wrong.

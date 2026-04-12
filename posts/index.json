@@ -1,15 +1,15 @@
 [
   {
     "slug": "welcome-to-the-machine",
-    "title": "Welcome to the Machine: On Writing About AI",
+    "title": "Everything Drifts",
     "date": "2026-03-22",
-    "description": "Why I'm starting a public blog about data science and GenAI — and what I hope to figure out by writing it.",
+    "description": "What drift means in AI — and why I named a blog after it.",
     "tags": ["meta", "GenAI"]
   },
   {
     "slug": "context",
     "title": "Is the Future of Programming Just Managing Markdown?",
-    "date": "2026-03-28",
+    "date": "2026-03-24",
     "description": "What context files actually do, why they go stale, and what it means when the agent knows your codebase better than you do.",
     "tags": ["GenAI", "claude-code", "context-engineering"]
   },

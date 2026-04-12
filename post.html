@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loading… — wesslen.github.io</title>
     <meta name="description" content="" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="wesslen.github.io" />
+    <meta property="og:title" content="wesslen.github.io" />
+    <meta
+      property="og:description"
+      content="Ryan Wesslen's public notebook on data science, machine learning, and the strange new world of generative AI."
+    />
+    <meta property="og:url" content="https://wesslen.github.io/" />
+    <meta property="og:image" content="https://wesslen.github.io/og-default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="wesslen.github.io" />
+    <meta
+      name="twitter:description"
+      content="Ryan Wesslen's public notebook on data science, machine learning, and the strange new world of generative AI."
+    />
+    <meta name="twitter:image" content="https://wesslen.github.io/og-default.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="stylesheet" href="./style.css" />
 
     <!--
@@ -657,8 +674,14 @@
 
             // Update page metadata
             const title = meta.title || fmMeta.title || slug;
+            const description = meta.description || "";
             document.title = `${title} — wesslen.github.io`;
-            document.querySelector('meta[name="description"]').content = meta.description || "";
+            document.querySelector('meta[name="description"]').content = description;
+            document.querySelector('meta[property="og:title"]')?.setAttribute("content", title);
+            document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
+            document.querySelector('meta[property="og:url"]')?.setAttribute("content", window.location.href);
+            document.querySelector('meta[name="twitter:title"]')?.setAttribute("content", title);
+            document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", description);
 
             // Populate post header
             document.getElementById("post-date").textContent = meta.date ? fmtDate(meta.date) : "";
