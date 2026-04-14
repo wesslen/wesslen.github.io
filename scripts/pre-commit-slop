@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# pre-commit-slop — git pre-commit hook: slop-guard check on staged posts
+#
+# Install by running:  bash scripts/install-hooks.sh
+# Or manually:         cp scripts/pre-commit-slop .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+#
+# Behaviour:
+#   - Finds staged *.md files under posts/
+#   - Skips if none are staged
+#   - Runs check-slop.py at threshold 70 (targets "light" band or better)
+#   - Prints score + violations on failure
+#   - Blocks the commit if any file scores below threshold
+#   - Passes with SLOP_SKIP=1 env var (emergency escape hatch)
+
+set -euo pipefail
+
+THRESHOLD=70
+
+if [ "${SLOP_SKIP:-0}" = "1" ]; then
+  echo "slop-guard: SLOP_SKIP=1 set — skipping check."
+  exit 0
+fi
+
+# Collect staged post files
+STAGED=$(git diff --cached --name-only --diff-filter=ACM -- 'posts/*.md' \
+  | grep -v 'posts/index\.json' || true)
+
+if [ -z "$STAGED" ]; then
+  exit 0
+fi
+
+echo "slop-guard: checking staged posts (threshold $THRESHOLD)..."
+
+# uv run resolves dependencies on the fly — no global install required
+uv run --with slop-guard \
+  python scripts/check-slop.py \
+  --threshold "$THRESHOLD" \
+  --verbose \
+  $STAGED
+
+STATUS=$?
+
+if [ $STATUS -ne 0 ]; then
+  echo ""
+  echo "slop-guard: ❌  One or more posts scored below $THRESHOLD."
+  echo "  Fix the flagged phrases and retry, or set SLOP_SKIP=1 to bypass."
+  echo "  (In Cowork: the slop-heal skill will auto-revise, up to 3 attempts.)"
+fi
+
+exit $STATUS

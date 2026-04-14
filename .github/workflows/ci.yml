@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  lint:
+    name: Lint & Format Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── Node setup (htmlhint, markdownlint, prettier) ──────
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ── HTML linting ───────────────────────────────────────
+      - name: Lint HTML
+        run: npx htmlhint "*.html"
+
+      # ── Markdown linting ───────────────────────────────────
+      - name: Lint Markdown
+        run: npx markdownlint-cli "posts/*.md" --ignore "posts/reference-audit.md"
+
+      # ── Prettier format check (HTML, CSS, JS in-file) ──────
+      - name: Check formatting
+        run: npx prettier --check "*.html" "*.css"
+
+  slop-check:
+    name: Prose Slop Guard
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── Python / uv setup ──────────────────────────────────
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      # ── Detect changed post files ──────────────────────────
+      # On a PR, diff against the base branch.
+      # On a direct push, diff against the previous commit.
+      # If no markdown posts changed, skip the check.
+      - name: Get changed post files
+        id: changed
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+          fi
+          FILES=$(git diff --name-only "$BASE" HEAD -- 'posts/*.md' \
+            | grep -v 'posts/index\.json' || true)
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          if [ -n "$FILES" ]; then
+            echo "Changed posts:"
+            echo "$FILES"
+          else
+            echo "No post files changed — skipping slop check."
+          fi
+
+      # ── Run slop check on changed posts ───────────────────
+      # Threshold 60 = "light" band or better.
+      # Exit 1 if any changed post scores below 60.
+      - name: Check for AI slop
+        if: steps.changed.outputs.files != ''
+        run: |
+          uv run --with slop-guard \
+            python scripts/check-slop.py \
+            --threshold 60 \
+            --verbose \
+            ${{ steps.changed.outputs.files }}
