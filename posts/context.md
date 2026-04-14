@@ -1,13 +1,13 @@
 ---
-title: "Is the Future of Programming Just Managing Markdown?"
+title: "Is the Future of GenAI Development Just Managing Markdown?"
 date: 2026-03-24
-description: "What context files actually do, why they go stale, and what it means when the agent knows your codebase better than you do."
+description: "What context files actually do, why they go stale, and what it means when the agent knows your project better than you do."
 tags: [GenAI, claude-code, context-engineering]
 ---
 
-> **TL;DR:** Context files like `CLAUDE.md` and `AGENTS.md` solve the cold-start problem for coding agents by injecting persistent project knowledge at every new session. They work — but ETH Zurich research shows LLM-generated context files can reduce task success rates while increasing costs, because agents follow bad instructions as faithfully as good ones. The harder problem is staleness: projects change faster than context files do, and in large teams where everyone works through agents, a stale file may be the last thin layer between developers and a codebase nobody reads anymore.
+> **TL;DR:** Context files like `CLAUDE.md` and `AGENTS.md` solve the cold-start problem for AI agents by injecting persistent project knowledge at every new session. They work — but ETH Zurich research shows LLM-generated context files can reduce task success rates while increasing costs, because agents follow bad instructions as faithfully as good ones. The harder problem is staleness: projects change faster than context files do, and in large teams where everyone works through agents, a stale file may be the last thin layer between people and a system nobody fully understands anymore.
 
-If you've used a GenAI coding tool — Claude Code, GitHub Copilot, Cursor — you've hit this wall: you start a new session, and the agent knows nothing. Which framework you're using, why you made that architectural call last week, that the port is 3002 not 3000. So you prompt it again.
+Typically if you use a GenAI app — Claude, GitHub Copilot, Gemini — you've hit this wall: you start a new session, and the agent knows nothing. Which project you're working on, what decisions you've already made, which tools are in play. For coding agents it's even more granular: which framework, why you made that architectural call last week, that the port is 3002 not 3000. So you prompt it again.
 
 Context files are the answer. You write a Markdown file — `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md` — drop it in the right place, and the agent reads it at the start of every session. What used to be repeated conversation becomes persistent knowledge. This is what people call *[context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)*: instead of prompting the same things over and over, you codify them once in a version-controlled file.
 
@@ -15,7 +15,7 @@ Context files are the answer. You write a Markdown file — `CLAUDE.md`, `AGENTS
 
 The part that doesn't get discussed is that these files accumulate. Design directions get abandoned, but the file still says they're current. The agent reads it faithfully and confidently does the wrong thing.[^1] And if you're moving between tools (which most teams are), you're maintaining multiple files with overlapping, occasionally conflicting instructions.
 
-There's a framing I keep coming back to. The arc from ad-hoc prompting to version-controlled, self-updating knowledge systems suggests that programming is becoming the art of managing Markdown files.
+There's a framing I keep coming back to. The arc from ad-hoc prompting to version-controlled, self-updating knowledge systems suggests that GenAI development is becoming the art of managing Markdown files.
 
 Conventions in `CLAUDE.md`. Capabilities in `SKILL.md`. Visual systems in `DESIGN.md`. The agent reads; the agent builds. I'm not sure whether that's a breakthrough or a warning.
 

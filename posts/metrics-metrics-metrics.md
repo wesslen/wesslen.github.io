@@ -9,11 +9,13 @@ tags: [GenAI, evals, psychometrics, MRM]
 
 If you've worked on evaluating a GenAI application and sat in a meeting where someone asked "can we just get a dashboard for this?" — you've met the instinct I want to write about. There's a particular kind of managerial comfort that comes from seeing a number. Helpfulness: 4.2 out of 5. Coherence: 87%. Hallucination rate: 3%. It feels like understanding. It often isn't.
 
+Engineers hit a different version of the same trap: ship the eval, check the box, next sprint. The problem isn't that rubber-stamp evals waste time — it's that they look like they're working, right up until you hit the cliff.
+
 The question I keep stumbling over is this: if our metrics aren't measuring what we think they're measuring, are we better off with them or without them?
 
 ## The Brady Bunch Problem
 
-GenAI evaluation has its own version of the Brady Bunch problem. Metrics, metrics, metrics. Ask any new GenAI team what their eval story is, and you'll hear about dashboards — rows of aggregate scores floating above a system nobody has actually looked at. What you won't hear much about is test design, failure taxonomies, eval pipeline engineering, or any of the harder scaffolding that makes metrics mean something.
+GenAI evaluation has its own version of the Brady Bunch problem. Metrics, metrics, metrics. Ask any new GenAI team what their eval story is, and you'll hear about dashboards — rows of aggregate scores floating above a system nobody has actually looked at. What you won't hear much about is test design, failure taxonomies, eval pipeline engineering, or any of the harder scaffolding that makes metrics mean something. The distinction is worth naming: metrics are the visible outputs; evaluation is the full stack — test cases, harness engineering, failure taxonomy, and the metrics together.
 
 [Hamel Husain made this point sharply](https://hamel.dev/blog/posts/revenge/) in a recent talk: teams reach for off-the-shelf eval frameworks and adopt their metrics wholesale. "The problem: you have no idea what is actually broken." Helpfulness and coherence scores sound reasonable. They're also generic enough to be useless for diagnosing what's failing in your specific application.[^1]
 
@@ -42,7 +44,7 @@ They call this construct validity, and it's a harder problem than it sounds. A 2
 
 Item Response Theory offers one concrete example of how that verification works. IRT models the probability of a correct response as a function of both model ability *and* item characteristics — difficulty, discrimination, the probability of correct guessing through pattern matching alone. The interesting thing about the guessing parameter is that it maps almost directly onto hallucination: the probability that a model produces a plausible-sounding correct answer not because it understands the domain but because it's learned the distribution of correct-looking outputs.[^6]
 
-Classical Test Theory does something else useful: it forces you to think about measurement error systematically. LLM performance isn't deterministic. Run the same prompt at temperature 0.7 twice and you get different outputs. CTT treats the "true score" as the expected performance across infinite replications under identical conditions — which gives you a way to reason about what's noise versus what's signal in your eval results.[^6]
+Classical Test Theory adds a complementary angle: since LLM outputs aren't deterministic, CTT's concept of "true score" — expected performance across infinite replications — gives you a principled way to separate noise from signal in your eval results.[^6]
 
 ## The Validity Problem Is Not Theoretical
 
@@ -69,6 +71,8 @@ I've watched this play out in financial services, which has had formal model ris
 Taleb's observation about VaR is worth sitting with: even people who *know* a metric is imperfect anchor on it anyway. The solution isn't to remove the number — it's to surround the number with the infrastructure that makes it meaningful. In finance, that meant stress testing, scenario analysis, and actual model validation. In GenAI, it means the same thing: test design, eval pipeline engineering, judge calibration, and an honest account of what your metrics can and can't tell you.
 
 The field I think GenAI practitioners most need to read isn't ML engineering literature. It's psychometrics. Social scientists spent the better part of the 20th century developing tools for measuring things you can't observe directly, under conditions where your measurement instrument affects what it measures, in contexts where the constructs themselves are contested. That is also, with slight vocabulary changes, an exact description of what we're trying to do with GenAI evaluation.
+
+The framing I'd offer skeptical engineers: this isn't an academic detour. Greedy evals — optimizing for the next sprint, shipping whatever scores look reasonable — are the local-optimum solution to a global problem. Every greedy algorithm risks missing the cliff. Eval debt compounds like technical debt, but the failure mode is harder to see coming: the metrics look fine, the dashboard looks fine, and then something in production doesn't. Thinking holistically about what your evals actually measure is faster than explaining in a postmortem why they didn't catch it.
 
 Psychometrics is 80 years of hard-won lessons about what it costs to measure things badly. We're about to learn most of them again — just faster, and at larger scale.
 
