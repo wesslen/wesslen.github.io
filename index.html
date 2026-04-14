@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drift: Notes on AI on the Edges</title>
+    <meta
+      name="description"
+      content="Ryan Wesslen writes about AI drift — where models, governance frameworks, and organizations diverge from where they started. Notes on GenAI, model risk, and agentic engineering from the edges."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Drift: Notes on AI on the Edges" />
+    <meta property="og:title" content="Drift: Notes on AI on the Edges" />
+    <meta
+      property="og:description"
+      content="Ryan Wesslen writes about AI drift — where models, governance frameworks, and organizations diverge from where they started."
+    />
+    <meta property="og:url" content="https://wesslen.github.io/" />
+    <meta
+      property="og:image"
+      content="https://wesslen.github.io/og-default.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Drift: Notes on AI on the Edges" />
+    <meta
+      name="twitter:description"
+      content="Ryan Wesslen writes about AI drift — where models, governance frameworks, and organizations diverge from where they started."
+    />
+    <meta
+      name="twitter:image"
+      content="https://wesslen.github.io/og-default.png"
+    />
+    <link rel="canonical" href="https://wesslen.github.io/" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>"
+    />
+  </head>
+  <body>
+    <!-- Reading progress bar (thin, on index page mostly decorative) -->
+    <div
+      id="progress-bar"
+      role="progressbar"
+      aria-valuenow="0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    ></div>
+
+    <!-- ── Site Header ────────────────────────────────────── -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="./index.html" class="site-title">
+          wesslen.github.io
+          <span class="cursor">_</span>
+        </a>
+        <div class="header-actions">
+          <a href="./about.html" class="nav-link">about</a>
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            title="Toggle dark/light mode"
+            aria-label="Toggle theme"
+          >
+            <span id="theme-icon">☀️</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Hero ──────────────────────────────────────────── -->
+    <section class="hero" aria-label="Site introduction">
+      <div class="hero-content">
+        <p class="hero-eyebrow">// public notebook</p>
+        <h1>
+          Drift
+          <br />
+          <span
+            style="
+              font-size: 0.55em;
+              font-weight: 400;
+              opacity: 0.75;
+              letter-spacing: 0.01em;
+            "
+          >
+            Notes on AI on the Edges
+          </span>
+        </h1>
+        <p class="hero-desc">
+          A data scientist tracking where the models go and the frameworks
+          haven't followed — governance, evals, and agentic engineering from the
+          edges where the behavior is hardest to predict.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Post List ──────────────────────────────────────── -->
+    <main class="posts-section" id="main-content">
+      <div class="posts-header">
+        <span class="section-label">// posts</span>
+      </div>
+      <!-- Tag filter bar (populated by JS after posts load) -->
+      <div
+        class="tag-filter-bar"
+        id="tag-filter-bar"
+        aria-label="Filter posts by tag"
+        style="display: none"
+      >
+        <button class="tag-filter-btn active" data-tag="__all__">all</button>
+      </div>
+      <ul class="post-list" id="post-list" aria-label="Blog posts">
+        <li class="loading-state" id="loading-msg">
+          <span class="loading-dots">loading posts</span>
+        </li>
+      </ul>
+    </main>
+
+    <!-- ── Footer ────────────────────────────────────────── -->
+    <footer class="site-footer">
+      <p>
+        built with ♥ and plain HTML ·
+        <a
+          href="https://github.com/wesslen/wesslen.github.io"
+          target="_blank"
+          rel="noopener"
+          >view source on GitHub</a
+        >
+      </p>
+      <p class="footer-disclaimer">
+        Views expressed here are my own and do not represent those of my
+        employer.
+      </p>
+    </footer>
+
+    <script>
+      (() => {
+        "use strict";
+
+        /* ── Theme Persistence ──────────────────────────── */
+        const root = document.documentElement;
+        const toggleBtn = document.getElementById("theme-toggle");
+        const themeIcon = document.getElementById("theme-icon");
+        const savedTheme = localStorage.getItem("theme") || "dark";
+
+        function applyTheme(theme) {
+          root.setAttribute("data-theme", theme);
+          themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
+          localStorage.setItem("theme", theme);
+        }
+
+        applyTheme(savedTheme);
+
+        toggleBtn.addEventListener("click", () => {
+          const current = root.getAttribute("data-theme");
+          applyTheme(current === "dark" ? "light" : "dark");
+        });
+
+        /* ── Reading Progress Bar ───────────────────────── */
+        const bar = document.getElementById("progress-bar");
+        function updateProgress() {
+          const scrollTop = window.scrollY;
+          const docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+          const pct =
+            docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+          bar.style.width = pct + "%";
+          bar.setAttribute("aria-valuenow", Math.round(pct));
+        }
+        window.addEventListener("scroll", updateProgress, { passive: true });
+
+        /* ── Tag Color (deterministic hue from tag name) ── */
+        function tagHue(tag) {
+          let hash = 0;
+          for (let i = 0; i < tag.length; i++) {
+            hash = (hash * 31 + tag.charCodeAt(i)) & 0xffffffff;
+          }
+          return Math.abs(hash) % 360;
+        }
+
+        function tagStyle(tag) {
+          const hue = tagHue(tag);
+          // Use HSL with fixed saturation/lightness, adjust for theme
+          const isDark = root.getAttribute("data-theme") === "dark";
+          const bg = isDark
+            ? `hsla(${hue},70%,60%,0.12)`
+            : `hsla(${hue},60%,40%,0.10)`;
+          const border = isDark
+            ? `hsla(${hue},70%,60%,0.4)`
+            : `hsla(${hue},60%,40%,0.35)`;
+          const color = isDark ? `hsl(${hue},80%,72%)` : `hsl(${hue},50%,35%)`;
+          return `background:${bg};border-color:${border};color:${color}`;
+        }
+
+        /* ── Read Time Estimate ─────────────────────────── */
+        function readTime(text) {
+          const words = text.trim().split(/\s+/).length;
+          const mins = Math.max(1, Math.round(words / 225));
+          return `${mins} min read`;
+        }
+
+        /* ── Format Date ────────────────────────────────── */
+        function fmtDate(iso) {
+          const d = new Date(iso + "T00:00:00");
+          return d.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          });
+        }
+
+        /* ── Render Post Cards ──────────────────────────── */
+        function renderCard(post, bodyText) {
+          const rt = readTime(bodyText);
+          const tags = (post.tags || [])
+            .map((t) => `<span class="tag" style="${tagStyle(t)}">${t}</span>`)
+            .join("");
+          const tagList = (post.tags || []).join(" ");
+
+          return `
+        <li class="post-card" data-tags="${tagList}">
+          <a href="./post.html?slug=${encodeURIComponent(post.slug)}" aria-label="${post.title}">
+            <div class="card-meta">
+              <span class="card-date">${fmtDate(post.date)}</span>
+              <span class="read-time-badge">${rt}</span>
+            </div>
+            <div class="card-title">${post.title}</div>
+            <div class="card-desc">${post.description}</div>
+            <div class="tags">${tags}</div>
+          </a>
+        </li>`;
+        }
+
+        /* ── Tag Filter Bar ─────────────────────────────── */
+        let activeTag = "__all__";
+
+        function buildTagFilter(manifest) {
+          const bar = document.getElementById("tag-filter-bar");
+          const allTags = [
+            ...new Set(manifest.flatMap((p) => p.tags || [])),
+          ].sort();
+          if (allTags.length < 2) return; // not enough tags to filter
+
+          allTags.forEach((tag) => {
+            const btn = document.createElement("button");
+            btn.className = "tag-filter-btn";
+            btn.dataset.tag = tag;
+            btn.textContent = tag;
+            btn.style.cssText = tagStyle(tag);
+            bar.appendChild(btn);
+          });
+
+          bar.style.display = "flex";
+
+          bar.addEventListener("click", (e) => {
+            const btn = e.target.closest(".tag-filter-btn");
+            if (!btn) return;
+            activeTag = btn.dataset.tag;
+
+            // Update active state
+            bar.querySelectorAll(".tag-filter-btn").forEach((b) => {
+              b.classList.toggle("active", b.dataset.tag === activeTag);
+              // Reset inline style for active (all) btn, keep tag color for others
+              if (b.dataset.tag === "__all__") {
+                b.style.cssText = "";
+              } else {
+                b.style.cssText = b.classList.contains("active")
+                  ? tagStyle(b.dataset.tag)
+                  : tagStyle(b.dataset.tag);
+              }
+            });
+
+            // Show/hide post cards
+            document
+              .querySelectorAll("#post-list .post-card")
+              .forEach((card) => {
+                const tags = card.dataset.tags
+                  ? card.dataset.tags.split(" ")
+                  : [];
+                card.style.display =
+                  activeTag === "__all__" || tags.includes(activeTag)
+                    ? ""
+                    : "none";
+              });
+          });
+        }
+
+        /* ── Fetch Manifest & Posts ─────────────────────── */
+        async function loadPosts() {
+          const list = document.getElementById("post-list");
+          const loading = document.getElementById("loading-msg");
+
+          try {
+            const res = await fetch("./posts/index.json");
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const manifest = await res.json();
+
+            // Sort newest first
+            manifest.sort((a, b) => b.date.localeCompare(a.date));
+
+            // Build tag filter before rendering cards
+            buildTagFilter(manifest);
+
+            // Fetch each post body to compute read time
+            const cards = await Promise.all(
+              manifest.map(async (post) => {
+                try {
+                  const r = await fetch(`./posts/${post.slug}.md`);
+                  const text = r.ok ? await r.text() : post.description;
+                  // Strip frontmatter for word count
+                  const body = text.replace(/^---[\s\S]*?---\n/, "");
+                  return renderCard(post, body);
+                } catch {
+                  return renderCard(post, post.description);
+                }
+              }),
+            );
+
+            list.innerHTML = cards.join("");
+          } catch (err) {
+            list.innerHTML = `
+          <li class="error-state">
+            <p>⚠ Could not load posts (${err.message})</p>
+            <p style="font-size:0.75rem;margin-top:0.5rem;color:var(--muted)">
+              If running locally, serve with <code style="font-family:var(--font-mono)">python -m http.server</code>
+            </p>
+          </li>`;
+          }
+        }
+
+        loadPosts();
+
+        /* Re-render tag colors on theme change */
+        toggleBtn.addEventListener("click", () => {
+          // Brief delay so data-theme is updated first
+          setTimeout(() => {
+            document.querySelectorAll(".tag").forEach((el) => {
+              const tag = el.textContent;
+              el.style.cssText = tagStyle(tag);
+            });
+          }, 50);
+        });
+      })();
+    </script>
+  </body>
+</html>
