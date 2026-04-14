@@ -199,11 +199,7 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 40%,
-    var(--bg) 85%
-  );
+  background: radial-gradient(ellipse at center, transparent 40%, var(--bg) 85%);
   pointer-events: none;
 }
 
@@ -313,12 +309,7 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    115deg,
-    transparent 0%,
-    var(--accent-dim) 40%,
-    transparent 70%
-  );
+  background: linear-gradient(115deg, transparent 0%, var(--accent-dim) 40%, transparent 70%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
