@@ -1,0 +1,17 @@
+{
+  "name": "wesslen-github-io",
+  "private": true,
+  "description": "CI tooling for wesslen.github.io blog",
+  "scripts": {
+    "lint:html": "htmlhint \"*.html\"",
+    "lint:md": "markdownlint-cli \"posts/*.md\" --ignore \"posts/reference-audit.md\"",
+    "lint:format": "prettier --check \"*.html\" \"*.css\"",
+    "lint": "npm run lint:html && npm run lint:md && npm run lint:format",
+    "format": "prettier --write \"*.html\" \"*.css\""
+  },
+  "devDependencies": {
+    "htmlhint": "^1.1.4",
+    "markdownlint-cli": "^0.43.0",
+    "prettier": "^3.4.2"
+  }
+}
