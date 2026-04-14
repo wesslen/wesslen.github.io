@@ -8,7 +8,7 @@
   },
   {
     "slug": "context",
-    "title": "Is the Future of Programming Just Managing Markdown?",
+    "title": "Is the Future of GenAI Development Just Managing Markdown?",
     "date": "2026-03-24",
     "description": "What context files actually do, why they go stale, and what it means when the agent knows your codebase better than you do.",
     "tags": ["GenAI", "claude-code", "context-engineering"]
