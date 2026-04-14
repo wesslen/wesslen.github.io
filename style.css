@@ -413,6 +413,14 @@ img {
   }
 }
 
+/* ── Post Top Nav (back + next) ──────────────────────────── */
+.post-top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
 /* ── Back Link ───────────────────────────────────────────── */
 .back-link {
   display: inline-flex;
@@ -421,7 +429,6 @@ img {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   color: var(--muted);
-  margin-bottom: 2rem;
   transition: color var(--transition);
 }
 .back-link:hover {
@@ -429,6 +436,25 @@ img {
   opacity: 1;
 }
 .back-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ── Next Post Link ──────────────────────────────────────── */
+.next-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+  transition: color var(--transition);
+}
+.next-link:hover {
+  color: var(--accent);
+  opacity: 1;
+}
+.next-link svg {
   width: 14px;
   height: 14px;
 }
