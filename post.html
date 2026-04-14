@@ -71,21 +71,37 @@
     <div class="post-layout container">
       <!-- Main article column -->
       <article id="article-col">
-        <!-- Back link -->
-        <a href="./index.html" class="back-link" id="back-link">
-          <svg
-            viewBox="0 0 16 16"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M10 12L6 8l4-4" />
-          </svg>
-          all posts
-        </a>
+        <!-- Top navigation: back link (left) + next post link (right) -->
+        <div class="post-top-nav">
+          <a href="./index.html" class="back-link" id="back-link">
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M10 12L6 8l4-4" />
+            </svg>
+            all posts
+          </a>
+          <a href="#" class="next-link" id="next-post-link" style="display: none" aria-label="Next post">
+            next post
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M6 4l4 4-4 4" />
+            </svg>
+          </a>
+        </div>
 
         <!-- Loading / error placeholders -->
         <div id="loading-state" class="loading-state">
@@ -729,7 +745,18 @@
             contentEl.style.display = "block";
             updateProgress();
 
-            // Post navigation
+            // Populate top-right next post link
+            const nextLinkEl = document.getElementById("next-post-link");
+            if (nextLinkEl && fullManifest.length > 0) {
+              const currentIdx = fullManifest.findIndex((p) => p.slug === slug);
+              if (currentIdx !== -1 && currentIdx < fullManifest.length - 1) {
+                const nextPost = fullManifest[currentIdx + 1];
+                nextLinkEl.href = `./post.html?slug=${encodeURIComponent(nextPost.slug)}`;
+                nextLinkEl.style.display = "inline-flex";
+              }
+            }
+
+            // Post navigation (bottom cards)
             renderPostNav(fullManifest, slug);
           } catch (err) {
             loadingEl.style.display = "none";
