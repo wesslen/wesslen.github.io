@@ -13,14 +13,20 @@
       content="Ryan Wesslen's public notebook on data science, machine learning, and the strange new world of generative AI."
     />
     <meta property="og:url" content="https://wesslen.github.io/" />
-    <meta property="og:image" content="https://wesslen.github.io/og-default.png" />
+    <meta
+      property="og:image"
+      content="https://wesslen.github.io/og-default.png"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="wesslen.github.io" />
     <meta
       name="twitter:description"
       content="Ryan Wesslen's public notebook on data science, machine learning, and the strange new world of generative AI."
     />
-    <meta name="twitter:image" content="https://wesslen.github.io/og-default.png" />
+    <meta
+      name="twitter:image"
+      content="https://wesslen.github.io/og-default.png"
+    />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="stylesheet" href="./style.css" />
 
@@ -49,7 +55,13 @@
   </head>
   <body>
     <!-- Reading progress bar -->
-    <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    <div
+      id="progress-bar"
+      role="progressbar"
+      aria-valuenow="0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    ></div>
 
     <!-- ── Site Header ────────────────────────────────────── -->
     <header class="site-header">
@@ -60,7 +72,12 @@
         </a>
         <div class="header-actions">
           <a href="./about.html" class="nav-link">about</a>
-          <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            title="Toggle dark/light mode"
+            aria-label="Toggle theme"
+          >
             <span id="theme-icon">☀️</span>
           </button>
         </div>
@@ -93,8 +110,11 @@
         </div>
         <div id="error-state" class="error-state" style="display: none">
           <p>⚠ Post not found.</p>
-          <p style="font-size: 0.75rem; margin-top: 0.5rem; color: var(--muted)">
-            Make sure the slug is correct and you're serving the site (not opening as
+          <p
+            style="font-size: 0.75rem; margin-top: 0.5rem; color: var(--muted)"
+          >
+            Make sure the slug is correct and you're serving the site (not
+            opening as
             <code>file://</code>
             ).
           </p>
@@ -114,7 +134,11 @@
 
           <!-- Mobile TOC (collapsible) -->
           <div class="toc-mobile" id="toc-mobile">
-            <button class="toc-mobile-toggle" id="toc-mobile-toggle" aria-expanded="false">
+            <button
+              class="toc-mobile-toggle"
+              id="toc-mobile-toggle"
+              aria-expanded="false"
+            >
               <span>// table of contents</span>
               <span class="toc-chevron" aria-hidden="true">▾</span>
             </button>
@@ -129,7 +153,11 @@
       </article>
 
       <!-- ── TOC Sidebar (desktop only) ────────────────── -->
-      <aside class="toc-sidebar" id="toc-sidebar" aria-label="Table of contents">
+      <aside
+        class="toc-sidebar"
+        id="toc-sidebar"
+        aria-label="Table of contents"
+      >
         <div class="toc-title">// contents</div>
         <ul class="toc-list" id="toc-list-desktop"></ul>
       </aside>
@@ -139,9 +167,17 @@
     <footer class="site-footer">
       <p>
         built with ♥ and plain HTML ·
-        <a href="https://github.com/wesslen/wesslen.github.io" target="_blank" rel="noopener">view source on GitHub</a>
+        <a
+          href="https://github.com/wesslen/wesslen.github.io"
+          target="_blank"
+          rel="noopener"
+          >view source on GitHub</a
+        >
       </p>
-      <p class="footer-disclaimer">Views expressed here are my own and do not represent those of my employer.</p>
+      <p class="footer-disclaimer">
+        Views expressed here are my own and do not represent those of my
+        employer.
+      </p>
     </footer>
 
     <!-- CDN: marked.js (markdown parser) -->
@@ -174,15 +210,19 @@
 
         applyTheme(savedTheme);
         toggleBtn.addEventListener("click", () => {
-          applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+          applyTheme(
+            root.getAttribute("data-theme") === "dark" ? "light" : "dark",
+          );
         });
 
         /* ── Reading Progress Bar ───────────────────────────── */
         const bar = document.getElementById("progress-bar");
         function updateProgress() {
           const scrollTop = window.scrollY;
-          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-          const pct = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+          const docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+          const pct =
+            docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
           bar.style.width = pct + "%";
           bar.setAttribute("aria-valuenow", Math.round(pct));
         }
@@ -199,8 +239,12 @@
         function tagStyle(tag) {
           const hue = tagHue(tag);
           const isDark = root.getAttribute("data-theme") === "dark";
-          const bg = isDark ? `hsla(${hue},70%,60%,0.12)` : `hsla(${hue},60%,40%,0.10)`;
-          const border = isDark ? `hsla(${hue},70%,60%,0.4)` : `hsla(${hue},60%,40%,0.35)`;
+          const bg = isDark
+            ? `hsla(${hue},70%,60%,0.12)`
+            : `hsla(${hue},60%,40%,0.10)`;
+          const border = isDark
+            ? `hsla(${hue},70%,60%,0.4)`
+            : `hsla(${hue},60%,40%,0.35)`;
           const color = isDark ? `hsl(${hue},80%,72%)` : `hsl(${hue},50%,35%)`;
           return `background:${bg};border-color:${border};color:${color}`;
         }
@@ -284,7 +328,9 @@
           if (order.length === 0) return { body, refsHtml: "" };
 
           // Remove definition lines from body
-          let cleanBody = body.replace(/^\[\^[^\]]+\]:\s*.+$/gm, "").replace(/\n{3,}/g, "\n\n");
+          let cleanBody = body
+            .replace(/^\[\^[^\]]+\]:\s*.+$/gm, "")
+            .replace(/\n{3,}/g, "\n\n");
 
           // Replace inline [^id] with superscript links
           // Avoid replacing inside fenced code blocks
@@ -300,7 +346,10 @@
             return `<sup class="cite-ref"><a href="#fn-${id}" id="fnref-${id}">${n || id}</a></sup>`;
           });
           // Restore code blocks
-          cleanBody = cleanBody.replace(/\x00CODE(\d+)\x00/g, (_, i) => codeBlocks[+i]);
+          cleanBody = cleanBody.replace(
+            /\x00CODE(\d+)\x00/g,
+            (_, i) => codeBlocks[+i],
+          );
 
           // Build the references section HTML
           const items = order
@@ -339,7 +388,8 @@
        The embed uses youtube-nocookie.com for privacy.
     ─────────────────────────────────────────────────────── */
         function processYouTube(proseEl) {
-          const ytRx = /^\[youtube:\s*([a-zA-Z0-9_-]+)(?:\?t=(\d+))?(?:\s+"([^"]*)")?\]$/;
+          const ytRx =
+            /^\[youtube:\s*([a-zA-Z0-9_-]+)(?:\?t=(\d+))?(?:\s+"([^"]*)")?\]$/;
 
           proseEl.querySelectorAll("p").forEach((p) => {
             const text = p.textContent.trim();
@@ -401,7 +451,9 @@
             // <p>[!NOTE]<br>content</p>  (single paragraph, <br> separator)
             // OR as two separate paragraphs depending on the markdown layout.
             const raw = firstP.innerHTML;
-            const match = raw.match(/^\[!([A-Z]+)\](<br\s*\/?>|<\/p><p>)?([\s\S]*)/i);
+            const match = raw.match(
+              /^\[!([A-Z]+)\](<br\s*\/?>|<\/p><p>)?([\s\S]*)/i,
+            );
             if (!match) return;
 
             const type = match[1].toUpperCase();
@@ -413,7 +465,9 @@
 
             // Collect any additional sibling paragraphs
             const extraParas = [...bq.querySelectorAll("p")].slice(1);
-            const extraHtml = extraParas.map((p) => `<p>${p.innerHTML}</p>`).join("");
+            const extraHtml = extraParas
+              .map((p) => `<p>${p.innerHTML}</p>`)
+              .join("");
 
             const div = document.createElement("div");
             div.className = `gh-alert gh-alert-${type.toLowerCase()}`;
@@ -433,10 +487,12 @@
        a small language tab via ::before pseudo-element.
     ─────────────────────────────────────────────────────── */
         function labelCodeBlocks() {
-          document.querySelectorAll(".prose pre code[class]").forEach((codeEl) => {
-            const m = codeEl.className.match(/language-(\w+)/);
-            if (m) codeEl.closest("pre").setAttribute("data-lang", m[1]);
-          });
+          document
+            .querySelectorAll(".prose pre code[class]")
+            .forEach((codeEl) => {
+              const m = codeEl.className.match(/language-(\w+)/);
+              if (m) codeEl.closest("pre").setAttribute("data-lang", m[1]);
+            });
         }
 
         /* ── Wrap Tables for Mobile Scroll ───────────────────────
@@ -536,7 +592,9 @@
               a.textContent = h.textContent;
               a.addEventListener("click", (e) => {
                 e.preventDefault();
-                document.getElementById(h.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                document
+                  .getElementById(h.id)
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
               });
               li.appendChild(a);
               container.appendChild(li);
@@ -553,23 +611,30 @@
                 if (entry.isIntersecting) {
                   const id = entry.target.id;
                   tocLinks.forEach((a) => {
-                    a.classList.toggle("active", a.getAttribute("href") === `#${id}`);
+                    a.classList.toggle(
+                      "active",
+                      a.getAttribute("href") === `#${id}`,
+                    );
                   });
                 }
               });
             },
-            { rootMargin: "-20% 0px -70% 0px" }
+            { rootMargin: "-20% 0px -70% 0px" },
           );
 
           headings.forEach((h) => observer.observe(h));
         }
 
         /* ── Mobile TOC Toggle ──────────────────────────────── */
-        document.getElementById("toc-mobile-toggle").addEventListener("click", () => {
-          const mobile = document.getElementById("toc-mobile");
-          const open = mobile.classList.toggle("open");
-          document.getElementById("toc-mobile-toggle").setAttribute("aria-expanded", open);
-        });
+        document
+          .getElementById("toc-mobile-toggle")
+          .addEventListener("click", () => {
+            const mobile = document.getElementById("toc-mobile");
+            const open = mobile.classList.toggle("open");
+            document
+              .getElementById("toc-mobile-toggle")
+              .setAttribute("aria-expanded", open);
+          });
 
         /* ── Post Navigation ─────────────────────────────────── */
         function renderPostNav(manifest, currentSlug) {
@@ -595,9 +660,14 @@
               .filter((p) => !usedSlugs.has(p.slug))
               .map((p) => ({
                 post: p,
-                overlap: (p.tags || []).filter((t) => currentTags.has(t)).length,
+                overlap: (p.tags || []).filter((t) => currentTags.has(t))
+                  .length,
               }))
-              .sort((a, b) => b.overlap - a.overlap || new Date(b.post.date) - new Date(a.post.date));
+              .sort(
+                (a, b) =>
+                  b.overlap - a.overlap ||
+                  new Date(b.post.date) - new Date(a.post.date),
+              );
             candidates.slice(0, 2 - picks.length).forEach(({ post }) => {
               picks.push({ post, label: "related" });
             });
@@ -617,7 +687,7 @@
                 <a href="./post.html?slug=${encodeURIComponent(post.slug)}" class="post-nav-card">
                   <span class="post-nav-meta">${label} · ${fmtDate(post.date)}</span>
                   <span class="post-nav-title">${post.title}</span>
-                </a>`
+                </a>`,
                 )
                 .join("")}
             </div>`;
@@ -673,23 +743,42 @@
             const title = meta.title || fmMeta.title || slug;
             const description = meta.description || "";
             document.title = `${title} — wesslen.github.io`;
-            document.querySelector('meta[name="description"]').content = description;
-            document.querySelector('meta[property="og:title"]')?.setAttribute("content", title);
-            document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
-            document.querySelector('meta[property="og:url"]')?.setAttribute("content", window.location.href);
-            document.querySelector('meta[name="twitter:title"]')?.setAttribute("content", title);
-            document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", description);
+            document.querySelector('meta[name="description"]').content =
+              description;
+            document
+              .querySelector('meta[property="og:title"]')
+              ?.setAttribute("content", title);
+            document
+              .querySelector('meta[property="og:description"]')
+              ?.setAttribute("content", description);
+            document
+              .querySelector('meta[property="og:url"]')
+              ?.setAttribute("content", window.location.href);
+            document
+              .querySelector('meta[name="twitter:title"]')
+              ?.setAttribute("content", title);
+            document
+              .querySelector('meta[name="twitter:description"]')
+              ?.setAttribute("content", description);
 
             // Populate post header
-            document.getElementById("post-date").textContent = meta.date ? fmtDate(meta.date) : "";
-            document.getElementById("post-read-time").textContent = readTime(rawBody);
+            document.getElementById("post-date").textContent = meta.date
+              ? fmtDate(meta.date)
+              : "";
+            document.getElementById("post-read-time").textContent =
+              readTime(rawBody);
             document.getElementById("post-title").textContent = title;
-            document.getElementById("post-description").textContent = meta.description || "";
+            document.getElementById("post-description").textContent =
+              meta.description || "";
 
             // Tags
             const tagsEl = document.getElementById("post-tags");
             const tags = meta.tags || fmMeta.tags || [];
-            tagsEl.innerHTML = tags.map((t) => `<span class="tag" style="${tagStyle(t)}">${t}</span>`).join("");
+            tagsEl.innerHTML = tags
+              .map(
+                (t) => `<span class="tag" style="${tagStyle(t)}">${t}</span>`,
+              )
+              .join("");
 
             // ── Render markdown → HTML, append references ──────
             const html = marked.parse(body) + refsHtml;
@@ -697,9 +786,11 @@
             proseEl.innerHTML = html;
 
             // Re-highlight any code blocks marked didn't catch
-            document.querySelectorAll(".prose pre code:not(.hljs)").forEach((el) => {
-              hljs.highlightElement(el);
-            });
+            document
+              .querySelectorAll(".prose pre code:not(.hljs)")
+              .forEach((el) => {
+                hljs.highlightElement(el);
+              });
 
             // ── Post-render processors ─────────────────────────
             processAlerts(proseEl); // must run before TOC (may change heading structure)
@@ -715,11 +806,13 @@
             const citationsToggle = document.querySelector(".citations-toggle");
             if (citationsToggle) {
               citationsToggle.addEventListener("click", () => {
-                const expanded = citationsToggle.getAttribute("aria-expanded") === "true";
+                const expanded =
+                  citationsToggle.getAttribute("aria-expanded") === "true";
                 citationsToggle.setAttribute("aria-expanded", !expanded);
                 const body = document.getElementById("cite-list-body");
                 if (body) body.classList.toggle("collapsed", expanded);
-                const chevron = citationsToggle.querySelector(".citations-chevron");
+                const chevron =
+                  citationsToggle.querySelector(".citations-chevron");
                 if (chevron) chevron.textContent = expanded ? "▸" : "▾";
               });
             }
