@@ -21,3 +21,6 @@ posts/*.draft.md
 
 # slop-guard corpus suppression config — hand-maintained, intentionally tracked
 # (fit-slop-rules.py would regenerate this from corpus, but needs Python >=3.11)
+
+# Local context — not for public repo
+CLAUDE.md
