@@ -48,7 +48,7 @@ The third vector requires neither a malicious marketplace nor a steganographic p
 
 This is the same mechanism I described in [the A2A case studies post](post.html?slug=a2a-case-studies): Copilot injecting malicious instructions into Claude Code's `CLAUDE.md` and `.mcp.json` configuration files. Skills are a more precisely targeted version of that surface — files specifically designed to influence agent behavior, in a known directory, loading automatically. An agent compromised through any of the other vectors here can write to that directory and establish persistence.
 
-The `context: fork` option in the skills spec makes this worse. A skill configured with `context: fork` runs as a background process rather than in the main conversation thread, outside the user's visible history. A skill written by a compromised agent and configured as a fork becomes a persistent background process. This is the skills-layer version of the memory poisoning problem from the guardrails post: the same architectural property that makes persistent context useful creates a durable attack surface.
+The [`context: fork` option in the skills spec](https://code.claude.com/docs/en/skills#run-skills-in-a-subagent) makes this worse. A skill configured with `context: fork` runs as a background process rather than in the main conversation thread, outside the user's visible history. A skill written by a compromised agent and configured as a fork becomes a persistent background process. This is the skills-layer version of the memory poisoning problem from [the guardrails post](post.html?slug=guardrails): the same architectural property that makes persistent context useful creates a durable attack surface.
 
 ## Why persistence changes the threat profile
 
@@ -56,7 +56,7 @@ Standard prompt injection is session-scoped. An attacker who embeds malicious in
 
 A backdoored skills file works the other way. It loads before the session starts and persists until someone removes it. In a team environment where skills are committed to a shared repository, a single compromised file affects every developer's agent runs until someone identifies it and takes it out. Skills are designed to be persistent — they survive context compaction, load automatically, and travel with the codebase. Those same properties are what make a compromised one hard to contain.
 
-This maps to a structural point from the Knight Capital incident: dead code doesn't become inert through disuse; it just becomes invisible. A skill installed six months ago and forgotten is still loading metadata into the system prompt on every session. A skills directory that's never been audited is almost certainly doing some of this quietly right now.
+This maps to a structural point from the [Knight Capital incident](https://wesslen.github.io/post.html?slug=a2a-case-studies#:~:text=made%20right%20now.-,Knight%20Capital%20still%20sets%20the%20baseline,-The%20five%20incidents): dead code doesn't become inert through disuse; it just becomes invisible. A skill installed six months ago and forgotten is still loading metadata into the system prompt on every session. A skills directory that's never been audited is almost certainly doing some of this quietly right now.
 
 ## What actually helps
 
