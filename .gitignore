@@ -14,5 +14,10 @@ Thumbs.db
 # Local dev
 *.local
 
+# Drafts — posts with a .draft.md suffix are never committed.
+# Preview locally via post.html?slug=<slug>.draft
+# Publish by renaming (strip .draft) and adding an entry to posts/index.json.
+posts/*.draft.md
+
 # slop-guard corpus suppression config — hand-maintained, intentionally tracked
 # (fit-slop-rules.py would regenerate this from corpus, but needs Python >=3.11)

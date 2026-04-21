@@ -7,7 +7,7 @@ tags: [GenAI, MRM, agentic-engineering, financial-AI, SR11-7]
 
 > **TL;DR:** "Guardrail" means different things depending on who's in the room — and that definitional sprawl is a real governance problem, not merely a communication one. The distinction that matters most is runtime vs. everything else: a guardrail intercepts live model behavior before it reaches a user or downstream system; tests and metrics are adjacent but different. In financial services, SR 11-7 maps onto guardrail design imperfectly — structural and output controls have established validation frameworks, but behavioral controls (prompt injection, jailbreaking, goal hijacking) don't, and in most institutions nobody owns them cleanly.
 
-The word "guardrail" appears in almost every serious conversation about AI safety in financial services. In my experience it means several different things depending on who's in the room — sometimes it's a regex filter on model output, sometimes it's a Pydantic schema, sometimes it's a human approval workflow, and once, memorably, someone used it to describe a quarterly MRM review cycle. That definitional sprawl isn't just a communication problem. If your security team thinks guardrails are tests and your model risk team thinks they're monitoring metrics, you end up with systems that look governed and aren't.
+The word "guardrail" appears in almost every serious conversation about AI safety in financial services, and it means several different things depending on who's in the room — sometimes it's a regex filter on model output, sometimes it's a Pydantic schema, sometimes it's a human approval workflow. The definitional confusion runs deep enough to surface in formal research. FinRegLab's 2025 market scan on agentic AI in financial services describes guardrails as "constraints to restrict the function of individual agents *and* ongoing monitoring and troubleshooting" — bundling a runtime intervention mechanism with a post-hoc observation function in a single definition.[^1] That conflation isn't merely imprecise; it's operationally consequential. If your security team thinks guardrails are tests and your model risk team thinks they're monitoring metrics, you end up with systems that look governed and aren't.
 
 So what is a guardrail, actually — and what does it mean to design one for an autonomous agent operating inside a bank?
 
@@ -17,7 +17,7 @@ At its most useful, a guardrail is a **runtime intervention mechanism**: a contr
 
 Tests are development-phase activities that verify binary correctness against known inputs. Metrics — F1 scores, toxicity rates, hallucination frequencies — quantify aggregate performance and trust, typically for retraining or audit review. Both matter. Neither does what a guardrail does: intercept a live response before it reaches a user or a downstream system.
 
-In a RAG-based system, a metric might tell you that hallucination risk is elevated in 3% of responses. A guardrail is what actually stops that 3% from going out. In the language of SR 11-7, metrics provide the "Ongoing Monitoring" data while guardrails provide the "Control" mechanism.[^1] Conflating them is how you end up with a beautifully instrumented system that still fails in production.
+In a RAG-based system, a metric might tell you that hallucination risk is elevated in 3% of responses. A guardrail is what actually stops that 3% from going out. In the language of SR 11-7, metrics provide the "Ongoing Monitoring" data while guardrails provide the "Control" mechanism.[^2] Conflating them is how you end up with a beautifully instrumented system that still fails in production.
 
 ## A taxonomy worth keeping
 
@@ -30,7 +30,7 @@ Within the runtime category, guardrails break down by where in an agent's execut
 | Tool | Execution safety | Allowlists, parameter validation, RBAC | Restricting wire transfers above threshold without human approval |
 | Structural | Data integrity | Schema validation (JSON/XML), type checking | Confirming trade execution data is correctly formatted for settlement systems |
 
-The structural category tends to be undercounted. In financial workflows where an agent's output is consumed directly by downstream automated systems — payment gateways, credit scoring engines — a malformed JSON object isn't an edge case, it's a production incident.[^2]
+The structural category tends to be undercounted. In financial workflows where an agent's output is consumed directly by downstream automated systems — payment gateways, credit scoring engines — a malformed JSON object isn't an edge case, it's a production incident.[^3]
 
 > [!WARNING]
 > Behavioral guardrails — screening for prompt injection, jailbreaking, and goal hijacking — address model "intent" rather than format. These are harder to implement and easier to bypass than structural controls. A strong behavioral guardrail and a weak structural one is not a balanced defense.
@@ -60,7 +60,7 @@ The tiering logic is sound. The harder question — one I don't think the indust
 
 ## The non-determinism wall
 
-The central paradox of agentic AI in banking is that the property making these models useful — probabilistic, contextual reasoning — is exactly what makes them unsafe for hard operational commitments. An LLM can produce a different response to the same prompt on successive calls. In a multi-step workflow, a small reasoning error at step one compounds across subsequent steps in ways that are genuinely difficult to anticipate.[^3]
+The central paradox of agentic AI in banking is that the property making these models useful — probabilistic, contextual reasoning — is exactly what makes them unsafe for hard operational commitments. An LLM can produce a different response to the same prompt on successive calls. In a multi-step workflow, a small reasoning error at step one compounds across subsequent steps in ways that are genuinely difficult to anticipate.[^4]
 
 The practical response is layering: deterministic guards as the final outer boundary, probabilistic classifiers in the middle. A deterministic validation layer — schema checks, amount limits, recipient whitelists — executes *after* the LLM proposes an action and has no flexibility. Either the data passes the check or the transaction stops. That boundary is non-negotiable for anything touching execution.
 
@@ -73,13 +73,13 @@ The cost of that layering is latency and money:
 | Reasoning-based (flash LLM) | 200–500ms | Moderate | High |
 | Reasoning-based (strong LLM) | 1–3s | High | Very high |
 
-For customer-facing applications with latency budgets under 500ms, using a strong reasoning model as a real-time monitor generally isn't viable.[^4] The practical solution is a cascade: a fast internal probe catches clear violations; a more expensive classifier activates only when the fast probe flags something ambiguous. That design is itself an orchestration problem — the same kind of [harness architecture challenge I've written about](post.html?slug=agent-harness-design), just applied to safety rather than task execution.
+For customer-facing applications with latency budgets under 500ms, using a strong reasoning model as a real-time monitor generally isn't viable.[^5] The practical solution is a cascade: a fast internal probe catches clear violations; a more expensive classifier activates only when the fast probe flags something ambiguous. That design is itself an orchestration problem — the same kind of [harness architecture challenge I've written about](post.html?slug=agent-harness-design), just applied to safety rather than task execution.
 
 ## What we don't know yet
 
 The guardrail research that keeps me up at night isn't about prompt injection or jailbreaking. Those are understood attack surfaces with active engineering investment. The frontier problems are structural.
 
-Memory poisoning is one. Standard injection attacks are session-scoped. An agentic system with persistent memory across sessions is vulnerable to a different class of attack: malicious instructions embedded in a document the agent retrieves, stores in its memory bank, and later acts on.[^5] The poisoned memory persists across sessions. This is a direct consequence of giving agents the long-term memory that makes them genuinely useful — the same [context engineering infrastructure](post.html?slug=context) that underpins multi-session continuity creates a durable attack surface.
+Memory poisoning is one. Standard injection attacks are session-scoped. An agentic system with persistent memory across sessions is vulnerable to a different class of attack: malicious instructions embedded in a document the agent retrieves, stores in its memory bank, and later acts on.[^6] The poisoned memory persists across sessions. This is a direct consequence of giving agents the long-term memory that makes them genuinely useful — the same [context engineering infrastructure](post.html?slug=context) that underpins multi-session continuity creates a durable attack surface.
 
 The agent-to-agent (A2A) attack surface is another. As multi-agent systems become standard, a compromised low-privilege summarization agent becomes a potential vector for influencing a high-privilege transaction agent. Securing these interactions requires standardized capability declarations and authentication schemes that the field is only beginning to develop.
 
@@ -91,9 +91,10 @@ Financial institutions have fifteen-plus years of practice building governance s
 
 Whether guardrails are a technical problem with governance implications or a governance problem that requires technical implementation probably determines who should own them inside a financial institution. In most institutions I'm aware of, neither team has claimed it — and so far, that's been fine. That won't stay true.
 
-[^1]: The Federal Reserve's SR 11-7 guidance is available at [federalreserve.gov](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.pdf). For an end-to-end MRM framework alignment to SR 11-7 specifically for GenAI, see the arxiv paper [2503.15668](https://arxiv.org/pdf/2503.15668).
-[^2]: Structural and behavioral guardrail architecture patterns are covered in the [Galileo AI guardrails framework](https://galileo.ai/blog/ai-agent-guardrails-framework) and [Enkrypt AI's agent security framework](https://www.enkryptai.com/blog/securing-ai-agents-a-comprehensive-framework-for-agent-guardrails).
-[^3]: The non-determinism challenge in production LLM systems is documented in [Stack Overflow's LLM reliability analysis](https://stackoverflow.blog/2025/06/30/reliability-for-unreliable-llms/).
-[^4]: Latency and cost figures are from [TrueFoundry's guardrail provider benchmark](https://www.truefoundry.com/blog/benchmarking-llm-guardrail-providers), which tested deterministic filters through full reasoning-model classifiers across representative use cases.
-[^5]: Memory poisoning attack vectors and Q4 2025 incident data are documented in [Stellar Cyber's agentic AI security analysis](https://stellarcyber.ai/learn/agentic-ai-securiry-threats/) and [eSecurity Planet's 2026 risk report](https://www.esecurityplanet.com/artificial-intelligence/ai-agent-attacks-in-q4-2025-signal-new-risks-for-2026/).
-[^6]: Multi-agent orchestration safety patterns and the A2A protocol are covered in the arxiv paper [2601.13671](https://arxiv.org/html/2601.13671v1).
+[^1]: *The Next Wave Arrives: Agentic AI in Financial Services*, FinRegLab (September 2025), p. 6, available at [finreglab.org](https://finreglab.org/research/the-next-wave-arrives-agentic-ai-in-financial-services/). The full passage: "Guardrails, such as constraints to restrict the function of individual agents and ongoing monitoring and troubleshooting, take on heightened importance in this context" — where "this context" is the difficulty of validating multi-component AAI systems holistically rather than component by component.
+[^2]: The Federal Reserve's SR 11-7 guidance is available at [federalreserve.gov](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.pdf). For an end-to-end MRM framework alignment to SR 11-7 specifically for GenAI, see the arxiv paper [2503.15668](https://arxiv.org/pdf/2503.15668).
+[^3]: Structural and behavioral guardrail architecture patterns are covered in the [Galileo AI guardrails framework](https://galileo.ai/blog/ai-agent-guardrails-framework) and [Enkrypt AI's agent security framework](https://www.enkryptai.com/blog/securing-ai-agents-a-comprehensive-framework-for-agent-guardrails).
+[^4]: The non-determinism challenge in production LLM systems is documented in [Stack Overflow's LLM reliability analysis](https://stackoverflow.blog/2025/06/30/reliability-for-unreliable-llms/).
+[^5]: Latency and cost figures are from [TrueFoundry's guardrail provider benchmark](https://www.truefoundry.com/blog/benchmarking-llm-guardrail-providers), which tested deterministic filters through full reasoning-model classifiers across representative use cases.
+[^6]: Memory poisoning attack vectors and Q4 2025 incident data are documented in [Stellar Cyber's agentic AI security analysis](https://stellarcyber.ai/learn/agentic-ai-securiry-threats/) and [eSecurity Planet's 2026 risk report](https://www.esecurityplanet.com/artificial-intelligence/ai-agent-attacks-in-q4-2025-signal-new-risks-for-2026/).
+[^7]: Multi-agent orchestration safety patterns and the A2A protocol are covered in the arxiv paper [2601.13671](https://arxiv.org/html/2601.13671v1).
