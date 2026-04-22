@@ -120,7 +120,7 @@ State scoping uses key prefixes, and this is one of the more elegant design choi
 - `user:` prefix: user-scoped — shared across all sessions for a specific user
 - `temp:` prefix: invocation-scoped — discarded after the request-response cycle
 
-The security implication is real. App-scoped state (`app:max_credit_limit`) can be written at configuration time and read by any session, but individual sessions can't override it — it's write-restricted to higher-privilege operations. That's the pattern for injecting policy constraints that individual users shouldn't be able to manipulate.
+The security implication is real. App-scoped state (`app:max_credit_limit`) can be written at configuration time and read by any session, but individual sessions can't override it — it's write-restricted to higher-privilege operations. That's the pattern for injecting policy constraints that individual users shouldn't be able to manipulate.[^3]
 
 State must always be modified through context objects — `callback_context.state`, `tool_context.state` — never directly on a retrieved `Session` object. The framework tracks changes through `EventActions.state_delta`, and direct mutation bypasses that tracking.
 
@@ -147,7 +147,7 @@ Six lifecycle hooks, each with precise return value semantics. The table matters
 
 The four context objects give hooks different access levels in order of expanding capability: `ReadonlyContext` → `CallbackContext` → `ToolContext` → `InvocationContext`. Custom agents implementing `_run_async_impl()` directly get `InvocationContext`, which exposes the full invocation state.
 
-`before_model_callback` is the right place to inject guardrail checks before spending tokens on an LLM call. `after_tool_callback` is where you'd audit or log tool invocations without modifying results. The return-value-as-interceptor pattern makes it clean to write short-circuit logic without needing to modify agent code.
+`before_model_callback` is the right place to inject guardrail checks before spending tokens on an LLM call.[^4] `after_tool_callback` is where you'd audit or log tool invocations without modifying results. The return-value-as-interceptor pattern makes it clean to write short-circuit logic without needing to modify agent code.
 
 ## Multi-agent orchestration
 
@@ -205,7 +205,7 @@ The `input-required` state is one of the more thoughtful design choices in the p
 > [!TIP]
 > **Plain terms:** [SSE (Server-Sent Events)](https://en.wikipedia.org/wiki/Server-sent_events) is a one-way channel where the server pushes updates to the client continuously over a single open HTTP connection, rather than the client polling repeatedly. Think of it as a news ticker that updates automatically rather than a page you refresh. For long agent tasks, streaming over SSE means you see partial results in real time — status changes, incremental output — rather than waiting for the full task to complete before receiving anything.
 
-Streaming over SSE delivers two event types: `TaskStatusUpdateEvent` (state transitions) and `TaskArtifactUpdateEvent` (incremental content). The stream closes when the task reaches a terminal state. Push notifications flip the model — the server HTTP POSTs to a client-supplied webhook URL as task state changes, so the client doesn't need to maintain a connection or poll.
+Streaming over SSE delivers two event types: `TaskStatusUpdateEvent` (state transitions) and `TaskArtifactUpdateEvent` (incremental content). The stream closes when the task reaches a terminal state. Push notifications flip the model — the server HTTP POSTs to a client-supplied webhook URL as task state changes, so the client doesn't need to maintain a connection or poll.[^5]
 
 ## ADK meets A2A
 
