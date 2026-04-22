@@ -1,0 +1,860 @@
+<\!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layout Prototype — Drift</title>
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+      /* ── Prototype Chrome ───────────────────────────────── */
+      .proto-bar {
+        position: sticky;
+        top: 56px;
+        z-index: 90;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        padding: 0.6rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .proto-label {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--muted);
+        margin-right: 0.5rem;
+        letter-spacing: 0.06em;
+      }
+      .proto-tab {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        padding: 0.3em 0.9em;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        background: none;
+        color: var(--muted);
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .proto-tab:hover { border-color: var(--accent); color: var(--accent); }
+      .proto-tab.active {
+        background: var(--accent-dim);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .proto-desc {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--muted);
+        margin-left: auto;
+        opacity: 0.7;
+      }
+
+      /* ── Layout panels ──────────────────────────────────── */
+      .layout-panel { display: none; }
+      .layout-panel.active { display: block; }
+
+      /* ════════════════════════════════════════════════════
+         LAYOUT A — Compact Expandable Rows
+         ════════════════════════════════════════════════════ */
+      .layout-a .post-list-a {
+        max-width: 760px;
+        margin: 0 auto;
+        list-style: none;
+      }
+
+      .series-group-a {
+        border-left: 2px solid var(--border);
+        margin-bottom: 0.25rem;
+      }
+      .series-header-a {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.5rem 1rem 0.5rem 1.25rem;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--accent2);
+        letter-spacing: 0.06em;
+        border-left: 2px solid var(--accent2);
+        margin-left: -2px;
+      }
+      .series-header-a .series-count {
+        background: var(--accent2-dim);
+        border: 1px solid var(--accent2);
+        border-radius: 20px;
+        padding: 0.1em 0.55em;
+        font-size: 0.65rem;
+      }
+
+      .row-a {
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+        padding: 0.55rem 1rem 0.55rem 1.25rem;
+        cursor: pointer;
+        transition: background 0.15s ease;
+        position: relative;
+      }
+      .series-group-a .row-a { padding-left: 1.5rem; }
+      .row-a:hover { background: var(--surface); }
+      .row-a.expanded { background: var(--surface); }
+
+      .row-a-chevron {
+        font-size: 0.6rem;
+        color: var(--muted);
+        transition: transform 0.2s ease;
+        flex-shrink: 0;
+        margin-top: 0.15em;
+      }
+      .row-a.expanded .row-a-chevron { transform: rotate(90deg); color: var(--accent); }
+
+      .row-a-title {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text);
+        flex: 1;
+        line-height: 1.3;
+      }
+      .row-a:hover .row-a-title, .row-a.expanded .row-a-title { color: var(--accent); }
+
+      .row-a-date {
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        color: var(--muted);
+        flex-shrink: 0;
+        white-space: nowrap;
+      }
+      .row-a-tags {
+        display: flex;
+        gap: 0.3rem;
+        flex-shrink: 0;
+        flex-wrap: wrap;
+      }
+      .row-a-tag {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        padding: 0.1em 0.5em;
+        border-radius: 20px;
+        border: 1px solid;
+        opacity: 0.75;
+      }
+      .row-a-expand {
+        display: none;
+        padding: 0.65rem 1.25rem 0.9rem 2.75rem;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        border-top: 1px solid var(--border);
+      }
+      .series-group-a .row-a-expand { padding-left: 3rem; }
+      .row-a-expand.open { display: block; }
+      .row-a-desc {
+        font-size: 0.875rem;
+        color: var(--muted);
+        line-height: 1.6;
+        margin-bottom: 0.6rem;
+      }
+      .row-a-link {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--accent);
+      }
+      .row-a-link:hover { opacity: 0.8; }
+
+      .standalone-divider-a {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        padding: 0.9rem 1rem 0.4rem;
+        opacity: 0.6;
+      }
+
+      /* ════════════════════════════════════════════════════
+         LAYOUT B — Series-Grouped Accordion
+         ════════════════════════════════════════════════════ */
+      .layout-b .post-list-b {
+        max-width: 760px;
+        margin: 0 auto;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .group-card-b {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: border-color 0.2s ease;
+      }
+      .group-card-b:hover { border-color: var(--accent2); }
+      .group-card-b.open { border-color: var(--accent2); }
+
+      .group-header-b {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.9rem 1.25rem;
+        cursor: pointer;
+        user-select: none;
+      }
+      .group-icon-b {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--accent2);
+        flex-shrink: 0;
+        width: 1.2em;
+        text-align: center;
+        transition: transform 0.2s ease;
+      }
+      .group-card-b.open .group-icon-b { transform: rotate(90deg); }
+      .group-title-b {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text);
+        flex: 1;
+      }
+      .group-meta-b {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .group-count-b {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--accent2);
+        background: var(--accent2-dim);
+        border: 1px solid var(--accent2);
+        border-radius: 20px;
+        padding: 0.15em 0.6em;
+      }
+      .group-date-range-b {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--muted);
+      }
+
+      .group-preview-b {
+        padding: 0 1.25rem 0.75rem 3.2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+      }
+      .group-card-b.open .group-preview-b { display: none; }
+      .preview-pill-b {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--muted);
+        background: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 0.15em 0.55em;
+        white-space: nowrap;
+      }
+
+      .group-posts-b {
+        display: none;
+        border-top: 1px solid var(--border);
+      }
+      .group-card-b.open .group-posts-b { display: block; }
+
+      .post-row-b {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        padding: 0.75rem 1.25rem 0.75rem 3.2rem;
+        border-bottom: 1px solid var(--border);
+        text-decoration: none;
+        color: inherit;
+        transition: background 0.15s ease;
+        position: relative;
+      }
+      .post-row-b:last-child { border-bottom: none; }
+      .post-row-b:hover { background: var(--accent-dim); }
+
+      .post-row-b::before {
+        content: '';
+        position: absolute;
+        left: 1.85rem;
+        top: 0; bottom: 0;
+        width: 1px;
+        background: var(--accent2);
+        opacity: 0.3;
+      }
+      .post-row-b:first-child::before { top: 50%; }
+      .post-row-b:last-child::before { bottom: 50%; }
+      .post-row-b:first-child:last-child::before { display: none; }
+      .post-row-b::after {
+        content: '';
+        position: absolute;
+        left: calc(1.85rem - 3px);
+        top: 50%;
+        transform: translateY(-50%);
+        width: 7px; height: 7px;
+        border-radius: 50%;
+        border: 1px solid var(--accent2);
+        background: var(--bg);
+      }
+
+      .post-num-b {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--accent2);
+        flex-shrink: 0;
+        width: 1.5em;
+        text-align: right;
+        opacity: 0.7;
+      }
+      .post-title-b {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text);
+        flex: 1;
+        line-height: 1.35;
+      }
+      .post-row-b:hover .post-title-b { color: var(--accent); }
+      .post-date-b {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--muted);
+        flex-shrink: 0;
+        white-space: nowrap;
+      }
+      .post-rt-b {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: var(--muted);
+        background: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 0.1em 0.5em;
+        flex-shrink: 0;
+      }
+
+      .solo-card-b {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      .solo-card-b:hover {
+        border-color: var(--accent);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      }
+      .solo-link-b {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.85rem 1.25rem;
+        text-decoration: none;
+        color: inherit;
+      }
+      .solo-title-b {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text);
+        flex: 1;
+        line-height: 1.35;
+      }
+      .solo-card-b:hover .solo-title-b { color: var(--accent); }
+      .solo-date-b {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--muted);
+        flex-shrink: 0;
+      }
+
+      /* ════════════════════════════════════════════════════
+         LAYOUT C — Dense Chronicle Timeline
+         ════════════════════════════════════════════════════ */
+      .layout-c .chronicle-wrap {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .month-block-c {
+        display: grid;
+        grid-template-columns: 5rem 1fr;
+        margin-bottom: 0.25rem;
+      }
+      .month-label-c {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        padding-top: 0.8rem;
+        text-align: right;
+        padding-right: 1.25rem;
+        position: relative;
+        opacity: 0.7;
+      }
+      .month-label-c::after {
+        content: '';
+        position: absolute;
+        right: -1px;
+        top: 0; bottom: 0;
+        width: 1px;
+        background: var(--border);
+      }
+      .month-posts-c { border-left: 1px solid var(--border); }
+
+      .post-entry-c {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.55rem 1rem 0.55rem 1.25rem;
+        text-decoration: none;
+        color: inherit;
+        position: relative;
+        transition: background 0.12s ease;
+      }
+      .post-entry-c:hover { background: var(--surface); }
+      .post-entry-c:hover .entry-title-c { color: var(--accent); }
+
+      .post-entry-c::before {
+        content: '';
+        position: absolute;
+        left: -4px;
+        top: 50%; transform: translateY(-50%);
+        width: 7px; height: 7px;
+        border-radius: 50%;
+        background: var(--border);
+        border: 1px solid var(--bg);
+        transition: background 0.12s ease;
+      }
+      .post-entry-c:hover::before { background: var(--accent); border-color: var(--accent); }
+      .post-entry-c.in-series::before { background: var(--accent2); border-color: var(--accent2); }
+      .post-entry-c.in-series:hover::before { background: var(--accent); border-color: var(--accent); }
+
+      .entry-day-c {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--muted);
+        flex-shrink: 0;
+        width: 1.5rem;
+        text-align: right;
+        opacity: 0.6;
+      }
+      .entry-title-c {
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: var(--text);
+        flex: 1;
+        line-height: 1.3;
+      }
+      .entry-tags-c {
+        display: flex;
+        gap: 0.25rem;
+        flex-shrink: 0;
+      }
+      .entry-tag-c {
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        padding: 0.1em 0.45em;
+        border-radius: 20px;
+        border: 1px solid;
+        opacity: 0.7;
+        white-space: nowrap;
+      }
+      .entry-series-c {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: var(--accent2);
+        background: var(--accent2-dim);
+        border: 1px solid var(--accent2);
+        border-radius: 4px;
+        padding: 0.1em 0.45em;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .entry-rt-c {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: var(--muted);
+        flex-shrink: 0;
+        opacity: 0.6;
+      }
+
+      /* ── Shared ─────────────────────────────────────────── */
+      .tag-filter-bar { max-width: 760px; margin: 0 auto 1rem; }
+      .posts-header { max-width: 760px; margin: 0 auto; }
+    </style>
+  </head>
+  <body>
+    <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="./index.html" class="site-title">wesslen.github.io <span class="cursor">_</span></a>
+        <div class="header-actions">
+          <a href="./index.html" class="nav-link" style="font-size:0.8rem;">← live index</a>
+          <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+            <span id="theme-icon">☀️</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <\!-- Prototype switcher bar -->
+    <div class="proto-bar">
+      <span class="proto-label">// layout prototype</span>
+      <button class="proto-tab active" data-layout="a">A · Expandable Rows</button>
+      <button class="proto-tab" data-layout="b">B · Series Accordion</button>
+      <button class="proto-tab" data-layout="c">C · Chronicle Timeline</button>
+      <span class="proto-desc" id="proto-desc-text">compact rows — click › to expand description</span>
+    </div>
+
+    <section class="hero" aria-label="Site introduction">
+      <div class="hero-content">
+        <p class="hero-eyebrow">// public notebook</p>
+        <h1>Drift <br><span style="font-size:0.55em;font-weight:400;opacity:0.75;letter-spacing:0.01em">Notes on AI on the Edges</span></h1>
+        <p class="hero-desc">A data scientist tracking where the models go and the frameworks haven't followed — governance, evals, and agentic engineering from the edges.</p>
+      </div>
+    </section>
+
+    <\!-- LAYOUT A -->
+    <div class="layout-panel layout-a active" id="panel-a">
+      <main class="posts-section">
+        <div class="posts-header"><span class="section-label">// posts</span></div>
+        <div class="tag-filter-bar" id="tag-filter-a" style="display:none">
+          <button class="tag-filter-btn active" data-tag="__all__">all</button>
+        </div>
+        <div class="post-list-a" id="list-a"></div>
+      </main>
+    </div>
+
+    <\!-- LAYOUT B -->
+    <div class="layout-panel layout-b" id="panel-b">
+      <main class="posts-section">
+        <div class="posts-header"><span class="section-label">// posts</span></div>
+        <div class="tag-filter-bar" id="tag-filter-b" style="display:none">
+          <button class="tag-filter-btn active" data-tag="__all__">all</button>
+        </div>
+        <ul class="post-list-b" id="list-b"></ul>
+      </main>
+    </div>
+
+    <\!-- LAYOUT C -->
+    <div class="layout-panel layout-c" id="panel-c">
+      <main class="posts-section">
+        <div class="posts-header"><span class="section-label">// posts</span></div>
+        <div class="tag-filter-bar" id="tag-filter-c" style="display:none">
+          <button class="tag-filter-btn active" data-tag="__all__">all</button>
+        </div>
+        <div class="chronicle-wrap" id="list-c"></div>
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <p>layout prototype · <a href="./index.html">back to live site</a></p>
+    </footer>
+
+    <script>
+    (() => {
+      "use strict";
+
+      /* ── Theme ──────────────────────────────────────────── */
+      const root = document.documentElement;
+      const toggleBtn = document.getElementById("theme-toggle");
+      const themeIcon = document.getElementById("theme-icon");
+      function applyTheme(t) {
+        root.setAttribute("data-theme", t);
+        themeIcon.textContent = t === "dark" ? "☀️" : "🌙";
+        localStorage.setItem("theme", t);
+      }
+      applyTheme(localStorage.getItem("theme") || "dark");
+      toggleBtn.addEventListener("click", () => {
+        applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+      });
+
+      /* ── Layout Switcher ────────────────────────────────── */
+      const DESCS = {
+        a: "compact rows — click › to expand description inline",
+        b: "series grouped — accordion collapses related posts into linked groups",
+        c: "dense chronicle — month dividers, series dots, minimal info per line"
+      };
+      document.querySelectorAll(".proto-tab").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".proto-tab").forEach(b => b.classList.remove("active"));
+          document.querySelectorAll(".layout-panel").forEach(p => p.classList.remove("active"));
+          btn.classList.add("active");
+          document.getElementById("panel-" + btn.dataset.layout).classList.add("active");
+          document.getElementById("proto-desc-text").textContent = DESCS[btn.dataset.layout];
+        });
+      });
+
+      /* ── Utilities ──────────────────────────────────────── */
+      function tagHue(tag) {
+        let h = 0;
+        for (let i = 0; i < tag.length; i++) h = (h * 31 + tag.charCodeAt(i)) & 0xffffffff;
+        return Math.abs(h) % 360;
+      }
+      function tagStyle(tag) {
+        const hue = tagHue(tag);
+        const dark = root.getAttribute("data-theme") === "dark";
+        const s = dark ? 70 : 60, l = dark ? 60 : 40, a = dark ? 0.12 : 0.10;
+        return `background:hsla(${hue},${s}%,${l}%,${a});border-color:hsla(${hue},${s}%,${l}%,${dark?0.4:0.35});color:hsl(${hue},${dark?80:50}%,${dark?72:35}%)`;
+      }
+      function fmtDate(iso) {
+        return new Date(iso + "T00:00:00").toLocaleDateString("en-US", {year:"numeric",month:"short",day:"numeric"});
+      }
+      function fmtMonth(iso) {
+        return new Date(iso + "T00:00:00").toLocaleDateString("en-US", {year:"numeric",month:"short"});
+      }
+      function fmtDay(iso) { return new Date(iso + "T00:00:00").getDate(); }
+      function readTime(text) {
+        return Math.max(1, Math.round(text.trim().split(/\s+/).length / 225)) + " min";
+      }
+      function postUrl(slug) { return `./post.html?slug=${encodeURIComponent(slug)}`; }
+
+      /* ── Series definition ──────────────────────────────── */
+      const SERIES = [
+        { id: "a2a", title: "A2A / Multi-Agent", slugs: ["google-adk-a2a", "a2a-risks", "a2a-case-studies"] },
+        { id: "harness", title: "Agent Harness Engineering", slugs: ["agent-harness-design", "claude-code-harness", "skills-supply-chain"] },
+        { id: "mrm", title: "MRM & Governance", slugs: ["sr11-7", "guardrails", "metrics-metrics-metrics"] }
+      ];
+      function getSeriesForSlug(slug) { return SERIES.find(s => s.slugs.includes(slug)); }
+      function getSeriesIdx(slug) {
+        const s = getSeriesForSlug(slug);
+        return s ? s.slugs.indexOf(slug) + 1 : null;
+      }
+
+      /* ── Tag filter ─────────────────────────────────────── */
+      function buildTagFilter(manifest, barId, selector) {
+        const bar = document.getElementById(barId);
+        const allTags = [...new Set(manifest.flatMap(p => p.tags || []))].sort();
+        if (allTags.length < 2) return;
+        allTags.forEach(tag => {
+          const btn = document.createElement("button");
+          btn.className = "tag-filter-btn";
+          btn.dataset.tag = tag;
+          btn.textContent = tag;
+          btn.style.cssText = tagStyle(tag);
+          bar.appendChild(btn);
+        });
+        bar.style.display = "flex";
+        bar.addEventListener("click", e => {
+          const btn = e.target.closest(".tag-filter-btn");
+          if (\!btn) return;
+          const active = btn.dataset.tag;
+          bar.querySelectorAll(".tag-filter-btn").forEach(b => b.classList.toggle("active", b.dataset.tag === active));
+          document.querySelectorAll(selector).forEach(el => {
+            const tags = (el.dataset.tags || "").split(" ");
+            el.style.display = (active === "__all__" || tags.includes(active)) ? "" : "none";
+          });
+        });
+      }
+
+      /* ══════════════════════════════════════════════════════
+         LAYOUT A — Expandable Rows
+         ══════════════════════════════════════════════════════ */
+      function renderA(manifest, bodies) {
+        const container = document.getElementById("list-a");
+        const bySlug = {};
+        manifest.forEach((p, i) => { bySlug[p.slug] = { post: p, body: bodies[i] }; });
+
+        const seriesSlugSet = new Set(SERIES.flatMap(s => s.slugs));
+        const solos = manifest.filter(p => \!seriesSlugSet.has(p.slug));
+        let html = "";
+
+        SERIES.forEach(series => {
+          const posts = series.slugs.map(s => bySlug[s]).filter(Boolean)
+            .sort((a, b) => a.post.date.localeCompare(b.post.date));
+          if (\!posts.length) return;
+
+          html += `<div class="series-group-a">
+            <div class="series-header-a">⬡ series · ${series.title}<span class="series-count">${posts.length} posts</span></div>`;
+          posts.forEach(({ post, body }) => {
+            const rt = readTime(body);
+            const tags = (post.tags || []).slice(0, 3).map(t =>
+              `<span class="row-a-tag" style="${tagStyle(t)}">${t}</span>`).join("");
+            html += `
+            <div class="row-a" data-slug="${post.slug}" data-tags="${(post.tags||[]).join(" ")}">
+              <span class="row-a-chevron">▶</span>
+              <span class="row-a-title">${post.title}</span>
+              <span class="row-a-date">${fmtDate(post.date)}</span>
+              <span class="row-a-tags">${tags}</span>
+            </div>
+            <div class="row-a-expand" id="exp-${post.slug}">
+              <div class="row-a-desc">${post.description}</div>
+              <a href="${postUrl(post.slug)}" class="row-a-link">read → ${rt}</a>
+            </div>`;
+          });
+          html += `</div>`;
+        });
+
+        if (solos.length) {
+          html += `<div class="standalone-divider-a">// standalone</div>`;
+          solos.forEach(post => {
+            const body = bySlug[post.slug]?.body || post.description;
+            const rt = readTime(body);
+            const tags = (post.tags || []).slice(0, 3).map(t =>
+              `<span class="row-a-tag" style="${tagStyle(t)}">${t}</span>`).join("");
+            html += `
+            <div class="row-a" data-slug="${post.slug}" data-tags="${(post.tags||[]).join(" ")}">
+              <span class="row-a-chevron">▶</span>
+              <span class="row-a-title">${post.title}</span>
+              <span class="row-a-date">${fmtDate(post.date)}</span>
+              <span class="row-a-tags">${tags}</span>
+            </div>
+            <div class="row-a-expand" id="exp-${post.slug}">
+              <div class="row-a-desc">${post.description}</div>
+              <a href="${postUrl(post.slug)}" class="row-a-link">read → ${rt}</a>
+            </div>`;
+          });
+        }
+
+        container.innerHTML = html;
+        container.addEventListener("click", e => {
+          const row = e.target.closest(".row-a");
+          if (\!row) return;
+          const slug = row.dataset.slug;
+          const exp = document.getElementById("exp-" + slug);
+          const wasOpen = row.classList.contains("expanded");
+          document.querySelectorAll(".row-a.expanded").forEach(r => r.classList.remove("expanded"));
+          document.querySelectorAll(".row-a-expand.open").forEach(r => r.classList.remove("open"));
+          if (\!wasOpen) { row.classList.add("expanded"); exp.classList.add("open"); }
+        });
+
+        buildTagFilter(manifest, "tag-filter-a", "#list-a [data-tags]");
+      }
+
+      /* ══════════════════════════════════════════════════════
+         LAYOUT B — Series Accordion
+         ══════════════════════════════════════════════════════ */
+      function renderB(manifest, bodies) {
+        const list = document.getElementById("list-b");
+        const bySlug = {};
+        manifest.forEach((p, i) => { bySlug[p.slug] = { post: p, body: bodies[i] }; });
+        const seriesSlugSet = new Set(SERIES.flatMap(s => s.slugs));
+        const solos = manifest.filter(p => \!seriesSlugSet.has(p.slug));
+        let html = "";
+
+        SERIES.forEach(series => {
+          const posts = series.slugs.map(s => bySlug[s]).filter(Boolean)
+            .sort((a, b) => a.post.date.localeCompare(b.post.date));
+          if (\!posts.length) return;
+
+          const dates = posts.map(p => p.post.date).sort();
+          const dateRange = posts.length > 1
+            ? `${fmtDate(dates[0])} – ${fmtDate(dates[dates.length-1])}`
+            : fmtDate(dates[0]);
+          const pills = posts.map((p, i) =>
+            `<span class="preview-pill-b">${i+1}. ${p.post.title.split(':')[0].substring(0,42)}</span>`).join("");
+          const rows = posts.map(({ post, body }, i) =>
+            `<a href="${postUrl(post.slug)}" class="post-row-b" data-tags="${(post.tags||[]).join(" ")}">
+              <span class="post-num-b">${i+1}</span>
+              <span class="post-title-b">${post.title}</span>
+              <span class="post-date-b">${fmtDate(post.date)}</span>
+              <span class="post-rt-b">${readTime(body)}</span>
+            </a>`).join("");
+          const allTags = [...new Set(posts.flatMap(p => p.post.tags||[]))].join(" ");
+
+          html += `<li class="group-card-b" data-tags="${allTags}">
+            <div class="group-header-b">
+              <span class="group-icon-b">▶</span>
+              <span class="group-title-b">${series.title}</span>
+              <div class="group-meta-b">
+                <span class="group-count-b">${posts.length} posts</span>
+                <span class="group-date-range-b">${dateRange}</span>
+              </div>
+            </div>
+            <div class="group-preview-b">${pills}</div>
+            <div class="group-posts-b">${rows}</div>
+          </li>`;
+        });
+
+        solos.forEach(post => {
+          const body = bySlug[post.slug]?.body || post.description;
+          html += `<li class="solo-card-b" data-tags="${(post.tags||[]).join(" ")}">
+            <a href="${postUrl(post.slug)}" class="solo-link-b">
+              <span class="solo-title-b">${post.title}</span>
+              <span class="solo-date-b">${fmtDate(post.date)}</span>
+              <span class="post-rt-b">${readTime(body)}</span>
+            </a>
+          </li>`;
+        });
+
+        list.innerHTML = html;
+        list.addEventListener("click", e => {
+          const header = e.target.closest(".group-header-b");
+          if (\!header) return;
+          header.closest(".group-card-b").classList.toggle("open");
+        });
+        buildTagFilter(manifest, "tag-filter-b", "#list-b [data-tags]");
+      }
+
+      /* ══════════════════════════════════════════════════════
+         LAYOUT C — Chronicle Timeline
+         ══════════════════════════════════════════════════════ */
+      function renderC(manifest, bodies) {
+        const wrap = document.getElementById("list-c");
+        const sorted = [...manifest].sort((a, b) => b.date.localeCompare(a.date));
+        const monthMap = new Map();
+        sorted.forEach((post, i) => {
+          const m = fmtMonth(post.date);
+          if (\!monthMap.has(m)) monthMap.set(m, []);
+          monthMap.get(m).push({ post, body: bodies[manifest.indexOf(post)] });
+        });
+
+        let html = "";
+        monthMap.forEach((posts, month) => {
+          const rows = posts.map(({ post, body }) => {
+            const series = getSeriesForSlug(post.slug);
+            const idx = getSeriesIdx(post.slug);
+            const badge = series
+              ? `<span class="entry-series-c">${series.id} ${idx}/${series.slugs.length}</span>` : "";
+            const tags = (post.tags || []).slice(0, 2).map(t =>
+              `<span class="entry-tag-c" style="${tagStyle(t)}">${t}</span>`).join("");
+            return `<a href="${postUrl(post.slug)}" class="post-entry-c ${series ? 'in-series' : ''}" data-tags="${(post.tags||[]).join(" ")}">
+              <span class="entry-day-c">${fmtDay(post.date)}</span>
+              <span class="entry-title-c">${post.title}</span>
+              ${badge}
+              <span class="entry-tags-c">${tags}</span>
+              <span class="entry-rt-c">${readTime(body)}</span>
+            </a>`;
+          }).join("");
+
+          html += `<div class="month-block-c">
+            <div class="month-label-c">${month}</div>
+            <div class="month-posts-c">${rows}</div>
+          </div>`;
+        });
+
+        wrap.innerHTML = html;
+        buildTagFilter(manifest, "tag-filter-c", "#list-c [data-tags]");
+      }
+
+      /* ── Boot ───────────────────────────────────────────── */
+      async function boot() {
+        try {
+          const res = await fetch("./posts/index.json");
+          const manifest = await res.json();
+          manifest.sort((a, b) => b.date.localeCompare(a.date));
+
+          const bodies = await Promise.all(manifest.map(async post => {
+            try {
+              const r = await fetch(`./posts/${post.slug}.md`);
+              const text = r.ok ? await r.text() : post.description;
+              return text.replace(/^---[\s\S]*?---\n/, "");
+            } catch { return post.description; }
+          }));
+
+          renderA(manifest, bodies);
+          renderB(manifest, bodies);
+          renderC(manifest, bodies);
+        } catch (err) {
+          ["list-a","list-b","list-c"].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = `<div style="padding:2rem;color:var(--muted);font-family:var(--font-mono);font-size:0.8rem;">⚠ serve with <code>python -m http.server</code> to load posts (${err.message})</div>`;
+          });
+        }
+      }
+
+      boot();
+    })();
+    </script>
+  </body>
+</html>
