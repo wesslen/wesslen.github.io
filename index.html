@@ -77,7 +77,7 @@
         <span class="section-label">// posts</span>
       </div>
       <!-- Tag filter bar (populated by JS after posts load) -->
-      <div class="tag-filter-bar" id="tag-filter-bar" aria-label="Filter posts by tag" style="display:none">
+      <div class="tag-filter-bar" id="tag-filter-bar" aria-label="Filter posts by tag" style="display: none">
         <button class="tag-filter-btn active" data-tag="__all__">all</button>
       </div>
       <div class="post-list-a" id="post-list" aria-label="Blog posts"></div>
@@ -164,16 +164,38 @@
 
         /* ── Series Definition ─────────────────────────────── */
         const SERIES = [
-          { id: "agentic-engineering", title: "Agentic Engineering",
-            slugs: ["context", "agent-harness-design", "claude-code-harness", "skills-supply-chain"] },
-          { id: "multi-agent", title: "Multi-Agent Systems",
-            slugs: ["google-adk-a2a", "a2a-risks", "a2a-case-studies"] },
-          { id: "model-risk-evals", title: "Model Risk & Evals",
-            slugs: ["sr11-7", "guardrails", "effective-challenge", "metrics-metrics-metrics", "adversarial-workflow", "deployment-gates", "judge-calibration"] },
-          { id: "banking-ai", title: "Banking AI",
-            slugs: ["payments-liability-gap", "agent-identity-kyc", "agentic-commerce-gap"] }
+          {
+            id: "agentic-engineering",
+            title: "Agentic Engineering",
+            slugs: ["context", "agent-harness-design", "claude-code-harness", "skills-supply-chain"],
+          },
+          {
+            id: "multi-agent",
+            title: "Multi-Agent Systems",
+            slugs: ["google-adk-a2a", "a2a-risks", "a2a-case-studies"],
+          },
+          {
+            id: "model-risk-evals",
+            title: "Model Risk & Evals",
+            slugs: [
+              "sr11-7",
+              "guardrails",
+              "effective-challenge",
+              "metrics-metrics-metrics",
+              "adversarial-workflow",
+              "deployment-gates",
+              "judge-calibration",
+            ],
+          },
+          {
+            id: "banking-ai",
+            title: "Banking AI",
+            slugs: ["payments-liability-gap", "agent-identity-kyc", "agentic-commerce-gap"],
+          },
         ];
-        function getSeriesForSlug(slug) { return SERIES.find(s => s.slugs.includes(slug)); }
+        function getSeriesForSlug(slug) {
+          return SERIES.find((s) => s.slugs.includes(slug));
+        }
         function postUrl(slug, draft) {
           return draft
             ? `./post.html?slug=${encodeURIComponent(slug)}.draft`
@@ -183,9 +205,9 @@
         /* ── Tag Filter (Layout A) ──────────────────────────── */
         function buildTagFilter(manifest) {
           const bar = document.getElementById("tag-filter-bar");
-          const allTags = [...new Set(manifest.flatMap(p => p.tags || []))].sort();
+          const allTags = [...new Set(manifest.flatMap((p) => p.tags || []))].sort();
           if (allTags.length < 2) return;
-          allTags.forEach(tag => {
+          allTags.forEach((tag) => {
             const btn = document.createElement("button");
             btn.className = "tag-filter-btn";
             btn.dataset.tag = tag;
@@ -194,15 +216,16 @@
             bar.appendChild(btn);
           });
           bar.style.display = "flex";
-          bar.addEventListener("click", e => {
+          bar.addEventListener("click", (e) => {
             const btn = e.target.closest(".tag-filter-btn");
             if (!btn) return;
             const active = btn.dataset.tag;
-            bar.querySelectorAll(".tag-filter-btn").forEach(b =>
-              b.classList.toggle("active", b.dataset.tag === active));
-            document.querySelectorAll("#post-list [data-tags]").forEach(el => {
+            bar
+              .querySelectorAll(".tag-filter-btn")
+              .forEach((b) => b.classList.toggle("active", b.dataset.tag === active));
+            document.querySelectorAll("#post-list [data-tags]").forEach((el) => {
               const tags = (el.dataset.tags || "").split(" ");
-              el.style.display = (active === "__all__" || tags.includes(active)) ? "" : "none";
+              el.style.display = active === "__all__" || tags.includes(active) ? "" : "none";
             });
           });
         }
@@ -212,14 +235,16 @@
           const container = document.getElementById("post-list");
           const introSlot = document.getElementById("intro-slot");
           const bySlug = {};
-          manifest.forEach((p, i) => { bySlug[p.slug] = { post: p, body: bodies[i] }; });
+          manifest.forEach((p, i) => {
+            bySlug[p.slug] = { post: p, body: bodies[i] };
+          });
 
-          const seriesSlugSet = new Set(SERIES.flatMap(s => s.slugs));
-          const solos = manifest.filter(p => !seriesSlugSet.has(p.slug) && p.slug !== "everything-drifts");
+          const seriesSlugSet = new Set(SERIES.flatMap((s) => s.slugs));
+          const solos = manifest.filter((p) => !seriesSlugSet.has(p.slug) && p.slug !== "everything-drifts");
           let html = "";
 
           // Pinned intro card above // posts strip
-          const introPost = manifest.find(p => p.slug === "everything-drifts");
+          const introPost = manifest.find((p) => p.slug === "everything-drifts");
           if (introPost && introSlot) {
             introSlot.innerHTML = `<a href="${postUrl(introPost.slug)}" class="intro-card-a">
               <span class="intro-label-a">// intro</span>
@@ -229,19 +254,23 @@
           }
 
           // Series groups
-          SERIES.forEach(series => {
-            const posts = series.slugs.map(s => bySlug[s]).filter(Boolean)
+          SERIES.forEach((series) => {
+            const posts = series.slugs
+              .map((s) => bySlug[s])
+              .filter(Boolean)
               .sort((a, b) => a.post.date.localeCompare(b.post.date));
             if (!posts.length) return;
 
-            html += `<div class="series-group-a" data-tags="${[...new Set(posts.flatMap(p => p.post.tags || []))].join(" ")}">
+            html += `<div class="series-group-a" data-tags="${[...new Set(posts.flatMap((p) => p.post.tags || []))].join(" ")}">
               <div class="series-header-a">⬡ series · ${series.title}<span class="series-count">${posts.length} posts</span></div>`;
             posts.forEach(({ post, body }) => {
               const rt = readTime(body);
-              const tags = (post.tags || []).slice(0, 3).map(t =>
-                `<span class="row-a-tag" style="${tagStyle(t)}">${t}</span>`).join("");
+              const tags = (post.tags || [])
+                .slice(0, 3)
+                .map((t) => `<span class="row-a-tag" style="${tagStyle(t)}">${t}</span>`)
+                .join("");
               html += `
-              <div class="row-a${post.draft ? " row-a-draft" : ""}" data-slug="${post.slug}" data-tags="${(post.tags||[]).join(" ")}">
+              <div class="row-a${post.draft ? " row-a-draft" : ""}" data-slug="${post.slug}" data-tags="${(post.tags || []).join(" ")}">
                 <span class="row-a-chevron">▶</span>
                 <span class="row-a-title">${post.title}${post.draft ? ' <span class="draft-badge">draft</span>' : ""}</span>
                 <span class="row-a-meta"><span class="row-a-date">${fmtDate(post.date)}</span><span class="row-a-tags">${tags}</span></span>
@@ -257,13 +286,15 @@
           // Standalone posts
           if (solos.length) {
             html += `<div class="standalone-divider-a">// standalone</div>`;
-            solos.forEach(post => {
+            solos.forEach((post) => {
               const body = bySlug[post.slug]?.body || post.description;
               const rt = readTime(body);
-              const tags = (post.tags || []).slice(0, 3).map(t =>
-                `<span class="row-a-tag" style="${tagStyle(t)}">${t}</span>`).join("");
+              const tags = (post.tags || [])
+                .slice(0, 3)
+                .map((t) => `<span class="row-a-tag" style="${tagStyle(t)}">${t}</span>`)
+                .join("");
               html += `
-              <div class="row-a${post.draft ? " row-a-draft" : ""}" data-slug="${post.slug}" data-tags="${(post.tags||[]).join(" ")}">
+              <div class="row-a${post.draft ? " row-a-draft" : ""}" data-slug="${post.slug}" data-tags="${(post.tags || []).join(" ")}">
                 <span class="row-a-chevron">▶</span>
                 <span class="row-a-title">${post.title}${post.draft ? ' <span class="draft-badge">draft</span>' : ""}</span>
                 <span class="row-a-meta"><span class="row-a-date">${fmtDate(post.date)}</span><span class="row-a-tags">${tags}</span></span>
@@ -278,15 +309,18 @@
           container.innerHTML = html;
 
           // Click-to-expand
-          container.addEventListener("click", e => {
+          container.addEventListener("click", (e) => {
             const row = e.target.closest(".row-a");
             if (!row) return;
             const slug = row.dataset.slug;
             const exp = document.getElementById("exp-" + slug);
             const wasOpen = row.classList.contains("expanded");
-            document.querySelectorAll(".row-a.expanded").forEach(r => r.classList.remove("expanded"));
-            document.querySelectorAll(".row-a-expand.open").forEach(r => r.classList.remove("open"));
-            if (!wasOpen) { row.classList.add("expanded"); exp.classList.add("open"); }
+            document.querySelectorAll(".row-a.expanded").forEach((r) => r.classList.remove("expanded"));
+            document.querySelectorAll(".row-a-expand.open").forEach((r) => r.classList.remove("open"));
+            if (!wasOpen) {
+              row.classList.add("expanded");
+              exp.classList.add("open");
+            }
           });
         }
 
@@ -298,17 +332,20 @@
             const manifest = await res.json();
             manifest.sort((a, b) => b.date.localeCompare(a.date));
 
-            const bodies = await Promise.all(manifest.map(async post => {
-              try {
-                const r = await fetch(`./posts/${post.slug}.md`);
-                const text = r.ok ? await r.text() : post.description;
-                return text.replace(/^---[\s\S]*?---\n/, "");
-              } catch { return post.description; }
-            }));
+            const bodies = await Promise.all(
+              manifest.map(async (post) => {
+                try {
+                  const r = await fetch(`./posts/${post.slug}.md`);
+                  const text = r.ok ? await r.text() : post.description;
+                  return text.replace(/^---[\s\S]*?---\n/, "");
+                } catch {
+                  return post.description;
+                }
+              })
+            );
 
             buildTagFilter(manifest);
             renderA(manifest, bodies);
-
           } catch (err) {
             document.getElementById("post-list").innerHTML =
               `<div style="padding:2rem;color:var(--muted);font-family:var(--font-mono);font-size:0.8rem;">
@@ -322,7 +359,7 @@
         /* Re-render tag colors on theme change */
         toggleBtn.addEventListener("click", () => {
           setTimeout(() => {
-            document.querySelectorAll(".row-a-tag").forEach(el => {
+            document.querySelectorAll(".row-a-tag").forEach((el) => {
               el.style.cssText = tagStyle(el.textContent);
             });
           }, 50);
