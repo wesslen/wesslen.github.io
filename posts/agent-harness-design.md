@@ -2,7 +2,7 @@
 title: "Harness Design for Long-Running Agents"
 date: 2026-03-30
 description: "What context files can't do: designing agent harnesses for context management, error recovery, and multi-session continuity."
-tags: [GenAI, claude-code, agentic-engineering]
+tags: [hands-on, harness]
 ---
 
 > **TL;DR:** Context files tell an agent what to know; the harness is what keeps it alive across a long session with a filling context window, repeated tool failures, and the temptation to cut corners as it runs out of room. A well-designed harness — with a deliberate compaction strategy, structured inter-session state, checkpoint artifacts, and error recovery patterns — is the single largest lever for agent reliability in production. The underappreciated corollary: eval scores that look like model capability may actually be measuring harness design choices, and separating the two is harder than most teams assume.

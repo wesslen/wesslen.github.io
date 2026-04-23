@@ -2,7 +2,7 @@
 title: "Skills Are Code: The Supply Chain Problem Nobody Wants to Own"
 date: 2026-04-09
 description: "Skills marketplaces have reproduced every vulnerability pattern that took npm a decade to recognize — in about six months. Three attack surfaces, no platform-level governance."
-tags: [GenAI, agentic-engineering, context-engineering, security]
+tags: [security, skills]
 ---
 
 > **TL;DR:** Skills marketplaces have reproduced every supply chain vulnerability pattern that took npm and PyPI a decade to recognize — in roughly six months. Three distinct attack surfaces: 824+ confirmed malicious skills in one marketplace alone, invisible Unicode Tags that inject instructions no human code review can catch, and agents that can write new skills into their own running environment. What makes this structurally different from runtime injection is persistence: a poisoned skills file loads automatically before every session until someone explicitly removes it. Nobody currently owns the aggregate problem at the platform level, and the tooling to catch these attacks came from the researchers who found them. Platform operators have yet to fill that gap.

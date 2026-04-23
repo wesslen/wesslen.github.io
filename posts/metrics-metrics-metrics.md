@@ -2,7 +2,7 @@
 title: "Metrics, Metrics, Metrics"
 date: 2026-04-03
 description: "Everyone in GenAI wants a dashboard. The problem is that generic metrics aren't just uninformative — they actively mislead. Social scientists figured this out decades ago."
-tags: [GenAI, evals, psychometrics, MRM]
+tags: [psychometrics, evals]
 ---
 
 > **TL;DR:** Generic GenAI metrics — helpfulness scores, coherence percentages, hallucination rates — produce the feeling of measurement without the reality of it. Finance learned this the hard way with VaR: even people who know a metric is imperfect anchor on it anyway, and the act of seeing a number tends to increase risk-taking rather than reduce it. The field practitioners most need to read isn't ML engineering literature — it's psychometrics, where social scientists spent a century developing tools for measuring latent constructs you can't observe directly, in contexts where the measurement instrument affects what it measures. That is also, vocabulary aside, an exact description of what GenAI evaluation is trying to do.

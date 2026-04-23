@@ -2,7 +2,7 @@
 title: "Inside the Claude Code Harness"
 date: 2026-04-04
 description: "Anthropic's source code leaked. Here's what it reveals about how a production-grade agent harness actually gets built — and how much of it looks like design versus survival."
-tags: [GenAI, claude-code, agentic-engineering]
+tags: [hands-on, harness]
 ---
 
 > **TL;DR:** Anthropic's Claude Code source recently leaked — about 1,900 TypeScript files. Walking through it is a study in the gap between how harnesses get described in theory and how they actually get built: four compaction layers where one would sound sufficient, a prompt cache split that amortizes cost across users, permission denials fed back to the model as tool results, and a comment in `query.ts` written in mock-medieval English to make sure nobody skims past it. The lesson isn't that Anthropic got everything right. It's that a production harness accumulates scars, and the scars are worth studying.

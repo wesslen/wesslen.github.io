@@ -2,7 +2,7 @@
 title: "When Agents Talk to Agents: The Risk Surface Nobody Has Fully Mapped"
 date: 2026-04-06
 description: "Multi-agent AI systems compound the risks of individual models in ways that single-model guardrails weren't designed to handle. Here's what that threat surface actually looks like."
-tags: [GenAI, agentic-engineering, multi-agent, security, MRM, financial-AI]
+tags: [security, protocol]
 ---
 
 > **TL;DR:** Multi-agent AI systems don't just inherit the risks of their component models; they create new ones at the seams. Trust boundaries dissolve across agent handoffs, prompt injection propagates between agents like a pathogen through a network, and cascading failures can travel faster than any human incident response. The defenses that work for single models are necessary but not sufficient. What's missing is a coherent ownership model for who is actually responsible when a chain of agents produces a harmful outcome.
