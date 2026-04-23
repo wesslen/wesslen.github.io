@@ -179,7 +179,7 @@ img {
 /* ── Hero / Dot-Grid ─────────────────────────────────────── */
 .hero {
   position: relative;
-  padding: 4rem 1.5rem 3.5rem;
+  padding: 4rem 1.5rem 2rem;
   overflow: hidden;
 }
 
@@ -244,7 +244,7 @@ img {
 
 /* ── Post List ───────────────────────────────────────────── */
 .posts-section {
-  padding: 2rem 1.5rem 4rem;
+  padding: 1rem 1.5rem 4rem;
 }
 
 .posts-header {
@@ -275,106 +275,187 @@ img {
   list-style: none;
 }
 
-/* ── Post Card ───────────────────────────────────────────── */
-.post-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem 1.75rem;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition:
-    border-color var(--transition),
-    box-shadow var(--transition),
-    transform var(--transition);
+/* ── Layout A — Compact Expandable Rows ─────────────────── */
+.post-list-a {
+  max-width: 760px;
+  margin: 0 auto;
 }
 
-/* Left accent bar on hover */
-.post-card::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--accent);
-  transform: scaleY(0);
-  transition: transform 0.2s ease;
-  transform-origin: bottom;
+.series-group-a {
+  border-left: 2px solid var(--border);
+  margin-bottom: 0.25rem;
 }
-
-/* Shimmer overlay on hover */
-.post-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(115deg, transparent 0%, var(--accent-dim) 40%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.post-card:hover {
-  border-color: var(--accent);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-  transform: translateY(-1px);
-}
-.post-card:hover::before {
-  transform: scaleY(1);
-}
-.post-card:hover::after {
-  opacity: 1;
-}
-
-.post-card a {
-  color: inherit;
-  text-decoration: none;
-}
-.post-card a::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-}
-
-.card-meta {
+.series-header-a {
   display: flex;
   align-items: center;
-  flex-wrap: wrap; /* let date + badge wrap on very small screens */
-  gap: 0.5rem 1rem;
-  margin-bottom: 0.6rem;
-}
-
-.card-date {
+  gap: 0.6rem;
+  padding: 0.5rem 1rem 0.5rem 1.25rem;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--muted);
-  letter-spacing: 0.05em;
+  font-size: 0.68rem;
+  color: var(--accent2);
+  letter-spacing: 0.06em;
+  border-left: 2px solid var(--accent2);
+  margin-left: -2px;
 }
-
-.read-time-badge {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--muted);
-  background: var(--code-bg);
-  border: 1px solid var(--border);
+.series-header-a .series-count {
+  background: var(--accent2-dim);
+  border: 1px solid var(--accent2);
   border-radius: 20px;
-  padding: 0.15em 0.65em;
+  padding: 0.1em 0.55em;
+  font-size: 0.65rem;
 }
 
-.card-title {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 0.4rem;
-  line-height: 1.35;
+.row-a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.55rem 1rem 0.55rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  position: relative;
 }
+.series-group-a .row-a { padding-left: 1.5rem; }
+.row-a:hover { background: var(--surface); }
+.row-a.expanded { background: var(--surface); }
 
-.card-desc {
+.row-a-chevron {
+  font-size: 0.6rem;
+  color: var(--muted);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  margin-top: 0.15em;
+}
+.row-a.expanded .row-a-chevron { transform: rotate(90deg); color: var(--accent); }
+
+.row-a-title {
   font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  flex: 1;
+  line-height: 1.3;
+}
+.row-a:hover .row-a-title, .row-a.expanded .row-a-title { color: var(--accent); }
+
+.row-a-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  gap: 0.2rem;
+}
+.row-a-date {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.row-a-tags {
+  display: flex;
+  gap: 0.3rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.row-a-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  padding: 0.1em 0.5em;
+  border-radius: 20px;
+  border: 1px solid;
+  opacity: 0.75;
+}
+.row-a-expand {
+  display: none;
+  padding: 0.65rem 1.25rem 0.9rem 2.75rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+}
+.series-group-a .row-a-expand { padding-left: 3rem; }
+.row-a-expand.open { display: block; }
+.row-a-desc {
+  font-size: 0.875rem;
   color: var(--muted);
   line-height: 1.6;
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.6rem;
+}
+.row-a-link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+}
+.row-a-link:hover { opacity: 0.8; }
+
+.standalone-divider-a {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  padding: 0.9rem 1rem 0.4rem;
+  opacity: 0.6;
+}
+
+/* ── Draft badge ─────────────────────────────────────────── */
+.draft-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 400;
+  color: var(--accent2);
+  background: var(--accent2-dim);
+  border: 1px solid var(--accent2);
+  border-radius: 3px;
+  padding: 0.05em 0.4em;
+  margin-left: 0.4em;
+  vertical-align: middle;
+  letter-spacing: 0.04em;
+}
+.row-a-draft .row-a-title { opacity: 0.75; }
+.row-a-draft .row-a-date { opacity: 0.5; }
+
+/* ── Pinned intro card ───────────────────────────────────── */
+.intro-card-a {
+  max-width: 760px;
+  margin: 0 auto 2rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent-dim);
+  padding: 1rem 1.5rem 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+.intro-card-a::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--accent);
+}
+.intro-label-a {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+.intro-title-a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--accent);
+  flex: 1;
+  line-height: 1.3;
+}
+.intro-card-a:hover .intro-title-a { opacity: 0.8; }
+.intro-desc-a {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.55;
+  flex: 2;
 }
 
 /* ── Tag Pills ───────────────────────────────────────────── */
@@ -1178,6 +1259,11 @@ img {
 /* Small mobile: ≤ 640px ------------------------------------ */
 @media (max-width: 640px) {
   /* Shrink site title so it fits alongside the 44px toggle */
+
+  /* Layout A rows: meta wrapper keeps date+tags tightly grouped on mobile */
+  .row-a-tags {
+    justify-content: flex-end;
+  }
   .site-title {
     font-size: 0.9rem;
   }
@@ -1191,10 +1277,6 @@ img {
   .hero {
     padding: 2.5rem 1rem 2rem;
   }
-  .post-card {
-    padding: 1.2rem 1.25rem;
-  }
-
   .prose pre code {
     padding: 1.1rem 1.25rem;
     font-size: 0.82rem;
@@ -1218,9 +1300,6 @@ img {
   }
   .hero h1 {
     font-size: 1.35rem;
-  }
-  .post-card {
-    padding: 1rem;
   }
 }
 
