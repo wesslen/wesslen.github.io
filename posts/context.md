@@ -2,7 +2,7 @@
 title: "Is the Future of GenAI Development Just Managing Markdown?"
 date: 2026-03-24
 description: "What context files actually do, why they go stale, and what it means when the agent knows your project better than you do."
-tags: [GenAI, claude-code, context-engineering]
+tags: [hands-on, skills]
 ---
 
 > **TL;DR:** Context files like `CLAUDE.md` and `AGENTS.md` solve the cold-start problem for AI agents by injecting persistent project knowledge at every new session. They work — but ETH Zurich research shows LLM-generated context files can reduce task success rates while increasing costs, because agents follow bad instructions as faithfully as good ones. The harder problem is staleness: projects change faster than context files do, and in large teams where everyone works through agents, a stale file may be the last thin layer between people and a system nobody fully understands anymore.

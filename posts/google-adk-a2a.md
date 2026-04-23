@@ -2,7 +2,7 @@
 title: "Google ADK and the A2A Protocol: A Technical Reference"
 date: 2026-04-04
 description: "A deep-dive into Google's Agent Development Kit and the Agent2Agent protocol — the six core primitives, the cooperative event loop, how agents communicate across frameworks, and where the abstraction lines actually sit."
-tags: [GenAI, agentic-engineering, multi-agent, protocols]
+tags: [hands-on, protocol]
 ---
 
 > **TL;DR:** Google ADK and the A2A protocol are the most coherent framework-plus-protocol proposal I've seen for the multi-agent problem. ADK provides six core primitives — Agent, Runner, Session, Event, Artifact, Tool — and a cooperative event loop that makes state management predictable across complex agent hierarchies. A2A handles cross-framework interoperability through Agent Cards, a stateful Task lifecycle, and three communication modes, all built on standard HTTP and JSON-RPC rather than proprietary infrastructure. What neither addresses is the application-layer trust problem: A2A tells you who you're talking to; it doesn't tell you whether the remote agent will behave safely under adversarial inputs, and that's still the hard part.

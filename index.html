@@ -72,6 +72,7 @@
 
     <!-- ── Post List ──────────────────────────────────────── -->
     <main class="posts-section" id="main-content">
+      <div id="intro-slot"></div>
       <div class="posts-header">
         <span class="section-label">// posts</span>
       </div>
@@ -79,11 +80,7 @@
       <div class="tag-filter-bar" id="tag-filter-bar" aria-label="Filter posts by tag" style="display: none">
         <button class="tag-filter-btn active" data-tag="__all__">all</button>
       </div>
-      <ul class="post-list" id="post-list" aria-label="Blog posts">
-        <li class="loading-state" id="loading-msg">
-          <span class="loading-dots">loading posts</span>
-        </li>
-      </ul>
+      <div class="post-list-a" id="post-list" aria-label="Blog posts"></div>
     </main>
 
     <!-- ── Footer ────────────────────────────────────────── -->
@@ -165,34 +162,51 @@
           });
         }
 
-        /* ── Render Post Cards ──────────────────────────── */
-        function renderCard(post, bodyText) {
-          const rt = readTime(bodyText);
-          const tags = (post.tags || []).map((t) => `<span class="tag" style="${tagStyle(t)}">${t}</span>`).join("");
-          const tagList = (post.tags || []).join(" ");
-
-          return `
-        <li class="post-card" data-tags="${tagList}">
-          <a href="./post.html?slug=${encodeURIComponent(post.slug)}" aria-label="${post.title}">
-            <div class="card-meta">
-              <span class="card-date">${fmtDate(post.date)}</span>
-              <span class="read-time-badge">${rt}</span>
-            </div>
-            <div class="card-title">${post.title}</div>
-            <div class="card-desc">${post.description}</div>
-            <div class="tags">${tags}</div>
-          </a>
-        </li>`;
+        /* ── Series Definition ─────────────────────────────── */
+        const SERIES = [
+          {
+            id: "agentic-engineering",
+            title: "Agentic Engineering",
+            slugs: ["context", "agent-harness-design", "claude-code-harness", "skills-supply-chain"],
+          },
+          {
+            id: "multi-agent",
+            title: "Multi-Agent Systems",
+            slugs: ["google-adk-a2a", "a2a-risks", "a2a-case-studies"],
+          },
+          {
+            id: "model-risk-evals",
+            title: "Model Risk & Evals",
+            slugs: [
+              "sr11-7",
+              "guardrails",
+              "effective-challenge",
+              "metrics-metrics-metrics",
+              "adversarial-workflow",
+              "deployment-gates",
+              "judge-calibration",
+            ],
+          },
+          {
+            id: "banking-ai",
+            title: "Banking AI",
+            slugs: ["payments-liability-gap", "agent-identity-kyc", "agentic-commerce-gap"],
+          },
+        ];
+        function getSeriesForSlug(slug) {
+          return SERIES.find((s) => s.slugs.includes(slug));
+        }
+        function postUrl(slug, draft) {
+          return draft
+            ? `./post.html?slug=${encodeURIComponent(slug)}.draft`
+            : `./post.html?slug=${encodeURIComponent(slug)}`;
         }
 
-        /* ── Tag Filter Bar ─────────────────────────────── */
-        let activeTag = "__all__";
-
+        /* ── Tag Filter (Layout A) ──────────────────────────── */
         function buildTagFilter(manifest) {
           const bar = document.getElementById("tag-filter-bar");
           const allTags = [...new Set(manifest.flatMap((p) => p.tags || []))].sort();
-          if (allTags.length < 2) return; // not enough tags to filter
-
+          if (allTags.length < 2) return;
           allTags.forEach((tag) => {
             const btn = document.createElement("button");
             btn.className = "tag-filter-btn";
@@ -201,85 +215,152 @@
             btn.style.cssText = tagStyle(tag);
             bar.appendChild(btn);
           });
-
           bar.style.display = "flex";
-
           bar.addEventListener("click", (e) => {
             const btn = e.target.closest(".tag-filter-btn");
             if (!btn) return;
-            activeTag = btn.dataset.tag;
-
-            // Update active state
-            bar.querySelectorAll(".tag-filter-btn").forEach((b) => {
-              b.classList.toggle("active", b.dataset.tag === activeTag);
-              // Reset inline style for active (all) btn, keep tag color for others
-              if (b.dataset.tag === "__all__") {
-                b.style.cssText = "";
-              } else {
-                b.style.cssText = b.classList.contains("active") ? tagStyle(b.dataset.tag) : tagStyle(b.dataset.tag);
-              }
-            });
-
-            // Show/hide post cards
-            document.querySelectorAll("#post-list .post-card").forEach((card) => {
-              const tags = card.dataset.tags ? card.dataset.tags.split(" ") : [];
-              card.style.display = activeTag === "__all__" || tags.includes(activeTag) ? "" : "none";
+            const active = btn.dataset.tag;
+            bar
+              .querySelectorAll(".tag-filter-btn")
+              .forEach((b) => b.classList.toggle("active", b.dataset.tag === active));
+            document.querySelectorAll("#post-list [data-tags]").forEach((el) => {
+              const tags = (el.dataset.tags || "").split(" ");
+              el.style.display = active === "__all__" || tags.includes(active) ? "" : "none";
             });
           });
         }
 
-        /* ── Fetch Manifest & Posts ─────────────────────── */
-        async function loadPosts() {
-          const list = document.getElementById("post-list");
-          const loading = document.getElementById("loading-msg");
+        /* ── Layout A: Expandable Rows ──────────────────────── */
+        function renderA(manifest, bodies) {
+          const container = document.getElementById("post-list");
+          const introSlot = document.getElementById("intro-slot");
+          const bySlug = {};
+          manifest.forEach((p, i) => {
+            bySlug[p.slug] = { post: p, body: bodies[i] };
+          });
 
+          const seriesSlugSet = new Set(SERIES.flatMap((s) => s.slugs));
+          const solos = manifest.filter((p) => !seriesSlugSet.has(p.slug) && p.slug !== "everything-drifts");
+          let html = "";
+
+          // Pinned intro card above // posts strip
+          const introPost = manifest.find((p) => p.slug === "everything-drifts");
+          if (introPost && introSlot) {
+            introSlot.innerHTML = `<a href="${postUrl(introPost.slug)}" class="intro-card-a">
+              <span class="intro-label-a">// intro</span>
+              <span class="intro-title-a">${introPost.title}</span>
+              <span class="intro-desc-a">${introPost.description}</span>
+            </a>`;
+          }
+
+          // Series groups
+          SERIES.forEach((series) => {
+            const posts = series.slugs
+              .map((s) => bySlug[s])
+              .filter(Boolean)
+              .sort((a, b) => a.post.date.localeCompare(b.post.date));
+            if (!posts.length) return;
+
+            html += `<div class="series-group-a" data-tags="${[...new Set(posts.flatMap((p) => p.post.tags || []))].join(" ")}">
+              <div class="series-header-a">⬡ series · ${series.title}<span class="series-count">${posts.length} posts</span></div>`;
+            posts.forEach(({ post, body }) => {
+              const rt = readTime(body);
+              const tags = (post.tags || [])
+                .slice(0, 3)
+                .map((t) => `<span class="row-a-tag" style="${tagStyle(t)}">${t}</span>`)
+                .join("");
+              html += `
+              <div class="row-a${post.draft ? " row-a-draft" : ""}" data-slug="${post.slug}" data-tags="${(post.tags || []).join(" ")}">
+                <span class="row-a-chevron">▶</span>
+                <span class="row-a-title">${post.title}${post.draft ? ' <span class="draft-badge">draft</span>' : ""}</span>
+                <span class="row-a-meta"><span class="row-a-date">${fmtDate(post.date)}</span><span class="row-a-tags">${tags}</span></span>
+              </div>
+              <div class="row-a-expand" id="exp-${post.slug}">
+                <div class="row-a-desc">${post.description}</div>
+                <a href="${postUrl(post.slug, post.draft)}" class="row-a-link">read → ${rt}</a>
+              </div>`;
+            });
+            html += `</div>`;
+          });
+
+          // Standalone posts
+          if (solos.length) {
+            html += `<div class="standalone-divider-a">// standalone</div>`;
+            solos.forEach((post) => {
+              const body = bySlug[post.slug]?.body || post.description;
+              const rt = readTime(body);
+              const tags = (post.tags || [])
+                .slice(0, 3)
+                .map((t) => `<span class="row-a-tag" style="${tagStyle(t)}">${t}</span>`)
+                .join("");
+              html += `
+              <div class="row-a${post.draft ? " row-a-draft" : ""}" data-slug="${post.slug}" data-tags="${(post.tags || []).join(" ")}">
+                <span class="row-a-chevron">▶</span>
+                <span class="row-a-title">${post.title}${post.draft ? ' <span class="draft-badge">draft</span>' : ""}</span>
+                <span class="row-a-meta"><span class="row-a-date">${fmtDate(post.date)}</span><span class="row-a-tags">${tags}</span></span>
+              </div>
+              <div class="row-a-expand" id="exp-${post.slug}">
+                <div class="row-a-desc">${post.description}</div>
+                <a href="${postUrl(post.slug, post.draft)}" class="row-a-link">read → ${rt}</a>
+              </div>`;
+            });
+          }
+
+          container.innerHTML = html;
+
+          // Click-to-expand
+          container.addEventListener("click", (e) => {
+            const row = e.target.closest(".row-a");
+            if (!row) return;
+            const slug = row.dataset.slug;
+            const exp = document.getElementById("exp-" + slug);
+            const wasOpen = row.classList.contains("expanded");
+            document.querySelectorAll(".row-a.expanded").forEach((r) => r.classList.remove("expanded"));
+            document.querySelectorAll(".row-a-expand.open").forEach((r) => r.classList.remove("open"));
+            if (!wasOpen) {
+              row.classList.add("expanded");
+              exp.classList.add("open");
+            }
+          });
+        }
+
+        /* ── Load Posts ─────────────────────────────────────── */
+        async function loadPosts() {
           try {
             const res = await fetch("./posts/index.json");
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const manifest = await res.json();
-
-            // Sort newest first
             manifest.sort((a, b) => b.date.localeCompare(a.date));
 
-            // Build tag filter before rendering cards
-            buildTagFilter(manifest);
-
-            // Fetch each post body to compute read time
-            const cards = await Promise.all(
+            const bodies = await Promise.all(
               manifest.map(async (post) => {
                 try {
                   const r = await fetch(`./posts/${post.slug}.md`);
                   const text = r.ok ? await r.text() : post.description;
-                  // Strip frontmatter for word count
-                  const body = text.replace(/^---[\s\S]*?---\n/, "");
-                  return renderCard(post, body);
+                  return text.replace(/^---[\s\S]*?---\n/, "");
                 } catch {
-                  return renderCard(post, post.description);
+                  return post.description;
                 }
               })
             );
 
-            list.innerHTML = cards.join("");
+            buildTagFilter(manifest);
+            renderA(manifest, bodies);
           } catch (err) {
-            list.innerHTML = `
-          <li class="error-state">
-            <p>⚠ Could not load posts (${err.message})</p>
-            <p style="font-size:0.75rem;margin-top:0.5rem;color:var(--muted)">
-              If running locally, serve with <code style="font-family:var(--font-mono)">python -m http.server</code>
-            </p>
-          </li>`;
+            document.getElementById("post-list").innerHTML =
+              `<div style="padding:2rem;color:var(--muted);font-family:var(--font-mono);font-size:0.8rem;">
+                ⚠ Could not load posts (${err.message})<br>
+                <span style="font-size:0.75rem">If local, serve with python -m http.server</span>
+              </div>`;
           }
         }
-
         loadPosts();
 
         /* Re-render tag colors on theme change */
         toggleBtn.addEventListener("click", () => {
-          // Brief delay so data-theme is updated first
           setTimeout(() => {
-            document.querySelectorAll(".tag").forEach((el) => {
-              const tag = el.textContent;
-              el.style.cssText = tagStyle(tag);
+            document.querySelectorAll(".row-a-tag").forEach((el) => {
+              el.style.cssText = tagStyle(el.textContent);
             });
           }, 50);
         });

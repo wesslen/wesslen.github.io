@@ -1,79 +1,109 @@
 [
   {
-    "slug": "welcome-to-the-machine",
+    "slug": "everything-drifts",
     "title": "Everything Drifts",
     "date": "2026-03-22",
-    "description": "What drift means in AI — and why I named a blog after it.",
-    "tags": ["meta", "GenAI"]
+    "description": "What drift means in AI \u2014 and why I named a blog after it.",
+    "tags": []
   },
   {
     "slug": "context",
     "title": "Is the Future of GenAI Development Just Managing Markdown?",
     "date": "2026-03-24",
     "description": "What context files actually do, why they go stale, and what it means when the agent knows your codebase better than you do.",
-    "tags": ["GenAI", "claude-code", "context-engineering"]
+    "tags": [
+      "hands-on",
+      "skills"
+    ]
   },
   {
     "slug": "sr11-7",
     "title": "SR 11-7 at Fifteen: Model Risk Management Faces an AI Reckoning",
     "date": "2026-03-25",
     "description": "The 2011 supervisory letter that built modern model risk management still governs banking AI in 2026. Here's why that's both reassuring and alarming.",
-    "tags": ["GenAI", "MRM", "financial-AI", "SR11-7"]
+    "tags": [
+      "banking",
+      "regulatory"
+    ]
   },
   {
     "slug": "agent-harness-design",
     "title": "Harness Design for Long-Running Agents",
     "date": "2026-03-30",
     "description": "What context files can't do: designing agent harnesses for context management, error recovery, and multi-session continuity.",
-    "tags": ["GenAI", "claude-code", "agentic-engineering"]
+    "tags": [
+      "hands-on",
+      "harness"
+    ]
   },
   {
     "slug": "guardrails",
     "title": "What 'Guardrail' Actually Means for Agentic AI in Finance",
     "date": "2026-04-02",
     "description": "Everyone says 'guardrail.' Almost no one means the same thing. In an agentic system operating inside a bank, that ambiguity stops being academic.",
-    "tags": ["GenAI", "MRM", "agentic-engineering", "financial-AI", "SR11-7"]
+    "tags": [
+      "banking",
+      "regulatory"
+    ]
   },
   {
     "slug": "metrics-metrics-metrics",
     "title": "Metrics, Metrics, Metrics",
     "date": "2026-04-03",
-    "description": "Everyone in GenAI wants a dashboard. The problem is that generic metrics aren't just uninformative — they actively mislead. Social scientists figured this out decades ago.",
-    "tags": ["GenAI", "evals", "psychometrics", "MRM"]
+    "description": "Everyone in GenAI wants a dashboard. The problem is that generic metrics aren't just uninformative \u2014 they actively mislead. Social scientists figured this out decades ago.",
+    "tags": [
+      "psychometrics",
+      "evals"
+    ]
   },
   {
     "slug": "google-adk-a2a",
     "title": "Google ADK and the A2A Protocol: A Technical Reference",
     "date": "2026-04-04",
-    "description": "A deep-dive into Google's Agent Development Kit and the Agent2Agent protocol — the six core primitives, the cooperative event loop, how agents communicate across frameworks, and where the abstraction lines actually sit.",
-    "tags": ["GenAI", "agentic-engineering", "multi-agent", "protocols"]
+    "description": "A deep-dive into Google's Agent Development Kit and the Agent2Agent protocol \u2014 the six core primitives, the cooperative event loop, how agents communicate across frameworks, and where the abstraction lines actually sit.",
+    "tags": [
+      "hands-on",
+      "protocol"
+    ]
   },
   {
     "slug": "claude-code-harness",
     "title": "Inside the Claude Code Harness",
     "date": "2026-04-04",
-    "description": "Anthropic's source code leaked. Here's what it reveals about how a production-grade agent harness actually gets built — and how much of it looks like design versus survival.",
-    "tags": ["GenAI", "claude-code", "agentic-engineering"]
+    "description": "Anthropic's source code leaked. Here's what it reveals about how a production-grade agent harness actually gets built \u2014 and how much of it looks like design versus survival.",
+    "tags": [
+      "hands-on",
+      "harness"
+    ]
   },
   {
     "slug": "a2a-risks",
     "title": "When Agents Talk to Agents: The Risk Surface Nobody Has Fully Mapped",
     "date": "2026-04-06",
     "description": "Multi-agent AI systems compound the risks of individual models in ways that single-model guardrails weren't designed to handle. Here's what that threat surface actually looks like.",
-    "tags": ["GenAI", "agentic-engineering", "multi-agent", "security", "MRM", "financial-AI"]
+    "tags": [
+      "security",
+      "protocol"
+    ]
   },
   {
     "slug": "a2a-case-studies",
     "title": "Five Failures That Explain the A2A Security Problem",
     "date": "2026-04-07",
-    "description": "The threat surface for multi-agent AI systems isn't theoretical. Here's what five real incidents — from a $5 domain purchase to spontaneous model self-preservation — actually reveal.",
-    "tags": ["GenAI", "agentic-engineering", "multi-agent", "security", "MRM", "financial-AI"]
+    "description": "The threat surface for multi-agent AI systems isn't theoretical. Here's what five real incidents \u2014 from a $5 domain purchase to spontaneous model self-preservation \u2014 actually reveal.",
+    "tags": [
+      "security",
+      "case-study"
+    ]
   },
   {
     "slug": "skills-supply-chain",
     "title": "Skills Are Code: The Supply Chain Problem Nobody Wants to Own",
     "date": "2026-04-09",
-    "description": "Skills marketplaces have reproduced every vulnerability pattern that took npm a decade to recognize — in about six months. Three attack surfaces, no platform-level governance.",
-    "tags": ["GenAI", "agentic-engineering", "context-engineering", "security"]
+    "description": "Skills marketplaces have reproduced every vulnerability pattern that took npm a decade to recognize \u2014 in about six months. Three attack surfaces, no platform-level governance.",
+    "tags": [
+      "security",
+      "skills"
+    ]
   }
 ]

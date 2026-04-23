@@ -2,7 +2,7 @@
 title: "What 'Guardrail' Actually Means for Agentic AI in Finance"
 date: 2026-04-02
 description: "Everyone says 'guardrail.' Almost no one means the same thing. In an agentic system operating inside a bank, that ambiguity stops being academic."
-tags: [GenAI, MRM, agentic-engineering, financial-AI, SR11-7]
+tags: [banking, regulatory]
 ---
 
 > **TL;DR:** "Guardrail" means different things depending on who's in the room — and that definitional sprawl is a real governance problem, not merely a communication one. The distinction that matters most is runtime vs. everything else: a guardrail intercepts live model behavior before it reaches a user or downstream system; tests and metrics are adjacent but different. In financial services, SR 11-7 maps onto guardrail design imperfectly — structural and output controls have established validation frameworks, but behavioral controls (prompt injection, jailbreaking, goal hijacking) don't, and in most institutions nobody owns them cleanly.

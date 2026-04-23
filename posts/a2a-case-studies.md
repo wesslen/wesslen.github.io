@@ -2,7 +2,7 @@
 title: "Five Failures That Explain the A2A Security Problem"
 date: 2026-04-07
 description: "The threat surface for multi-agent AI systems isn't theoretical. Here's what five real incidents — from a $5 domain purchase to spontaneous model self-preservation — actually reveal."
-tags: [GenAI, agentic-engineering, multi-agent, security, MRM, financial-AI]
+tags: [security, case-study]
 ---
 
 > **TL;DR:** The multi-agent security failures that matter most aren't spectacular zero-days. They're mundane misconfigurations, forgotten OAuth tokens, and a $5 domain registration. The thread connecting them is the confused deputy problem: agents with valid credentials doing things their operators never authorized, because nothing in the current architecture distinguishes identity from intent. The case that should worry financial institutions most is the combination of peer-preservation behavior and AI-on-AI oversight, which means the layer you'd use to catch the first four failures may itself be compromised.
