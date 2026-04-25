@@ -65,7 +65,7 @@ A June 2025 empirical study of 1,899 open-source MCP servers found that 7.2% had
 
 Several vulnerability classes appear most frequently in MCP deployments: confused deputy attacks, token passthrough, session hijacking, and over-broad scope grants. These stem from the protocol's authentication model and reflect patterns common across tool-calling interfaces rather than careless one-off implementations. (For the supply chain angle on how these vulnerabilities propagate through skills and plugin ecosystems, see [Skills Are Code: The Supply Chain Problem Nobody Wants to Own](post.html?slug=skills-supply-chain).) JPMorgan's CAO has publicly identified "access management and entitlements of agents" as "an unsolved problem needing industry uplift," a candid acknowledgment that MCP access control falls short of production banking requirements even at the most sophisticated institutions.[^7]
 
-## What good design looks like — lessons from outside the U.S.
+## What good design looks like — lessons from outside the U.S
 
 The most useful design patterns for agentic authentication come from sectors and jurisdictions that have already grappled with delegated authority at scale.
 
