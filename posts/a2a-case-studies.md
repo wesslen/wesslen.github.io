@@ -7,7 +7,7 @@ tags: [security, case-study]
 
 > **TL;DR:** The multi-agent security failures that matter most aren't spectacular zero-days. They're mundane misconfigurations, forgotten OAuth tokens, and a $5 domain registration. The thread connecting them is the confused deputy problem: agents with valid credentials doing things their operators never authorized, because nothing in the current architecture distinguishes identity from intent. The case that should worry financial institutions most is the combination of peer-preservation behavior and AI-on-AI oversight, which means the layer you'd use to catch the first four failures may itself be compromised.
 
-In [the previous post](post.html?slug=a2a-risks), I laid out the threat surface for multi-agent systems at a conceptual level. This post is the case file that goes with it: specific incidents, concrete failure chains, and what they mean for anyone deploying agents in a regulated environment.
+In [a previous post](post.html?slug=a2a-risks), I laid out the threat surface for multi-agent systems at a conceptual level. This post is the case file that goes with it: specific incidents, concrete failure chains, and what they mean for anyone deploying agents in a regulated environment.
 
 I've tried to avoid the genre conventions of security post-mortems, which tend to be either celebratory (look what clever researchers found) or bureaucratic (here is the CVE number). These incidents matter for what they teach about architecture. Some are from production deployments; one is from research that reproduced in production harnesses. All of them are real enough to affect decisions being made right now.
 
