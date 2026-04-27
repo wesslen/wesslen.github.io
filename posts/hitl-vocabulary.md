@@ -87,11 +87,11 @@ The convergence across jurisdictions is on a core set of expectations: board-lev
 
 Earlier automation waves produced human-readable state at every stage. An operator could look at the system and understand exactly what it was doing, even if intervention was difficult.
 
-Agentic AI changes what oversight requires in three specific ways, each structural rather than incremental. 
+Agentic AI changes what oversight requires in three specific ways, each structural rather than incremental.
 
-First, intermediate steps are opaque: the human checkpoint sees an artifact produced by multi-step reasoning it cannot inspect. In algorithmic trading or industrial control, each decision step is a deterministic function of auditable inputs; in an agentic pipeline, the reasoning trace is a chain of probabilistic outputs that doesn’t reproduce exactly under re-inspection, which means post-hoc review cannot reconstruct how an output was reached. 
+First, intermediate steps are opaque: the human checkpoint sees an artifact produced by multi-step reasoning it cannot inspect. In algorithmic trading or industrial control, each decision step is a deterministic function of auditable inputs; in an agentic pipeline, the reasoning trace is a chain of probabilistic outputs that doesn’t reproduce exactly under re-inspection, which means post-hoc review cannot reconstruct how an output was reached.
 
-Second, errors compound across agents before any monitoring flag fires — a small reasoning error at step one propagates through subsequent steps in ways that point-in-time review cannot catch after the fact. Unlike cascade failures in distributed systems, where error propagation follows explicit inter-service call paths and produces structured logs, multi-agent error propagation occurs through natural-language context that leaves no structured audit trail to diagnose. 
+Second, errors compound across agents before any monitoring flag fires — a small reasoning error at step one propagates through subsequent steps in ways that point-in-time review cannot catch after the fact. Unlike cascade failures in distributed systems, where error propagation follows explicit inter-service call paths and produces structured logs, multi-agent error propagation occurs through natural-language context that leaves no structured audit trail to diagnose.
 
 Third, agentic systems can update their response patterns based on accumulated context and state, meaning the behavior validated before deployment is not guaranteed to be what executes under novel inputs tomorrow. This differs from standard model drift: conventional online-learning drift is measured against known distribution statistics and triggers a revalidation event; agentic behavioral drift accumulates through context-window state that existing monitoring frameworks have no established metric to capture.
 
