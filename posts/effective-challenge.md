@@ -6,7 +6,9 @@ tags: [banking, regulatory]
 ---
 
 > **TL;DR:** Effective challenge — SR 11-7's requirement that models face critical analysis from independent parties who are structurally separated from development, technically capable of probing model behavior, and organizationally empowered to force change — is the one insight from 2011 that survives the transition to generative and agentic AI. Each leg of that triad is under acute stress: first-line pay dominance corrupts incentives, model opacity undermines competence, and vendor-controlled release cycles weaken influence. The question isn't whether to repeal SR 11-7. It's whether effective challenge can be preserved without the procedural apparatus that's come to stand in for it.
->
+
+---
+
 > [!IMPORTANT]
 > **Regulatory context (April 2026):** SR 11-7 was formally superseded by [joint Fed/OCC/FDIC guidance SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) on April 17, 2026, resolving the BPI repeal debate in an unexpected way: not repeal, but supersession, with these systems **explicitly excluded from scope** (footnote 3). What that exclusion means in practice is unsettled — it does not clearly exempt GenAI deployments from all model risk requirements. The guidance is principles-based and primarily scoped to banks above $30B in assets; smaller institutions face less direct regulatory pressure from the supersession but inherit the same conceptual vacuum on GenAI governance. The effective challenge triad this post argues for remains the most relevant organizing concept for GenAI governance precisely because the new guidance leaves the question formally unaddressed. Expect the framework to keep shifting.
 

@@ -3,7 +3,7 @@
     "slug": "everything-drifts",
     "title": "Everything Drifts",
     "date": "2026-03-22",
-    "description": "What drift means in AI \u2014 and why I named a blog after it.",
+    "description": "What drift means in AI — and why I named a blog after it.",
     "tags": []
   },
   {
@@ -43,14 +43,14 @@
     "description": "Everyone says 'guardrail.' Almost no one means the same thing. In an agentic system operating inside a bank, that ambiguity stops being academic.",
     "tags": [
       "banking",
-      "regulatory"
+      "guardrails"
     ]
   },
   {
     "slug": "metrics-metrics-metrics",
     "title": "Metrics, Metrics, Metrics",
     "date": "2026-04-03",
-    "description": "Everyone in GenAI wants a dashboard. The problem is that generic metrics aren't just uninformative \u2014 they actively mislead. Social scientists figured this out decades ago.",
+    "description": "Everyone in GenAI wants a dashboard. The problem is that generic metrics aren't just uninformative — they actively mislead. Social scientists figured this out decades ago.",
     "tags": [
       "psychometrics",
       "evals"
@@ -60,7 +60,7 @@
     "slug": "google-adk-a2a",
     "title": "Google ADK and the A2A Protocol: A Technical Reference",
     "date": "2026-04-04",
-    "description": "A deep-dive into Google's Agent Development Kit and the Agent2Agent protocol \u2014 the six core primitives, the cooperative event loop, how agents communicate across frameworks, and where the abstraction lines actually sit.",
+    "description": "A deep-dive into Google's Agent Development Kit and the Agent2Agent protocol — the six core primitives, the cooperative event loop, how agents communicate across frameworks, and where the abstraction lines actually sit.",
     "tags": [
       "hands-on",
       "protocol"
@@ -70,7 +70,7 @@
     "slug": "claude-code-harness",
     "title": "Inside the Claude Code Harness",
     "date": "2026-04-04",
-    "description": "Anthropic's source code leaked. Here's what it reveals about how a production-grade agent harness actually gets built \u2014 and how much of it looks like design versus survival.",
+    "description": "Anthropic's source code leaked. Here's what it reveals about how a production-grade agent harness actually gets built — and how much of it looks like design versus survival.",
     "tags": [
       "hands-on",
       "harness"
@@ -90,7 +90,7 @@
     "slug": "a2a-case-studies",
     "title": "Five Failures That Explain the A2A Security Problem",
     "date": "2026-04-07",
-    "description": "The threat surface for multi-agent AI systems isn't theoretical. Here's what five real incidents \u2014 from a $5 domain purchase to spontaneous model self-preservation \u2014 actually reveal.",
+    "description": "The threat surface for multi-agent AI systems isn't theoretical. Here's what five real incidents — from a $5 domain purchase to spontaneous model self-preservation — actually reveal.",
     "tags": [
       "security",
       "case-study"
@@ -100,7 +100,7 @@
     "slug": "skills-supply-chain",
     "title": "Skills Are Code: The Supply Chain Problem Nobody Wants to Own",
     "date": "2026-04-09",
-    "description": "Skills marketplaces have reproduced every vulnerability pattern that took npm a decade to recognize \u2014 in about six months. Three attack surfaces, no platform-level governance.",
+    "description": "Skills marketplaces have reproduced every vulnerability pattern that took npm a decade to recognize — in about six months. Three attack surfaces, no platform-level governance.",
     "tags": [
       "security",
       "skills"
@@ -110,7 +110,7 @@
     "slug": "payments-liability-gap",
     "title": "Who Pays When the Agent Gets It Wrong? A Rail-by-Rail Guide to the Liability Vacuum",
     "date": "2026-04-25",
-    "description": "Your AI agent made a payment that went wrong. Whether you're protected \u2014 and by how much \u2014 depends almost entirely on which payment rail it used. On the newest rails, the answer may be nobody.",
+    "description": "Your AI agent made a payment that went wrong. Whether you're protected — and by how much — depends almost entirely on which payment rail it used. On the newest rails, the answer may be nobody.",
     "tags": [
       "payments",
       "regulatory"
@@ -120,7 +120,7 @@
     "slug": "agent-identity-kyc",
     "title": "The Identity Problem: Banks Don't Know Who Your AI Agent Is",
     "date": "2026-04-25",
-    "description": "Banks are legally required to know their customers. But the Customer Identification Program rule was written for humans and legal entities. An AI agent is neither \u2014 and no banking law has a category for it.",
+    "description": "Banks are legally required to know their customers. But the Customer Identification Program rule was written for humans and legal entities. An AI agent is neither — and no banking law has a category for it.",
     "tags": [
       "payments",
       "regulatory"
@@ -141,17 +141,38 @@
     "slug": "effective-challenge",
     "title": "Effective Challenge Is Worth Keeping. The Rest Is Negotiable.",
     "date": "2026-04-25",
-    "description": "SR 11-7's organizing principle \u2014 critical analysis by objective parties with real authority \u2014 is the only piece of the 2011 framework that still holds under GenAI. Saving it may require dismantling much of what's been built around it.",
+    "description": "SR 11-7's organizing principle — critical analysis by objective parties with real authority — is the only piece of the 2011 framework that still holds under GenAI. Saving it may require dismantling much of what's been built around it.",
     "tags": [
       "banking",
       "regulatory"
     ]
   },
   {
+    "slug": "hitl-vocabulary",
+    "title": "Human-in-the-Loop Is a Borrowed Term",
+    "date": "2026-04-26",
+    "description": "The phrase 'human-in-the-loop' is a 1978 teleoperation concept that appears in barely any binding banking supervision. Understanding what regulators actually say — and why the vocabulary gap is about to become a governance design problem — starts with the sixty-year lineage of the term.",
+    "tags": [
+      "human-in-the-loop",
+      "regulatory"
+    ]
+  },
+  {
+    "slug": "hitl-design",
+    "title": "Where to Put the Human",
+    "date": "2026-04-26",
+    "description": "HITL is a design decision, not a checkbox. Three timing regimes — design-time labeling, deploy-time validation, and runtime approval gates — map to different controls, different regulatory expectations, and different failure modes. Knight Capital shows what happens when the checkpoint exists in form and collapses in function.",
+    "tags": [
+      "human-in-the-loop",
+      "case-study"
+    ],
+    "draft": true
+  },
+  {
     "slug": "adversarial-workflow",
     "title": "Adversarial Testing for LLMs: The Workflow That Has to Hold Up",
     "date": "2026-04-19",
-    "description": "Red-teaming an LLM is a model risk control now, even though no US banking regulation uses the word. Here's what a defensible engagement actually looks like \u2014 and why most MRM teams aren't yet set up to run one.",
+    "description": "Red-teaming an LLM is a model risk control now, even though no US banking regulation uses the word. Here's what a defensible engagement actually looks like — and why most MRM teams aren't yet set up to run one.",
     "tags": [
       "adversarial",
       "evals"
@@ -162,10 +183,10 @@
     "slug": "deployment-gates",
     "title": "Three Gates for Deploying an LLM Under Model Risk Governance",
     "date": "2026-04-19",
-    "description": "A defensible LLM deployment gate combines three quantitative pass/fail conditions \u2014 capability non-regression, safety non-regression, and a robustness ceiling \u2014 each with a derivation an examiner can take apart.",
+    "description": "A defensible LLM deployment gate combines three quantitative pass/fail conditions — capability non-regression, safety non-regression, and a robustness ceiling — each with a derivation an examiner can take apart.",
     "tags": [
       "adversarial",
-      "evals"
+      "guardrails"
     ],
     "draft": true
   },
