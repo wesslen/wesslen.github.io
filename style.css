@@ -512,6 +512,13 @@ img {
   padding: 2rem 1.5rem 5rem;
 }
 
+/* Prevent grid item from expanding beyond track width when content
+   (tables, code blocks) has a wide min-content size. Without this,
+   the 1fr column can blow past the viewport on mobile. */
+#article-col {
+  min-width: 0;
+}
+
 @media (min-width: 1200px) {
   .post-layout {
     grid-template-columns: 1fr 240px;
@@ -806,7 +813,8 @@ img {
   position: relative;
   margin: 1.5rem 0;
   border-radius: var(--radius);
-  overflow: visible;
+  overflow: hidden; /* was: visible — hidden clips wide code to the border box;
+                       code { overflow-x: auto } handles horizontal scrolling */
   border: 1px solid var(--border);
 }
 
