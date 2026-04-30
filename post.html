@@ -46,6 +46,20 @@
       rel="icon"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>"
     />
+  <!-- MathJax for mathematical notation (used in posts with formal models) -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   </head>
   <body>
     <!-- Reading progress bar -->
@@ -723,6 +737,13 @@
             labelCodeBlocks();
             injectCopyButtons();
             processYouTube(proseEl);
+
+            // Typeset MathJax if present (no-op on posts without math)
+            // Typeset MathJax: check typesetPromise specifically (window.MathJax is always set
+            // as a config object, but typesetPromise only exists after the CDN script loads)
+            if (window.MathJax && window.MathJax.typesetPromise) {
+              MathJax.typesetPromise([proseEl]).catch(err => console.warn("MathJax:", err));
+            }
 
             // Build TOC
             buildTOC();
