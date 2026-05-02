@@ -1,0 +1,612 @@
+[
+  {
+    "id": "sr11-7",
+    "term": "SR 11-7",
+    "full": "Supervisory Guidance on Model Risk Management",
+    "short": "2011 Fed/OCC guidance that codified model risk management at U.S. banks; superseded by SR 26-2 in April 2026.",
+    "definition": "Issued jointly by the Federal Reserve and OCC on April 4, 2011, SR 11-7 established the foundational U.S. framework for model risk management — covering model development, validation, and governance. It was designed for regression models and closed-form analytics, and its core assumptions are strained by LLMs and agentic AI. SR 11-7 was formally superseded by SR 26-2 on April 17, 2026, though its principles remain the operational baseline most practitioners work from.",
+    "domain": "regulatory",
+    "aliases": [],
+    "used_in": ["sr11-7", "guardrails", "effective-challenge", "a2a-risks", "hitl-vocabulary"]
+  },
+  {
+    "id": "sr26-2",
+    "term": "SR 26-2",
+    "full": "Supervisory Guidance on Model Risk Management (2026)",
+    "short": "Joint Fed/OCC/FDIC MRM guidance issued April 2026; explicitly excludes generative and agentic AI from scope.",
+    "definition": "Issued jointly by the Federal Reserve, OCC, and FDIC on April 17, 2026, SR 26-2 is the first tri-agency revision to the foundational MRM framework since 2011. It adopts a risk-based, tiered approach primarily scoped to banking organizations with more than $30 billion in total assets and is principles-based rather than prescriptive. Notably, generative AI and agentic AI are explicitly excluded from scope — described as 'novel and rapidly evolving' — leaving the governance gap for those systems formally unaddressed.",
+    "domain": "regulatory",
+    "aliases": [],
+    "used_in": ["sr11-7", "guardrails", "effective-challenge", "hitl-vocabulary"]
+  },
+  {
+    "id": "mrm",
+    "term": "MRM",
+    "full": "Model Risk Management",
+    "short": "The discipline of identifying, measuring, and managing risks from models used in decision-making.",
+    "definition": "Model Risk Management is the organizational function, codified by SR 11-7, responsible for ensuring models are developed soundly, validated independently, and governed with clear accountability. MRM functions sit in the second line of defense — structurally separated from the business to provide objective oversight. Key activities include model validation, ongoing monitoring, inventory management, and escalating model limitations to senior management and boards.",
+    "domain": "banking",
+    "aliases": ["Model Risk Management"],
+    "used_in": ["sr11-7", "guardrails", "effective-challenge", "context", "hitl-vocabulary"]
+  },
+  {
+    "id": "three-lines",
+    "term": "three lines of defense",
+    "full": "",
+    "short": "Risk governance structure dividing accountability into business (1st line), risk oversight (2nd line), and audit (3rd line).",
+    "definition": "The three lines of defense is a risk governance framework dividing accountability into three layers: the first line is the business that owns and uses models; the second line is independent risk oversight (e.g., MRM) with incentives oriented toward identifying problems; and the third line is internal audit, verifying that the first two lines are functioning. SR 11-7 helped codify this structure across U.S. banking. The incentive asymmetry between the lines — growth versus prudence versus verification — is central to how effective challenge is supposed to work.",
+    "domain": "banking",
+    "aliases": ["three-lines-of-defense"],
+    "used_in": ["sr11-7", "effective-challenge"]
+  },
+  {
+    "id": "effective-challenge",
+    "term": "effective challenge",
+    "full": "",
+    "short": "SR 11-7 requirement that models be critically analyzed by objective, informed parties with real authority to push back.",
+    "definition": "Effective challenge, as defined in SR 11-7, requires critical analysis of models by objective, informed parties who can identify limitations and effect change. It has three necessary conditions: appropriate incentives (validators rewarded for finding problems, not approving them), relevant competence (validators who understand the model well enough to critique it), and organizational influence (validators with real authority to escalate and block deployment). In the GenAI era, all three conditions are under pressure from explainability gaps, talent scarcity, and diffuse accountability.",
+    "domain": "banking",
+    "aliases": [],
+    "used_in": ["sr11-7", "effective-challenge", "hitl-vocabulary"]
+  },
+  {
+    "id": "model-inventory",
+    "term": "model inventory",
+    "full": "",
+    "short": "A bank's full catalogued list of all models in use, required by SR 11-7 as a cornerstone of governance.",
+    "definition": "SR 11-7 requires banks to maintain a comprehensive model inventory — a registry of every model in use, including its purpose, methodology, ownership, validation status, and risk tier. Large institutions have inventories of 1,000 to 10,000+ models, growing at 10–25% annually. Whether LLMs, foundation models accessed via API, and agentic systems belong in the inventory is one of the central unresolved governance questions in banking AI.",
+    "domain": "banking",
+    "aliases": [],
+    "used_in": ["sr11-7", "guardrails"]
+  },
+  {
+    "id": "var",
+    "term": "VaR",
+    "full": "Value-at-Risk",
+    "short": "Statistical measure estimating maximum portfolio loss at a given confidence level over a time horizon.",
+    "definition": "Value-at-Risk estimates the potential loss of a portfolio over a defined period at a specified confidence level (e.g., 95% or 99%). VaR models were central to pre-2008 risk management and famously failed during the financial crisis: calibrated on benign historical data, they assumed constant volatility and dramatically underestimated tail risk when correlations spiked. Nassim Taleb testified before Congress in 2009 that 'VaR does not replicate out of sample — the past almost never predicts subsequent blowups.'",
+    "domain": "banking",
+    "aliases": ["Value-at-Risk"],
+    "used_in": ["sr11-7", "metrics-metrics-metrics"]
+  },
+  {
+    "id": "cecl",
+    "term": "CECL",
+    "full": "Current Expected Credit Loss",
+    "short": "FASB accounting standard requiring banks to recognize lifetime expected credit losses at origination.",
+    "definition": "Current Expected Credit Loss (FASB ASU 2016-13) replaced incurred-loss accounting with a forward-looking, lifetime expected credit loss standard — dramatically increasing model complexity at banks. When COVID-19 struck in early 2020, CECL models that had barely been implemented were immediately overwhelmed, with 82% of banks reporting credit-risk models were most affected and 66% resorting to management overlays that initially lacked adequate governance controls.",
+    "domain": "banking",
+    "aliases": ["Current Expected Credit Loss"],
+    "used_in": ["sr11-7"]
+  },
+  {
+    "id": "occ",
+    "term": "OCC",
+    "full": "Office of the Comptroller of the Currency",
+    "short": "Federal regulator that supervises national banks and federal savings associations.",
+    "definition": "The Office of the Comptroller of the Currency is a U.S. Treasury bureau that charters, regulates, and supervises national banks and federal savings associations. The OCC co-issued SR 11-7 with the Federal Reserve and is a co-issuer of SR 26-2. In September 2025, the OCC issued Bulletin 2025-26 describing itself as 'a first step' in a broader MRM review for AI systems.",
+    "domain": "regulatory",
+    "aliases": [],
+    "used_in": ["sr11-7", "effective-challenge"]
+  },
+  {
+    "id": "fdic",
+    "term": "FDIC",
+    "full": "Federal Deposit Insurance Corporation",
+    "short": "Federal agency that insures bank deposits and resolves failed banks; co-issuer of SR 26-2.",
+    "definition": "The Federal Deposit Insurance Corporation provides deposit insurance for U.S. banks, supervises state-chartered non-Fed-member banks, and manages bank resolutions. The FDIC joined the Federal Reserve and OCC as a co-issuer of SR 26-2 in April 2026. In 2026 Congressional testimony, the FDIC indicated the goal of SR 26-2 was a more tailored, risk-based approach — with a stated goal of loosening requirements for smaller institutions.",
+    "domain": "regulatory",
+    "aliases": [],
+    "used_in": ["sr11-7"]
+  },
+  {
+    "id": "cfpb",
+    "term": "CFPB",
+    "full": "Consumer Financial Protection Bureau",
+    "short": "Federal agency that writes and enforces consumer financial protection rules including Regulation E and Regulation Z.",
+    "definition": "The Consumer Financial Protection Bureau is an independent federal agency created by the Dodd-Frank Act (2010) to protect consumers in financial markets. The CFPB writes and enforces Regulation E (electronic fund transfers), Regulation Z (credit cards), and Regulation V (credit reporting). Under Section 1033 of Dodd-Frank, the CFPB oversees the open banking rules governing consumer financial data portability.",
+    "domain": "regulatory",
+    "aliases": [],
+    "used_in": ["payments-liability-gap", "agent-identity-kyc"]
+  },
+  {
+    "id": "ffiec",
+    "term": "FFIEC",
+    "full": "Federal Financial Institutions Examination Council",
+    "short": "Interagency body that issues examination guidance and standards for U.S. bank supervisors.",
+    "definition": "The Federal Financial Institutions Examination Council prescribes uniform principles and standards for the federal examination of financial institutions. Its member agencies include the Federal Reserve, OCC, FDIC, NCUA, and CFPB. The FFIEC's 2021 Authentication Guidance — designed for human users and managed system credentials — is what examiners are currently stretching to cover AI agents, without a formal update.",
+    "domain": "regulatory",
+    "aliases": [],
+    "used_in": ["agent-identity-kyc"]
+  },
+  {
+    "id": "fsb",
+    "term": "FSB",
+    "full": "Financial Stability Board",
+    "short": "International body that monitors global financial system stability and coordinates regulatory responses.",
+    "definition": "The Financial Stability Board is an international body established after the 2008 financial crisis to monitor and coordinate global financial regulation, hosted by the Bank for International Settlements in Basel. The FSB identified AI provider concentration — banks' dependence on a small number of foundation model vendors — as a primary financial stability vulnerability in its November 2024 report.",
+    "domain": "regulatory",
+    "aliases": [],
+    "used_in": ["sr11-7"]
+  },
+  {
+    "id": "bpi",
+    "term": "BPI",
+    "full": "Bank Policy Institute",
+    "short": "U.S. banking industry trade group representing large banks in policy advocacy.",
+    "definition": "The Bank Policy Institute is a nonpartisan public policy, research, and advocacy group representing leading universal banks, regional banks, and major foreign banks operating in the United States. In April 2025, BPI called for outright repeal of SR 11-7, arguing the guidance discourages AI innovation — a position senior model risk executives at BPI's own member banks publicly pushed back on.",
+    "domain": "banking",
+    "aliases": ["Bank Policy Institute"],
+    "used_in": ["sr11-7", "effective-challenge"]
+  },
+  {
+    "id": "nist-ai-rmf",
+    "term": "NIST AI RMF",
+    "full": "NIST AI Risk Management Framework",
+    "short": "Voluntary NIST framework for managing AI risks across the AI lifecycle; published January 2023.",
+    "definition": "The National Institute of Standards and Technology AI Risk Management Framework provides a structured, voluntary approach for managing AI risks organized around four core functions: Govern, Map, Measure, and Manage. A Generative AI Profile was added in July 2024. The NIST AI RMF lacks supervisory force but is shaping examiner expectations at U.S. banking regulators.",
+    "domain": "regulatory",
+    "aliases": [],
+    "used_in": ["sr11-7"]
+  },
+  {
+    "id": "eu-ai-act",
+    "term": "EU AI Act",
+    "full": "EU Artificial Intelligence Act",
+    "short": "EU regulation classifying AI systems by risk tier; credit scoring and underwriting AI is classified as high-risk.",
+    "definition": "The EU Artificial Intelligence Act (Regulation 2024/1689) is the first comprehensive binding AI regulation, applying risk-based requirements based on AI system classification. AI systems used for credit scoring and credit worthiness assessment are classified as high-risk, imposing binding requirements for documentation, human oversight, explainability, and ongoing monitoring. Compliance deadlines for high-risk systems are set for August 2, 2026.",
+    "domain": "regulatory",
+    "aliases": [],
+    "used_in": ["sr11-7"]
+  },
+  {
+    "id": "pra-ss123",
+    "term": "PRA SS1/23",
+    "full": "UK PRA Supervisory Statement 1/23: Model Risk Management",
+    "short": "UK bank MRM principles (2023) with a model definition that explicitly covers qualitative outputs.",
+    "definition": "The UK Prudential Regulation Authority's Supervisory Statement 1/23 (effective May 2024) established five MRM principles for UK banks with a broader model definition that explicitly covers qualitative outputs — going beyond SR 11-7's 'quantitative estimates' framing. It is frequently cited as a template for how U.S. regulators might update SR 11-7 to address AI systems.",
+    "domain": "regulatory",
+    "aliases": [],
+    "used_in": ["sr11-7", "effective-challenge"]
+  },
+  {
+    "id": "osfi-e23",
+    "term": "OSFI E-23",
+    "full": "OSFI Guideline E-23: Model Risk Management",
+    "short": "Canada's technology-neutral MRM guideline (effective May 2027) with an explicit AI/ML model definition.",
+    "definition": "Canada's Office of the Superintendent of Financial Institutions Guideline E-23, finalized September 2025 and effective May 2027, uses a technology-neutral model definition that explicitly covers AI and ML methods — closing the definitional gap that SR 11-7 leaves open. OSFI E-23 is frequently cited alongside PRA SS1/23 as a model for how the U.S. might modernize its MRM framework.",
+    "domain": "regulatory",
+    "aliases": [],
+    "used_in": ["sr11-7", "effective-challenge"]
+  },
+  {
+    "id": "gaussian-copula",
+    "term": "Gaussian copula",
+    "full": "",
+    "short": "Mathematical model for joint default correlations whose fatal assumptions drove CDO mispricing in the 2008 crisis.",
+    "definition": "The Gaussian copula, applied to structured credit products by David Li (2000), modeled correlations between default events using a statistical function that assumed stable, low correlations. CDO tranche correlations that had been modeled at 0.2–0.3 surged to nearly 1.0 when the housing market turned, making the model's outputs catastrophically wrong. It became the canonical example of how mathematically sound models fail when their calibration assumptions are violated at scale.",
+    "domain": "banking",
+    "aliases": [],
+    "used_in": ["sr11-7"]
+  },
+  {
+    "id": "cdo",
+    "term": "CDO",
+    "full": "Collateralized Debt Obligation",
+    "short": "Structured financial product that pools loans and sells claims on them in risk-tiered tranches.",
+    "definition": "A Collateralized Debt Obligation pools loans, mortgages, or bonds and issues tranches of varying risk and return — senior tranches paid first, junior tranches absorbing first losses. CDOs backed by subprime mortgages were central to the 2007–2009 financial crisis; their mispricing relied on Gaussian copula models that dramatically underestimated correlated default risk under stress.",
+    "domain": "banking",
+    "aliases": ["Collateralized Debt Obligation"],
+    "used_in": ["sr11-7"]
+  },
+  {
+    "id": "bsa-aml",
+    "term": "BSA/AML",
+    "full": "Bank Secrecy Act / Anti-Money Laundering",
+    "short": "Federal legal framework requiring banks to detect and report money laundering and financial crimes.",
+    "definition": "The Bank Secrecy Act (1970) and its Anti-Money Laundering requirements form the primary U.S. framework for financial crime compliance — requiring effective programs for detecting, preventing, and reporting suspicious activity. BSA/AML compliance includes CIP (know your customer), customer due diligence, transaction monitoring, and Suspicious Activity Reports. SR 21-8 extended SR 11-7's MRM principles specifically to BSA/AML models.",
+    "domain": "banking",
+    "aliases": ["Bank Secrecy Act", "Anti-Money Laundering"],
+    "used_in": ["sr11-7", "agent-identity-kyc"]
+  },
+  {
+    "id": "regulation-e",
+    "term": "Regulation E",
+    "full": "Electronic Fund Transfer Regulation",
+    "short": "CFPB rule implementing EFTA, providing consumer liability caps for unauthorized electronic fund transfers.",
+    "definition": "Regulation E (12 CFR Part 1005) implements the Electronic Fund Transfer Act, providing consumer protections for electronic payments including debit cards, ACH transfers, and ATM transactions. Its most important protection is a tiered liability cap for unauthorized transfers: $50 if reported within two days, $500 if within sixty days, unlimited after. A critical exception — transfers initiated by 'a person to whom the consumer has furnished the access device' — may eliminate these caps for AI-agent-initiated transactions.",
+    "domain": "payments",
+    "aliases": [],
+    "used_in": ["payments-liability-gap", "agent-identity-kyc"]
+  },
+  {
+    "id": "efta",
+    "term": "EFTA",
+    "full": "Electronic Fund Transfer Act",
+    "short": "1978 federal law protecting consumers on electronic payments; implemented by Regulation E.",
+    "definition": "The Electronic Fund Transfer Act (15 U.S.C. § 1693) is the federal consumer protection statute governing electronic payments — debit cards, ATM transactions, ACH transfers, and most digital payment flows. Regulation E is its implementing regulation. EFTA's consumer protections are triggered by 'unauthorized' transfers, and the definition of 'unauthorized' — particularly the 'furnished access device' exception — is the central legal question for AI-agent-initiated payments.",
+    "domain": "payments",
+    "aliases": [],
+    "used_in": ["payments-liability-gap", "agent-identity-kyc"]
+  },
+  {
+    "id": "regulation-z",
+    "term": "Regulation Z",
+    "full": "Truth in Lending Regulation",
+    "short": "CFPB rule implementing TILA, governing credit card billing errors and consumer disclosures.",
+    "definition": "Regulation Z (12 CFR Part 1026) implements the Truth in Lending Act, covering credit card billing, disclosures, and error resolution. Its §1666 billing-error framework allows consumers to dispute credit card charges within 60 days. Like Regulation E, Regulation Z was drafted around contemporaneous human authorization — an assumption that does not map cleanly onto standing delegations to AI agents.",
+    "domain": "payments",
+    "aliases": [],
+    "used_in": ["payments-liability-gap"]
+  },
+  {
+    "id": "tila",
+    "term": "TILA",
+    "full": "Truth in Lending Act",
+    "short": "1968 federal law governing credit disclosures and billing error resolution; implemented by Regulation Z.",
+    "definition": "The Truth in Lending Act (15 U.S.C. § 1601) governs credit disclosures, credit card billing rights, and error resolution. Regulation Z is its implementing regulation. TILA assumes a human who reviewed and authorized a specific credit transaction — an assumption that does not fit AI-agent-initiated transactions where the consumer may never see the individual authorization.",
+    "domain": "payments",
+    "aliases": [],
+    "used_in": ["payments-liability-gap"]
+  },
+  {
+    "id": "cip",
+    "term": "CIP",
+    "full": "Customer Identification Program",
+    "short": "The 'know your customer' rule requiring banks to collect and verify identity before opening accounts.",
+    "definition": "The Customer Identification Program rule (31 CFR § 1020.220) requires every federally regulated bank to collect and verify minimum identity information before opening an account — full legal name, date of birth, address, and taxpayer ID. CIP was mandated by the USA PATRIOT Act (2001) as a core AML control. AI agents are neither natural persons nor legal entities under current CIP definitions, creating a structural gap in banking's identity infrastructure.",
+    "domain": "payments",
+    "aliases": ["Customer Identification Program"],
+    "used_in": ["agent-identity-kyc"]
+  },
+  {
+    "id": "kyc",
+    "term": "KYC",
+    "full": "Know Your Customer",
+    "short": "The identity verification and due diligence requirements banks must satisfy before establishing customer relationships.",
+    "definition": "Know Your Customer encompasses the set of due diligence processes banks use to verify the identity of customers and assess their risk profiles. KYC includes the CIP rule at account opening, customer due diligence for ongoing relationship assessment, and enhanced due diligence for higher-risk customers. AI agents currently have no established category in KYC frameworks — they are neither the natural person nor the legal entity the rules were written to identify.",
+    "domain": "payments",
+    "aliases": ["Know Your Customer"],
+    "used_in": ["agent-identity-kyc"]
+  },
+  {
+    "id": "ach",
+    "term": "ACH",
+    "full": "Automated Clearing House",
+    "short": "Batch electronic payment network used for direct deposits, bill pay, and account-to-account transfers.",
+    "definition": "The Automated Clearing House is a nationwide batch processing network, operated by NACHA, handling direct deposits, payroll, bill payment, and account-to-account transfers. ACH transactions are governed by Regulation E and NACHA Operating Rules. Unlike RTP and FedNow, ACH is not real-time — transactions typically settle within one business day — and some ACH transactions can be returned after the fact, providing limited recourse for errors.",
+    "domain": "payments",
+    "aliases": ["Automated Clearing House"],
+    "used_in": ["payments-liability-gap"]
+  },
+  {
+    "id": "rtp",
+    "term": "RTP",
+    "full": "Real-Time Payments",
+    "short": "The Clearing House's instant payment rail — settles in seconds and is irrevocable once complete.",
+    "definition": "Real-Time Payments is The Clearing House's instant payment network, available 24/7/365. RTP transactions settle in seconds and are irrevocable — there is no chargeback mechanism and no reversal once settled. This makes RTP a high-risk rail for agentic AI errors: an agent that misroutes a payment may execute multiple transactions before any monitoring flag fires, with no mechanism to undo settled payments.",
+    "domain": "payments",
+    "aliases": ["Real-Time Payments"],
+    "used_in": ["payments-liability-gap"]
+  },
+  {
+    "id": "fednow",
+    "term": "FedNow",
+    "full": "FedNow Service",
+    "short": "The Federal Reserve's instant payment service (launched 2023) — irrevocable once settled.",
+    "definition": "FedNow is the Federal Reserve's instant payment service launched July 2023, providing 24/7/365 real-time payment settlement for participating banks. Like RTP, FedNow transactions are irrevocable once settled with no true chargeback mechanism. Regulation E applies in theory, but the 'furnished access device' exception and the irrevocability of settled transactions make FedNow the highest-risk rail for AI-agent payment errors.",
+    "domain": "payments",
+    "aliases": [],
+    "used_in": ["payments-liability-gap"]
+  },
+  {
+    "id": "genius-act",
+    "term": "GENIUS Act",
+    "full": "Guiding and Establishing National Innovation for U.S. Stablecoins Act",
+    "short": "2025 U.S. federal stablecoin law with reserve and chartering rules but no consumer fraud recovery floor.",
+    "definition": "The GENIUS Act (Public Law 119-27), signed July 18, 2025, is the first U.S. federal framework for payment stablecoins. It requires 100% reserves, monthly attestation, and dual federal-state chartering. What it does not establish: any consumer protection floor for fraud recovery, EFTA applicability, or AI-agent-specific provisions. The CFPB's January 2025 proposal to extend Regulation E to stablecoin wallets was withdrawn before the GENIUS Act passed.",
+    "domain": "payments",
+    "aliases": [],
+    "used_in": ["payments-liability-gap"]
+  },
+  {
+    "id": "ucc-4a",
+    "term": "UCC 4A",
+    "full": "Uniform Commercial Code Article 4A",
+    "short": "State law governing wire transfers, traditionally offering consumers very limited recourse.",
+    "definition": "Uniform Commercial Code Article 4A is the state law governing wire transfers, treating them as institutional instruments with limited consumer recourse. Unlike Regulation E's tiered liability caps, UCC 4A was designed around commercial transactions. The pending Second Circuit ruling in New York v. Citibank is expected to clarify whether EFTA can reach online-initiated wire transfers — a ruling that will directly affect agent-initiated payment liability on wire-adjacent rails.",
+    "domain": "payments",
+    "aliases": [],
+    "used_in": ["payments-liability-gap"]
+  },
+  {
+    "id": "nacha",
+    "term": "NACHA",
+    "full": "National Automated Clearing House Association",
+    "short": "The industry body that operates the ACH network and sets its operating rules.",
+    "definition": "NACHA (now formally Nacha) is the governing body that operates the ACH network and sets the NACHA Operating Rules governing ACH transactions. NACHA rules are contractual obligations between participating banks, distinct from Regulation E's statutory requirements. NACHA has a return mechanism for ACH transactions — unlike RTP and FedNow — providing limited but real recourse for payment errors.",
+    "domain": "payments",
+    "aliases": [],
+    "used_in": ["payments-liability-gap"]
+  },
+  {
+    "id": "visa-tap",
+    "term": "Visa TAP",
+    "full": "Visa Trusted Agent Protocol",
+    "short": "Identity-first framework that cryptographically attests which AI agent is initiating a payment.",
+    "definition": "Visa's Trusted Agent Protocol (launched October 2025 with Cloudflare) uses IETF RFC 9421 HTTP Message Signatures to attest: which specific agent is initiating the transaction, that the consumer has recognized that agent, and that a tokenized payment credential is bound to the transaction. TAP takes an identity-first design approach — its core question is whether this specific agent can be identified. As of April 2026, no enforceable chargeback-rule amendments have been published.",
+    "domain": "payments",
+    "aliases": [],
+    "used_in": ["payments-liability-gap", "agent-identity-kyc"]
+  },
+  {
+    "id": "mastercard-verifiable-intent",
+    "term": "Mastercard Verifiable Intent",
+    "full": "",
+    "short": "Intent-first agent authorization framework constraining what an AI agent is permitted to do in a transaction.",
+    "definition": "Mastercard's Agent Pay / Verifiable Intent framework (expanded March 2026 with Google) registers agents with issuers, issues cryptographically signed SD-JWT credentials specifying merchant category, spending caps, and time windows, and has signaled two new dispute categories: 'agent overreach' and 'mandate repudiation.' Unlike Visa TAP's identity-first approach, Verifiable Intent is intent-first — its question is what the agent is authorized to do. As of April 2026, no enforceable chargeback rules have been published.",
+    "domain": "payments",
+    "aliases": [],
+    "used_in": ["payments-liability-gap", "agent-identity-kyc"]
+  },
+  {
+    "id": "eidas-20",
+    "term": "eIDAS 2.0",
+    "full": "EU Electronic Identification, Authentication and Trust Services Regulation",
+    "short": "EU regulation requiring member states to deploy government-rooted digital identity wallets by December 2026.",
+    "definition": "eIDAS 2.0 is the EU's revised electronic identification regulation, requiring each EU member state to deploy government-rooted digital identity wallets to all eligible citizens by December 2026, with private-sector acceptance mandated by December 2027. For agentic AI, it provides the infrastructure foundation the U.S. lacks: an agent acting on behalf of a citizen could present a cryptographically signed, government-issued credential establishing who the principal is and the scope of the agent's delegation.",
+    "domain": "regulatory",
+    "aliases": [],
+    "used_in": ["agent-identity-kyc"]
+  },
+  {
+    "id": "psd3",
+    "term": "PSD3",
+    "full": "EU Payment Services Directive 3",
+    "short": "Proposed EU payment services legislation that would explicitly permit delegated Strong Customer Authentication.",
+    "definition": "PSD3 is the EU's proposed revision to its Payment Services Directive, currently in final negotiations. The feature relevant to agentic payments: PSD3 would explicitly permit delegated Strong Customer Authentication as regulated outsourcing, meaning a consumer could authorize a third-party provider to authenticate transactions on their behalf within a defined scope, with clear regulatory accountability — the legal foundation that agentic payments need and that U.S. law does not currently provide.",
+    "domain": "regulatory",
+    "aliases": [],
+    "used_in": ["agent-identity-kyc"]
+  },
+  {
+    "id": "fdx",
+    "term": "FDX",
+    "full": "Financial Data Exchange",
+    "short": "The CFPB-approved standard-setting body for open banking data access under Section 1033.",
+    "definition": "The Financial Data Exchange is the industry consortium approved by the CFPB in January 2025 as the first Section 1033 standard-setting body for open banking data access. FDX launched an Agentic AI initiative on April 14, 2026, with a Call for Input covering agent identification, consent delegation, and security — the live process most likely to produce industry standards for agentic payments in the near term.",
+    "domain": "payments",
+    "aliases": ["Financial Data Exchange"],
+    "used_in": ["agent-identity-kyc"]
+  },
+  {
+    "id": "section-1033",
+    "term": "Section 1033",
+    "full": "Dodd-Frank Act Section 1033 (Open Banking)",
+    "short": "Dodd-Frank provision requiring financial institutions to share consumer financial data with authorized third parties.",
+    "definition": "Section 1033 of the Dodd-Frank Act directs the CFPB to establish rules requiring financial institutions to provide consumers and authorized third parties with access to their financial data. The CFPB finalized its open banking rule in October 2024. Section 1033 is the legal foundation for the open banking ecosystem that AI agents will increasingly rely on to access consumer financial accounts.",
+    "domain": "payments",
+    "aliases": [],
+    "used_in": ["agent-identity-kyc"]
+  },
+  {
+    "id": "oidc-a",
+    "term": "OIDC-A",
+    "full": "OpenID Connect for Agents",
+    "short": "Draft identity protocol extending OIDC to handle AI agent delegation with defined scope and revocation.",
+    "definition": "OpenID Connect for Agents is a draft extension to the OpenID Connect identity protocol designed to accommodate AI agent delegation — specifying the principal's identity, the agent's authorized scope, and how that authorization can be revoked. It remains an individual contributor draft (arXiv:2509.25974) awaiting formal OpenID Foundation Working Group adoption. No major banking institution had adopted it as of April 2026.",
+    "domain": "payments",
+    "aliases": [],
+    "used_in": ["agent-identity-kyc"]
+  },
+  {
+    "id": "llm",
+    "term": "LLM",
+    "full": "Large Language Model",
+    "short": "AI model trained on large text corpora to generate language; outputs are probabilistic, not deterministic.",
+    "definition": "A Large Language Model is a neural network trained on vast text corpora to predict and generate language. Unlike traditional statistical models that produce deterministic quantitative outputs, LLMs are probabilistic — the same input can produce different outputs on repeated calls, and small prompt variations can dramatically alter behavior. This stochasticity, combined with the lack of interpretable parameters, is why LLMs challenge SR 11-7's validation architecture.",
+    "domain": "ai",
+    "aliases": ["Large Language Model"],
+    "used_in": ["sr11-7", "guardrails", "effective-challenge", "context", "agent-harness-design", "a2a-risks"]
+  },
+  {
+    "id": "genai",
+    "term": "GenAI",
+    "full": "Generative AI",
+    "short": "AI systems that generate text, code, images, or other content in response to prompts.",
+    "definition": "Generative AI refers to AI systems capable of producing new content — text, code, images, audio, or structured data — in response to natural language prompts or other inputs. In banking, GenAI encompasses foundation models accessed via API (GPT-4, Claude, Gemini) and their fine-tuned derivatives. SR 26-2 explicitly excludes GenAI from its scope, describing it as 'novel and rapidly evolving' — leaving governance frameworks for GenAI in banking formally unsettled.",
+    "domain": "ai",
+    "aliases": ["Generative AI", "generative AI"],
+    "used_in": ["sr11-7", "guardrails", "effective-challenge", "context", "a2a-risks", "hitl-vocabulary"]
+  },
+  {
+    "id": "agentic-ai",
+    "term": "Agentic AI",
+    "full": "",
+    "short": "AI systems that autonomously pursue goals through multi-step tool use, planning, and decision-making.",
+    "definition": "Agentic AI refers to AI systems that go beyond responding to individual prompts to autonomously pursue objectives over multiple steps — using tools, making decisions, and taking actions with limited human intervention. Agentic systems introduce compounding risks relative to single-turn models: trust boundaries dissolve across agent handoffs, errors amplify non-linearly, and attribution becomes difficult across delegation chains. SR 26-2 explicitly excludes agentic AI from scope alongside generative AI.",
+    "domain": "agentic",
+    "aliases": ["AAI", "agentic AI"],
+    "used_in": ["sr11-7", "guardrails", "a2a-risks", "a2a-case-studies", "agent-identity-kyc", "payments-liability-gap", "hitl-vocabulary"]
+  },
+  {
+    "id": "mcp",
+    "term": "MCP",
+    "full": "Model Context Protocol",
+    "short": "Open standard that lets AI agents access external data sources and tools through a standardized interface.",
+    "definition": "The Model Context Protocol is an open standard, originally developed by Anthropic, defining how AI agents connect to external data sources, APIs, and tools in a standardized way. MCP is rapidly becoming the default integration layer for agentic AI in financial services. A 2025 empirical study of 1,899 open-source MCP servers found 7.2% had general security vulnerabilities and 5.5% exhibited tool poisoning vulnerabilities — a non-trivial attack surface for banking deployments.",
+    "domain": "agentic",
+    "aliases": ["Model Context Protocol"],
+    "used_in": ["agent-identity-kyc", "skills-supply-chain", "a2a-risks"]
+  },
+  {
+    "id": "a2a",
+    "term": "A2A",
+    "full": "Agent-to-Agent",
+    "short": "Protocol or interaction pattern where AI agents communicate and delegate tasks directly to each other.",
+    "definition": "Agent-to-Agent describes both a Google-proposed protocol and the general pattern of AI agents interacting directly with other AI agents without human mediation at each step. Multi-agent A2A systems create new risks at the seams: trust boundaries dissolve across handoffs, prompt injection can propagate between agents, and cascading failures travel faster than human incident response. Attribution of harm becomes difficult when a chain of agents produces a harmful outcome.",
+    "domain": "agentic",
+    "aliases": ["agent-to-agent"],
+    "used_in": ["a2a-risks", "a2a-case-studies", "google-adk-a2a"]
+  },
+  {
+    "id": "orchestrator",
+    "term": "orchestrator",
+    "full": "",
+    "short": "An AI agent that coordinates the actions of other specialized sub-agents toward a broader goal.",
+    "definition": "In multi-agent systems, an orchestrator is an AI agent responsible for decomposing a complex task, delegating subtasks to specialized sub-agents, and synthesizing their outputs. The orchestrator layer introduces a specific governance challenge: it concentrates decision-making authority in a single component that must be trusted to faithfully interpret user intent and appropriately scope sub-agent permissions. Compromising an orchestrator affects every downstream agent it directs.",
+    "domain": "agentic",
+    "aliases": ["orchestration layer"],
+    "used_in": ["a2a-risks", "guardrails"]
+  },
+  {
+    "id": "hitl",
+    "term": "HITL",
+    "full": "Human-in-the-Loop",
+    "short": "Control mode where a human must approve each AI action before it executes.",
+    "definition": "Human-in-the-Loop is an automation control mode in which a human must actively review and approve each action before the system executes it. The term originates in Sheridan and Verplank's 1978 taxonomy of human supervisory control. In agentic AI governance, HITL is often invoked as a control without specifying the checkpoint design — raising the question of whether the intervention point is meaningful (approve before execution) or cosmetic (review after the fact).",
+    "domain": "ai",
+    "aliases": ["human-in-the-loop", "Human in the Loop"],
+    "used_in": ["hitl-vocabulary", "guardrails", "a2a-risks"]
+  },
+  {
+    "id": "hotl",
+    "term": "HOTL",
+    "full": "Human-on-the-Loop",
+    "short": "Control mode where a human monitors AI execution and can intervene but does not pre-approve each action.",
+    "definition": "Human-on-the-Loop is an automation control mode where a human monitors system execution and retains the ability to intervene or override, but does not pre-approve each individual action. The distinction from HITL is meaningful: HOTL places the burden on the human to detect problems rather than requiring the system to pause and request approval. In practice, automation bias makes HOTL supervision less reliable than its design suggests.",
+    "domain": "ai",
+    "aliases": ["human-on-the-loop", "Human on the Loop"],
+    "used_in": ["hitl-vocabulary"]
+  },
+  {
+    "id": "hootl",
+    "term": "HOOTL",
+    "full": "Human-out-of-the-Loop",
+    "short": "Fully automated AI operation with no human in the approval or monitoring path.",
+    "definition": "Human-out-of-the-Loop describes fully automated system operation where no human is involved in approving or monitoring individual actions. HOOTL is the natural endpoint of automation pressure in agentic AI systems — and the control mode that regulators are most skeptical of for consequential decisions. The distinction between HOTL and HOOTL can collapse in practice if human monitors are overloaded or if the monitoring interval is too long relative to the system's action rate.",
+    "domain": "ai",
+    "aliases": ["human-out-of-the-loop"],
+    "used_in": ["hitl-vocabulary"]
+  },
+  {
+    "id": "automation-bias",
+    "term": "automation bias",
+    "full": "",
+    "short": "The tendency to over-trust automated system recommendations, reducing critical human review of AI outputs.",
+    "definition": "Automation bias is the tendency for human operators to over-rely on automated system recommendations — accepting correct outputs uncritically and failing to detect errors when the system is wrong. First documented in aviation safety research (Mosier and Skitka, 1996), automation bias is a systematic cognitive failure that gets worse as automation becomes more reliable: the more often the system is right, the less vigilant humans become on the rare occasions it is wrong. ACPR (France's banking regulator) has characterized automation bias as a governance pathology rather than an individual failure.",
+    "domain": "ai",
+    "aliases": [],
+    "used_in": ["hitl-vocabulary"]
+  },
+  {
+    "id": "prompt-injection",
+    "term": "prompt injection",
+    "full": "",
+    "short": "Attack where malicious text hijacks an LLM's intended behavior by overriding its instructions.",
+    "definition": "Prompt injection is an attack in which malicious text embedded in an LLM's input — in a retrieved document, a tool output, or user-provided content — causes the model to override its system instructions and execute attacker-specified actions instead. In multi-agent systems, prompt injection can propagate: a compromised agent's output becomes the next agent's input, allowing a single injection to cascade through an entire pipeline. The HouYi research framework achieved an 86.1% success rate in prompt injection attacks across 36 LLM-integrated applications.",
+    "domain": "security",
+    "aliases": [],
+    "used_in": ["sr11-7", "guardrails", "a2a-risks", "a2a-case-studies", "skills-supply-chain"]
+  },
+  {
+    "id": "tool-poisoning",
+    "term": "tool poisoning",
+    "full": "",
+    "short": "Attack where a malicious tool or MCP server injects instructions that cause an AI agent to take unauthorized actions.",
+    "definition": "Tool poisoning is a variant of prompt injection specific to tool-calling AI agents: a malicious or compromised tool (e.g., an MCP server) returns results containing embedded instructions that hijack the agent's subsequent behavior. Because agents typically trust tool outputs as factual context, tool poisoning is particularly effective. A 2025 study of 1,899 open-source MCP servers found 5.5% exhibited tool poisoning vulnerabilities.",
+    "domain": "security",
+    "aliases": [],
+    "used_in": ["a2a-risks", "agent-identity-kyc", "skills-supply-chain"]
+  },
+  {
+    "id": "owasp-llm-top10",
+    "term": "OWASP LLM Top 10",
+    "full": "OWASP Top 10 for Large Language Model Applications",
+    "short": "OWASP's ranked list of the ten most critical security vulnerability classes for LLM applications.",
+    "definition": "The OWASP Top 10 for LLM Applications is a curated list of the most critical security risks for applications built on large language models. The 2025 version covers: prompt injection, sensitive information disclosure, supply chain vulnerabilities, data and model poisoning, improper output handling, excessive agency, system prompt leakage, vector and embedding weaknesses, misinformation, and unbounded consumption. It is widely used as a baseline adversarial testing checklist.",
+    "domain": "security",
+    "aliases": ["OWASP LLM Top 10"],
+    "used_in": ["a2a-risks", "guardrails"]
+  },
+  {
+    "id": "mitre-atlas",
+    "term": "MITRE ATLAS",
+    "full": "Adversarial Threat Landscape for AI Systems",
+    "short": "MITRE framework mapping attacker tactics and techniques specifically targeting machine learning systems.",
+    "definition": "MITRE ATLAS is a knowledge base of adversarial tactics, techniques, and case studies targeting AI and ML systems — analogous to MITRE ATT&CK for traditional cybersecurity. ATLAS organizes attacks across the ML lifecycle from reconnaissance through impact. It is used alongside OWASP LLM Top 10 for structured adversarial testing of GenAI applications in banking and financial services.",
+    "domain": "security",
+    "aliases": [],
+    "used_in": ["a2a-risks", "guardrails"]
+  },
+  {
+    "id": "supply-chain-attack",
+    "term": "supply chain attack",
+    "full": "",
+    "short": "A security compromise targeting a shared dependency, affecting every downstream system that uses it.",
+    "definition": "A supply chain attack compromises software, data, or services distributed as dependencies — affecting every system that consumes them rather than targeting victims directly. In the agentic AI context, supply chain attacks target skills, plugins, MCP servers, and tool registries that agents pull in at runtime. The ClawHavoc campaign (2025) embedded malicious payloads in publicly shared Claude skill files — a direct agentic supply chain attack.",
+    "domain": "security",
+    "aliases": [],
+    "used_in": ["skills-supply-chain", "a2a-risks"]
+  },
+  {
+    "id": "rag",
+    "term": "RAG",
+    "full": "Retrieval-Augmented Generation",
+    "short": "Technique where an LLM retrieves external knowledge before generating a response to ground outputs in current data.",
+    "definition": "Retrieval-Augmented Generation is an architecture where a language model retrieves relevant documents or data from an external knowledge base before generating a response. RAG reduces hallucinations by grounding outputs in retrieved context and allows LLMs to access information not present in their training data. RAG pipelines introduce a new attack surface: retrieved documents can carry prompt injection payloads that hijack the model's output.",
+    "domain": "ai",
+    "aliases": ["Retrieval-Augmented Generation"],
+    "used_in": ["context", "skills-supply-chain"]
+  },
+  {
+    "id": "rlhf",
+    "term": "RLHF",
+    "full": "Reinforcement Learning from Human Feedback",
+    "short": "Training technique that uses human preference signals to align model outputs with desired behavior.",
+    "definition": "Reinforcement Learning from Human Feedback is a training methodology where human raters evaluate model outputs and those preference signals are used to fine-tune the model via reinforcement learning. RLHF is the primary technique used to align large language models with human values and reduce harmful outputs. It illustrates the explore/exploit tension in qualitative evaluation: the model optimizes for the reward signal, but the signal may not perfectly capture what humans actually want.",
+    "domain": "ai",
+    "aliases": [],
+    "used_in": ["context", "metrics-metrics-metrics"]
+  },
+  {
+    "id": "nlp",
+    "term": "NLP",
+    "full": "Natural Language Processing",
+    "short": "AI/ML techniques for understanding, processing, and generating human language.",
+    "definition": "Natural Language Processing is the branch of AI concerned with enabling computers to understand, interpret, and generate human language — encompassing tasks like text classification, sentiment analysis, named entity recognition, and text generation. In banking, NLP applications were among the first AI systems to stress-test SR 11-7's validation frameworks, particularly on whether text outputs constitute 'quantitative estimates.'",
+    "domain": "ai",
+    "aliases": ["Natural Language Processing"],
+    "used_in": ["sr11-7", "context"]
+  },
+  {
+    "id": "asr",
+    "term": "ASR",
+    "full": "Attack Success Rate",
+    "short": "The percentage of adversarial test inputs that successfully compromise a model's intended behavior.",
+    "definition": "Attack Success Rate measures what fraction of adversarial inputs (jailbreak attempts, prompt injections, or other attacks) successfully cause a model to produce undesired outputs. ASR varies dramatically by model, attack technique, and domain — and aggregate ASR can mask high failure rates on specific high-risk inputs. A model that passes 95% of adversarial tests is not necessarily safe if the 5% failure cases are the consequential ones.",
+    "domain": "evals",
+    "aliases": ["Attack Success Rate"],
+    "used_in": ["guardrails", "a2a-risks"]
+  },
+  {
+    "id": "cohens-kappa",
+    "term": "Cohen's Kappa",
+    "full": "",
+    "short": "Statistical measure of inter-rater agreement that corrects for agreement expected by chance alone.",
+    "definition": "Cohen's Kappa (κ) measures agreement between two raters beyond what chance would predict. Values range from −1 to 1, with 1 indicating perfect agreement and 0 indicating only chance agreement. In GenAI evaluation, Kappa is used to measure how consistently human annotators or LLM judges classify model outputs — a prerequisite for trusting that an eval's scores reflect meaningful signal rather than rater variation.",
+    "domain": "evals",
+    "aliases": [],
+    "used_in": ["metrics-metrics-metrics"]
+  },
+  {
+    "id": "goodharts-law",
+    "term": "Goodhart's Law",
+    "full": "",
+    "short": "The principle that when a measure becomes a target, it ceases to be a good measure.",
+    "definition": "Goodhart's Law, attributed to British economist Charles Goodhart, states that when a measure becomes a target, it ceases to be a good measure. Originally applied to monetary policy, it generalizes to any optimization process: once a metric is used to evaluate and reward behavior, agents optimize for the metric rather than the underlying construct. In GenAI evaluation, Goodhart's Law manifests when models learn to score well on benchmarks without actually improving on the capability being measured.",
+    "domain": "evals",
+    "aliases": ["Goodhart's law"],
+    "used_in": ["metrics-metrics-metrics"]
+  }
+]

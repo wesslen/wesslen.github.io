@@ -46,20 +46,23 @@
       rel="icon"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>"
     />
-  <!-- MathJax for mathematical notation (used in posts with formal models) -->
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [["\\(", "\\)"]],
-        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
-        processEscapes: true
-      },
-      options: {
-        skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
-      }
-    };
-  </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <!-- MathJax for mathematical notation (used in posts with formal models) -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["\\(", "\\)"]],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+          processEscapes: true,
+        },
+        options: {
+          skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+        },
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   </head>
   <body>
     <!-- Reading progress bar -->
@@ -73,6 +76,7 @@
           <span class="cursor">_</span>
         </a>
         <div class="header-actions">
+          <a href="./glossary.html" class="nav-link">glossary</a>
           <a href="./about.html" class="nav-link">about</a>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
             <span id="theme-icon">☀️</span>
@@ -742,7 +746,19 @@
             // Typeset MathJax: check typesetPromise specifically (window.MathJax is always set
             // as a config object, but typesetPromise only exists after the CDN script loads)
             if (window.MathJax && window.MathJax.typesetPromise) {
-              MathJax.typesetPromise([proseEl]).catch(err => console.warn("MathJax:", err));
+              MathJax.typesetPromise([proseEl]).catch((err) => console.warn("MathJax:", err));
+            }
+
+            // ── Glossary tooltips ──────────────────────────────
+            try {
+              const gRes = await fetch("./glossary.json");
+              if (gRes.ok) {
+                const glossary = await gRes.json();
+                applyGlossaryTooltips(proseEl, glossary);
+              }
+            } catch (e) {
+              // Non-fatal: tooltips are an enhancement only
+              console.warn("Glossary tooltip init failed:", e);
             }
 
             // Build TOC
@@ -784,6 +800,227 @@
             errorEl.style.display = "block";
             console.error("Failed to load post:", err);
           }
+        }
+
+        /* ── Glossary Tooltips ──────────────────────────────────
+           Fetches glossary.json, scans prose text nodes for the
+           first occurrence of each term, wraps it in a .term-def
+           span, and shows a floating tooltip card on hover/focus.
+           Only the first occurrence per entry is marked up.
+        ─────────────────────────────────────────────────────── */
+        function applyGlossaryTooltips(proseEl, glossary) {
+          if (!glossary || !glossary.length) return;
+
+          // Build flat match list { text, entry }, longest first
+          const matchList = [];
+          for (const entry of glossary) {
+            matchList.push({ text: entry.term, entry });
+            for (const alias of entry.aliases || []) {
+              if (alias) matchList.push({ text: alias, entry });
+            }
+          }
+          matchList.sort((a, b) => b.text.length - a.text.length);
+
+          // Track which entry IDs have been applied (first-occurrence only)
+          const seen = new Set();
+
+          // Process a single text node: find all unmatched terms,
+          // split the node, insert .term-def spans.
+          function processTextNode(node) {
+            const text = node.textContent;
+            const parts = [];
+            let lastIdx = 0;
+            let changed = false;
+
+            while (lastIdx < text.length) {
+              let bestIdx = Infinity;
+              let bestEntry = null;
+              let bestText = "";
+
+              for (const { text: matchText, entry } of matchList) {
+                if (seen.has(entry.id)) continue;
+                const idx = text.indexOf(matchText, lastIdx);
+                if (idx === -1 || idx >= bestIdx) continue;
+
+                // Word-boundary guard for short tokens (≤ 6 chars)
+                if (matchText.length <= 6) {
+                  const before = text[idx - 1];
+                  const after = text[idx + matchText.length];
+                  if ((before && /[A-Za-z0-9]/.test(before)) || (after && /[A-Za-z0-9]/.test(after))) continue;
+                }
+
+                bestIdx = idx;
+                bestEntry = entry;
+                bestText = matchText;
+              }
+
+              if (!bestEntry) break;
+
+              // Text before match
+              parts.push(document.createTextNode(text.slice(lastIdx, bestIdx)));
+
+              // The term span
+              const span = document.createElement("span");
+              span.className = "term-def";
+              span.textContent = bestText;
+              span.dataset.glossaryId = bestEntry.id;
+              span.setAttribute("tabindex", "0");
+              span.setAttribute("role", "button");
+              span.setAttribute("aria-label", bestEntry.term + ": " + bestEntry.short);
+              parts.push(span);
+
+              seen.add(bestEntry.id);
+              lastIdx = bestIdx + bestText.length;
+              changed = true;
+            }
+
+            if (!changed) return;
+
+            // Remaining text after last match
+            if (lastIdx < text.length) {
+              parts.push(document.createTextNode(text.slice(lastIdx)));
+            }
+
+            const frag = document.createDocumentFragment();
+            parts.forEach((p) => frag.appendChild(p));
+            node.parentNode.replaceChild(frag, node);
+          }
+
+          // Collect all eligible text nodes (exclude code/pre/a/existing spans)
+          const walker = document.createTreeWalker(proseEl, NodeFilter.SHOW_TEXT, {
+            acceptNode(node) {
+              let el = node.parentElement;
+              while (el && el !== proseEl) {
+                const tag = el.tagName;
+                if (tag === "CODE" || tag === "PRE" || tag === "A" || tag === "SCRIPT" || tag === "STYLE") {
+                  return NodeFilter.FILTER_REJECT;
+                }
+                if (
+                  el.classList.contains("term-def") ||
+                  el.classList.contains("gh-alert-title") ||
+                  el.classList.contains("post-title") ||
+                  el.classList.contains("toc-list")
+                ) {
+                  return NodeFilter.FILTER_REJECT;
+                }
+                el = el.parentElement;
+              }
+              // Skip nodes with only whitespace
+              return node.textContent.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+            },
+          });
+
+          // Collect first, then process (avoid live-DOM issues during iteration)
+          const nodes = [];
+          let n;
+          while ((n = walker.nextNode())) nodes.push(n);
+          nodes.forEach(processTextNode);
+
+          // ── Shared floating tooltip element ──────────────────
+          const tipEl = document.createElement("div");
+          tipEl.className = "term-tooltip";
+          tipEl.style.display = "none";
+          tipEl.style.position = "absolute";
+          document.body.appendChild(tipEl);
+
+          const glossaryMap = Object.fromEntries(glossary.map((e) => [e.id, e]));
+
+          function showTip(termEl) {
+            const entry = glossaryMap[termEl.dataset.glossaryId];
+            if (!entry) return;
+
+            let html = '<div class="term-tooltip-term">' + entry.term;
+            if (entry.full) {
+              html += ' <span class="term-tooltip-full">— ' + entry.full + "</span>";
+            }
+            html += "</div>";
+            html += '<div class="term-tooltip-def">' + entry.short + "</div>";
+            html += '<a href="./glossary.html#' + entry.id + '" class="term-tooltip-more">full entry →</a>';
+
+            tipEl.innerHTML = html;
+            tipEl.style.display = "block";
+
+            // Position: prefer above the term, clamp to viewport
+            const rect = termEl.getBoundingClientRect();
+            const tipH = tipEl.offsetHeight;
+            const tipW = tipEl.offsetWidth;
+
+            let top = rect.top + window.scrollY - tipH - 10;
+            let left = rect.left + window.scrollX + rect.width / 2 - tipW / 2;
+
+            // If above viewport, flip below
+            if (top < window.scrollY + 8) {
+              top = rect.bottom + window.scrollY + 8;
+            }
+            // Clamp horizontally
+            left = Math.max(8, Math.min(left, window.innerWidth - tipW - 8));
+
+            tipEl.style.top = top + "px";
+            tipEl.style.left = left + "px";
+          }
+
+          let hideTimer = null;
+
+          function hideTip() {
+            tipEl.style.display = "none";
+            if (hideTimer) {
+              clearTimeout(hideTimer);
+              hideTimer = null;
+            }
+          }
+
+          function scheduleHide() {
+            if (hideTimer) clearTimeout(hideTimer);
+            hideTimer = setTimeout(hideTip, 220);
+          }
+
+          function cancelHide() {
+            if (hideTimer) {
+              clearTimeout(hideTimer);
+              hideTimer = null;
+            }
+          }
+
+          // Mouse events on prose
+          proseEl.addEventListener("mouseover", (e) => {
+            const t = e.target.closest(".term-def");
+            if (t) {
+              cancelHide();
+              showTip(t);
+            }
+          });
+          proseEl.addEventListener("mouseout", (e) => {
+            // Only schedule hide if not moving into the tooltip itself
+            if (!e.relatedTarget || !e.relatedTarget.closest(".term-tooltip")) {
+              scheduleHide();
+            }
+          });
+
+          // Keep tip open while cursor is inside it; hide when it leaves
+          tipEl.addEventListener("mouseenter", cancelHide);
+          tipEl.addEventListener("mouseleave", scheduleHide);
+
+          // Keyboard / focus events
+          proseEl.addEventListener("focusin", (e) => {
+            const t = e.target.closest(".term-def");
+            if (t) showTip(t);
+          });
+          proseEl.addEventListener("focusout", () => hideTip());
+
+          // Close on outside click
+          document.addEventListener(
+            "click",
+            (e) => {
+              if (!e.target.closest(".term-def") && !e.target.closest(".term-tooltip")) {
+                hideTip();
+              }
+            },
+            { capture: false }
+          );
+
+          // Reposition on scroll/resize
+          window.addEventListener("scroll", hideTip, { passive: true });
+          window.addEventListener("resize", hideTip, { passive: true });
         }
 
         loadPost();

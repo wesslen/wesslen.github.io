@@ -1528,7 +1528,9 @@ img {
   transition: background 0.15s;
 }
 
-.math-details summary::-webkit-details-marker { display: none; }
+.math-details summary::-webkit-details-marker {
+  display: none;
+}
 
 .math-details summary::before {
   content: "▸";
@@ -1642,4 +1644,68 @@ img {
   .model-embed-mobile-note {
     display: block;
   }
+}
+
+/* ── Term Definition Tooltips ────────────────────────────────
+   Applied to first occurrences of glossary terms in posts.
+   .term-def: the inline span wrapping the matched text.
+   .term-tooltip: the floating card (one shared instance, moved by JS).
+─────────────────────────────────────────────────────────────── */
+.term-def {
+  border-bottom: 1px dotted var(--accent);
+  cursor: help;
+  color: inherit;
+  /* no color shift — keep prose tone, just dotted underline */
+}
+.term-def:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.term-tooltip {
+  position: absolute;
+  z-index: 500;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.65rem 0.85rem;
+  max-width: 300px;
+  min-width: 180px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  transition: opacity 0.12s ease;
+}
+[data-theme="light"] .term-tooltip {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+.term-tooltip-term {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+.term-tooltip-full {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+.term-tooltip-def {
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+.term-tooltip-more {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent2);
+  text-decoration: none;
+  margin-top: 0.1rem;
+  opacity: 0.85;
+}
+.term-tooltip-more:hover {
+  opacity: 1;
 }
