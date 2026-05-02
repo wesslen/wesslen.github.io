@@ -89,7 +89,7 @@ Multi-agent systems diffuse accountability across the chain in ways that make it
 
 I don't have a clean architectural answer to that. The case studies that follow in [the next post](post.html?slug=a2a-case-studies) make the concrete failure modes a lot harder to ignore. But the governance design question is one I find myself unable to resolve neatly: how do you build an institutional structure that forces accountability onto a system whose failures are inherently distributed?
 
-Which might be the most honest thing I can say about the current state of the field.
+Which might be the most honest thing I can say about the current state of the field. [The governance question — how to build institutional structures that force accountability onto distributed failures — is one I've come back to at length in a post on effective challenge under GenAI.](post.html?slug=effective-challenge)
 
 [^1]: Agent Card spoofing and capability exaggeration attacks are documented in the [Cloud Security Alliance's MAESTRO threat model](https://cloudsecurityalliance.org/blog/2025/02/06/agentic-ai-threat-modeling-framework-maestro) (February 2025).
 [^2]: [OWASP released its Top 10 for Agentic Applications](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/) in December 2025, distinct from the existing LLM Top 10. Prompt injection appeared as the top-ranked vulnerability, present in 73% of evaluated production deployments.

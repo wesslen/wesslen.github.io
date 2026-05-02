@@ -97,7 +97,7 @@ Third, agentic systems can update their response patterns based on accumulated c
 
 These aren't incremental differences from [Knight Capital](post.html?slug=a2a-case-studies) or the 2010 Flash Crash. They change what effective oversight requires structurally: monitoring instrumentation calibrated to each pipeline stage; coverage metrics are the wrong frame. The [effective-challenge triad](post.html?slug=effective-challenge) was designed for validators reviewing static models. For an agentic system whose intermediate steps are invisible and whose behavior can shift across sessions, the "competence" leg faces a problem the original framework wasn't designed to solve.
 
-The supervisory question for agentic AI isn't whether a human is in the loop. It's whether the loop still runs at a speed and transparency at which human judgment can matter — and what to do in financial services when the answer is no. The second post in this series takes up that design question directly.
+The supervisory question for agentic AI isn't whether a human is in the loop. It's whether the loop still runs at a speed and transparency at which human judgment can matter — and what to do in financial services when the answer is no. The [second post in this series](post.html?slug=hitl-design) takes up that design question directly.
 
 [^1]: Thomas B. Sheridan and William L. Verplank, *Human and Computer Control of Undersea Teleoperators* (MIT Man-Machine Systems Laboratory, 1978), available via [WorldCat](https://search.worldcat.org/title/human-and-computer-control-of-undersea-teleoperators/oclc/8544670) and [ResearchGate](https://www.researchgate.net/publication/23882567_Human_and_Computer_Control_of_Undersea_Teleoperators).
 

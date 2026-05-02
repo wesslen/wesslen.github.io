@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glossary — wesslen.github.io</title>
+    <meta
+      name="description"
+      content="A reference glossary of regulatory, banking, payments, and AI terms used across this blog."
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>"
+    />
+    <style>
+      /* ── Glossary-specific styles ─────────────────────────── */
+      .glossary-hero {
+        padding: 3rem 1.5rem 1.5rem;
+        max-width: 860px;
+        margin: 0 auto;
+      }
+      .glossary-hero h1 {
+        font-family: var(--font-mono);
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      }
+      .glossary-hero h1 .accent {
+        color: var(--accent);
+      }
+      .glossary-hero p {
+        color: var(--muted);
+        font-size: 0.95rem;
+        max-width: 600px;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Search */
+      .glossary-search-wrap {
+        position: relative;
+        max-width: 400px;
+        margin-bottom: 1.5rem;
+      }
+      .glossary-search {
+        width: 100%;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 0.55rem 0.9rem 0.55rem 2.2rem;
+        color: var(--text);
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .glossary-search:focus {
+        border-color: var(--accent);
+      }
+      .glossary-search-icon {
+        position: absolute;
+        left: 0.7rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--muted);
+        font-size: 0.85rem;
+        pointer-events: none;
+      }
+
+      /* Domain filter pills */
+      .glossary-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 2rem;
+      }
+      .filter-pill {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 0.28rem 0.75rem;
+        font-size: 0.75rem;
+        font-family: var(--font-mono);
+        color: var(--muted);
+        cursor: pointer;
+        transition: all 0.15s;
+        user-select: none;
+      }
+      .filter-pill:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .filter-pill.active {
+        background: var(--accent-dim);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .filter-pill .pill-count {
+        opacity: 0.7;
+        margin-left: 0.2rem;
+      }
+
+      /* Main glossary layout */
+      .glossary-body {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 0 1.5rem 4rem;
+      }
+
+      /* Domain section headers */
+      .domain-section {
+        margin-bottom: 2.5rem;
+      }
+      .domain-heading {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent2);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.4rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Entry cards */
+      .glossary-entry {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--surface);
+        padding: 1rem 1.25rem;
+        margin-bottom: 0.6rem;
+        transition: border-color 0.15s;
+        scroll-margin-top: 80px;
+      }
+      .glossary-entry:hover {
+        border-color: var(--accent);
+      }
+      .glossary-entry.hidden {
+        display: none;
+      }
+
+      .entry-header {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 0.4rem;
+      }
+      .entry-term {
+        font-family: var(--font-mono);
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--accent);
+      }
+      .entry-full {
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+      .entry-domain-tag {
+        font-size: 0.65rem;
+        font-family: var(--font-mono);
+        padding: 0.15rem 0.5rem;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        margin-left: auto;
+        white-space: nowrap;
+      }
+      .entry-definition {
+        font-size: 0.88rem;
+        color: var(--text);
+        line-height: 1.65;
+        margin-bottom: 0.6rem;
+      }
+      .entry-posts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        align-items: center;
+      }
+      .entry-posts-label {
+        font-size: 0.68rem;
+        color: var(--muted);
+        font-family: var(--font-mono);
+        margin-right: 0.2rem;
+      }
+      .entry-post-link {
+        font-size: 0.68rem;
+        font-family: var(--font-mono);
+        color: var(--accent2);
+        background: var(--accent2-dim);
+        padding: 0.1rem 0.45rem;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        text-decoration: none;
+        transition: border-color 0.15s;
+      }
+      .entry-post-link:hover {
+        border-color: var(--accent2);
+        opacity: 1;
+      }
+
+      /* No results state */
+      .glossary-empty {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        display: none;
+      }
+      .glossary-empty.visible {
+        display: block;
+      }
+
+      /* Count badge */
+      .glossary-count {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-bottom: 1.25rem;
+      }
+      .glossary-count span {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="./index.html" class="site-title">
+          wesslen.github.io
+          <span class="cursor">_</span>
+        </a>
+        <div class="header-actions">
+          <a href="./glossary.html" class="nav-link active">glossary</a>
+          <a href="./about.html" class="nav-link">about</a>
+          <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
+            <span id="theme-icon">☀️</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="glossary-hero">
+      <h1>
+        //
+        <span class="accent">glossary</span>
+      </h1>
+      <p>
+        Terms used across this blog — regulatory frameworks, banking standards, payment rails, and AI/ML vocabulary.
+        Each entry links back to the posts where the term appears.
+      </p>
+
+      <div class="glossary-search-wrap">
+        <span class="glossary-search-icon">⌕</span>
+        <input
+          type="search"
+          class="glossary-search"
+          id="glossary-search"
+          placeholder="search terms..."
+          aria-label="Search glossary"
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="glossary-filters" id="glossary-filters" role="group" aria-label="Filter by domain">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
+    <div class="glossary-body">
+      <div class="glossary-count" id="glossary-count"></div>
+      <div id="glossary-content"><!-- populated by JS --></div>
+      <div class="glossary-empty" id="glossary-empty">no matching terms</div>
+    </div>
+
+    <footer class="site-footer">
+      <p>
+        built with ♥ and plain HTML ·
+        <a href="https://github.com/wesslen/wesslen.github.io" target="_blank" rel="noopener">view source on GitHub</a>
+      </p>
+      <p class="footer-disclaimer">Views expressed here are my own and do not represent those of my employer.</p>
+    </footer>
+
+    <script>
+      (() => {
+        "use strict";
+
+        /* ── Theme ──────────────────────────────────────── */
+        const root = document.documentElement;
+        const toggleBtn = document.getElementById("theme-toggle");
+        const themeIcon = document.getElementById("theme-icon");
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        function applyTheme(t) {
+          root.setAttribute("data-theme", t);
+          themeIcon.textContent = t === "dark" ? "☀️" : "🌙";
+          localStorage.setItem("theme", t);
+        }
+        applyTheme(savedTheme);
+        toggleBtn.addEventListener("click", () =>
+          applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark")
+        );
+
+        /* ── Progress bar ───────────────────────────────── */
+        const bar = document.getElementById("progress-bar");
+        window.addEventListener(
+          "scroll",
+          () => {
+            const d = document.documentElement.scrollHeight - window.innerHeight;
+            bar.style.width = d > 0 ? Math.min((window.scrollY / d) * 100, 100) + "%" : "0%";
+          },
+          { passive: true }
+        );
+
+        /* ── Domain config ──────────────────────────────── */
+        const DOMAIN_LABELS = {
+          regulatory: "Regulatory",
+          banking: "Banking & MRM",
+          payments: "Payments",
+          ai: "AI / ML",
+          agentic: "Agentic AI",
+          security: "Security",
+          evals: "Evals",
+        };
+        const DOMAIN_ORDER = ["regulatory", "banking", "payments", "ai", "agentic", "security", "evals"];
+
+        /* ── Post title lookup (best-effort) ───────────── */
+        const POST_TITLES = {
+          "sr11-7": "SR 11-7 at Fifteen",
+          guardrails: 'What "Guardrail" Actually Means',
+          "effective-challenge": "Effective Challenge",
+          "a2a-risks": "When Agents Talk to Agents",
+          "a2a-case-studies": "A2A Case Studies",
+          "hitl-vocabulary": "HITL Vocabulary",
+          "payments-liability-gap": "Who Pays When the Agent Gets It Wrong?",
+          "agent-identity-kyc": "The Identity Problem",
+          "skills-supply-chain": "Skills Are Code",
+          context: "Context",
+          "agent-harness-design": "Agent Harness Design",
+          "google-adk-a2a": "Google ADK & A2A",
+          "metrics-metrics-metrics": "Metrics, Metrics, Metrics",
+          "claude-code-harness": "Claude Code Harness",
+          "everything-drifts": "Everything Drifts",
+        };
+
+        /* ── Render ─────────────────────────────────────── */
+        let glossary = [];
+        let activeFilter = "all";
+        let searchQuery = "";
+
+        function buildFilters() {
+          const filtersEl = document.getElementById("glossary-filters");
+          const counts = {};
+          glossary.forEach((e) => {
+            counts[e.domain] = (counts[e.domain] || 0) + 1;
+          });
+
+          const allBtn = document.createElement("button");
+          allBtn.className = "filter-pill active";
+          allBtn.dataset.domain = "all";
+          allBtn.innerHTML = `all <span class="pill-count">(${glossary.length})</span>`;
+          filtersEl.appendChild(allBtn);
+
+          DOMAIN_ORDER.forEach((d) => {
+            if (!counts[d]) return;
+            const btn = document.createElement("button");
+            btn.className = "filter-pill";
+            btn.dataset.domain = d;
+            btn.innerHTML = `${DOMAIN_LABELS[d] || d} <span class="pill-count">(${counts[d]})</span>`;
+            filtersEl.appendChild(btn);
+          });
+
+          filtersEl.addEventListener("click", (e) => {
+            const pill = e.target.closest(".filter-pill");
+            if (!pill) return;
+            activeFilter = pill.dataset.domain;
+            filtersEl.querySelectorAll(".filter-pill").forEach((p) => p.classList.toggle("active", p === pill));
+            renderEntries();
+          });
+        }
+
+        function renderEntries() {
+          const q = searchQuery.toLowerCase().trim();
+          const container = document.getElementById("glossary-content");
+          const emptyEl = document.getElementById("glossary-empty");
+          const countEl = document.getElementById("glossary-count");
+          container.innerHTML = "";
+
+          const filtered = glossary.filter((e) => {
+            if (activeFilter !== "all" && e.domain !== activeFilter) return false;
+            if (!q) return true;
+            return (
+              e.term.toLowerCase().includes(q) ||
+              (e.full || "").toLowerCase().includes(q) ||
+              e.definition.toLowerCase().includes(q) ||
+              (e.aliases || []).some((a) => a.toLowerCase().includes(q))
+            );
+          });
+
+          // Group by domain in DOMAIN_ORDER
+          const grouped = {};
+          filtered.forEach((e) => {
+            if (!grouped[e.domain]) grouped[e.domain] = [];
+            grouped[e.domain].push(e);
+          });
+
+          let totalShown = 0;
+          DOMAIN_ORDER.forEach((domain) => {
+            if (!grouped[domain] || !grouped[domain].length) return;
+            const entries = grouped[domain].sort((a, b) => a.term.localeCompare(b.term));
+            totalShown += entries.length;
+
+            const section = document.createElement("div");
+            section.className = "domain-section";
+            section.innerHTML = `<div class="domain-heading">${DOMAIN_LABELS[domain] || domain}</div>`;
+
+            entries.forEach((entry) => {
+              const div = document.createElement("div");
+              div.className = "glossary-entry";
+              div.id = entry.id;
+
+              const postLinks = (entry.used_in || [])
+                .map((slug) => {
+                  const title = POST_TITLES[slug] || slug;
+                  return `<a href="./post.html?slug=${encodeURIComponent(slug)}" class="entry-post-link" title="${title}">${slug}</a>`;
+                })
+                .join("");
+
+              div.innerHTML = `
+              <div class="entry-header">
+                <span class="entry-term">${entry.term}</span>
+                ${entry.full ? `<span class="entry-full">— ${entry.full}</span>` : ""}
+                <span class="entry-domain-tag">${DOMAIN_LABELS[entry.domain] || entry.domain}</span>
+              </div>
+              <div class="entry-definition">${entry.definition}</div>
+              ${postLinks ? `<div class="entry-posts"><span class="entry-posts-label">used in:</span>${postLinks}</div>` : ""}
+            `;
+              section.appendChild(div);
+            });
+
+            container.appendChild(section);
+          });
+
+          const total = glossary.length;
+          if (totalShown === 0) {
+            emptyEl.classList.add("visible");
+            countEl.innerHTML = "";
+          } else {
+            emptyEl.classList.remove("visible");
+            countEl.innerHTML = `showing <span>${totalShown}</span> of <span>${total}</span> terms`;
+          }
+        }
+
+        /* ── Search ─────────────────────────────────────── */
+        document.getElementById("glossary-search").addEventListener("input", (e) => {
+          searchQuery = e.target.value;
+          renderEntries();
+        });
+
+        /* ── Deep-link to entry ─────────────────────────── */
+        function scrollToHash() {
+          const hash = window.location.hash.slice(1);
+          if (!hash) return;
+          setTimeout(() => {
+            const el = document.getElementById(hash);
+            if (el) {
+              el.scrollIntoView({ behavior: "smooth", block: "center" });
+              el.style.borderColor = "var(--accent)";
+              setTimeout(() => (el.style.borderColor = ""), 1500);
+            }
+          }, 100);
+        }
+
+        /* ── Init ───────────────────────────────────────── */
+        fetch("./glossary.json")
+          .then((r) => r.json())
+          .then((data) => {
+            glossary = data.sort((a, b) => a.term.localeCompare(b.term));
+            buildFilters();
+            renderEntries();
+            scrollToHash();
+          })
+          .catch((err) => {
+            document.getElementById("glossary-content").innerHTML =
+              '<p style="color:var(--muted);font-family:var(--font-mono);font-size:0.85rem">⚠ Could not load glossary.json</p>';
+            console.error(err);
+          });
+      })();
+    </script>
+  </body>
+</html>

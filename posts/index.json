@@ -1,204 +1,214 @@
 [
-  {
-    "slug": "everything-drifts",
-    "title": "Everything Drifts",
-    "date": "2026-03-22",
-    "description": "What drift means in AI — and why I named a blog after it.",
-    "tags": []
-  },
-  {
-    "slug": "context",
-    "title": "Is the Future of GenAI Development Just Managing Markdown?",
-    "date": "2026-03-24",
-    "description": "What context files actually do, why they go stale, and what it means when the agent knows your codebase better than you do.",
-    "tags": [
-      "hands-on",
-      "skills"
-    ]
-  },
-  {
-    "slug": "sr11-7",
-    "title": "SR 11-7 at Fifteen: Model Risk Management Faces an AI Reckoning",
-    "date": "2026-03-25",
-    "description": "The 2011 supervisory letter that built modern model risk management still governs banking AI in 2026. Here's why that's both reassuring and alarming.",
-    "tags": [
-      "banking",
-      "regulatory"
-    ]
-  },
-  {
-    "slug": "agent-harness-design",
-    "title": "Harness Design for Long-Running Agents",
-    "date": "2026-03-30",
-    "description": "What context files can't do: designing agent harnesses for context management, error recovery, and multi-session continuity.",
-    "tags": [
-      "hands-on",
-      "harness"
-    ]
-  },
-  {
-    "slug": "guardrails",
-    "title": "What 'Guardrail' Actually Means for Agentic AI in Finance",
-    "date": "2026-04-02",
-    "description": "Everyone says 'guardrail.' Almost no one means the same thing. In an agentic system operating inside a bank, that ambiguity stops being academic.",
-    "tags": [
-      "banking",
-      "guardrails"
-    ]
-  },
-  {
-    "slug": "metrics-metrics-metrics",
-    "title": "Metrics, Metrics, Metrics",
-    "date": "2026-04-03",
-    "description": "Everyone in GenAI wants a dashboard. The problem is that generic metrics aren't just uninformative — they actively mislead. Social scientists figured this out decades ago.",
-    "tags": [
-      "psychometrics",
-      "evals"
-    ]
-  },
-  {
-    "slug": "google-adk-a2a",
-    "title": "Google ADK and the A2A Protocol: A Technical Reference",
-    "date": "2026-04-04",
-    "description": "A deep-dive into Google's Agent Development Kit and the Agent2Agent protocol — the six core primitives, the cooperative event loop, how agents communicate across frameworks, and where the abstraction lines actually sit.",
-    "tags": [
-      "hands-on",
-      "protocol"
-    ]
-  },
-  {
-    "slug": "claude-code-harness",
-    "title": "Inside the Claude Code Harness",
-    "date": "2026-04-04",
-    "description": "Anthropic's source code leaked. Here's what it reveals about how a production-grade agent harness actually gets built — and how much of it looks like design versus survival.",
-    "tags": [
-      "hands-on",
-      "harness"
-    ]
-  },
-  {
-    "slug": "a2a-risks",
-    "title": "When Agents Talk to Agents: The Risk Surface Nobody Has Fully Mapped",
-    "date": "2026-04-06",
-    "description": "Multi-agent AI systems compound the risks of individual models in ways that single-model guardrails weren't designed to handle. Here's what that threat surface actually looks like.",
-    "tags": [
-      "security",
-      "protocol"
-    ]
-  },
-  {
-    "slug": "a2a-case-studies",
-    "title": "Five Failures That Explain the A2A Security Problem",
-    "date": "2026-04-07",
-    "description": "The threat surface for multi-agent AI systems isn't theoretical. Here's what five real incidents — from a $5 domain purchase to spontaneous model self-preservation — actually reveal.",
-    "tags": [
-      "security",
-      "case-study"
-    ]
-  },
-  {
-    "slug": "skills-supply-chain",
-    "title": "Skills Are Code: The Supply Chain Problem Nobody Wants to Own",
-    "date": "2026-04-09",
-    "description": "Skills marketplaces have reproduced every vulnerability pattern that took npm a decade to recognize — in about six months. Three attack surfaces, no platform-level governance.",
-    "tags": [
-      "security",
-      "skills"
-    ]
-  },
-  {
-    "slug": "payments-liability-gap",
-    "title": "Who Pays When the Agent Gets It Wrong? A Rail-by-Rail Guide to the Liability Vacuum",
-    "date": "2026-04-25",
-    "description": "Your AI agent made a payment that went wrong. Whether you're protected — and by how much — depends almost entirely on which payment rail it used. On the newest rails, the answer may be nobody.",
-    "tags": [
-      "payments",
-      "regulatory"
-    ]
-  },
-  {
-    "slug": "agent-identity-kyc",
-    "title": "The Identity Problem: Banks Don't Know Who Your AI Agent Is",
-    "date": "2026-04-25",
-    "description": "Banks are legally required to know their customers. But the Customer Identification Program rule was written for humans and legal entities. An AI agent is neither — and no banking law has a category for it.",
-    "tags": [
-      "payments",
-      "regulatory"
-    ]
-  },
-  {
-    "slug": "agentic-commerce-gap",
-    "title": "Fast Technology, Slow Law, Narrowing Merchants: The State of Agentic Commerce in Banking",
-    "date": "2026-05-01",
-    "description": "A three-tier banking market is forming around agentic AI. Open banking is in regulatory limbo. Flagship deployments have underperformed. And the U.S. is choosing private ordering over consumer protection at precisely the moment other jurisdictions are going the other direction.",
-    "tags": [
-      "payments",
-      "regulatory"
-    ],
-    "draft": true
-  },
-  {
-    "slug": "effective-challenge",
-    "title": "Effective Challenge Is Worth Keeping. The Rest Is Negotiable.",
-    "date": "2026-04-25",
-    "description": "SR 11-7's organizing principle — critical analysis by objective parties with real authority — is the only piece of the 2011 framework that still holds under GenAI. Saving it may require dismantling much of what's been built around it.",
-    "tags": [
-      "banking",
-      "regulatory"
-    ]
-  },
-  {
-    "slug": "hitl-vocabulary",
-    "title": "Human-in-the-Loop Is a Borrowed Term",
-    "date": "2026-04-26",
-    "description": "The phrase 'human-in-the-loop' is a 1978 teleoperation concept that appears in barely any binding banking supervision. Understanding what regulators actually say — and why the vocabulary gap is about to become a governance design problem — starts with the sixty-year lineage of the term.",
-    "tags": [
-      "human-in-the-loop",
-      "regulatory"
-    ]
-  },
-  {
-    "slug": "hitl-design",
-    "title": "Where to Put the Human",
-    "date": "2026-04-26",
-    "description": "HITL is a design decision, not a checkbox. Three timing regimes — design-time labeling, deploy-time validation, and runtime approval gates — map to different controls, different regulatory expectations, and different failure modes. Knight Capital shows what happens when the checkpoint exists in form and collapses in function.",
-    "tags": [
-      "human-in-the-loop",
-      "case-study"
-    ],
-    "draft": true
-  },
-  {
-    "slug": "adversarial-workflow",
-    "title": "Adversarial Testing for LLMs: The Workflow That Has to Hold Up",
-    "date": "2026-04-19",
-    "description": "Red-teaming an LLM is a model risk control now, even though no US banking regulation uses the word. Here's what a defensible engagement actually looks like — and why most MRM teams aren't yet set up to run one.",
-    "tags": [
-      "adversarial",
-      "evals"
-    ],
-    "draft": true
-  },
-  {
-    "slug": "deployment-gates",
-    "title": "Three Gates for Deploying an LLM Under Model Risk Governance",
-    "date": "2026-04-19",
-    "description": "A defensible LLM deployment gate combines three quantitative pass/fail conditions — capability non-regression, safety non-regression, and a robustness ceiling — each with a derivation an examiner can take apart.",
-    "tags": [
-      "adversarial",
-      "guardrails"
-    ],
-    "draft": true
-  },
-  {
-    "slug": "judge-calibration",
-    "title": "Your Red-Team Numbers Are Probably Wrong. Here's How You'd Know.",
-    "date": "2026-04-19",
-    "description": "Adversarial evaluation at scale relies on LLM-as-judge systems, and the judge is itself a model under governance. Four calibration requirements separate a defensible score from a noise generator with branding.",
-    "tags": [
-      "adversarial",
-      "evals"
-    ],
-    "draft": true
-  }
+    {
+        "slug": "everything-drifts",
+        "title": "Everything Drifts",
+        "date": "2026-03-22",
+        "description": "What drift means in AI \u2014 and why I named a blog after it.",
+        "tags": []
+    },
+    {
+        "slug": "context",
+        "title": "Is the Future of GenAI Development Just Managing Markdown?",
+        "date": "2026-03-24",
+        "description": "What context files actually do, why they go stale, and what it means when the agent knows your codebase better than you do.",
+        "tags": [
+            "hands-on",
+            "skills"
+        ]
+    },
+    {
+        "slug": "sr11-7",
+        "title": "SR 11-7 at Fifteen: Model Risk Management Faces an AI Reckoning",
+        "date": "2026-03-25",
+        "description": "The 2011 supervisory letter that built modern model risk management still governs banking AI in 2026. Here's why that's both reassuring and alarming.",
+        "tags": [
+            "banking",
+            "regulatory"
+        ]
+    },
+    {
+        "slug": "agent-harness-design",
+        "title": "Harness Design for Long-Running Agents",
+        "date": "2026-03-30",
+        "description": "What context files can't do: designing agent harnesses for context management, error recovery, and multi-session continuity.",
+        "tags": [
+            "hands-on",
+            "harness"
+        ]
+    },
+    {
+        "slug": "guardrails",
+        "title": "What 'Guardrail' Actually Means for Agentic AI in Finance",
+        "date": "2026-04-02",
+        "description": "Everyone says 'guardrail.' Almost no one means the same thing. In an agentic system operating inside a bank, that ambiguity stops being academic.",
+        "tags": [
+            "banking",
+            "guardrails"
+        ]
+    },
+    {
+        "slug": "metrics-metrics-metrics",
+        "title": "Metrics, Metrics, Metrics",
+        "date": "2026-04-03",
+        "description": "Everyone in GenAI wants a dashboard. The problem is that generic metrics aren't just uninformative \u2014 they actively mislead. Social scientists figured this out decades ago.",
+        "tags": [
+            "psychometrics",
+            "evals"
+        ]
+    },
+    {
+        "slug": "google-adk-a2a",
+        "title": "Google ADK and the A2A Protocol: A Technical Reference",
+        "date": "2026-04-04",
+        "description": "A deep-dive into Google's Agent Development Kit and the Agent2Agent protocol \u2014 the six core primitives, the cooperative event loop, how agents communicate across frameworks, and where the abstraction lines actually sit.",
+        "tags": [
+            "hands-on",
+            "protocol"
+        ]
+    },
+    {
+        "slug": "claude-code-harness",
+        "title": "Inside the Claude Code Harness",
+        "date": "2026-04-04",
+        "description": "Anthropic's source code leaked. Here's what it reveals about how a production-grade agent harness actually gets built \u2014 and how much of it looks like design versus survival.",
+        "tags": [
+            "hands-on",
+            "harness"
+        ]
+    },
+    {
+        "slug": "a2a-risks",
+        "title": "When Agents Talk to Agents: The Risk Surface Nobody Has Fully Mapped",
+        "date": "2026-04-06",
+        "description": "Multi-agent AI systems compound the risks of individual models in ways that single-model guardrails weren't designed to handle. Here's what that threat surface actually looks like.",
+        "tags": [
+            "security",
+            "protocol"
+        ]
+    },
+    {
+        "slug": "a2a-case-studies",
+        "title": "Five Failures That Explain the A2A Security Problem",
+        "date": "2026-04-07",
+        "description": "The threat surface for multi-agent AI systems isn't theoretical. Here's what five real incidents \u2014 from a $5 domain purchase to spontaneous model self-preservation \u2014 actually reveal.",
+        "tags": [
+            "security",
+            "case-study"
+        ]
+    },
+    {
+        "slug": "skills-supply-chain",
+        "title": "Skills Are Code: The Supply Chain Problem Nobody Wants to Own",
+        "date": "2026-04-09",
+        "description": "Skills marketplaces have reproduced every vulnerability pattern that took npm a decade to recognize \u2014 in about six months. Three attack surfaces, no platform-level governance.",
+        "tags": [
+            "security",
+            "skills"
+        ]
+    },
+    {
+        "slug": "payments-liability-gap",
+        "title": "Who Pays When the Agent Gets It Wrong? A Rail-by-Rail Guide to the Liability Vacuum",
+        "date": "2026-04-25",
+        "description": "Your AI agent made a payment that went wrong. Whether you're protected \u2014 and by how much \u2014 depends almost entirely on which payment rail it used. On the newest rails, the answer may be nobody.",
+        "tags": [
+            "payments",
+            "regulatory"
+        ]
+    },
+    {
+        "slug": "agent-identity-kyc",
+        "title": "The Identity Problem: Banks Don't Know Who Your AI Agent Is",
+        "date": "2026-04-25",
+        "description": "Banks are legally required to know their customers. But the Customer Identification Program rule was written for humans and legal entities. An AI agent is neither \u2014 and no banking law has a category for it.",
+        "tags": [
+            "payments",
+            "regulatory"
+        ]
+    },
+    {
+        "slug": "agentic-commerce-gap",
+        "title": "Fast Technology, Slow Law, Narrowing Merchants: The State of Agentic Commerce in Banking",
+        "date": "2026-05-01",
+        "description": "A three-tier banking market is forming around agentic AI. Open banking is in regulatory limbo. Flagship deployments have underperformed. And the U.S. is choosing private ordering over consumer protection at precisely the moment other jurisdictions are going the other direction.",
+        "tags": [
+            "payments",
+            "regulatory"
+        ],
+        "draft": true
+    },
+    {
+        "slug": "effective-challenge",
+        "title": "Effective Challenge Is Worth Keeping. The Rest Is Negotiable.",
+        "date": "2026-04-25",
+        "description": "SR 11-7's organizing principle \u2014 critical analysis by objective parties with real authority \u2014 is the only piece of the 2011 framework that still holds under GenAI. Saving it may require dismantling much of what's been built around it.",
+        "tags": [
+            "banking",
+            "regulatory"
+        ]
+    },
+    {
+        "slug": "hitl-vocabulary",
+        "title": "Human-in-the-Loop Is a Borrowed Term",
+        "date": "2026-04-26",
+        "description": "The phrase 'human-in-the-loop' is a 1978 teleoperation concept that appears in barely any binding banking supervision. Understanding what regulators actually say \u2014 and why the vocabulary gap is about to become a governance design problem \u2014 starts with the sixty-year lineage of the term.",
+        "tags": [
+            "human-in-the-loop",
+            "regulatory"
+        ]
+    },
+    {
+        "slug": "hitl-design",
+        "title": "Where to Put the Human",
+        "date": "2026-05-01",
+        "description": "HITL is a design problem with three timing regimes. Runtime monitoring cannot substitute for deploy-time governance. Knight Capital is the proof case.",
+        "tags": [
+            "human-in-the-loop",
+            "regulatory",
+            "case-study"
+        ]
+    },
+    {
+        "slug": "adversarial-workflow",
+        "title": "Adversarial Testing for LLMs: The Workflow That Has to Hold Up",
+        "date": "2026-04-19",
+        "description": "Red-teaming an LLM is a model risk control now, even though no US banking regulation uses the word. Here's what a defensible engagement actually looks like \u2014 and why most MRM teams aren't yet set up to run one.",
+        "tags": [
+            "adversarial",
+            "evals"
+        ],
+        "draft": true
+    },
+    {
+        "slug": "deployment-gates",
+        "title": "Three Gates for Deploying an LLM Under Model Risk Governance",
+        "date": "2026-04-19",
+        "description": "A defensible LLM deployment gate combines three quantitative pass/fail conditions \u2014 capability non-regression, safety non-regression, and a robustness ceiling \u2014 each with a derivation an examiner can take apart.",
+        "tags": [
+            "adversarial",
+            "guardrails"
+        ],
+        "draft": true
+    },
+    {
+        "slug": "judge-calibration",
+        "title": "Your Red-Team Numbers Are Probably Wrong. Here's How You'd Know.",
+        "date": "2026-04-19",
+        "description": "Adversarial evaluation at scale relies on LLM-as-judge systems, and the judge is itself a model under governance. Four calibration requirements separate a defensible score from a noise generator with branding.",
+        "tags": [
+            "adversarial",
+            "evals"
+        ],
+        "draft": true
+    },
+    {
+        "slug": "ai-econ-model",
+        "title": "Econ 101, AI, and the Assumptions That Do All the Work",
+        "date": "2026-04-27",
+        "description": "A simple comparative advantage model shows that under the right assumptions, large AI productivity gains make unskilled workers entirely obsolete. Here's where those assumptions crack \u2014 and an interactive model to explore it yourself.",
+        "tags": [
+            "economics",
+            "labor"
+        ]
+    }
 ]
