@@ -160,13 +160,13 @@
     {
         "slug": "hitl-design",
         "title": "Where to Put the Human",
-        "date": "2026-04-26",
-        "description": "HITL is a design decision, not a checkbox. Three timing regimes \u2014 design-time labeling, deploy-time validation, and runtime approval gates \u2014 map to different controls, different regulatory expectations, and different failure modes. Knight Capital shows what happens when the checkpoint exists in form and collapses in function.",
+        "date": "2026-05-01",
+        "description": "HITL is a design problem with three timing regimes. Runtime monitoring cannot substitute for deploy-time governance. Knight Capital is the proof case.",
         "tags": [
             "human-in-the-loop",
+            "regulatory",
             "case-study"
-        ],
-        "draft": true
+        ]
     },
     {
         "slug": "adversarial-workflow",
@@ -209,7 +209,6 @@
         "tags": [
             "economics",
             "labor"
-        ],
-        "draft": true
+        ]
     }
 ]
