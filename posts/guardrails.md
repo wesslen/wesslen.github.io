@@ -7,6 +7,8 @@ tags: [banking, regulatory]
 
 > **TL;DR:** "Guardrail" means different things depending on who's in the room — and that definitional sprawl is a real governance problem, not merely a communication one. The distinction that matters most is runtime vs. everything else: a guardrail intercepts live model behavior before it reaches a user or downstream system; tests and metrics are adjacent but different. In financial services, SR 11-7 maps onto guardrail design imperfectly — structural and output controls have established validation frameworks, but behavioral controls (prompt injection, jailbreaking, goal hijacking) don't, and in most institutions nobody owns them cleanly.
 
+---
+
 > [!IMPORTANT]
 > **Regulatory update — April 17, 2026:** SR 11-7 has been formally superseded by [joint Fed/OCC/FDIC guidance SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/sr2602.htm). The new guidance adopts a risk-based, tiered approach primarily scoped to banking organizations above $30B in total assets. **Generative AI and agentic AI are explicitly excluded from SR 26-2's scope** — the agencies describe these technologies as "novel and rapidly evolving" and state they are "not within the scope of this guidance." The SR 11-7 framework this post maps onto guardrail design remains the most complete baseline practitioners have, but the regulatory gaps it identifies — particularly for behavioral controls — are now formally unaddressed by the superseding guidance. For the full SR 26-2 context, see [SR 11-7 at Fifteen](post.html?slug=sr11-7).
 
