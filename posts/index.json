@@ -164,20 +164,18 @@
         "description": "HITL is a design problem with three timing regimes. Runtime monitoring cannot substitute for deploy-time governance. Knight Capital is the proof case.",
         "tags": [
             "human-in-the-loop",
-            "regulatory",
             "case-study"
         ]
     },
     {
         "slug": "adversarial-workflow",
         "title": "Adversarial Testing for LLMs: The Workflow That Has to Hold Up",
-        "date": "2026-04-19",
+        "date": "2026-05-02",
         "description": "Red-teaming an LLM is a model risk control now, even though no US banking regulation uses the word. Here's what a defensible engagement actually looks like \u2014 and why most MRM teams aren't yet set up to run one.",
         "tags": [
             "adversarial",
             "evals"
-        ],
-        "draft": true
+        ]
     },
     {
         "slug": "deployment-gates",
@@ -191,10 +189,10 @@
         "draft": true
     },
     {
-        "slug": "judge-calibration",
-        "title": "Your Red-Team Numbers Are Probably Wrong. Here's How You'd Know.",
+        "slug": "adversarial-incompleteness",
+        "title": "The Incomplete Test: Why Adversarial Red-Teaming Can Never Finish \u2014 and Why That\u2019s Not a Reason to Stop",
         "date": "2026-04-19",
-        "description": "Adversarial evaluation at scale relies on LLM-as-judge systems, and the judge is itself a model under governance. Four calibration requirements separate a defensible score from a noise generator with branding.",
+        "description": "A recent NIST publication establishes that no finite test suite can enumerate all adversarial inputs to a language model. The practical upshot isn\u2019t paralysis \u2014 it\u2019s a different kind of program: not a gate you clear, but a monitoring function you sustain.",
         "tags": [
             "adversarial",
             "evals"
@@ -209,6 +207,7 @@
         "tags": [
             "economics",
             "labor"
-        ]
+        ],
+        "draft": true
     }
 ]
