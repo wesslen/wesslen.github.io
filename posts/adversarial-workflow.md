@@ -7,6 +7,8 @@ tags: [adversarial, evals]
 
 > **TL;DR:** Adversarial testing has crossed from research concern to live model-risk obligation, but US banking model risk guidance has never formally named these techniques — and with SR 11-7's April 2026 supersession by SR 26-2 excluding both categories from its formal scope, the regulatory gap remains unaddressed. The closest supervisory hook is the NIST AI RMF Generative AI Profile, which some OCC examiners have been citing in examination conversations when probing "effective challenge," according to practitioner reports. A defensible engagement maps onto five phases — scope and threat modeling, attack execution, triage, reporting, retest — with each producing artifacts that survive examiner review. The open question isn't whether to run one. It's who runs it, because validators who understand SR 11-7 rarely have adversarial-ML competence, and adversarial-ML specialists rarely know what a Model Risk Committee needs.
 
+---
+
 > [!IMPORTANT]
 > **Regulatory update (April 2026):** SR 11-7 was formally superseded by [joint Fed/OCC/FDIC guidance SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/sr2602.htm) on April 17, 2026. SR 26-2 explicitly excludes generative AI and agentic AI from scope (footnote 3) — but what that exclusion means in practice remains unsettled. It does not clearly exempt GenAI deployments from all model risk requirements; the guidance is principles-based and primarily scoped to banks above $30B in assets. SR 11-7 remains the most complete principles reference practitioners have for adversarial testing program design, and this post uses it as such. Expect further guidance as the supervisory framework develops.
 
