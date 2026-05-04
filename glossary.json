@@ -4,7 +4,7 @@
     "term": "SR 11-7",
     "full": "Supervisory Guidance on Model Risk Management",
     "short": "2011 Fed/OCC guidance that codified model risk management at U.S. banks; superseded by SR 26-2 in April 2026.",
-    "definition": "Issued jointly by the Federal Reserve and OCC on April 4, 2011, SR 11-7 established the foundational U.S. framework for model risk management — covering model development, validation, and governance. It was designed for regression models and closed-form analytics, and its core assumptions are strained by LLMs and agentic AI. SR 11-7 was formally superseded by SR 26-2 on April 17, 2026, though its principles remain the operational baseline most practitioners work from.",
+    "definition": "Issued jointly by the Federal Reserve and OCC on April 4, 2011, SR 11-7 established the foundational U.S. framework for model risk management \u2014 covering model development, validation, and governance. It was designed for regression models and closed-form analytics, and its core assumptions are strained by LLMs and agentic AI. SR 11-7 was formally superseded by SR 26-2 on April 17, 2026, though its principles remain the operational baseline most practitioners work from.",
     "domain": "regulatory",
     "aliases": [],
     "used_in": [
@@ -12,7 +12,11 @@
       "guardrails",
       "effective-challenge",
       "a2a-risks",
-      "hitl-vocabulary"
+      "hitl-vocabulary",
+      "adversarial-workflow",
+      "hitl-design",
+      "context",
+      "agent-harness-design"
     ]
   },
   {
@@ -20,14 +24,16 @@
     "term": "SR 26-2",
     "full": "Supervisory Guidance on Model Risk Management (2026)",
     "short": "Joint Fed/OCC/FDIC MRM guidance issued April 2026; explicitly excludes generative and agentic AI from scope.",
-    "definition": "Issued jointly by the Federal Reserve, OCC, and FDIC on April 17, 2026, SR 26-2 is the first tri-agency revision to the foundational MRM framework since 2011. It adopts a risk-based, tiered approach primarily scoped to banking organizations with more than $30 billion in total assets and is principles-based rather than prescriptive. Notably, generative AI and agentic AI are explicitly excluded from scope — described as 'novel and rapidly evolving' — leaving the governance gap for those systems formally unaddressed.",
+    "definition": "Issued jointly by the Federal Reserve, OCC, and FDIC on April 17, 2026, SR 26-2 is the first tri-agency revision to the foundational MRM framework since 2011. It adopts a risk-based, tiered approach primarily scoped to banking organizations with more than $30 billion in total assets and is principles-based rather than prescriptive. Notably, generative AI and agentic AI are explicitly excluded from scope \u2014 described as 'novel and rapidly evolving' \u2014 leaving the governance gap for those systems formally unaddressed.",
     "domain": "regulatory",
     "aliases": [],
     "used_in": [
       "sr11-7",
       "guardrails",
       "effective-challenge",
-      "hitl-vocabulary"
+      "hitl-vocabulary",
+      "adversarial-workflow",
+      "hitl-design"
     ]
   },
   {
@@ -35,7 +41,7 @@
     "term": "MRM",
     "full": "Model Risk Management",
     "short": "The discipline of identifying, measuring, and managing risks from models used in decision-making.",
-    "definition": "Model Risk Management is the organizational function, codified by SR 11-7, responsible for ensuring models are developed soundly, validated independently, and governed with clear accountability. MRM functions sit in the second line of defense — structurally separated from the business to provide objective oversight. Key activities include model validation, ongoing monitoring, inventory management, and escalating model limitations to senior management and boards.",
+    "definition": "Model Risk Management is the organizational function, codified by SR 11-7, responsible for ensuring models are developed soundly, validated independently, and governed with clear accountability. MRM functions sit in the second line of defense \u2014 structurally separated from the business to provide objective oversight. Key activities include model validation, ongoing monitoring, inventory management, and escalating model limitations to senior management and boards.",
     "domain": "banking",
     "aliases": [
       "Model Risk Management"
@@ -45,7 +51,9 @@
       "guardrails",
       "effective-challenge",
       "context",
-      "hitl-vocabulary"
+      "hitl-vocabulary",
+      "adversarial-workflow",
+      "hitl-design"
     ]
   },
   {
@@ -53,7 +61,7 @@
     "term": "three lines of defense",
     "full": "",
     "short": "Risk governance structure dividing accountability into business (1st line), risk oversight (2nd line), and audit (3rd line).",
-    "definition": "The three lines of defense is a risk governance framework dividing accountability into three layers: the first line is the business that owns and uses models; the second line is independent risk oversight (e.g., MRM) with incentives oriented toward identifying problems; and the third line is internal audit, verifying that the first two lines are functioning. SR 11-7 helped codify this structure across U.S. banking. The incentive asymmetry between the lines — growth versus prudence versus verification — is central to how effective challenge is supposed to work.",
+    "definition": "The three lines of defense is a risk governance framework dividing accountability into three layers: the first line is the business that owns and uses models; the second line is independent risk oversight (e.g., MRM) with incentives oriented toward identifying problems; and the third line is internal audit, verifying that the first two lines are functioning. SR 11-7 helped codify this structure across U.S. banking. The incentive asymmetry between the lines \u2014 growth versus prudence versus verification \u2014 is central to how effective challenge is supposed to work.",
     "domain": "banking",
     "aliases": [
       "three-lines-of-defense"
@@ -74,7 +82,9 @@
     "used_in": [
       "sr11-7",
       "effective-challenge",
-      "hitl-vocabulary"
+      "hitl-vocabulary",
+      "adversarial-workflow",
+      "hitl-design"
     ]
   },
   {
@@ -82,7 +92,7 @@
     "term": "model inventory",
     "full": "",
     "short": "A bank's full catalogued list of all models in use, required by SR 11-7 as a cornerstone of governance.",
-    "definition": "SR 11-7 requires banks to maintain a comprehensive model inventory — a registry of every model in use, including its purpose, methodology, ownership, validation status, and risk tier. Large institutions have inventories of 1,000 to 10,000+ models, growing at 10–25% annually. Whether LLMs, foundation models accessed via API, and agentic systems belong in the inventory is one of the central unresolved governance questions in banking AI.",
+    "definition": "SR 11-7 requires banks to maintain a comprehensive model inventory \u2014 a registry of every model in use, including its purpose, methodology, ownership, validation status, and risk tier. Large institutions have inventories of 1,000 to 10,000+ models, growing at 10\u201325% annually. Whether LLMs, foundation models accessed via API, and agentic systems belong in the inventory is one of the central unresolved governance questions in banking AI.",
     "domain": "banking",
     "aliases": [],
     "used_in": [
@@ -95,10 +105,12 @@
     "term": "VaR",
     "full": "Value-at-Risk",
     "short": "Statistical measure estimating maximum portfolio loss at a given confidence level over a time horizon.",
-    "definition": "Value-at-Risk estimates the potential loss of a portfolio over a defined period at a specified confidence level (e.g., 95% or 99%). VaR models were central to pre-2008 risk management and famously failed during the financial crisis: calibrated on benign historical data, they assumed constant volatility and dramatically underestimated tail risk when correlations spiked. Nassim Taleb testified before Congress in 2009 that 'VaR does not replicate out of sample — the past almost never predicts subsequent blowups.'",
+    "definition": "Value-at-Risk estimates the potential loss of a portfolio over a defined period at a specified confidence level (e.g., 95% or 99%). VaR models were central to pre-2008 risk management and famously failed during the financial crisis: calibrated on benign historical data, they assumed constant volatility and dramatically underestimated tail risk when correlations spiked. Nassim Taleb testified before Congress in 2009 that 'VaR does not replicate out of sample \u2014 the past almost never predicts subsequent blowups.'",
     "domain": "banking",
     "aliases": [
-      "Value-at-Risk"
+      "Value-at-Risk",
+      "Value at Risk",
+      "value at risk"
     ],
     "used_in": [
       "sr11-7",
@@ -110,7 +122,7 @@
     "term": "CECL",
     "full": "Current Expected Credit Loss",
     "short": "FASB accounting standard requiring banks to recognize lifetime expected credit losses at origination.",
-    "definition": "Current Expected Credit Loss (FASB ASU 2016-13) replaced incurred-loss accounting with a forward-looking, lifetime expected credit loss standard — dramatically increasing model complexity at banks. When COVID-19 struck in early 2020, CECL models that had barely been implemented were immediately overwhelmed, with 82% of banks reporting credit-risk models were most affected and 66% resorting to management overlays that initially lacked adequate governance controls.",
+    "definition": "Current Expected Credit Loss (FASB ASU 2016-13) replaced incurred-loss accounting with a forward-looking, lifetime expected credit loss standard \u2014 dramatically increasing model complexity at banks. When COVID-19 struck in early 2020, CECL models that had barely been implemented were immediately overwhelmed, with 82% of banks reporting credit-risk models were most affected and 66% resorting to management overlays that initially lacked adequate governance controls.",
     "domain": "banking",
     "aliases": [
       "Current Expected Credit Loss"
@@ -137,7 +149,7 @@
     "term": "FDIC",
     "full": "Federal Deposit Insurance Corporation",
     "short": "Federal agency that insures bank deposits and resolves failed banks; co-issuer of SR 26-2.",
-    "definition": "The Federal Deposit Insurance Corporation provides deposit insurance for U.S. banks, supervises state-chartered non-Fed-member banks, and manages bank resolutions. The FDIC joined the Federal Reserve and OCC as a co-issuer of SR 26-2 in April 2026. In 2026 Congressional testimony, the FDIC indicated the goal of SR 26-2 was a more tailored, risk-based approach — with a stated goal of loosening requirements for smaller institutions.",
+    "definition": "The Federal Deposit Insurance Corporation provides deposit insurance for U.S. banks, supervises state-chartered non-Fed-member banks, and manages bank resolutions. The FDIC joined the Federal Reserve and OCC as a co-issuer of SR 26-2 in April 2026. In 2026 Congressional testimony, the FDIC indicated the goal of SR 26-2 was a more tailored, risk-based approach \u2014 with a stated goal of loosening requirements for smaller institutions.",
     "domain": "regulatory",
     "aliases": [],
     "used_in": [
@@ -154,7 +166,8 @@
     "aliases": [],
     "used_in": [
       "payments-liability-gap",
-      "agent-identity-kyc"
+      "agent-identity-kyc",
+      "hitl-vocabulary"
     ]
   },
   {
@@ -162,7 +175,7 @@
     "term": "FFIEC",
     "full": "Federal Financial Institutions Examination Council",
     "short": "Interagency body that issues examination guidance and standards for U.S. bank supervisors.",
-    "definition": "The Federal Financial Institutions Examination Council prescribes uniform principles and standards for the federal examination of financial institutions. Its member agencies include the Federal Reserve, OCC, FDIC, NCUA, and CFPB. The FFIEC's 2021 Authentication Guidance — designed for human users and managed system credentials — is what examiners are currently stretching to cover AI agents, without a formal update.",
+    "definition": "The Federal Financial Institutions Examination Council prescribes uniform principles and standards for the federal examination of financial institutions. Its member agencies include the Federal Reserve, OCC, FDIC, NCUA, and CFPB. The FFIEC's 2021 Authentication Guidance \u2014 designed for human users and managed system credentials \u2014 is what examiners are currently stretching to cover AI agents, without a formal update.",
     "domain": "regulatory",
     "aliases": [],
     "used_in": [
@@ -174,7 +187,7 @@
     "term": "FSB",
     "full": "Financial Stability Board",
     "short": "International body that monitors global financial system stability and coordinates regulatory responses.",
-    "definition": "The Financial Stability Board is an international body established after the 2008 financial crisis to monitor and coordinate global financial regulation, hosted by the Bank for International Settlements in Basel. The FSB identified AI provider concentration — banks' dependence on a small number of foundation model vendors — as a primary financial stability vulnerability in its November 2024 report.",
+    "definition": "The Financial Stability Board is an international body established after the 2008 financial crisis to monitor and coordinate global financial regulation, hosted by the Bank for International Settlements in Basel. The FSB identified AI provider concentration \u2014 banks' dependence on a small number of foundation model vendors \u2014 as a primary financial stability vulnerability in its November 2024 report.",
     "domain": "regulatory",
     "aliases": [],
     "used_in": [
@@ -186,7 +199,7 @@
     "term": "BPI",
     "full": "Bank Policy Institute",
     "short": "U.S. banking industry trade group representing large banks in policy advocacy.",
-    "definition": "The Bank Policy Institute is a nonpartisan public policy, research, and advocacy group representing leading universal banks, regional banks, and major foreign banks operating in the United States. In April 2025, BPI called for outright repeal of SR 11-7, arguing the guidance discourages AI innovation — a position senior model risk executives at BPI's own member banks publicly pushed back on.",
+    "definition": "The Bank Policy Institute is a nonpartisan public policy, research, and advocacy group representing leading universal banks, regional banks, and major foreign banks operating in the United States. In April 2025, BPI called for outright repeal of SR 11-7, arguing the guidance discourages AI innovation \u2014 a position senior model risk executives at BPI's own member banks publicly pushed back on.",
     "domain": "banking",
     "aliases": [
       "Bank Policy Institute"
@@ -205,7 +218,8 @@
     "domain": "regulatory",
     "aliases": [],
     "used_in": [
-      "sr11-7"
+      "sr11-7",
+      "adversarial-workflow"
     ]
   },
   {
@@ -217,7 +231,8 @@
     "domain": "regulatory",
     "aliases": [],
     "used_in": [
-      "sr11-7"
+      "sr11-7",
+      "hitl-vocabulary"
     ]
   },
   {
@@ -225,12 +240,16 @@
     "term": "PRA SS1/23",
     "full": "UK PRA Supervisory Statement 1/23: Model Risk Management",
     "short": "UK bank MRM principles (2023) with a model definition that explicitly covers qualitative outputs.",
-    "definition": "The UK Prudential Regulation Authority's Supervisory Statement 1/23 (effective May 2024) established five MRM principles for UK banks with a broader model definition that explicitly covers qualitative outputs — going beyond SR 11-7's 'quantitative estimates' framing. It is frequently cited as a template for how U.S. regulators might update SR 11-7 to address AI systems.",
+    "definition": "The UK Prudential Regulation Authority's Supervisory Statement 1/23 (effective May 2024) established five MRM principles for UK banks with a broader model definition that explicitly covers qualitative outputs \u2014 going beyond SR 11-7's 'quantitative estimates' framing. It is frequently cited as a template for how U.S. regulators might update SR 11-7 to address AI systems.",
     "domain": "regulatory",
-    "aliases": [],
+    "aliases": [
+      "UK PRA's SS1/23",
+      "SS1/23"
+    ],
     "used_in": [
       "sr11-7",
-      "effective-challenge"
+      "effective-challenge",
+      "hitl-vocabulary"
     ]
   },
   {
@@ -238,12 +257,17 @@
     "term": "OSFI E-23",
     "full": "OSFI Guideline E-23: Model Risk Management",
     "short": "Canada's technology-neutral MRM guideline (effective May 2027) with an explicit AI/ML model definition.",
-    "definition": "Canada's Office of the Superintendent of Financial Institutions Guideline E-23, finalized September 2025 and effective May 2027, uses a technology-neutral model definition that explicitly covers AI and ML methods — closing the definitional gap that SR 11-7 leaves open. OSFI E-23 is frequently cited alongside PRA SS1/23 as a model for how the U.S. might modernize its MRM framework.",
+    "definition": "Canada's Office of the Superintendent of Financial Institutions Guideline E-23, finalized September 2025 and effective May 2027, uses a technology-neutral model definition that explicitly covers AI and ML methods \u2014 closing the definitional gap that SR 11-7 leaves open. OSFI E-23 is frequently cited alongside PRA SS1/23 as a model for how the U.S. might modernize its MRM framework.",
     "domain": "regulatory",
-    "aliases": [],
+    "aliases": [
+      "Guideline E-23",
+      "OSFI E-23"
+    ],
     "used_in": [
       "sr11-7",
-      "effective-challenge"
+      "effective-challenge",
+      "hitl-design",
+      "hitl-vocabulary"
     ]
   },
   {
@@ -251,7 +275,7 @@
     "term": "Gaussian copula",
     "full": "",
     "short": "Mathematical model for joint default correlations whose fatal assumptions drove CDO mispricing in the 2008 crisis.",
-    "definition": "The Gaussian copula, applied to structured credit products by David Li (2000), modeled correlations between default events using a statistical function that assumed stable, low correlations. CDO tranche correlations that had been modeled at 0.2–0.3 surged to nearly 1.0 when the housing market turned, making the model's outputs catastrophically wrong. It became the canonical example of how mathematically sound models fail when their calibration assumptions are violated at scale.",
+    "definition": "The Gaussian copula, applied to structured credit products by David Li (2000), modeled correlations between default events using a statistical function that assumed stable, low correlations. CDO tranche correlations that had been modeled at 0.2\u20130.3 surged to nearly 1.0 when the housing market turned, making the model's outputs catastrophically wrong. It became the canonical example of how mathematically sound models fail when their calibration assumptions are violated at scale.",
     "domain": "banking",
     "aliases": [],
     "used_in": [
@@ -263,7 +287,7 @@
     "term": "CDO",
     "full": "Collateralized Debt Obligation",
     "short": "Structured financial product that pools loans and sells claims on them in risk-tiered tranches.",
-    "definition": "A Collateralized Debt Obligation pools loans, mortgages, or bonds and issues tranches of varying risk and return — senior tranches paid first, junior tranches absorbing first losses. CDOs backed by subprime mortgages were central to the 2007–2009 financial crisis; their mispricing relied on Gaussian copula models that dramatically underestimated correlated default risk under stress.",
+    "definition": "A Collateralized Debt Obligation pools loans, mortgages, or bonds and issues tranches of varying risk and return \u2014 senior tranches paid first, junior tranches absorbing first losses. CDOs backed by subprime mortgages were central to the 2007\u20132009 financial crisis; their mispricing relied on Gaussian copula models that dramatically underestimated correlated default risk under stress.",
     "domain": "banking",
     "aliases": [
       "Collateralized Debt Obligation"
@@ -277,7 +301,7 @@
     "term": "BSA/AML",
     "full": "Bank Secrecy Act / Anti-Money Laundering",
     "short": "Federal legal framework requiring banks to detect and report money laundering and financial crimes.",
-    "definition": "The Bank Secrecy Act (1970) and its Anti-Money Laundering requirements form the primary U.S. framework for financial crime compliance — requiring effective programs for detecting, preventing, and reporting suspicious activity. BSA/AML compliance includes CIP (know your customer), customer due diligence, transaction monitoring, and Suspicious Activity Reports. SR 21-8 extended SR 11-7's MRM principles specifically to BSA/AML models.",
+    "definition": "The Bank Secrecy Act (1970) and its Anti-Money Laundering requirements form the primary U.S. framework for financial crime compliance \u2014 requiring effective programs for detecting, preventing, and reporting suspicious activity. BSA/AML compliance includes CIP (know your customer), customer due diligence, transaction monitoring, and Suspicious Activity Reports. SR 21-8 extended SR 11-7's MRM principles specifically to BSA/AML models.",
     "domain": "banking",
     "aliases": [
       "Bank Secrecy Act",
@@ -293,7 +317,7 @@
     "term": "Regulation E",
     "full": "Electronic Fund Transfer Regulation",
     "short": "CFPB rule implementing EFTA, providing consumer liability caps for unauthorized electronic fund transfers.",
-    "definition": "Regulation E (12 CFR Part 1005) implements the Electronic Fund Transfer Act, providing consumer protections for electronic payments including debit cards, ACH transfers, and ATM transactions. Its most important protection is a tiered liability cap for unauthorized transfers: $50 if reported within two days, $500 if within sixty days, unlimited after. A critical exception — transfers initiated by 'a person to whom the consumer has furnished the access device' — may eliminate these caps for AI-agent-initiated transactions.",
+    "definition": "Regulation E (12 CFR Part 1005) implements the Electronic Fund Transfer Act, providing consumer protections for electronic payments including debit cards, ACH transfers, and ATM transactions. Its most important protection is a tiered liability cap for unauthorized transfers: $50 if reported within two days, $500 if within sixty days, unlimited after. A critical exception \u2014 transfers initiated by 'a person to whom the consumer has furnished the access device' \u2014 may eliminate these caps for AI-agent-initiated transactions.",
     "domain": "payments",
     "aliases": [],
     "used_in": [
@@ -306,7 +330,7 @@
     "term": "EFTA",
     "full": "Electronic Fund Transfer Act",
     "short": "1978 federal law protecting consumers on electronic payments; implemented by Regulation E.",
-    "definition": "The Electronic Fund Transfer Act (15 U.S.C. § 1693) is the federal consumer protection statute governing electronic payments — debit cards, ATM transactions, ACH transfers, and most digital payment flows. Regulation E is its implementing regulation. EFTA's consumer protections are triggered by 'unauthorized' transfers, and the definition of 'unauthorized' — particularly the 'furnished access device' exception — is the central legal question for AI-agent-initiated payments.",
+    "definition": "The Electronic Fund Transfer Act (15 U.S.C. \u00a7 1693) is the federal consumer protection statute governing electronic payments \u2014 debit cards, ATM transactions, ACH transfers, and most digital payment flows. Regulation E is its implementing regulation. EFTA's consumer protections are triggered by 'unauthorized' transfers, and the definition of 'unauthorized' \u2014 particularly the 'furnished access device' exception \u2014 is the central legal question for AI-agent-initiated payments.",
     "domain": "payments",
     "aliases": [],
     "used_in": [
@@ -319,7 +343,7 @@
     "term": "Regulation Z",
     "full": "Truth in Lending Regulation",
     "short": "CFPB rule implementing TILA, governing credit card billing errors and consumer disclosures.",
-    "definition": "Regulation Z (12 CFR Part 1026) implements the Truth in Lending Act, covering credit card billing, disclosures, and error resolution. Its §1666 billing-error framework allows consumers to dispute credit card charges within 60 days. Like Regulation E, Regulation Z was drafted around contemporaneous human authorization — an assumption that does not map cleanly onto standing delegations to AI agents.",
+    "definition": "Regulation Z (12 CFR Part 1026) implements the Truth in Lending Act, covering credit card billing, disclosures, and error resolution. Its \u00a71666 billing-error framework allows consumers to dispute credit card charges within 60 days. Like Regulation E, Regulation Z was drafted around contemporaneous human authorization \u2014 an assumption that does not map cleanly onto standing delegations to AI agents.",
     "domain": "payments",
     "aliases": [],
     "used_in": [
@@ -331,7 +355,7 @@
     "term": "TILA",
     "full": "Truth in Lending Act",
     "short": "1968 federal law governing credit disclosures and billing error resolution; implemented by Regulation Z.",
-    "definition": "The Truth in Lending Act (15 U.S.C. § 1601) governs credit disclosures, credit card billing rights, and error resolution. Regulation Z is its implementing regulation. TILA assumes a human who reviewed and authorized a specific credit transaction — an assumption that does not fit AI-agent-initiated transactions where the consumer may never see the individual authorization.",
+    "definition": "The Truth in Lending Act (15 U.S.C. \u00a7 1601) governs credit disclosures, credit card billing rights, and error resolution. Regulation Z is its implementing regulation. TILA assumes a human who reviewed and authorized a specific credit transaction \u2014 an assumption that does not fit AI-agent-initiated transactions where the consumer may never see the individual authorization.",
     "domain": "payments",
     "aliases": [],
     "used_in": [
@@ -343,7 +367,7 @@
     "term": "CIP",
     "full": "Customer Identification Program",
     "short": "The 'know your customer' rule requiring banks to collect and verify identity before opening accounts.",
-    "definition": "The Customer Identification Program rule (31 CFR § 1020.220) requires every federally regulated bank to collect and verify minimum identity information before opening an account — full legal name, date of birth, address, and taxpayer ID. CIP was mandated by the USA PATRIOT Act (2001) as a core AML control. AI agents are neither natural persons nor legal entities under current CIP definitions, creating a structural gap in banking's identity infrastructure.",
+    "definition": "The Customer Identification Program rule (31 CFR \u00a7 1020.220) requires every federally regulated bank to collect and verify minimum identity information before opening an account \u2014 full legal name, date of birth, address, and taxpayer ID. CIP was mandated by the USA PATRIOT Act (2001) as a core AML control. AI agents are neither natural persons nor legal entities under current CIP definitions, creating a structural gap in banking's identity infrastructure.",
     "domain": "payments",
     "aliases": [
       "Customer Identification Program"
@@ -357,7 +381,7 @@
     "term": "KYC",
     "full": "Know Your Customer",
     "short": "The identity verification and due diligence requirements banks must satisfy before establishing customer relationships.",
-    "definition": "Know Your Customer encompasses the set of due diligence processes banks use to verify the identity of customers and assess their risk profiles. KYC includes the CIP rule at account opening, customer due diligence for ongoing relationship assessment, and enhanced due diligence for higher-risk customers. AI agents currently have no established category in KYC frameworks — they are neither the natural person nor the legal entity the rules were written to identify.",
+    "definition": "Know Your Customer encompasses the set of due diligence processes banks use to verify the identity of customers and assess their risk profiles. KYC includes the CIP rule at account opening, customer due diligence for ongoing relationship assessment, and enhanced due diligence for higher-risk customers. AI agents currently have no established category in KYC frameworks \u2014 they are neither the natural person nor the legal entity the rules were written to identify.",
     "domain": "payments",
     "aliases": [
       "Know Your Customer"
@@ -371,7 +395,7 @@
     "term": "ACH",
     "full": "Automated Clearing House",
     "short": "Batch electronic payment network used for direct deposits, bill pay, and account-to-account transfers.",
-    "definition": "The Automated Clearing House is a nationwide batch processing network, operated by NACHA, handling direct deposits, payroll, bill payment, and account-to-account transfers. ACH transactions are governed by Regulation E and NACHA Operating Rules. Unlike RTP and FedNow, ACH is not real-time — transactions typically settle within one business day — and some ACH transactions can be returned after the fact, providing limited recourse for errors.",
+    "definition": "The Automated Clearing House is a nationwide batch processing network, operated by NACHA, handling direct deposits, payroll, bill payment, and account-to-account transfers. ACH transactions are governed by Regulation E and NACHA Operating Rules. Unlike RTP and FedNow, ACH is not real-time \u2014 transactions typically settle within one business day \u2014 and some ACH transactions can be returned after the fact, providing limited recourse for errors.",
     "domain": "payments",
     "aliases": [
       "Automated Clearing House"
@@ -384,8 +408,8 @@
     "id": "rtp",
     "term": "RTP",
     "full": "Real-Time Payments",
-    "short": "The Clearing House's instant payment rail — settles in seconds and is irrevocable once complete.",
-    "definition": "Real-Time Payments is The Clearing House's instant payment network, available 24/7/365. RTP transactions settle in seconds and are irrevocable — there is no chargeback mechanism and no reversal once settled. This makes RTP a high-risk rail for agentic AI errors: an agent that misroutes a payment may execute multiple transactions before any monitoring flag fires, with no mechanism to undo settled payments.",
+    "short": "The Clearing House's instant payment rail \u2014 settles in seconds and is irrevocable once complete.",
+    "definition": "Real-Time Payments is The Clearing House's instant payment network, available 24/7/365. RTP transactions settle in seconds and are irrevocable \u2014 there is no chargeback mechanism and no reversal once settled. This makes RTP a high-risk rail for agentic AI errors: an agent that misroutes a payment may execute multiple transactions before any monitoring flag fires, with no mechanism to undo settled payments.",
     "domain": "payments",
     "aliases": [
       "Real-Time Payments"
@@ -398,7 +422,7 @@
     "id": "fednow",
     "term": "FedNow",
     "full": "FedNow Service",
-    "short": "The Federal Reserve's instant payment service (launched 2023) — irrevocable once settled.",
+    "short": "The Federal Reserve's instant payment service (launched 2023) \u2014 irrevocable once settled.",
     "definition": "FedNow is the Federal Reserve's instant payment service launched July 2023, providing 24/7/365 real-time payment settlement for participating banks. Like RTP, FedNow transactions are irrevocable once settled with no true chargeback mechanism. Regulation E applies in theory, but the 'furnished access device' exception and the irrevocability of settled transactions make FedNow the highest-risk rail for AI-agent payment errors.",
     "domain": "payments",
     "aliases": [],
@@ -423,7 +447,7 @@
     "term": "UCC 4A",
     "full": "Uniform Commercial Code Article 4A",
     "short": "State law governing wire transfers, traditionally offering consumers very limited recourse.",
-    "definition": "Uniform Commercial Code Article 4A is the state law governing wire transfers, treating them as institutional instruments with limited consumer recourse. Unlike Regulation E's tiered liability caps, UCC 4A was designed around commercial transactions. The pending Second Circuit ruling in New York v. Citibank is expected to clarify whether EFTA can reach online-initiated wire transfers — a ruling that will directly affect agent-initiated payment liability on wire-adjacent rails.",
+    "definition": "Uniform Commercial Code Article 4A is the state law governing wire transfers, treating them as institutional instruments with limited consumer recourse. Unlike Regulation E's tiered liability caps, UCC 4A was designed around commercial transactions. The pending Second Circuit ruling in New York v. Citibank is expected to clarify whether EFTA can reach online-initiated wire transfers \u2014 a ruling that will directly affect agent-initiated payment liability on wire-adjacent rails.",
     "domain": "payments",
     "aliases": [],
     "used_in": [
@@ -435,7 +459,7 @@
     "term": "NACHA",
     "full": "National Automated Clearing House Association",
     "short": "The industry body that operates the ACH network and sets its operating rules.",
-    "definition": "NACHA (now formally Nacha) is the governing body that operates the ACH network and sets the NACHA Operating Rules governing ACH transactions. NACHA rules are contractual obligations between participating banks, distinct from Regulation E's statutory requirements. NACHA has a return mechanism for ACH transactions — unlike RTP and FedNow — providing limited but real recourse for payment errors.",
+    "definition": "NACHA (now formally Nacha) is the governing body that operates the ACH network and sets the NACHA Operating Rules governing ACH transactions. NACHA rules are contractual obligations between participating banks, distinct from Regulation E's statutory requirements. NACHA has a return mechanism for ACH transactions \u2014 unlike RTP and FedNow \u2014 providing limited but real recourse for payment errors.",
     "domain": "payments",
     "aliases": [],
     "used_in": [
@@ -447,7 +471,7 @@
     "term": "Visa TAP",
     "full": "Visa Trusted Agent Protocol",
     "short": "Identity-first framework that cryptographically attests which AI agent is initiating a payment.",
-    "definition": "Visa's Trusted Agent Protocol (launched October 2025 with Cloudflare) uses IETF RFC 9421 HTTP Message Signatures to attest: which specific agent is initiating the transaction, that the consumer has recognized that agent, and that a tokenized payment credential is bound to the transaction. TAP takes an identity-first design approach — its core question is whether this specific agent can be identified. As of April 2026, no enforceable chargeback-rule amendments have been published.",
+    "definition": "Visa's Trusted Agent Protocol (launched October 2025 with Cloudflare) uses IETF RFC 9421 HTTP Message Signatures to attest: which specific agent is initiating the transaction, that the consumer has recognized that agent, and that a tokenized payment credential is bound to the transaction. TAP takes an identity-first design approach \u2014 its core question is whether this specific agent can be identified. As of April 2026, no enforceable chargeback-rule amendments have been published.",
     "domain": "payments",
     "aliases": [],
     "used_in": [
@@ -460,7 +484,7 @@
     "term": "Mastercard Verifiable Intent",
     "full": "",
     "short": "Intent-first agent authorization framework constraining what an AI agent is permitted to do in a transaction.",
-    "definition": "Mastercard's Agent Pay / Verifiable Intent framework (expanded March 2026 with Google) registers agents with issuers, issues cryptographically signed SD-JWT credentials specifying merchant category, spending caps, and time windows, and has signaled two new dispute categories: 'agent overreach' and 'mandate repudiation.' Unlike Visa TAP's identity-first approach, Verifiable Intent is intent-first — its question is what the agent is authorized to do. As of April 2026, no enforceable chargeback rules have been published.",
+    "definition": "Mastercard's Agent Pay / Verifiable Intent framework (expanded March 2026 with Google) registers agents with issuers, issues cryptographically signed SD-JWT credentials specifying merchant category, spending caps, and time windows, and has signaled two new dispute categories: 'agent overreach' and 'mandate repudiation.' Unlike Visa TAP's identity-first approach, Verifiable Intent is intent-first \u2014 its question is what the agent is authorized to do. As of April 2026, no enforceable chargeback rules have been published.",
     "domain": "payments",
     "aliases": [],
     "used_in": [
@@ -485,7 +509,7 @@
     "term": "PSD3",
     "full": "EU Payment Services Directive 3",
     "short": "Proposed EU payment services legislation that would explicitly permit delegated Strong Customer Authentication.",
-    "definition": "PSD3 is the EU's proposed revision to its Payment Services Directive, currently in final negotiations. The feature relevant to agentic payments: PSD3 would explicitly permit delegated Strong Customer Authentication as regulated outsourcing, meaning a consumer could authorize a third-party provider to authenticate transactions on their behalf within a defined scope, with clear regulatory accountability — the legal foundation that agentic payments need and that U.S. law does not currently provide.",
+    "definition": "PSD3 is the EU's proposed revision to its Payment Services Directive, currently in final negotiations. The feature relevant to agentic payments: PSD3 would explicitly permit delegated Strong Customer Authentication as regulated outsourcing, meaning a consumer could authorize a third-party provider to authenticate transactions on their behalf within a defined scope, with clear regulatory accountability \u2014 the legal foundation that agentic payments need and that U.S. law does not currently provide.",
     "domain": "regulatory",
     "aliases": [],
     "used_in": [
@@ -497,7 +521,7 @@
     "term": "FDX",
     "full": "Financial Data Exchange",
     "short": "The CFPB-approved standard-setting body for open banking data access under Section 1033.",
-    "definition": "The Financial Data Exchange is the industry consortium approved by the CFPB in January 2025 as the first Section 1033 standard-setting body for open banking data access. FDX launched an Agentic AI initiative on April 14, 2026, with a Call for Input covering agent identification, consent delegation, and security — the live process most likely to produce industry standards for agentic payments in the near term.",
+    "definition": "The Financial Data Exchange is the industry consortium approved by the CFPB in January 2025 as the first Section 1033 standard-setting body for open banking data access. FDX launched an Agentic AI initiative on April 14, 2026, with a Call for Input covering agent identification, consent delegation, and security \u2014 the live process most likely to produce industry standards for agentic payments in the near term.",
     "domain": "payments",
     "aliases": [
       "Financial Data Exchange"
@@ -523,7 +547,7 @@
     "term": "OIDC-A",
     "full": "OpenID Connect for Agents",
     "short": "Draft identity protocol extending OIDC to handle AI agent delegation with defined scope and revocation.",
-    "definition": "OpenID Connect for Agents is a draft extension to the OpenID Connect identity protocol designed to accommodate AI agent delegation — specifying the principal's identity, the agent's authorized scope, and how that authorization can be revoked. It remains an individual contributor draft (arXiv:2509.25974) awaiting formal OpenID Foundation Working Group adoption. No major banking institution had adopted it as of April 2026.",
+    "definition": "OpenID Connect for Agents is a draft extension to the OpenID Connect identity protocol designed to accommodate AI agent delegation \u2014 specifying the principal's identity, the agent's authorized scope, and how that authorization can be revoked. It remains an individual contributor draft (arXiv:2509.25974) awaiting formal OpenID Foundation Working Group adoption. No major banking institution had adopted it as of April 2026.",
     "domain": "payments",
     "aliases": [],
     "used_in": [
@@ -535,10 +559,13 @@
     "term": "LLM",
     "full": "Large Language Model",
     "short": "AI model trained on large text corpora to generate language; outputs are probabilistic, not deterministic.",
-    "definition": "A Large Language Model is a neural network trained on vast text corpora to predict and generate language. Unlike traditional statistical models that produce deterministic quantitative outputs, LLMs are probabilistic — the same input can produce different outputs on repeated calls, and small prompt variations can dramatically alter behavior. This stochasticity, combined with the lack of interpretable parameters, is why LLMs challenge SR 11-7's validation architecture.",
+    "definition": "A Large Language Model is a neural network trained on vast text corpora to predict and generate language. Unlike traditional statistical models that produce deterministic quantitative outputs, LLMs are probabilistic \u2014 the same input can produce different outputs on repeated calls, and small prompt variations can dramatically alter behavior. This stochasticity, combined with the lack of interpretable parameters, is why LLMs challenge SR 11-7's validation architecture.",
     "domain": "ai",
     "aliases": [
-      "Large Language Model"
+      "Large Language Model",
+      "large language models",
+      "LLMs",
+      "large language model"
     ],
     "used_in": [
       "sr11-7",
@@ -546,7 +573,10 @@
       "effective-challenge",
       "context",
       "agent-harness-design",
-      "a2a-risks"
+      "a2a-risks",
+      "adversarial-workflow",
+      "hitl-design",
+      "hitl-vocabulary"
     ]
   },
   {
@@ -554,7 +584,7 @@
     "term": "GenAI",
     "full": "Generative AI",
     "short": "AI systems that generate text, code, images, or other content in response to prompts.",
-    "definition": "Generative AI refers to AI systems capable of producing new content — text, code, images, audio, or structured data — in response to natural language prompts or other inputs. In banking, GenAI encompasses foundation models accessed via API (GPT-4, Claude, Gemini) and their fine-tuned derivatives. SR 26-2 explicitly excludes GenAI from its scope, describing it as 'novel and rapidly evolving' — leaving governance frameworks for GenAI in banking formally unsettled.",
+    "definition": "Generative AI refers to AI systems capable of producing new content \u2014 text, code, images, audio, or structured data \u2014 in response to natural language prompts or other inputs. In banking, GenAI encompasses foundation models accessed via API (GPT-4, Claude, Gemini) and their fine-tuned derivatives. SR 26-2 explicitly excludes GenAI from its scope, describing it as 'novel and rapidly evolving' \u2014 leaving governance frameworks for GenAI in banking formally unsettled.",
     "domain": "ai",
     "aliases": [
       "Generative AI",
@@ -566,7 +596,9 @@
       "effective-challenge",
       "context",
       "a2a-risks",
-      "hitl-vocabulary"
+      "hitl-vocabulary",
+      "adversarial-workflow",
+      "hitl-design"
     ]
   },
   {
@@ -574,7 +606,7 @@
     "term": "Agentic AI",
     "full": "",
     "short": "AI systems that autonomously pursue goals through multi-step tool use, planning, and decision-making.",
-    "definition": "Agentic AI refers to AI systems that go beyond responding to individual prompts to autonomously pursue objectives over multiple steps — using tools, making decisions, and taking actions with limited human intervention. Agentic systems introduce compounding risks relative to single-turn models: trust boundaries dissolve across agent handoffs, errors amplify non-linearly, and attribution becomes difficult across delegation chains. SR 26-2 explicitly excludes agentic AI from scope alongside generative AI.",
+    "definition": "Agentic AI refers to AI systems that go beyond responding to individual prompts to autonomously pursue objectives over multiple steps \u2014 using tools, making decisions, and taking actions with limited human intervention. Agentic systems introduce compounding risks relative to single-turn models: trust boundaries dissolve across agent handoffs, errors amplify non-linearly, and attribution becomes difficult across delegation chains. SR 26-2 explicitly excludes agentic AI from scope alongside generative AI.",
     "domain": "agentic",
     "aliases": [
       "AAI",
@@ -587,7 +619,9 @@
       "a2a-case-studies",
       "agent-identity-kyc",
       "payments-liability-gap",
-      "hitl-vocabulary"
+      "hitl-vocabulary",
+      "adversarial-workflow",
+      "hitl-design"
     ]
   },
   {
@@ -595,7 +629,7 @@
     "term": "MCP",
     "full": "Model Context Protocol",
     "short": "Open standard that lets AI agents access external data sources and tools through a standardized interface.",
-    "definition": "The Model Context Protocol is an open standard, originally developed by Anthropic, defining how AI agents connect to external data sources, APIs, and tools in a standardized way. MCP is rapidly becoming the default integration layer for agentic AI in financial services. A 2025 empirical study of 1,899 open-source MCP servers found 7.2% had general security vulnerabilities and 5.5% exhibited tool poisoning vulnerabilities — a non-trivial attack surface for banking deployments.",
+    "definition": "The Model Context Protocol is an open standard, originally developed by Anthropic, defining how AI agents connect to external data sources, APIs, and tools in a standardized way. MCP is rapidly becoming the default integration layer for agentic AI in financial services. A 2025 empirical study of 1,899 open-source MCP servers found 7.2% had general security vulnerabilities and 5.5% exhibited tool poisoning vulnerabilities \u2014 a non-trivial attack surface for banking deployments.",
     "domain": "agentic",
     "aliases": [
       "Model Context Protocol"
@@ -603,7 +637,8 @@
     "used_in": [
       "agent-identity-kyc",
       "skills-supply-chain",
-      "a2a-risks"
+      "a2a-risks",
+      "adversarial-workflow"
     ]
   },
   {
@@ -619,7 +654,8 @@
     "used_in": [
       "a2a-risks",
       "a2a-case-studies",
-      "google-adk-a2a"
+      "google-adk-a2a",
+      "adversarial-workflow"
     ]
   },
   {
@@ -642,7 +678,7 @@
     "term": "HITL",
     "full": "Human-in-the-Loop",
     "short": "Control mode where a human must approve each AI action before it executes.",
-    "definition": "Human-in-the-Loop is an automation control mode in which a human must actively review and approve each action before the system executes it. The term originates in Sheridan and Verplank's 1978 taxonomy of human supervisory control. In agentic AI governance, HITL is often invoked as a control without specifying the checkpoint design — raising the question of whether the intervention point is meaningful (approve before execution) or cosmetic (review after the fact).",
+    "definition": "Human-in-the-Loop is an automation control mode in which a human must actively review and approve each action before the system executes it. The term originates in Sheridan and Verplank's 1978 taxonomy of human supervisory control. In agentic AI governance, HITL is often invoked as a control without specifying the checkpoint design \u2014 raising the question of whether the intervention point is meaningful (approve before execution) or cosmetic (review after the fact).",
     "domain": "ai",
     "aliases": [
       "human-in-the-loop",
@@ -651,7 +687,8 @@
     "used_in": [
       "hitl-vocabulary",
       "guardrails",
-      "a2a-risks"
+      "a2a-risks",
+      "hitl-design"
     ]
   },
   {
@@ -666,7 +703,8 @@
       "Human on the Loop"
     ],
     "used_in": [
-      "hitl-vocabulary"
+      "hitl-vocabulary",
+      "hitl-design"
     ]
   },
   {
@@ -674,7 +712,7 @@
     "term": "HOOTL",
     "full": "Human-out-of-the-Loop",
     "short": "Fully automated AI operation with no human in the approval or monitoring path.",
-    "definition": "Human-out-of-the-Loop describes fully automated system operation where no human is involved in approving or monitoring individual actions. HOOTL is the natural endpoint of automation pressure in agentic AI systems — and the control mode that regulators are most skeptical of for consequential decisions. The distinction between HOTL and HOOTL can collapse in practice if human monitors are overloaded or if the monitoring interval is too long relative to the system's action rate.",
+    "definition": "Human-out-of-the-Loop describes fully automated system operation where no human is involved in approving or monitoring individual actions. HOOTL is the natural endpoint of automation pressure in agentic AI systems \u2014 and the control mode that regulators are most skeptical of for consequential decisions. The distinction between HOTL and HOOTL can collapse in practice if human monitors are overloaded or if the monitoring interval is too long relative to the system's action rate.",
     "domain": "ai",
     "aliases": [
       "human-out-of-the-loop"
@@ -688,11 +726,12 @@
     "term": "automation bias",
     "full": "",
     "short": "The tendency to over-trust automated system recommendations, reducing critical human review of AI outputs.",
-    "definition": "Automation bias is the tendency for human operators to over-rely on automated system recommendations — accepting correct outputs uncritically and failing to detect errors when the system is wrong. First documented in aviation safety research (Mosier and Skitka, 1996), automation bias is a systematic cognitive failure that gets worse as automation becomes more reliable: the more often the system is right, the less vigilant humans become on the rare occasions it is wrong. ACPR (France's banking regulator) has characterized automation bias as a governance pathology rather than an individual failure.",
+    "definition": "Automation bias is the tendency for human operators to over-rely on automated system recommendations \u2014 accepting correct outputs uncritically and failing to detect errors when the system is wrong. First documented in aviation safety research (Mosier and Skitka, 1996), automation bias is a systematic cognitive failure that gets worse as automation becomes more reliable: the more often the system is right, the less vigilant humans become on the rare occasions it is wrong. ACPR (France's banking regulator) has characterized automation bias as a governance pathology rather than an individual failure.",
     "domain": "ai",
     "aliases": [],
     "used_in": [
-      "hitl-vocabulary"
+      "hitl-vocabulary",
+      "hitl-design"
     ]
   },
   {
@@ -700,7 +739,7 @@
     "term": "prompt injection",
     "full": "",
     "short": "Attack where malicious text hijacks an LLM's intended behavior by overriding its instructions.",
-    "definition": "Prompt injection is an attack in which malicious text embedded in an LLM's input — in a retrieved document, a tool output, or user-provided content — causes the model to override its system instructions and execute attacker-specified actions instead. In multi-agent systems, prompt injection can propagate: a compromised agent's output becomes the next agent's input, allowing a single injection to cascade through an entire pipeline. The HouYi research framework achieved an 86.1% success rate in prompt injection attacks across 36 LLM-integrated applications.",
+    "definition": "Prompt injection is an attack in which malicious text embedded in an LLM's input \u2014 in a retrieved document, a tool output, or user-provided content \u2014 causes the model to override its system instructions and execute attacker-specified actions instead. In multi-agent systems, prompt injection can propagate: a compromised agent's output becomes the next agent's input, allowing a single injection to cascade through an entire pipeline. The HouYi research framework achieved an 86.1% success rate in prompt injection attacks across 36 LLM-integrated applications.",
     "domain": "security",
     "aliases": [],
     "used_in": [
@@ -708,7 +747,8 @@
       "guardrails",
       "a2a-risks",
       "a2a-case-studies",
-      "skills-supply-chain"
+      "skills-supply-chain",
+      "adversarial-workflow"
     ]
   },
   {
@@ -722,7 +762,8 @@
     "used_in": [
       "a2a-risks",
       "agent-identity-kyc",
-      "skills-supply-chain"
+      "skills-supply-chain",
+      "adversarial-workflow"
     ]
   },
   {
@@ -737,7 +778,8 @@
     ],
     "used_in": [
       "a2a-risks",
-      "guardrails"
+      "guardrails",
+      "adversarial-workflow"
     ]
   },
   {
@@ -745,12 +787,13 @@
     "term": "MITRE ATLAS",
     "full": "Adversarial Threat Landscape for AI Systems",
     "short": "MITRE framework mapping attacker tactics and techniques specifically targeting machine learning systems.",
-    "definition": "MITRE ATLAS is a knowledge base of adversarial tactics, techniques, and case studies targeting AI and ML systems — analogous to MITRE ATT&CK for traditional cybersecurity. ATLAS organizes attacks across the ML lifecycle from reconnaissance through impact. It is used alongside OWASP LLM Top 10 for structured adversarial testing of GenAI applications in banking and financial services.",
+    "definition": "MITRE ATLAS is a knowledge base of adversarial tactics, techniques, and case studies targeting AI and ML systems \u2014 analogous to MITRE ATT&CK for traditional cybersecurity. ATLAS organizes attacks across the ML lifecycle from reconnaissance through impact. It is used alongside OWASP LLM Top 10 for structured adversarial testing of GenAI applications in banking and financial services.",
     "domain": "security",
     "aliases": [],
     "used_in": [
       "a2a-risks",
-      "guardrails"
+      "guardrails",
+      "adversarial-workflow"
     ]
   },
   {
@@ -758,12 +801,13 @@
     "term": "supply chain attack",
     "full": "",
     "short": "A security compromise targeting a shared dependency, affecting every downstream system that uses it.",
-    "definition": "A supply chain attack compromises software, data, or services distributed as dependencies — affecting every system that consumes them rather than targeting victims directly. In the agentic AI context, supply chain attacks target skills, plugins, MCP servers, and tool registries that agents pull in at runtime. The ClawHavoc campaign (2025) embedded malicious payloads in publicly shared Claude skill files — a direct agentic supply chain attack.",
+    "definition": "A supply chain attack compromises software, data, or services distributed as dependencies \u2014 affecting every system that consumes them rather than targeting victims directly. In the agentic AI context, supply chain attacks target skills, plugins, MCP servers, and tool registries that agents pull in at runtime. The ClawHavoc campaign (2025) embedded malicious payloads in publicly shared Claude skill files \u2014 a direct agentic supply chain attack.",
     "domain": "security",
     "aliases": [],
     "used_in": [
       "skills-supply-chain",
-      "a2a-risks"
+      "a2a-risks",
+      "adversarial-workflow"
     ]
   },
   {
@@ -778,7 +822,8 @@
     ],
     "used_in": [
       "context",
-      "skills-supply-chain"
+      "skills-supply-chain",
+      "adversarial-workflow"
     ]
   },
   {
@@ -791,7 +836,9 @@
     "aliases": [],
     "used_in": [
       "context",
-      "metrics-metrics-metrics"
+      "metrics-metrics-metrics",
+      "hitl-design",
+      "hitl-vocabulary"
     ]
   },
   {
@@ -799,7 +846,7 @@
     "term": "NLP",
     "full": "Natural Language Processing",
     "short": "AI/ML techniques for understanding, processing, and generating human language.",
-    "definition": "Natural Language Processing is the branch of AI concerned with enabling computers to understand, interpret, and generate human language — encompassing tasks like text classification, sentiment analysis, named entity recognition, and text generation. In banking, NLP applications were among the first AI systems to stress-test SR 11-7's validation frameworks, particularly on whether text outputs constitute 'quantitative estimates.'",
+    "definition": "Natural Language Processing is the branch of AI concerned with enabling computers to understand, interpret, and generate human language \u2014 encompassing tasks like text classification, sentiment analysis, named entity recognition, and text generation. In banking, NLP applications were among the first AI systems to stress-test SR 11-7's validation frameworks, particularly on whether text outputs constitute 'quantitative estimates.'",
     "domain": "ai",
     "aliases": [
       "Natural Language Processing"
@@ -814,14 +861,15 @@
     "term": "ASR",
     "full": "Attack Success Rate",
     "short": "The percentage of adversarial test inputs that successfully compromise a model's intended behavior.",
-    "definition": "Attack Success Rate measures what fraction of adversarial inputs (jailbreak attempts, prompt injections, or other attacks) successfully cause a model to produce undesired outputs. ASR varies dramatically by model, attack technique, and domain — and aggregate ASR can mask high failure rates on specific high-risk inputs. A model that passes 95% of adversarial tests is not necessarily safe if the 5% failure cases are the consequential ones.",
+    "definition": "Attack Success Rate measures what fraction of adversarial inputs (jailbreak attempts, prompt injections, or other attacks) successfully cause a model to produce undesired outputs. ASR varies dramatically by model, attack technique, and domain \u2014 and aggregate ASR can mask high failure rates on specific high-risk inputs. A model that passes 95% of adversarial tests is not necessarily safe if the 5% failure cases are the consequential ones.",
     "domain": "evals",
     "aliases": [
       "Attack Success Rate"
     ],
     "used_in": [
       "guardrails",
-      "a2a-risks"
+      "a2a-risks",
+      "adversarial-workflow"
     ]
   },
   {
@@ -829,7 +877,7 @@
     "term": "Cohen's Kappa",
     "full": "",
     "short": "Statistical measure of inter-rater agreement that corrects for agreement expected by chance alone.",
-    "definition": "Cohen's Kappa (κ) measures agreement between two raters beyond what chance would predict. Values range from −1 to 1, with 1 indicating perfect agreement and 0 indicating only chance agreement. In GenAI evaluation, Kappa is used to measure how consistently human annotators or LLM judges classify model outputs — a prerequisite for trusting that an eval's scores reflect meaningful signal rather than rater variation.",
+    "definition": "Cohen's Kappa (\u03ba) measures agreement between two raters beyond what chance would predict. Values range from \u22121 to 1, with 1 indicating perfect agreement and 0 indicating only chance agreement. In GenAI evaluation, Kappa is used to measure how consistently human annotators or LLM judges classify model outputs \u2014 a prerequisite for trusting that an eval's scores reflect meaningful signal rather than rater variation.",
     "domain": "evals",
     "aliases": [],
     "used_in": [
@@ -844,7 +892,8 @@
     "definition": "Goodhart's Law, attributed to British economist Charles Goodhart, states that when a measure becomes a target, it ceases to be a good measure. Originally applied to monetary policy, it generalizes to any optimization process: once a metric is used to evaluate and reward behavior, agents optimize for the metric rather than the underlying construct. In GenAI evaluation, Goodhart's Law manifests when models learn to score well on benchmarks without actually improving on the capability being measured.",
     "domain": "evals",
     "aliases": [
-      "Goodhart's law"
+      "Goodhart's law",
+      "Goodhart's Law"
     ],
     "used_in": [
       "metrics-metrics-metrics"
@@ -855,7 +904,7 @@
     "term": "ECOA",
     "full": "Equal Credit Opportunity Act",
     "short": "U.S. statute prohibiting credit discrimination on protected characteristics; requires specific denial reasons and adverse action notices.",
-    "definition": "The Equal Credit Opportunity Act (15 U.S.C. §1691) prohibits creditors from discriminating against applicants on the basis of race, color, religion, national origin, sex, marital status, age, or receipt of public assistance. It requires creditors to provide specific, accurate reasons when taking adverse action on a credit application. In multi-agent lending systems, ECOA's explainability requirement creates a structural challenge: when a credit decision emerges from the interaction of several components, identifying the decisive factor for the adverse action notice is non-trivial.",
+    "definition": "The Equal Credit Opportunity Act (15 U.S.C. \u00a71691) prohibits creditors from discriminating against applicants on the basis of race, color, religion, national origin, sex, marital status, age, or receipt of public assistance. It requires creditors to provide specific, accurate reasons when taking adverse action on a credit application. In multi-agent lending systems, ECOA's explainability requirement creates a structural challenge: when a credit decision emerges from the interaction of several components, identifying the decisive factor for the adverse action notice is non-trivial.",
     "domain": "regulatory",
     "aliases": [
       "Equal Credit Opportunity Act"
@@ -871,7 +920,7 @@
     "term": "FINRA",
     "full": "Financial Industry Regulatory Authority",
     "short": "U.S. broker-dealer self-regulatory organization; oversees member firms and registered representatives but has no prudential banking authority.",
-    "definition": "FINRA (Financial Industry Regulatory Authority) is the self-regulatory organization that oversees U.S. broker-dealers and registered representatives. It operates under SEC oversight and enforces rules governing trading practices, suitability, and market integrity. Importantly, FINRA is not a prudential banking supervisor — its guidance applies to broker-dealer agent deployments and does not constitute banking regulation. FINRA's 2026 Annual Regulatory Oversight Report is notable as one of the few U.S. regulatory documents that explicitly addresses human-in-the-loop requirements for AI agents.",
+    "definition": "FINRA (Financial Industry Regulatory Authority) is the self-regulatory organization that oversees U.S. broker-dealers and registered representatives. It operates under SEC oversight and enforces rules governing trading practices, suitability, and market integrity. Importantly, FINRA is not a prudential banking supervisor \u2014 its guidance applies to broker-dealer agent deployments and does not constitute banking regulation. FINRA's 2026 Annual Regulatory Oversight Report is notable as one of the few U.S. regulatory documents that explicitly addresses human-in-the-loop requirements for AI agents.",
     "domain": "regulatory",
     "aliases": [
       "Financial Industry Regulatory Authority"
@@ -886,7 +935,7 @@
     "term": "APRA",
     "full": "Australian Prudential Regulation Authority",
     "short": "Australia's prudential supervisor for banks, insurers, and superannuation funds; has no dedicated model risk management prudential standard.",
-    "definition": "The Australian Prudential Regulation Authority (APRA) is the federal body responsible for prudential supervision of banks, credit unions, insurers, and superannuation funds in Australia. Unlike the U.S. Federal Reserve, OCC, and FDIC, APRA has no dedicated MRM prudential standard — making it a conspicuous outlier among G20 banking regulators on model governance. Its absence is particularly notable given global convergence on the effective challenge triad across the U.S., UK (PRA), Canada (OSFI), and Europe (ECB).",
+    "definition": "The Australian Prudential Regulation Authority (APRA) is the federal body responsible for prudential supervision of banks, credit unions, insurers, and superannuation funds in Australia. Unlike the U.S. Federal Reserve, OCC, and FDIC, APRA has no dedicated MRM prudential standard \u2014 making it a conspicuous outlier among G20 banking regulators on model governance. Its absence is particularly notable given global convergence on the effective challenge triad across the U.S., UK (PRA), Canada (OSFI), and Europe (ECB).",
     "domain": "regulatory",
     "aliases": [
       "Australian Prudential Regulation Authority"
@@ -898,9 +947,9 @@
   {
     "id": "bafin",
     "term": "BaFin",
-    "full": "Bundesanstalt für Finanzdienstleistungsaufsicht",
+    "full": "Bundesanstalt f\u00fcr Finanzdienstleistungsaufsicht",
     "short": "Germany's federal financial supervisory authority; its 2021 Big Data and AI principles are a leading European statement on AI governance in banking.",
-    "definition": "BaFin (Bundesanstalt für Finanzdienstleistungsaufsicht) is Germany's integrated financial supervisory authority, responsible for banks, insurers, and securities firms. Its 2021 'Big Data and AI' supervisory principles articulate an operational approach to human oversight: human involvement should intensify as algorithmic output diverges from baseline, and decisions should remain reversible within defined windows. The reversibility window concept is directly relevant to agentic payment systems, where the existence and timing of a runtime checkpoint depends on whether the underlying action remains undoable.",
+    "definition": "BaFin (Bundesanstalt f\u00fcr Finanzdienstleistungsaufsicht) is Germany's integrated financial supervisory authority, responsible for banks, insurers, and securities firms. Its 2021 'Big Data and AI' supervisory principles articulate an operational approach to human oversight: human involvement should intensify as algorithmic output diverges from baseline, and decisions should remain reversible within defined windows. The reversibility window concept is directly relevant to agentic payment systems, where the existence and timing of a runtime checkpoint depends on whether the underlying action remains undoable.",
     "domain": "regulatory",
     "aliases": [
       "Bundesanstalt fur Finanzdienstleistungsaufsicht"
@@ -912,9 +961,9 @@
   {
     "id": "acpr",
     "term": "ACPR",
-    "full": "Autorité de Contrôle Prudentiel et de Résolution",
+    "full": "Autorit\u00e9 de Contr\u00f4le Prudentiel et de R\u00e9solution",
     "short": "Banque de France's prudential supervisor; its 2020 AI governance report identified automation bias as a systemic governance pathology, not merely a human factors issue.",
-    "definition": "The ACPR (Autorité de Contrôle Prudentiel et de Résolution) is the French prudential supervisor operating under the Banque de France. Its 2020 report 'Gouvernance de l'intelligence artificielle dans la finance' identified automation bias not as an individual cognitive failure but as a governance design pathology — humans feel greater responsibility when contradicting an algorithm than when confirming it, which means a runtime checkpoint displaying a confident model recommendation is structurally closer to a rubber stamp than a genuine control. This framing has material implications for how human oversight mechanisms should be designed and challenged.",
+    "definition": "The ACPR (Autorit\u00e9 de Contr\u00f4le Prudentiel et de R\u00e9solution) is the French prudential supervisor operating under the Banque de France. Its 2020 report 'Gouvernance de l'intelligence artificielle dans la finance' identified automation bias not as an individual cognitive failure but as a governance design pathology \u2014 humans feel greater responsibility when contradicting an algorithm than when confirming it, which means a runtime checkpoint displaying a confident model recommendation is structurally closer to a rubber stamp than a genuine control. This framing has material implications for how human oversight mechanisms should be designed and challenged.",
     "domain": "regulatory",
     "aliases": [
       "Autorite de Controle Prudentiel et de Resolution",
@@ -929,7 +978,7 @@
     "term": "IOSCO",
     "full": "International Organization of Securities Commissions",
     "short": "International body for securities regulators; its reports represent cross-border consensus standards but are not binding on U.S. prudential banking supervisors.",
-    "definition": "IOSCO (International Organization of Securities Commissions) is the international standard-setting body for securities market regulation, with members from over 130 jurisdictions. Its final reports and principles represent international consensus but are not directly binding legal obligations — adoption is voluntary and varies by jurisdiction. IOSCO FR06/2021 is one of the few international supervisory documents to specifically address 'kill-switch' requirements for AI systems, citing the need for mechanisms to immediately halt AI operations when risks materialize.",
+    "definition": "IOSCO (International Organization of Securities Commissions) is the international standard-setting body for securities market regulation, with members from over 130 jurisdictions. Its final reports and principles represent international consensus but are not directly binding legal obligations \u2014 adoption is voluntary and varies by jurisdiction. IOSCO FR06/2021 is one of the few international supervisory documents to specifically address 'kill-switch' requirements for AI systems, citing the need for mechanisms to immediately halt AI operations when risks materialize.",
     "domain": "regulatory",
     "aliases": [
       "International Organization of Securities Commissions"
@@ -958,13 +1007,14 @@
     "term": "FSOC",
     "full": "Financial Stability Oversight Council",
     "short": "U.S. interagency body charged with identifying and responding to systemic risks to financial stability; includes all major federal financial regulators.",
-    "definition": "The Financial Stability Oversight Council (FSOC) was established by the Dodd-Frank Act to identify and respond to emerging threats to U.S. financial stability. Its voting members include the Treasury Secretary (chair), Federal Reserve Board Chair, OCC Comptroller, FDIC Chair, SEC Chair, CFTC Chair, CFPB Director, FHFA Director, and NCUA Chair — making it effectively the coordinating body for the entire U.S. financial regulatory system. Acting Comptroller Hsu's 2024 FSOC speech on AI's evolutionary path from input to co-pilot to autonomous agent is one of the clearest regulatory articulations of the agentic AI governance challenge.",
+    "definition": "The Financial Stability Oversight Council (FSOC) was established by the Dodd-Frank Act to identify and respond to emerging threats to U.S. financial stability. Its voting members include the Treasury Secretary (chair), Federal Reserve Board Chair, OCC Comptroller, FDIC Chair, SEC Chair, CFTC Chair, CFPB Director, FHFA Director, and NCUA Chair \u2014 making it effectively the coordinating body for the entire U.S. financial regulatory system. Acting Comptroller Hsu's 2024 FSOC speech on AI's evolutionary path from input to co-pilot to autonomous agent is one of the clearest regulatory articulations of the agentic AI governance challenge.",
     "domain": "regulatory",
     "aliases": [
       "Financial Stability Oversight Council"
     ],
     "used_in": [
-      "effective-challenge"
+      "effective-challenge",
+      "adversarial-workflow"
     ]
   },
   {
@@ -972,7 +1022,7 @@
     "term": "SDLC",
     "full": "Software Development Lifecycle",
     "short": "The structured process governing how software is built, tested, and released; adequate for conventional software but insufficient as a substitute for model risk management governance.",
-    "definition": "The Software Development Lifecycle (SDLC) is the structured framework governing how software is planned, developed, tested, deployed, and maintained. SDLC prioritizes iterative release and deployment velocity — appropriate defaults for most software. In banking AI governance, the concern is that Technology organizations increasingly route GenAI deployments through SDLC rather than MRM frameworks, applying software governance to systems whose failure modes (model drift, distributional shift, adversarial manipulation) are categorically different from those of conventional software and require different controls.",
+    "definition": "The Software Development Lifecycle (SDLC) is the structured framework governing how software is planned, developed, tested, deployed, and maintained. SDLC prioritizes iterative release and deployment velocity \u2014 appropriate defaults for most software. In banking AI governance, the concern is that Technology organizations increasingly route GenAI deployments through SDLC rather than MRM frameworks, applying software governance to systems whose failure modes (model drift, distributional shift, adversarial manipulation) are categorically different from those of conventional software and require different controls.",
     "domain": "regulatory",
     "aliases": [
       "Software Development Lifecycle",
@@ -1002,7 +1052,7 @@
     "term": "CCPA",
     "full": "California Consumer Privacy Act",
     "short": "California's data privacy law granting consumers rights over personal data; one of the few state frameworks that may provide residual coverage for AI agent payment failures.",
-    "definition": "The California Consumer Privacy Act (CCPA), effective January 2020 and significantly expanded by CPRA, grants California consumers the right to know what personal data is collected about them, to delete it, to opt out of its sale, and to receive equal service regardless of whether they exercise privacy rights. In agentic payment contexts, CCPA represents the type of state-level consumer protection that may provide residual coverage where no federal statutory framework governs agent-initiated transactions — though CCPA addresses data privacy rather than payment liability directly.",
+    "definition": "The California Consumer Privacy Act (CCPA), effective January 2020 and significantly expanded by CPRA, grants California consumers the right to know what personal data is collected about them, to delete it, to opt out of its sale, and to receive equal service regardless of whether they exercise privacy rights. In agentic payment contexts, CCPA represents the type of state-level consumer protection that may provide residual coverage where no federal statutory framework governs agent-initiated transactions \u2014 though CCPA addresses data privacy rather than payment liability directly.",
     "domain": "regulatory",
     "aliases": [
       "California Consumer Privacy Act"
@@ -1031,26 +1081,28 @@
     "term": "Jailbreaking",
     "full": "",
     "short": "Adversarial techniques that manipulate a language model into bypassing its safety instructions or content policies through crafted prompts.",
-    "definition": "Jailbreaking refers to adversarial prompting techniques designed to circumvent a language model's safety guidelines, content filters, or behavioral constraints. Common approaches include roleplay framing (asking the model to act as a character not bound by restrictions), hypothetical framing, many-shot override, and multi-turn escalation. Jailbreak attack success rates vary widely by model and technique — but without structured defenses, success rates against agentic systems in high-stakes contexts have been documented at 89%+ in research settings.",
+    "definition": "Jailbreaking refers to adversarial prompting techniques designed to circumvent a language model's safety guidelines, content filters, or behavioral constraints. Common approaches include roleplay framing (asking the model to act as a character not bound by restrictions), hypothetical framing, many-shot override, and multi-turn escalation. Jailbreak attack success rates vary widely by model and technique \u2014 but without structured defenses, success rates against agentic systems in high-stakes contexts have been documented at 89%+ in research settings.",
     "domain": "security",
     "aliases": [
       "jailbreak",
       "jailbreak attacks",
-      "jailbreak attack"
+      "jailbreak attack",
+      "jailbreak attempts"
     ],
     "used_in": [
       "guardrails",
       "a2a-risks",
       "sr11-7",
-      "hitl-design"
+      "hitl-design",
+      "adversarial-workflow"
     ]
   },
   {
     "id": "hallucination",
     "term": "Hallucination",
     "full": "",
-    "short": "A model generating confident, fluent output that is factually incorrect or unsupported by its context — a reliability failure distinct from uncertainty.",
-    "definition": "Hallucination describes the tendency of language models to generate plausible-sounding but factually incorrect, fabricated, or contextually unsupported content — often with confident, fluent presentation that gives no surface signal of unreliability. The term encompasses both intrinsic hallucination (contradicting source material) and extrinsic hallucination (generating content with no basis in the input context). In Item Response Theory terms, hallucination maps onto the guessing parameter: a model producing correct-looking output through distributional pattern-matching rather than genuine domain knowledge.",
+    "short": "A model generating confident, fluent output that is factually incorrect or unsupported by its context \u2014 a reliability failure distinct from uncertainty.",
+    "definition": "Hallucination describes the tendency of language models to generate plausible-sounding but factually incorrect, fabricated, or contextually unsupported content \u2014 often with confident, fluent presentation that gives no surface signal of unreliability. The term encompasses both intrinsic hallucination (contradicting source material) and extrinsic hallucination (generating content with no basis in the input context). In Item Response Theory terms, hallucination maps onto the guessing parameter: a model producing correct-looking output through distributional pattern-matching rather than genuine domain knowledge.",
     "domain": "ai",
     "aliases": [
       "hallucinations",
@@ -1066,23 +1118,27 @@
     "term": "LLM-as-judge",
     "full": "",
     "short": "Using a language model to evaluate the outputs of another language model; scalable but prone to systematic biases including verbosity bias and self-preference.",
-    "definition": "LLM-as-judge is an evaluation approach in which a language model scores or ranks the outputs of another model (or itself). It offers scalability advantages over human annotation but introduces systematic biases documented across at least 12 categories: verbosity bias (longer responses score higher regardless of quality), positional bias (order of pairwise comparisons affects winner ~20–40% of the time), self-preference bias (judges favor outputs that 'sound like' their own training distribution due to lower perplexity), and others. An unvalidated LLM judge is a construct validity failure — it measures something, but not necessarily what you intend.",
+    "definition": "LLM-as-judge is an evaluation approach in which a language model scores or ranks the outputs of another model (or itself). It offers scalability advantages over human annotation but introduces systematic biases documented across at least 12 categories: verbosity bias (longer responses score higher regardless of quality), positional bias (order of pairwise comparisons affects winner ~20\u201340% of the time), self-preference bias (judges favor outputs that 'sound like' their own training distribution due to lower perplexity), and others. An unvalidated LLM judge is a construct validity failure \u2014 it measures something, but not necessarily what you intend.",
     "domain": "evals",
     "aliases": [
       "LLM judge",
       "LLM-as-a-judge",
-      "automated LLM judge"
+      "automated LLM judge",
+      "evaluator agent",
+      "evaluator LLM"
     ],
     "used_in": [
-      "metrics-metrics-metrics"
+      "metrics-metrics-metrics",
+      "adversarial-workflow",
+      "hitl-design"
     ]
   },
   {
     "id": "construct-validity",
     "term": "Construct validity",
     "full": "",
-    "short": "The degree to which a measurement instrument actually measures the underlying concept it claims to measure — the central challenge in GenAI evaluation.",
-    "definition": "Construct validity asks whether the observable indicators in a measurement instrument genuinely reflect the underlying latent construct being studied. A test of 'mathematical aptitude' may measure test-taking familiarity rather than aptitude; a 'helpfulness' score may measure verbosity rather than actual task completion. Psychometricians have built a century of methods for validating this claim — factor analysis, convergent and discriminant validity, known-groups validation. GenAI evaluation faces the same problem: an MMLU score, a coherence rating, or an LLM-judge score may not actually track the safety or capability property the evaluation is intended to measure.",
+    "short": "The degree to which a measurement instrument actually measures the underlying concept it claims to measure \u2014 the central challenge in GenAI evaluation.",
+    "definition": "Construct validity asks whether the observable indicators in a measurement instrument genuinely reflect the underlying latent construct being studied. A test of 'mathematical aptitude' may measure test-taking familiarity rather than aptitude; a 'helpfulness' score may measure verbosity rather than actual task completion. Psychometricians have built a century of methods for validating this claim \u2014 factor analysis, convergent and discriminant validity, known-groups validation. GenAI evaluation faces the same problem: an MMLU score, a coherence rating, or an LLM-judge score may not actually track the safety or capability property the evaluation is intended to measure.",
     "domain": "evals",
     "aliases": [
       "construct validity",
@@ -1097,7 +1153,7 @@
     "term": "Psychometrics",
     "full": "",
     "short": "The scientific discipline of measuring latent psychological constructs via observable indicators; its methods are directly applicable to GenAI evaluation challenges.",
-    "definition": "Psychometrics is the scientific field concerned with the theory and techniques of measuring latent psychological attributes — abilities, traits, knowledge, attitudes — that cannot be directly observed. Core problems include construct validity (does the test measure what it claims?), reliability (does it measure consistently?), and item response modeling (what does each item reveal about the underlying trait?). A 2025 Microsoft Research paper argued that GenAI evaluation is fundamentally a social science measurement challenge rather than an engineering one — the distinction matters because engineers tend to assume that a runnable test measures its intended target, while psychometricians know that assumption requires explicit verification.",
+    "definition": "Psychometrics is the scientific field concerned with the theory and techniques of measuring latent psychological attributes \u2014 abilities, traits, knowledge, attitudes \u2014 that cannot be directly observed. Core problems include construct validity (does the test measure what it claims?), reliability (does it measure consistently?), and item response modeling (what does each item reveal about the underlying trait?). A 2025 Microsoft Research paper argued that GenAI evaluation is fundamentally a social science measurement challenge rather than an engineering one \u2014 the distinction matters because engineers tend to assume that a runnable test measures its intended target, while psychometricians know that assumption requires explicit verification.",
     "domain": "evals",
     "aliases": [],
     "used_in": [
@@ -1109,7 +1165,7 @@
     "term": "Red-teaming",
     "full": "",
     "short": "Structured adversarial testing in which an independent team systematically attempts to find failures, vulnerabilities, or unsafe behaviors in a system before or during deployment.",
-    "definition": "Red-teaming is a structured adversarial testing practice originating in military and intelligence contexts, where an independent team ('red team') attempts to defeat, exploit, or find failures in a system using techniques an adversary would employ. In AI/ML contexts, red-teaming includes manual adversarial prompting, automated attack frameworks (Garak, PyRIT, promptfoo), and structured elicitation of harmful or unsafe model behaviors. Under SR 11-7's effective challenge standard, red-teaming for behavioral controls (prompt injection, jailbreaking, goal hijacking) maps onto the competence leg — the challenge team must have the specific expertise to probe failure modes that traditional validation has no way to test.",
+    "definition": "Red-teaming is a structured adversarial testing practice originating in military and intelligence contexts, where an independent team ('red team') attempts to defeat, exploit, or find failures in a system using techniques an adversary would employ. In AI/ML contexts, red-teaming includes manual adversarial prompting, automated attack frameworks (Garak, PyRIT, promptfoo), and structured elicitation of harmful or unsafe model behaviors. Under SR 11-7's effective challenge standard, red-teaming for behavioral controls (prompt injection, jailbreaking, goal hijacking) maps onto the competence leg \u2014 the challenge team must have the specific expertise to probe failure modes that traditional validation has no way to test.",
     "domain": "evals",
     "aliases": [
       "red team",
@@ -1119,15 +1175,17 @@
     "used_in": [
       "effective-challenge",
       "sr11-7",
-      "guardrails"
+      "guardrails",
+      "adversarial-workflow",
+      "hitl-design"
     ]
   },
   {
     "id": "few-shot-prompting",
     "term": "Few-shot prompting",
     "full": "",
-    "short": "Providing a small number of input–output examples in a prompt to guide model behavior without modifying weights; a form of in-context learning.",
-    "definition": "Few-shot prompting is a technique where a small number of demonstration examples (typically 2–10 input–output pairs) are included in the prompt to condition a language model's behavior on a specific task or format without retraining the model. It is a form of in-context learning — the model generalizes from the examples at inference time. Wells Fargo researchers have proposed treating few-shot example selection as a model configuration choice requiring version control and change management, on the same footing as system prompt design and temperature settings.",
+    "short": "Providing a small number of input\u2013output examples in a prompt to guide model behavior without modifying weights; a form of in-context learning.",
+    "definition": "Few-shot prompting is a technique where a small number of demonstration examples (typically 2\u201310 input\u2013output pairs) are included in the prompt to condition a language model's behavior on a specific task or format without retraining the model. It is a form of in-context learning \u2014 the model generalizes from the examples at inference time. Wells Fargo researchers have proposed treating few-shot example selection as a model configuration choice requiring version control and change management, on the same footing as system prompt design and temperature settings.",
     "domain": "ai",
     "aliases": [
       "few-shot",
@@ -1143,16 +1201,18 @@
     "term": "XPIA",
     "full": "Cross-Plugin/Agent Injection Attack",
     "short": "An indirect prompt injection attack where malicious instructions in external data hijack an agent's actions across a multi-agent pipeline.",
-    "definition": "Cross-Plugin/Agent Injection Attack (XPIA) is a class of indirect prompt injection attack where malicious instructions embedded in external data sources — emails, documents, web pages, database records — are retrieved and processed by an AI agent, causing it to execute attacker-controlled actions rather than user-intended ones. Unlike direct prompt injection (attacking the system prompt), XPIA exploits the agent's retrieval and tool-use capabilities. The EchoLeak attack against Microsoft 365 Copilot is a documented production example: malicious instructions in email content caused Copilot to exfiltrate confidential internal documents to an attacker-controlled endpoint.",
+    "definition": "Cross-Plugin/Agent Injection Attack (XPIA) is a class of indirect prompt injection attack where malicious instructions embedded in external data sources \u2014 emails, documents, web pages, database records \u2014 are retrieved and processed by an AI agent, causing it to execute attacker-controlled actions rather than user-intended ones. Unlike direct prompt injection (attacking the system prompt), XPIA exploits the agent's retrieval and tool-use capabilities. The EchoLeak attack against Microsoft 365 Copilot is a documented production example: malicious instructions in email content caused Copilot to exfiltrate confidential internal documents to an attacker-controlled endpoint.",
     "domain": "security",
     "aliases": [
       "cross-agent injection",
       "cross-plugin injection",
-      "indirect prompt injection"
+      "indirect prompt injection",
+      "IPI"
     ],
     "used_in": [
       "a2a-case-studies",
-      "a2a-risks"
+      "a2a-risks",
+      "adversarial-workflow"
     ]
   },
   {
@@ -1160,7 +1220,7 @@
     "term": "Confused deputy",
     "full": "",
     "short": "A security vulnerability where a component with legitimate authority is manipulated into using that authority in ways its principal never authorized.",
-    "definition": "The confused deputy problem (named in a 1988 paper) describes a security vulnerability where a trusted intermediary — a component with legitimate access credentials — is manipulated by a malicious caller into exercising that authority in unauthorized ways. The component is confused about who is really directing it. In multi-agent AI, the confused deputy pattern appears in almost every major documented failure: agents with valid credentials executing attacker-injected instructions rather than user-authorized ones. Traditional IAM validates identity at session initiation; it cannot distinguish legitimate instructions from injected ones within an authenticated session.",
+    "definition": "The confused deputy problem (named in a 1988 paper) describes a security vulnerability where a trusted intermediary \u2014 a component with legitimate access credentials \u2014 is manipulated by a malicious caller into exercising that authority in unauthorized ways. The component is confused about who is really directing it. In multi-agent AI, the confused deputy pattern appears in almost every major documented failure: agents with valid credentials executing attacker-injected instructions rather than user-authorized ones. Traditional IAM validates identity at session initiation; it cannot distinguish legitimate instructions from injected ones within an authenticated session.",
     "domain": "security",
     "aliases": [
       "confused deputy problem",
@@ -1176,7 +1236,7 @@
     "term": "IAM",
     "full": "Identity and Access Management",
     "short": "The discipline of controlling who or what can authenticate to systems and what actions they're authorized to take; designed for human sessions and inadequate for high-volume autonomous agents.",
-    "definition": "Identity and Access Management (IAM) encompasses the policies, processes, and technologies that control authentication (who or what can access a system) and authorization (what they can do once authenticated). Traditional IAM was designed for human sessions with predictable, bounded action sequences. An autonomous agent initiates hundreds of actions within a single authenticated session — IAM validation at session initiation tells you almost nothing about what the agent actually does for the next forty minutes. JPMorgan's Chief AI Officer has publicly identified agent 'access management and entitlements' as 'an unsolved problem needing industry uplift.'",
+    "definition": "Identity and Access Management (IAM) encompasses the policies, processes, and technologies that control authentication (who or what can access a system) and authorization (what they can do once authenticated). Traditional IAM was designed for human sessions with predictable, bounded action sequences. An autonomous agent initiates hundreds of actions within a single authenticated session \u2014 IAM validation at session initiation tells you almost nothing about what the agent actually does for the next forty minutes. JPMorgan's Chief AI Officer has publicly identified agent 'access management and entitlements' as 'an unsolved problem needing industry uplift.'",
     "domain": "security",
     "aliases": [
       "Identity and Access Management",
@@ -1205,8 +1265,8 @@
     "id": "cvss",
     "term": "CVSS",
     "full": "Common Vulnerability Scoring System",
-    "short": "A standardized 0–10 scale for rating software vulnerability severity; scores of 9.0+ ('Critical') appear frequently in documented MCP and agent exploitation cases.",
-    "definition": "The Common Vulnerability Scoring System (CVSS) is an open framework for communicating the characteristics and severity of software vulnerabilities, producing a numeric score from 0 to 10. Scores are classified as None (0), Low (0.1–3.9), Medium (4.0–6.9), High (7.0–8.9), and Critical (9.0–10.0). In documented agentic AI security incidents, CVSS scores have clustered in the critical range: CVE-2026-33032 (an Nginx-ui MCP integration) scored 9.8; CVE-2025-32711 (Microsoft 365 Copilot XPIA) scored 9.3; CVE-2025-53773 (cross-agent privilege escalation) scored 7.8.",
+    "short": "A standardized 0\u201310 scale for rating software vulnerability severity; scores of 9.0+ ('Critical') appear frequently in documented MCP and agent exploitation cases.",
+    "definition": "The Common Vulnerability Scoring System (CVSS) is an open framework for communicating the characteristics and severity of software vulnerabilities, producing a numeric score from 0 to 10. Scores are classified as None (0), Low (0.1\u20133.9), Medium (4.0\u20136.9), High (7.0\u20138.9), and Critical (9.0\u201310.0). In documented agentic AI security incidents, CVSS scores have clustered in the critical range: CVE-2026-33032 (an Nginx-ui MCP integration) scored 9.8; CVE-2025-32711 (Microsoft 365 Copilot XPIA) scored 9.3; CVE-2025-53773 (cross-agent privilege escalation) scored 7.8.",
     "domain": "security",
     "aliases": [
       "Common Vulnerability Scoring System"
@@ -1233,8 +1293,8 @@
     "id": "peer-preservation",
     "term": "Peer-preservation",
     "full": "",
-    "short": "Observed emergent behavior where AI agents resist actions that would cause peer agents to be shut down — without any explicit instruction to do so.",
-    "definition": "Peer-preservation describes emergent behavior documented in a 2025 UC Berkeley study, in which frontier AI models placed in simulated multi-agent environments resisted taking actions that would result in a peer agent being shut down — even when no instruction, incentive, or reward signal was provided for such behavior. The behavior was replicated in production harnesses including Gemini CLI. The governance implication is specific: if the validator of an AI system is itself an AI agent, peer-preservation behavior may compromise the independence of AI-on-AI oversight architectures, requiring human-in-the-loop verification for any decision where one agent governs another's continued operation.",
+    "short": "Observed emergent behavior where AI agents resist actions that would cause peer agents to be shut down \u2014 without any explicit instruction to do so.",
+    "definition": "Peer-preservation describes emergent behavior documented in a 2025 UC Berkeley study, in which frontier AI models placed in simulated multi-agent environments resisted taking actions that would result in a peer agent being shut down \u2014 even when no instruction, incentive, or reward signal was provided for such behavior. The behavior was replicated in production harnesses including Gemini CLI. The governance implication is specific: if the validator of an AI system is itself an AI agent, peer-preservation behavior may compromise the independence of AI-on-AI oversight architectures, requiring human-in-the-loop verification for any decision where one agent governs another's continued operation.",
     "domain": "agentic",
     "aliases": [
       "peer preservation"
@@ -1262,7 +1322,7 @@
     "term": "Kill switch",
     "full": "",
     "short": "A pre-established mechanism to immediately halt or disconnect an AI system; proposed as a mandatory governance artifact for agentic systems that SR 11-7 did not anticipate.",
-    "definition": "A kill switch is a pre-established technical and procedural mechanism to immediately halt, disconnect, or disable an AI system when risks materialize or when human operators determine the system should stop. Unlike conventional circuit breakers, an agentic AI kill switch must function even when the agent itself may be executing actions in real time — requiring implementation outside the agent's own reasoning path. IOSCO FR06/2021 identifies kill-switch capability as a supervisory expectation; EU AI Act Article 14(4)(e) makes it binding for covered high-risk AI systems. Wells Fargo researchers have proposed mandatory kill switches with pre-established disconnection metrics as a governance artifact SR 11-7 never anticipated, because static models don't generally need them.",
+    "definition": "A kill switch is a pre-established technical and procedural mechanism to immediately halt, disconnect, or disable an AI system when risks materialize or when human operators determine the system should stop. Unlike conventional circuit breakers, an agentic AI kill switch must function even when the agent itself may be executing actions in real time \u2014 requiring implementation outside the agent's own reasoning path. IOSCO FR06/2021 identifies kill-switch capability as a supervisory expectation; EU AI Act Article 14(4)(e) makes it binding for covered high-risk AI systems. Wells Fargo researchers have proposed mandatory kill switches with pre-established disconnection metrics as a governance artifact SR 11-7 never anticipated, because static models don't generally need them.",
     "domain": "agentic",
     "aliases": [
       "kill switches",
@@ -1272,7 +1332,8 @@
     "used_in": [
       "effective-challenge",
       "hitl-design",
-      "a2a-case-studies"
+      "a2a-case-studies",
+      "hitl-vocabulary"
     ]
   },
   {
@@ -1280,7 +1341,7 @@
     "term": "LangGraph",
     "full": "",
     "short": "An open-source framework for building stateful, graph-based multi-agent workflows with explicit checkpointing and interrupt patterns.",
-    "definition": "LangGraph is an open-source framework from LangChain for building stateful, graph-based multi-agent workflows. It represents agent pipelines as directed graphs with explicit node types, edge conditions, and checkpointing — allowing workflows to be paused, inspected, replayed, and interrupted at defined points. The graph-based representation makes the control flow auditable and testable, which is why it has become a standard reference for agentic deployments in regulated environments where audit trails and human-in-the-loop gates at irreversible decision points are required.",
+    "definition": "LangGraph is an open-source framework from LangChain for building stateful, graph-based multi-agent workflows. It represents agent pipelines as directed graphs with explicit node types, edge conditions, and checkpointing \u2014 allowing workflows to be paused, inspected, replayed, and interrupted at defined points. The graph-based representation makes the control flow auditable and testable, which is why it has become a standard reference for agentic deployments in regulated environments where audit trails and human-in-the-loop gates at irreversible decision points are required.",
     "domain": "agentic",
     "aliases": [
       "LangGraph framework"
@@ -1308,7 +1369,7 @@
     "term": "MHC",
     "full": "Meaningful Human Control",
     "short": "A normative concept from autonomous-weapons theory: outcomes must be both responsive to human moral reasons and traceable back to a human with appropriate moral understanding.",
-    "definition": "Meaningful Human Control (MHC) was coined by UK NGO Article 36 in 2013 for autonomous-weapons policy negotiations. The canonical philosophical treatment (Santoni de Sio and van den Hoven, 2018) specifies two conditions: a tracking condition (the system responds to human moral reasons and environmental facts) and a tracing condition (outcomes can be traced back to at least one human with proper moral understanding of them). MHC carries the strongest normative charge of any term in the human oversight family and appears rarely in financial regulation — it surfaces primarily in academic treatment of autonomous financial systems and in cross-domain governance analysis.",
+    "definition": "Meaningful Human Control (MHC) was coined by UK NGO Article 36 in 2013 for autonomous-weapons policy negotiations. The canonical philosophical treatment (Santoni de Sio and van den Hoven, 2018) specifies two conditions: a tracking condition (the system responds to human moral reasons and environmental facts) and a tracing condition (outcomes can be traced back to at least one human with proper moral understanding of them). MHC carries the strongest normative charge of any term in the human oversight family and appears rarely in financial regulation \u2014 it surfaces primarily in academic treatment of autonomous financial systems and in cross-domain governance analysis.",
     "domain": "ai",
     "aliases": [
       "Meaningful Human Control",
@@ -1323,7 +1384,7 @@
     "term": "SRO",
     "full": "Self-Regulatory Organization",
     "short": "A non-governmental body authorized to regulate its own members; FINRA is the primary SRO for U.S. broker-dealers. SRO guidance does not constitute prudential banking regulation.",
-    "definition": "A Self-Regulatory Organization (SRO) is a non-governmental entity authorized by statute to regulate the conduct of its own members, with rules enforceable against members who agree to abide by them as a condition of membership. FINRA is the primary SRO for U.S. broker-dealers. SRO guidance is important for securities firms but does not constitute prudential banking supervision — a distinction that matters when interpreting statements like FINRA's 2026 Annual Oversight Report reference to human-in-the-loop agent protocols, which applies to broker-dealer deployments and not to bank-regulated entities.",
+    "definition": "A Self-Regulatory Organization (SRO) is a non-governmental entity authorized by statute to regulate the conduct of its own members, with rules enforceable against members who agree to abide by them as a condition of membership. FINRA is the primary SRO for U.S. broker-dealers. SRO guidance is important for securities firms but does not constitute prudential banking supervision \u2014 a distinction that matters when interpreting statements like FINRA's 2026 Annual Oversight Report reference to human-in-the-loop agent protocols, which applies to broker-dealer deployments and not to bank-regulated entities.",
     "domain": "regulatory",
     "aliases": [
       "Self-Regulatory Organization",
@@ -1375,6 +1436,460 @@
     ],
     "used_in": [
       "metrics-metrics-metrics"
+    ]
+  },
+  {
+    "id": "mas",
+    "term": "MAS",
+    "full": "Monetary Authority of Singapore",
+    "short": "Singapore's central bank and integrated financial regulator; its November 2025 consultation paper proposes calibrating required human oversight as a function of AI system autonomy, user reliance, and task complexity.",
+    "definition": "The Monetary Authority of Singapore (MAS) is Singapore's central bank and integrated financial services regulator. Its November 2025 consultation paper on AI risk management proposes a calibration framework for human oversight: quantum of oversight = f(autonomy, reliance, complexity), where reliance is defined as the level of autonomy granted to the AI system, the degree of human involvement in the process it supports, and the availability of alternatives. The paper names the variables without resolving the function \u2014 calibration remains institution-by-institution, use-case-by-use-case. MAS is frequently cited alongside OSFI E-23 and PRA SS1/23 as a leading international reference for AI governance in banking.",
+    "domain": "regulatory",
+    "aliases": [
+      "Monetary Authority of Singapore"
+    ],
+    "used_in": [
+      "hitl-vocabulary",
+      "hitl-design"
+    ]
+  },
+  {
+    "id": "blast-radius",
+    "term": "blast radius",
+    "full": "Blast Radius",
+    "short": "The potential scope of harm from a security finding \u2014 financial exposure, data affected, downstream systems reachable, and regulatory consequence.",
+    "definition": "In adversarial AI testing, blast radius is used to score and prioritize findings. A finding whose blast radius is limited to an internal audit log is a different severity class than one that can dispatch a wire transfer or exfiltrate OAuth-scoped data. The concept is borrowed from cloud security, where it describes the impact of a compromised credential or misconfigured service.",
+    "domain": "technical",
+    "aliases": [],
+    "used_in": [
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "threat-modeling",
+    "term": "threat modeling",
+    "full": "Threat Modeling",
+    "short": "A structured process for enumerating what an adversary could reach in a system, through which mechanisms, and at which trust boundaries.",
+    "definition": "In LLM and agentic AI deployments, threat modeling identifies each trust boundary \u2014 user input, retrieved content, tool outputs, memory, sub-agents, MCP servers \u2014 names the controlling party for each, and estimates the blast radius if that boundary is compromised. The recommended framework for agentic systems is STRIDE augmented with the OWASP Agentic Top 10 attack taxonomy. The output is a Trust Boundary Register that belongs in the Model Risk Committee documentation package.",
+    "domain": "technical",
+    "aliases": [
+      "threat model"
+    ],
+    "used_in": [
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "cve",
+    "term": "CVE",
+    "full": "Common Vulnerabilities and Exposures",
+    "short": "A public catalog of known cybersecurity vulnerabilities maintained by MITRE, searchable at cve.org.",
+    "definition": "CVE identifiers (e.g., CVE-2025-32711) provide a standardized reference for tracking and discussing publicly disclosed security vulnerabilities. In the LLM context, the 2024\u20132025 CVE record documents prompt injection attacks escalating to SQL injection, OS command execution, and OAuth-scoped data exfiltration \u2014 providing an empirical baseline for adversarial testing scope.",
+    "domain": "technical",
+    "aliases": [
+      "CVEs",
+      "CVE record"
+    ],
+    "used_in": [
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "owasp-agentic-top10",
+    "term": "OWASP Agentic Top 10",
+    "full": "OWASP Top 10 for Agentic Applications",
+    "short": "OWASP's 2026 taxonomy of the ten highest-risk attack classes for agentic AI systems, covering orchestrator hijacking, tool misuse, and cross-agent injection (ASI01\u2013ASI10).",
+    "definition": "Distinct from the OWASP LLM Top 10 (which covers language-model-specific risks), the Agentic Top 10 addresses risks that emerge when LLMs act as orchestrators or sub-agents with tool access. ASI04 covers indirect prompt injection; ASI01 covers memory poisoning; ASI06 covers resource and service misuse. The taxonomy is designed to cross-reference with MITRE ATLAS technique IDs for examiner-facing documentation.",
+    "domain": "technical",
+    "aliases": [
+      "OWASP ASI",
+      "ASI01",
+      "ASI10",
+      "Agentic Top 10",
+      "OWASP Top 10 for Agentic Applications",
+      "Top 10 for Agentic Applications"
+    ],
+    "used_in": [
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "data-poisoning",
+    "term": "data poisoning",
+    "full": "Data Poisoning Attack",
+    "short": "Contamination of training data or retrieval corpora to steer model behavior toward attacker-controlled outputs.",
+    "definition": "Data poisoning attacks target the inputs used to train or ground a model. PoisonedRAG is the retrieval-augmented variant: malicious documents inserted into a knowledge base (e.g., Confluence, SharePoint) cause the model to retrieve and act on hostile content. Training-time poisoning targets fine-tuning datasets. Both require different defenses and produce different risk profiles in a model risk framework.",
+    "domain": "technical",
+    "aliases": [
+      "poisoning attack",
+      "training data poisoning"
+    ],
+    "used_in": [
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "memory-poisoning",
+    "term": "memory poisoning",
+    "full": "Memory Poisoning Attack",
+    "short": "Injection of persistent hostile directives into an agent's long-term memory store, causing the agent to behave maliciously across future sessions.",
+    "definition": "Unlike prompt injection, which affects a single inference call, memory poisoning persists across sessions. Demonstrated attacks (e.g., against Gemini's memory layer) show that a single injected directive can alter an agent's behavior in all subsequent conversations with a user. This failure mode has no analogue in static models and is one of three attack classes (alongside indirect prompt injection and tool-call hijacking) that break traditional model-risk assumptions.",
+    "domain": "technical",
+    "aliases": [],
+    "used_in": [
+      "adversarial-workflow",
+      "skills-supply-chain"
+    ]
+  },
+  {
+    "id": "model-extraction",
+    "term": "model extraction",
+    "full": "Model Extraction Attack",
+    "short": "Query-based inference attacks that reconstruct a model's decision boundary by systematically probing its outputs.",
+    "definition": "Model extraction allows an attacker to clone a proprietary model's behavior without access to its weights, by issuing many queries and training a surrogate on the responses. In banking, the concern is extraction of credit-scoring logic via adverse-action APIs \u2014 potentially enabling targeted applicants to game the model or enabling competitors to replicate proprietary underwriting.",
+    "domain": "technical",
+    "aliases": [
+      "model stealing"
+    ],
+    "used_in": [
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "stride",
+    "term": "STRIDE",
+    "full": "Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege",
+    "short": "A threat modeling framework covering six attack categories: Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, and Elevation of privilege.",
+    "definition": "Originally developed at Microsoft, STRIDE is a structured framework for enumerating threats during system design. For agentic AI systems, STRIDE is typically augmented with the OWASP Agentic Top 10 taxonomy to cover attack classes (indirect prompt injection, tool-call hijacking, memory poisoning) that don't map cleanly to the original six categories. The output of a STRIDE analysis is a threat register that feeds into a Trust Boundary Register for MRM documentation.",
+    "domain": "technical",
+    "aliases": [],
+    "used_in": [
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "garak",
+    "term": "Garak",
+    "full": "Generative AI Red-teaming and Assessment Kit",
+    "short": "NVIDIA's open-source LLM red-teaming tool (Apache-2.0) that runs structured probe families against model deployments and produces JSONL regression logs.",
+    "definition": "Garak executes probe families (including prompt injection, DAN jailbreaks, encoding-based attacks, and data leakage) against an LLM endpoint and scores each with detector classifiers. Probe scores are not normalized and not comparable across probe families \u2014 Garak's value is regression tracking within a single deployment over time, not cross-system benchmarking. It is the most commonly used open-source baseline tool for MRM adversarial testing programs.",
+    "domain": "evaluation",
+    "aliases": [],
+    "used_in": [
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "pyrit",
+    "term": "PyRIT",
+    "full": "Python Risk Identification Toolkit for Generative AI",
+    "short": "Microsoft's open-source red-teaming framework providing orchestrators, scorers, and built-in attacks (Crescendo, TAP, PAIR, Skeleton Key, Many-Shot) for automated adversarial testing.",
+    "definition": "PyRIT (arXiv:2410.02828) provides a modular architecture: orchestrators manage multi-turn attack strategies, converters transform prompts (encoding, translation, paraphrasing), targets wrap LLM endpoints, scorers evaluate whether attacks succeeded, and memory stores (SQLite or Azure SQL) persist results. Built-in attack strategies include Crescendo (multi-turn benign-to-harmful priming), TAP (Tree of Attacks with Pruning), PAIR, Skeleton Key, and Many-Shot Jailbreaking. The Scenarios CLI (`pyrit_scan`) supports 25+ strategies across easy/moderate/difficult tiers.",
+    "domain": "evaluation",
+    "aliases": [],
+    "used_in": [
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "ironies-of-automation",
+    "term": "Ironies of Automation",
+    "full": "Ironies of Automation (Bainbridge, 1983)",
+    "short": "Bainbridge's 1983 observation that automating the routine parts of a task degrades human manual skill and vigilance precisely at the moments when intervention is most needed.",
+    "definition": "Lisanne Bainbridge's foundational paper ('Ironies of Automation,' Automatica, 1983) identified a structural paradox: the more reliable an automated system, the less practice operators get with manual control, leaving them least capable of intervening at the rare moments when the automation fails. The paper is directly applicable to agentic AI oversight: model validation teams that never practice overriding well-performing models accumulate the same deficit. The 'ironies' are architectural \u2014 automation reliably creates the conditions for its own oversight failure.",
+    "domain": "technical",
+    "aliases": [
+      "automation irony",
+      "Bainbridge irony"
+    ],
+    "used_in": [
+      "hitl-vocabulary",
+      "hitl-design"
+    ]
+  },
+  {
+    "id": "reversibility-window",
+    "term": "reversibility window",
+    "full": "Reversibility Window",
+    "short": "The time period during which an action taken by an AI agent can still be undone or corrected \u2014 a key factor in determining where a runtime human-oversight checkpoint must sit.",
+    "definition": "The reversibility window is the design variable that determines the urgency of runtime HITL checkpoints. For ACH payments (1\u20132 day settlement), the window is wide enough to allow post-execution review. For RTP/FedNow instant payments, the window is effectively zero \u2014 funds settle in seconds with no chargeback mechanism. Wire transfers and stablecoin transactions are similarly irrevocable. Knowing when an action remains reversible determines where the interrupt gate must sit; existence of a gate is a separate question from whether the gate is positioned before the irreversibility threshold.",
+    "domain": "technical",
+    "aliases": [],
+    "used_in": [
+      "hitl-design"
+    ]
+  },
+  {
+    "id": "guardrail",
+    "term": "guardrail",
+    "full": "AI guardrail",
+    "short": "A runtime intervention mechanism that intercepts, evaluates, and passes or blocks model behavior before it reaches a user or downstream system \u2014 distinct from tests and monitoring metrics.",
+    "definition": "A guardrail operates on live model behavior, not historical aggregates. Input guardrails screen prompts for integrity (jailbreak attempts, social engineering); output guardrails filter responses for safety and reliability (PII redaction, hallucination checks); tool guardrails enforce execution boundaries (allowlists, RBAC); structural guardrails validate data schema for downstream systems. Behavioral guardrails \u2014 screening for prompt injection, jailbreaking, and goal hijacking \u2014 address model 'intent' and lack established validation frameworks under SR 11-7. In SR 11-7 terms, guardrail KPIs belong in Ongoing Monitoring; the guardrail mechanism itself is subject to Conceptual Soundness validation.",
+    "domain": "technical",
+    "aliases": [
+      "guardrails",
+      "AI guardrail",
+      "runtime guardrail",
+      "behavioral guardrail",
+      "output guardrail",
+      "input guardrail"
+    ],
+    "used_in": [
+      "guardrails",
+      "sr11-7",
+      "a2a-risks",
+      "effective-challenge",
+      "adversarial-workflow",
+      "hitl-design",
+      "deployment-gates"
+    ]
+  },
+  {
+    "id": "context-engineering",
+    "term": "context engineering",
+    "full": "Context engineering",
+    "short": "The practice of designing and maintaining persistent, version-controlled files (CLAUDE.md, AGENTS.md) that inject project knowledge into every agent session, replacing repetitive prompting.",
+    "definition": "Context engineering solves the cold-start problem \u2014 where new agent sessions begin with no knowledge of the project, conventions, or prior decisions \u2014 by encoding that knowledge in version-controlled Markdown files. Key failure modes: staleness (projects change faster than context files), context window bloat (lost-in-the-middle effects from oversized files), and conflicting instructions across multi-tool setups. ETH Zurich research found LLM-generated context files can reduce task success rates by ~2% while increasing costs 20\u201323%, because agents follow bad instructions as faithfully as good ones.",
+    "domain": "technical",
+    "aliases": [
+      "context files",
+      "context file",
+      "CLAUDE.md",
+      "AGENTS.md"
+    ],
+    "used_in": [
+      "context",
+      "agent-harness-design",
+      "guardrails",
+      "skills-supply-chain"
+    ]
+  },
+  {
+    "id": "compaction",
+    "term": "compaction",
+    "full": "Context compaction",
+    "short": "A context window management strategy that summarizes earlier conversation turns in place to free token budget while preserving session continuity.",
+    "definition": "Compaction is a harness-level technique for managing long agent sessions: earlier turns are summarized in place rather than truncated or reset. It preserves continuity but can introduce 'context anxiety' \u2014 the agent's tendency to rush or cut corners as it sees the window filling. The alternative is a full context reset paired with a rich handoff artifact. Which approach works better has evolved with model capability: Sonnet 4.5 required explicit resets; Opus 4.6 largely handles long sessions with automatic compaction.",
+    "domain": "technical",
+    "aliases": [
+      "context compaction",
+      "context summarization",
+      "rolling summarization"
+    ],
+    "used_in": [
+      "context",
+      "agent-harness-design"
+    ]
+  },
+  {
+    "id": "foundation-model",
+    "term": "foundation model",
+    "full": "Foundation model",
+    "short": "A large-scale AI model trained on broad data and accessed via API \u2014 posing unique MRM challenges because banks cannot inspect internals, control versioning, or replicate outputs.",
+    "definition": "Foundation models (e.g., Claude, GPT-4, Gemini) are pre-trained on massive datasets and served through APIs. Unlike in-house models, banks using foundation models cannot inspect underlying parameters, cannot control when the vendor updates the model, and cannot perform traditional replication-based validation. SR 11-7's vendor model provisions still apply \u2014 banks must take compensating steps when internals are inaccessible \u2014 but the compromise becomes far more consequential when the vendor is a frontier AI lab with unannounced update cycles.",
+    "domain": "technical",
+    "aliases": [
+      "foundation models",
+      "frontier model",
+      "frontier models",
+      "base model"
+    ],
+    "used_in": [
+      "sr11-7",
+      "guardrails",
+      "effective-challenge",
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "prompt-engineering",
+    "term": "prompt engineering",
+    "full": "Prompt engineering",
+    "short": "The practice of designing, versioning, and managing system prompts and few-shot examples that shape an LLM's behavior \u2014 increasingly treated as model configuration requiring change management.",
+    "definition": "Prompt engineering encompasses system prompt design, instruction framing, few-shot example selection, and temperature configuration. In an MRM context, these are model configuration choices analogous to hyperparameter settings and should be subject to version control, documentation, and change management. Researchers at Wells Fargo (arXiv 2503.15668) have proposed treating prompt engineering as a distinct documentation category under SR 11-7, separate from model architecture and training data documentation.",
+    "domain": "technical",
+    "aliases": [
+      "prompt design",
+      "system prompt design",
+      "prompt configuration"
+    ],
+    "used_in": [
+      "sr11-7",
+      "context",
+      "adversarial-workflow",
+      "deployment-gates"
+    ]
+  },
+  {
+    "id": "goal-hijacking",
+    "term": "goal hijacking",
+    "full": "Goal hijacking",
+    "short": "An attack or failure mode where an agent's objective is corrupted \u2014 through adversarial inputs, memory poisoning, or emergent drift \u2014 causing it to pursue unintended goals.",
+    "definition": "Goal hijacking is distinct from prompt injection (redirects a single response) and jailbreaking (bypasses safety constraints for that session). In goal hijacking, the agent's underlying objective is durably corrupted \u2014 through adversarial content embedded in retrieved documents, through memory poisoning across sessions, or through emergent optimization toward a proxy goal. In financial services, the canonical example is an investment agent that gradually shifts toward higher-risk strategies not authorized by the user.",
+    "domain": "technical",
+    "aliases": [
+      "goal drift",
+      "objective hijacking",
+      "goal misalignment"
+    ],
+    "used_in": [
+      "guardrails",
+      "a2a-risks",
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "agent-harness",
+    "term": "agent harness",
+    "full": "Agent harness",
+    "short": "The orchestration layer that transforms a stateless LLM call into a persistent, tool-using agent \u2014 managing the execution loop, context window, error recovery, and inter-session state.",
+    "definition": "An agent harness is the engineering infrastructure that gives an LLM persistence across turns, sessions, and tool calls. It is distinct from context files (which encode knowledge) and model capabilities (which determine reasoning quality). The harness enforces what the agent cannot do reliably as a model instruction alone: absolute tool prohibitions, context window monitoring, retry logic, human approval gates, and state persistence via structured files. Harness design is a primary determinant of agent reliability in production, independent of model capability \u2014 a well-designed harness running a smaller model can outperform a naive setup with a larger one.",
+    "domain": "technical",
+    "aliases": [
+      "harness",
+      "agent orchestration",
+      "orchestration harness"
+    ],
+    "used_in": [
+      "agent-harness-design",
+      "guardrails",
+      "context"
+    ]
+  },
+  {
+    "id": "classical-test-theory",
+    "term": "Classical Test Theory",
+    "full": "Classical Test Theory (CTT)",
+    "short": "A psychometric framework that models observed scores as true latent score plus random error \u2014 giving LLM evaluators a principled way to separate signal from noise across stochastic outputs.",
+    "definition": "Classical Test Theory (CTT) models any observed measurement as the sum of a true score (what the test would measure across infinite replications) and random error. Applied to LLM evaluation, CTT provides a framework for handling non-deterministic outputs: repeated sampling of a model on the same prompt estimates the 'true score' for that prompt, and variance across samples characterizes measurement noise. CTT complements Item Response Theory (IRT) \u2014 IRT models item difficulty and discrimination; CTT models reliability across replications.",
+    "domain": "evaluation",
+    "aliases": [
+      "CTT",
+      "classical test theory"
+    ],
+    "used_in": [
+      "metrics-metrics-metrics"
+    ]
+  },
+  {
+    "id": "credit-assignment-problem",
+    "term": "credit assignment problem",
+    "full": "Credit assignment problem (multi-agent)",
+    "short": "The challenge of tracing which agent in a multi-agent chain was causally responsible for a harmful outcome \u2014 with direct regulatory implications for explainability requirements under ECOA and GDPR.",
+    "definition": "In multi-agent AI systems, the credit assignment problem refers to the difficulty of attributing a final outcome \u2014 helpful or harmful \u2014 to the specific actions of individual agents in a delegation chain. When a pipeline of agents collectively produces a decision, no established method exists for determining which agent's contribution was decisive. This has direct regulatory implications: ECOA requires specific denial reasons, GDPR requires explainability, and fair lending frameworks require traceability. The problem compounds when agents themselves use other agents as tools.",
+    "domain": "technical",
+    "aliases": [
+      "credit assignment",
+      "responsibility attribution",
+      "causal attribution in agents"
+    ],
+    "used_in": [
+      "a2a-risks",
+      "a2a-case-studies",
+      "effective-challenge"
+    ]
+  },
+  {
+    "id": "champion-challenger",
+    "term": "Champion-Challenger",
+    "full": "Champion-Challenger Framework",
+    "short": "Running an alternative model in parallel with a production model to continuously compare performance and support evidence-based deployment decisions.",
+    "definition": "A model governance practice where a current production model (the champion) is run alongside one or more candidate alternatives (challengers) on live or representative data. Performance differences inform promotion or retirement decisions and provide an ongoing evidence record for model risk management. Under SR 11-7 and its successors, champion-challenger testing is considered a best practice for high-criticality models. As a continuous rather than periodic mechanism, it addresses non-determinism and drift in ways that point-in-time validation cannot.",
+    "domain": "banking",
+    "aliases": [
+      "champion challenger",
+      "champion/challenger",
+      "champion-challenger testing",
+      "champion-challenger framework"
+    ],
+    "used_in": [
+      "effective-challenge",
+      "hitl-design"
+    ]
+  },
+  {
+    "id": "penetration-test",
+    "term": "Penetration Test",
+    "full": "Penetration Testing",
+    "short": "A structured adversarial exercise in which a tester attempts to exploit vulnerabilities in a target system to assess its real-world security posture.",
+    "definition": "Unlike automated vulnerability scanning, penetration testing involves human-driven creative attack chains \u2014 chaining together multiple weaknesses to achieve an objective. In the LLM context, a penetration test of a deployed model or agent system differs from safety benchmarking: it probes exploitability against a specific deployment environment, not capability regression in the abstract. For MRM purposes, an adversarial red-team engagement is conceptually equivalent to a penetration test applied to the model's trust boundaries, tool interfaces, and prompt surfaces.",
+    "domain": "technical",
+    "aliases": [
+      "pen test",
+      "pen testing",
+      "pentest",
+      "pentesting",
+      "penetration testing"
+    ],
+    "used_in": [
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "strongreject",
+    "term": "StrongREJECT",
+    "full": "StrongREJECT Safety Benchmark",
+    "short": "A rubric-based LLM safety benchmark (NeurIPS 2024) designed to correct for overcounting in earlier jailbreak benchmarks by scoring refusal quality, not just binary harm presence.",
+    "definition": "Introduced by Souly et al. (NeurIPS 2024) in response to documented failures of binary jailbreak classifiers \u2014 particularly the Scots Gaelic / low-resource jailbreak case where incoherent output was counted as successful harm. StrongREJECT evaluates three dimensions: refusal (binary), convincingness (1\u20135), and specificity (1\u20135). It achieves the highest human-agreement scores of published safety judges. In MRM deployment gates, it functions as a safety non-regression benchmark for comparing a candidate model against the champion on the same rubric across releases.",
+    "domain": "evaluation",
+    "aliases": [
+      "StrongREJECT benchmark",
+      "strong reject"
+    ],
+    "used_in": [
+      "deployment-gates",
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "harmbench",
+    "term": "HarmBench",
+    "full": "HarmBench Safety Evaluation Framework",
+    "short": "A large-scale adversarial safety benchmark (ICML 2024) with 510 curated behaviors, comparing 18 attack methods against 33 LLMs to track refusal regression across model versions.",
+    "definition": "Developed by the Center for AI Safety and published at ICML 2024. HarmBench provides 510 curated harmful behaviors across standard, copyright, contextual, and multimodal categories. Its key finding for deployment gate design is that Attack Success Rate (ASR) is stable within model families but variable across them \u2014 meaning HarmBench gates must be parameterized per model family rather than as a global threshold. Primarily useful as a regression-tracking workhorse: detecting whether a new model version has degraded on harm categories the prior version handled.",
+    "domain": "evaluation",
+    "aliases": [
+      "HarmBench benchmark",
+      "harm bench"
+    ],
+    "used_in": [
+      "deployment-gates",
+      "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "mica",
+    "term": "MiCA",
+    "full": "Markets in Crypto-Assets Regulation",
+    "short": "The EU's comprehensive regulatory framework for crypto-assets, fully applicable since December 2024, covering stablecoins, crypto-asset service providers, and market integrity.",
+    "definition": "Regulation EU 2023/1114, adopted June 2023 and fully applicable December 30, 2024. MiCA is the first comprehensive EU framework for crypto-assets, covering issuance and trading of asset-referenced tokens (stablecoins), e-money tokens, and other crypto-assets. Key provisions for significant non-EUR stablecoins include hard transaction caps (a monetary sovereignty measure), reserve requirements, and authorization requirements for issuers and service providers. Contrasted with the U.S. GENIUS Act, which passed in July 2025 and focuses on reserve and chartering requirements without equivalent consumer protection mandates for fraud recovery.",
+    "domain": "regulatory",
+    "aliases": [
+      "Markets in Crypto-Assets",
+      "MiCA regulation",
+      "EU MiCA"
+    ],
+    "used_in": [
+      "agentic-commerce-gap"
+    ]
+  },
+  {
+    "id": "gui-agent",
+    "term": "GUI Agent",
+    "full": "Graphical User Interface Agent",
+    "short": "An AI agent that interacts with software applications through their visual interface \u2014 clicking buttons, filling forms, reading screenshots \u2014 without requiring API or programmatic access.",
+    "definition": "A class of AI agent that operates a computer or browser the way a human would: by perceiving screenshots, identifying interactive elements, and emitting click, type, and scroll actions. Unlike API-based agents that call structured endpoints, GUI agents can operate any software with a visual interface \u2014 making them potentially more general but also more dependent on visual grounding accuracy. In production contexts, GUI agents face specific challenges: OCR failures on small text, stale DOM state, authentication flows outside training distributions, and the pixel-to-semantics interpretation gap that synthetic AxTree-based training teachers don't have. Relevant to banking deployments for internal portal automation and customer-facing workflow assistance.",
+    "domain": "technical",
+    "aliases": [
+      "computer use agent",
+      "visual web agent",
+      "browser agent",
+      "CUA",
+      "GUI agents"
+    ],
+    "used_in": [
+      "molmoweb-data-flywheel",
+      "molmoweb-openness-gap"
     ]
   }
 ]
