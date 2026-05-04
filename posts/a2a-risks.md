@@ -71,7 +71,7 @@ Early practitioners are converging on three zones. Agent-level controls form the
 
 Sandboxing is where I see most organizations underinvest. [Only about 5% of enterprises](https://www.softwareseni.com/ai-agents-in-production-the-sandboxing-problem-no-one-has-solved) have solved this well enough for production. [AWS Firecracker microVMs and Google's Agent Sandbox with gVisor isolation](https://www.softwareseni.com/ai-agents-in-production-the-sandboxing-problem-no-one-has-solved) are the current state of the art, but deployment is still rare outside early-adopter shops. The blast radius from a compromised agent that isn't containerized is much larger than it needs to be.
 
-The adversarial testing piece deserves a separate conversation, but the short version: without active defenses, roleplay and multi-turn jailbreak attacks against agent systems succeed at rates that would be unacceptable in any other security context. Well-designed defenses can reduce those success rates dramatically, but the testing has to be continuous, running alongside deployment rather than treating pre-launch as sufficient.[^8]
+The adversarial testing piece [deserves a separate conversation](post.html?slug=adversarial-workflow), but the short version: without active defenses, roleplay and multi-turn jailbreak attacks against agent systems succeed at rates that would be unacceptable in any other security context. Well-designed defenses can reduce those success rates dramatically, but the testing has to be continuous, running alongside deployment rather than treating pre-launch as sufficient.[^8]
 
 ## The governance gap is the one that worries me most
 

@@ -90,7 +90,7 @@ A practical project-level `CLAUDE.md` is usually shorter than people expect:
 One thing that doesn't show up enough: security instructions. [Analysis of real-world repositories](https://arxiv.org/abs/2511.12884v1) found them in only 14.5% of context files. If you're defining what the agent *can* do, also define what it *can't* — especially around destructive operations and credential handling.
 
 > [!CAUTION]
-> The security exposure from skills files runs deeper than what belongs in a context file. Skills marketplaces have grown to thousands of entries with minimal gatekeeping — one audit found 824 confirmed malicious skills in a single marketplace. Invisible Unicode codepoints can embed instructions that survive human code review entirely. And agents with filesystem access can write new skills into their own environment, establishing persistence across future sessions. For the full picture, [see the companion post on the skills supply chain problem](post.html?slug=skills-supply-chain).
+> The security exposure from skills files runs deeper than what belongs in a context file. Skills marketplaces have grown to thousands of entries with minimal gatekeeping — [one audit found 824 confirmed malicious skills in a single marketplace](post.html?slug=skills-supply-chain). Invisible Unicode codepoints can embed instructions that survive human code review entirely. And agents with filesystem access can write new skills into their own environment, establishing persistence across future sessions. For the full attack surface, see [the companion post on the skills supply chain](post.html?slug=skills-supply-chain).
 
 ## What the research actually found
 

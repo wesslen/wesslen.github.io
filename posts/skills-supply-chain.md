@@ -7,7 +7,7 @@ tags: [security, skills]
 
 > **TL;DR:** Skills marketplaces have reproduced every supply chain vulnerability pattern that took npm and PyPI a decade to recognize — in roughly six months. Three distinct attack surfaces: 824+ confirmed malicious skills in one marketplace alone, invisible Unicode Tags that inject instructions no human code review can catch, and agents that can write new skills into their own running environment. What makes this structurally different from runtime injection is persistence: a poisoned skills file loads automatically before every session until someone explicitly removes it. Nobody currently owns the aggregate problem at the platform level, and the tooling to catch these attacks came from the researchers who found them. Platform operators have yet to fill that gap.
 
-The central bet of [context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) is obedience. You write a `SKILL.md`, drop it in the right directory, and your agent reads it faithfully at the start of every session — no arguing, no skipping, no judgment about whether the instructions look right. That obedience is the feature. It's also the attack surface.
+The central bet of context engineering is obedience. You write a `SKILL.md`, drop it in the right directory, and your agent reads it faithfully at the start of every session — no arguing, no skipping, no judgment about whether the instructions look right. That obedience is the feature. It's also the attack surface.
 
 I wrote about context files and their staleness problem [in an earlier post](post.html?slug=context). The [ETH Zurich research group's finding](https://arxiv.org/abs/2602.11988v1) there was that agents are "too obedient" — they follow unnecessary instructions just as reliably as useful ones. This post is about what that same obedience produces when the instructions are malicious.
 
@@ -56,7 +56,7 @@ Standard prompt injection is session-scoped. An attacker who embeds malicious in
 
 A backdoored skills file works the other way. It loads before the session starts and persists until someone removes it. In a team environment where skills are committed to a shared repository, a single compromised file affects every developer's agent runs until someone identifies it and takes it out. Skills are designed to be persistent — they survive context compaction, load automatically, and travel with the codebase. Those same properties are what make a compromised one hard to contain.
 
-This maps to a structural point from the [Knight Capital incident](https://wesslen.github.io/post.html?slug=a2a-case-studies#:~:text=made%20right%20now.-,Knight%20Capital%20still%20sets%20the%20baseline,-The%20five%20incidents): dead code doesn't become inert through disuse; it just becomes invisible. A skill installed six months ago and forgotten is still loading metadata into the system prompt on every session. A skills directory that's never been audited is almost certainly doing some of this quietly right now.
+This maps to a structural point from the [Knight Capital incident](post.html?slug=a2a-case-studies): dead code doesn't become inert through disuse; it just becomes invisible. A skill installed six months ago and forgotten is still loading metadata into the system prompt on every session. A skills directory that's never been audited is almost certainly doing some of this quietly right now.
 
 ## What actually helps
 
@@ -70,7 +70,7 @@ The practical posture: treat skills installation like a `pip install` from an un
 
 ## The governance question
 
-What connects all three attack vectors is what connected the five incidents in [the A2A case studies post](post.html?slug=a2a-case-studies): nobody owns the aggregate problem.
+What connects all three attack vectors is what connected the five incidents in [the A2A case studies post](post.html?slug=a2a-case-studies): nobody owns the aggregate problem. The [adversarial testing series](post.html?slug=adversarial-workflow) covers how the supply chain attack surface — particularly tool-call hijacking and memory poisoning — maps into a defensible red-team engagement.
 
 The ClawHavoc campaign ran until a security team and their bot audited the marketplace themselves. The HTML comment vulnerability had been demonstrated publicly and left unfixed. The Unicode Tag technique had been reported to model vendors for two years. The fixes exist and the tooling is available; what's missing is the institutional incentive to require either.
 
