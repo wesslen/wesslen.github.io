@@ -1,0 +1,107 @@
+<svg viewBox="0 0 680 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svg-title svg-desc">
+  <title id="svg-title">MolmoWeb ReAct Harness Loop</title>
+  <desc id="svg-desc">Flowchart of the MolmoWeb agent harness. Each step: assemble a prompt from task goal, last 10 steps, URL and title, and a fresh screenshot; POST to the stateless model server; receive a Thought and Action; execute the action via Playwright; capture a new screenshot; append to rolling history; check whether the model emitted an [ANSWER] prefix — if yes, exit; if no, repeat from the top.</desc>
+
+  <defs>
+    <marker id="arr-dark" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#374151"/>
+    </marker>
+    <marker id="arr-loop" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .box-main { fill: #f9fafb; stroke: #d1d5db; stroke-width: 1.5; }
+    .box-exit  { fill: #fff1f2; stroke: #fca5a5; stroke-width: 1.5; }
+    .diamond   { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1.5; }
+    .lbl       { font-size: 13px; font-weight: 600; fill: #111827; }
+    .sub       { font-size: 11px; fill: #6b7280; }
+    .conn      { stroke: #374151; stroke-width: 1.5; fill: none; marker-end: url(#arr-dark); }
+    .loop-line { stroke: #9ca3af; stroke-width: 1.5; fill: none; stroke-dasharray: 5,4; marker-end: url(#arr-loop); }
+    .yn        { font-size: 11px; fill: #2563eb; font-style: italic; }
+    .annot     { font-size: 10px; fill: #9ca3af; font-style: italic; }
+    .cost-note { font-size: 10px; fill: #d97706; }
+  </style>
+
+  <!-- ── Box 1: Assemble Prompt ─────────────────────────────────────────── -->
+  <rect x="185" y="22" width="310" height="68" rx="6" class="box-main"/>
+  <text x="340" y="44"  text-anchor="middle" class="lbl">Assemble Prompt</text>
+  <text x="340" y="60"  text-anchor="middle" class="sub">Task goal  ·  last 10 steps  ·  URL + title</text>
+  <text x="340" y="76"  text-anchor="middle" class="sub">fresh screenshot  ·  no session ID</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="340" y1="90" x2="340" y2="118" class="conn"/>
+
+  <!-- ── Box 2: POST /predict ───────────────────────────────────────────── -->
+  <rect x="205" y="120" width="270" height="52" rx="6" class="box-main"/>
+  <text x="340" y="142" text-anchor="middle" class="lbl">POST /predict</text>
+  <text x="340" y="158" text-anchor="middle" class="sub">stateless FastAPI server  ·  full prompt + image_base64</text>
+
+  <!-- cost annotation -->
+  <text x="504" y="140" class="cost-note">re-encodes entire</text>
+  <text x="504" y="153" class="cost-note">history every step</text>
+  <line x1="499" y1="146" x2="477" y2="146" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- Arrow 2→3 -->
+  <line x1="340" y1="172" x2="340" y2="200" class="conn"/>
+
+  <!-- ── Box 3: Model Response ──────────────────────────────────────────── -->
+  <rect x="190" y="202" width="300" height="58" rx="6" class="box-main"/>
+  <text x="340" y="224" text-anchor="middle" class="lbl">Model Response</text>
+  <text x="340" y="241" text-anchor="middle" class="sub">Thought: &lt;natural language reasoning&gt;</text>
+  <text x="340" y="255" text-anchor="middle" class="sub">Action: &lt;tool call with args&gt;</text>
+
+  <!-- Arrow 3→4 -->
+  <line x1="340" y1="260" x2="340" y2="288" class="conn"/>
+
+  <!-- ── Box 4: Execute ─────────────────────────────────────────────────── -->
+  <rect x="200" y="290" width="280" height="52" rx="6" class="box-main"/>
+  <text x="340" y="312" text-anchor="middle" class="lbl">Execute via Playwright</text>
+  <text x="340" y="328" text-anchor="middle" class="sub">click  ·  type  ·  navigate  ·  scroll  ·  fill</text>
+
+  <!-- Arrow 4→5 -->
+  <line x1="340" y1="342" x2="340" y2="370" class="conn"/>
+
+  <!-- ── Box 5: Capture Screenshot ──────────────────────────────────────── -->
+  <rect x="210" y="372" width="260" height="50" rx="6" class="box-main"/>
+  <text x="340" y="394" text-anchor="middle" class="lbl">Capture Screenshot</text>
+  <text x="340" y="410" text-anchor="middle" class="sub">observation = pixels only (no text Observation field)</text>
+
+  <!-- Arrow 5→6 -->
+  <line x1="340" y1="422" x2="340" y2="450" class="conn"/>
+
+  <!-- ── Box 6: Append to History ───────────────────────────────────────── -->
+  <rect x="210" y="452" width="260" height="48" rx="6" class="box-main"/>
+  <text x="340" y="474" text-anchor="middle" class="lbl">Append to Rolling History</text>
+  <text x="340" y="489" text-anchor="middle" class="sub">thought + action stored; max 10 steps retained</text>
+
+  <!-- Arrow 6→decision -->
+  <line x1="340" y1="500" x2="340" y2="528" class="conn"/>
+
+  <!-- ── Decision Diamond: [ANSWER]? ───────────────────────────────────── -->
+  <!-- Diamond centered at (340, 552), half-width=110, half-height=26 -->
+  <polygon points="340,526 450,552 340,578 230,552" class="diamond"/>
+  <text x="340" y="548" text-anchor="middle" class="lbl" font-size="12">[ANSWER] prefix detected?</text>
+  <text x="340" y="563" text-anchor="middle" class="sub" font-size="10">send_msg_to_user text starts with [ANSWER]</text>
+
+  <!-- YES branch: right from diamond → EXIT -->
+  <line x1="450" y1="552" x2="530" y2="552" class="conn"/>
+  <text x="490" y="544" text-anchor="middle" class="yn">YES</text>
+  <rect x="530" y="534" width="84" height="36" rx="6" class="box-exit"/>
+  <text x="572" y="557" text-anchor="middle" class="lbl" fill="#dc2626">EXIT</text>
+
+  <!-- NO branch: left of diamond → up the left rail → back to box 1 -->
+  <text x="183" y="545" text-anchor="end" class="yn">NO</text>
+  <!-- left from diamond -->
+  <line x1="230" y1="552" x2="100" y2="552" stroke="#9ca3af" stroke-width="1.5" fill="none"/>
+  <!-- up the left rail -->
+  <line x1="100" y1="552" x2="100" y2="56" stroke="#9ca3af" stroke-width="1.5" fill="none"/>
+  <!-- right into box 1 -->
+  <line x1="100" y1="56" x2="183" y2="56" class="loop-line"/>
+
+  <!-- Left-rail label -->
+  <text x="72" y="310" text-anchor="middle" class="annot" transform="rotate(-90,72,310)">repeat  ·  step N+1</text>
+
+</svg>
