@@ -179,12 +179,12 @@
   },
   {
     "slug": "deployment-gates",
-    "title": "Three Gates for Deploying an LLM Under Model Risk Governance",
+    "title": "Three Adversarial Gates for LLM Deployment",
     "date": "2026-04-19",
-    "description": "A defensible LLM deployment gate combines three quantitative pass/fail conditions \u2014 capability non-regression, safety non-regression, and a robustness ceiling \u2014 each with a derivation an examiner can take apart.",
+    "description": "Three quantitative adversarial gates for LLM use-case deployment \u2014 capability non-regression, safety non-regression, and an attack-success-rate ceiling \u2014 each with a threshold derivation an examiner can take apart. Adversarial layer only; quality metrics are a parallel obligation.",
     "tags": [
       "adversarial",
-      "guardrails"
+      "evals"
     ],
     "draft": true
   },
