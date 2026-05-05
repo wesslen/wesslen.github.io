@@ -68,7 +68,8 @@
     ],
     "used_in": [
       "sr11-7",
-      "effective-challenge"
+      "effective-challenge",
+      "token-transfer-pricing"
     ]
   },
   {
@@ -84,7 +85,8 @@
       "effective-challenge",
       "hitl-vocabulary",
       "adversarial-workflow",
-      "hitl-design"
+      "hitl-design",
+      "token-transfer-pricing"
     ]
   },
   {
@@ -576,7 +578,8 @@
       "a2a-risks",
       "adversarial-workflow",
       "hitl-design",
-      "hitl-vocabulary"
+      "hitl-vocabulary",
+      "token-transfer-pricing"
     ]
   },
   {
@@ -896,7 +899,8 @@
       "Goodhart's Law"
     ],
     "used_in": [
-      "metrics-metrics-metrics"
+      "metrics-metrics-metrics",
+      "token-transfer-pricing"
     ]
   },
   {
@@ -1125,7 +1129,8 @@
       "LLM-as-a-judge",
       "automated LLM judge",
       "evaluator agent",
-      "evaluator LLM"
+      "evaluator LLM",
+      "LLM-judge"
     ],
     "used_in": [
       "metrics-metrics-metrics",
@@ -1641,7 +1646,8 @@
       "effective-challenge",
       "adversarial-workflow",
       "hitl-design",
-      "deployment-gates"
+      "deployment-gates",
+      "token-transfer-pricing"
     ]
   },
   {
@@ -1890,6 +1896,239 @@
     "used_in": [
       "molmoweb-data-flywheel",
       "molmoweb-openness-gap"
+    ]
+  },
+  {
+    "id": "duration",
+    "term": "duration",
+    "full": "Interest Rate Duration",
+    "short": "A measure of a bond or loan's sensitivity to interest rate changes, expressed in years; longer-duration assets carry greater interest rate risk because their cash flows are locked in further into the future.",
+    "definition": "Duration quantifies how much the price of a fixed-income instrument changes for a given change in interest rates. A 10-year mortgage has far higher duration than a 30-day repo \u2014 meaning the bank holding it is exposed to much larger mark-to-market losses if rates rise. In Funds Transfer Pricing, duration is the key dimension used to match each loan or deposit to the correct point on the internal funding curve, ensuring the business unit pays \u2014 or receives credit for \u2014 the full term premium embedded in its product.",
+    "domain": "banking",
+    "aliases": [
+      "interest rate duration",
+      "duration risk",
+      "Macaulay duration"
+    ],
+    "used_in": [
+      "token-transfer-pricing"
+    ]
+  },
+  {
+    "id": "liquidity-premium",
+    "term": "liquidity premium",
+    "full": "Liquidity Premium",
+    "short": "The additional return or internal rate charge required to compensate for holding or funding assets that cannot easily be converted to cash; in FTP, expressed as a surcharge on products that demand immediate, on-demand access to funds.",
+    "definition": "A liquidity premium reflects the cost of committing funds to uses that cannot be quickly unwound. In bank FTP frameworks, products that draw on demand (like demand deposits funding mortgages) carry a liquidity surcharge because they expose the treasury to unexpected outflow risk. In the token pricing analogy, synchronous real-time inference imposes a liquidity premium over scheduled batch inference \u2014 the platform must hold excess capacity available on demand rather than scheduling it predictably.",
+    "domain": "banking",
+    "aliases": [
+      "liquidity surcharge",
+      "liquidity charge"
+    ],
+    "used_in": [
+      "token-transfer-pricing"
+    ]
+  },
+  {
+    "id": "ftp",
+    "term": "Funds Transfer Pricing",
+    "full": "Funds Transfer Pricing (FTP)",
+    "short": "Internal bank pricing mechanism that charges business units for the funds they consume based on duration, liquidity, and optionality \u2014 making cross-subsidies between desks visible and correctable through price signals rather than mandates.",
+    "definition": "FTP assigns each loan or deposit an internal cost or credit based on the true cost of funding it, adjusted for duration, liquidity risk, and embedded optionality. It prevents business units from exploiting gaps in the bank's internal funding curve \u2014 for example, booking long-duration loans while pocketing the term premium without paying the corresponding duration risk. The mechanism transforms treasury policy into a price signal that automatically shapes business unit behavior without requiring explicit mandates.",
+    "domain": "banking",
+    "aliases": [
+      "FTP",
+      "transfer pricing",
+      "funds transfer pricing"
+    ],
+    "used_in": [
+      "token-transfer-pricing"
+    ]
+  },
+  {
+    "id": "matched-maturity-ftp",
+    "term": "Matched Maturity FTP",
+    "full": "Matched Maturity Funds Transfer Pricing",
+    "short": "The gold-standard FTP variant where each product is priced against the specific point on the internal funding curve that matches its duration, eliminating cross-subsidization between short- and long-term products.",
+    "definition": "In matched maturity FTP, every loan or deposit is assigned an internal transfer rate corresponding to a point on the bank's funding curve with the same tenor or duration. A 30-year mortgage is priced against the 30-year internal curve, not a blended average rate \u2014 which means the mortgage desk cannot benefit from a steep yield curve without paying the term premium in its funding charge. This is considered the gold standard because it eliminates duration mismatches at the product level.",
+    "domain": "banking",
+    "aliases": [
+      "matched maturity",
+      "MMFTP"
+    ],
+    "used_in": [
+      "token-transfer-pricing"
+    ]
+  },
+  {
+    "id": "basis-risk",
+    "term": "Basis Risk",
+    "full": "Basis Risk",
+    "short": "The risk that two correlated financial instruments move at different rates, leaving a residual exposure even after an apparently hedged position. In FTP, the treasury absorbs basis risk so business units can plan against stable internal rates.",
+    "definition": "Basis risk arises when a hedging instrument does not move in perfect lockstep with the underlying exposure \u2014 for example, when the rate used to fund a loan drifts relative to the rate earned on that loan. In the context of bank treasury operations and FTP, the treasury function absorbs basis risk from external market volatility, offering business units stable internal transfer prices. In the token context, the central AI platform absorbs basis risk from external API price changes so that internal departments face predictable internal charges.",
+    "domain": "banking",
+    "aliases": [],
+    "used_in": [
+      "token-transfer-pricing"
+    ]
+  },
+  {
+    "id": "finops",
+    "term": "FinOps",
+    "full": "Cloud Financial Operations (FinOps)",
+    "short": "A cloud financial management discipline that allocates and optimizes infrastructure spend at the team and feature level, rather than treating it as undifferentiated IT overhead.",
+    "definition": "FinOps emerged as a practice when cloud spend grew large enough that pooled IT overhead accounting became inadequate. It applies unit economics thinking to cloud infrastructure: which team consumed which resources, which features drove cost, and whether the spend was justified by the value produced. The FinOps Foundation formalized the practice, and it is now a standard function at organizations with significant cloud workloads. Token economics for LLMs is following a similar trajectory, with the key difference that the cost driver is behavioral (prompt design, model selection, caching choices) rather than provisioned resource allocation.",
+    "domain": "technical",
+    "aliases": [
+      "cloud FinOps",
+      "cloud financial management"
+    ],
+    "used_in": [
+      "token-transfer-pricing"
+    ]
+  },
+  {
+    "id": "token-maxing",
+    "term": "Token Maxing",
+    "full": "Token Maxing",
+    "short": "Behavioral gaming of AI usage metrics \u2014 redundant prompting, task inflation, delegation theater \u2014 that emerges when token consumption becomes a KPI rather than a cost tied to outcomes. Goodhart's Law at the compute layer.",
+    "definition": "Token Maxing describes the pattern in which teams or individuals optimize AI usage metrics \u2014 prompts per day, tokens consumed, AI interactions logged \u2014 rather than the outcomes those metrics were intended to proxy. When AI-integration scores become performance targets, the rational response is to maximize the metric through redundant prompting, inflated task delegation, and other forms of usage theater. The fix is the same as in banking's FTP parallel: replace activity metrics with cost-per-outcome metrics, so that the denominator is outcome value, not consumption volume.",
+    "domain": "evaluation",
+    "aliases": [],
+    "used_in": [
+      "token-transfer-pricing"
+    ]
+  },
+  {
+    "id": "accessibility-tree",
+    "term": "Accessibility tree",
+    "full": "Accessibility tree (AxTree)",
+    "short": "A structured browser representation of a page's elements \u2014 their labels, roles, and relationships \u2014 exposed by the browser for assistive technologies and, in agent contexts, readable by text-only agents as an alternative to pixel-level screenshot inference.",
+    "definition": "The accessibility tree (often abbreviated AxTree) is a hierarchical data structure the browser maintains alongside the visual DOM. It maps each page element to a semantic label, role (button, link, input), and state (checked, disabled, focused). Screen readers use it; so do text-based web agents. In the MolmoWeb training pipeline, Gemini agents read the AxTree rather than screenshots, giving them direct access to element semantics that the trained visual model won't have at inference time \u2014 the source of the information asymmetry at the heart of the synthetic-vs-human ablation.",
+    "domain": "technical",
+    "aliases": [
+      "AxTree",
+      "AX tree",
+      "accessibility tree"
+    ],
+    "used_in": [
+      "molmoweb-data-flywheel",
+      "molmoweb-openness-gap"
+    ]
+  },
+  {
+    "id": "dom",
+    "term": "DOM",
+    "full": "Document Object Model",
+    "short": "The browser's in-memory tree representation of an HTML document \u2014 the structured source from which both the visual render and the accessibility tree are derived.",
+    "definition": "The Document Object Model (DOM) is the browser's programmatic representation of a web page as a tree of nodes (elements, attributes, text). JavaScript reads and mutates the DOM; CSS styles it; the browser renders it visually. The accessibility tree is derived from the DOM but is not identical to it \u2014 not every DOM node has an accessible role, and the AxTree reflects semantic intent rather than raw markup structure. Web agents that read the DOM directly are brittle to sites that generate markup dynamically or use non-semantic elements; agents that read the accessibility tree are more robust but still miss canvas-rendered or PDF-based content.",
+    "domain": "technical",
+    "aliases": [
+      "Document Object Model"
+    ],
+    "used_in": [
+      "molmoweb-data-flywheel"
+    ]
+  },
+  {
+    "id": "react-prompting",
+    "term": "ReAct",
+    "short": "A prompting framework where an agent alternates Reasoning steps and Action calls in a structured loop, enabling step-by-step tool use with explicit thought traces before each action.",
+    "domain": "technical",
+    "aliases": [
+      "ReAct framework",
+      "ReAct loop",
+      "ReAct prompting",
+      "Reason+Act"
+    ]
+  },
+  {
+    "id": "pass-at-k",
+    "term": "pass@k",
+    "short": "An evaluation metric measuring the probability that at least one of k model attempts at a task succeeds; often reported as pass@1 (single attempt) or pass@4 (best of four parallel rollouts).",
+    "domain": "evaluation",
+    "aliases": [
+      "pass@1",
+      "pass@4",
+      "pass at k",
+      "best-of-N"
+    ]
+  },
+  {
+    "id": "vlm",
+    "term": "VLM",
+    "short": "Vision-Language Model: a foundation model capable of processing both images and text as input, enabling visual reasoning, screenshot understanding, and GUI agent behavior.",
+    "domain": "technical",
+    "aliases": [
+      "Vision-Language Model",
+      "vision-language model",
+      "VLMs",
+      "multimodal LLM",
+      "multimodal model"
+    ]
+  },
+  {
+    "id": "playwright",
+    "term": "Playwright",
+    "short": "An open-source browser automation library by Microsoft that controls Chromium, Firefox, and WebKit programmatically; used by GUI agents to execute web actions (click, type, navigate) and capture screenshots.",
+    "domain": "technical",
+    "aliases": [
+      "Playwright browser",
+      "Playwright client"
+    ]
+  },
+  {
+    "id": "apache-20",
+    "term": "Apache 2.0",
+    "short": "A permissive open-source software license that allows use, modification, and distribution with minimal restrictions, including in commercial products, provided attribution is given.",
+    "domain": "technical",
+    "aliases": [
+      "Apache License 2.0",
+      "Apache License",
+      "Apache-2.0"
+    ]
+  },
+  {
+    "id": "odc-by",
+    "term": "ODC-BY 1.0",
+    "short": "Open Data Commons Attribution License: a permissive open data license requiring attribution, commonly used for releasing machine learning datasets alongside Apache-licensed code.",
+    "domain": "technical",
+    "aliases": [
+      "ODC-BY",
+      "Open Data Commons Attribution",
+      "ODC Attribution"
+    ]
+  },
+  {
+    "id": "kv-cache",
+    "term": "KV-cache",
+    "short": "Key-value cache: an inference optimization that stores intermediate attention computations across tokens so they need not be recomputed on each new generation step; absence of KV-cache reuse across agent steps means full re-encoding every step.",
+    "domain": "technical",
+    "aliases": [
+      "KV cache",
+      "key-value cache",
+      "attention cache",
+      "KV-cache reuse"
+    ]
+  },
+  {
+    "id": "webvoyager",
+    "term": "WebVoyager",
+    "short": "An open-ended web agent benchmark of 643 real-world tasks across 15 websites, evaluated by GPT-4V as judge; a primary benchmark for GUI agent capability with pass@1 and pass@4 metrics.",
+    "domain": "evaluation",
+    "aliases": [
+      "WebVoyager benchmark"
+    ]
+  },
+  {
+    "id": "online-mind2web",
+    "term": "Online-Mind2Web",
+    "short": "A live web agent benchmark derived from Mind2Web, requiring agents to complete tasks on real websites rather than static snapshots; tests generalization to dynamic, unanticipated web states.",
+    "domain": "evaluation",
+    "aliases": [
+      "Online Mind2Web",
+      "Mind2Web online",
+      "Online-Mind2Web benchmark"
     ]
   }
 ]
