@@ -58,7 +58,7 @@ Applying FTP logic to LLM usage transforms the central AI platform into a comput
 
 | FTP Component | Bank Definition | Token Equivalent |
 |---|---|---|
-| Charge/Credit | Internal rate for borrowing/lending funds | Internal charge per token tier consumed by BU |
+| Charge/Credit | Internal rate for borrowing/lending funds | Internal charge per token tier consumed by business unit |
 | Matched Maturity | Pricing based on loan duration/tenor | Pricing based on latency tier (real-time vs. batch) |
 | Liquidity Premium | Cost for on-demand access to liquid funds | Premium for synchronous vs. asynchronous inference |
 | Basis Risk Absorption | Treasury absorbs index mismatch volatility | AI platform absorbs external API price swings |
