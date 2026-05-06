@@ -3,7 +3,7 @@
     "slug": "everything-drifts",
     "title": "Everything Drifts",
     "date": "2026-03-22",
-    "description": "What drift means in AI \u2014 and why I named a blog after it.",
+    "description": "What drift means in AI — and why I named a blog after it.",
     "tags": []
   },
   {
@@ -50,7 +50,7 @@
     "slug": "metrics-metrics-metrics",
     "title": "Metrics, Metrics, Metrics",
     "date": "2026-04-03",
-    "description": "Everyone in GenAI wants a dashboard. The problem is that generic metrics aren't just uninformative \u2014 they actively mislead. Social scientists figured this out decades ago.",
+    "description": "Everyone in GenAI wants a dashboard. The problem is that generic metrics aren't just uninformative — they actively mislead. Social scientists figured this out decades ago.",
     "tags": [
       "psychometrics",
       "evals"
@@ -60,7 +60,7 @@
     "slug": "google-adk-a2a",
     "title": "Google ADK and the A2A Protocol: A Technical Reference",
     "date": "2026-04-04",
-    "description": "A deep-dive into Google's Agent Development Kit and the Agent2Agent protocol \u2014 the six core primitives, the cooperative event loop, how agents communicate across frameworks, and where the abstraction lines actually sit.",
+    "description": "A deep-dive into Google's Agent Development Kit and the Agent2Agent protocol — the six core primitives, the cooperative event loop, how agents communicate across frameworks, and where the abstraction lines actually sit.",
     "tags": [
       "hands-on",
       "protocol"
@@ -70,7 +70,7 @@
     "slug": "claude-code-harness",
     "title": "Inside the Claude Code Harness",
     "date": "2026-04-04",
-    "description": "Anthropic's source code leaked. Here's what it reveals about how a production-grade agent harness actually gets built \u2014 and how much of it looks like design versus survival.",
+    "description": "Anthropic's source code leaked. Here's what it reveals about how a production-grade agent harness actually gets built — and how much of it looks like design versus survival.",
     "tags": [
       "hands-on",
       "harness"
@@ -90,7 +90,7 @@
     "slug": "a2a-case-studies",
     "title": "Five Failures That Explain the A2A Security Problem",
     "date": "2026-04-07",
-    "description": "The threat surface for multi-agent AI systems isn't theoretical. Here's what five real incidents \u2014 from a $5 domain purchase to spontaneous model self-preservation \u2014 actually reveal.",
+    "description": "The threat surface for multi-agent AI systems isn't theoretical. Here's what five real incidents — from a $5 domain purchase to spontaneous model self-preservation — actually reveal.",
     "tags": [
       "security",
       "case-study"
@@ -100,7 +100,7 @@
     "slug": "skills-supply-chain",
     "title": "Skills Are Code: The Supply Chain Problem Nobody Wants to Own",
     "date": "2026-04-09",
-    "description": "Skills marketplaces have reproduced every vulnerability pattern that took npm a decade to recognize \u2014 in about six months. Three attack surfaces, no platform-level governance.",
+    "description": "Skills marketplaces have reproduced every vulnerability pattern that took npm a decade to recognize — in about six months. Three attack surfaces, no platform-level governance.",
     "tags": [
       "security",
       "skills"
@@ -110,7 +110,7 @@
     "slug": "payments-liability-gap",
     "title": "Who Pays When the Agent Gets It Wrong? A Rail-by-Rail Guide to the Liability Vacuum",
     "date": "2026-04-25",
-    "description": "Your AI agent made a payment that went wrong. Whether you're protected \u2014 and by how much \u2014 depends almost entirely on which payment rail it used. On the newest rails, the answer may be nobody.",
+    "description": "Your AI agent made a payment that went wrong. Whether you're protected — and by how much — depends almost entirely on which payment rail it used. On the newest rails, the answer may be nobody.",
     "tags": [
       "payments",
       "regulatory"
@@ -120,7 +120,7 @@
     "slug": "agent-identity-kyc",
     "title": "The Identity Problem: Banks Don't Know Who Your AI Agent Is",
     "date": "2026-04-25",
-    "description": "Banks are legally required to know their customers. But the Customer Identification Program rule was written for humans and legal entities. An AI agent is neither \u2014 and no banking law has a category for it.",
+    "description": "Banks are legally required to know their customers. But the Customer Identification Program rule was written for humans and legal entities. An AI agent is neither — and no banking law has a category for it.",
     "tags": [
       "payments",
       "regulatory"
@@ -141,7 +141,7 @@
     "slug": "effective-challenge",
     "title": "Effective Challenge Is Worth Keeping. The Rest Is Negotiable.",
     "date": "2026-04-25",
-    "description": "SR 11-7's organizing principle \u2014 critical analysis by objective parties with real authority \u2014 is the only piece of the 2011 framework that still holds under GenAI. Saving it may require dismantling much of what's been built around it.",
+    "description": "SR 11-7's organizing principle — critical analysis by objective parties with real authority — is the only piece of the 2011 framework that still holds under GenAI. Saving it may require dismantling much of what's been built around it.",
     "tags": [
       "banking",
       "regulatory"
@@ -151,7 +151,7 @@
     "slug": "hitl-vocabulary",
     "title": "Human-in-the-Loop Is a Borrowed Term",
     "date": "2026-04-26",
-    "description": "The phrase 'human-in-the-loop' is a 1978 teleoperation concept that appears in barely any binding banking supervision. Understanding what regulators actually say \u2014 and why the vocabulary gap is about to become a governance design problem \u2014 starts with the sixty-year lineage of the term.",
+    "description": "The phrase 'human-in-the-loop' is a 1978 teleoperation concept that appears in barely any binding banking supervision. Understanding what regulators actually say — and why the vocabulary gap is about to become a governance design problem — starts with the sixty-year lineage of the term.",
     "tags": [
       "human-in-the-loop",
       "regulatory"
@@ -171,7 +171,7 @@
     "slug": "adversarial-workflow",
     "title": "Adversarial Testing for LLMs: The Workflow That Has to Hold Up",
     "date": "2026-05-02",
-    "description": "Red-teaming an LLM is a model risk control now, even though no US banking regulation uses the word. Here's what a defensible engagement actually looks like \u2014 and why most MRM teams aren't yet set up to run one.",
+    "description": "Red-teaming an LLM is a model risk control now, even though no US banking regulation uses the word. Here's what a defensible engagement actually looks like — and why most MRM teams aren't yet set up to run one.",
     "tags": [
       "adversarial",
       "evals"
@@ -181,7 +181,7 @@
     "slug": "deployment-gates",
     "title": "Three Adversarial Gates for LLM Deployment",
     "date": "2026-04-19",
-    "description": "Three quantitative adversarial gates for LLM use-case deployment \u2014 capability non-regression, safety non-regression, and an attack-success-rate ceiling \u2014 each with a threshold derivation an examiner can take apart. Adversarial layer only; quality metrics are a parallel obligation.",
+    "description": "Three quantitative adversarial gates for LLM use-case deployment — capability non-regression, safety non-regression, and an attack-success-rate ceiling — each with a threshold derivation an examiner can take apart. Adversarial layer only; quality metrics are a parallel obligation.",
     "tags": [
       "adversarial",
       "evals"
@@ -190,9 +190,9 @@
   },
   {
     "slug": "adversarial-incompleteness",
-    "title": "The Incomplete Test: Why Adversarial Red-Teaming Can Never Finish \u2014 and Why That\u2019s Not a Reason to Stop",
+    "title": "The Incomplete Test: Why Adversarial Red-Teaming Can Never Finish — and Why That’s Not a Reason to Stop",
     "date": "2026-04-19",
-    "description": "A recent NIST publication establishes that no finite test suite can enumerate all adversarial inputs to a language model. The practical upshot isn\u2019t paralysis \u2014 it\u2019s a different kind of program: not a gate you clear, but a monitoring function you sustain.",
+    "description": "A recent NIST publication establishes that no finite test suite can enumerate all adversarial inputs to a language model. The practical upshot isn’t paralysis — it’s a different kind of program: not a gate you clear, but a monitoring function you sustain.",
     "tags": [
       "adversarial",
       "evals"
@@ -203,7 +203,7 @@
     "slug": "ai-econ-model",
     "title": "Econ 101, AI, and the Assumptions That Do All the Work",
     "date": "2026-04-27",
-    "description": "A simple comparative advantage model shows that under the right assumptions, large AI productivity gains make unskilled workers entirely obsolete. Here's where those assumptions crack \u2014 and an interactive model to explore it yourself.",
+    "description": "A simple comparative advantage model shows that under the right assumptions, large AI productivity gains make unskilled workers entirely obsolete. Here's where those assumptions crack — and an interactive model to explore it yourself.",
     "tags": [
       "economics",
       "labor"
@@ -213,7 +213,7 @@
     "slug": "molmoweb-data-flywheel",
     "title": "The Training Data Inversion: What MolmoWeb's Ablation Actually Proves",
     "date": "2026-05-04",
-    "description": "Ai2's MolmoWeb is the best open-weight visual web agent available. Its headline numbers are real. But the most important finding isn't a benchmark number \u2014 it's the ablation showing synthetic trajectories beat human demonstrations at matched scale by 17 points.",
+    "description": "Ai2's MolmoWeb is the best open-weight visual web agent available. Its headline numbers are real. But the most important finding isn't a benchmark number — it's the ablation showing synthetic trajectories beat human demonstrations at matched scale by 17 points.",
     "tags": [
       "evals",
       "data"
@@ -223,7 +223,7 @@
     "slug": "molmoweb-openness-gap",
     "title": "Inside the MolmoWeb Harness: What Best-in-Class Open GUI Agent Code Actually Reveals",
     "date": "2026-05-04",
-    "description": "Six weeks after launch, Ai2 shipped the training code, benchmark harness, and annotation tool \u2014 the repo went from incomplete to operationally complete. Now that everything is visible, we can read what 'complete' actually means in practice, and what the patterns it reveals predict for GUI agent deployment in regulated environments.",
+    "description": "Six weeks after launch, Ai2 shipped the training code, benchmark harness, and annotation tool — the repo went from incomplete to operationally complete. Now that everything is visible, we can read what 'complete' actually means in practice, and what the patterns it reveals predict for GUI agent deployment in regulated environments.",
     "tags": [
       "evals",
       "case-study"
@@ -238,5 +238,17 @@
       "banking",
       "pricing"
     ]
+  },
+  {
+    "slug": "gui-agents-verifier",
+    "title": "Did It Actually Work? The Verification Gap in Computer Use Agents",
+    "date": "2026-05-05",
+    "description": "The canonical verifiers behind GUI agent benchmarks have false positive rates above 40%, not because of weak backbone models, but because of how they're architecturally designed. A new paper from Microsoft Research builds a better judge and forces a reckoning with what the field's benchmark numbers actually measure.",
+    "tags": [
+      "evals",
+      "gui-agents",
+      "case-study"
+    ],
+    "draft": true
   }
 ]

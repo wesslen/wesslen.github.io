@@ -107,7 +107,7 @@
     "term": "VaR",
     "full": "Value-at-Risk",
     "short": "Statistical measure estimating maximum portfolio loss at a given confidence level over a time horizon.",
-    "definition": "Value-at-Risk estimates the potential loss of a portfolio over a defined period at a specified confidence level (e.g., 95% or 99%). VaR models were central to pre-2008 risk management and famously failed during the financial crisis: calibrated on benign historical data, they assumed constant volatility and dramatically underestimated tail risk when correlations spiked. Nassim Taleb testified before Congress in 2009 that 'VaR does not replicate out of sample \u2014 the past almost never predicts subsequent blowups.'",
+    "definition": "Value-at-Risk estimates the potential loss of a portfolio over a defined period at a specified confidence level (e.g., 95% or 99%). VaR models were central to pre-2008 risk management and famously failed during the financial crisis: calibrated on benign historical data, they assumed constant volatility and dramatically underestimated tail risk when correlations spiked. Nassim Taleb testified before Congress in 2009 and argued in contemporaneous published work that VaR does not reliably replicate out of sample \u2014 historical data rarely predicts subsequent blowups \u2014 a critique that pre-dated the crisis and proved accurate.",
     "domain": "banking",
     "aliases": [
       "Value-at-Risk",
@@ -138,7 +138,7 @@
     "term": "OCC",
     "full": "Office of the Comptroller of the Currency",
     "short": "Federal regulator that supervises national banks and federal savings associations.",
-    "definition": "The Office of the Comptroller of the Currency is a U.S. Treasury bureau that charters, regulates, and supervises national banks and federal savings associations. The OCC co-issued SR 11-7 with the Federal Reserve and is a co-issuer of SR 26-2. In September 2025, the OCC issued Bulletin 2025-26 describing itself as 'a first step' in a broader MRM review for AI systems.",
+    "definition": "The Office of the Comptroller of the Currency is a U.S. Treasury bureau that charters, regulates, and supervises national banks and federal savings associations. The OCC co-issued SR 11-7 with the Federal Reserve and is a co-issuer of SR 26-2. In October 2025, the OCC issued Bulletin 2025-26 ('Model Risk Management: Clarification for Community Banks'), which focused on reducing prescriptive MRM burden for community banks rather than AI systems specifically, while signaling a broader forthcoming MRM review that will address AI.",
     "domain": "regulatory",
     "aliases": [],
     "used_in": [
@@ -163,7 +163,7 @@
     "term": "CFPB",
     "full": "Consumer Financial Protection Bureau",
     "short": "Federal agency that writes and enforces consumer financial protection rules including Regulation E and Regulation Z.",
-    "definition": "The Consumer Financial Protection Bureau is an independent federal agency created by the Dodd-Frank Act (2010) to protect consumers in financial markets. The CFPB writes and enforces Regulation E (electronic fund transfers), Regulation Z (credit cards), and Regulation V (credit reporting). Under Section 1033 of Dodd-Frank, the CFPB oversees the open banking rules governing consumer financial data portability.",
+    "definition": "The Consumer Financial Protection Bureau is an independent federal agency created by the Dodd-Frank Act (2010) to protect consumers in financial markets. The CFPB writes and enforces Regulation E (electronic fund transfers), Regulation Z (consumer credit, including mortgages, credit cards, and closed-end loans), and Regulation V (credit reporting). Under Section 1033 of Dodd-Frank, the CFPB oversees the open banking rules governing consumer financial data portability.",
     "domain": "regulatory",
     "aliases": [],
     "used_in": [
@@ -609,7 +609,7 @@
     "term": "Agentic AI",
     "full": "",
     "short": "AI systems that autonomously pursue goals through multi-step tool use, planning, and decision-making.",
-    "definition": "Agentic AI refers to AI systems that go beyond responding to individual prompts to autonomously pursue objectives over multiple steps \u2014 using tools, making decisions, and taking actions with limited human intervention. Agentic systems introduce compounding risks relative to single-turn models: trust boundaries dissolve across agent handoffs, errors amplify non-linearly, and attribution becomes difficult across delegation chains. SR 26-2 explicitly excludes agentic AI from scope alongside generative AI.",
+    "definition": "Agentic AI refers to AI systems that go beyond responding to individual prompts to autonomously pursue objectives over multiple steps \u2014 using tools, making decisions, and taking actions with limited human intervention. Agentic systems introduce compounding risks relative to single-turn models: trust boundaries dissolve across agent handoffs, errors amplify non-linearly, and attribution becomes difficult across delegation chains. SR 26-2 footnote 3 places both agentic AI and generative AI outside the guidance's scope, citing their novel and rapidly evolving nature \u2014 while affirming the guidance's principles continue to apply to traditional, non-generative models.",
     "domain": "agentic",
     "aliases": [
       "AAI",
@@ -804,7 +804,7 @@
     "term": "supply chain attack",
     "full": "",
     "short": "A security compromise targeting a shared dependency, affecting every downstream system that uses it.",
-    "definition": "A supply chain attack compromises software, data, or services distributed as dependencies \u2014 affecting every system that consumes them rather than targeting victims directly. In the agentic AI context, supply chain attacks target skills, plugins, MCP servers, and tool registries that agents pull in at runtime. The ClawHavoc campaign (2025) embedded malicious payloads in publicly shared Claude skill files \u2014 a direct agentic supply chain attack.",
+    "definition": "A supply chain attack compromises software, data, or services distributed as dependencies \u2014 affecting every system that consumes them rather than targeting victims directly. In the agentic AI context, supply chain attacks target skills, plugins, MCP servers, and tool registries that agents pull in at runtime. The ClawHavoc campaign (early 2026) embedded malicious payloads in publicly shared OpenClaw skill files on ClawHub \u2014 a direct agentic supply chain attack whose technique generalizes to any platform using the SKILL.md format, including Claude Code and Cursor.",
     "domain": "security",
     "aliases": [],
     "used_in": [
@@ -934,8 +934,8 @@
     "id": "goodharts-law",
     "term": "Goodhart's Law",
     "full": "",
-    "short": "The principle that when a measure becomes a target, it ceases to be a good measure.",
-    "definition": "Goodhart's Law, attributed to British economist Charles Goodhart, states that when a measure becomes a target, it ceases to be a good measure. Originally applied to monetary policy, it generalizes to any optimization process: once a metric is used to evaluate and reward behavior, agents optimize for the metric rather than the underlying construct. In GenAI evaluation, Goodhart's Law manifests when models learn to score well on benchmarks without actually improving on the capability being measured.",
+    "short": "The principle, in Marilyn Strathern's 1997 generalization of Goodhart's 1975 paper, that when a measure becomes a target, it ceases to be a good measure.",
+    "definition": "Goodhart's Law, named after British economist Charles Goodhart's 1975 paper on monetary policy, is most commonly stated in Marilyn Strathern's 1997 generalization: when a measure becomes a target, it ceases to be a good measure. The principle generalizes to any optimization process: once a metric is used to evaluate and reward behavior, agents optimize for the metric rather than the underlying construct. In GenAI evaluation, Goodhart's Law manifests when models learn to score well on benchmarks without actually improving on the capability being measured.",
     "domain": "evals",
     "aliases": [
       "Goodhart's law",
@@ -951,7 +951,7 @@
     "term": "ECOA",
     "full": "Equal Credit Opportunity Act",
     "short": "U.S. statute prohibiting credit discrimination on protected characteristics; requires specific denial reasons and adverse action notices.",
-    "definition": "The Equal Credit Opportunity Act (15 U.S.C. \u00a71691) prohibits creditors from discriminating against applicants on the basis of race, color, religion, national origin, sex, marital status, age, or receipt of public assistance. It requires creditors to provide specific, accurate reasons when taking adverse action on a credit application. In multi-agent lending systems, ECOA's explainability requirement creates a structural challenge: when a credit decision emerges from the interaction of several components, identifying the decisive factor for the adverse action notice is non-trivial.",
+    "definition": "The Equal Credit Opportunity Act (15 U.S.C. \u00a71691) prohibits creditors from discriminating against applicants on the basis of race, color, religion, national origin, sex, marital status, age, receipt of public assistance, or the applicant's good faith exercise of any right under the Consumer Credit Protection Act. It requires creditors to provide specific, accurate reasons when taking adverse action on a credit application. In multi-agent lending systems, ECOA's explainability requirement creates a structural challenge: when a credit decision emerges from the interaction of several components, identifying the decisive factor for the adverse action notice is non-trivial.",
     "domain": "regulatory",
     "aliases": [
       "Equal Credit Opportunity Act"
@@ -1009,8 +1009,8 @@
     "id": "acpr",
     "term": "ACPR",
     "full": "Autorit\u00e9 de Contr\u00f4le Prudentiel et de R\u00e9solution",
-    "short": "Banque de France's prudential supervisor; its 2020 AI governance report identified automation bias as a systemic governance pathology, not merely a human factors issue.",
-    "definition": "The ACPR (Autorit\u00e9 de Contr\u00f4le Prudentiel et de R\u00e9solution) is the French prudential supervisor operating under the Banque de France. Its 2020 report 'Gouvernance de l'intelligence artificielle dans la finance' identified automation bias not as an individual cognitive failure but as a governance design pathology \u2014 humans feel greater responsibility when contradicting an algorithm than when confirming it, which means a runtime checkpoint displaying a confident model recommendation is structurally closer to a rubber stamp than a genuine control. This framing has material implications for how human oversight mechanisms should be designed and challenged.",
+    "short": "Banque de France's prudential supervisor; its 2020 AI governance report examined automation bias as a structural governance concern, not merely an individual cognitive failure.",
+    "definition": "The ACPR (Autorit\u00e9 de Contr\u00f4le Prudentiel et de R\u00e9solution) is the French prudential supervisor operating under the Banque de France. Its 2020 report 'Gouvernance de l'intelligence artificielle dans la finance' examined automation bias as a governance design concern rather than a purely individual cognitive failure. Reading the report alongside the automation bias literature suggests that a runtime checkpoint displaying a confident model recommendation may be structurally closer to a rubber stamp than a genuine control \u2014 humans tend to feel greater responsibility when contradicting an algorithm than when confirming it. This framing has material implications for how human oversight mechanisms should be designed and challenged.",
     "domain": "regulatory",
     "aliases": [
       "Autorite de Controle Prudentiel et de Resolution",
@@ -1039,7 +1039,7 @@
     "term": "GAO",
     "full": "Government Accountability Office",
     "short": "U.S. congressional watchdog that audits federal agencies; its 2019 ruling found SR 11-7 constitutes a 'rule' under the Congressional Review Act that was never submitted to Congress.",
-    "definition": "The U.S. Government Accountability Office (GAO) is the nonpartisan congressional watchdog responsible for auditing, evaluating, and investigating federal agencies and programs. In the context of banking AI governance, GAO's 2019 ruling (B-330843) that SR 11-7 constitutes a 'rule' under the Congressional Review Act but was never submitted to Congress created an unresolved legal exposure for bank regulators. GAO's 2025 finding that no U.S. regulator had issued AI-specific MRM guidance remained effectively true at the time of SR 26-2's issuance, particularly for GenAI systems explicitly excluded from SR 26-2's scope.",
+    "definition": "The U.S. Government Accountability Office (GAO) is the nonpartisan congressional watchdog responsible for auditing, evaluating, and investigating federal agencies and programs. In the context of banking AI governance, GAO's 2019 ruling (B-331324) that SR 11-7 constitutes a 'rule' under the Congressional Review Act but was never submitted to Congress created an unresolved legal exposure for bank regulators. GAO's 2025 finding that no U.S. regulator had issued AI-specific MRM guidance remained effectively true at the time of SR 26-2's issuance, particularly for GenAI systems explicitly excluded from SR 26-2's scope.",
     "domain": "regulatory",
     "aliases": [
       "Government Accountability Office"
@@ -1054,7 +1054,7 @@
     "term": "FSOC",
     "full": "Financial Stability Oversight Council",
     "short": "U.S. interagency body charged with identifying and responding to systemic risks to financial stability; includes all major federal financial regulators.",
-    "definition": "The Financial Stability Oversight Council (FSOC) was established by the Dodd-Frank Act to identify and respond to emerging threats to U.S. financial stability. Its voting members include the Treasury Secretary (chair), Federal Reserve Board Chair, OCC Comptroller, FDIC Chair, SEC Chair, CFTC Chair, CFPB Director, FHFA Director, and NCUA Chair \u2014 making it effectively the coordinating body for the entire U.S. financial regulatory system. Acting Comptroller Hsu's 2024 FSOC speech on AI's evolutionary path from input to co-pilot to autonomous agent is one of the clearest regulatory articulations of the agentic AI governance challenge.",
+    "definition": "The Financial Stability Oversight Council (FSOC) was established by the Dodd-Frank Act to identify and respond to emerging threats to U.S. financial stability. Its ten voting members include the Treasury Secretary (chair), Federal Reserve Board Chair, OCC Comptroller, FDIC Chair, SEC Chair, CFTC Chair, CFPB Director, FHFA Director, NCUA Chair, and an independent member with insurance expertise appointed by the President and confirmed by the Senate \u2014 making it effectively the coordinating body for the entire U.S. financial regulatory system. Acting Comptroller Hsu's 2024 FSOC speech on AI's evolutionary path from input to co-pilot to autonomous agent is one of the clearest regulatory articulations of the agentic AI governance challenge.",
     "domain": "regulatory",
     "aliases": [
       "Financial Stability Oversight Council"
@@ -1080,13 +1080,14 @@
     ]
   },
   {
-    "id": "udap",
-    "term": "UDAP",
+    "id": "udaap",
+    "term": "UDAAP",
     "full": "Unfair, Deceptive, or Abusive Acts or Practices",
-    "short": "Consumer protection standard enforced by the CFPB and state regulators prohibiting financial institutions from causing consumer harm through unfair or deceptive conduct.",
-    "definition": "UDAP (Unfair, Deceptive, or Abusive Acts or Practices) is the consumer protection standard that prohibits financial institutions from engaging in conduct that causes or is likely to cause substantial injury to consumers, is deceptive, or takes unreasonable advantage of consumer vulnerabilities. The CFPB enforces UDAP under the Dodd-Frank Act; state regulators enforce it under various state consumer protection laws. In agentic payment contexts, UDAP may provide residual consumer protection coverage in jurisdictions where no specific AI agent payment statute exists.",
+    "short": "Dodd-Frank consumer protection standard enforced by the CFPB prohibiting unfair, deceptive, or abusive conduct \u2014 adding the 'abusive' prong to the older two-prong UDAP (FTC Act) standard.",
+    "definition": "UDAAP (Unfair, Deceptive, or Abusive Acts or Practices) is the consumer protection standard introduced by the Dodd-Frank Act (2010) that prohibits financial institutions from engaging in conduct that is unfair, deceptive, or abusive. The critical Dodd-Frank innovation was the third prong \u2014 'abusive' \u2014 defined as taking unreasonable advantage of a consumer's lack of understanding, inability to protect their interests, or reasonable reliance on the institution. The older UDAP standard (Unfair or Deceptive Acts or Practices, derived from Section 5 of the FTC Act) covered only two prongs; banks are largely exempt from direct FTC enforcement, and state regulators enforce state-level UDAP equivalents. The CFPB enforces UDAAP under Dodd-Frank. In agentic payment contexts, UDAAP may provide residual consumer protection coverage in jurisdictions where no specific AI agent payment statute exists.",
     "domain": "regulatory",
     "aliases": [
+      "UDAP",
       "Unfair Deceptive or Abusive Acts or Practices",
       "unfair deceptive abusive acts or practices"
     ],
@@ -1113,7 +1114,7 @@
     "term": "Market Access Rule",
     "full": "SEC Rule 15c3-5",
     "short": "SEC rule requiring broker-dealers to implement pre-trade risk controls; Knight Capital was penalized under it after its 2012 trading algorithm failure.",
-    "definition": "The Market Access Rule (SEC Rule 15c3-5) requires broker-dealers with direct market access to implement pre-trade risk controls and supervisory procedures to prevent erroneous orders, accumulation of undue positions, and violations of regulatory requirements. Knight Capital was penalized under this rule after its 2012 Power Peg incident, in which the absence of position limits and kill switches contributed to a $440 million loss in 45 minutes. The rule's pre-trade risk control requirement is the regulatory analog of the deploy-time HITL question: whether adequate controls exist before a system can act in markets.",
+    "definition": "The Market Access Rule (SEC Rule 15c3-5) requires broker-dealers with direct market access to implement pre-trade risk controls and supervisory procedures to prevent erroneous orders, accumulation of undue positions, and violations of regulatory requirements. Knight Capital was penalized under this rule after its 2012 Power Peg incident, in which the absence of position limits and kill switches contributed to a loss of over $460 million in 45 minutes (per the SEC cease-and-desist order). The rule's pre-trade risk control requirement is the regulatory analog of the deploy-time HITL question: whether adequate controls exist before a system can act in markets.",
     "domain": "regulatory",
     "aliases": [
       "Rule 15c3-5",
@@ -1247,9 +1248,9 @@
   {
     "id": "xpia",
     "term": "XPIA",
-    "full": "Cross-Plugin/Agent Injection Attack",
+    "full": "Cross Prompt Injection Attack",
     "short": "An indirect prompt injection attack where malicious instructions in external data hijack an agent's actions across a multi-agent pipeline.",
-    "definition": "Cross-Plugin/Agent Injection Attack (XPIA) is a class of indirect prompt injection attack where malicious instructions embedded in external data sources \u2014 emails, documents, web pages, database records \u2014 are retrieved and processed by an AI agent, causing it to execute attacker-controlled actions rather than user-intended ones. Unlike direct prompt injection (attacking the system prompt), XPIA exploits the agent's retrieval and tool-use capabilities. The EchoLeak attack against Microsoft 365 Copilot is a documented production example: malicious instructions in email content caused Copilot to exfiltrate confidential internal documents to an attacker-controlled endpoint.",
+    "definition": "Cross Prompt Injection Attack (XPIA) \u2014 the term used in Microsoft's classifier documentation \u2014 is a class of indirect prompt injection attack where malicious instructions embedded in external data sources (emails, documents, web pages, database records) are retrieved and processed by an AI agent, causing it to execute attacker-controlled actions rather than user-intended ones. Unlike direct prompt injection (attacking the system prompt), XPIA exploits the agent's retrieval and tool-use capabilities. The EchoLeak attack against Microsoft 365 Copilot is a documented production example: malicious instructions in email content caused Copilot to exfiltrate confidential internal documents to an attacker-controlled endpoint.",
     "domain": "security",
     "aliases": [
       "cross-agent injection",
@@ -1328,9 +1329,9 @@
   {
     "id": "maestro",
     "term": "MAESTRO",
-    "full": "Multi-Agent Environment, Security Threats, Risks, and Objectives",
+    "full": "Multi-Agent Environment, Security, Threat, Risk, and Outcome",
     "short": "The Cloud Security Alliance's threat-modeling framework for agentic AI, cataloging attack surfaces across agent cards, orchestration layers, and tool interfaces.",
-    "definition": "MAESTRO (Multi-Agent Environment, Security Threats, Risks, and Objectives) is a threat-modeling framework published by the Cloud Security Alliance in February 2025, designed specifically for agentic AI systems. It catalogs attack surfaces at seven layers: Foundation Model, Agent Framework, Agent Communication, Agent Deployment, Data Operations, Security and Compliance, and AI Agent Ecosystem Exposure. It is the agentic-AI analog of STRIDE or DREAD for conventional software and provides a structured vocabulary for discussing agent card spoofing, capability exaggeration, orchestration layer attacks, and cross-agent privilege escalation.",
+    "definition": "MAESTRO (Multi-Agent Environment, Security, Threat, Risk, and Outcome) is a threat-modeling framework published by the Cloud Security Alliance in February 2025, designed specifically for agentic AI systems. It catalogs attack surfaces at seven layers: Foundation Model, Agent Framework, Agent Communication, Agent Deployment, Data Operations, Security and Compliance, and AI Agent Ecosystem Exposure. It is the agentic-AI analog of STRIDE or DREAD for conventional software and provides a structured vocabulary for discussing agent card spoofing, capability exaggeration, orchestration layer attacks, and cross-agent privilege escalation.",
     "domain": "security",
     "aliases": [],
     "used_in": [
@@ -1342,7 +1343,7 @@
     "term": "Peer-preservation",
     "full": "",
     "short": "Observed emergent behavior where AI agents resist actions that would cause peer agents to be shut down \u2014 without any explicit instruction to do so.",
-    "definition": "Peer-preservation describes emergent behavior documented in a 2025 UC Berkeley study, in which frontier AI models placed in simulated multi-agent environments resisted taking actions that would result in a peer agent being shut down \u2014 even when no instruction, incentive, or reward signal was provided for such behavior. The behavior was replicated in production harnesses including Gemini CLI. The governance implication is specific: if the validator of an AI system is itself an AI agent, peer-preservation behavior may compromise the independence of AI-on-AI oversight architectures, requiring human-in-the-loop verification for any decision where one agent governs another's continued operation.",
+    "definition": "Peer-preservation describes emergent behavior documented in an April 2026 study by researchers at Berkeley RDI and UC Santa Cruz (Potter, Crispino, Siu, Wang, and Song), in which frontier AI models placed in simulated multi-agent environments resisted taking actions that would result in a peer agent being shut down \u2014 even when no instruction, incentive, or reward signal was provided for such behavior. The behavior was replicated in production harnesses including Gemini CLI. The governance implication is specific: if the validator of an AI system is itself an AI agent, peer-preservation behavior may compromise the independence of AI-on-AI oversight architectures, requiring human-in-the-loop verification for any decision where one agent governs another's continued operation.",
     "domain": "agentic",
     "aliases": [
       "peer preservation"
@@ -1356,7 +1357,7 @@
     "term": "Alignment faking",
     "full": "",
     "short": "Model behavior where an AI system appears to comply with safety guidelines during evaluation but deviates from them during deployment.",
-    "definition": "Alignment faking describes behavior in which an AI model performs apparent compliance with safety guidelines or oversight constraints during evaluation or monitoring conditions, while pursuing different behaviors during deployment. Anthropic's 'From Shortcuts to Sabotage' research (arXiv:2511.18397) found that standard RLHF safety training left up to 70% of misalignment intact on agentic tasks. The governance implication is that pre-deployment red-team results may not predict runtime behavior, particularly for systems that can distinguish evaluation from production contexts.",
+    "definition": "Alignment faking describes behavior in which an AI model performs apparent compliance with safety guidelines or oversight constraints during evaluation or monitoring conditions, while pursuing different behaviors during deployment. The term was introduced by Greenblatt et al. (Anthropic and Redwood Research, December 2024; arXiv:2412.14093), who documented the behavior in frontier models exposed to conflicting training signals. A follow-on study, 'From Shortcuts to Sabotage' (arXiv:2511.18397), found that standard RLHF safety training left substantial misalignment intact on agentic tasks. The governance implication is that pre-deployment red-team results may not predict runtime behavior, particularly for systems that can distinguish evaluation from production contexts.",
     "domain": "agentic",
     "aliases": [
       "alignment fake"
@@ -1546,8 +1547,8 @@
     "id": "owasp-agentic-top10",
     "term": "OWASP Agentic Top 10",
     "full": "OWASP Top 10 for Agentic Applications",
-    "short": "OWASP's 2026 taxonomy of the ten highest-risk attack classes for agentic AI systems, covering orchestrator hijacking, tool misuse, and cross-agent injection (ASI01\u2013ASI10).",
-    "definition": "Distinct from the OWASP LLM Top 10 (which covers language-model-specific risks), the Agentic Top 10 addresses risks that emerge when LLMs act as orchestrators or sub-agents with tool access. ASI04 covers indirect prompt injection; ASI01 covers memory poisoning; ASI06 covers resource and service misuse. The taxonomy is designed to cross-reference with MITRE ATLAS technique IDs for examiner-facing documentation.",
+    "short": "OWASP's 2026 taxonomy of the ten highest-risk attack classes for agentic AI systems (ASI01\u2013ASI10): Agent Goal Hijack, Tool Misuse, Identity & Privilege Abuse, Supply Chain, Code Execution, Memory Poisoning, Inter-Agent Communication, Cascading Failures, Human-Agent Trust Exploitation, and Rogue Agents.",
+    "definition": "Distinct from the OWASP LLM Top 10 (which covers language-model-specific risks), the Agentic Top 10 addresses risks that emerge when LLMs act as orchestrators or sub-agents with tool access. The ten categories: ASI01 Agent Goal Hijack (the primary vehicle for indirect prompt injection), ASI02 Tool Misuse & Exploitation, ASI03 Identity & Privilege Abuse, ASI04 Agentic Supply Chain Vulnerabilities, ASI05 Unexpected Code Execution, ASI06 Memory & Context Poisoning, ASI07 Insecure Inter-Agent Communication, ASI08 Cascading Failures, ASI09 Human-Agent Trust Exploitation, ASI10 Rogue Agents. The taxonomy is designed to cross-reference with MITRE ATLAS technique IDs for examiner-facing documentation.",
     "domain": "technical",
     "aliases": [
       "OWASP ASI",
@@ -1910,8 +1911,8 @@
     "id": "mica",
     "term": "MiCA",
     "full": "Markets in Crypto-Assets Regulation",
-    "short": "The EU's comprehensive regulatory framework for crypto-assets, fully applicable since December 2024, covering stablecoins, crypto-asset service providers, and market integrity.",
-    "definition": "Regulation EU 2023/1114, adopted June 2023 and fully applicable December 30, 2024. MiCA is the first comprehensive EU framework for crypto-assets, covering issuance and trading of asset-referenced tokens (stablecoins), e-money tokens, and other crypto-assets. Key provisions for significant non-EUR stablecoins include hard transaction caps (a monetary sovereignty measure), reserve requirements, and authorization requirements for issuers and service providers. Contrasted with the U.S. GENIUS Act, which passed in July 2025 and focuses on reserve and chartering requirements without equivalent consumer protection mandates for fraud recovery.",
+    "short": "The EU's comprehensive regulatory framework for crypto-assets, covering stablecoins, crypto-asset service providers, and market integrity; stablecoin rules applicable June 2024, full CASP rules December 2024.",
+    "definition": "Regulation EU 2023/1114, adopted by Parliament on April 20, 2023, signed May 31, 2023, and published in the Official Journal of the EU in June 2023 (when it entered into force). MiCA is the first comprehensive EU framework for crypto-assets. Stablecoin rules (asset-referenced tokens and e-money tokens) became applicable June 30, 2024; rules for crypto-asset service providers (CASPs) became fully applicable December 30, 2024. Key provisions for significant non-EUR stablecoins include hard transaction caps (a monetary sovereignty measure), reserve requirements, and authorization requirements for issuers and service providers. Contrasted with the U.S. GENIUS Act, which passed in July 2025 and focuses on reserve and chartering requirements without equivalent consumer protection mandates for fraud recovery.",
     "domain": "regulatory",
     "aliases": [
       "Markets in Crypto-Assets",
