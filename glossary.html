@@ -326,8 +326,11 @@
           agentic: "Agentic AI",
           security: "Security",
           evals: "Evals",
+          evaluation: "Evaluation",
+          "machine-learning": "Machine Learning",
+          technical: "Technical",
         };
-        const DOMAIN_ORDER = ["regulatory", "banking", "payments", "ai", "agentic", "security", "evals"];
+        const DOMAIN_ORDER = ["regulatory", "banking", "payments", "ai", "agentic", "security", "evals", "evaluation", "machine-learning", "technical"];
 
         /* ── Post title lookup (best-effort) ───────────── */
         const POST_TITLES = {
@@ -410,8 +413,15 @@
             grouped[e.domain].push(e);
           });
 
+          // Auto-detect any domains not in DOMAIN_ORDER and append them
+          const knownDomains = new Set(DOMAIN_ORDER);
+          const extraDomains = Object.keys(grouped)
+            .filter((d) => !knownDomains.has(d))
+            .sort();
+          const effectiveDomainOrder = [...DOMAIN_ORDER, ...extraDomains];
+
           let totalShown = 0;
-          DOMAIN_ORDER.forEach((domain) => {
+          effectiveDomainOrder.forEach((domain) => {
             if (!grouped[domain] || !grouped[domain].length) return;
             const entries = grouped[domain].sort((a, b) => a.term.localeCompare(b.term));
             totalShown += entries.length;
