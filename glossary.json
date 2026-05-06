@@ -2100,7 +2100,11 @@
       "ReAct prompting",
       "Reason+Act"
     ],
-    "definition": "A prompting framework where an agent alternates Reasoning steps and Action calls in a structured loop, enabling step-by-step tool use with explicit thought traces before each action."
+    "definition": "A prompting framework where an agent alternates Reasoning steps and Action calls in a structured loop, enabling step-by-step tool use with explicit thought traces before each action.",
+    "used_in": [
+      "molmoweb-data-flywheel",
+      "molmoweb-openness-gap"
+    ]
   },
   {
     "id": "pass-at-k",
@@ -2113,7 +2117,10 @@
       "pass at k",
       "best-of-N"
     ],
-    "definition": "An evaluation metric measuring the probability that at least one of k model attempts at a task succeeds; often reported as pass@1 (single attempt) or pass@4 (best of four parallel rollouts)."
+    "definition": "An evaluation metric measuring the probability that at least one of k model attempts at a task succeeds; often reported as pass@1 (single attempt) or pass@4 (best of four parallel rollouts).",
+    "used_in": [
+      "molmoweb-openness-gap"
+    ]
   },
   {
     "id": "vlm",
@@ -2127,7 +2134,10 @@
       "multimodal LLM",
       "multimodal model"
     ],
-    "definition": "Vision-Language Model: a foundation model capable of processing both images and text as input, enabling visual reasoning, screenshot understanding, and GUI agent behavior."
+    "definition": "Vision-Language Model: a foundation model capable of processing both images and text as input, enabling visual reasoning, screenshot understanding, and GUI agent behavior.",
+    "used_in": [
+      "molmoweb-openness-gap"
+    ]
   },
   {
     "id": "playwright",
@@ -2138,7 +2148,10 @@
       "Playwright browser",
       "Playwright client"
     ],
-    "definition": "An open-source browser automation library by Microsoft that controls Chromium, Firefox, and WebKit programmatically; used by GUI agents to execute web actions (click, type, navigate) and capture screenshots."
+    "definition": "An open-source browser automation library by Microsoft that controls Chromium, Firefox, and WebKit programmatically; used by GUI agents to execute web actions (click, type, navigate) and capture screenshots.",
+    "used_in": [
+      "molmoweb-openness-gap"
+    ]
   },
   {
     "id": "apache-20",
@@ -2150,7 +2163,11 @@
       "Apache License",
       "Apache-2.0"
     ],
-    "definition": "A permissive open-source software license that allows use, modification, and distribution with minimal restrictions, including in commercial products, provided attribution is given."
+    "definition": "A permissive open-source software license that allows use, modification, and distribution with minimal restrictions, including in commercial products, provided attribution is given.",
+    "used_in": [
+      "molmoweb-data-flywheel",
+      "molmoweb-openness-gap"
+    ]
   },
   {
     "id": "odc-by",
@@ -2162,7 +2179,10 @@
       "Open Data Commons Attribution",
       "ODC Attribution"
     ],
-    "definition": "Open Data Commons Attribution License: a permissive open data license requiring attribution, commonly used for releasing machine learning datasets alongside Apache-licensed code."
+    "definition": "Open Data Commons Attribution License: a permissive open data license requiring attribution, commonly used for releasing machine learning datasets alongside Apache-licensed code.",
+    "used_in": [
+      "molmoweb-openness-gap"
+    ]
   },
   {
     "id": "kv-cache",
@@ -2175,7 +2195,10 @@
       "attention cache",
       "KV-cache reuse"
     ],
-    "definition": "Key-value cache: an inference optimization that stores intermediate attention computations across tokens so they need not be recomputed on each new generation step; absence of KV-cache reuse across agent steps means full re-encoding every step."
+    "definition": "Key-value cache: an inference optimization that stores intermediate attention computations across tokens so they need not be recomputed on each new generation step; absence of KV-cache reuse across agent steps means full re-encoding every step.",
+    "used_in": [
+      "molmoweb-openness-gap"
+    ]
   },
   {
     "id": "webvoyager",
@@ -2185,7 +2208,11 @@
     "aliases": [
       "WebVoyager benchmark"
     ],
-    "definition": "An open-ended web agent benchmark of 643 real-world tasks across 15 websites, evaluated by GPT-4V as judge; a primary benchmark for GUI agent capability with pass@1 and pass@4 metrics."
+    "definition": "An open-ended web agent benchmark of 643 real-world tasks across 15 websites, evaluated by GPT-4V as judge; a primary benchmark for GUI agent capability with pass@1 and pass@4 metrics.",
+    "used_in": [
+      "molmoweb-data-flywheel",
+      "molmoweb-openness-gap"
+    ]
   },
   {
     "id": "online-mind2web",
@@ -2197,6 +2224,10 @@
       "Mind2Web online",
       "Online-Mind2Web benchmark"
     ],
-    "definition": "A live web agent benchmark derived from Mind2Web, requiring agents to complete tasks on real websites rather than static snapshots; tests generalization to dynamic, unanticipated web states."
+    "definition": "A live web agent benchmark derived from Mind2Web, requiring agents to complete tasks on real websites rather than static snapshots; tests generalization to dynamic, unanticipated web states.",
+    "used_in": [
+      "molmoweb-data-flywheel",
+      "molmoweb-openness-gap"
+    ]
   }
 ]
