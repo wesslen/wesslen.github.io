@@ -25,6 +25,18 @@ The fundamental problem is cold start: every new agent session begins with a bla
 
 Beyond factual project knowledge, context files shape what the agent does and doesn't do. Claude Code's *auto-memory* system takes this further: the agent automatically saves useful discoveries — successful build commands, debugging insights — to a `MEMORY.md` that grows across sessions. Agent Skills extend the concept to on-demand capabilities that load only when relevant, rather than consuming window space permanently.[^2]
 
+The distinction between the two trips people up, because both are often Markdown files that shape agent behavior. The difference is in *when* they load and *what kind* of instruction they carry:
+
+| | Context Files | Skills |
+|---|---|---|
+| **Role** | Informative — what the agent *knows* | Procedural — what the agent *can do* |
+| **Loading** | Present on every turn (always in the context window) | Progressive disclosure: only metadata loads at startup; full body loads on demand |
+| **Token cost** | Continuous; accumulates with file size | Low baseline; full cost paid only when the skill is invoked |
+| **Examples** | `CLAUDE.md`, `AGENTS.md`, brand guide, `PROJECT_RULES.md` | `create_jira_ticket.md`, deploy runbook, multi-step test workflow |
+| **Synonyms** | System prompt, knowledge base, project rules, system instructions | Playbook, procedure, task automation, agent procedure |
+
+Think of context files as the agent's standing brief — always in the room, always shaping what it knows. Skills are specialist consultants: they don't consume space by default, but you can call one in when the work demands it.
+
 When a context file is committed to version control, every team member's AI assistant works from the same baseline. New developers and new agents alike inherit the project's conventions immediately. That's the promise.
 
 > [!NOTE]
