@@ -48,7 +48,12 @@
         <div class="header-actions">
           <button class="search-trigger" id="search-modal-btn" title="Search (⌘K)" aria-label="Search">
             <svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 6.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+              <path
+                d="M10 6.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+              />
             </svg>
           </button>
           <a href="./glossary.html" class="nav-link">glossary</a>
@@ -86,7 +91,14 @@
       </div>
       <!-- Search box -->
       <div id="search-wrap">
-        <input type="search" id="search-input" placeholder="search posts…" autocomplete="off" spellcheck="false" aria-label="Search posts" />
+        <input
+          type="search"
+          id="search-input"
+          placeholder="search posts…"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Search posts"
+        />
         <span id="search-clear" role="button" aria-label="Clear search" title="Clear search">✕</span>
       </div>
       <!-- Search results panel (shown while query is active) -->
@@ -351,18 +363,18 @@
 
         /* ── Search ─────────────────────────────────────────────── */
         function initSearch() {
-          const input       = document.getElementById("search-input");
-          const clearBtn    = document.getElementById("search-clear");
-          const panel       = document.getElementById("search-results");
-          const postList    = document.getElementById("post-list");
-          const introSlot   = document.getElementById("intro-slot");
+          const input = document.getElementById("search-input");
+          const clearBtn = document.getElementById("search-clear");
+          const panel = document.getElementById("search-results");
+          const postList = document.getElementById("post-list");
+          const introSlot = document.getElementById("intro-slot");
 
           let debounceTimer = null;
-          let focusIdx      = -1;
+          let focusIdx = -1;
 
           function showNormal() {
             panel.classList.remove("active");
-            panel.innerHTML   = "";
+            panel.innerHTML = "";
             clearBtn.style.display = "none";
             postList.style.display = "";
             introSlot.style.display = "";
@@ -372,9 +384,9 @@
           function showResults(results, query) {
             focusIdx = -1;
             /* hide normal layout */
-            postList.style.display  = "none";
+            postList.style.display = "none";
             introSlot.style.display = "none";
-            clearBtn.style.display  = "block";
+            clearBtn.style.display = "block";
 
             if (!results.length) {
               panel.innerHTML = `<div class="sr-empty">no results for &ldquo;${query.trim()}&rdquo;</div>`;
@@ -396,10 +408,10 @@
                   <div class="sr-snippet">${r.snippetHtml}</div>
                 </a>`;
               } else {
-                const url  = postUrl(r.slug, r.draft);
+                const url = postUrl(r.slug, r.draft);
                 const date = fmtDate(r.date);
-                const ser  = r.series ? `<span class="sr-series">${r.series}</span>` : "";
-                const db   = r.draft  ? ` <span class="draft-badge">draft</span>` : "";
+                const ser = r.series ? `<span class="sr-series">${r.series}</span>` : "";
+                const db = r.draft ? ` <span class="draft-badge">draft</span>` : "";
                 html += `<a class="sr-item" href="${url}" data-idx="${idx}" tabindex="0">
                   <div class="sr-item-header">
                     <span class="sr-title">${r.title}${db}</span>
@@ -415,7 +427,10 @@
           }
 
           async function runSearch(q) {
-            if (!q.trim() || q.length < 2) { showNormal(); return; }
+            if (!q.trim() || q.length < 2) {
+              showNormal();
+              return;
+            }
             clearBtn.style.display = "block";
             try {
               const results = await window.BlogSearch.search(q);
@@ -428,7 +443,10 @@
           /* Debounced input handler */
           input.addEventListener("input", () => {
             clearTimeout(debounceTimer);
-            if (!input.value.trim()) { showNormal(); return; }
+            if (!input.value.trim()) {
+              showNormal();
+              return;
+            }
             clearBtn.style.display = "block";
             debounceTimer = setTimeout(() => runSearch(input.value), 220);
           });
@@ -444,7 +462,10 @@
           input.addEventListener("keydown", (e) => {
             const items = panel.querySelectorAll(".sr-item");
             if (!items.length) {
-              if (e.key === "Escape") { input.value = ""; showNormal(); }
+              if (e.key === "Escape") {
+                input.value = "";
+                showNormal();
+              }
               return;
             }
             if (e.key === "Escape") {
@@ -462,7 +483,10 @@
               items[focusIdx].scrollIntoView({ block: "nearest" });
             } else if (e.key === "Enter") {
               const target = items[focusIdx] || items[0];
-              if (target) { e.preventDefault(); target.click(); }
+              if (target) {
+                e.preventDefault();
+                target.click();
+              }
             }
           });
 
@@ -474,7 +498,6 @@
 
         loadPosts();
         initSearch();
-
       })();
     </script>
   </body>
