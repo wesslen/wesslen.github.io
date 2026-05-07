@@ -26,6 +26,8 @@
     <meta name="twitter:image" content="https://wesslen.github.io/og-default.png" />
     <link rel="canonical" href="https://wesslen.github.io/" />
     <link rel="stylesheet" href="./style.css" />
+    <script src="./search.js" defer></script>
+    <script src="./search-modal.js" defer></script>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link
       rel="icon"
@@ -40,10 +42,15 @@
     <header class="site-header">
       <div class="header-inner">
         <a href="./index.html" class="site-title">
-          wesslen.github.io
+          // drift
           <span class="cursor">_</span>
         </a>
         <div class="header-actions">
+          <button class="search-trigger" id="search-modal-btn" title="Search (⌘K)" aria-label="Search">
+            <svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 6.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+            </svg>
+          </button>
           <a href="./glossary.html" class="nav-link">glossary</a>
           <a href="./about.html" class="nav-link">about</a>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
@@ -77,10 +84,13 @@
       <div class="posts-header">
         <span class="section-label">// posts</span>
       </div>
-      <!-- Tag filter bar (populated by JS after posts load) -->
-      <div class="tag-filter-bar" id="tag-filter-bar" aria-label="Filter posts by tag" style="display: none">
-        <button class="tag-filter-btn active" data-tag="__all__">all</button>
+      <!-- Search box -->
+      <div id="search-wrap">
+        <input type="search" id="search-input" placeholder="search posts…" autocomplete="off" spellcheck="false" aria-label="Search posts" />
+        <span id="search-clear" role="button" aria-label="Clear search" title="Clear search">✕</span>
       </div>
+      <!-- Search results panel (shown while query is active) -->
+      <div id="search-results" aria-live="polite" aria-label="Search results"></div>
       <div class="post-list-a" id="post-list" aria-label="Blog posts"></div>
     </main>
 
@@ -215,34 +225,6 @@
             : `./post.html?slug=${encodeURIComponent(slug)}`;
         }
 
-        /* ── Tag Filter (Layout A) ──────────────────────────── */
-        function buildTagFilter(manifest) {
-          const bar = document.getElementById("tag-filter-bar");
-          const allTags = [...new Set(manifest.flatMap((p) => p.tags || []))].sort();
-          if (allTags.length < 2) return;
-          allTags.forEach((tag) => {
-            const btn = document.createElement("button");
-            btn.className = "tag-filter-btn";
-            btn.dataset.tag = tag;
-            btn.textContent = tag;
-            btn.style.cssText = tagStyle(tag);
-            bar.appendChild(btn);
-          });
-          bar.style.display = "flex";
-          bar.addEventListener("click", (e) => {
-            const btn = e.target.closest(".tag-filter-btn");
-            if (!btn) return;
-            const active = btn.dataset.tag;
-            bar
-              .querySelectorAll(".tag-filter-btn")
-              .forEach((b) => b.classList.toggle("active", b.dataset.tag === active));
-            document.querySelectorAll("#post-list [data-tags]").forEach((el) => {
-              const tags = (el.dataset.tags || "").split(" ");
-              el.style.display = active === "__all__" || tags.includes(active) ? "" : "none";
-            });
-          });
-        }
-
         /* ── Layout A: Expandable Rows ──────────────────────── */
         function renderA(manifest, bodies) {
           const container = document.getElementById("post-list");
@@ -357,7 +339,6 @@
               })
             );
 
-            buildTagFilter(manifest);
             renderA(manifest, bodies);
           } catch (err) {
             document.getElementById("post-list").innerHTML =
@@ -367,16 +348,133 @@
               </div>`;
           }
         }
-        loadPosts();
 
-        /* Re-render tag colors on theme change */
-        toggleBtn.addEventListener("click", () => {
-          setTimeout(() => {
-            document.querySelectorAll(".row-a-tag").forEach((el) => {
-              el.style.cssText = tagStyle(el.textContent);
+        /* ── Search ─────────────────────────────────────────────── */
+        function initSearch() {
+          const input       = document.getElementById("search-input");
+          const clearBtn    = document.getElementById("search-clear");
+          const panel       = document.getElementById("search-results");
+          const postList    = document.getElementById("post-list");
+          const introSlot   = document.getElementById("intro-slot");
+
+          let debounceTimer = null;
+          let focusIdx      = -1;
+
+          function showNormal() {
+            panel.classList.remove("active");
+            panel.innerHTML   = "";
+            clearBtn.style.display = "none";
+            postList.style.display = "";
+            introSlot.style.display = "";
+            focusIdx = -1;
+          }
+
+          function showResults(results, query) {
+            focusIdx = -1;
+            /* hide normal layout */
+            postList.style.display  = "none";
+            introSlot.style.display = "none";
+            clearBtn.style.display  = "block";
+
+            if (!results.length) {
+              panel.innerHTML = `<div class="sr-empty">no results for &ldquo;${query.trim()}&rdquo;</div>`;
+              panel.classList.add("active");
+              return;
+            }
+
+            const plural = results.length !== 1 ? "s" : "";
+            let html = `<div class="sr-count">${results.length} result${plural}</div>`;
+            results.forEach((r, idx) => {
+              if (r.type === "glossary") {
+                const url = `./glossary.html#${encodeURIComponent(r.slug)}`;
+                html += `<a class="sr-item sr-item-glossary" href="${url}" data-idx="${idx}" tabindex="0">
+                  <div class="sr-item-header">
+                    <span class="sr-title">${r.title}</span>
+                    <span class="sr-glossary-badge">glossary</span>
+                    ${r.domain ? `<span class="sr-date">${r.domain}</span>` : ""}
+                  </div>
+                  <div class="sr-snippet">${r.snippetHtml}</div>
+                </a>`;
+              } else {
+                const url  = postUrl(r.slug, r.draft);
+                const date = fmtDate(r.date);
+                const ser  = r.series ? `<span class="sr-series">${r.series}</span>` : "";
+                const db   = r.draft  ? ` <span class="draft-badge">draft</span>` : "";
+                html += `<a class="sr-item" href="${url}" data-idx="${idx}" tabindex="0">
+                  <div class="sr-item-header">
+                    <span class="sr-title">${r.title}${db}</span>
+                    ${ser}
+                    <span class="sr-date">${date}</span>
+                  </div>
+                  <div class="sr-snippet">${r.snippetHtml}</div>
+                </a>`;
+              }
             });
-          }, 50);
-        });
+            panel.innerHTML = html;
+            panel.classList.add("active");
+          }
+
+          async function runSearch(q) {
+            if (!q.trim() || q.length < 2) { showNormal(); return; }
+            clearBtn.style.display = "block";
+            try {
+              const results = await window.BlogSearch.search(q);
+              showResults(results, q);
+            } catch (e) {
+              console.error("BlogSearch error:", e);
+            }
+          }
+
+          /* Debounced input handler */
+          input.addEventListener("input", () => {
+            clearTimeout(debounceTimer);
+            if (!input.value.trim()) { showNormal(); return; }
+            clearBtn.style.display = "block";
+            debounceTimer = setTimeout(() => runSearch(input.value), 220);
+          });
+
+          /* Clear button */
+          clearBtn.addEventListener("click", () => {
+            input.value = "";
+            showNormal();
+            input.focus();
+          });
+
+          /* Keyboard navigation */
+          input.addEventListener("keydown", (e) => {
+            const items = panel.querySelectorAll(".sr-item");
+            if (!items.length) {
+              if (e.key === "Escape") { input.value = ""; showNormal(); }
+              return;
+            }
+            if (e.key === "Escape") {
+              input.value = "";
+              showNormal();
+            } else if (e.key === "ArrowDown") {
+              e.preventDefault();
+              focusIdx = Math.min(focusIdx + 1, items.length - 1);
+              items.forEach((el, i) => el.classList.toggle("sr-focused", i === focusIdx));
+              items[focusIdx].scrollIntoView({ block: "nearest" });
+            } else if (e.key === "ArrowUp") {
+              e.preventDefault();
+              focusIdx = Math.max(focusIdx - 1, 0);
+              items.forEach((el, i) => el.classList.toggle("sr-focused", i === focusIdx));
+              items[focusIdx].scrollIntoView({ block: "nearest" });
+            } else if (e.key === "Enter") {
+              const target = items[focusIdx] || items[0];
+              if (target) { e.preventDefault(); target.click(); }
+            }
+          });
+
+          /* Warm up the index fetch when the user focuses the input */
+          input.addEventListener("focus", () => {
+            if (window.BlogSearch) window.BlogSearch.load();
+          });
+        }
+
+        loadPosts();
+        initSearch();
+
       })();
     </script>
   </body>

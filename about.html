@@ -6,14 +6,14 @@
     <title>About — Drift: Notes on AI on the Edges</title>
     <meta
       name="description"
-      content="About Ryan Wesslen — data scientist, researcher, and writer on GenAI, model risk, and agentic systems."
+      content="About Ryan — data scientist, researcher, and writer on GenAI, model risk, and agentic systems."
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Drift: Notes on AI on the Edges" />
     <meta property="og:title" content="About — Drift: Notes on AI on the Edges" />
     <meta
       property="og:description"
-      content="About Ryan Wesslen — data scientist writing about AI drift: where models, governance frameworks, and organizations diverge from where they started."
+      content="About Ryan — data scientist writing about AI drift: where models, governance frameworks, and organizations diverge from where they started."
     />
     <meta property="og:url" content="https://wesslen.github.io/about.html" />
     <meta property="og:image" content="https://wesslen.github.io/og-default.png" />
@@ -21,7 +21,7 @@
     <meta name="twitter:title" content="About — Drift: Notes on AI on the Edges" />
     <meta
       name="twitter:description"
-      content="About Ryan Wesslen — data scientist writing about AI drift: where models, governance frameworks, and organizations diverge from where they started."
+      content="About Ryan — data scientist writing about AI drift: where models, governance frameworks, and organizations diverge from where they started."
     />
     <meta name="twitter:image" content="https://wesslen.github.io/og-default.png" />
     <link rel="canonical" href="https://wesslen.github.io/about.html" />
@@ -40,10 +40,15 @@
     <header class="site-header">
       <div class="header-inner">
         <a href="./index.html" class="site-title">
-          wesslen.github.io
+          // drift
           <span class="cursor">_</span>
         </a>
         <div class="header-actions">
+          <button class="search-trigger" id="search-modal-btn" title="Search (⌘K)" aria-label="Search">
+            <svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 6.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+            </svg>
+          </button>
           <a href="./glossary.html" class="nav-link">glossary</a>
           <a href="./about.html" class="nav-link active">about</a>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
@@ -75,7 +80,7 @@
           <div class="post-eyebrow">
             <span class="post-date">// about</span>
           </div>
-          <h1 class="post-title">Ryan Wesslen</h1>
+          <h1 class="post-title">Ryan</h1>
           <p class="post-description">
             Data scientist and researcher. GenAI, NLP, evaluation, and the occasional regulatory rabbit hole.
           </p>
@@ -168,5 +173,7 @@
         window.addEventListener("scroll", updateProgress, { passive: true });
       })();
     </script>
+      <script src="./search.js" defer></script>
+    <script src="./search-modal.js" defer></script>
   </body>
 </html>

@@ -7,7 +7,8 @@
     "lint:md": "markdownlint-cli \"posts/*.md\" --ignore \"posts/reference-audit.md\"",
     "lint:format": "prettier --check \"*.html\" \"*.css\"",
     "lint": "npm run lint:html && npm run lint:md && npm run lint:format",
-    "format": "prettier --write \"*.html\" \"*.css\""
+    "format": "prettier --write \"*.html\" \"*.css\"",
+    "build:search": "node scripts/build-search-index.js"
   },
   "devDependencies": {
     "htmlhint": "^1.1.4",

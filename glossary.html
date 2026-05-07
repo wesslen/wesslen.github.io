@@ -130,7 +130,6 @@
         padding: 1rem 1.25rem;
         margin-bottom: 0.6rem;
         transition: border-color 0.15s;
-        scroll-margin-top: 80px;
       }
       .glossary-entry:hover {
         border-color: var(--accent);
@@ -223,6 +222,79 @@
       .glossary-count span {
         color: var(--accent);
       }
+
+      /* ── Sticky domain nav ─────────────────────────────── */
+      #glos-sticky-nav {
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: 900;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        transform: translateY(-110%);
+        transition: transform 0.22s ease, opacity 0.22s ease;
+        opacity: 0;
+        pointer-events: none;
+      }
+      #glos-sticky-nav.gsnav-visible {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .gsnav-inner {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 0.42rem 1.5rem;
+        display: flex;
+        gap: 0.35rem;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .gsnav-inner::-webkit-scrollbar { display: none; }
+      #glos-sticky-nav::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 2.5rem;
+        background: linear-gradient(to right, transparent, var(--bg) 80%);
+        pointer-events: none;
+      }
+      .gsnav-pill {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 0.2rem 0.65rem;
+        font-size: 0.68rem;
+        font-family: var(--font-mono);
+        color: var(--muted);
+        cursor: pointer;
+        transition: all 0.15s;
+        user-select: none;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .gsnav-pill:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .gsnav-pill.gsnav-active {
+        background: var(--accent-dim);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .glossary-entry,
+      .domain-section {
+        scroll-margin-top: 116px;
+      }
+      @media (max-width: 640px) {
+        .gsnav-inner { padding: 0.38rem 1rem; gap: 0.28rem; }
+        .gsnav-pill  { font-size: 0.63rem; padding: 0.18rem 0.55rem; }
+      }
+
     </style>
   </head>
   <body>
@@ -231,10 +303,15 @@
     <header class="site-header">
       <div class="header-inner">
         <a href="./index.html" class="site-title">
-          wesslen.github.io
+          // drift
           <span class="cursor">_</span>
         </a>
         <div class="header-actions">
+          <button class="search-trigger" id="search-modal-btn" title="Search (⌘K)" aria-label="Search">
+            <svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 6.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+            </svg>
+          </button>
           <a href="./glossary.html" class="nav-link active">glossary</a>
           <a href="./about.html" class="nav-link">about</a>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
@@ -243,6 +320,13 @@
         </div>
       </div>
     </header>
+
+    <!-- Sticky domain jump nav (shown via JS when filter bar scrolls out of view) -->
+    <div id="glos-sticky-nav" aria-hidden="true">
+      <div class="gsnav-inner" id="gsnav-inner">
+        <!-- pills populated by buildStickyNav() -->
+      </div>
+    </div>
 
     <div class="glossary-hero">
       <h1>
@@ -396,6 +480,7 @@
             activeFilter = pill.dataset.domain;
             filtersEl.querySelectorAll(".filter-pill").forEach((p) => p.classList.toggle("active", p === pill));
             renderEntries();
+            syncStickyNavVisibility();
           });
         }
 
@@ -505,6 +590,8 @@
             glossary = data.sort((a, b) => a.term.localeCompare(b.term));
             buildFilters();
             renderEntries();
+            buildStickyNav();
+            setupFilterBarObserver();
             scrollToHash();
           })
           .catch((err) => {
@@ -512,7 +599,119 @@
               '<p style="color:var(--muted);font-family:var(--font-mono);font-size:0.85rem">⚠ Could not load glossary.json</p>';
             console.error(err);
           });
+
+        /* ── Sticky domain nav ──────────────────────────────────────────── */
+
+        const gsNav      = document.getElementById("glos-sticky-nav");
+        const gsNavInner = document.getElementById("gsnav-inner");
+
+        /* Build one pill per domain that has entries */
+        function buildStickyNav() {
+          gsNavInner.innerHTML = "";
+          const domains = DOMAIN_ORDER.filter((d) => glossary.some((e) => e.domain === d));
+          domains.forEach((domain) => {
+            const btn = document.createElement("button");
+            btn.className = "gsnav-pill";
+            btn.dataset.domain = domain;
+            btn.textContent = DOMAIN_LABELS[domain] || domain;
+            btn.addEventListener("click", () => scrollToDomain(domain));
+            gsNavInner.appendChild(btn);
+          });
+
+          /* Position nav below the sticky site header */
+          const headerH = document.querySelector(".site-header")?.offsetHeight || 56;
+          gsNav.style.top = headerH + "px";
+        }
+
+        /* Smooth-scroll to a domain section, clearing both sticky bars */
+        function scrollToDomain(domain) {
+          const label = DOMAIN_LABELS[domain] || domain;
+          for (const section of document.querySelectorAll(".domain-section")) {
+            const h = section.querySelector(".domain-heading");
+            if (h && h.textContent.trim() === label) {
+              const headerH = document.querySelector(".site-header")?.offsetHeight || 56;
+              const navH    = gsNav.offsetHeight || 0;
+              const top     = section.getBoundingClientRect().top + window.scrollY - headerH - navH - 8;
+              window.scrollTo({ top, behavior: "smooth" });
+              return;
+            }
+          }
+        }
+
+        /* Highlight the pill matching the current domain; scroll it into view */
+        function updateStickyPill(domain) {
+          let found = false;
+          gsNavInner.querySelectorAll(".gsnav-pill").forEach((p) => {
+            const active = p.dataset.domain === domain;
+            p.classList.toggle("gsnav-active", active);
+            if (active && !found) {
+              found = true;
+              /* Scroll pill into view within the horizontal container */
+              const pillL = p.offsetLeft;
+              const pillR = pillL + p.offsetWidth;
+              const contL = gsNavInner.scrollLeft;
+              const contR = contL + gsNavInner.offsetWidth;
+              if (pillL < contL + 24) {
+                gsNavInner.scrollTo({ left: pillL - 24, behavior: "smooth" });
+              } else if (pillR > contR - 24) {
+                gsNavInner.scrollTo({ left: pillR - gsNavInner.offsetWidth + 24, behavior: "smooth" });
+              }
+            }
+          });
+        }
+
+        /* Scroll-spy: determine which domain section is at the top of viewport */
+        function runScrollSpy() {
+          if (activeFilter !== "all") return;
+          const headerH = document.querySelector(".site-header")?.offsetHeight || 56;
+          const navH    = gsNav.classList.contains("gsnav-visible") ? gsNav.offsetHeight : 0;
+          const offset  = headerH + navH + 24;
+
+          let currentDomain = null;
+          for (const section of document.querySelectorAll(".domain-section")) {
+            if (section.getBoundingClientRect().top <= offset) {
+              const headingText = section.querySelector(".domain-heading")?.textContent.trim();
+              for (const [d, label] of Object.entries(DOMAIN_LABELS)) {
+                if (label === headingText) { currentDomain = d; break; }
+              }
+            } else {
+              break; /* sections are in order, stop once we're past the fold */
+            }
+          }
+          if (currentDomain) updateStickyPill(currentDomain);
+        }
+
+        /* Show/hide sticky nav using IntersectionObserver on the original filter bar */
+        function setupFilterBarObserver() {
+          const filtersEl = document.getElementById("glossary-filters");
+          new IntersectionObserver(
+            ([entry]) => {
+              /* Only show sticky nav in "all" mode — filtered views have one section */
+              const show = !entry.isIntersecting && activeFilter === "all";
+              gsNav.classList.toggle("gsnav-visible", show);
+              gsNav.setAttribute("aria-hidden", show ? "false" : "true");
+              if (show) runScrollSpy();
+            },
+            { threshold: 0 }
+          ).observe(filtersEl);
+        }
+
+        /* Re-evaluate sticky nav visibility after filter changes */
+        function syncStickyNavVisibility() {
+          const filtersEl = document.getElementById("glossary-filters");
+          const rect = filtersEl.getBoundingClientRect();
+          const scrolledPast = rect.bottom < 0;
+          const show = scrolledPast && activeFilter === "all";
+          gsNav.classList.toggle("gsnav-visible", show);
+          gsNav.setAttribute("aria-hidden", show ? "false" : "true");
+        }
+
+        /* Attach scroll listener for spy */
+        window.addEventListener("scroll", runScrollSpy, { passive: true });
+
       })();
     </script>
+      <script src="./search.js" defer></script>
+    <script src="./search-modal.js" defer></script>
   </body>
 </html>
