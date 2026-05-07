@@ -88,12 +88,14 @@ jobs:
     runs-on: ubuntu-latest
     # Only on push — PR builds don't have write access to commit back
     if: github.event_name == 'push'
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          # Default GITHUB_TOKEN is enough for commits to the same repo
+          # GITHUB_TOKEN with contents:write permission (set at job level)
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node
