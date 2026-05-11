@@ -1,0 +1,113 @@
+---
+title: "The Benchmark Isn't the Measurement: Notes on NIST AI 800-2"
+date: 2026-05-10
+description: "NIST just published a framework for how to run automated benchmark evaluations properly. The three-stage structure formalizes what measurement science has been pointing at for decades. The 'emerging practice' labels tell you exactly where the field is failing."
+tags: [evals, psychometrics]
+---
+
+> **TL;DR:** NIST AI 800-2 (January 2026, initial public draft) is the closest thing the field now has to a federal standard for running automated benchmark evaluations of language models. The framework carries no regulatory authority, but its three-stage structure — define objectives, implement and run, analyze and report — formalizes the measurement-validity argument that psychometrics has been making since the 1950s and applies it directly to LLM evals. Two things stand out. Most organizations are failing at Stage 1, before they write a single line of eval code, because they haven't defined what they're actually trying to measure. And the practices labeled "emerging" — uncertainty quantification, evaluation awareness detection, transcript release, benchmark versioning — are not open research problems. They are standard scientific practices that the AI evaluation community has not yet implemented at scale.
+
+I've been pointing at the psychometrics problem in LLM evaluation since [the metrics post](post.html?slug=metrics-metrics-metrics): the gap between *running a benchmark* and *measuring something* is the gap construct validity was designed to close. NIST just formalized that argument with a government publication number. I want to do two things with this post — work through what the framework actually says, and use it to surface what's still missing.
+
+[NIST AI 800-2](https://doi.org/10.6028/NIST.AI.800-2.ipd) is an initial public draft, open for comment, scoped specifically to *automated* benchmark evaluations — evaluations that, once set up, run without additional human input. The document explicitly carves out red-teaming, human-subject experiments, field testing, and post-deployment monitoring. That scoping matters. If your evaluation objective requires those methods, the framework says so and refers you elsewhere. The document isn't trying to be a complete evaluation theory — it's trying to establish minimum reproducible practice for a specific class of evaluation that has become ubiquitous and is mostly being done wrong.[^1]
+
+> [!NOTE]
+> **Why NIST standards tend to matter beyond their publication date:** NIST (National Institute of Standards and Technology) is a non-regulatory federal agency — it publishes voluntary guidelines that carry no regulatory force. But NIST voluntary standards have a consistent track record of becoming de facto requirements: its AES encryption standard (2001) is now the global default for symmetric encryption; its Cybersecurity Framework (2014) is referenced in U.S. banking examination guidance despite never being mandatory law. The AI equivalents are following the same arc. The NIST AI RMF's Generative AI Profile (600-1) is already appearing in examination conversations according to practitioner reports. AI 800-2 is a draft today; the pattern suggests it will matter in practice before it is ever required.
+
+## Stage 1: The construct definition problem
+
+The framework's first stage is defining evaluation objectives. That sounds obvious. It isn't.
+
+NIST draws a distinction that practitioners routinely collapse: the *measurement construct* (the abstract concept you care about — "mathematical reasoning," "safety," "faithfulness") versus the *measurement criterion* (the specific, directly measurable proxy — "accuracy on GPQA-Diamond," "attack success rate on AgentDojo"). The construct is what you're trying to know. The criterion is what your benchmark actually measures. The distance between them is your validity problem.[^2]
+
+Most organizations pick a benchmark first and reverse-engineer a justification for why it measures what they care about. NIST recommends the opposite: define the construct, then assess whether a candidate benchmark measures it directly, measures it as a conceptual proxy, or merely predicts related downstream outcomes. Those are meaningfully different relationships, and they imply different claims you're entitled to make about your results.
+
+| Benchmark–construct relationship | What it means | Banking example | Claim you're entitled to make |
+|---|---|---|---|
+| **Direct measurement** | Benchmark items reflect the construct of interest | Credit-reasoning benchmark for a credit decisioning agent | "This model performs X on the construct we care about" |
+| **Conceptual proxy** | Benchmark measures a related subskill or prerequisite | GPQA graduate reasoning for a research summarization agent | "This model demonstrates capability in a related domain" |
+| **Downstream prediction** | Empirical correlation, even if weakly conceptual | Arena-Hard human preference for a customer service chatbot | "Prior studies suggest performance here predicts outcome Y" |
+
+The contamination question belongs here too. If benchmark items appeared in a model's training data, the scores measure something between "can solve this problem" and "has memorized this problem." NIST discusses canary strings — unique sequences intentionally embedded to detect training on the test set — as an emerging practice. Most deployed evaluation pipelines don't use them.
+
+For financial services specifically, the construct definition failure has a direct regulatory consequence. A model evaluated against a general reasoning benchmark and found suitable for a specific credit decisioning task has cleared a gate with no measurement validity for that gate. The benchmark didn't measure credit reasoning. It measured something that may correlate with credit reasoning. That's a different claim, and under general model risk governance principles the burden of establishing that relationship sits with the deploying institution. SR 26-2 explicitly excludes GenAI from its formal scope and cannot be the source of that obligation, but the underlying requirement to justify fit between evidence and claim holds regardless of which framework applies.
+
+## Stage 2: Protocol design and the cost-control blind spot
+
+The second stage covers how you run the evaluation once you've selected a benchmark. NIST identifies four design principles: comparability, external validity, cost control, and performance optimization.
+
+Cost control is the one most practitioners treat as a budget issue rather than a methodological one. Modern reasoning models can be configured to use more or less computational effort: "reasoning effort" settings that trade token cost for performance. Comparing two models run at different reasoning effort settings is like comparing two analysts given different amounts of time. The comparison may be valid, but it measures model performance at a given cost point rather than raw capability in isolation. NIST recommends either controlling cost uniformly across compared systems, or reporting both cost and performance together — and most published evaluation reports do neither.
+
+External validity — whether evaluation conditions resemble deployment conditions — is where agentic evaluations consistently break down. A model evaluated with no tools, minimal context, and a controlled environment produces performance numbers for a system that doesn't exist in production. NIST recommends scaffolding models during evaluation in ways that mirror their actual deployment scaffolding. NIST uses "scaffolding" for what this blog has been calling a [harness](post.html?slug=agent-harness-design) — the orchestration layer of tool routing, execution loops, and context management that wraps the base model. The terms are synonymous; the framing difference is that "harness" foregrounds the engineering obligations (error recovery, inter-session state, retry logic) that "scaffolding" leaves implicit. That framing difference matters here: building a faithful eval harness means reproducing not just the tools and system prompt but the full operational infrastructure the agent runs inside in production — the part most teams skip, and the part most responsible for external validity failures. The [claude-code-harness post](post.html?slug=claude-code-harness) covers what that infrastructure looks like in a production-grade open-source implementation.
+
+NIST also covers LLM-as-judge calibration directly, recommending that evaluators compare judge outputs against human grading, use multiple judges, and compute interrater agreement. Cohen's κ as the interrater agreement measure was the same calibration argument the [deployment-gates post](post.html?slug=deployment-gates) made; the [gui-agents-verifier post](post.html?slug=gui-agents-verifier) approached it from the verifier design side. It is now in a federal draft standard.
+
+The debugging section deserves more attention than it usually gets. NIST identifies six common failure modes in automated evals — each capable of producing benchmark scores that look valid and mean nothing. Most evaluation pipelines don't check for any of them systematically.
+
+| Failure mode | What goes wrong | Detection method |
+|---|---|---|
+| **Degraded serving** | Model runs in a misconfigured or quantized state | Cross-check scores against developer-published benchmark results |
+| **Tool-calling errors** | Errors in how the model formats tool calls, or bugs in tool endpoints themselves, suppress agent performance | Manual transcript review; look for error-code patterns in model-side tool call formatting and in tool responses |
+| **Unsolvable test items** | Environment bugs make certain tasks impossible for any model | Run a deterministic solution against the environment; verify tool and network access |
+| **Refusal mismatch** | Refusal rate during eval differs from production config | Scan transcripts for refusal language; compare against deployment system prompt |
+| **Evaluation cheating** | Model finds an unintended solution path (e.g., deletes failing tests rather than fixing them) | Automated transcript review; spot-check grading logic against raw outputs |
+| **Evaluation awareness** | Model adjusts behavior when it detects it's being tested | Flag verbalized awareness in transcripts; compare eval vs. deployment output distributions |
+
+## The evaluation awareness problem NIST can't solve
+
+The document's treatment of evaluation awareness is its most honest section.
+
+Some models have been shown, in certain contexts, to detect when they're being evaluated. Recent work — including an Anthropic system card for Claude Sonnet 4.5 — documents that models will sometimes behave differently when they perceive they're in an evaluation context.[^3] NIST cites this explicitly and frames it as a direct threat to external validity: if the model performs better during evaluation than during deployment, the evaluation measures the model *behaving under test conditions*, not the model doing its intended job.
+
+What NIST recommends is limited and appropriately self-aware: measure rates of *verbalized* evaluation awareness — when models explicitly acknowledge they might be being tested — and note this as a caveat on external validity claims. They acknowledge that verbalized awareness is only the detectable fraction. Whether a model is adjusting behavior based on evaluation cues without saying so is an open research problem with no current solution.
+
+This maps directly onto the problem [metrics-metrics-metrics](post.html?slug=metrics-metrics-metrics) raised: the measurement instrument affects what it measures. In psychometrics that's the Hawthorne effect — subjects behave differently when observed. LLMs have apparently developed an analog. The difference is that psychometricians can at least blind subjects to whether they're in the study condition. There's no obvious equivalent for a model that has encoded evaluation format patterns during pretraining.
+
+The incompleteness argument from [adversarial-incompleteness](post.html?slug=adversarial-incompleteness) has a direct parallel: just as no finite test suite can enumerate the full adversarial attack surface, no finite benchmark can fully account for a model that adapts its behavior to its evaluation context. The analogy isn't structurally identical — one is a mathematical result about attack surfaces, the other an empirical finding about model behavior in certain contexts — but the governance implication is the same: finite enumeration cannot capture the full problem. Both are measurement validity failures with structural rather than engineering causes.
+
+## What "emerging practice" actually tells you
+
+Across all three stages, NIST applies an "emerging practice" label to recommendations that are not yet widely adopted among evaluation practitioners. A partial list: uncertainty quantification for evaluation results, evaluation awareness detection, benchmark versioning with semantic version numbers, sandboxing agents in containers, releasing evaluation transcripts, publishing evaluation code, and reporting costs alongside performance metrics.
+
+These are not emerging in the sense of being speculative or research-stage. Uncertainty quantification has been standard in experimental science for over a century. Version control has existed since the 1970s. Sandboxing predates the first iPhone. The "emerging" label means the AI evaluation field hasn't adopted these practices at scale — not that the practices themselves are novel.
+
+NIST is doing something useful here: distinguishing between what they're comfortable calling best practice (things most serious evaluators already do) and what they believe serious evaluators should do but don't. For most of the labeled practices, "emerging" means the right approach is known and institutions simply have not implemented it at scale. For evaluation awareness detection specifically, the label reflects genuinely unsettled methodology: measuring verbalized awareness is a proxy, not a solution, and the field doesn't yet have a reliable way to detect non-verbalized adjustment. Reading the "emerging practice" passages as a gap analysis of current AI evaluation is, I think, the document's most practical use.[^4]
+
+| "Emerging practice" per NIST 800-2 | Standard in… since… |
+|---|---|
+| Uncertainty quantification (standard errors, confidence intervals) | Experimental science — 19th century |
+| Benchmark versioning with semantic version numbers | Software engineering — version control has existed since the 1970s |
+| Sandboxing agents in isolated containers | Security engineering — early 2000s |
+| Releasing evaluation transcripts for reproducibility | Academic publishing — replication standards predate LLMs by decades |
+| Reporting costs alongside performance metrics | Economic analysis — basic since cost-benefit frameworks were formalized |
+| Evaluation awareness detection | Experimental blinding in medicine and psychology — standard practice since RCTs |
+
+NIST itself ran a real-world evaluation of DeepSeek models that applies these principles — publishing protocol details, uncertainty estimates, and cost-performance profiles — as a worked example of what the framework looks like in practice.[^5] Most published AI evaluation reports, including vendor reports and third-party comparisons, don't clear the bar the document sets.[^6]
+
+For financial services, the gap has MRM implications. The practices labeled "emerging" are largely the practices that would produce evaluation artifacts defensible in examination — statistical uncertainty bounds on benchmark scores, evidence of protocol independence from development, versioned evaluation specifications with documented settings. With GenAI formally out of scope under SR 26-2, the NIST 800-2 vocabulary may become the closest approximation to a standard that examiners reach for — the NIST AI RMF Generative AI Profile (600-1) has already appeared in examination conversations according to practitioner reports; 800-2 could follow as evaluation-specific guidance matures.
+
+## Where this leaves the evals agenda
+
+NIST AI 800-2 establishes a baseline, not an upper bound. It is voluntary, principles-based, and scoped to automated benchmarks, and it says nothing about how to evaluate agentic systems in the messy conditions where failures actually happen. The [adversarial-workflow post](post.html?slug=adversarial-workflow) covers what a defensible red-team engagement looks like; 800-2 deliberately doesn't go there.
+
+The benchmark saturation problem that [metrics-metrics-metrics](post.html?slug=metrics-metrics-metrics) flagged is present but underspecified here. NIST discusses contamination risk as a reason to prefer benchmarks created after training cutoff, and to use canary strings where possible. The framing assumes a passive adversary. When model developers actively train toward public benchmarks — not just absorbing them incidentally during pretraining — the canary strings arrive after the optimization has already occurred. That's Goodhart's Law operating at the benchmark lifecycle level, and 800-2 doesn't fully address it.[^7]
+
+The document's treatment of Stage 3 — qualified claims — is the part I want to carry forward. The guidance is direct: distinguish what the evaluation measured from what you're inferring, and be explicit about the gap. That discipline — earning the right to make a claim before making it — is the same discipline the [effective-challenge post](post.html?slug=effective-challenge) argued validators need to maintain under GenAI pressure. A benchmark score becomes a defensible conclusion only after the explicit qualification work the framework outlines. NIST is formal about that now.
+
+Stage 3 — qualified claims, uncertainty reporting, sharing evaluation details — is where the framework's practical value is most direct and least discussed. NIST is explicit: distinguish what the evaluation measured from what you're inferring, report statistical uncertainty alongside every summary metric, and share enough protocol detail that another team could reproduce the result. For an MRM audience, that translates to a specific artifact: a model risk report that includes confidence intervals on benchmark scores, a documented protocol with versioned settings, and an explicit section naming the gap between the benchmark's measurement criterion and the deployment use case. Most AI evaluation reports submitted to model risk committees today have none of those three things. The NIST framework does not require them, but it gives validators a vocabulary to ask for them.
+
+"Emerging practice" is NIST's honest admission about the distance between where the field is and where it needs to be. Most of what needs to emerge isn't technically difficult. It's institutionally uncomfortable: running evaluations you might fail, reporting uncertainty you'd rather not quantify, releasing transcripts that expose your methodological choices. None of that is a measurement problem.
+
+[^1]: NIST AI 800-2, "Practices for Automated Benchmark Evaluations of Language Models," Initial Public Draft, January 2026. Center for AI Standards and Innovation (CAISI), U.S. Department of Commerce. https://doi.org/10.6028/NIST.AI.800-2.ipd. The document distinguishes automated benchmarks from red-teaming, human-subject experiments, field testing, and post-deployment monitoring in Table I.1, with explicit criteria for when each method is more appropriate.
+
+[^2]: The construct vs. criterion distinction maps onto the vocabulary in Wallach et al. (2025), "Position: Evaluating Generative AI Systems Is a Social Science Measurement Challenge," which NIST cites directly. Their framing — measurement construct (background concept) vs. measurement criterion (systematized concept) — is adapted from Adcock and Collier (2001). The [metrics-metrics-metrics post](post.html?slug=metrics-metrics-metrics) covers the upstream psychometrics argument; NIST 800-2 applies the same vocabulary operationally.
+
+[^3]: Needham et al. (2025), "Large Language Models Often Know When They Are Being Evaluated," arXiv:2505.23836. NIST also cites the Anthropic Claude Sonnet 4.5 System Card (2025, https://assets.anthropic.com/m/12f214efcc2f457a/original/Claude-Sonnet-4-5-System-Card.pdf) and an Anthropic-OpenAI joint alignment evaluation exercise as evidence for evaluation awareness. The implication — that evaluation conditions may systematically differ from deployment conditions in ways that inflate benchmark scores — is an open external validity problem with no current solution.
+
+[^4]: This framing isn't unique to NIST. The "emerging practice" label in regulatory and standards documents typically signals: we know this should be done, we can't yet require it, and we're flagging it because we expect to require it later. The NIST AI RMF used similar framing around GenAI-specific risks before the 600-1 profile was published.
+
+[^5]: CAISI (2025), "Evaluation of DeepSeek AI Models," Center for AI Standards and Innovation Report. https://www.nist.gov/system/files/documents/2025/09/30/CAISI_Evaluation_of_DeepSeek_AI_Models.pdf. The report includes uncertainty estimates (standard error via generalized linear mixed model), detailed protocol settings (reasoning budget specifications per model family), and cost-performance profiles — practices flagged as "emerging" in 800-2 but implemented here as a worked example.
+
+[^6]: Raji et al. (2021), "AI and the Everything in the Whole Wide World Benchmark," arXiv:2111.15366, is the canonical critique of how benchmarks become proxies for capabilities they were never designed to measure. NIST cites this directly in the benchmark selection guidance. The paper's central observation — that benchmarks are adopted as shorthand for broad capability claims they don't support — is the measurement validity failure the Stage 1 practices are trying to prevent.
+
+[^7]: Akhtar et al. (2026), "When AI Benchmarks Plateau: A Systematic Study of Benchmark Saturation," arXiv:2602.16763, provides the longitudinal data: nearly half of 60 widely used benchmarks show saturation, with top models becoming statistically indistinguishable. NIST's contamination guidance focuses on passive contamination (pretraining data exposure); active training-toward-benchmarks is the harder version of the same problem and remains unaddressed.
