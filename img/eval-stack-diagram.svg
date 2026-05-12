@@ -1,0 +1,45 @@
+<svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" style="font-family:ui-sans-serif,system-ui,sans-serif;">
+
+  <!-- Background fill so the SVG looks correct regardless of page theme -->
+  <rect x="0" y="0" width="640" height="360" rx="8" fill="#161b27"/>
+
+  <!-- L1: Raw infrastructure logs — outermost, most muted -->
+  <rect x="0" y="0" width="640" height="360" rx="8"
+        fill="rgba(167,139,250,0.05)" stroke="rgba(167,139,250,0.22)" stroke-width="1.5"/>
+  <text x="14" y="21" fill="#a78bfa" font-weight="700" font-size="13.5">Raw infrastructure logs</text>
+  <text x="626" y="21" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">highest volume · all system events</text>
+
+  <!-- L2: Distributed traces -->
+  <rect x="18" y="38" width="604" height="312" rx="7"
+        fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.30)" stroke-width="1.5"/>
+  <text x="32" y="59" fill="#a78bfa" font-weight="700" font-size="13.5">Distributed traces</text>
+  <text x="610" y="59" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">call graphs · latency across services</text>
+
+  <!-- L3: Rollout -->
+  <rect x="36" y="76" width="568" height="264" rx="6"
+        fill="rgba(167,139,250,0.11)" stroke="rgba(167,139,250,0.38)" stroke-width="1.5"/>
+  <text x="50" y="97" fill="#a78bfa" font-weight="700" font-size="13.5">Rollout</text>
+  <text x="594" y="97" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">single policy execution event</text>
+
+  <!-- L4: Agent trajectory -->
+  <rect x="54" y="114" width="532" height="216" rx="5"
+        fill="rgba(167,139,250,0.15)" stroke="rgba(167,139,250,0.46)" stroke-width="1.5"/>
+  <text x="68" y="135" fill="#a78bfa" font-weight="700" font-size="13.5">Agent trajectory</text>
+  <text x="578" y="135" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">state → action sequence · outcomes</text>
+
+  <!-- L5: Evaluation transcript -->
+  <rect x="72" y="152" width="496" height="168" rx="4"
+        fill="rgba(167,139,250,0.19)" stroke="rgba(167,139,250,0.56)" stroke-width="1.5"/>
+  <text x="86" y="173" fill="#a78bfa" font-weight="700" font-size="13.5">Evaluation transcript</text>
+  <text x="562" y="173" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">human-legible record · audit &amp; replication</text>
+
+  <!-- L6: Evaluation results / metrics — innermost, most vivid -->
+  <rect x="90" y="190" width="460" height="118" rx="3"
+        fill="rgba(167,139,250,0.27)" stroke="rgba(167,139,250,0.72)" stroke-width="2"/>
+  <text x="104" y="211" fill="#a78bfa" font-weight="700" font-size="13.5">Evaluation results / metrics</text>
+  <text x="546" y="211" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">lowest volume · highest abstraction</text>
+
+  <!-- Axis legend -->
+  <text x="8" y="352" fill="#94a3b8" font-size="10" opacity="0.45">abstraction ↑ · volume ↓  (inward)</text>
+
+</svg>

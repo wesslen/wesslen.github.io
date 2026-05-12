@@ -82,6 +82,51 @@ NIST is doing something useful here: distinguishing between what they're comfort
 | Reporting costs alongside performance metrics | Economic analysis — basic since cost-benefit frameworks were formalized |
 | Evaluation awareness detection | Experimental blinding in medicine and psychology — standard practice since Randomized Control Trials (RCTs) |
 
+<details style="margin:2rem 0;border:1px solid var(--accent2);border-radius:6px;background:var(--accent2-dim);">
+<summary style="cursor:pointer;padding:0.8rem 1.1rem;font-weight:600;color:var(--accent2);user-select:none;list-style:none;display:flex;align-items:center;gap:0.5rem;"><span>▶</span> Terminology: transcript vs. trajectory vs. rollout vs. log vs. trace</summary>
+<div style="padding:0.25rem 1.25rem 1.25rem;border-top:1px solid var(--accent2);margin-top:0;">
+
+<p style="margin-top:1rem;font-size:0.9em;color:var(--muted);">NIST AI 800-2 uses "transcript" as a core quality assurance concept without defining it precisely. Practitioners working across evaluation science, reinforcement learning, and software observability use five overlapping terms for related but distinct things.</p>
+
+<table style="font-size:0.85em;width:100%;border-collapse:collapse;margin:1rem 0;">
+<thead><tr style="border-bottom:1px solid var(--accent2);">
+<th style="text-align:left;padding:0.4rem 0.6rem;">Term</th>
+<th style="text-align:left;padding:0.4rem 0.6rem;">What it captures</th>
+<th style="text-align:left;padding:0.4rem 0.6rem;">Primary use</th>
+<th style="text-align:left;padding:0.4rem 0.6rem;">Origin</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.6rem;"><strong>Transcript</strong></td><td style="padding:0.4rem 0.6rem;">Human-legible interaction record (turns, tool calls, responses)</td><td style="padding:0.4rem 0.6rem;">Evaluation review &amp; reproducibility</td><td style="padding:0.4rem 0.6rem;">NLP / eval science</td></tr>
+<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.6rem;"><strong>Trajectory</strong></td><td style="padding:0.4rem 0.6rem;">State → action sequence + outcomes</td><td style="padding:0.4rem 0.6rem;">Task completion measurement, RL training</td><td style="padding:0.4rem 0.6rem;">RL / planning</td></tr>
+<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.6rem;"><strong>Rollout</strong></td><td style="padding:0.4rem 0.6rem;">Single policy execution from start to finish</td><td style="padding:0.4rem 0.6rem;">Sampling event; generates a trajectory</td><td style="padding:0.4rem 0.6rem;">Reinforcement learning</td></tr>
+<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.6rem;"><strong>Log</strong></td><td style="padding:0.4rem 0.6rem;">Machine-generated, append-only event records</td><td style="padding:0.4rem 0.6rem;">Infrastructure monitoring &amp; debugging</td><td style="padding:0.4rem 0.6rem;">Software engineering</td></tr>
+<tr><td style="padding:0.4rem 0.6rem;"><strong>Trace</strong></td><td style="padding:0.4rem 0.6rem;">Causally-linked spans across distributed services</td><td style="padding:0.4rem 0.6rem;">Latency, call graphs, performance</td><td style="padding:0.4rem 0.6rem;">DevOps / observability</td></tr>
+</tbody>
+</table>
+
+<h4 style="color:var(--accent2);margin:1.2rem 0 0.3rem;font-size:0.95em;">Transcript</h4>
+<p style="margin:0 0 0.8rem;font-size:0.9em;">In NIST AI 800-2, a transcript is the human-legible record of an evaluation interaction — ordered inputs, outputs, tool calls, and model responses for a single test item. It is evaluation-scoped (one per benchmark trial) and designed for sharing, auditing, and replication. The emphasis is on <em>what was said and done</em>, for the purpose of assessing model behavior — not system performance.</p>
+
+<h4 style="color:var(--accent2);margin:1.2rem 0 0.3rem;font-size:0.95em;">Agent Trajectory</h4>
+<p style="margin:0 0 0.8rem;font-size:0.9em;">From RL and planning research, a trajectory is the formal sequence s₀→a₀→s₁→a₁→…→sₙ, where <em>s</em> is environment state and <em>a</em> is agent action. Unlike a transcript, it is state-centric rather than turn-centric — if an agent runs a bash command, the trajectory captures filesystem state before and after, not just the command text. Frameworks like AgentBench and OSWorld use "trajectory" specifically because their agents interact with GUIs and filesystems where world state matters as much as the conversation.</p>
+
+<h4 style="color:var(--accent2);margin:1.2rem 0 0.3rem;font-size:0.95em;">Rollout</h4>
+<p style="margin:0 0 0.8rem;font-size:0.9em;">A rollout is the RL term for a single sampled episode — the <em>act</em> of executing a policy from start to finish, which produces a trajectory as its record. NIST's "multiple trials per test item" is functionally rollout sampling: run the policy N times from the same initial state to estimate expected performance. The distinction matters: a rollout is the sampling event; a trajectory is the resulting record. In casual usage, practitioners often conflate them.</p>
+
+<h4 style="color:var(--accent2);margin:1.2rem 0 0.3rem;font-size:0.95em;">Log</h4>
+<p style="margin:0 0 0.8rem;font-size:0.9em;">Software engineering logs are append-only, machine-generated event records — JSON lines, timestamps, severity levels — optimized for monitoring and debugging. In LLM deployments, logs capture request metadata, token counts, latency, and errors, not primarily the semantic content of model responses. High volume, low signal; a transcript is a curated, meaningful subset of what logs incidentally record.</p>
+
+<h4 style="color:var(--accent2);margin:1.2rem 0 0.3rem;font-size:0.95em;">Trace</h4>
+<p style="margin:0 0 0.8rem;font-size:0.9em;">From the OpenTelemetry/distributed systems world, a trace is a causally-linked chain of spans tracking performance and latency across services. Tools like LangSmith present traces in a UI that resembles a transcript, but the architectural purpose differs — a trace answers "what took how long and why," not "what did the model decide." The OpenTelemetry Semantic Conventions for GenAI (emerging 2024–2025) are attempting to embed transcript-like content inside traces, which is where the two concepts are actively converging.</p>
+
+<h4 style="color:var(--accent2);margin:1.2rem 0 0.3rem;font-size:0.95em;">How they stack</h4>
+<img src="../img/eval-stack-diagram.svg" alt="Nested containment diagram: raw infrastructure logs contain distributed traces, which contain rollouts, agent trajectories, evaluation transcripts, and evaluation metrics at the innermost level. Abstraction increases and volume decreases moving inward." style="width:100%;height:auto;display:block;margin:0.75rem 0 0.5rem;border-radius:6px;">
+
+<p style="margin:0;font-size:0.85em;color:var(--muted);border-top:1px solid var(--border);padding-top:0.75rem;"><strong>Governance note:</strong> SR 26-2 / MRM auditability maps most directly to <em>transcripts and trajectories</em> — what the model decided and why. Operational resilience frameworks (Basel, DORA) map to <em>logs and traces</em> — what the system did and when. The EU AI Act Article 12 record-keeping requirements straddle both.</p>
+
+</div>
+</details>
+
 NIST itself ran a real-world evaluation of DeepSeek models that applies these principles — publishing protocol details, uncertainty estimates, and cost-performance profiles — as a worked example of what the framework looks like in practice.[^5] The uncertainty estimates use a generalized linear mixed effects model with logit link, treating model as a fixed effect and task type as a random effect to separate estimation error from benchmark size and non-determinism in model responses.[^6] Most published AI evaluation reports, including vendor reports and third-party comparisons, don't clear the bar the document sets.[^7]
 
 ![Expense-performance curves for GPT-4.1-mini and DeepSeek V3.1. The leftward shift of the blue curves (GPT-4.1-mini) compared to the red curves (DeepSeek V3.1) indicates GPT-4.1-mini's lower cost across a variety of expense limits.](../img/expense_curve_deepseek.png)
