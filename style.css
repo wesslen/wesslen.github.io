@@ -1687,6 +1687,51 @@ img {
   opacity: 1;
 }
 
+/* ── Footnote Popup Tooltips ─────────────────────────────────
+   Shown on hover/focus/click of inline footnote superscripts.
+   Uses accent2 (violet) to stay distinct from glossary tooltips
+   (which use accent/teal + dotted underline).
+   The existing violet pill on .cite-ref a is the visual cue —
+   no additional underline is added.
+─────────────────────────────────────────────────────────────── */
+.fn-tooltip {
+  position: absolute;
+  z-index: 500;
+  background: var(--surface);
+  border: 1px solid var(--accent2-dim);
+  border-left: 3px solid var(--accent2);
+  border-radius: var(--radius);
+  padding: 0.65rem 0.85rem;
+  max-width: 320px;
+  min-width: 180px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+[data-theme="light"] .fn-tooltip {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+.fn-tooltip-num {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.72rem;
+  color: var(--accent2);
+  margin-bottom: 0.3rem;
+  opacity: 0.8;
+}
+.fn-tooltip-text {
+  color: var(--text);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+.fn-tooltip-text a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-dim);
+  word-break: break-all;
+}
+
 /* ── Search ──────────────────────────────────────────────── */
 #search-wrap {
   max-width: 760px;

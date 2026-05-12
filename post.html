@@ -751,6 +751,7 @@
             labelCodeBlocks();
             injectCopyButtons();
             processYouTube(proseEl);
+            applyFootnoteTooltips(proseEl);
 
             // Typeset MathJax if present (no-op on posts without math)
             // Typeset MathJax: check typesetPromise specifically (window.MathJax is always set
@@ -810,6 +811,171 @@
             errorEl.style.display = "block";
             console.error("Failed to load post:", err);
           }
+        }
+
+        /* ── Footnote Popup Tooltips ───────────────────────────────
+           On hover/focus/click of a .cite-ref superscript, renders a
+           floating card with the footnote text. Click prevents default
+           scroll-to-refs navigation and toggles the popup instead.
+           Styled with accent2 (violet) to differ from glossary tooltips
+           (accent/teal + dotted underline). One shared .fn-tooltip div
+           is reused across all footnotes.
+        ─────────────────────────────────────────────────────── */
+        function applyFootnoteTooltips(proseEl) {
+          const tipEl = document.createElement("div");
+          tipEl.className = "fn-tooltip";
+          // Set all visual styles inline via CSS variables — resolves correctly
+          // regardless of external stylesheet caching. z-index 9000 clears
+          // everything including sticky headers and glossary tooltips.
+          tipEl.style.cssText = [
+            "display:none",
+            "position:absolute",
+            "z-index:9000",
+            "background:var(--surface)",
+            "border:1px solid var(--accent2-dim)",
+            "border-left:3px solid var(--accent2)",
+            "border-radius:var(--radius,6px)",
+            "padding:0.65rem 0.85rem",
+            "max-width:320px",
+            "min-width:180px",
+            "pointer-events:auto",
+            "font-size:0.8rem",
+            "line-height:1.55",
+          ].join(";");
+          document.body.appendChild(tipEl);
+
+          let activeRef = null; // track which ref has tip open
+
+          function showFnTip(refEl) {
+            const href = refEl.getAttribute("href");
+            if (!href || !href.startsWith("#")) return;
+            const fnId = href.slice(1);
+            const fnEl = document.getElementById(fnId);
+            if (!fnEl) return;
+
+            const numEl = fnEl.querySelector(".cite-num");
+            const num = numEl ? numEl.textContent.trim() : "";
+
+            // Clone li, strip the number + back-arrow, keep footnote text
+            const clone = fnEl.cloneNode(true);
+            clone.querySelectorAll(".cite-num, .cite-back").forEach((el) => el.remove());
+            const text = clone.innerHTML.trim();
+
+            // Inline child styles so they render regardless of CSS cache state
+            const isDark = document.documentElement.getAttribute("data-theme") !== "light";
+            const accent2 = isDark ? "#a78bfa" : "#7c3aed";
+            const textColor = isDark ? "#e6edf3" : "#1f2328";
+            const shadow = isDark
+              ? "0 4px 20px rgba(0,0,0,0.55)"
+              : "0 4px 16px rgba(0,0,0,0.18)";
+            tipEl.style.boxShadow = shadow;
+
+            tipEl.innerHTML =
+              '<div style="font-family:var(--font-mono,monospace);font-weight:600;font-size:0.72rem;color:' +
+              accent2 +
+              ';margin-bottom:0.3rem;opacity:0.85;">fn ' +
+              num +
+              "</div>" +
+              '<div style="color:' +
+              textColor +
+              ';font-size:0.8rem;line-height:1.6;">' +
+              text +
+              "</div>";
+            tipEl.style.display = "block";
+
+            // Position: prefer above, flip below if near top of viewport
+            const rect = refEl.getBoundingClientRect();
+            const tipH = tipEl.offsetHeight;
+            const tipW = tipEl.offsetWidth;
+
+            let top = rect.top + window.scrollY - tipH - 10;
+            let left = rect.left + window.scrollX + rect.width / 2 - tipW / 2;
+
+            if (top < window.scrollY + 8) {
+              top = rect.bottom + window.scrollY + 8;
+            }
+            left = Math.max(8, Math.min(left, window.innerWidth - tipW - 8));
+
+            tipEl.style.top = top + "px";
+            tipEl.style.left = left + "px";
+          }
+
+          function hideFnTip() {
+            tipEl.style.display = "none";
+            activeRef = null;
+          }
+
+          let hideTimer = null;
+
+          function scheduleHide() {
+            if (hideTimer) clearTimeout(hideTimer);
+            hideTimer = setTimeout(hideFnTip, 220);
+          }
+
+          function cancelHide() {
+            if (hideTimer) {
+              clearTimeout(hideTimer);
+              hideTimer = null;
+            }
+          }
+
+          // Hover: show on enter, schedule hide on leave
+          proseEl.addEventListener("mouseover", (e) => {
+            const a = e.target.closest(".cite-ref a");
+            if (a) {
+              cancelHide();
+              showFnTip(a);
+            }
+          });
+          proseEl.addEventListener("mouseout", (e) => {
+            if (e.target.closest(".cite-ref a")) {
+              if (!e.relatedTarget || !e.relatedTarget.closest(".fn-tooltip")) {
+                scheduleHide();
+              }
+            }
+          });
+
+          // Keep tip open while cursor is inside it
+          tipEl.addEventListener("mouseenter", cancelHide);
+          tipEl.addEventListener("mouseleave", scheduleHide);
+
+          // Click: prevent scroll-to-refs, toggle tooltip instead
+          proseEl.addEventListener("click", (e) => {
+            const a = e.target.closest(".cite-ref a");
+            if (!a) return;
+            e.preventDefault();
+            if (activeRef === a && tipEl.style.display !== "none") {
+              hideFnTip();
+            } else {
+              cancelHide();
+              activeRef = a;
+              showFnTip(a);
+            }
+          });
+
+          // Keyboard focus
+          proseEl.addEventListener("focusin", (e) => {
+            const a = e.target.closest(".cite-ref a");
+            if (a) {
+              activeRef = a;
+              showFnTip(a);
+            }
+          });
+          proseEl.addEventListener("focusout", (e) => {
+            // Small delay so focus moving into tooltip doesn't close it
+            scheduleHide();
+          });
+
+          // Outside click closes
+          document.addEventListener("click", (e) => {
+            if (!e.target.closest(".cite-ref") && !e.target.closest(".fn-tooltip")) {
+              hideFnTip();
+            }
+          });
+
+          // Hide on scroll/resize
+          window.addEventListener("scroll", hideFnTip, { passive: true });
+          window.addEventListener("resize", hideFnTip, { passive: true });
         }
 
         /* ── Glossary Tooltips ──────────────────────────────────
