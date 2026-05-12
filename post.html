@@ -865,9 +865,7 @@
             const isDark = document.documentElement.getAttribute("data-theme") !== "light";
             const accent2 = isDark ? "#a78bfa" : "#7c3aed";
             const textColor = isDark ? "#e6edf3" : "#1f2328";
-            const shadow = isDark
-              ? "0 4px 20px rgba(0,0,0,0.55)"
-              : "0 4px 16px rgba(0,0,0,0.18)";
+            const shadow = isDark ? "0 4px 20px rgba(0,0,0,0.55)" : "0 4px 16px rgba(0,0,0,0.18)";
             tipEl.style.boxShadow = shadow;
 
             tipEl.innerHTML =
