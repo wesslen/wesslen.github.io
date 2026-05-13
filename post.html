@@ -50,7 +50,10 @@
     <script>
       window.MathJax = {
         tex: {
-          inlineMath: [["\\(", "\\)"]],
+          inlineMath: [
+            ["\\(", "\\)"],
+            ["$", "$"],
+          ],
           displayMath: [
             ["$$", "$$"],
             ["\\[", "\\]"],
@@ -310,6 +313,32 @@
        Definitions are stripped from the markdown body before
        passing to marked, so they never appear as plain text.
     ─────────────────────────────────────────────────────── */
+        /* ── Math protection: shield $...$ and $$...$$ from marked.js ──
+       marked.js processes _ and * inside math spans, breaking LaTeX.
+       We stash every math region before marked runs, then restore
+       after, so MathJax receives the original LaTeX untouched.
+    ─────────────────────────────────────────────────────── */
+        function protectMath(text) {
+          const stash = [];
+          // Sentinel unlikely to appear in any blog prose or HTML
+          const ph = (i) => "DRIFTMATHSTASH" + i + "DRIFTMATHEND";
+          // Display math first ($$...$$) to avoid consuming a lone $ twice
+          text = text.replace(/\$\$([\s\S]+?)\$\$/g, (_, m) => {
+            stash.push("$$" + m + "$$");
+            return ph(stash.length - 1);
+          });
+          // Inline math ($...$) — single line only, no empty spans
+          text = text.replace(/\$([^\$\r\n]+?)\$/g, (_, m) => {
+            stash.push("$" + m + "$");
+            return ph(stash.length - 1);
+          });
+          return { text, stash };
+        }
+
+        function restoreMath(html, stash) {
+          return html.replace(/DRIFTMATHSTASH(\d+)DRIFTMATHEND/g, (_, i) => stash[+i]);
+        }
+
         function processFootnotes(body) {
           const defs = {};
           const order = []; // preserve definition order
@@ -736,7 +765,8 @@
             tagsEl.innerHTML = tags.map((t) => `<span class="tag" style="${tagStyle(t)}">${t}</span>`).join("");
 
             // ── Render markdown → HTML, append references ──────
-            const html = marked.parse(body) + refsHtml;
+            const { text: mathSafeBody, stash: mathStash } = protectMath(body);
+            const html = restoreMath(marked.parse(mathSafeBody), mathStash) + refsHtml;
             const proseEl = document.getElementById("prose-body");
             proseEl.innerHTML = html;
 
