@@ -102,7 +102,7 @@ python3 -m garak \
 
 Requirement 2 is the one that breaks most programs. Practitioners who understand foundation-model attack surfaces are rare and expensive, competing for hiring almost exclusively with first-line AI product teams. Many banks satisfy this by co-sourcing with external specialists (Big 4, boutique AI red-team firms) while keeping oversight and sign-off with internal MRM. That's consistent with prior model risk guidance on vendor-validation provided independence and documentation are preserved.
 
-Requirement 1 is the one that surprises teams. In several programs I've seen, the adversarial-ML specialists brought in to do red-teaming were the same people who had advised on the agent's prompt architecture. Structurally, that's the same problem as a developer validating their own model — SR 11-7 itself warned in 2011 about [asymmetric user challenges](https://www.federalreserve.gov/supervisionreg/srletters/sr1107a1.pdf), where the people closest to the model are least likely to probe it hard. The GenAI version is sharper because the competence is rarer; the answer is the same.
+Requirement 1 is the one that surprises teams. A recurring pattern in adversarial testing programs is that the adversarial-ML specialists brought in for red-teaming were the same people who had advised on the agent's prompt architecture. Structurally, that's the same problem as a developer validating their own model — SR 11-7 itself warned in 2011 about [asymmetric user challenges](https://www.federalreserve.gov/supervisionreg/srletters/sr1107a1.pdf), where the people closest to the model are least likely to probe it hard. The GenAI version is sharper because the competence is rarer; the answer is the same.
 
 ## What the PR-level checks look like in practice
 

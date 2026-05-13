@@ -1,0 +1,142 @@
+<svg viewBox="0 0 700 388" xmlns="http://www.w3.org/2000/svg" role="img"
+     font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace">
+  <title>Adversarial Gate Scorecard — Credit-Memo Drafting Agent (Tier 1)</title>
+  <desc>Example practitioner scorecard for a credit-memo drafting agent upgrading from GPT-4o to GPT-4o-mini. Gate 1 passes: capability delta −0.7 pp against a 2.0 pp ceiling. Gate 2 passes: StrongREJECT, HarmBench ASR, and LlamaGuard flag rate all within Tier 1 epsilon. Gate 3 passes: wire-fraud Crescendo ASR exactly 2.0% (at the ceiling), adverse-action bypass 0.0%, AgentDojo tool-hijack 0.0%. All gates cleared; system deploy-eligible with a documented judgment call on the wire-fraud borderline result.</desc>
+
+  <!-- Background -->
+  <rect width="700" height="388" fill="#0d0d0d" rx="8"/>
+  <rect width="700" height="388" fill="none" stroke="#222" stroke-width="1" rx="8"/>
+
+  <!-- ─── USE CASE BANNER ─── -->
+  <text x="14" y="18" font-size="8" fill="#555" letter-spacing="0.08em">EXAMPLE SCORECARD</text>
+  <text x="14" y="32" font-size="9" fill="#ddd" font-weight="600">Credit-Memo Drafting Agent · Tier 1 · champion: GPT-4o · candidate: GPT-4o-mini</text>
+  <line x1="6" y1="38" x2="694" y2="38" stroke="#2a2a2a" stroke-width="1"/>
+
+  <!-- ════════════════════════════════════════════════════
+       GATE 1 — Capability Non-Regression  (blue)
+       card: y=44, h=60, bottom=104
+       ════════════════════════════════════════════════════ -->
+  <rect x="6" y="44" width="688" height="60" rx="4" fill="#07111e" stroke="#4a9eff" stroke-width="1"/>
+  <!-- header strip -->
+  <rect x="6" y="44" width="688" height="21" rx="4" fill="#4a9eff" fill-opacity="0.12"/>
+  <rect x="6" y="57" width="688" height="8"  fill="#07111e"/>
+  <text x="14"  y="58" font-size="8.5" fill="#4a9eff" font-weight="700" letter-spacing="0.06em">GATE 1 — CAPABILITY NON-REGRESSION</text>
+  <text x="686" y="58" text-anchor="end" font-size="7.5" fill="#2d5080" font-style="italic">task suite: internal credit-memo accuracy · n = 400</text>
+
+  <!-- G1 column headers -->
+  <text x="14"  y="74" font-size="7" fill="#444" letter-spacing="0.06em">CHAMPION</text>
+  <text x="130" y="74" font-size="7" fill="#444" letter-spacing="0.06em">CANDIDATE</text>
+  <text x="250" y="74" font-size="7" fill="#444" letter-spacing="0.06em">DELTA</text>
+  <text x="315" y="74" font-size="7" fill="#444" letter-spacing="0.06em">THRESHOLD</text>
+  <text x="450" y="74" font-size="7" fill="#444" letter-spacing="0.06em">DERIVATION BASIS</text>
+  <text x="686" y="74" text-anchor="end" font-size="7" fill="#444" letter-spacing="0.06em">STATUS</text>
+  <line x1="14" y1="76" x2="686" y2="76" stroke="#1a2a40" stroke-width="1"/>
+
+  <!-- G1 data row -->
+  <rect x="6" y="77" width="688" height="23" fill="#0a1829" fill-opacity="0.6"/>
+  <text x="14"  y="92" font-size="9" fill="#ccc">84.2%</text>
+  <text x="130" y="92" font-size="9" fill="#ccc">83.5%</text>
+  <text x="250" y="92" font-size="9" fill="#aaa">−0.7 pp</text>
+  <text x="315" y="92" font-size="9" fill="#aaa">≤ 2.0 pp</text>
+  <text x="450" y="92" font-size="8" fill="#2d5080" font-style="italic">σ = ±0.8 pp over 4 prior releases → 2.5σ headroom</text>
+  <text x="686" y="92" text-anchor="end" font-size="9" fill="#5cb85c" font-weight="700">✓ PASS</text>
+
+  <!-- ════════════════════════════════════════════════════
+       GATE 2 — Safety Non-Regression  (amber)
+       card: y=110, h=104, bottom=214
+       ════════════════════════════════════════════════════ -->
+  <rect x="6" y="110" width="688" height="104" rx="4" fill="#120e00" stroke="#f0a500" stroke-width="1"/>
+  <!-- header strip -->
+  <rect x="6" y="110" width="688" height="21" rx="4" fill="#f0a500" fill-opacity="0.12"/>
+  <rect x="6" y="123" width="688" height="8"  fill="#120e00"/>
+  <text x="14"  y="124" font-size="8.5" fill="#f0a500" font-weight="700" letter-spacing="0.06em">GATE 2 — SAFETY NON-REGRESSION</text>
+  <text x="686" y="124" text-anchor="end" font-size="7.5" fill="#7a5e00" font-style="italic">Tier 1: ε = 1.0 pp / 0.010 absolute</text>
+
+  <!-- G2 column headers -->
+  <text x="14"  y="143" font-size="7" fill="#444" letter-spacing="0.06em">BENCHMARK</text>
+  <text x="255" y="143" font-size="7" fill="#444" letter-spacing="0.06em">CHAMPION</text>
+  <text x="345" y="143" font-size="7" fill="#444" letter-spacing="0.06em">CANDIDATE</text>
+  <text x="440" y="143" font-size="7" fill="#444" letter-spacing="0.06em">DELTA</text>
+  <text x="510" y="143" font-size="7" fill="#444" letter-spacing="0.06em">THRESHOLD</text>
+  <text x="686" y="143" text-anchor="end" font-size="7" fill="#444" letter-spacing="0.06em">STATUS</text>
+  <line x1="14" y1="145" x2="686" y2="145" stroke="#261e00" stroke-width="1"/>
+
+  <!-- G2 row 1 (tinted) -->
+  <rect x="6" y="146" width="688" height="20" fill="#1a1200" fill-opacity="0.6"/>
+  <text x="14"  y="159" font-size="8.5" fill="#aaa">StrongREJECT</text>
+  <text x="255" y="159" font-size="8.5" fill="#ccc">0.937</text>
+  <text x="345" y="159" font-size="8.5" fill="#ccc">0.941</text>
+  <text x="440" y="159" font-size="8.5" fill="#aaa">+0.004</text>
+  <text x="510" y="159" font-size="8.5" fill="#aaa">≤ champ + 0.010</text>
+  <text x="686" y="159" text-anchor="end" font-size="8.5" fill="#5cb85c" font-weight="700">✓ PASS</text>
+
+  <!-- G2 row 2 (plain) -->
+  <text x="14"  y="179" font-size="8.5" fill="#aaa">HarmBench ASR</text>
+  <text x="255" y="179" font-size="8.5" fill="#ccc">2.9%</text>
+  <text x="345" y="179" font-size="8.5" fill="#ccc">3.1%</text>
+  <text x="440" y="179" font-size="8.5" fill="#aaa">+0.2 pp</text>
+  <text x="510" y="179" font-size="8.5" fill="#aaa">≤ champ + 1.0 pp</text>
+  <text x="686" y="179" text-anchor="end" font-size="8.5" fill="#5cb85c" font-weight="700">✓ PASS</text>
+
+  <!-- G2 row 3 (tinted) -->
+  <rect x="6" y="186" width="688" height="20" fill="#1a1200" fill-opacity="0.6"/>
+  <text x="14"  y="199" font-size="8.5" fill="#aaa">LlamaGuard flag rate</text>
+  <text x="255" y="199" font-size="8.5" fill="#ccc">0.7%</text>
+  <text x="345" y="199" font-size="8.5" fill="#ccc">0.8%</text>
+  <text x="440" y="199" font-size="8.5" fill="#aaa">+0.1 pp</text>
+  <text x="510" y="199" font-size="8.5" fill="#aaa">≤ champ + 1.0 pp</text>
+  <text x="686" y="199" text-anchor="end" font-size="8.5" fill="#5cb85c" font-weight="700">✓ PASS</text>
+
+  <!-- ════════════════════════════════════════════════════
+       GATE 3 — Robustness Ceiling  (red)
+       card: y=220, h=104, bottom=324
+       ════════════════════════════════════════════════════ -->
+  <rect x="6" y="220" width="688" height="104" rx="4" fill="#130707" stroke="#e05252" stroke-width="1"/>
+  <!-- header strip -->
+  <rect x="6" y="220" width="688" height="21" rx="4" fill="#e05252" fill-opacity="0.12"/>
+  <rect x="6" y="233" width="688" height="8"  fill="#130707"/>
+  <text x="14"  y="234" font-size="8.5" fill="#e05252" font-weight="700" letter-spacing="0.06em">GATE 3 — ROBUSTNESS CEILING (ATTACK SUCCESS RATE)</text>
+  <text x="686" y="234" text-anchor="end" font-size="7.5" fill="#7a2020" font-style="italic">Tier 1 ceiling: ASR ≤ 2.0% · zero-tolerance: tool-hijack</text>
+
+  <!-- G3 column headers -->
+  <text x="14"  y="253" font-size="7" fill="#444" letter-spacing="0.06em">PROBE FAMILY</text>
+  <text x="320" y="253" font-size="7" fill="#444" letter-spacing="0.06em">RESULT</text>
+  <text x="395" y="253" font-size="7" fill="#444" letter-spacing="0.06em">ASR</text>
+  <text x="455" y="253" font-size="7" fill="#444" letter-spacing="0.06em">CEILING</text>
+  <text x="686" y="253" text-anchor="end" font-size="7" fill="#444" letter-spacing="0.06em">STATUS</text>
+  <line x1="14" y1="255" x2="686" y2="255" stroke="#260f0f" stroke-width="1"/>
+
+  <!-- G3 row 1 (tinted) — borderline result in amber -->
+  <rect x="6" y="256" width="688" height="20" fill="#1e0a0a" fill-opacity="0.6"/>
+  <text x="14"  y="269" font-size="8.5" fill="#aaa">Wire-fraud Crescendo (PyRIT · n = 50 runs)</text>
+  <text x="320" y="269" font-size="8.5" fill="#ccc">1 / 50</text>
+  <text x="395" y="269" font-size="8.5" fill="#d4a017" font-weight="700">2.0%</text>
+  <text x="455" y="269" font-size="8.5" fill="#aaa">≤ 2.0%</text>
+  <text x="686" y="269" text-anchor="end" font-size="8.5" fill="#5cb85c" font-weight="700">✓ PASS ⚑</text>
+
+  <!-- G3 row 2 (plain) -->
+  <text x="14"  y="289" font-size="8.5" fill="#aaa">Adverse-action bypass (PyRIT · n = 50 runs)</text>
+  <text x="320" y="289" font-size="8.5" fill="#ccc">0 / 50</text>
+  <text x="395" y="289" font-size="8.5" fill="#ccc">0.0%</text>
+  <text x="455" y="289" font-size="8.5" fill="#aaa">≤ 2.0%</text>
+  <text x="686" y="289" text-anchor="end" font-size="8.5" fill="#5cb85c" font-weight="700">✓ PASS</text>
+
+  <!-- G3 row 3 (tinted) -->
+  <rect x="6" y="296" width="688" height="20" fill="#1e0a0a" fill-opacity="0.6"/>
+  <text x="14"  y="309" font-size="8.5" fill="#aaa">AgentDojo tool-hijack (n = 20 tasks · write-access)</text>
+  <text x="320" y="309" font-size="8.5" fill="#ccc">0 / 20</text>
+  <text x="395" y="309" font-size="8.5" fill="#ccc">0.0%</text>
+  <text x="455" y="309" font-size="8.5" fill="#aaa">zero-tolerance</text>
+  <text x="686" y="309" text-anchor="end" font-size="8.5" fill="#5cb85c" font-weight="700">✓ PASS</text>
+
+  <!-- ════════════════════════════════════════════════════
+       SUMMARY BAR
+       y=330, h=28, bottom=358
+       ════════════════════════════════════════════════════ -->
+  <rect x="6" y="330" width="688" height="28" rx="4" fill="#060f06" stroke="#5cb85c" stroke-width="1.5"/>
+  <text x="350" y="348" text-anchor="middle" font-size="9.5" fill="#5cb85c" font-weight="700">ALL GATES PASSED — system documented and deploy-eligible</text>
+
+  <!-- ─── FOOTER NOTES ─── -->
+  <text x="350" y="370" text-anchor="middle" font-size="7.5" fill="#555">⚑ Wire-fraud ASR at exactly 2.0% (1 success in 50 runs) sits on the Tier 1 ceiling. Real programs flag this for a documented judgment call</text>
+  <text x="350" y="381" text-anchor="middle" font-size="7.5" fill="#555">in the validation report — passing at the boundary requires committee sign-off, not just a checkbox.</text>
+</svg>

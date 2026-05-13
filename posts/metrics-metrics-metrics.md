@@ -46,6 +46,47 @@ Item Response Theory offers one concrete example of how that verification works.
 
 Classical Test Theory adds a complementary angle: since LLM outputs aren't deterministic, CTT's concept of "true score" — expected performance across infinite replications — gives you a principled way to separate noise from signal in your eval results.[^6]
 
+## IRT in Practice: What the Guessing Floor Reveals
+
+A 3% hallucination rate treats a wrong answer on "what year was Dodd-Frank passed" identically to a wrong answer on "given this credit file and these regulatory constraints, is this loan permissible." IRT doesn't. It separates item difficulty from model ability — and adds a third parameter, *c*, the guessing floor:
+
+![3PL IRT equation: P(θ) = c + (1−c)·σ(a·(θ−b)), annotated with guessing floor, model ability, discrimination, and item difficulty](../img/irt-3pl-annotated.svg)
+
+<details class="math-details">
+<summary>The 3-Parameter Logistic model</summary>
+<div class="math-inner">
+
+<p>The full 3PL item characteristic curve in fraction form:</p>
+
+$P_j(\theta) = c_j + \frac{1 - c_j}{1 + e^{-a_j(\theta - b_j)}}$
+
+<p>Three item parameters:</p>
+
+<ul>
+<li>\(a_j\) — <strong>discrimination</strong>: steepness of the curve. High \(a_j\) means the item sharply separates models above and below the difficulty threshold.</li>
+<li>\(b_j\) — <strong>difficulty</strong>: ability level where \(P_j = (1+c_j)/2\). Items with large \(b_j\) are hard even for capable models.</li>
+<li>\(c_j\) — <strong>guessing floor</strong>: lower asymptote. As \(\theta \to -\infty\), \(P_j \to c_j\) — a correct answer becomes no less likely than \(c_j\), regardless of domain ability.</li>
+</ul>
+
+<p><strong>Calibration note.</strong> The simulation assumes \(a_j\) and \(b_j\) are pre-calibrated (known from a reference run across a panel of models). The <code>neg_ll</code> function above then recovers \(\theta\) and \(c\) per model via MLE. For a full joint calibration pipeline, see the <code>py-irt</code> library (Bamman &amp; Smith, 2020).</p>
+</div>
+</details>
+
+Even as model ability $\theta$ drops arbitrarily low, the probability of a correct answer asymptotes to $c$, not zero. That floor is the hallucination proxy: the rate at which a model answers correctly through pattern matching rather than domain reasoning.
+
+Two models with nearly identical raw scores can have completely different guessing floors. The model with the high floor passes hard questions at higher rates — it would look better on a standard benchmark — but most of those correct answers are structurally unreliable. You can't distinguish them from hallucinations at the output level. IRT gives you the decomposition.
+
+A simulation across 40 QA items — each with pre-calibrated difficulty and discrimination — illustrates the divergence. Two models with similar raw accuracy have completely different IRT profiles:
+
+| | Raw accuracy | Ability ($\theta$) | Guessing floor ($c$) | Hard-item accuracy | Hard-item answers from guessing floor |
+|---|:-:|:-:|:-:|:-:|:-:|
+| Model A — genuine reasoner | 73% | +0.99 | 0.04 | 35% | ~11% |
+| Model B — pattern-matcher | 68% | +0.00 | 0.35 | 42% | **~83%** |
+
+Raw accuracy puts the models within five points of each other. IRT shows they are structurally different: Model A's 73% reflects genuine domain reasoning ($\theta \approx +1$); Model B's 68% is propped up by a 35% guessing floor. The hard-items result is where this becomes actionable: Model B *outperforms* Model A there by raw count (42% vs 35%), so it would score higher on a difficult benchmark. But 83% of those correct answers are guessing-floor — plausible outputs that happen to be right, not domain understanding. In a regulated use case, the distinction matters: you cannot tell them apart at the output level.
+
+The guessing floor is an estimate of the rate at which a model's correct answers are structurally similar to its hallucinations — right by coincidence, not by reasoning. A 3% aggregate hallucination rate can coexist with an 83% guessing-floor ratio on hard domain questions. Standard evals won't show you that.
+
 ## The Validity Problem Is Not Theoretical
 
 Chess is a good case study because it's concrete. You can measure accuracy against ground truth, and frontier models achieve near-optimal scores on standard board positions. So when researchers tried rotating or mirroring the board, they found error rates jumped 600%.[^7]

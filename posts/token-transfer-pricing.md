@@ -1,6 +1,6 @@
 ---
 title: "Token Transfer Pricing"
-date: 2026-05-03
+date: 2026-05-04
 description: "The team running a reasoning model on email filtering isn't making a technical error. They're making a rational response to an internal pricing signal that doesn't exist. Banks built the solution to exactly this problem decades ago. They called it funds transfer pricing."
 tags: [banking, evals]
 ---
