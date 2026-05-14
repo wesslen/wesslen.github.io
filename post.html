@@ -1047,8 +1047,8 @@
                 const idx = text.indexOf(matchText, lastIdx);
                 if (idx === -1 || idx >= bestIdx) continue;
 
-                // Word-boundary guard for short tokens (≤ 6 chars)
-                if (matchText.length <= 6) {
+                // Word-boundary guard for all single-word tokens
+                if (!matchText.includes(" ")) {
                   const before = text[idx - 1];
                   const after = text[idx + matchText.length];
                   if ((before && /[A-Za-z0-9]/.test(before)) || (after && /[A-Za-z0-9]/.test(after))) continue;
