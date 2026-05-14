@@ -840,6 +840,11 @@
           } catch (err) {
             loadingEl.style.display = "none";
             errorEl.style.display = "block";
+            if (slug && slug.endsWith(".draft")) {
+              errorEl.querySelector("p").textContent = "Draft in progress — check back soon.";
+              const sub = errorEl.querySelectorAll("p")[1];
+              if (sub) sub.style.display = "none";
+            }
             console.error("Failed to load post:", err);
           }
         }
