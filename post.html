@@ -328,7 +328,8 @@
             return ph(stash.length - 1);
           });
           // Inline math ($...$) — single line only, no empty spans
-          text = text.replace(/\$([^\$\r\n]+?)\$/g, (_, m) => {
+          // (?!\d) negative lookahead excludes currency ($50, $300M) from being treated as math delimiters
+          text = text.replace(/\$(?!\d)([^\$\r\n]+?)\$/g, (_, m) => {
             stash.push("$" + m + "$");
             return ph(stash.length - 1);
           });
