@@ -222,7 +222,7 @@
     "term": "BPI",
     "full": "Bank Policy Institute",
     "short": "U.S. banking industry trade group representing large banks in policy advocacy.",
-    "definition": "The Bank Policy Institute is a nonpartisan public policy, research, and advocacy group representing leading universal banks, regional banks, and major foreign banks operating in the United States. In April 2025, BPI called for outright repeal of SR 11-7, arguing the guidance discourages AI innovation — a position senior model risk executives at BPI's own member banks publicly pushed back on.",
+    "definition": "The Bank Policy Institute is a nonpartisan public policy, research, and advocacy group representing leading universal banks, regional banks, and major foreign banks operating in the United States. In April 2025, BPI called for outright repeal of SR 11-7, arguing the guidance discourages AI innovation — a position senior model risk executives at BPI's own member banks publicly pushed back on, according to Risk.net.",
     "domain": "banking",
     "aliases": [
       "Bank Policy Institute"
@@ -1129,7 +1129,7 @@
     "term": "Jailbreaking",
     "full": "",
     "short": "Adversarial techniques that manipulate a language model into bypassing its safety instructions or content policies through crafted prompts.",
-    "definition": "Jailbreaking refers to adversarial prompting techniques designed to circumvent a language model's safety guidelines, content filters, or behavioral constraints. Common approaches include roleplay framing (asking the model to act as a character not bound by restrictions), hypothetical framing, many-shot override, and multi-turn escalation. Jailbreak attack success rates vary widely by model and technique — but without structured defenses, success rates against agentic systems in high-stakes contexts have been documented at 89%+ in research settings.",
+    "definition": "Jailbreaking refers to adversarial prompting techniques designed to circumvent a language model's safety guidelines, content filters, or behavioral constraints. Common approaches include roleplay framing (asking the model to act as a character not bound by restrictions), hypothetical framing, many-shot override, and multi-turn escalation. Jailbreak attack success rates vary widely by model and technique — but without structured defenses, success rates against agentic systems in high-stakes contexts have been documented at 89%+ in research settings (Anthropic Constitutional Classifiers research).",
     "domain": "security",
     "aliases": [
       "jailbreak",
@@ -1254,7 +1254,7 @@
     "term": "LLM-as-judge",
     "full": "",
     "short": "Using a language model to evaluate the outputs of another language model; scalable but prone to systematic biases including verbosity bias and self-preference.",
-    "definition": "LLM-as-judge is an evaluation approach in which a language model scores or ranks the outputs of another model (or itself). It offers scalability advantages over human annotation but introduces systematic biases documented across at least 12 categories: verbosity bias (longer responses score higher regardless of quality), positional bias (order of pairwise comparisons affects winner ~20–40% of the time), self-preference bias (judges favor outputs that 'sound like' their own training distribution due to lower perplexity), and others. An unvalidated LLM judge is a construct validity failure — it measures something, but not necessarily what you intend.",
+    "definition": "LLM-as-judge is an evaluation approach in which a language model scores or ranks the outputs of another model (or itself). It offers scalability advantages over human annotation but introduces systematic biases documented across at least 12 categories by Ye et al. 2024 (arXiv:2410.02736): verbosity bias (longer responses score higher regardless of quality), positional bias (order of pairwise comparisons affects winner ~20–40% of the time), self-preference bias (judges favor outputs that 'sound like' their own training distribution due to lower perplexity), and others. An unvalidated LLM judge is a construct validity failure — it measures something, but not necessarily what you intend.",
     "domain": "evals",
     "aliases": [
       "LLM judge",
@@ -1345,7 +1345,7 @@
     "term": "MCP",
     "full": "Model Context Protocol",
     "short": "Open standard that lets AI agents access external data sources and tools through a standardized interface.",
-    "definition": "The Model Context Protocol is an open standard, originally developed by Anthropic, defining how AI agents connect to external data sources, APIs, and tools in a standardized way. MCP is rapidly becoming the default integration layer for agentic AI in financial services. A 2025 empirical study of 1,899 open-source MCP servers found 7.2% had general security vulnerabilities and 5.5% exhibited tool poisoning vulnerabilities — a non-trivial attack surface for banking deployments.",
+    "definition": "The Model Context Protocol is an open standard, originally developed by Anthropic, defining how AI agents connect to external data sources, APIs, and tools in a standardized way. MCP is rapidly becoming the default integration layer for agentic AI in financial services. A June 2025 empirical study of 1,899 open-source MCP servers (arXiv:2506.13538, \"MCP at First Glance\") found 7.2% had general security vulnerabilities and 5.5% exhibited tool poisoning vulnerabilities — a non-trivial attack surface for banking deployments.",
     "domain": "agentic",
     "aliases": [
       "Model Context Protocol"
@@ -1448,7 +1448,7 @@
     "term": "model inventory",
     "full": "",
     "short": "A bank's full catalogued list of all models in use, required by SR 11-7 as a cornerstone of governance.",
-    "definition": "SR 11-7 requires banks to maintain a comprehensive model inventory — a registry of every model in use, including its purpose, methodology, ownership, validation status, and risk tier. Large institutions have inventories of 1,000 to 10,000+ models, growing at 10–25% annually. Whether LLMs, foundation models accessed via API, and agentic systems belong in the inventory is one of the central unresolved governance questions in banking AI.",
+    "definition": "SR 11-7 requires banks to maintain a comprehensive model inventory — a registry of every model in use, including its purpose, methodology, ownership, validation status, and risk tier. Large institutions have inventories of 1,000 to 10,000+ models, growing at 10–25% annually, per McKinsey benchmarking. Whether LLMs, foundation models accessed via API, and agentic systems belong in the inventory is one of the central unresolved governance questions in banking AI.",
     "domain": "banking",
     "aliases": [],
     "used_in": [
@@ -2220,7 +2220,7 @@
     "term": "tool poisoning",
     "full": "",
     "short": "Attack where a malicious tool or MCP server injects instructions that cause an AI agent to take unauthorized actions.",
-    "definition": "Tool poisoning is a variant of prompt injection specific to tool-calling AI agents: a malicious or compromised tool (e.g., an MCP server) returns results containing embedded instructions that hijack the agent's subsequent behavior. Because agents typically trust tool outputs as factual context, tool poisoning is particularly effective. A 2025 study of 1,899 open-source MCP servers found 5.5% exhibited tool poisoning vulnerabilities.",
+    "definition": "Tool poisoning is a variant of prompt injection specific to tool-calling AI agents: a malicious or compromised tool (e.g., an MCP server) returns results containing embedded instructions that hijack the agent's subsequent behavior. Because agents typically trust tool outputs as factual context, tool poisoning is particularly effective. A June 2025 empirical study of 1,899 open-source MCP servers (arXiv:2506.13538, \"MCP at First Glance\") found 5.5% exhibited tool poisoning vulnerabilities.",
     "domain": "security",
     "aliases": [],
     "used_in": [
