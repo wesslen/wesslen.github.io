@@ -1,0 +1,63 @@
+<svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" role="img"
+     font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace">
+  <title>Welfare curve: static gains vs. long-run welfare as AI precision increases</title>
+  <desc>Two-curve chart. A dotted line (static gains only) rises monotonically with AI precision. A solid line (actual long-run welfare) rises to an interior optimum τ*, then falls sharply past the collapse threshold τ_A^c — dropping below the no-AI baseline. The gap on the right is the dynamic crowd-out.</desc>
+
+  <!-- Zone fills -->
+  <rect x="55" y="35" width="165" height="225" fill="rgba(56,189,248,0.07)"/>
+  <rect x="220" y="35" width="170" height="225" fill="rgba(139,148,158,0.04)"/>
+  <rect x="390" y="35" width="235" height="225" fill="rgba(224,82,82,0.09)"/>
+
+  <!-- Axes -->
+  <line x1="55" y1="35" x2="55" y2="260" stroke="#444c56" stroke-width="1"/>
+  <line x1="55" y1="260" x2="625" y2="260" stroke="#444c56" stroke-width="1"/>
+  <polygon points="622,256 630,260 622,264" fill="#444c56"/>
+  <polygon points="51,38 55,30 59,38" fill="#444c56"/>
+
+  <!-- Threshold dashed lines -->
+  <line x1="220" y1="35" x2="220" y2="260" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.8"/>
+  <line x1="390" y1="35" x2="390" y2="260" stroke="#e05252" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.8"/>
+
+  <!-- Static gains only (dotted, muted) — rises monotonically -->
+  <path d="M 55,195 C 160,188 280,168 390,138 C 460,118 540,103 620,96"
+        fill="none" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="7 4" opacity="0.7"/>
+
+  <!-- Actual long-run welfare (solid) — rises to τ*, cliff-drops past τ_A^c -->
+  <path d="M 55,190 C 110,100 175,44 220,49 C 265,53 335,128 390,190 C 393,200 394,230 405,248 C 450,255 560,255 620,256"
+        fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Key point dots -->
+  <circle cx="220" cy="49" r="5" fill="#a78bfa"/>
+  <circle cx="390" cy="190" r="5" fill="#e05252"/>
+
+  <!-- Callout at τ* peak -->
+  <line x1="222" y1="53" x2="233" y2="71" stroke="#a78bfa" stroke-width="1" opacity="0.65"/>
+  <rect x="233" y="69" width="138" height="21" rx="3" fill="#161b22" stroke="#a78bfa" stroke-width="0.75"/>
+  <text x="302" y="83" text-anchor="middle" font-size="9" fill="#a78bfa">first-best policy: cap here</text>
+
+  <!-- "Static gains only" label on dotted curve -->
+  <text x="358" y="148" text-anchor="middle" font-size="9" fill="#8b949e">static gains only ↗</text>
+
+  <!-- Dynamic crowd-out bracket on right -->
+  <line x1="615" y1="96" x2="615" y2="256" stroke="#e05252" stroke-width="1" opacity="0.6"/>
+  <line x1="611" y1="96" x2="619" y2="96" stroke="#e05252" stroke-width="1" opacity="0.6"/>
+  <line x1="611" y1="256" x2="619" y2="256" stroke="#e05252" stroke-width="1" opacity="0.6"/>
+  <text x="630" y="140" text-anchor="start" font-size="8.5" fill="#e05252">dynamic</text>
+  <text x="630" y="152" text-anchor="start" font-size="8.5" fill="#e05252">crowd-out</text>
+
+  <!-- Zone labels -->
+  <text x="137" y="53" text-anchor="middle" font-size="9" fill="#8b949e" letter-spacing="0.07em">WELFARE-IMPROVING</text>
+  <text x="305" y="53" text-anchor="middle" font-size="9" fill="#8b949e" letter-spacing="0.07em">PAST OPTIMUM</text>
+  <text x="480" y="53" text-anchor="middle" font-size="9" fill="#8b949e" letter-spacing="0.07em">COLLAPSE ZONE</text>
+
+  <!-- Threshold labels below x axis -->
+  <text x="220" y="276" text-anchor="middle" font-size="12" font-weight="700" fill="#a78bfa">τ*</text>
+  <text x="220" y="291" text-anchor="middle" font-size="8.5" fill="#8b949e">welfare optimum</text>
+
+  <text x="390" y="276" text-anchor="middle" font-size="12" font-weight="700" fill="#e05252">τ<tspan dy="3" font-size="8" fill="#e05252">A</tspan><tspan dy="-5" font-size="8" fill="#e05252">c</tspan></text>
+  <text x="390" y="291" text-anchor="middle" font-size="8.5" fill="#8b949e">collapse threshold</text>
+
+  <!-- Axis labels -->
+  <text x="325" y="310" text-anchor="middle" font-size="10" fill="#8b949e">AI recommendation precision (τ)  →</text>
+  <text x="16" y="147" text-anchor="middle" font-size="10" fill="#8b949e" transform="rotate(-90,16,147)">Long-run social welfare  ↑</text>
+</svg>

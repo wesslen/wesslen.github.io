@@ -1,0 +1,57 @@
+<svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" role="img"
+     font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace">
+  <title>Two-phase information design: suppression then optimal cap</title>
+  <desc>Timeline showing two phases of the optimal garbling policy. Phase 1: AI precision is suppressed to zero; the general knowledge stock rebuilds rapidly. Phase 2: AI precision is restored and capped permanently at τ* (the interior optimum); the knowledge stock holds steady.</desc>
+
+  <!-- Phase background fills -->
+  <rect x="50" y="20" width="270" height="185" fill="rgba(167,139,250,0.05)" rx="2"/>
+  <rect x="330" y="20" width="285" height="185" fill="rgba(56,189,248,0.05)" rx="2"/>
+
+  <!-- Phase headers -->
+  <text x="185" y="16" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" letter-spacing="0.05em">PHASE 1: SUPPRESSION</text>
+  <text x="472" y="16" text-anchor="middle" font-size="10" font-weight="700" fill="#38bdf8" letter-spacing="0.05em">PHASE 2: STEADY STATE</text>
+
+  <!-- Phase divider -->
+  <line x1="320" y1="20" x2="320" y2="205" stroke="#444c56" stroke-width="1" stroke-dasharray="4 3"/>
+
+  <!-- X axis (time) -->
+  <line x1="50" y1="205" x2="615" y2="205" stroke="#444c56" stroke-width="1"/>
+  <polygon points="612,201 620,205 612,209" fill="#444c56"/>
+  <text x="335" y="230" text-anchor="middle" font-size="10" fill="#8b949e">Time  →</text>
+
+  <!-- Y axis -->
+  <line x1="50" y1="30" x2="50" y2="205" stroke="#444c56" stroke-width="1"/>
+  <polygon points="46,33 50,25 54,33" fill="#444c56"/>
+
+  <!-- ── Gold line: General knowledge stock ── -->
+  <!-- Phase 1: rises from depleted state to high steady-state -->
+  <path d="M 50,185 C 90,175 150,100 210,62 C 255,38 295,33 320,32"
+        fill="none" stroke="#d4a843" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Phase 2: flat at high level -->
+  <line x1="320" y1="32" x2="605" y2="32" stroke="#d4a843" stroke-width="2.5"/>
+  <!-- Knowledge stock label -->
+  <rect x="490" y="19" width="118" height="16" rx="3" fill="#161b22"/>
+  <text x="550" y="30" text-anchor="middle" font-size="9" fill="#d4a843">general knowledge stock</text>
+
+  <!-- ── Blue line: Allowed AI precision ── -->
+  <!-- Phase 1: flat at zero (bottom) -->
+  <line x1="50" y1="200" x2="320" y2="200" stroke="#38bdf8" stroke-width="2" stroke-dasharray="1 0"/>
+  <!-- Phase 2: flat at τ* level -->
+  <line x1="320" y1="140" x2="605" y2="140" stroke="#38bdf8" stroke-width="2.5"/>
+  <!-- Dot at start of Phase 2 precision line -->
+  <circle cx="320" cy="140" r="4" fill="#38bdf8"/>
+  <!-- τ* label on blue line -->
+  <rect x="380" y="128" width="80" height="16" rx="3" fill="#161b22"/>
+  <text x="420" y="139" text-anchor="middle" font-size="9" fill="#38bdf8">regulated cap (τ*)</text>
+
+  <!-- Phase 1 annotations -->
+  <!-- "Allowed AI precision = 0" label -->
+  <text x="185" y="197" text-anchor="middle" font-size="8.5" fill="#8b949e">allowed AI precision = 0</text>
+  <!-- Rising arrow on knowledge curve -->
+  <text x="135" y="100" text-anchor="middle" font-size="9" fill="#d4a843">knowledge stock ↑</text>
+  <text x="135" y="111" text-anchor="middle" font-size="9" fill="#d4a843">rebuilds rapidly</text>
+
+  <!-- Phase 2 annotations -->
+  <text x="472" y="47" text-anchor="middle" font-size="9" fill="#d4a843">knowledge maintained</text>
+  <text x="472" y="175" text-anchor="middle" font-size="9" fill="#38bdf8">AI helps — but only up to τ*</text>
+</svg>
