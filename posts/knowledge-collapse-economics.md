@@ -1,5 +1,5 @@
 ---
-title: "The Case for Inferior LLMs"
+title: "The Economic Case for Inferior LLMs"
 date: 2026-05-16
 description: "A new MIT working paper shows that maximizing AI accuracy can destroy the knowledge that makes AI recommendations valuable in the first place. The welfare-optimal policy is deliberately less accurate AI — and it is the first-best choice, not a concession."
 tags: [economics, labor]

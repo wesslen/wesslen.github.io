@@ -269,7 +269,7 @@
     },
     {
         "slug": "knowledge-collapse-economics",
-        "title": "The Case for Inferior LLMs",
+        "title": "The Economic Case for Inferior LLMs",
         "date": "2026-05-16",
         "description": "A new MIT working paper shows that welfare is non-monotone in AI accuracy: more precise recommendations crowd out human learning until the community's knowledge stock collapses. The welfare-optimal policy is deliberately less accurate AI — not as a concession, but as the first-best choice.",
         "tags": [
