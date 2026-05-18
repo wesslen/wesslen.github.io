@@ -1,0 +1,125 @@
+<svg viewBox="0 0 700 165" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Background -->
+  <rect width="700" height="165" fill="#fafaf9" rx="8"/>
+  <rect width="700" height="165" fill="none" stroke="#e2e8f0" stroke-width="1" rx="8"/>
+
+  <!-- ═══════════════════════════════════════════════
+       FORMULA  (font-size 22, Georgia, y-baseline=90)
+       Estimated layout, starting at x=200:
+         "P(θ) = "   → 68px → ends at 268
+         "c"         → 12px → ends at 280  (guessing floor, center≈274)
+         " + (1 − "  → 62px → ends at 342
+         "c"         → 12px → ends at 354  (second c, lighter)
+         ") ⋅ σ("    → 46px → ends at 400
+         "a"         → 12px → ends at 412  (discrimination, center≈406)
+         " ⋅ ("      → 26px → ends at 438
+         "θ"         → 13px → ends at 451  (model ability, center≈444)
+         " − "       → 23px → ends at 474
+         "b"         → 12px → ends at 486  (item difficulty, center≈480)
+         "))"        → 14px → ends at 500
+       Total ≈ 300px, centered in 700px  ═══════════ -->
+
+  <!-- P(θ) =  -->
+  <text x="200" y="90"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="22" fill="#374151">P(θ) = </text>
+
+  <!-- c — guessing floor — GREEN -->
+  <text x="268" y="90"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="22" fill="#15803d" font-weight="bold">c</text>
+
+  <!--  + (1 −  -->
+  <text x="280" y="90"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="22" fill="#374151"> + (1 − </text>
+
+  <!-- c (second, in 1−c, uncoloured) -->
+  <text x="342" y="90"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="22" fill="#374151">c</text>
+
+  <!-- ) ⋅ σ( -->
+  <text x="354" y="90"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="22" fill="#374151">) ⋅ σ(</text>
+
+  <!-- a — discrimination — AMBER -->
+  <text x="400" y="90"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="22" fill="#b45309" font-weight="bold">a</text>
+
+  <!--  ⋅ ( -->
+  <text x="412" y="90"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="22" fill="#374151"> ⋅ (</text>
+
+  <!-- θ — model ability — VIOLET -->
+  <text x="438" y="90"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="22" fill="#6d28d9" font-weight="bold">θ</text>
+
+  <!--  −  -->
+  <text x="451" y="90"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="22" fill="#374151"> − </text>
+
+  <!-- b — item difficulty — CRIMSON -->
+  <text x="474" y="90"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="22" fill="#b91c1c" font-weight="bold">b</text>
+
+  <!-- )) -->
+  <text x="486" y="90"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="22" fill="#374151">))</text>
+
+
+  <!-- ═══════════════════════════════════════════════
+       ANNOTATIONS
+       ═══════════════════════════════════════════════ -->
+
+  <!-- ── c = guessing floor  (ABOVE, GREEN) ──────── -->
+  <!-- vertical line from formula top → tick -->
+  <line x1="274" y1="70" x2="274" y2="50" stroke="#15803d" stroke-width="1.5"/>
+  <!-- tick mark -->
+  <line x1="266" y1="50" x2="282" y2="50" stroke="#15803d" stroke-width="1.5"/>
+  <!-- label -->
+  <text x="274" y="40"
+        font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"
+        font-size="12" fill="#15803d" text-anchor="middle" font-weight="500">guessing floor</text>
+
+
+  <!-- ── θ = model ability  (ABOVE, VIOLET) ────── -->
+  <line x1="444" y1="70" x2="444" y2="50" stroke="#6d28d9" stroke-width="1.5"/>
+  <line x1="436" y1="50" x2="452" y2="50" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="444" y="40"
+        font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"
+        font-size="12" fill="#6d28d9" text-anchor="middle" font-weight="500">model ability</text>
+
+
+  <!-- ── a = discrimination  (BELOW-LEFT diagonal, AMBER) ── -->
+  <line x1="406" y1="100" x2="372" y2="122" stroke="#b45309" stroke-width="1.5"/>
+  <line x1="364" y1="122" x2="380" y2="122" stroke="#b45309" stroke-width="1.5"/>
+  <text x="372" y="138"
+        font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"
+        font-size="12" fill="#b45309" text-anchor="middle" font-weight="500">discrimination</text>
+
+
+  <!-- ── b = item difficulty  (BELOW-RIGHT diagonal, CRIMSON) ── -->
+  <line x1="480" y1="100" x2="514" y2="122" stroke="#b91c1c" stroke-width="1.5"/>
+  <line x1="506" y1="122" x2="522" y2="122" stroke="#b91c1c" stroke-width="1.5"/>
+  <text x="514" y="138"
+        font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"
+        font-size="12" fill="#b91c1c" text-anchor="middle" font-weight="500">item difficulty</text>
+
+
+  <!-- ── Footer key ────────────────────────────── -->
+  <text x="350" y="157"
+        font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"
+        font-size="10" fill="#9ca3af" text-anchor="middle">
+    P(θ) = probability of correct answer · σ = logistic function · subscript j (item index) omitted for clarity
+  </text>
+
+</svg>

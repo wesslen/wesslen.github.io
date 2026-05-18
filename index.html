@@ -57,6 +57,7 @@
             </svg>
           </button>
           <a href="./glossary.html" class="nav-link">glossary</a>
+          <a href="./slides.html" class="nav-link">slides</a>
           <a href="./about.html" class="nav-link">about</a>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
             <span id="theme-icon">☀️</span>
@@ -198,9 +199,14 @@
             slugs: ["google-adk-a2a", "a2a-risks", "a2a-case-studies"],
           },
           {
-            id: "model-risk-governance",
-            title: "Model Risk & Governance",
-            slugs: ["sr11-7", "guardrails", "effective-challenge", "hitl-vocabulary", "hitl-design"],
+            id: "agentic-governance",
+            title: "Agentic Governance & Regulatory",
+            slugs: ["sr11-7", "effective-challenge"],
+          },
+          {
+            id: "human-in-the-loop",
+            title: "Human and the Loop",
+            slugs: ["guardrails", "hitl-vocabulary", "hitl-design"],
           },
           {
             id: "evaluations",
@@ -238,7 +244,7 @@
         }
 
         /* ── Layout A: Expandable Rows ──────────────────────── */
-        function renderA(manifest, bodies) {
+        function renderA(manifest, bodies, slidesMap = {}) {
           const container = document.getElementById("post-list");
           const introSlot = document.getElementById("intro-slot");
           const bySlug = {};
@@ -268,8 +274,12 @@
               .sort((a, b) => a.post.date.localeCompare(b.post.date));
             if (!posts.length) return;
 
+            const slidesDeck = slidesMap[series.id];
+            const slidesLink = slidesDeck
+              ? ` <a href="./${slidesDeck.dir}/index.html" class="series-slides-link" target="_blank" rel="noopener" title="View slide deck">slides ↗</a>`
+              : "";
             html += `<div class="series-group-a" data-tags="${[...new Set(posts.flatMap((p) => p.post.tags || []))].join(" ")}">
-              <div class="series-header-a">⬡ series · ${series.title}<span class="series-count">${posts.length} posts</span></div>`;
+              <div class="series-header-a">⬡ series · ${series.title}${slidesLink}<span class="series-count">${posts.length} posts</span></div>`;
             posts.forEach(({ post, body }) => {
               const rt = readTime(body);
               const tags = (post.tags || [])
@@ -339,19 +349,25 @@
             const manifest = await res.json();
             manifest.sort((a, b) => b.date.localeCompare(a.date));
 
-            const bodies = await Promise.all(
-              manifest.map(async (post) => {
-                try {
-                  const r = await fetch(`./posts/${post.slug}.md`);
-                  const text = r.ok ? await r.text() : post.description;
-                  return text.replace(/^---[\s\S]*?---\n/, "");
-                } catch {
-                  return post.description;
-                }
-              })
-            );
+            const [bodies, slidesMap] = await Promise.all([
+              Promise.all(
+                manifest.map(async (post) => {
+                  try {
+                    const r = await fetch(`./posts/${post.slug}.md`);
+                    const text = r.ok ? await r.text() : post.description;
+                    return text.replace(/^---[\s\S]*?---\n/, "");
+                  } catch {
+                    return post.description;
+                  }
+                })
+              ),
+              fetch("./slides/slides.json")
+                .then((r) => (r.ok ? r.json() : []))
+                .then((decks) => Object.fromEntries(decks.filter((d) => d.published).map((d) => [d.id, d])))
+                .catch(() => ({})),
+            ]);
 
-            renderA(manifest, bodies);
+            renderA(manifest, bodies, slidesMap);
           } catch (err) {
             document.getElementById("post-list").innerHTML =
               `<div style="padding:2rem;color:var(--muted);font-family:var(--font-mono);font-size:0.8rem;">

@@ -304,6 +304,25 @@ img {
   padding: 0.1em 0.55em;
   font-size: 0.65rem;
 }
+.series-slides-link {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  padding: 0.1em 0.45em;
+  opacity: 0.75;
+  transition:
+    opacity 0.12s,
+    background 0.12s;
+  margin-left: auto;
+  margin-right: 0.35rem;
+}
+.series-slides-link:hover {
+  opacity: 1;
+  background: var(--accent-dim);
+}
 
 .row-a {
   display: flex;

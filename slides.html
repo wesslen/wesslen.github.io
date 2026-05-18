@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slides — Drift: Notes on AI on the Edges</title>
+    <meta
+      name="description"
+      content="Slide decks for each series on the Drift blog — covering agentic engineering, model risk, evaluations, adversarial testing, banking AI, and more."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Drift: Notes on AI on the Edges" />
+    <meta property="og:title" content="Slides — Drift: Notes on AI on the Edges" />
+    <meta
+      property="og:description"
+      content="Slide decks for each series — agentic engineering, model risk, evaluations, adversarial testing, banking AI, and more."
+    />
+    <meta property="og:url" content="https://wesslen.github.io/slides.html" />
+    <meta property="og:image" content="https://wesslen.github.io/og-default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Slides — Drift: Notes on AI on the Edges" />
+    <meta
+      name="twitter:description"
+      content="Slide decks for each series — agentic engineering, model risk, evaluations, adversarial testing, banking AI, and more."
+    />
+    <meta name="twitter:image" content="https://wesslen.github.io/og-default.png" />
+    <link rel="canonical" href="https://wesslen.github.io/slides.html" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>"
+    />
+    <style>
+      /* ── Slides page ────────────────────────────── */
+      .slides-hero {
+        padding: 2.5rem 0 1.5rem;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 2.5rem;
+      }
+      .slides-hero h1 {
+        font-size: clamp(1.6rem, 4vw, 2.2rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 0.5rem;
+      }
+      .slides-hero h1 .accent {
+        color: var(--accent2);
+      }
+      .slides-hero p {
+        color: var(--muted);
+        font-size: 0.95rem;
+        max-width: 52ch;
+        margin: 0;
+      }
+
+      .slides-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.25rem;
+        margin-bottom: 3rem;
+      }
+
+      .slide-card {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 1.25rem 1.4rem 1.1rem;
+        background: var(--surface);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        transition: border-color 0.15s;
+      }
+      .slide-card:hover {
+        border-color: var(--accent2);
+      }
+      .slide-card-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.5rem;
+      }
+      .slide-card-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--fg);
+        margin: 0;
+      }
+      .slide-card-badge {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 0.15em 0.55em;
+        border-radius: 3px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .slide-card-badge.published {
+        background: var(--accent-dim);
+        border: 1px solid var(--accent);
+        color: var(--accent);
+      }
+      .slide-card-badge.soon {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--muted);
+      }
+      .slide-card-desc {
+        font-size: 0.84rem;
+        color: var(--muted);
+        line-height: 1.55;
+        flex: 1;
+        margin: 0;
+      }
+      .slide-card-posts {
+        font-size: 0.75rem;
+        color: var(--muted);
+        opacity: 0.7;
+      }
+      .slide-card-actions {
+        display: flex;
+        gap: 0.6rem;
+        margin-top: 0.25rem;
+        flex-wrap: wrap;
+      }
+      .slide-btn {
+        font-size: 0.8rem;
+        font-weight: 500;
+        padding: 0.3em 0.85em;
+        border-radius: 4px;
+        text-decoration: none;
+        border: 1px solid;
+        transition:
+          background 0.12s,
+          color 0.12s;
+        line-height: 1.5;
+      }
+      .slide-btn-html {
+        background: var(--accent-dim);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .slide-btn-html:hover {
+        background: var(--accent);
+        color: var(--bg);
+      }
+      .slide-btn-pdf {
+        background: var(--accent2-dim);
+        border-color: var(--accent2);
+        color: var(--accent2);
+      }
+      .slide-btn-pdf:hover {
+        background: var(--accent2);
+        color: var(--bg);
+      }
+      .slide-card-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 0.25rem 0;
+      }
+
+      .slides-note {
+        font-size: 0.82rem;
+        color: var(--muted);
+        border-left: 2px solid var(--border);
+        padding-left: 0.9rem;
+        margin-bottom: 2.5rem;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 540px) {
+        .slides-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Reading progress bar -->
+    <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+    <!-- ── Site Header ────────────────────────────────────── -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="./index.html" class="site-title">
+          // drift
+          <span class="cursor">_</span>
+        </a>
+        <div class="header-actions">
+          <button class="search-trigger" id="search-modal-btn" title="Search (⌘K)" aria-label="Search">
+            <svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M10 6.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+          <a href="./glossary.html" class="nav-link">glossary</a>
+          <a href="./slides.html" class="nav-link active">slides</a>
+          <a href="./about.html" class="nav-link">about</a>
+          <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
+            <span id="theme-icon">☀️</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Slides Content ──────────────────────────────────── -->
+    <div class="container" style="max-width: 860px; padding-top: 0">
+      <div class="slides-hero">
+        <h1>
+          //
+          <span class="accent">slides</span>
+        </h1>
+        <p>One deck per series — HTML for presenting, PDF for sharing.</p>
+      </div>
+
+      <p class="slides-note">
+        Each slide deck covers a complete series from the blog. HTML decks open in-browser via
+        <a href="https://github.com/dayhaysoos/open-slide" target="_blank" rel="noopener">open-slide</a>
+        ; PDFs are the same content exported for download and offline sharing. Series without a published deck are
+        listed as coming soon.
+      </p>
+
+      <div class="slides-grid" id="slides-grid">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
+    <!-- Search modal (reused from site) -->
+    <div id="search-modal" class="search-modal" role="dialog" aria-modal="true" aria-label="Search" hidden>
+      <div class="search-modal-backdrop"></div>
+      <div class="search-modal-box">
+        <div class="search-modal-header">
+          <svg class="search-modal-icon" width="16" height="16" viewBox="0 0 15 15" fill="none">
+            <path
+              d="M10 6.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z"
+              fill="currentColor"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <input
+            id="search-input"
+            class="search-modal-input"
+            type="search"
+            placeholder="Search posts and glossary…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <kbd class="search-esc-hint">esc</kbd>
+        </div>
+        <div id="search-results" class="search-results"></div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <span>// drift · ryan wesslen</span>
+      <a href="https://github.com/wesslen/wesslen.github.io" target="_blank" rel="noopener">view source</a>
+    </footer>
+
+    <script>
+      /* ── Theme ────────────────────────────────────────────── */
+      const root = document.documentElement;
+      const stored = localStorage.getItem("theme");
+      if (stored) root.setAttribute("data-theme", stored);
+      document.getElementById("theme-toggle").addEventListener("click", () => {
+        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+        document.getElementById("theme-icon").textContent = next === "dark" ? "☀️" : "🌙";
+      });
+      document.getElementById("theme-icon").textContent = root.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
+
+      /* ── Reading progress bar ─────────────────────────────── */
+      const bar = document.getElementById("progress-bar");
+      function updateProgress() {
+        const s = document.documentElement.scrollTop;
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = h > 0 ? `${(s / h) * 100}%` : "0%";
+      }
+      window.addEventListener("scroll", updateProgress, { passive: true });
+
+      /* ── Render slide cards ───────────────────────────────── */
+      async function renderSlides() {
+        const grid = document.getElementById("slides-grid");
+        let decks;
+        try {
+          const res = await fetch("./slides/slides.json");
+          decks = await res.json();
+        } catch {
+          grid.innerHTML = `<p style="color:var(--muted);font-size:0.85rem">Could not load slides manifest.</p>`;
+          return;
+        }
+
+        grid.innerHTML = decks
+          .map((deck) => {
+            const postCount = deck.posts?.length ?? 0;
+            const postLabel = `${postCount} post${postCount !== 1 ? "s" : ""}`;
+            const badgeClass = deck.published ? "published" : "soon";
+            const badgeLabel = deck.published ? "published" : "coming soon";
+
+            const actions = deck.published
+              ? `<div class="slide-card-actions">
+                  <a href="./${deck.dir}/index.html" class="slide-btn slide-btn-html" target="_blank" rel="noopener">view slides ↗</a>
+                  <a href="./${deck.dir}/index.pdf" class="slide-btn slide-btn-pdf" download>download pdf ↓</a>
+                </div>`
+              : "";
+
+            return `<div class="slide-card">
+              <div class="slide-card-header">
+                <p class="slide-card-title">⬡ ${deck.title}</p>
+                <span class="slide-card-badge ${badgeClass}">${badgeLabel}</span>
+              </div>
+              <div class="slide-card-divider"></div>
+              <p class="slide-card-desc">${deck.description}</p>
+              <span class="slide-card-posts">${postLabel} · series</span>
+              ${actions}
+            </div>`;
+          })
+          .join("");
+      }
+
+      renderSlides();
+    </script>
+    <script src="./search.js" defer></script>
+    <script src="./search-modal.js" defer></script>
+  </body>
+</html>
