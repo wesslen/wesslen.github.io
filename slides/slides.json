@@ -10,8 +10,8 @@
       "claude-code-harness",
       "skills-supply-chain"
     ],
-    "published": false,
-    "date": null
+    "published": true,
+    "date": "2026-05-18"
   },
   {
     "id": "multi-agent",
@@ -23,8 +23,8 @@
       "a2a-risks",
       "a2a-case-studies"
     ],
-    "published": false,
-    "date": null
+    "published": true,
+    "date": "2026-05-18"
   },
   {
     "id": "agentic-governance",
@@ -35,8 +35,8 @@
       "sr11-7",
       "effective-challenge"
     ],
-    "published": false,
-    "date": null
+    "published": true,
+    "date": "2026-05-18"
   },
   {
     "id": "human-in-the-loop",
@@ -48,8 +48,8 @@
       "hitl-vocabulary",
       "hitl-design"
     ],
-    "published": false,
-    "date": null
+    "published": true,
+    "date": "2026-05-18"
   },
   {
     "id": "evaluations",
@@ -87,8 +87,8 @@
       "agent-identity-kyc",
       "agentic-commerce-gap"
     ],
-    "published": false,
-    "date": null
+    "published": true,
+    "date": "2026-05-18"
   },
   {
     "id": "ai-economy",
