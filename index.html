@@ -279,7 +279,7 @@
               ? ` <a href="./${slidesDeck.dir}/index.html" class="series-slides-link" target="_blank" rel="noopener" title="View slide deck">slides ↗</a>`
               : "";
             html += `<div class="series-group-a" data-tags="${[...new Set(posts.flatMap((p) => p.post.tags || []))].join(" ")}">
-              <div class="series-header-a">⬡ series · ${series.title}${slidesLink}<span class="series-count">${posts.length} posts</span></div>`;
+              <div class="series-header-a">⬡ ${series.title}${slidesLink}<span class="series-count">${posts.length} posts</span></div>`;
             posts.forEach(({ post, body }) => {
               const rt = readTime(body);
               const tags = (post.tags || [])
