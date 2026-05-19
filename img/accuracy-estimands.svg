@@ -1,0 +1,80 @@
+<svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, 'Times New Roman', serif" font-size="13">
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="var(--text-secondary, #888)"/>
+    </marker>
+    <marker id="arr-accent" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="var(--accent, #5b6af0)"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="720" height="280" fill="var(--bg, #fafaf8)" rx="4"/>
+
+  <!-- ── LEFT PANEL: Benchmark Accuracy ── -->
+  <rect x="20" y="16" width="320" height="248" rx="6" fill="var(--bg-secondary, #f0ede6)" stroke="var(--border, #ccc)" stroke-width="1.2"/>
+  <text x="180" y="40" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--text-primary, #1a1a18)">Benchmark accuracy</text>
+  <text x="180" y="57" text-anchor="middle" font-size="11" fill="var(--text-secondary, #666)">These 198 items, fixed</text>
+
+  <!-- Biology exam analogy -->
+  <rect x="36" y="68" width="288" height="34" rx="4" fill="var(--bg, #fafaf8)" stroke="var(--border, #ccc)" stroke-width="1"/>
+  <text x="180" y="84" text-anchor="middle" font-size="11" font-style="italic" fill="var(--text-secondary, #666)">Your average score on this exam</text>
+  <text x="180" y="97" text-anchor="middle" font-size="11" font-style="italic" fill="var(--text-secondary, #666)">given infinite reattempts</text>
+
+  <!-- Sources of uncertainty -->
+  <text x="44" y="122" font-size="11.5" fill="var(--text-primary, #1a1a18)">Uncertainty sources:</text>
+  <circle cx="52" cy="137" r="4" fill="var(--accent, #5b6af0)"/>
+  <text x="62" y="141" font-size="11" fill="var(--text-primary, #1a1a18)">LLM nondeterminism (sampling)</text>
+  <circle cx="52" cy="155" r="4" fill="var(--border, #ccc)"/>
+  <text x="62" y="159" font-size="11" fill="var(--text-secondary, #888)">Item selection variance — not included</text>
+
+  <!-- CI bar: benchmark -->
+  <line x1="100" y1="196" x2="260" y2="196" stroke="var(--border, #ccc)" stroke-width="1" stroke-dasharray="3,3"/>
+  <!-- point estimate -->
+  <circle cx="180" cy="196" r="5" fill="var(--accent, #5b6af0)"/>
+  <!-- CI ticks -->
+  <line x1="122" y1="188" x2="122" y2="204" stroke="var(--accent, #5b6af0)" stroke-width="2"/>
+  <line x1="238" y1="188" x2="238" y2="204" stroke="var(--accent, #5b6af0)" stroke-width="2"/>
+  <line x1="122" y1="196" x2="238" y2="196" stroke="var(--accent, #5b6af0)" stroke-width="2"/>
+  <text x="180" y="220" text-anchor="middle" font-size="11" fill="var(--text-primary, #1a1a18)">75.3% ± 2.1%</text>
+  <text x="180" y="234" text-anchor="middle" font-size="10" fill="var(--text-secondary, #888)">(wider — under-confident vs. naive)</text>
+
+  <!-- naive reference line -->
+  <line x1="144" y1="192" x2="144" y2="200" stroke="var(--muted, #bbb)" stroke-width="1.5" stroke-dasharray="2,2"/>
+  <line x1="216" y1="192" x2="216" y2="200" stroke="var(--muted, #bbb)" stroke-width="1.5" stroke-dasharray="2,2"/>
+  <text x="180" y="250" text-anchor="middle" font-size="10" fill="var(--muted, #aaa)" font-style="italic">naive: ±1.4%</text>
+
+  <!-- ── RIGHT PANEL: Generalized Accuracy ── -->
+  <rect x="380" y="16" width="320" height="248" rx="6" fill="var(--bg-secondary, #f0ede6)" stroke="var(--border, #ccc)" stroke-width="1.2"/>
+  <text x="540" y="40" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--text-primary, #1a1a18)">Generalized accuracy</text>
+  <text x="540" y="57" text-anchor="middle" font-size="11" fill="var(--text-secondary, #666)">Full domain the benchmark represents</text>
+
+  <!-- Biology exam analogy -->
+  <rect x="396" y="68" width="288" height="34" rx="4" fill="var(--bg, #fafaf8)" stroke="var(--border, #ccc)" stroke-width="1"/>
+  <text x="540" y="84" text-anchor="middle" font-size="11" font-style="italic" fill="var(--text-secondary, #666)">Your average score on all biology questions</text>
+  <text x="540" y="97" text-anchor="middle" font-size="11" font-style="italic" fill="var(--text-secondary, #666)">that could have been on the exam</text>
+
+  <!-- Sources of uncertainty -->
+  <text x="404" y="122" font-size="11.5" fill="var(--text-primary, #1a1a18)">Uncertainty sources:</text>
+  <circle cx="412" cy="137" r="4" fill="var(--accent, #5b6af0)"/>
+  <text x="422" y="141" font-size="11" fill="var(--text-primary, #1a1a18)">LLM nondeterminism (sampling)</text>
+  <circle cx="412" cy="155" r="4" fill="var(--accent2, #d97706)"/>
+  <text x="422" y="159" font-size="11" fill="var(--text-primary, #1a1a18)">Item selection variance — included</text>
+
+  <!-- CI bar: generalized (wider) -->
+  <line x1="460" y1="196" x2="620" y2="196" stroke="var(--border, #ccc)" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="540" cy="196" r="5" fill="var(--accent2, #d97706)"/>
+  <line x1="482" y1="188" x2="482" y2="204" stroke="var(--accent2, #d97706)" stroke-width="2"/>
+  <line x1="598" y1="188" x2="598" y2="204" stroke="var(--accent2, #d97706)" stroke-width="2"/>
+  <line x1="482" y1="196" x2="598" y2="196" stroke="var(--accent2, #d97706)" stroke-width="2"/>
+  <text x="540" y="220" text-anchor="middle" font-size="11" fill="var(--text-primary, #1a1a18)">75.3% ± 3.8%</text>
+  <text x="540" y="234" text-anchor="middle" font-size="10" fill="var(--text-secondary, #888)">(wider — correctly captures domain uncertainty)</text>
+
+  <!-- naive reference line -->
+  <line x1="504" y1="192" x2="504" y2="200" stroke="var(--muted, #bbb)" stroke-width="1.5" stroke-dasharray="2,2"/>
+  <line x1="576" y1="192" x2="576" y2="200" stroke="var(--muted, #bbb)" stroke-width="1.5" stroke-dasharray="2,2"/>
+  <text x="540" y="250" text-anchor="middle" font-size="10" fill="var(--muted, #aaa)" font-style="italic">naive: ±1.4% (overconfident)</text>
+
+  <!-- Centre divider label -->
+  <text x="360" y="148" text-anchor="middle" font-size="22" fill="var(--border, #ccc)">vs</text>
+</svg>
