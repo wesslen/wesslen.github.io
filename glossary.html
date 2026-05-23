@@ -329,12 +329,18 @@
           <a href="./glossary.html" class="nav-link active">glossary</a>
           <a href="./slides.html" class="nav-link">slides</a>
           <a href="./about.html" class="nav-link">about</a>
+          <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">&#9776;</button>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
             <span id="theme-icon">☀️</span>
           </button>
         </div>
       </div>
     </header>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <a href="./glossary.html" class="nav-link active">glossary</a>
+      <a href="./slides.html" class="nav-link">slides</a>
+      <a href="./about.html" class="nav-link">about</a>
+    </nav>
 
     <!-- Sticky domain jump nav (shown via JS when filter bar scrolls out of view) -->
     <div id="glos-sticky-nav" aria-hidden="true">
@@ -472,6 +478,35 @@
             counts[e.domain] = (counts[e.domain] || 0) + 1;
           });
 
+          /* ── Mobile Nav (hamburger) ─────────────────────── */
+          (function () {
+            var btn = document.getElementById("nav-hamburger");
+            var nav = document.getElementById("mobile-nav");
+            if (!btn || !nav) return;
+            function openMenu() {
+              nav.classList.add("open");
+              btn.setAttribute("aria-expanded", "true");
+              btn.textContent = "✕";
+            }
+            function closeMenu() {
+              nav.classList.remove("open");
+              btn.setAttribute("aria-expanded", "false");
+              btn.innerHTML = "&#9776;";
+            }
+            btn.addEventListener("click", function (e) {
+              e.stopPropagation();
+              nav.classList.contains("open") ? closeMenu() : openMenu();
+            });
+            document.addEventListener("keydown", function (e) {
+              if (e.key === "Escape") closeMenu();
+            });
+            nav.querySelectorAll(".nav-link").forEach(function (link) {
+              link.addEventListener("click", closeMenu);
+            });
+            document.addEventListener("click", function (e) {
+              if (!btn.contains(e.target) && !nav.contains(e.target)) closeMenu();
+            });
+          })();
           const allBtn = document.createElement("button");
           allBtn.className = "filter-pill active";
           allBtn.dataset.domain = "all";

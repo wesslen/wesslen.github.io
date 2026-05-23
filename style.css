@@ -2167,3 +2167,75 @@ img {
     display: none;
   }
 }
+
+/* ── Hamburger / Mobile Nav ──────────────────────────────── */
+/* Button: hidden on desktop, shown on mobile */
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: var(--radius);
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  line-height: 1;
+  touch-action: manipulation;
+  flex-shrink: 0;
+  transition:
+    border-color var(--transition),
+    color var(--transition);
+}
+.nav-hamburger:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+/* Dropdown panel: fixed below the sticky header */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 56px; /* matches .header-inner height */
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 1.25rem 0.75rem;
+  flex-direction: column;
+  gap: 0.15rem;
+  /* Subtle slide-in */
+  animation: mobileNavIn 0.15s ease;
+}
+.mobile-nav.open {
+  display: flex;
+}
+@keyframes mobileNavIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.mobile-nav .nav-link {
+  font-size: 0.85rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius);
+  display: block;
+}
+
+/* On mobile: hide nav-links from header row, show hamburger */
+@media (max-width: 640px) {
+  .header-actions .nav-link {
+    display: none;
+  }
+  .nav-hamburger {
+    display: flex;
+  }
+}

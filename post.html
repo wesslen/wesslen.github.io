@@ -92,12 +92,18 @@
           <a href="./glossary.html" class="nav-link">glossary</a>
           <a href="./slides.html" class="nav-link">slides</a>
           <a href="./about.html" class="nav-link">about</a>
+          <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">&#9776;</button>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
             <span id="theme-icon">☀️</span>
           </button>
         </div>
       </div>
     </header>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <a href="./glossary.html" class="nav-link">glossary</a>
+      <a href="./slides.html" class="nav-link">slides</a>
+      <a href="./about.html" class="nav-link">about</a>
+    </nav>
 
     <!-- ── Post Layout ────────────────────────────────────── -->
     <div class="post-layout container">
@@ -225,6 +231,35 @@
           applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
         });
 
+        /* ── Mobile Nav (hamburger) ─────────────────────── */
+        (function () {
+          var btn = document.getElementById("nav-hamburger");
+          var nav = document.getElementById("mobile-nav");
+          if (!btn || !nav) return;
+          function openMenu() {
+            nav.classList.add("open");
+            btn.setAttribute("aria-expanded", "true");
+            btn.textContent = "✕";
+          }
+          function closeMenu() {
+            nav.classList.remove("open");
+            btn.setAttribute("aria-expanded", "false");
+            btn.innerHTML = "&#9776;";
+          }
+          btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            nav.classList.contains("open") ? closeMenu() : openMenu();
+          });
+          document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") closeMenu();
+          });
+          nav.querySelectorAll(".nav-link").forEach(function (link) {
+            link.addEventListener("click", closeMenu);
+          });
+          document.addEventListener("click", function (e) {
+            if (!btn.contains(e.target) && !nav.contains(e.target)) closeMenu();
+          });
+        })();
         /* ── Reading Progress Bar ───────────────────────────── */
         const bar = document.getElementById("progress-bar");
         function updateProgress() {
