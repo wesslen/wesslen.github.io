@@ -1,11 +1,11 @@
 ---
-title: "The Incomplete Test: Why Adversarial Red-Teaming Can Never Finish — and Why That's Not a Reason to Stop"
+title: "Why Adversarial Red-Teaming Can Never Finish — and Why That's Not a Reason to Stop"
 date: 2026-05-14
 description: "A recent NIST publication establishes that no finite test suite can enumerate all adversarial inputs to a language model. The practical upshot isn't paralysis — it's a different kind of program: not a gate you clear, but a monitoring function you sustain."
 tags: [adversarial, evals]
 ---
 
-*A 2025 NIST publication establishes an information-theoretic result: for any finite guardrail policy, the set of adversarial prompts that circumvent it is countably infinite. No finite red-team suite can enumerate the full attack surface. The practical upshot isn't to abandon adversarial testing; it's to abandon the certification frame, in which red-teaming is something you complete before release. The right frame is continuous adversarial monitoring: a program that runs in parallel with production, adapts to new threat surfaces, and produces control-effectiveness evidence over time rather than a point-in-time clearance. Recent work by researchers at Capital One on adaptive instruction composition, a Neural Thompson Sampling-based approach that explores 8+ trillion tactic combinations and outperforms static red-teaming on both attack success rate and diversity, suggests what the adaptive alternative looks like at scale.*
+> **TL;DR:** A 2025 NIST publication establishes an information-theoretic result: for any finite guardrail policy, the set of adversarial prompts that circumvent it is countably infinite. No finite red-team suite can enumerate the full attack surface. The practical upshot isn't to abandon adversarial testing; it's to abandon the certification frame, in which red-teaming is something you complete before release. The right frame is continuous adversarial monitoring: a program that runs in parallel with production, adapts to new threat surfaces, and produces control-effectiveness evidence over time rather than a point-in-time clearance. Recent work by researchers at Capital One on adaptive instruction composition, a Neural Thompson Sampling-based approach that explores 8+ trillion tactic combinations and outperforms static red-teaming on both attack success rate and diversity, suggests what the adaptive alternative looks like at scale.
 
 ---
 
