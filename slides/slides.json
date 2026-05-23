@@ -28,7 +28,7 @@
   },
   {
     "id": "agentic-governance",
-    "title": "Agentic Governance & Regulatory",
+    "title": "Regulatory Drift",
     "description": "SR 26-2, the supersession of SR 11-7, and what effective challenge actually requires when the model under review is a GenAI system.",
     "dir": "slides/agentic-governance",
     "posts": [
