@@ -403,7 +403,7 @@
     "full": "Classical Test Theory (CTT)",
     "short": "A psychometric framework that models observed scores as true latent score plus random error — giving LLM evaluators a principled way to separate signal from noise across stochastic outputs.",
     "definition": "Classical Test Theory (CTT) models any observed measurement as the sum of a true score (what the test would measure across infinite replications) and random error. Applied to LLM evaluation, CTT provides a framework for handling non-deterministic outputs: repeated sampling of a model on the same prompt estimates the 'true score' for that prompt, and variance across samples characterizes measurement noise. CTT complements Item Response Theory (IRT) — IRT models item difficulty and discrimination; CTT models reliability across replications.",
-    "domain": "evaluation",
+    "domain": "evals",
     "aliases": [
       "CTT",
       "classical test theory"
@@ -912,7 +912,7 @@
     "full": "Generative AI Red-teaming and Assessment Kit",
     "short": "NVIDIA's open-source LLM red-teaming tool (Apache-2.0) that runs structured probe families against model deployments and produces JSONL regression logs.",
     "definition": "Garak executes probe families (including prompt injection, DAN jailbreaks, encoding-based attacks, and data leakage) against an LLM endpoint and scores each with detector classifiers. Probe scores are not normalized and not comparable across probe families — Garak's value is regression tracking within a single deployment over time, not cross-system benchmarking. It is the most commonly used open-source baseline tool for MRM adversarial testing programs.",
-    "domain": "evaluation",
+    "domain": "evals",
     "aliases": [],
     "used_in": [
       "adversarial-workflow"
@@ -1111,7 +1111,7 @@
     "full": "HarmBench Safety Evaluation Framework",
     "short": "A large-scale adversarial safety benchmark (ICML 2024) with 510 curated behaviors, comparing 18 attack methods against 33 LLMs to track refusal regression across model versions.",
     "definition": "Developed by the Center for AI Safety and published at ICML 2024. HarmBench provides 510 curated harmful behaviors across standard, copyright, contextual, and multimodal categories. Its key finding for deployment gate design is that Attack Success Rate (ASR) is stable within model families but variable across them — meaning HarmBench gates must be parameterized per model family rather than as a global threshold. Primarily useful as a regression-tracking workhorse: detecting whether a new model version has degraded on harm categories the prior version handled.",
-    "domain": "evaluation",
+    "domain": "evals",
     "aliases": [
       "HarmBench benchmark",
       "harm bench"
@@ -1816,7 +1816,7 @@
     "id": "online-mind2web",
     "term": "Online-Mind2Web",
     "short": "A live web agent benchmark derived from Mind2Web, requiring agents to complete tasks on real websites rather than static snapshots; tests generalization to dynamic, unanticipated web states.",
-    "domain": "evaluation",
+    "domain": "evals",
     "aliases": [
       "Online Mind2Web",
       "Mind2Web online",
@@ -1917,7 +1917,7 @@
     "id": "pass-at-k",
     "term": "pass@k",
     "short": "An evaluation metric measuring the probability that at least one of k model attempts at a task succeeds; often reported as pass@1 (single attempt) or pass@4 (best of four parallel rollouts).",
-    "domain": "evaluation",
+    "domain": "evals",
     "aliases": [
       "pass@1",
       "pass@4",
@@ -2058,7 +2058,7 @@
     "full": "Python Risk Identification Toolkit for Generative AI",
     "short": "Microsoft's open-source red-teaming framework providing orchestrators, scorers, and built-in attacks (Crescendo, TAP, PAIR, Skeleton Key, Many-Shot) for automated adversarial testing.",
     "definition": "PyRIT (arXiv:2410.02828) provides a modular architecture: orchestrators manage multi-turn attack strategies, converters transform prompts (encoding, translation, paraphrasing), targets wrap LLM endpoints, scorers evaluate whether attacks succeeded, and memory stores (SQLite or Azure SQL) persist results. Built-in attack strategies include Crescendo (multi-turn benign-to-harmful priming), TAP (Tree of Attacks with Pruning), PAIR, Skeleton Key, and Many-Shot Jailbreaking. The Scenarios CLI (`pyrit_scan`) supports 25+ strategies across easy/moderate/difficult tiers.",
-    "domain": "evaluation",
+    "domain": "evals",
     "aliases": [],
     "used_in": [
       "adversarial-workflow"
@@ -2405,7 +2405,7 @@
     "full": "StrongREJECT Safety Benchmark",
     "short": "A rubric-based LLM safety benchmark (NeurIPS 2024) designed to correct for overcounting in earlier jailbreak benchmarks by scoring refusal quality, not just binary harm presence.",
     "definition": "Introduced by Souly et al. (NeurIPS 2024) in response to documented failures of binary jailbreak classifiers — particularly the Scots Gaelic / low-resource jailbreak case where incoherent output was counted as successful harm. StrongREJECT evaluates three dimensions: refusal (binary), convincingness (1–5), and specificity (1–5). It achieves the highest human-agreement scores of published safety judges. In MRM deployment gates, it functions as a safety non-regression benchmark for comparing a candidate model against the champion on the same rubric across releases.",
-    "domain": "evaluation",
+    "domain": "evals",
     "aliases": [
       "StrongREJECT benchmark",
       "strong reject"
@@ -2477,7 +2477,7 @@
     "full": "Token Maxing",
     "short": "Behavioral gaming of AI usage metrics — redundant prompting, task inflation, delegation theater — that emerges when token consumption becomes a KPI rather than a cost tied to outcomes. Goodhart's Law at the compute layer.",
     "definition": "Token Maxing describes the pattern in which teams or individuals optimize AI usage metrics — prompts per day, tokens consumed, AI interactions logged — rather than the outcomes those metrics were intended to proxy. When AI-integration scores become performance targets, the rational response is to maximize the metric through redundant prompting, inflated task delegation, and other forms of usage theater. The fix is the same as in banking's FTP parallel: replace activity metrics with cost-per-outcome metrics, so that the denominator is outcome value, not consumption volume.",
-    "domain": "evaluation",
+    "domain": "evals",
     "aliases": [],
     "used_in": [
       "token-transfer-pricing"
@@ -2594,7 +2594,7 @@
     "id": "webvoyager",
     "term": "WebVoyager",
     "short": "An open-ended web agent benchmark of 643 real-world tasks across 15 websites, evaluated by GPT-4V as judge; a primary benchmark for GUI agent capability with pass@1 and pass@4 metrics.",
-    "domain": "evaluation",
+    "domain": "evals",
     "aliases": [
       "WebVoyager benchmark"
     ],

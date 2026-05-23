@@ -78,7 +78,7 @@
   },
   {
     "slug": "a2a-risks",
-    "title": "When Agents Talk to Agents: The Risk Surface Nobody Has Fully Mapped",
+    "title": "When Agents Talk to Agents: The Risk Surface",
     "date": "2026-04-06",
     "description": "Multi-agent AI systems compound the risks of individual models in ways that single-model guardrails weren't designed to handle. Here's what that threat surface actually looks like.",
     "tags": [
@@ -108,7 +108,7 @@
   },
   {
     "slug": "payments-liability-gap",
-    "title": "Who Pays When the Agent Gets It Wrong? A Rail-by-Rail Guide to the Liability Vacuum",
+    "title": "Who Pays When the Agent Gets It Wrong?",
     "date": "2026-04-25",
     "description": "Your AI agent made a payment that went wrong. Whether you're protected — and by how much — depends almost entirely on which payment rail it used. On the newest rails, the answer may be nobody.",
     "tags": [
@@ -128,7 +128,7 @@
   },
   {
     "slug": "agentic-commerce-gap",
-    "title": "Fast Technology, Slow Law, Narrowing Merchants: The State of Agentic Commerce in Banking",
+    "title": "Fast Technology, Slow Law, Narrowing Merchants",
     "date": "2026-05-16",
     "description": "A three-tier banking market is forming around agentic AI. Open banking is in regulatory limbo. Flagship deployments have underperformed. And the U.S. is choosing private ordering over consumer protection at precisely the moment other jurisdictions are going the other direction.",
     "tags": [
@@ -208,7 +208,7 @@
   },
   {
     "slug": "molmoweb-data-flywheel",
-    "title": "The Training Data Inversion: What MolmoWeb's Ablation Actually Proves",
+    "title": "The Training Data Inversion: What MolmoWeb's Ablation Proves",
     "date": "2026-05-04",
     "description": "Ai2's MolmoWeb is the best open-weight visual web agent available. Its headline numbers are real. But the most important finding isn't a benchmark number — it's the ablation showing synthetic trajectories beat human demonstrations at matched scale by 17 points.",
     "tags": [
@@ -218,7 +218,7 @@
   },
   {
     "slug": "molmoweb-openness-gap",
-    "title": "Inside the MolmoWeb Harness: What Best-in-Class Open GUI Agent Code Actually Reveals",
+    "title": "Inside the MolmoWeb Harness: What Open GUI Agent Code Reveals",
     "date": "2026-05-04",
     "description": "Six weeks after launch, Ai2 shipped the training code, benchmark harness, and annotation tool — the repo went from incomplete to operationally complete. Now that everything is visible, we can read what 'complete' actually means in practice, and what the patterns it reveals predict for GUI agent deployment in regulated environments.",
     "tags": [

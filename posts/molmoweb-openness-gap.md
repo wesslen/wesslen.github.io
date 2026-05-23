@@ -1,5 +1,5 @@
 ---
-title: "Inside the MolmoWeb Harness: What Best-in-Class Open GUI Agent Code Actually Reveals"
+title: "Inside the MolmoWeb Harness: What Open GUI Agent Code Reveals"
 date: 2026-05-04
 description: "Six weeks after launch, Ai2 shipped the training code, benchmark runner, and annotation tool — the repo went from incomplete to operationally complete. Now that everything is visible, we can read what 'complete' actually means in practice, and what the patterns it reveals predict for GUI agent deployment in regulated environments."
 tags: [evals, case-study]

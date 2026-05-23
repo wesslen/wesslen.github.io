@@ -1,5 +1,5 @@
 ---
-title: "The Training Data Inversion: What MolmoWeb's Ablation Actually Proves"
+title: "The Training Data Inversion: What MolmoWeb's Ablation Proves"
 date: 2026-05-04
 description: "Ai2's MolmoWeb is the best open-weight visual web agent available. Its headline numbers are real. But the most important finding isn't a benchmark number — it's the ablation showing synthetic trajectories beat human demonstrations at matched scale by 17 points. That result has uncomfortable implications for how the field thinks about annotation quality."
 tags: [evals]

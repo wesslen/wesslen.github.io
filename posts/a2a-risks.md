@@ -1,5 +1,5 @@
 ---
-title: "When Agents Talk to Agents: The Risk Surface Nobody Has Fully Mapped"
+title: "When Agents Talk to Agents: The Risk Surface"
 date: 2026-04-06
 description: "Multi-agent AI systems compound the risks of individual models in ways that single-model guardrails weren't designed to handle. Here's what that threat surface actually looks like."
 tags: [security, protocol]

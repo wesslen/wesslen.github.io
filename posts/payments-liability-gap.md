@@ -1,5 +1,5 @@
 ---
-title: "Who Pays When the Agent Gets It Wrong? A Rail-by-Rail Guide to the Liability Vacuum"
+title: "Who Pays When the Agent Gets It Wrong?"
 date: 2026-04-25
 description: "Your AI agent made a payment that went wrong. Whether you're protected — and by how much — depends almost entirely on which payment rail it used. On the newest rails, the answer may be nobody."
 tags: [payments, regulatory]

@@ -15,7 +15,7 @@
   },
   {
     "id": "multi-agent",
-    "title": "Multi-Agent Systems",
+    "title": "Agent to Agent",
     "description": "A2A protocol design, cross-agent security risks, and real-world case studies of agentic systems in the wild.",
     "dir": "slides/multi-agent",
     "posts": [
@@ -53,7 +53,7 @@
   },
   {
     "id": "evaluations",
-    "title": "Evaluations",
+    "title": "The Eval Gap",
     "description": "Measurement theory, NIST benchmark frameworks, psychometrics, and why most LLM eval pipelines report the wrong uncertainty estimate.",
     "dir": "slides/evaluations",
     "posts": [

@@ -1,5 +1,5 @@
 ---
-title: "Fast Technology, Slow Law, Narrowing Merchants: The State of Agentic Commerce in Banking"
+title: "Fast Technology, Slow Law, Narrowing Merchants"
 date: 2026-05-16
 description: "A three-tier banking market is forming around agentic AI. Open banking is in regulatory limbo. Flagship deployments have underperformed. And the U.S. is choosing private ordering over consumer protection at precisely the moment other jurisdictions are going the other direction."
 tags: [payments, regulatory]
