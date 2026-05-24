@@ -4,42 +4,134 @@
    ============================================================ */
 
 /* ── Google Fonts ────────────────────────────────────────── */
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&display=swap");
 
 /* ── CSS Custom Properties (dark mode default) ───────────── */
 :root {
-  --bg: #0d1117;
-  --surface: #161b22;
-  --border: #30363d;
-  --text: #e6edf3;
-  --muted: #8b949e;
-  --accent: #38bdf8;
-  --accent-dim: rgba(56, 189, 248, 0.12);
-  --accent-glow: rgba(56, 189, 248, 0.25);
-  --accent2: #a78bfa; /* violet — citations, secondary detail */
-  --accent2-dim: rgba(167, 139, 250, 0.12);
-  --code-bg: #1e2530;
-  --code-text: #38bdf8; /* inline code color — same as accent in dark */
-  --radius: 6px;
-  --transition: 0.2s ease;
-  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", "Fira Code", monospace;
+
+  /* ── Surfaces ── */
+  --bg:            #ffffff;
+  --surface:       #f8f9fa;
+  --surface-2:     #f1f3f4;
+  --border:        #e8eaed;
+  --border-strong: #dadce0;
+  --text:          #202124;
+  --muted:         #5f6368;
+
+  /* ── Brand accent ── */
+  --accent:        #1a73e8;
+  --accent-rgb:    26, 115, 232;
+  --accent-dim:    rgba(26, 115, 232, 0.1);
+  --accent-glow:   rgba(26, 115, 232, 0.22);
+  --accent-hover:  #1768d1;
+
+  /* ── Secondary accent (citations, h3, IMPORTANT) ── */
+  --accent2:       #7c3aed;
+  --accent2-rgb:   124, 58, 237;
+  --accent2-dim:   rgba(124, 58, 237, 0.1);
+
+  /* ── Code ── */
+  --code-bg:       #f6f8fa;
+  --code-text:     #24292e;
+
+  /* ── Shadows ── */
+  --shadow-sm:     0 1px 3px rgba(60,64,67,0.12), 0 1px 2px rgba(60,64,67,0.07);
+  --shadow-md:     0 2px 8px rgba(60,64,67,0.12), 0 1px 4px rgba(60,64,67,0.07);
+  --shadow-lg:     0 4px 20px rgba(60,64,67,0.12), 0 2px 8px rgba(60,64,67,0.07);
+
+  /* ── Typography ── */
+  --font-sans:     'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
+  --font-label:    'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Geometry ── */
+  --radius:        8px;
+  --transition:    0.2s ease;
 }
 
 /* ── Light Mode ──────────────────────────────────────────── */
 [data-theme="light"] {
-  --bg: #f6f8fa;
-  --surface: #ffffff;
-  --border: #d0d7de;
-  --text: #1f2328;
-  --muted: #656d76;
-  --accent: #0969da;
-  --accent-dim: rgba(9, 105, 218, 0.08);
-  --accent-glow: rgba(9, 105, 218, 0.2);
-  --accent2: #7c3aed; /* deeper violet for light mode */
-  --accent2-dim: rgba(124, 58, 237, 0.08);
-  --code-bg: #eef1f6; /* more distinct from page bg */
-  --code-text: #0550ae; /* deeper blue — better contrast on light */
+
+  /* ── Surfaces ── */
+  --bg:            #ffffff;
+  --surface:       #f8f9fa;
+  --surface-2:     #f1f3f4;
+  --border:        #e8eaed;
+  --border-strong: #dadce0;
+  --text:          #202124;
+  --muted:         #5f6368;
+
+  /* ── Brand accent ── */
+  --accent:        #1a73e8;
+  --accent-rgb:    26, 115, 232;
+  --accent-dim:    rgba(26, 115, 232, 0.1);
+  --accent-glow:   rgba(26, 115, 232, 0.22);
+  --accent-hover:  #1768d1;
+
+  /* ── Secondary accent (citations, h3, IMPORTANT) ── */
+  --accent2:       #7c3aed;
+  --accent2-rgb:   124, 58, 237;
+  --accent2-dim:   rgba(124, 58, 237, 0.1);
+
+  /* ── Code ── */
+  --code-bg:       #f6f8fa;
+  --code-text:     #24292e;
+
+  /* ── Shadows ── */
+  --shadow-sm:     0 1px 3px rgba(60,64,67,0.12), 0 1px 2px rgba(60,64,67,0.07);
+  --shadow-md:     0 2px 8px rgba(60,64,67,0.12), 0 1px 4px rgba(60,64,67,0.07);
+  --shadow-lg:     0 4px 20px rgba(60,64,67,0.12), 0 2px 8px rgba(60,64,67,0.07);
+
+  /* ── Typography ── */
+  --font-sans:     'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
+  --font-label:    'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Geometry ── */
+  --radius:        8px;
+  --transition:    0.2s ease;
+}
+
+[data-theme="dark"] {
+
+  /* ── Surfaces ── */
+  --bg:            #1c2128;
+  --surface:       #22272e;
+  --surface-2:     #2d333b;
+  --border:        #373e47;
+  --border-strong: #444c56;
+  --text:          #cdd9e5;
+  --muted:         #768390;
+
+  /* ── Brand accent ── */
+  --accent:        #1a73e8;
+  --accent-rgb:    26, 115, 232;
+  --accent-dim:    rgba(26, 115, 232, 0.1);
+  --accent-glow:   rgba(26, 115, 232, 0.22);
+  --accent-hover:  #1768d1;
+
+  /* ── Secondary accent (citations, h3, IMPORTANT) ── */
+  --accent2:       #7c3aed;
+  --accent2-rgb:   124, 58, 237;
+  --accent2-dim:   rgba(124, 58, 237, 0.1);
+
+  /* ── Code ── */
+  --code-bg:       #161b22;
+  --code-text:     #e6edf3;
+
+  /* ── Shadows ── */
+  --shadow-sm:     0 1px 3px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.25);
+  --shadow-md:     0 2px 8px rgba(0,0,0,0.35), 0 1px 4px rgba(0,0,0,0.25);
+  --shadow-lg:     0 4px 20px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.25);
+
+  /* ── Typography ── */
+  --font-sans:     'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
+  --font-label:    'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Geometry ── */
+  --radius:        8px;
+  --transition:    0.2s ease;
 }
 
 /* ── Reset & Base ────────────────────────────────────────── */
@@ -54,6 +146,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden; /* prevent page-level horizontal scroll; vertical scroll unaffected */
 }
 
 body {
@@ -65,6 +158,7 @@ body {
     background var(--transition),
     color var(--transition);
   min-height: 100vh;
+  overflow-x: hidden; /* belt-and-suspenders alongside html overflow-x: hidden */
 }
 
 a {
@@ -527,13 +621,17 @@ img {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1.5rem 5rem;
+  overflow-x: clip; /* clip any child overflow before it reaches the page scroll width */
 }
 
 /* Prevent grid item from expanding beyond track width when content
    (tables, code blocks) has a wide min-content size. Without this,
-   the 1fr column can blow past the viewport on mobile. */
+   the 1fr column can blow past the viewport on mobile.
+   overflow-x: clip clips any table/code that escapes inner scroll wrappers
+   without creating a new scroll container (preserves sticky positioning). */
 #article-col {
   min-width: 0;
+  overflow-x: clip;
 }
 
 @media (min-width: 1200px) {
@@ -615,7 +713,7 @@ img {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--muted);
-  background: var(--code-bg);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 0.2em 0.75em;
@@ -832,7 +930,9 @@ img {
   border-radius: var(--radius);
   overflow: hidden; /* was: visible — hidden clips wide code to the border box;
                        code { overflow-x: auto } handles horizontal scrolling */
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-sm);
+  padding: 5px; /* inset gap between border and code background */
 }
 
 /* Language label tab */
@@ -847,9 +947,9 @@ img {
   text-transform: uppercase;
   color: var(--muted);
   padding: 0.3rem 0.6rem;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  border-left: 1px solid var(--border);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border-strong);
+  border-left: 1px solid var(--border-strong);
   border-radius: 0 0 0 4px;
   z-index: 2;
 }
@@ -857,11 +957,13 @@ img {
 .prose pre code {
   display: block;
   overflow-x: auto;
-  padding: 1.4rem 1.75rem;
+  padding: 1.3rem 1.75rem;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   line-height: 1.65;
   background: var(--code-bg) !important;
+  color: var(--code-text);
+  border-radius: calc(var(--radius) - 3px); /* inset from pre border */
   -webkit-overflow-scrolling: touch; /* smooth momentum scroll on iOS */
 }
 
@@ -911,7 +1013,10 @@ img {
 }
 
 .prose table {
-  width: 100%;
+  /* min-width: 100% fills the scroll wrapper when content is narrow;
+     no width: 100% — that was causing Chrome to propagate the table's
+     min-content width up through the scroll wrapper to the page. */
+  min-width: 100%;
   border-collapse: collapse;
   font-size: 0.885rem;
   /* margin/border/overflow now owned by wrapper */
@@ -933,7 +1038,7 @@ img {
   padding: 0.75rem 1.1rem;
   border-bottom: 2px solid var(--accent);
   text-align: left;
-  white-space: nowrap;
+  white-space: normal; /* was: nowrap — nowrap forced multi-column tables to huge min-content widths */
   font-weight: 600;
 }
 
@@ -1110,6 +1215,7 @@ img {
 /* ── TOC Sidebar ─────────────────────────────────────────── */
 .toc-sidebar {
   display: none;
+  min-width: 0; /* prevent 240px grid track from expanding beyond its declared width */
 }
 
 @media (min-width: 1200px) {
@@ -1279,12 +1385,8 @@ img {
 /* ── Highlight.js overrides ──────────────────────────────── */
 .hljs {
   background: var(--code-bg) !important;
+  color: var(--code-text); /* base token colour — always light, code island is always dark */
   padding: 0 !important;
-}
-
-/* Light mode: ensure hljs tokens are readable on light bg */
-[data-theme="light"] .hljs {
-  color: #24292e;
 }
 
 /* ── Responsive tweaks ───────────────────────────────────── */

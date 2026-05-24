@@ -83,3 +83,98 @@ Push to the `main` (or `gh-pages`) branch of `wesslen/wesslen.github.io`.
 GitHub Pages will serve from the repo root at `https://wesslen.github.io/`.
 
 No build step required.
+---
+
+## Theming
+
+The blog uses a YAML-driven theme system. Edit **`theme.yaml`** in the repo root, then run:
+
+```bash
+npm install        # first time only — installs js-yaml
+npm run build:theme
+```
+
+This rewrites the CSS custom properties in `style.css` in-place. No manual CSS editing needed for basic customization.
+
+### Colors
+
+```yaml
+brand:
+  primary: "#1a73e8"    # accent color — links, TOC active, h2 bars, progress bar, tags
+  secondary: "#7c3aed"  # secondary accent — citations, h3 bars, IMPORTANT alert
+```
+
+Any valid CSS hex color works. After changing, run `npm run build:theme`.
+
+### Fonts
+
+```yaml
+typography:
+  body: "'Inter', system-ui, -apple-system, sans-serif"
+  mono: "'JetBrains Mono', 'Fira Code', monospace"
+  google_fonts: "https://fonts.googleapis.com/css2?family=Inter:..."
+```
+
+- `body` — prose text, nav, post titles
+- `mono` — code blocks, inline code, and (if `edge.mono_ui_labels: true`) dates, read-time, and nav links
+- `google_fonts` — update to match whichever fonts you specify above; the build script injects this as the `@import` at the top of `style.css`
+
+### Presets
+
+Three starting points are available via `preset:`:
+
+| Preset | Description |
+|--------|-------------|
+| `professional-light` | White/light-gray surfaces, Google-blue accent, Inter + JetBrains Mono. Default. |
+| `dark-editorial` | Dark navy background, amber accent, editorial feel. |
+| `warm-minimal` | Off-white background, slate accent, warm sans. |
+
+The preset sets all base values; individual `brand:`, `typography:`, and `surfaces:` keys override the preset.
+
+### Surfaces & Radius
+
+```yaml
+surfaces:
+  style: elevated    # elevated | flat | outlined
+  radius: "8px"      # base border-radius; components scale relative to this
+```
+
+### Light / Dark Mode
+
+```yaml
+mode:
+  default: light       # which theme loads on first visit: light | dark
+  allow_toggle: true   # show the theme toggle button in the header
+  code_dark_island: false  # keep code blocks dark even in light mode
+```
+
+### Personality flags
+
+```yaml
+edge:
+  cursor_blink: true      # blinking › cursor appended to the site title
+  mono_ui_labels: true    # dates, read-time, nav links use monospace font
+  dot_grid_hero: true     # subtle dot-grid pattern in the hero background
+  progress_bar: true      # thin reading-progress bar at viewport top
+```
+
+### Full example — swap to a purple-accented dark theme
+
+```yaml
+preset: dark-editorial
+brand:
+  primary: "#9f7aea"
+  secondary: "#f6ad55"
+typography:
+  body: "'IBM Plex Sans', system-ui, sans-serif"
+  mono: "'IBM Plex Mono', monospace"
+  google_fonts: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&display=swap"
+surfaces:
+  radius: "4px"
+mode:
+  default: dark
+edge:
+  mono_ui_labels: false
+```
+
+Then: `npm run build:theme`

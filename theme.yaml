@@ -1,0 +1,64 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Drift — Theme Configuration
+# Run `npm run build:theme` after editing to regenerate CSS variables.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Preset ───────────────────────────────────────────────────────────────────
+# Built-in presets: professional-light | dark-editorial | warm-minimal
+preset: professional-light
+
+# ── Brand Colors ─────────────────────────────────────────────────────────────
+brand:
+  # Primary accent — links, active states, h2 bars, progress bar, tags
+  primary: "#1a73e8"
+
+  # Secondary accent — citations [^fn], h3 bars, IMPORTANT alerts
+  secondary: "#7c3aed"
+
+# ── Typography ───────────────────────────────────────────────────────────────
+typography:
+  # Body / UI font — used for prose, nav, post titles
+  body: "'Inter', system-ui, -apple-system, sans-serif"
+
+  # Monospace font — used for code blocks, inline code, and ui_labels (if enabled)
+  mono: "'JetBrains Mono', 'Fira Code', monospace"
+
+  # Google Fonts import URL — updated automatically by build-theme.js
+  google_fonts: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&display=swap"
+
+# ── Surfaces ─────────────────────────────────────────────────────────────────
+surfaces:
+  # elevated: cards use drop shadows, minimal borders
+  # flat: no shadows, rely on bg color contrast
+  # outlined: visible borders, no shadows (current style)
+  style: elevated
+
+  # Base border-radius. Components scale up/down relative to this.
+  radius: "8px"
+
+# ── Mode ─────────────────────────────────────────────────────────────────────
+mode:
+  # Which theme loads by default: light | dark
+  default: light
+
+  # Show the theme toggle button in the header
+  allow_toggle: true
+
+  # Keep code blocks dark even when the page is in light mode ("dark island")
+  code_dark_island: false
+
+# ── Edge: Practitioner Personality ───────────────────────────────────────────
+# These settings preserve the technical / workbench character of the blog.
+edge:
+  # Blinking cursor glyph appended to the site title in the header
+  cursor_blink: true
+
+  # Use monospace font for UI metadata: dates, read-time, eyebrow labels,
+  # section dividers, nav links. Sets --font-label to --font-mono.
+  mono_ui_labels: true
+
+  # Subtle dot-grid pattern in the hero background
+  dot_grid_hero: true
+
+  # Thin reading-progress bar pinned to the top of the viewport on post pages
+  progress_bar: true

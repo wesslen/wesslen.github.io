@@ -33,12 +33,12 @@
     <link
       id="hljs-dark"
       rel="stylesheet"
+      disabled
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
     />
     <link
       id="hljs-light"
       rel="stylesheet"
-      disabled
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
     />
 
@@ -216,7 +216,7 @@
         const themeIcon = document.getElementById("theme-icon");
         const hljsDark = document.getElementById("hljs-dark");
         const hljsLight = document.getElementById("hljs-light");
-        const savedTheme = localStorage.getItem("theme") || "dark";
+        const savedTheme = localStorage.getItem("theme") || "light";
 
         function applyTheme(theme) {
           root.setAttribute("data-theme", theme);
