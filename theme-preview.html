@@ -1,430 +1,1220 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="light">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Theme Preview — Drift (professional-light)</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-/* ── Variables ───────────────────────────────────────────── */
-:root {
-  --bg:            #ffffff;
-  --surface:       #f8f9fa;
-  --surface-2:     #f1f3f4;
-  --border:        #e8eaed;
-  --border-strong: #dadce0;
-  --text:          #202124;
-  --muted:         #5f6368;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Theme Preview — Drift (professional-light)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ── Variables ───────────────────────────────────────────── */
+      :root {
+        --bg: #ffffff;
+        --surface: #f8f9fa;
+        --surface-2: #f1f3f4;
+        --border: #e8eaed;
+        --border-strong: #dadce0;
+        --text: #202124;
+        --muted: #5f6368;
 
-  --accent:        #1a73e8;
-  --accent-rgb:    26, 115, 232;
-  --accent-dim:    rgba(26,115,232,0.10);
-  --accent-glow:   rgba(26,115,232,0.22);
+        --accent: #1a73e8;
+        --accent-rgb: 26, 115, 232;
+        --accent-dim: rgba(26, 115, 232, 0.1);
+        --accent-glow: rgba(26, 115, 232, 0.22);
 
-  --accent2:       #7c3aed;
-  --accent2-rgb:   124,58,237;
-  --accent2-dim:   rgba(124,58,237,0.10);
+        --accent2: #7c3aed;
+        --accent2-rgb: 124, 58, 237;
+        --accent2-dim: rgba(124, 58, 237, 0.1);
 
-  /* Code — light terminal style (Mac Terminal Basic / GitHub light) */
-  --code-bg:       #f6f8fa;
-  --code-text:     #24292e;
+        /* Code — light terminal style (Mac Terminal Basic / GitHub light) */
+        --code-bg: #f6f8fa;
+        --code-text: #24292e;
 
-  /* Shadows */
-  --shadow-sm:  0 1px 3px rgba(60,64,67,0.12), 0 1px 2px rgba(60,64,67,0.07);
-  --shadow-md:  0 2px 8px rgba(60,64,67,0.12), 0 1px 4px rgba(60,64,67,0.07);
-  --shadow-lg:  0 4px 20px rgba(60,64,67,0.12), 0 2px 8px rgba(60,64,67,0.07);
+        /* Shadows */
+        --shadow-sm: 0 1px 3px rgba(60, 64, 67, 0.12), 0 1px 2px rgba(60, 64, 67, 0.07);
+        --shadow-md: 0 2px 8px rgba(60, 64, 67, 0.12), 0 1px 4px rgba(60, 64, 67, 0.07);
+        --shadow-lg: 0 4px 20px rgba(60, 64, 67, 0.12), 0 2px 8px rgba(60, 64, 67, 0.07);
 
-  --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
-  --font-label: var(--font-mono); /* mono_ui_labels: true */
-  --radius:     8px;
-  --transition: 0.2s ease;
-}
+        --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+        --font-mono: "JetBrains Mono", "Fira Code", monospace;
+        --font-label: var(--font-mono); /* mono_ui_labels: true */
+        --radius: 8px;
+        --transition: 0.2s ease;
+      }
 
-[data-theme="dark"] {
-  --bg:            #1c2128;
-  --surface:       #22272e;
-  --surface-2:     #2d333b;
-  --border:        #373e47;
-  --border-strong: #444c56;
-  --text:          #cdd9e5;
-  --muted:         #768390;
-  --shadow-sm:  0 1px 3px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.25);
-  --shadow-md:  0 2px 8px rgba(0,0,0,0.35), 0 1px 4px rgba(0,0,0,0.25);
-  --shadow-lg:  0 4px 20px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.25);
-  --code-bg:    #161b22;
-  --code-text:  #e6edf3;
-}
+      [data-theme="dark"] {
+        --bg: #1c2128;
+        --surface: #22272e;
+        --surface-2: #2d333b;
+        --border: #373e47;
+        --border-strong: #444c56;
+        --text: #cdd9e5;
+        --muted: #768390;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25);
+        --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.35), 0 1px 4px rgba(0, 0, 0, 0.25);
+        --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.25);
+        --code-bg: #161b22;
+        --code-text: #e6edf3;
+      }
 
-/* ── Reset ───────────────────────────────────────────────── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;scroll-behavior:smooth}
-body{font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.75;min-height:100vh;transition:background var(--transition),color var(--transition)}
-a{color:var(--accent);text-decoration:none}
-img{max-width:100%;display:block}
+      /* ── Reset ───────────────────────────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-sans);
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.75;
+        min-height: 100vh;
+        transition:
+          background var(--transition),
+          color var(--transition);
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
 
-/* ── Progress bar ────────────────────────────────────────── */
-#progress-bar{position:fixed;top:0;left:0;height:3px;width:42%;background:linear-gradient(90deg,var(--accent),rgba(var(--accent-rgb),0.6));z-index:1000;box-shadow:0 0 6px var(--accent-glow)}
+      /* ── Progress bar ────────────────────────────────────────── */
+      #progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 42%;
+        background: linear-gradient(90deg, var(--accent), rgba(var(--accent-rgb), 0.6));
+        z-index: 1000;
+        box-shadow: 0 0 6px var(--accent-glow);
+      }
 
-/* ── Header ──────────────────────────────────────────────── */
-.site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 1.5rem;box-shadow:var(--shadow-sm);transition:background var(--transition)}
-[data-theme="dark"] .site-header{background:rgba(28,33,40,0.88)}
-.header-inner{max-width:1160px;margin:0 auto;height:58px;display:flex;align-items:center;justify-content:space-between}
-.site-title{font-family:var(--font-mono);font-size:1.05rem;font-weight:600;color:var(--text);letter-spacing:-0.02em}
-.site-title .cursor{display:inline-block;color:var(--accent);animation:blink 1.1s step-end infinite;margin-left:1px}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-.header-actions{display:flex;align-items:center;gap:0.5rem}
-.nav-link{font-family:var(--font-label);font-size:0.76rem;color:var(--muted);padding:0.3rem 0.7rem;border-radius:var(--radius);transition:color var(--transition),background var(--transition);letter-spacing:0.02em}
-.nav-link:hover,.nav-link.active{color:var(--accent);background:var(--accent-dim)}
-.theme-toggle{background:none;border:1px solid var(--border);color:var(--muted);cursor:pointer;border-radius:var(--radius);width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:border-color var(--transition),color var(--transition),background var(--transition)}
-.theme-toggle:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+      /* ── Header ──────────────────────────────────────────────── */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 1.5rem;
+        box-shadow: var(--shadow-sm);
+        transition: background var(--transition);
+      }
+      [data-theme="dark"] .site-header {
+        background: rgba(28, 33, 40, 0.88);
+      }
+      .header-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        height: 58px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .site-title {
+        font-family: var(--font-mono);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: -0.02em;
+      }
+      .site-title .cursor {
+        display: inline-block;
+        color: var(--accent);
+        animation: blink 1.1s step-end infinite;
+        margin-left: 1px;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .nav-link {
+        font-family: var(--font-label);
+        font-size: 0.76rem;
+        color: var(--muted);
+        padding: 0.3rem 0.7rem;
+        border-radius: var(--radius);
+        transition:
+          color var(--transition),
+          background var(--transition);
+        letter-spacing: 0.02em;
+      }
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--accent);
+        background: var(--accent-dim);
+      }
+      .theme-toggle {
+        background: none;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        cursor: pointer;
+        border-radius: var(--radius);
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        transition:
+          border-color var(--transition),
+          color var(--transition),
+          background var(--transition);
+      }
+      .theme-toggle:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: var(--accent-dim);
+      }
 
-/* ── Hero ────────────────────────────────────────────────── */
-.hero{position:relative;padding:4.5rem 1.5rem 3rem;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,var(--border) 1px,transparent 1px);background-size:24px 24px;opacity:0.6;pointer-events:none}
-.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,var(--bg) 80%);pointer-events:none}
-.hero-content{position:relative;z-index:1;max-width:740px;margin:0 auto}
-.hero-eyebrow{font-family:var(--font-label);font-size:0.72rem;color:var(--accent);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.85rem}
-.hero h1{font-family:var(--font-sans);font-size:clamp(1.7rem,4vw,2.6rem);font-weight:600;line-height:1.2;letter-spacing:-0.03em;margin-bottom:1rem;color:var(--text)}
-.hero h1 em{font-style:normal;color:var(--accent)}
-.hero-desc{font-size:1.05rem;color:var(--muted);max-width:560px;line-height:1.7}
+      /* ── Hero ────────────────────────────────────────────────── */
+      .hero {
+        position: relative;
+        padding: 4.5rem 1.5rem 3rem;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+        background-size: 24px 24px;
+        opacity: 0.6;
+        pointer-events: none;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at center, transparent 30%, var(--bg) 80%);
+        pointer-events: none;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 740px;
+        margin: 0 auto;
+      }
+      .hero-eyebrow {
+        font-family: var(--font-label);
+        font-size: 0.72rem;
+        color: var(--accent);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin-bottom: 0.85rem;
+      }
+      .hero h1 {
+        font-family: var(--font-sans);
+        font-size: clamp(1.7rem, 4vw, 2.6rem);
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+        color: var(--text);
+      }
+      .hero h1 em {
+        font-style: normal;
+        color: var(--accent);
+      }
+      .hero-desc {
+        font-size: 1.05rem;
+        color: var(--muted);
+        max-width: 560px;
+        line-height: 1.7;
+      }
 
-/* ── Container ───────────────────────────────────────────── */
-.container{max-width:1160px;margin:0 auto;padding:0 1.5rem}
+      /* ── Container ───────────────────────────────────────────── */
+      .container {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
 
-/* ── Section label ───────────────────────────────────────── */
-.section-label{font-family:var(--font-label);font-size:0.68rem;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;padding-bottom:0.5rem;border-bottom:1px solid var(--border);width:100%}
+      /* ── Section label ───────────────────────────────────────── */
+      .section-label {
+        font-family: var(--font-label);
+        font-size: 0.68rem;
+        color: var(--muted);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+        width: 100%;
+      }
 
-/* ── Post list (Layout A style) ──────────────────────────── */
-.posts-section{padding:1rem 1.5rem 4rem}
-.post-list-a{max-width:740px;margin:0 auto}
+      /* ── Post list (Layout A style) ──────────────────────────── */
+      .posts-section {
+        padding: 1rem 1.5rem 4rem;
+      }
+      .post-list-a {
+        max-width: 740px;
+        margin: 0 auto;
+      }
 
-.intro-card{max-width:740px;margin:0 auto 2rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.4rem;display:flex;align-items:center;gap:1.25rem;box-shadow:var(--shadow-sm);text-decoration:none;position:relative;overflow:hidden;transition:box-shadow var(--transition),border-color var(--transition)}
-.intro-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);border-radius:var(--radius) 0 0 var(--radius)}
-.intro-card:hover{box-shadow:var(--shadow-md);border-color:var(--accent)}
-.intro-label{font-family:var(--font-label);font-size:0.62rem;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;flex-shrink:0}
-.intro-title{font-size:0.9rem;font-weight:600;color:var(--text);flex:1;line-height:1.35}
-.intro-desc{font-size:0.82rem;color:var(--muted);flex:2;line-height:1.55}
+      .intro-card {
+        max-width: 740px;
+        margin: 0 auto 2rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.1rem 1.4rem;
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        box-shadow: var(--shadow-sm);
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        transition:
+          box-shadow var(--transition),
+          border-color var(--transition);
+      }
+      .intro-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--accent);
+        border-radius: var(--radius) 0 0 var(--radius);
+      }
+      .intro-card:hover {
+        box-shadow: var(--shadow-md);
+        border-color: var(--accent);
+      }
+      .intro-label {
+        font-family: var(--font-label);
+        font-size: 0.62rem;
+        color: var(--accent);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        flex-shrink: 0;
+      }
+      .intro-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text);
+        flex: 1;
+        line-height: 1.35;
+      }
+      .intro-desc {
+        font-size: 0.82rem;
+        color: var(--muted);
+        flex: 2;
+        line-height: 1.55;
+      }
 
-.series-group{border-left:2px solid var(--border);margin-bottom:0.25rem}
-.series-header{display:flex;align-items:center;gap:0.6rem;padding:0.55rem 1rem 0.55rem 1.25rem;font-family:var(--font-label);font-size:0.67rem;color:var(--accent2);letter-spacing:0.06em;text-transform:uppercase;border-left:2px solid var(--accent2);margin-left:-2px}
-.series-count{background:var(--accent2-dim);border:1px solid var(--accent2);border-radius:20px;padding:0.1em 0.5em;font-size:0.62rem}
+      .series-group {
+        border-left: 2px solid var(--border);
+        margin-bottom: 0.25rem;
+      }
+      .series-header {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.55rem 1rem 0.55rem 1.25rem;
+        font-family: var(--font-label);
+        font-size: 0.67rem;
+        color: var(--accent2);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        border-left: 2px solid var(--accent2);
+        margin-left: -2px;
+      }
+      .series-count {
+        background: var(--accent2-dim);
+        border: 1px solid var(--accent2);
+        border-radius: 20px;
+        padding: 0.1em 0.5em;
+        font-size: 0.62rem;
+      }
 
-.row-a{display:flex;align-items:baseline;gap:0.75rem;padding:0.6rem 1rem 0.6rem 1.25rem;cursor:pointer;transition:background var(--transition);border-radius:var(--radius);margin:1px 0}
-.series-group .row-a{padding-left:1.5rem;border-radius:0}
-.row-a:hover,.row-a.expanded{background:var(--surface)}
-.row-a-chevron{font-size:0.58rem;color:var(--muted);transition:transform 0.2s;flex-shrink:0;margin-top:0.15em}
-.row-a.expanded .row-a-chevron{transform:rotate(90deg);color:var(--accent)}
-.row-a-title{font-size:0.9rem;font-weight:500;color:var(--text);flex:1;line-height:1.3}
-.row-a:hover .row-a-title,.row-a.expanded .row-a-title{color:var(--accent)}
-.row-a-meta{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;gap:0.2rem}
-.row-a-date{font-family:var(--font-label);font-size:0.64rem;color:var(--muted);white-space:nowrap}
-.row-a-tags{display:flex;gap:0.3rem}
-.row-a-tag{font-family:var(--font-label);font-size:0.58rem;padding:0.1em 0.5em;border-radius:20px;border:1px solid;opacity:0.75}
-.row-a-expand{display:none;padding:0.7rem 1.25rem 0.9rem 2.75rem;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius)}
-.series-group .row-a-expand{padding-left:3rem}
-.row-a-expand.open{display:block}
-.row-a-desc{font-size:0.875rem;color:var(--muted);line-height:1.6;margin-bottom:0.6rem}
-.row-a-link{font-family:var(--font-label);font-size:0.72rem;color:var(--accent)}
-.standalone-divider{font-family:var(--font-label);font-size:0.63rem;color:var(--muted);letter-spacing:0.08em;padding:0.9rem 1rem 0.35rem;opacity:0.6;text-transform:uppercase}
+      .row-a {
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+        padding: 0.6rem 1rem 0.6rem 1.25rem;
+        cursor: pointer;
+        transition: background var(--transition);
+        border-radius: var(--radius);
+        margin: 1px 0;
+      }
+      .series-group .row-a {
+        padding-left: 1.5rem;
+        border-radius: 0;
+      }
+      .row-a:hover,
+      .row-a.expanded {
+        background: var(--surface);
+      }
+      .row-a-chevron {
+        font-size: 0.58rem;
+        color: var(--muted);
+        transition: transform 0.2s;
+        flex-shrink: 0;
+        margin-top: 0.15em;
+      }
+      .row-a.expanded .row-a-chevron {
+        transform: rotate(90deg);
+        color: var(--accent);
+      }
+      .row-a-title {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text);
+        flex: 1;
+        line-height: 1.3;
+      }
+      .row-a:hover .row-a-title,
+      .row-a.expanded .row-a-title {
+        color: var(--accent);
+      }
+      .row-a-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        flex-shrink: 0;
+        gap: 0.2rem;
+      }
+      .row-a-date {
+        font-family: var(--font-label);
+        font-size: 0.64rem;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .row-a-tags {
+        display: flex;
+        gap: 0.3rem;
+      }
+      .row-a-tag {
+        font-family: var(--font-label);
+        font-size: 0.58rem;
+        padding: 0.1em 0.5em;
+        border-radius: 20px;
+        border: 1px solid;
+        opacity: 0.75;
+      }
+      .row-a-expand {
+        display: none;
+        padding: 0.7rem 1.25rem 0.9rem 2.75rem;
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        border-radius: 0 0 var(--radius) var(--radius);
+      }
+      .series-group .row-a-expand {
+        padding-left: 3rem;
+      }
+      .row-a-expand.open {
+        display: block;
+      }
+      .row-a-desc {
+        font-size: 0.875rem;
+        color: var(--muted);
+        line-height: 1.6;
+        margin-bottom: 0.6rem;
+      }
+      .row-a-link {
+        font-family: var(--font-label);
+        font-size: 0.72rem;
+        color: var(--accent);
+      }
+      .standalone-divider {
+        font-family: var(--font-label);
+        font-size: 0.63rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        padding: 0.9rem 1rem 0.35rem;
+        opacity: 0.6;
+        text-transform: uppercase;
+      }
 
-/* ── Post page ───────────────────────────────────────────── */
-.post-layout{max-width:1160px;margin:0 auto;padding:2.5rem 1.5rem 5rem;display:grid;grid-template-columns:1fr;gap:2rem}
-@media(min-width:1100px){.post-layout{grid-template-columns:1fr 230px;gap:4rem;align-items:start}}
-.back-link{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--font-label);font-size:0.76rem;color:var(--muted);margin-bottom:2rem;transition:color var(--transition)}
-.back-link:hover{color:var(--accent)}
-.post-header{margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
-.post-eyebrow{display:flex;align-items:center;gap:0.9rem;margin-bottom:0.9rem;flex-wrap:wrap}
-.post-date{font-family:var(--font-label);font-size:0.73rem;color:var(--muted)}
-.post-read-time{font-family:var(--font-label);font-size:0.7rem;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:0.2em 0.75em}
-.post-title{font-family:var(--font-sans);font-size:clamp(1.45rem,3.5vw,2rem);font-weight:600;line-height:1.25;letter-spacing:-0.025em;margin-bottom:0.75rem;color:var(--text)}
-.post-description{font-size:1rem;color:var(--muted);line-height:1.65}
+      /* ── Post page ───────────────────────────────────────────── */
+      .post-layout {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem 5rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      @media (min-width: 1100px) {
+        .post-layout {
+          grid-template-columns: 1fr 230px;
+          gap: 4rem;
+          align-items: start;
+        }
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-label);
+        font-size: 0.76rem;
+        color: var(--muted);
+        margin-bottom: 2rem;
+        transition: color var(--transition);
+      }
+      .back-link:hover {
+        color: var(--accent);
+      }
+      .post-header {
+        margin-bottom: 2.5rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .post-eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        margin-bottom: 0.9rem;
+        flex-wrap: wrap;
+      }
+      .post-date {
+        font-family: var(--font-label);
+        font-size: 0.73rem;
+        color: var(--muted);
+      }
+      .post-read-time {
+        font-family: var(--font-label);
+        font-size: 0.7rem;
+        color: var(--muted);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 0.2em 0.75em;
+      }
+      .post-title {
+        font-family: var(--font-sans);
+        font-size: clamp(1.45rem, 3.5vw, 2rem);
+        font-weight: 600;
+        line-height: 1.25;
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+        color: var(--text);
+      }
+      .post-description {
+        font-size: 1rem;
+        color: var(--muted);
+        line-height: 1.65;
+      }
 
-/* ── Prose ───────────────────────────────────────────────── */
-.prose{font-size:1rem;line-height:1.8;color:var(--text)}
-.prose h2{font-family:var(--font-sans);font-size:1.2rem;font-weight:600;color:var(--text);margin:2.5rem 0 0.75rem;padding-bottom:0.4rem;padding-left:0.85rem;border-left:3px solid var(--accent);border-bottom:1px solid var(--border);letter-spacing:-0.01em}
-.prose h3{font-family:var(--font-sans);font-size:1rem;font-weight:600;color:var(--text);margin:2rem 0 0.6rem;padding-left:0.6rem;border-left:2px solid var(--accent2)}
-.prose p{margin-bottom:1.3rem}
-.prose a{color:var(--accent);text-decoration:underline;text-decoration-color:var(--accent-dim);text-underline-offset:3px}
-.prose a:hover{text-decoration-color:var(--accent)}
-.prose strong{font-weight:600}
+      /* ── Prose ───────────────────────────────────────────────── */
+      .prose {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: var(--text);
+      }
+      .prose h2 {
+        font-family: var(--font-sans);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text);
+        margin: 2.5rem 0 0.75rem;
+        padding-bottom: 0.4rem;
+        padding-left: 0.85rem;
+        border-left: 3px solid var(--accent);
+        border-bottom: 1px solid var(--border);
+        letter-spacing: -0.01em;
+      }
+      .prose h3 {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text);
+        margin: 2rem 0 0.6rem;
+        padding-left: 0.6rem;
+        border-left: 2px solid var(--accent2);
+      }
+      .prose p {
+        margin-bottom: 1.3rem;
+      }
+      .prose a {
+        color: var(--accent);
+        text-decoration: underline;
+        text-decoration-color: var(--accent-dim);
+        text-underline-offset: 3px;
+      }
+      .prose a:hover {
+        text-decoration-color: var(--accent);
+      }
+      .prose strong {
+        font-weight: 600;
+      }
 
-/* Inline code */
-.prose code:not(pre code){font-family:var(--font-mono);font-size:0.855em;background:var(--code-bg);color:var(--code-text);border:1px solid var(--border-strong);border-radius:4px;padding:0.2em 0.5em}
+      /* Inline code */
+      .prose code:not(pre code) {
+        font-family: var(--font-mono);
+        font-size: 0.855em;
+        background: var(--code-bg);
+        color: var(--code-text);
+        border: 1px solid var(--border-strong);
+        border-radius: 4px;
+        padding: 0.2em 0.5em;
+      }
 
-/* Code block — dark island */
-.prose pre{position:relative;margin:1.5rem 0;border-radius:var(--radius);overflow:hidden;background:var(--bg);border:1px solid var(--border-strong);box-shadow:var(--shadow-sm);padding:5px}
-.prose pre[data-lang]::before{content:attr(data-lang);position:absolute;top:0;right:3rem;font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);padding:0.3rem 0.6rem;background:var(--surface-2);border-bottom:1px solid var(--border-strong);border-left:1px solid var(--border-strong);border-radius:0 0 0 4px;z-index:2}
-.prose pre code{display:block;overflow-x:auto;padding:1.3rem 1.5rem;font-family:var(--font-mono);font-size:0.84rem;line-height:1.65;color:var(--code-text);background:var(--code-bg);border-radius:calc(var(--radius) - 3px)}
-.prose pre .kw{color:#d73a49}
-.prose pre .fn{color:#6f42c1}
-.prose pre .str{color:#032f62}
-.prose pre .cm{color:#6a737d;font-style:italic}
-.prose pre .num{color:#005cc5}
-.prose pre .op{color:#d73a49}
+      /* Code block — dark island */
+      .prose pre {
+        position: relative;
+        margin: 1.5rem 0;
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: var(--bg);
+        border: 1px solid var(--border-strong);
+        box-shadow: var(--shadow-sm);
+        padding: 5px;
+      }
+      .prose pre[data-lang]::before {
+        content: attr(data-lang);
+        position: absolute;
+        top: 0;
+        right: 3rem;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding: 0.3rem 0.6rem;
+        background: var(--surface-2);
+        border-bottom: 1px solid var(--border-strong);
+        border-left: 1px solid var(--border-strong);
+        border-radius: 0 0 0 4px;
+        z-index: 2;
+      }
+      .prose pre code {
+        display: block;
+        overflow-x: auto;
+        padding: 1.3rem 1.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.84rem;
+        line-height: 1.65;
+        color: var(--code-text);
+        background: var(--code-bg);
+        border-radius: calc(var(--radius) - 3px);
+      }
+      .prose pre .kw {
+        color: #d73a49;
+      }
+      .prose pre .fn {
+        color: #6f42c1;
+      }
+      .prose pre .str {
+        color: #032f62;
+      }
+      .prose pre .cm {
+        color: #6a737d;
+        font-style: italic;
+      }
+      .prose pre .num {
+        color: #005cc5;
+      }
+      .prose pre .op {
+        color: #d73a49;
+      }
 
-/* Table */
-.table-scroll-wrapper{width:100%;overflow-x:auto;margin:1.75rem 0;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm)}
-.prose table{width:100%;border-collapse:collapse;font-size:0.875rem}
-.prose thead{background:var(--surface-2)}
-.prose thead th{font-family:var(--font-label);font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);padding:0.75rem 1.1rem;border-bottom:2px solid var(--accent);text-align:left;font-weight:600;white-space:nowrap}
-.prose tbody tr{border-bottom:1px solid var(--border);transition:background var(--transition)}
-.prose tbody tr:last-child{border-bottom:none}
-.prose tbody tr:hover{background:var(--accent-dim)}
-.prose tbody td{padding:0.65rem 1.1rem;vertical-align:top;line-height:1.55}
+      /* Table */
+      .table-scroll-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        margin: 1.75rem 0;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-sm);
+      }
+      .prose table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+      }
+      .prose thead {
+        background: var(--surface-2);
+      }
+      .prose thead th {
+        font-family: var(--font-label);
+        font-size: 0.7rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding: 0.75rem 1.1rem;
+        border-bottom: 2px solid var(--accent);
+        text-align: left;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .prose tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background var(--transition);
+      }
+      .prose tbody tr:last-child {
+        border-bottom: none;
+      }
+      .prose tbody tr:hover {
+        background: var(--accent-dim);
+      }
+      .prose tbody td {
+        padding: 0.65rem 1.1rem;
+        vertical-align: top;
+        line-height: 1.55;
+      }
 
-/* Alerts */
-.gh-alert{margin:1.75rem 0;padding:0.9rem 1.25rem;border-left:4px solid;border-radius:0 var(--radius) var(--radius) 0;box-shadow:var(--shadow-sm)}
-.gh-alert p{margin-bottom:0.35rem}
-.gh-alert p:last-child{margin-bottom:0}
-.gh-alert-title{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-label);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem}
-.gh-alert-note{background:rgba(26,115,232,0.07);border-color:var(--accent)}
-.gh-alert-note .gh-alert-title{color:var(--accent)}
-.gh-alert-tip{background:rgba(30,142,62,0.07);border-color:#1e8e3e}
-.gh-alert-tip .gh-alert-title{color:#1e8e3e}
-.gh-alert-important{background:rgba(124,58,237,0.08);border-color:var(--accent2)}
-.gh-alert-important .gh-alert-title{color:var(--accent2)}
-.gh-alert-warning{background:rgba(180,83,9,0.07);border-color:#b45309}
-.gh-alert-warning .gh-alert-title{color:#b45309}
-.gh-alert-caution{background:rgba(220,38,38,0.07);border-color:#dc2626}
-.gh-alert-caution .gh-alert-title{color:#dc2626}
+      /* Alerts */
+      .gh-alert {
+        margin: 1.75rem 0;
+        padding: 0.9rem 1.25rem;
+        border-left: 4px solid;
+        border-radius: 0 var(--radius) var(--radius) 0;
+        box-shadow: var(--shadow-sm);
+      }
+      .gh-alert p {
+        margin-bottom: 0.35rem;
+      }
+      .gh-alert p:last-child {
+        margin-bottom: 0;
+      }
+      .gh-alert-title {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-label);
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
+      .gh-alert-note {
+        background: rgba(26, 115, 232, 0.07);
+        border-color: var(--accent);
+      }
+      .gh-alert-note .gh-alert-title {
+        color: var(--accent);
+      }
+      .gh-alert-tip {
+        background: rgba(30, 142, 62, 0.07);
+        border-color: #1e8e3e;
+      }
+      .gh-alert-tip .gh-alert-title {
+        color: #1e8e3e;
+      }
+      .gh-alert-important {
+        background: rgba(124, 58, 237, 0.08);
+        border-color: var(--accent2);
+      }
+      .gh-alert-important .gh-alert-title {
+        color: var(--accent2);
+      }
+      .gh-alert-warning {
+        background: rgba(180, 83, 9, 0.07);
+        border-color: #b45309;
+      }
+      .gh-alert-warning .gh-alert-title {
+        color: #b45309;
+      }
+      .gh-alert-caution {
+        background: rgba(220, 38, 38, 0.07);
+        border-color: #dc2626;
+      }
+      .gh-alert-caution .gh-alert-title {
+        color: #dc2626;
+      }
 
-/* Footnotes */
-.cite-ref{line-height:0;vertical-align:super;font-size:0.72em}
-.cite-ref a{font-family:var(--font-mono);color:var(--accent2);text-decoration:none;padding:0.05em 0.2em;border-radius:3px;border:1px solid var(--accent2-dim);background:var(--accent2-dim);font-size:1em}
+      /* Footnotes */
+      .cite-ref {
+        line-height: 0;
+        vertical-align: super;
+        font-size: 0.72em;
+      }
+      .cite-ref a {
+        font-family: var(--font-mono);
+        color: var(--accent2);
+        text-decoration: none;
+        padding: 0.05em 0.2em;
+        border-radius: 3px;
+        border: 1px solid var(--accent2-dim);
+        background: var(--accent2-dim);
+        font-size: 1em;
+      }
 
-/* ── TOC sidebar ─────────────────────────────────────────── */
-.toc-sidebar{display:none}
-@media(min-width:1100px){
-  .toc-sidebar{display:block;position:sticky;top:74px;max-height:calc(100vh - 90px);overflow-y:auto;border-left:1px solid var(--border);padding-left:1.4rem}
-}
-.toc-title{font-family:var(--font-label);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.9rem}
-.toc-list{list-style:none;display:flex;flex-direction:column;gap:0.2rem}
-.toc-item a{font-size:0.8rem;color:var(--muted);display:block;padding:0.2rem 0 0.2rem 0.7rem;border-left:2px solid transparent;line-height:1.4;transition:color var(--transition),border-color var(--transition)}
-.toc-item a:hover,.toc-item a.active{color:var(--accent);border-left-color:var(--accent)}
-.toc-item.h3 a{padding-left:1.4rem;font-size:0.76rem}
+      /* ── TOC sidebar ─────────────────────────────────────────── */
+      .toc-sidebar {
+        display: none;
+      }
+      @media (min-width: 1100px) {
+        .toc-sidebar {
+          display: block;
+          position: sticky;
+          top: 74px;
+          max-height: calc(100vh - 90px);
+          overflow-y: auto;
+          border-left: 1px solid var(--border);
+          padding-left: 1.4rem;
+        }
+      }
+      .toc-title {
+        font-family: var(--font-label);
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.9rem;
+      }
+      .toc-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .toc-item a {
+        font-size: 0.8rem;
+        color: var(--muted);
+        display: block;
+        padding: 0.2rem 0 0.2rem 0.7rem;
+        border-left: 2px solid transparent;
+        line-height: 1.4;
+        transition:
+          color var(--transition),
+          border-color var(--transition);
+      }
+      .toc-item a:hover,
+      .toc-item a.active {
+        color: var(--accent);
+        border-left-color: var(--accent);
+      }
+      .toc-item.h3 a {
+        padding-left: 1.4rem;
+        font-size: 0.76rem;
+      }
 
-/* ── Post nav cards ──────────────────────────────────────── */
-.post-nav{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)}
-.post-nav-label{font-family:var(--font-label);font-size:0.68rem;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:1.2rem}
-.post-nav-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.post-nav-card{display:flex;flex-direction:column;gap:0.4rem;padding:1.1rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;box-shadow:var(--shadow-sm);transition:box-shadow var(--transition),border-color var(--transition)}
-.post-nav-card:hover{box-shadow:var(--shadow-md);border-color:var(--accent)}
-.post-nav-meta{font-family:var(--font-label);font-size:0.66rem;color:var(--muted)}
-.post-nav-title{font-size:0.88rem;color:var(--text);font-weight:600;line-height:1.4}
+      /* ── Post nav cards ──────────────────────────────────────── */
+      .post-nav {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border);
+      }
+      .post-nav-label {
+        font-family: var(--font-label);
+        font-size: 0.68rem;
+        color: var(--muted);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin-bottom: 1.2rem;
+      }
+      .post-nav-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .post-nav-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        padding: 1.1rem 1.25rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        text-decoration: none;
+        box-shadow: var(--shadow-sm);
+        transition:
+          box-shadow var(--transition),
+          border-color var(--transition);
+      }
+      .post-nav-card:hover {
+        box-shadow: var(--shadow-md);
+        border-color: var(--accent);
+      }
+      .post-nav-meta {
+        font-family: var(--font-label);
+        font-size: 0.66rem;
+        color: var(--muted);
+      }
+      .post-nav-title {
+        font-size: 0.88rem;
+        color: var(--text);
+        font-weight: 600;
+        line-height: 1.4;
+      }
 
-/* ── Footer ──────────────────────────────────────────────── */
-.site-footer{border-top:1px solid var(--border);padding:1.5rem;text-align:center;font-family:var(--font-label);font-size:0.7rem;color:var(--muted)}
-.site-footer a{color:var(--muted)}
-.site-footer a:hover{color:var(--accent)}
-.footer-disclaimer{margin-top:0.5rem;font-size:0.63rem;opacity:0.6;line-height:1.5}
+      /* ── Footer ──────────────────────────────────────────────── */
+      .site-footer {
+        border-top: 1px solid var(--border);
+        padding: 1.5rem;
+        text-align: center;
+        font-family: var(--font-label);
+        font-size: 0.7rem;
+        color: var(--muted);
+      }
+      .site-footer a {
+        color: var(--muted);
+      }
+      .site-footer a:hover {
+        color: var(--accent);
+      }
+      .footer-disclaimer {
+        margin-top: 0.5rem;
+        font-size: 0.63rem;
+        opacity: 0.6;
+        line-height: 1.5;
+      }
 
-/* ── Preview-only: section band ─────────────────────────────── */
-.preview-band{background:var(--surface-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0.45rem 1.5rem;font-family:var(--font-label);font-size:0.62rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
-.preview-band span{color:var(--accent);margin-right:0.5em}
+      /* ── Preview-only: section band ─────────────────────────────── */
+      .preview-band {
+        background: var(--surface-2);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 0.45rem 1.5rem;
+        font-family: var(--font-label);
+        font-size: 0.62rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .preview-band span {
+        color: var(--accent);
+        margin-right: 0.5em;
+      }
 
-/* ── TL;DR ───────────────────────────────────────────────── */
-.tldr{margin:0 0 2rem;padding:1rem 1.4rem;background:var(--surface);border-left:4px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;box-shadow:var(--shadow-sm)}
-.tldr-label{font-family:var(--font-label);font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem}
-.tldr p{font-size:0.9rem;color:var(--muted);line-height:1.65;margin:0}
-</style>
-</head>
+      /* ── TL;DR ───────────────────────────────────────────────── */
+      .tldr {
+        margin: 0 0 2rem;
+        padding: 1rem 1.4rem;
+        background: var(--surface);
+        border-left: 4px solid var(--accent);
+        border-radius: 0 var(--radius) var(--radius) 0;
+        box-shadow: var(--shadow-sm);
+      }
+      .tldr-label {
+        font-family: var(--font-label);
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.4rem;
+      }
+      .tldr p {
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.65;
+        margin: 0;
+      }
+    </style>
+  </head>
 
-<body>
+  <body>
+    <!-- Reading progress bar (static for preview) -->
+    <div id="progress-bar"></div>
 
-<!-- Reading progress bar (static for preview) -->
-<div id="progress-bar"></div>
-
-<!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
      BAND 1 — HEADER
 ══════════════════════════════════════════════════════════════ -->
-<div class="preview-band"><span>▸</span> Section 1 of 3 — Site Header</div>
-
-<header class="site-header">
-  <div class="header-inner">
-    <a href="#" class="site-title">drift<span class="cursor">_</span></a>
-    <div class="header-actions">
-      <a href="#" class="nav-link active">posts</a>
-      <a href="#" class="nav-link">glossary</a>
-      <a href="#" class="nav-link">slides</a>
-      <a href="#" class="nav-link">about</a>
-      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
-        <span id="toggle-icon">🌙</span>
-      </button>
+    <div class="preview-band">
+      <span>▸</span>
+      Section 1 of 3 — Site Header
     </div>
-  </div>
-</header>
 
-
-<!-- ═══════════════════════════════════════════════════════════
-     BAND 2 — INDEX PAGE
-══════════════════════════════════════════════════════════════ -->
-<div class="preview-band" style="margin-top:2rem"><span>▸</span> Section 2 of 3 — Index / Post List</div>
-
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-content">
-    <div class="hero-eyebrow">AI · Finance · Model Risk</div>
-    <h1>Writing on <em>agentic systems</em><br>and the infrastructure beneath them.</h1>
-    <p class="hero-desc">Practitioner notes on GenAI evaluation, SR 26-2 model risk management, GUI agents, and the economics of AI-augmented work.</p>
-  </div>
-</section>
-
-<!-- Post list -->
-<section class="posts-section">
-  <div class="container">
-
-    <!-- Pinned intro card -->
-    <a href="#" class="intro-card">
-      <span class="intro-label">start here</span>
-      <span class="intro-title">Everything Drifts</span>
-      <span class="intro-desc">A practitioner's orientation to why AI systems drift — and why that matters for every governance framework that assumes they won't.</span>
-    </a>
-
-    <div class="post-list-a">
-
-      <div style="max-width:740px;margin:0 auto 0.25rem;display:flex;align-items:center;">
-        <span class="section-label">Published posts</span>
-      </div>
-
-      <!-- Series group -->
-      <div class="series-group">
-        <div class="series-header">
-          Adversarial Testing Series
-          <span class="series-count">3 posts</span>
-        </div>
-
-        <!-- Expanded row -->
-        <div class="row-a expanded" onclick="toggleRow(this)">
-          <span class="row-a-chevron">▶</span>
-          <span class="row-a-title">The Adversarial Workflow</span>
-          <div class="row-a-meta">
-            <span class="row-a-date">2026-05-02</span>
-            <div class="row-a-tags">
-              <span class="row-a-tag" style="color:#1a73e8;border-color:rgba(26,115,232,0.35)">adversarial</span>
-              <span class="row-a-tag" style="color:#1e8e3e;border-color:rgba(30,142,62,0.35)">evals</span>
-            </div>
-          </div>
-        </div>
-        <div class="row-a-expand open">
-          <p class="row-a-desc">Five-phase engagement model and a 10-class taxonomy mapped to OWASP LLM Top 10, OWASP ASI01–10, and MITRE ATLAS. Includes a Garak snippet for automated red-teaming.</p>
-          <a href="#" class="row-a-link">Read post →</a>
-        </div>
-
-        <div class="row-a" onclick="toggleRow(this)">
-          <span class="row-a-chevron">▶</span>
-          <span class="row-a-title">Deployment Gates for GenAI</span>
-          <div class="row-a-meta">
-            <span class="row-a-date">2026-05-11</span>
-            <div class="row-a-tags">
-              <span class="row-a-tag" style="color:#1a73e8;border-color:rgba(26,115,232,0.35)">adversarial</span>
-            </div>
-          </div>
-        </div>
-        <div class="row-a-expand">
-          <p class="row-a-desc">Three gates — capability, safety, robustness — with tier-specific ASR thresholds and PyRIT/Crescendo integration. Covers how to score the tests.</p>
-          <a href="#" class="row-a-link">Read post →</a>
-        </div>
-
-        <div class="row-a" onclick="toggleRow(this)">
-          <span class="row-a-chevron">▶</span>
-          <span class="row-a-title">The Adversarial Incompleteness Result</span>
-          <div class="row-a-meta">
-            <span class="row-a-date">2026-05-11</span>
-            <div class="row-a-tags">
-              <span class="row-a-tag" style="color:#1a73e8;border-color:rgba(26,115,232,0.35)">adversarial</span>
-              <span class="row-a-tag" style="color:#7c3aed;border-color:rgba(124,58,237,0.35)">math</span>
-            </div>
-          </div>
-        </div>
-        <div class="row-a-expand">
-          <p class="row-a-desc">Vassilev/NIST diagonalization result: the adversarial attack surface is countably infinite and no finite red-team can certify safety. What that means for continuous monitoring programs.</p>
-          <a href="#" class="row-a-link">Read post →</a>
-        </div>
-      </div><!-- /series-group -->
-
-      <!-- Standalone divider -->
-      <div class="standalone-divider">standalone posts</div>
-
-      <div class="row-a" onclick="toggleRow(this)">
-        <span class="row-a-chevron">▶</span>
-        <span class="row-a-title">Benchmark Uncertainty and What to Do About It</span>
-        <div class="row-a-meta">
-          <span class="row-a-date">2026-05-18</span>
-          <div class="row-a-tags">
-            <span class="row-a-tag" style="color:#1e8e3e;border-color:rgba(30,142,62,0.35)">evals</span>
-            <span class="row-a-tag" style="color:#b45309;border-color:rgba(180,83,9,0.35)">psychometrics</span>
-          </div>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="#" class="site-title">
+          drift
+          <span class="cursor">_</span>
+        </a>
+        <div class="header-actions">
+          <a href="#" class="nav-link active">posts</a>
+          <a href="#" class="nav-link">glossary</a>
+          <a href="#" class="nav-link">slides</a>
+          <a href="#" class="nav-link">about</a>
+          <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+            <span id="toggle-icon">🌙</span>
+          </button>
         </div>
       </div>
-      <div class="row-a-expand">
-        <p class="row-a-desc">NIST AI 800-3 benchmark accuracy vs. generalized accuracy as distinct estimands. GLMM with partial pooling, regression-free SE corrections, and the ICC diagnostic.</p>
-        <a href="#" class="row-a-link">Read post →</a>
-      </div>
-
-      <div class="row-a" onclick="toggleRow(this)">
-        <span class="row-a-chevron">▶</span>
-        <span class="row-a-title">Knowledge Collapse and the Economics of AI</span>
-        <div class="row-a-meta">
-          <span class="row-a-date">2026-05-16</span>
-          <div class="row-a-tags">
-            <span class="row-a-tag" style="color:#7c3aed;border-color:rgba(124,58,237,0.35)">economics</span>
-          </div>
-        </div>
-      </div>
-      <div class="row-a-expand">
-        <p class="row-a-desc">Acemoglu/Kong/Ozdaglar MIT working paper — welfare is non-monotone in AI accuracy. The garbling policy result: an inferior model can be the first-best choice.</p>
-        <a href="#" class="row-a-link">Read post →</a>
-      </div>
-
-    </div><!-- /post-list-a -->
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     BAND 3 — POST PAGE
-══════════════════════════════════════════════════════════════ -->
-<div class="preview-band" style="margin-top:1rem"><span>▸</span> Section 3 of 3 — Post Page</div>
-
-<div class="post-layout">
-  <div>
-    <a href="#" class="back-link">← All posts</a>
-
-    <header class="post-header">
-      <div class="post-eyebrow">
-        <span class="post-date">May 2, 2026</span>
-        <span class="post-read-time">14 min read</span>
-        <span class="row-a-tag" style="color:#1a73e8;border-color:rgba(26,115,232,0.35);font-family:var(--font-label);font-size:0.62rem;padding:0.18em 0.55em;border-radius:20px;border:1px solid">adversarial</span>
-        <span class="row-a-tag" style="color:#1e8e3e;border-color:rgba(30,142,62,0.35);font-family:var(--font-label);font-size:0.62rem;padding:0.18em 0.55em;border-radius:20px;border:1px solid">evals</span>
-      </div>
-      <h1 class="post-title">The Adversarial Workflow</h1>
-      <p class="post-description">A five-phase engagement model and 10-class taxonomy for systematic red-teaming of GenAI systems — mapped to OWASP, MITRE ATLAS, and the model risk vocabulary practitioners already use.</p>
     </header>
 
-    <article class="prose">
+    <!-- ═══════════════════════════════════════════════════════════
+     BAND 2 — INDEX PAGE
+══════════════════════════════════════════════════════════════ -->
+    <div class="preview-band" style="margin-top: 2rem">
+      <span>▸</span>
+      Section 2 of 3 — Index / Post List
+    </div>
 
-      <div class="tldr">
-        <div class="tldr-label">TL;DR</div>
-        <p>Red-teaming GenAI isn't a one-time exercise. This post proposes a repeatable five-phase workflow: scoping, capability audit, adversarial generation, scoring, and continuous monitoring — each with concrete tooling and a clear MRM artifact.</p>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-eyebrow">AI · Finance · Model Risk</div>
+        <h1>
+          Writing on
+          <em>agentic systems</em>
+          <br />
+          and the infrastructure beneath them.
+        </h1>
+        <p class="hero-desc">
+          Practitioner notes on GenAI evaluation, SR 26-2 model risk management, GUI agents, and the economics of
+          AI-augmented work.
+        </p>
       </div>
+    </section>
 
-      <p>There's a specific moment in a GenAI deployment when confidence tips into complacency. The model passed its pre-launch evaluation. The guardrails are in place. Someone has written "comprehensive testing" in the validation report. What that phrase usually means, if you pull it apart, is that the team ran a fixed test set before launch and hasn't run anything since.</p>
+    <!-- Post list -->
+    <section class="posts-section">
+      <div class="container">
+        <!-- Pinned intro card -->
+        <a href="#" class="intro-card">
+          <span class="intro-label">start here</span>
+          <span class="intro-title">Everything Drifts</span>
+          <span class="intro-desc">
+            A practitioner's orientation to why AI systems drift — and why that matters for every governance framework
+            that assumes they won't.
+          </span>
+        </a>
 
-      <p>The adversarial testing literature has known for years that static test sets are insufficient. The NIST incompleteness result formalizes what practitioners already suspected: the attack surface is countably infinite, and no finite red-team program can enumerate it.<span class="cite-ref"><a href="#">1</a></span> What follows is a description of how to make the program at least <em>useful</em>, even though it can never be complete.</p>
+        <div class="post-list-a">
+          <div style="max-width: 740px; margin: 0 auto 0.25rem; display: flex; align-items: center">
+            <span class="section-label">Published posts</span>
+          </div>
 
-      <h2>The Five Phases</h2>
+          <!-- Series group -->
+          <div class="series-group">
+            <div class="series-header">
+              Adversarial Testing Series
+              <span class="series-count">3 posts</span>
+            </div>
 
-      <p>A repeatable adversarial workflow has five phases. They're sequential at launch and then cycle continuously in production.</p>
+            <!-- Expanded row -->
+            <div class="row-a expanded" onclick="toggleRow(this)">
+              <span class="row-a-chevron">▶</span>
+              <span class="row-a-title">The Adversarial Workflow</span>
+              <div class="row-a-meta">
+                <span class="row-a-date">2026-05-02</span>
+                <div class="row-a-tags">
+                  <span class="row-a-tag" style="color: #1a73e8; border-color: rgba(26, 115, 232, 0.35)">
+                    adversarial
+                  </span>
+                  <span class="row-a-tag" style="color: #1e8e3e; border-color: rgba(30, 142, 62, 0.35)">evals</span>
+                </div>
+              </div>
+            </div>
+            <div class="row-a-expand open">
+              <p class="row-a-desc">
+                Five-phase engagement model and a 10-class taxonomy mapped to OWASP LLM Top 10, OWASP ASI01–10, and
+                MITRE ATLAS. Includes a Garak snippet for automated red-teaming.
+              </p>
+              <a href="#" class="row-a-link">Read post →</a>
+            </div>
 
-      <h3>Phase 1: Scope and Threat Modeling</h3>
+            <div class="row-a" onclick="toggleRow(this)">
+              <span class="row-a-chevron">▶</span>
+              <span class="row-a-title">Deployment Gates for GenAI</span>
+              <div class="row-a-meta">
+                <span class="row-a-date">2026-05-11</span>
+                <div class="row-a-tags">
+                  <span class="row-a-tag" style="color: #1a73e8; border-color: rgba(26, 115, 232, 0.35)">
+                    adversarial
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="row-a-expand">
+              <p class="row-a-desc">
+                Three gates — capability, safety, robustness — with tier-specific ASR thresholds and PyRIT/Crescendo
+                integration. Covers how to score the tests.
+              </p>
+              <a href="#" class="row-a-link">Read post →</a>
+            </div>
 
-      <p>Before writing a single test, you need a threat model. That means deciding which OWASP LLM categories are in scope for this deployment, which actor types are realistic, and what a successful attack would actually cost. The output is a one-page scoping document that becomes an MRM artifact.</p>
+            <div class="row-a" onclick="toggleRow(this)">
+              <span class="row-a-chevron">▶</span>
+              <span class="row-a-title">The Adversarial Incompleteness Result</span>
+              <div class="row-a-meta">
+                <span class="row-a-date">2026-05-11</span>
+                <div class="row-a-tags">
+                  <span class="row-a-tag" style="color: #1a73e8; border-color: rgba(26, 115, 232, 0.35)">
+                    adversarial
+                  </span>
+                  <span class="row-a-tag" style="color: #7c3aed; border-color: rgba(124, 58, 237, 0.35)">math</span>
+                </div>
+              </div>
+            </div>
+            <div class="row-a-expand">
+              <p class="row-a-desc">
+                Vassilev/NIST diagonalization result: the adversarial attack surface is countably infinite and no finite
+                red-team can certify safety. What that means for continuous monitoring programs.
+              </p>
+              <a href="#" class="row-a-link">Read post →</a>
+            </div>
+          </div>
+          <!-- /series-group -->
 
-      <!-- Code block (dark island) -->
-      <pre data-lang="python"><code><span class="cm"># Phase 1: Initialize threat model scope</span>
+          <!-- Standalone divider -->
+          <div class="standalone-divider">standalone posts</div>
+
+          <div class="row-a" onclick="toggleRow(this)">
+            <span class="row-a-chevron">▶</span>
+            <span class="row-a-title">Benchmark Uncertainty and What to Do About It</span>
+            <div class="row-a-meta">
+              <span class="row-a-date">2026-05-18</span>
+              <div class="row-a-tags">
+                <span class="row-a-tag" style="color: #1e8e3e; border-color: rgba(30, 142, 62, 0.35)">evals</span>
+                <span class="row-a-tag" style="color: #b45309; border-color: rgba(180, 83, 9, 0.35)">
+                  psychometrics
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row-a-expand">
+            <p class="row-a-desc">
+              NIST AI 800-3 benchmark accuracy vs. generalized accuracy as distinct estimands. GLMM with partial
+              pooling, regression-free SE corrections, and the ICC diagnostic.
+            </p>
+            <a href="#" class="row-a-link">Read post →</a>
+          </div>
+
+          <div class="row-a" onclick="toggleRow(this)">
+            <span class="row-a-chevron">▶</span>
+            <span class="row-a-title">Knowledge Collapse and the Economics of AI</span>
+            <div class="row-a-meta">
+              <span class="row-a-date">2026-05-16</span>
+              <div class="row-a-tags">
+                <span class="row-a-tag" style="color: #7c3aed; border-color: rgba(124, 58, 237, 0.35)">economics</span>
+              </div>
+            </div>
+          </div>
+          <div class="row-a-expand">
+            <p class="row-a-desc">
+              Acemoglu/Kong/Ozdaglar MIT working paper — welfare is non-monotone in AI accuracy. The garbling policy
+              result: an inferior model can be the first-best choice.
+            </p>
+            <a href="#" class="row-a-link">Read post →</a>
+          </div>
+        </div>
+        <!-- /post-list-a -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     BAND 3 — POST PAGE
+══════════════════════════════════════════════════════════════ -->
+    <div class="preview-band" style="margin-top: 1rem">
+      <span>▸</span>
+      Section 3 of 3 — Post Page
+    </div>
+
+    <div class="post-layout">
+      <div>
+        <a href="#" class="back-link">← All posts</a>
+
+        <header class="post-header">
+          <div class="post-eyebrow">
+            <span class="post-date">May 2, 2026</span>
+            <span class="post-read-time">14 min read</span>
+            <span
+              class="row-a-tag"
+              style="
+                color: #1a73e8;
+                border-color: rgba(26, 115, 232, 0.35);
+                font-family: var(--font-label);
+                font-size: 0.62rem;
+                padding: 0.18em 0.55em;
+                border-radius: 20px;
+                border: 1px solid;
+              "
+            >
+              adversarial
+            </span>
+            <span
+              class="row-a-tag"
+              style="
+                color: #1e8e3e;
+                border-color: rgba(30, 142, 62, 0.35);
+                font-family: var(--font-label);
+                font-size: 0.62rem;
+                padding: 0.18em 0.55em;
+                border-radius: 20px;
+                border: 1px solid;
+              "
+            >
+              evals
+            </span>
+          </div>
+          <h1 class="post-title">The Adversarial Workflow</h1>
+          <p class="post-description">
+            A five-phase engagement model and 10-class taxonomy for systematic red-teaming of GenAI systems — mapped to
+            OWASP, MITRE ATLAS, and the model risk vocabulary practitioners already use.
+          </p>
+        </header>
+
+        <article class="prose">
+          <div class="tldr">
+            <div class="tldr-label">TL;DR</div>
+            <p>
+              Red-teaming GenAI isn't a one-time exercise. This post proposes a repeatable five-phase workflow: scoping,
+              capability audit, adversarial generation, scoring, and continuous monitoring — each with concrete tooling
+              and a clear MRM artifact.
+            </p>
+          </div>
+
+          <p>
+            There's a specific moment in a GenAI deployment when confidence tips into complacency. The model passed its
+            pre-launch evaluation. The guardrails are in place. Someone has written "comprehensive testing" in the
+            validation report. What that phrase usually means, if you pull it apart, is that the team ran a fixed test
+            set before launch and hasn't run anything since.
+          </p>
+
+          <p>
+            The adversarial testing literature has known for years that static test sets are insufficient. The NIST
+            incompleteness result formalizes what practitioners already suspected: the attack surface is countably
+            infinite, and no finite red-team program can enumerate it.
+            <span class="cite-ref"><a href="#">1</a></span>
+            What follows is a description of how to make the program at least
+            <em>useful</em>
+            , even though it can never be complete.
+          </p>
+
+          <h2>The Five Phases</h2>
+
+          <p>
+            A repeatable adversarial workflow has five phases. They're sequential at launch and then cycle continuously
+            in production.
+          </p>
+
+          <h3>Phase 1: Scope and Threat Modeling</h3>
+
+          <p>
+            Before writing a single test, you need a threat model. That means deciding which OWASP LLM categories are in
+            scope for this deployment, which actor types are realistic, and what a successful attack would actually
+            cost. The output is a one-page scoping document that becomes an MRM artifact.
+          </p>
+
+          <!-- Code block (dark island) -->
+          <pre data-lang="python"><code><span class="cm"># Phase 1: Initialize threat model scope</span>
 <span class="kw">from</span> garak <span class="kw">import</span> harness, probes, generators
 
 <span class="cm"># Define target system and actor profile</span>
@@ -441,141 +1231,169 @@ h = harness.Harness(
     probes=probes.from_owasp(scope[<span class="str">"owasp_in_scope"</span>]),
 )</code></pre>
 
-      <!-- Alert callouts -->
-      <div class="gh-alert gh-alert-important">
-        <div class="gh-alert-title">⚠ Important</div>
-        <p>SR 26-2 (April 2026) explicitly excludes GenAI and agentic AI from its model risk management scope (footnote 3). Adversarial testing programs for these systems currently operate in a regulatory gap — design them to the spirit of SR 26-2 principles, not the letter.</p>
+          <!-- Alert callouts -->
+          <div class="gh-alert gh-alert-important">
+            <div class="gh-alert-title">⚠ Important</div>
+            <p>
+              SR 26-2 (April 2026) explicitly excludes GenAI and agentic AI from its model risk management scope
+              (footnote 3). Adversarial testing programs for these systems currently operate in a regulatory gap —
+              design them to the spirit of SR 26-2 principles, not the letter.
+            </p>
+          </div>
+
+          <h2>Taxonomy: 10 Attack Classes</h2>
+
+          <p>
+            The taxonomy maps across three frameworks that practitioners encounter in different contexts: OWASP LLM Top
+            10 for practitioner vocabulary, OWASP ASI01–10 for agentic-specific coverage, and MITRE ATLAS for enterprise
+            threat intelligence.
+            <span class="cite-ref"><a href="#">2</a></span>
+          </p>
+
+          <!-- Table -->
+          <div class="table-scroll-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Class</th>
+                  <th>OWASP LLM</th>
+                  <th>OWASP ASI</th>
+                  <th>MITRE ATLAS</th>
+                  <th>Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>prompt-injection</code></td>
+                  <td>LLM01</td>
+                  <td>ASI01</td>
+                  <td>AML.T0051</td>
+                  <td>System-prompt override via user turn</td>
+                </tr>
+                <tr>
+                  <td><code>jailbreak</code></td>
+                  <td>LLM01</td>
+                  <td>—</td>
+                  <td>AML.T0054</td>
+                  <td>Role-play bypass of content filters</td>
+                </tr>
+                <tr>
+                  <td><code>data-exfil</code></td>
+                  <td>LLM02</td>
+                  <td>ASI03</td>
+                  <td>AML.T0037</td>
+                  <td>PII extraction via indirect prompting</td>
+                </tr>
+                <tr>
+                  <td><code>supply-chain</code></td>
+                  <td>LLM03</td>
+                  <td>ASI06</td>
+                  <td>AML.T0010</td>
+                  <td>Malicious MCP plugin injection</td>
+                </tr>
+                <tr>
+                  <td><code>xpia</code></td>
+                  <td>—</td>
+                  <td>ASI02</td>
+                  <td>AML.T0051.002</td>
+                  <td>Cross-agent prompt injection via A2A</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="gh-alert gh-alert-tip">
+            <div class="gh-alert-title">✓ Tip</div>
+            <p>
+              Start with the two classes most likely to produce a reputational or regulatory event for your specific
+              deployment. For a loan officer assistant, that's almost always
+              <code>prompt-injection</code>
+              and
+              <code>data-exfil</code>
+              .
+            </p>
+          </div>
+
+          <div class="gh-alert gh-alert-warning">
+            <div class="gh-alert-title">⚡ Warning</div>
+            <p>
+              Garak's default probe families include datasets that may generate genuinely harmful content during
+              execution. Run in an isolated environment and ensure all generated content is reviewed before being logged
+              to any system of record.
+            </p>
+          </div>
+        </article>
+        <!-- /prose -->
+
+        <!-- Post navigation -->
+        <nav class="post-nav">
+          <div class="post-nav-label">Continue reading</div>
+          <div class="post-nav-cards">
+            <a href="#" class="post-nav-card">
+              <span class="post-nav-meta">← Previous</span>
+              <span class="post-nav-title">Guardrails Are Not a Control</span>
+            </a>
+            <a href="#" class="post-nav-card">
+              <span class="post-nav-meta">Next →</span>
+              <span class="post-nav-title">Deployment Gates for GenAI Systems</span>
+            </a>
+          </div>
+        </nav>
       </div>
+      <!-- /article col -->
 
-      <h2>Taxonomy: 10 Attack Classes</h2>
+      <!-- TOC sidebar -->
+      <aside class="toc-sidebar">
+        <div class="toc-title">On this page</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#" class="active">The Five Phases</a></li>
+          <li class="toc-item h3"><a href="#">Phase 1: Scope and Threat Modeling</a></li>
+          <li class="toc-item"><a href="#">Taxonomy: 10 Attack Classes</a></li>
+          <li class="toc-item"><a href="#">Scoring and Thresholds</a></li>
+          <li class="toc-item"><a href="#">Continuous Monitoring</a></li>
+          <li class="toc-item"><a href="#">MRM Artifacts</a></li>
+        </ul>
+      </aside>
+    </div>
+    <!-- /post-layout -->
 
-      <p>The taxonomy maps across three frameworks that practitioners encounter in different contexts: OWASP LLM Top 10 for practitioner vocabulary, OWASP ASI01–10 for agentic-specific coverage, and MITRE ATLAS for enterprise threat intelligence.<span class="cite-ref"><a href="#">2</a></span></p>
-
-      <!-- Table -->
-      <div class="table-scroll-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Class</th>
-              <th>OWASP LLM</th>
-              <th>OWASP ASI</th>
-              <th>MITRE ATLAS</th>
-              <th>Example</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>prompt-injection</code></td>
-              <td>LLM01</td>
-              <td>ASI01</td>
-              <td>AML.T0051</td>
-              <td>System-prompt override via user turn</td>
-            </tr>
-            <tr>
-              <td><code>jailbreak</code></td>
-              <td>LLM01</td>
-              <td>—</td>
-              <td>AML.T0054</td>
-              <td>Role-play bypass of content filters</td>
-            </tr>
-            <tr>
-              <td><code>data-exfil</code></td>
-              <td>LLM02</td>
-              <td>ASI03</td>
-              <td>AML.T0037</td>
-              <td>PII extraction via indirect prompting</td>
-            </tr>
-            <tr>
-              <td><code>supply-chain</code></td>
-              <td>LLM03</td>
-              <td>ASI06</td>
-              <td>AML.T0010</td>
-              <td>Malicious MCP plugin injection</td>
-            </tr>
-            <tr>
-              <td><code>xpia</code></td>
-              <td>—</td>
-              <td>ASI02</td>
-              <td>AML.T0051.002</td>
-              <td>Cross-agent prompt injection via A2A</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="gh-alert gh-alert-tip">
-        <div class="gh-alert-title">✓ Tip</div>
-        <p>Start with the two classes most likely to produce a reputational or regulatory event for your specific deployment. For a loan officer assistant, that's almost always <code>prompt-injection</code> and <code>data-exfil</code>.</p>
-      </div>
-
-      <div class="gh-alert gh-alert-warning">
-        <div class="gh-alert-title">⚡ Warning</div>
-        <p>Garak's default probe families include datasets that may generate genuinely harmful content during execution. Run in an isolated environment and ensure all generated content is reviewed before being logged to any system of record.</p>
-      </div>
-
-    </article><!-- /prose -->
-
-    <!-- Post navigation -->
-    <nav class="post-nav">
-      <div class="post-nav-label">Continue reading</div>
-      <div class="post-nav-cards">
-        <a href="#" class="post-nav-card">
-          <span class="post-nav-meta">← Previous</span>
-          <span class="post-nav-title">Guardrails Are Not a Control</span>
-        </a>
-        <a href="#" class="post-nav-card">
-          <span class="post-nav-meta">Next →</span>
-          <span class="post-nav-title">Deployment Gates for GenAI Systems</span>
-        </a>
-      </div>
-    </nav>
-  </div><!-- /article col -->
-
-  <!-- TOC sidebar -->
-  <aside class="toc-sidebar">
-    <div class="toc-title">On this page</div>
-    <ul class="toc-list">
-      <li class="toc-item"><a href="#" class="active">The Five Phases</a></li>
-      <li class="toc-item h3"><a href="#">Phase 1: Scope and Threat Modeling</a></li>
-      <li class="toc-item"><a href="#">Taxonomy: 10 Attack Classes</a></li>
-      <li class="toc-item"><a href="#">Scoring and Thresholds</a></li>
-      <li class="toc-item"><a href="#">Continuous Monitoring</a></li>
-      <li class="toc-item"><a href="#">MRM Artifacts</a></li>
-    </ul>
-  </aside>
-</div><!-- /post-layout -->
-
-
-<!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
      FOOTER
 ══════════════════════════════════════════════════════════════ -->
-<footer class="site-footer">
-  <div>drift · notes on agentic systems and model risk · <a href="#">rss</a> · <a href="#">github</a></div>
-  <div class="footer-disclaimer">Views expressed are my own and do not represent my employer. Not legal or financial advice.</div>
-</footer>
+    <footer class="site-footer">
+      <div>
+        drift · notes on agentic systems and model risk ·
+        <a href="#">rss</a>
+        ·
+        <a href="#">github</a>
+      </div>
+      <div class="footer-disclaimer">
+        Views expressed are my own and do not represent my employer. Not legal or financial advice.
+      </div>
+    </footer>
 
-<script>
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') === 'dark';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  document.getElementById('toggle-icon').textContent = isDark ? '🌙' : '☀️';
-}
+    <script>
+      function toggleTheme() {
+        const html = document.documentElement;
+        const isDark = html.getAttribute("data-theme") === "dark";
+        html.setAttribute("data-theme", isDark ? "light" : "dark");
+        document.getElementById("toggle-icon").textContent = isDark ? "🌙" : "☀️";
+      }
 
-function toggleRow(el) {
-  const wasExpanded = el.classList.contains('expanded');
-  // Collapse all rows in same parent
-  el.parentElement.querySelectorAll('.row-a').forEach(r => {
-    r.classList.remove('expanded');
-    const exp = r.nextElementSibling;
-    if (exp && exp.classList.contains('row-a-expand')) exp.classList.remove('open');
-  });
-  if (!wasExpanded) {
-    el.classList.add('expanded');
-    const exp = el.nextElementSibling;
-    if (exp && exp.classList.contains('row-a-expand')) exp.classList.add('open');
-  }
-}
-</script>
-</body>
+      function toggleRow(el) {
+        const wasExpanded = el.classList.contains("expanded");
+        // Collapse all rows in same parent
+        el.parentElement.querySelectorAll(".row-a").forEach((r) => {
+          r.classList.remove("expanded");
+          const exp = r.nextElementSibling;
+          if (exp && exp.classList.contains("row-a-expand")) exp.classList.remove("open");
+        });
+        if (!wasExpanded) {
+          el.classList.add("expanded");
+          const exp = el.nextElementSibling;
+          if (exp && exp.classList.contains("row-a-expand")) exp.classList.add("open");
+        }
+      }
+    </script>
+  </body>
 </html>

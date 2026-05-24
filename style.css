@@ -8,130 +8,127 @@
 
 /* ── CSS Custom Properties (dark mode default) ───────────── */
 :root {
-
   /* ── Surfaces ── */
-  --bg:            #ffffff;
-  --surface:       #f8f9fa;
-  --surface-2:     #f1f3f4;
-  --border:        #e8eaed;
+  --bg: #ffffff;
+  --surface: #f8f9fa;
+  --surface-2: #f1f3f4;
+  --border: #e8eaed;
   --border-strong: #dadce0;
-  --text:          #202124;
-  --muted:         #5f6368;
+  --text: #202124;
+  --muted: #5f6368;
 
   /* ── Brand accent ── */
-  --accent:        #1a73e8;
-  --accent-rgb:    26, 115, 232;
-  --accent-dim:    rgba(26, 115, 232, 0.1);
-  --accent-glow:   rgba(26, 115, 232, 0.22);
-  --accent-hover:  #1768d1;
+  --accent: #1a73e8;
+  --accent-rgb: 26, 115, 232;
+  --accent-dim: rgba(26, 115, 232, 0.1);
+  --accent-glow: rgba(26, 115, 232, 0.22);
+  --accent-hover: #1768d1;
 
   /* ── Secondary accent (citations, h3, IMPORTANT) ── */
-  --accent2:       #7c3aed;
-  --accent2-rgb:   124, 58, 237;
-  --accent2-dim:   rgba(124, 58, 237, 0.1);
+  --accent2: #7c3aed;
+  --accent2-rgb: 124, 58, 237;
+  --accent2-dim: rgba(124, 58, 237, 0.1);
 
   /* ── Code ── */
-  --code-bg:       #f6f8fa;
-  --code-text:     #24292e;
+  --code-bg: #f6f8fa;
+  --code-text: #24292e;
 
   /* ── Shadows ── */
-  --shadow-sm:     0 1px 3px rgba(60,64,67,0.12), 0 1px 2px rgba(60,64,67,0.07);
-  --shadow-md:     0 2px 8px rgba(60,64,67,0.12), 0 1px 4px rgba(60,64,67,0.07);
-  --shadow-lg:     0 4px 20px rgba(60,64,67,0.12), 0 2px 8px rgba(60,64,67,0.07);
+  --shadow-sm: 0 1px 3px rgba(60, 64, 67, 0.12), 0 1px 2px rgba(60, 64, 67, 0.07);
+  --shadow-md: 0 2px 8px rgba(60, 64, 67, 0.12), 0 1px 4px rgba(60, 64, 67, 0.07);
+  --shadow-lg: 0 4px 20px rgba(60, 64, 67, 0.12), 0 2px 8px rgba(60, 64, 67, 0.07);
 
   /* ── Typography ── */
-  --font-sans:     'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
-  --font-label:    'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-label: "JetBrains Mono", "Fira Code", monospace;
 
   /* ── Geometry ── */
-  --radius:        8px;
-  --transition:    0.2s ease;
+  --radius: 8px;
+  --transition: 0.2s ease;
 }
 
 /* ── Light Mode ──────────────────────────────────────────── */
 [data-theme="light"] {
-
   /* ── Surfaces ── */
-  --bg:            #ffffff;
-  --surface:       #f8f9fa;
-  --surface-2:     #f1f3f4;
-  --border:        #e8eaed;
+  --bg: #ffffff;
+  --surface: #f8f9fa;
+  --surface-2: #f1f3f4;
+  --border: #e8eaed;
   --border-strong: #dadce0;
-  --text:          #202124;
-  --muted:         #5f6368;
+  --text: #202124;
+  --muted: #5f6368;
 
   /* ── Brand accent ── */
-  --accent:        #1a73e8;
-  --accent-rgb:    26, 115, 232;
-  --accent-dim:    rgba(26, 115, 232, 0.1);
-  --accent-glow:   rgba(26, 115, 232, 0.22);
-  --accent-hover:  #1768d1;
+  --accent: #1a73e8;
+  --accent-rgb: 26, 115, 232;
+  --accent-dim: rgba(26, 115, 232, 0.1);
+  --accent-glow: rgba(26, 115, 232, 0.22);
+  --accent-hover: #1768d1;
 
   /* ── Secondary accent (citations, h3, IMPORTANT) ── */
-  --accent2:       #7c3aed;
-  --accent2-rgb:   124, 58, 237;
-  --accent2-dim:   rgba(124, 58, 237, 0.1);
+  --accent2: #7c3aed;
+  --accent2-rgb: 124, 58, 237;
+  --accent2-dim: rgba(124, 58, 237, 0.1);
 
   /* ── Code ── */
-  --code-bg:       #f6f8fa;
-  --code-text:     #24292e;
+  --code-bg: #f6f8fa;
+  --code-text: #24292e;
 
   /* ── Shadows ── */
-  --shadow-sm:     0 1px 3px rgba(60,64,67,0.12), 0 1px 2px rgba(60,64,67,0.07);
-  --shadow-md:     0 2px 8px rgba(60,64,67,0.12), 0 1px 4px rgba(60,64,67,0.07);
-  --shadow-lg:     0 4px 20px rgba(60,64,67,0.12), 0 2px 8px rgba(60,64,67,0.07);
+  --shadow-sm: 0 1px 3px rgba(60, 64, 67, 0.12), 0 1px 2px rgba(60, 64, 67, 0.07);
+  --shadow-md: 0 2px 8px rgba(60, 64, 67, 0.12), 0 1px 4px rgba(60, 64, 67, 0.07);
+  --shadow-lg: 0 4px 20px rgba(60, 64, 67, 0.12), 0 2px 8px rgba(60, 64, 67, 0.07);
 
   /* ── Typography ── */
-  --font-sans:     'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
-  --font-label:    'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-label: "JetBrains Mono", "Fira Code", monospace;
 
   /* ── Geometry ── */
-  --radius:        8px;
-  --transition:    0.2s ease;
+  --radius: 8px;
+  --transition: 0.2s ease;
 }
 
 [data-theme="dark"] {
-
   /* ── Surfaces ── */
-  --bg:            #1c2128;
-  --surface:       #22272e;
-  --surface-2:     #2d333b;
-  --border:        #373e47;
+  --bg: #1c2128;
+  --surface: #22272e;
+  --surface-2: #2d333b;
+  --border: #373e47;
   --border-strong: #444c56;
-  --text:          #cdd9e5;
-  --muted:         #768390;
+  --text: #cdd9e5;
+  --muted: #768390;
 
   /* ── Brand accent ── */
-  --accent:        #1a73e8;
-  --accent-rgb:    26, 115, 232;
-  --accent-dim:    rgba(26, 115, 232, 0.1);
-  --accent-glow:   rgba(26, 115, 232, 0.22);
-  --accent-hover:  #1768d1;
+  --accent: #1a73e8;
+  --accent-rgb: 26, 115, 232;
+  --accent-dim: rgba(26, 115, 232, 0.1);
+  --accent-glow: rgba(26, 115, 232, 0.22);
+  --accent-hover: #1768d1;
 
   /* ── Secondary accent (citations, h3, IMPORTANT) ── */
-  --accent2:       #7c3aed;
-  --accent2-rgb:   124, 58, 237;
-  --accent2-dim:   rgba(124, 58, 237, 0.1);
+  --accent2: #7c3aed;
+  --accent2-rgb: 124, 58, 237;
+  --accent2-dim: rgba(124, 58, 237, 0.1);
 
   /* ── Code ── */
-  --code-bg:       #161b22;
-  --code-text:     #e6edf3;
+  --code-bg: #161b22;
+  --code-text: #e6edf3;
 
   /* ── Shadows ── */
-  --shadow-sm:     0 1px 3px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.25);
-  --shadow-md:     0 2px 8px rgba(0,0,0,0.35), 0 1px 4px rgba(0,0,0,0.25);
-  --shadow-lg:     0 4px 20px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.25);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.35), 0 1px 4px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.25);
 
   /* ── Typography ── */
-  --font-sans:     'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
-  --font-label:    'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-label: "JetBrains Mono", "Fira Code", monospace;
 
   /* ── Geometry ── */
-  --radius:        8px;
-  --transition:    0.2s ease;
+  --radius: 8px;
+  --transition: 0.2s ease;
 }
 
 /* ── Reset & Base ────────────────────────────────────────── */
