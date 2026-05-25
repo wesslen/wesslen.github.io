@@ -52,6 +52,19 @@
     "date": "2026-05-18"
   },
   {
+    "id": "bainbridge-debt",
+    "title": "Bainbridge's Debt",
+    "description": "Forty years of HCI and human-factors research has named, empirically documented, and partially solved banking's human-automation failure modes. Banking keeps ignoring it.",
+    "dir": "slides/bainbridge-debt",
+    "posts": [
+      "bainbridge-ironies",
+      "automation-bias-banking",
+      "hci-translation"
+    ],
+    "published": false,
+    "date": null
+  },
+  {
     "id": "evaluations",
     "title": "The Eval Gap",
     "description": "Measurement theory, NIST benchmark frameworks, psychometrics, and why most LLM eval pipelines report the wrong uncertainty estimate.",
@@ -67,7 +80,7 @@
   {
     "id": "adversarial-testing",
     "title": "Adversarial Testing",
-    "description": "Five-phase red-teaming, three deployment gates, and why adversarial completeness is provably unachievable — and why you still need the program.",
+    "description": "Five-phase red-teaming, three deployment gates, and why adversarial completeness is provably unachievable \u2014 and why you still need the program.",
     "dir": "slides/adversarial-testing",
     "posts": [
       "adversarial-workflow",
@@ -93,7 +106,7 @@
   {
     "id": "ai-economy",
     "title": "Economics of AI",
-    "description": "Comparative advantage models, token transfer pricing, and knowledge collapse — the macro and institutional economics of AI adoption.",
+    "description": "Comparative advantage models, token transfer pricing, and knowledge collapse \u2014 the macro and institutional economics of AI adoption.",
     "dir": "slides/ai-economy",
     "posts": [
       "ai-econ-model",
