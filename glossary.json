@@ -205,7 +205,8 @@
     "aliases": [],
     "used_in": [
       "hitl-vocabulary",
-      "hitl-design"
+      "hitl-design",
+      "bainbridge-ironies"
     ]
   },
   {
@@ -705,6 +706,24 @@
     ]
   },
   {
+    "id": "red-team-engagement",
+    "term": "engagement",
+    "full": "red-team engagement",
+    "short": "A bounded, structured adversarial testing exercise with defined scope, phases, and deliverables. Security-industry term; MRM practitioners often call the same activity a red-team exercise or adversarial review.",
+    "definition": "In security consulting, an engagement is a scoped, time-boxed project — analogous to an audit or model validation cycle — in which a team systematically attempts to break a system within agreed rules of engagement. Applied to LLMs, a red-team engagement typically traverses five phases: scope and threat modeling, attack execution, triage, reporting, and retest. Each phase produces artifacts (architecture diagrams, findings logs, ASR dashboards, residual-risk statements) that map directly onto model risk documentation requirements. The term originates in penetration testing practice; model risk and validation teams more familiar with SR 11-7 vocabulary may prefer red-team exercise or adversarial review — these are functionally equivalent.",
+    "domain": "security",
+    "aliases": [
+      "red-team engagement",
+      "red-team exercise",
+      "adversarial review",
+      "adversarial testing engagement"
+    ],
+    "used_in": [
+      "adversarial-workflow",
+      "deployment-gates"
+    ]
+  },
+  {
     "id": "eu-ai-act",
     "term": "EU AI Act",
     "full": "EU Artificial Intelligence Act",
@@ -1122,6 +1141,37 @@
     ]
   },
   {
+    "id": "hcai",
+    "term": "HCAI",
+    "full": "Human-Centered AI",
+    "short": "Design philosophy arguing that AI systems should augment human capability and accountability rather than automate them away — high automation and high human control are not in tension.",
+    "definition": "Human-Centered AI (HCAI) is a design philosophy and research framework advanced most prominently by Ben Shneiderman (University of Maryland), often credited as a founding figure of human interface design. HCAI rejects the assumption that high automation and high human control are in tension: Shneiderman's framework proposes that well-designed AI systems can simultaneously offer extensive automation and genuine human oversight — and that designing for one at the expense of the other produces inferior outcomes on both dimensions. His 2022 book Human-Centered AI and the underlying ACM paper (2020) provide the most developed academic statement of the position. In financial services, HCAI provides the research framing for what regulators describe informally as 'effective challenge,' 'human oversight,' and HITL requirements — with the added contribution of empirical findings on how specific design choices determine whether those oversight mechanisms are genuine or performative.",
+    "domain": "ai",
+    "aliases": [
+      "Human-Centered AI",
+      "human-centered AI",
+      "human centered AI"
+    ],
+    "used_in": [
+      "bainbridge-ironies"
+    ]
+  },
+  {
+    "id": "hci",
+    "term": "HCI",
+    "full": "Human-Computer Interaction",
+    "short": "Academic discipline studying how people interact with automated and computer systems — covering not just interface design but the cognitive, behavioral, and organizational consequences of automation on human performance.",
+    "definition": "Human-Computer Interaction (HCI) is an academic discipline at the intersection of computer science, cognitive psychology, and design. Its scope extends well beyond interface aesthetics: HCI research produces empirical findings on how system design choices affect when humans override machines effectively, when they defer badly, and when automation degrades the skills needed for meaningful oversight. Primary venues include ACM CHI (the Conference on Human Factors in Computing Systems) and journals including Human Factors and the International Journal of Human-Computer Studies. The HCI literature on automation bias, skill atrophy, and supervisory control is directly applicable to agentic AI governance in financial services — but largely absent from US banking supervisory guidance, which draws instead on risk-management vocabulary (effective challenge, independent validation) rather than human-factors engineering.",
+    "domain": "ai",
+    "aliases": [
+      "Human-Computer Interaction",
+      "human-computer interaction"
+    ],
+    "used_in": [
+      "bainbridge-ironies"
+    ]
+  },
+  {
     "id": "hic",
     "term": "HIC",
     "full": "Human-in-Command",
@@ -1196,6 +1246,22 @@
     "used_in": [
       "hitl-vocabulary",
       "hitl-design"
+    ]
+  },
+  {
+    "id": "human-factors",
+    "term": "Human Factors",
+    "full": "Human Factors",
+    "short": "Engineering and research discipline concerned with human performance under operational conditions — including how system design affects cognition, workload, error rates, and the breakdown of oversight at automation failure points.",
+    "definition": "Human Factors (also called ergonomics or human factors engineering) is a scientific discipline concerned with understanding human performance in operational contexts and designing systems that account for human capabilities and limitations. Where HCI focuses primarily on the human-computer interface, Human Factors encompasses the broader cognitive, physical, and organizational conditions under which humans operate automated systems — including vigilance maintenance, skill degradation, workload saturation, and the conditions that produce systematic errors. The field's foundational work includes Sheridan and Verplank's 1978 supervisory control taxonomy, Mosier and Skitka's automation bias research (1996), and Bainbridge's Ironies of Automation (1983). Human Factors findings on when human oversight of automated systems succeeds or fails are directly applicable to model validation, HITL checkpoint design, and agentic AI governance — fields that have developed parallel vocabulary (effective challenge, independent validation) without engaging the underlying empirical literature.",
+    "domain": "ai",
+    "aliases": [
+      "human factors engineering",
+      "ergonomics",
+      "Human Factors Engineering"
+    ],
+    "used_in": [
+      "bainbridge-ironies"
     ]
   },
   {
@@ -1275,7 +1341,8 @@
     ],
     "used_in": [
       "hitl-vocabulary",
-      "hitl-design"
+      "hitl-design",
+      "bainbridge-ironies"
     ]
   },
   {
@@ -1674,22 +1741,6 @@
     ]
   },
   {
-    "id": "nhi",
-    "term": "non-human identity",
-    "full": "Non-human identity",
-    "short": "Service accounts, API keys, bots, and AI agents that authenticate to systems — a vastly over-permissioned credential class.",
-    "definition": "Non-human identities (NHIs) are the credentials used by automated systems — service accounts, API keys, CI/CD tokens, bots, and AI agents — to authenticate to and take actions within IT environments. Entro Security's 2025 State of Non-Human Identities report found that 97% of NHIs carry excessive privileges. AI agents are a rapidly growing NHI category: they operate at machine speed, initiate hundreds of actions within a single authenticated session, and may access sensitive data across multiple systems without intermediate human authentication. The NIST NCCoE concept paper on agent identity and authorization specifically addresses how to establish least privilege for agents whose required actions cannot be fully predicted at deployment time.",
-    "domain": "security",
-    "aliases": [
-      "NHI",
-      "non-human identities",
-      "non-human principals"
-    ],
-    "used_in": [
-      "a2a-risks"
-    ]
-  },
-  {
     "id": "nist",
     "term": "NIST",
     "full": "National Institute of Standards and Technology",
@@ -1738,6 +1789,22 @@
     "used_in": [
       "sr11-7",
       "context"
+    ]
+  },
+  {
+    "id": "nhi",
+    "term": "non-human identity",
+    "full": "Non-human identity",
+    "short": "Service accounts, API keys, bots, and AI agents that authenticate to systems — a vastly over-permissioned credential class.",
+    "definition": "Non-human identities (NHIs) are the credentials used by automated systems — service accounts, API keys, CI/CD tokens, bots, and AI agents — to authenticate to and take actions within IT environments. Entro Security's 2025 State of Non-Human Identities report found that 97% of NHIs carry excessive privileges. AI agents are a rapidly growing NHI category: they operate at machine speed, initiate hundreds of actions within a single authenticated session, and may access sensitive data across multiple systems without intermediate human authentication. The NIST NCCoE concept paper on agent identity and authorization specifically addresses how to establish least privilege for agents whose required actions cannot be fully predicted at deployment time.",
+    "domain": "security",
+    "aliases": [
+      "NHI",
+      "non-human identities",
+      "non-human principals"
+    ],
+    "used_in": [
+      "a2a-risks"
     ]
   },
   {
@@ -2131,24 +2198,6 @@
     ]
   },
   {
-    "id": "red-team-engagement",
-    "term": "engagement",
-    "full": "red-team engagement",
-    "short": "A bounded, structured adversarial testing exercise with defined scope, phases, and deliverables. Security-industry term; MRM practitioners often call the same activity a red-team exercise or adversarial review.",
-    "definition": "In security consulting, an engagement is a scoped, time-boxed project — analogous to an audit or model validation cycle — in which a team systematically attempts to break a system within agreed rules of engagement. Applied to LLMs, a red-team engagement typically traverses five phases: scope and threat modeling, attack execution, triage, reporting, and retest. Each phase produces artifacts (architecture diagrams, findings logs, ASR dashboards, residual-risk statements) that map directly onto model risk documentation requirements. The term originates in penetration testing practice; model risk and validation teams more familiar with SR 11-7 vocabulary may prefer red-team exercise or adversarial review — these are functionally equivalent.",
-    "domain": "security",
-    "aliases": [
-      "red-team engagement",
-      "red-team exercise",
-      "adversarial review",
-      "adversarial testing engagement"
-    ],
-    "used_in": [
-      "adversarial-workflow",
-      "deployment-gates"
-    ]
-  },
-  {
     "id": "red-teaming",
     "term": "Red-teaming",
     "full": "",
@@ -2266,6 +2315,21 @@
     "definition": "An RL term for a single sampled episode produced by executing a policy from start to finish. The rollout is the sampling event; the agent trajectory is the resulting record. NIST AI 800-2's 'multiple trials per test item' is functionally rollout sampling — running the policy N times from the same initial state to estimate expected performance."
   },
   {
+    "id": "rpa",
+    "term": "RPA",
+    "full": "Robotic Process Automation",
+    "short": "Software that automates rule-based tasks by scripting interactions with existing user interfaces, without modifying the underlying systems.",
+    "definition": "Robotic Process Automation (RPA) is software that automates repetitive, rule-based tasks by mimicking human interactions with existing application interfaces — clicking buttons, copying data between screens, filling forms — without requiring changes to the underlying systems being automated. RPA was widely adopted in banking back-office operations from roughly 2000 to 2018 for data entry, reconciliation, KYC document processing, and regulatory reporting. Its human-in-the-loop design typically consisted of exception queues: cases the automation could not resolve, routed to human operators. This design reproduced Bainbridge's training paradox at scale — operations analysts received the most complex 20% of cases while losing the routine 80% that had built their judgment. RPA is distinct from agentic AI in that it follows deterministic scripts against fixed interfaces rather than reasoning across variable inputs; its failure modes are correspondingly more predictable, and its exception queues better defined.",
+    "domain": "ai",
+    "aliases": [
+      "Robotic Process Automation",
+      "robotic process automation"
+    ],
+    "used_in": [
+      "bainbridge-ironies"
+    ]
+  },
+  {
     "id": "rtp",
     "term": "RTP",
     "full": "Real-Time Payments",
@@ -2333,6 +2397,22 @@
     ],
     "used_in": [
       "molmoweb-data-flywheel"
+    ]
+  },
+  {
+    "id": "skill-atrophy",
+    "term": "skill atrophy",
+    "full": "Skill atrophy",
+    "short": "Bainbridge's first irony: automating routine tasks removes the practice that maintains skills needed for exceptional cases, leaving human operators least prepared to intervene precisely when the automation fails.",
+    "definition": "Skill atrophy is Bainbridge's first irony of automation: by handling routine tasks, automation removes the daily repetition through which operators maintain the manual and judgment skills needed for exceptional cases — while leaving humans responsible for exactly those exceptional cases. The irony is architectural rather than incidental: the more reliable the automation, the fewer opportunities operators have to practice, and the less capable they are when intervention is needed most. In banking, skill atrophy has recurred across every automation wave. ATM deployment repositioned tellers toward exception handling without training them for it. Credit scoring shifted credit officers from individual-applicant judgment to model governance, eroding the intuition the former role built. RPA exception queues left operations analysts with the hardest cases but none of the routine volume that built their pattern recognition. Agentic AI accelerates the dynamic because output volumes make exhaustive human review structurally infeasible. See also: Ironies of Automation, training paradox, automation bias.",
+    "domain": "ai",
+    "aliases": [
+      "automation-induced deskilling",
+      "deskilling",
+      "skill degradation"
+    ],
+    "used_in": [
+      "bainbridge-ironies"
     ]
   },
   {
@@ -2496,6 +2576,21 @@
       "agent-identity-kyc",
       "skills-supply-chain",
       "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "training-paradox",
+    "term": "training paradox",
+    "full": "Training paradox",
+    "short": "Bainbridge's second irony: operators need more skill than their pre-automation predecessors to handle the exceptional cases automation cannot, but automation's success prevents the practice opportunities that build and maintain that skill.",
+    "definition": "The training paradox is Bainbridge's second irony of automation: because manual intervention is required only in unusual situations, operators need greater skill than their pre-automation counterparts — but because unusual situations are rare, the practice opportunities necessary to develop and sustain that skill are scarce. The automation succeeds precisely by eliminating the repetition that would build intervention competence. The paradox is structural: it cannot be resolved by individual effort, only by deliberate system design that manufactures practice opportunities (simulation, red-teaming, mandatory override exercises) that the operational environment no longer provides naturally. In financial services, the training paradox appears in model validation teams that rarely challenge well-performing models, AML alert analysts who process exception volumes without baseline transaction experience, and agentic AI oversight functions staffed by people who have never operated the workflows the agent has replaced. See also: Ironies of Automation, skill atrophy.",
+    "domain": "ai",
+    "aliases": [
+      "automation training paradox",
+      "Bainbridge training paradox"
+    ],
+    "used_in": [
+      "bainbridge-ironies"
     ]
   },
   {
