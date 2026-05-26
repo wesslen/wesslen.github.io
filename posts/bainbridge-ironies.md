@@ -13,7 +13,8 @@ Lisanne Bainbridge named this dynamic in 1983, and named it precisely: not as in
 
 This series, Bainbridge's Debt, is about that gap and what it costs.
 
-*HCI and Human Factors are academic disciplines studying the cognitive and organizational consequences of automation on human performance. The contemporary synthesis is Human-Centered AI (HCAI), advanced most prominently by [Ben Shneiderman](https://en.wikipedia.org/wiki/Ben_Shneiderman), whose [paper and book](https://arxiv.org/abs/2002.04087) on the field argue that AI should augment human capability and accountability rather than automate them away. Most of what banking governance calls "human oversight" is, without knowing it, an applied problem in this literature.*
+> [!NOTE]
+> HCI and Human Factors are academic disciplines studying the cognitive and organizational consequences of automation on human performance. The contemporary synthesis is Human-Centered AI (HCAI), advanced most prominently by [Ben Shneiderman](https://en.wikipedia.org/wiki/Ben_Shneiderman), whose [paper and book](https://arxiv.org/abs/2002.04087) on the field argue that AI should augment human capability and accountability rather than automate them away. Most of what banking governance calls "human oversight" is, without knowing it, an applied problem in this literature.
 
 ## What Bainbridge actually argued
 
