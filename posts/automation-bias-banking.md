@@ -1,5 +1,5 @@
 ---
-title: "The Levels We Don't Measure"
+title: "Why 'The Analyst Will Catch It' Is an Empirically Unreliable Control"
 date: 2026-05-26
 description: "Banking runs AI systems across the full Sheridan-Verplank automation range and applies the same governance expectation to all of them. The human-factors literature has had names for the failure modes at each level for thirty years."
 tags: [human-in-the-loop, banking, regulatory]
