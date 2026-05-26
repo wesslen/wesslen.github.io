@@ -291,7 +291,7 @@
   {
     "slug": "automation-bias-banking",
     "title": "The Levels We Don't Measure",
-    "date": "2026-05-24",
+    "date": "2026-05-26",
     "description": "Banking runs AI systems across the full Sheridan-Verplank automation spectrum and applies the same governance expectation to all of them. The human-factors literature has had names for the failure modes at each level for thirty years.",
     "tags": [
       "human-factors",
@@ -302,7 +302,7 @@
   {
     "slug": "hci-translation",
     "title": "The Last Mile That No One Owns",
-    "date": "2026-05-24",
+    "date": "2026-05-27",
     "description": "NIST AI 800-4 found that human-factors monitoring is the most underdeveloped category of post-deployment AI oversight. This is not a technical limitation. It is a field-boundary problem — and it has a specific cost.",
     "tags": [
       "human-factors",
