@@ -27,6 +27,8 @@ SR 11-7 defines effective challenge as "critical analysis by objective, informed
 That triad is the concept's actual substance. Independent review (the term SR 11-7 replaced) only required structural separation. Effective challenge adds the claim that structural separation without the other two legs produces compliance theater. Validators can report to the CRO, publish findings, and still fail to force any change in a model's use if they lack the authority or standing to do so.
 
 The OCC has since unified the terminology. The [2021 Comptroller's Handbook on Model Risk Management](https://web.archive.org/web/20250222103442/https://www.occ.gov/publications-and-resources/publications/comptrollers-handbook/files/model-risk-management/pub-ch-model-risk.pdf)[^2] states explicitly that "effective challenge is synonymous with credible challenge" — the phrase the OCC's 2014 [Heightened Standards](https://www.occ.gov/news-issuances/federal-register/2014/nr-occ-2014-117a.pdf) introduced to flag that some challenges are performative and others substantive. The shift was subtle but consequential. Supervisors had watched banks satisfy structural requirements for a decade and still miss material model problems. That shift from asking "does an independent team exist?" to "is the challenge actually producing risk reduction?" is the most significant evolution of the concept since 2011, and the one most at risk in the repeal debate. Dismantling the procedural scaffolding is cheap. Recovering the substantive expectation once it's gone is expensive.
+> [!QUOTE]
+> Dismantling the procedural scaffolding is cheap. Recovering the substantive expectation once it’s gone is expensive.
 
 ## Why 2011 was a genuine conceptual upgrade
 
@@ -77,6 +79,10 @@ The ownership question the [guardrails post](post.html?slug=guardrails) left del
 The 2012 JPMorgan trading loss — $6.2 billion, caused by a new VaR model that cut reported risk by roughly 50% while actual risk was escalating — remains the clearest operational demonstration of what effective challenge is protecting against. The Chief Investment Office's new model was built by [someone who had never built a VaR model before](https://corpgov.law.harvard.edu/2013/01/24/the-jp-morgan-whale-report-and-the-ghosts-of-the-financial-crisis/). A subsequent Excel error used SUM instead of AVERAGE in a volatility calculation, and over 300 VaR limit breaches were resolved by swapping in a more lenient model rather than investigating the underlying trades.[^5]
 
 Risk managers involved later reported feeling "not sufficiently independent to challenge the office's practices." The structural separation was there. The incentives leg was not. The post-mortem doesn't read like a technical failure — it reads like an influence failure with a technical veneer, which is exactly the failure mode SR 11-7 was written to prevent and which it clearly did not prevent.
+
+> [!QUOTE]
+> The post-mortem doesn’t read like a technical failure — it reads like an influence failure with a technical veneer.
+
 
 ## The case for repeal, steelmanned
 

@@ -85,6 +85,11 @@ The risk isn't evenly distributed. Tier 1 banks are positioned to benefit from r
 
 The right question before deployment isn't "is this product legal?" It's "when something goes wrong, and something will go wrong, do the people most exposed to the consequence have any meaningful recourse?"
 
+
+> [!QUOTE]
+> The right question before deployment isn't "is this product legal?" It's "when something goes wrong, and something will go wrong, do the people most exposed to the consequence have any meaningful recourse?"
+
+
 Right now, on the newest rails, the honest answer is often no.
 
 [^1]: JPMorgan data fee regime: Fortune reporting on the ~$300M annual estimate at [fortune.com](https://fortune.com/2025/07/16/jpmorgan-chase-fees-fintechs-plaid-finicity-crypto-wall-street-citigroup-bank-of-america-wells-fargo/); CNBC confirmation of negotiated deals covering 95%+ of pulls at [cnbc.com](https://www.cnbc.com/2025/11/14/jpmorgan-chase-fintech-fees.html); Payments Dive on Plaid's pricing arrangement at [paymentsdive.com](https://www.paymentsdive.com/news/plaid-to-pay-for-jpmorgan-data-open-banking-fintechs/760192/).

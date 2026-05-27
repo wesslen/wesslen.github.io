@@ -87,6 +87,10 @@ My prior work in [credit scorecard modeling and second-line risk](post.html?slug
 
 Multi-agent systems diffuse accountability across the chain in ways that make it genuinely hard to assign. And the pattern I keep noticing is that diffuse accountability tends to collapse to zero accountability in practice. No one owns the aggregate behavior; everyone owns their individual component.
 
+> [!QUOTE]
+> Multi-agent systems diffuse accountability across the chain. Diffuse accountability tends to collapse to zero accountability in practice. No one owns the aggregate behavior; everyone owns their individual component.
+
+
 I don't have a clean architectural answer to that. The case studies that follow in [the next post](post.html?slug=a2a-case-studies) make the concrete failure modes a lot harder to ignore. But the governance design question is one I find myself unable to resolve neatly: how do you build an institutional structure that forces accountability onto a system whose failures are inherently distributed?
 
 Which might be the most honest thing I can say about the current state of the field. [The governance question — how to build institutional structures that force accountability onto distributed failures — is one I've come back to at length in a post on effective challenge under GenAI.](post.html?slug=effective-challenge)

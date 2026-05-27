@@ -55,7 +55,13 @@ The standard assumption in training data governance is that human labels are noi
 
 Web navigation is different. The AirTag annotator wasn't wrong because of inattention: they were navigating genuine uncertainty about which product category the question targeted, which scroll path would surface the answer, and whether the page had loaded in a useful state. That uncertainty is structural to the task. Multiple annotators facing the same confusing interface may all produce exploratory paths, none of which converges on the correct answer.
 
-Consensus mechanisms don't fix structured noise; they aggregate it. If human annotators systematically produce exploratory paths on complex tasks, running more annotators produces a larger, equally flawed sample of exploratory paths. Aggregation doesn't fix the underlying confusion; it just captures it more thoroughly. The synthetic pipeline sidesteps this entirely because the teacher doesn't face uncertainty about page structure; it reads element semantics directly and takes the shortest path.
+Consensus mechanisms don't fix structured noise; they aggregate it.
+
+> [!QUOTE]
+> Consensus mechanisms don't fix structured noise; they aggregate it.
+
+
+If human annotators systematically produce exploratory paths on complex tasks, running more annotators produces a larger, equally flawed sample of exploratory paths. Aggregation doesn't fix the underlying confusion; it just captures it more thoroughly. The synthetic pipeline sidesteps this entirely because the teacher doesn't face uncertainty about page structure; it reads element semantics directly and takes the shortest path.
 
 The distinction matters because it predicts where human annotation will fail silently. Correlated noise is invisible to the usual diagnostic signals: inter-annotator agreement will be high (everyone is confused the same way), and training loss will decrease normally (the model learns to imitate exploratory paths, which is technically "correct" from the loss function's perspective). The failure shows up only at evaluation time or in production. The trained model inherits the annotators' uncertainty and learns to hedge in exactly the situations where it should act decisively.
 

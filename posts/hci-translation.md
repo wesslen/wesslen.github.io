@@ -19,6 +19,10 @@ The HCI and Human Factors research literature is substantial. Since Sheridan and
 
 Two disciplines have spent forty years solving the same problem without once citing each other: human factors research and banking model risk management. The HCI literature produces empirical findings on when and how human operators fail to catch automated errors. The MRM literature produces governance frameworks for the same phenomenon. The crosswalk doesn't exist.
 
+> [!QUOTE]
+> Two disciplines have spent forty years solving the same problem without once citing each other: human factors research and banking model risk management. The crosswalk doesn't exist.
+
+
 The vocabulary gap is not incidental. MRM practitioners use "effective challenge," "ongoing monitoring," and "qualified personnel." HCI researchers use "skill atrophy," "automation bias," "supervisory control," and "situation awareness." Both vocabularies describe the conditions under which oversight of deployed AI systems breaks down, with completely different terms and completely different operational implications. When the vocabulary doesn't connect, governance solutions can look correct from inside the framework while being systematically incomplete from outside it.
 
 The disciplines also don't share career ladders. Building the crosswalk requires credibility in both fields simultaneously, and institutional incentive structures have not historically rewarded that combination. The crosswalk's absence is partly an information-transfer failure and partly a structural one.
@@ -85,6 +89,9 @@ That vocabulary and those methods exist in the HCI literature. They have existed
 Banking's governance frameworks for agentic AI are being assembled right now, in model risk committees and vendor evaluations and SR 26-2 implementation working groups. The people doing that assembly are capable practitioners working in good faith. They are working without the research that most applies to what they are doing.
 
 Every governance framework built without a crosswalk to the HCI literature will reproduce, in a fourth variant, the ironies Bainbridge identified in the first. Reproducing them is a choice, made by default, by people who haven't been told the choice exists.
+
+> [!QUOTE]
+> Every governance framework built without a crosswalk to the HCI literature will reproduce, in a fourth variant, the ironies Bainbridge identified in the first. Reproducing them is a choice, made by default, by people who haven't been told the choice exists.
 
 The field didn't need to start from scratch. The governance frameworks just did anyway.[^7]
 

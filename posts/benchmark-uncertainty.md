@@ -225,6 +225,10 @@ Both the benchmark design and the evaluation protocol were correct. The failure 
 
 For teams whose evaluation results feed directly into deployment decisions or model risk documentation, the question is whether to keep reporting the number that's convenient to compute or the number that's correct. NIST 800-3 has formalized which is which.
 
+> [!QUOTE]
+> The leaderboards you're reading almost certainly report the wrong one.
+
+
 The leaderboards you're reading almost certainly report the wrong one.
 
 [^1]: NIST AI 800-3, "Expanding the AI Evaluation Toolbox with Statistical Models," Keller et al. (2026), NIST Center for AI Standards and Innovation. Authors: Keller, Kwegyir-Aggrey, Steed, Rao, Sharp, Bergman. https://doi.org/10.6028/NIST.AI.800-3. The paper evaluates 22 API-access frontier LLMs on three benchmarks: GPQA-Diamond (198 items), BIG-Bench Hard, and Global-MMLU Lite, comparing GLMM and regression-free estimates across both simulated and real data.

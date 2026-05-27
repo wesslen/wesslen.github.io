@@ -16,6 +16,10 @@ This is the third post in a short series on adversarial testing for LLMs in bank
 
 The question has a precise mathematical form. A 2025 NIST publication[^1] (updated April 2026) frames it as follows: for any language model policy Π that rejects a set of unacceptable outputs, the set of prompts that can elicit those outputs cannot be finitely enumerated. The scope of possible adversarial inputs is not large. It is unbounded.
 
+> [!QUOTE]
+> The scope of possible adversarial inputs is not large. It is unbounded.
+
+
 ## The incompleteness result in plain terms
 
 Vassilev introduces a useful term: OOPS — Out-Of-Policy Speech. OOPS is the set of prompts a policy Π deems unacceptable: a policy violation, a jailbreak, or a harmful generation, depending on what Π is trying to prevent. The question they ask is whether OOPS can be enumerated.
@@ -71,6 +75,10 @@ Control-effectiveness evidence from continuous monitoring has to route somewhere
 The program produces, when run well, something more useful than a certificate of safety: a time-series of control-effectiveness evidence that tells you whether the adversarial resilience of a specific deployment is improving, degrading, or stable, against the attacks you know about. The attacks you don't know about are what the incompleteness result is describing. The honest answer is that you won't catch all of them. That's been true of every model risk control since 2011, and it didn't make the controls worthless. It made the quality of the ongoing monitoring program the thing that actually mattered.[^5]
 
 The [metrics post](post.html?slug=metrics-metrics-metrics) argued that measuring the wrong thing is worse than not measuring at all, because the number creates the feeling of control without the reality. The adversarial testing corollary is that a static red-team suite maintained past its useful life does the same thing. The ASR is real. The threat model it was built against is not.
+
+> [!QUOTE]
+> The question isn't whether your red-team program is finished. It can't be. The question is whether it's still running.
+
 
 The question isn't whether your red-team program is finished. It can't be. The question is whether it's still running.
 

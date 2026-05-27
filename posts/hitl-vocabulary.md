@@ -81,6 +81,10 @@ Internationally, the vocabulary is tighter but the specificity varies. The UK's 
 
 The obvious counterargument is that vocabulary is incidental — that “effective challenge” and “qualified personnel” are functionally adequate, and what’s actually missing is guidance specificity on what those standards require for agentic systems. That’s partly right. But vocabulary and institutional design aren’t independent: the terms a bank uses to specify its oversight structure shape what that structure looks like, who owns it, and what an examiner will ask for. A governance committee built around “HITL checkpoints” and one built around “effective challenge with qualified validators” will allocate both responsibility and accountability differently when something goes wrong.
 
+> [!QUOTE]
+> A governance committee built around "HITL checkpoints" and one built around "effective challenge with qualified validators" will allocate both responsibility and accountability differently when something goes wrong.
+
+
 The convergence across jurisdictions is on a core set of expectations: board-level accountability, independent validation, override capability, human review of material or customer-facing decisions, and the principle that AI deployment does not dilute human accountability. The convergent term is "human oversight." A compliance program drafted around the former without grounding it in the vocabulary of the latter cannot satisfy a regulatory examination.
 
 ## What's categorically different now

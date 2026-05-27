@@ -61,7 +61,13 @@ I've been thinking about this in terms of junior analyst development in MRM shop
 
 Agentic AI that drafts model documentation, flags statistical tests, and writes validation findings changes the marginal return to working through model internals yourself. The recommendation is there. You can sign off or push back. But "push back on what basis?" requires familiarity that accumulates from having done the work. That familiarity is exactly what the learning externality erodes.
 
-[Effective challenge](post.html?slug=effective-challenge), the third pillar of model governance, requires that reviewers have the competence to mount it. Competence is not static. It compounds when practitioners learn, and it depreciates when the learning incentive disappears. What the effective challenge framework demands of the organization is precisely the capacity that agentic AI, at high enough precision, systematically undermines.
+[Effective challenge](post.html?slug=effective-challenge), the third pillar of model governance, requires that reviewers have the competence to mount it. Competence is not static. It compounds when practitioners learn, and it depreciates when the learning incentive disappears.
+
+> [!QUOTE]
+> Competence is not static. It compounds when practitioners learn, and it depreciates when the learning incentive disappears.
+
+
+What the effective challenge framework demands of the organization is precisely the capacity that agentic AI, at high enough precision, systematically undermines.
 
 SR 26-2 (which superseded SR 11-7 on April 17, 2026) explicitly excludes GenAI and agentic AI from its scope. The formal MRM framework does not speak to the systems creating the knowledge externality described here.
 
@@ -79,6 +85,10 @@ The paper identifies one parameter that is unambiguously welfare-improving witho
 This is a less glamorous finding than the garbling result, but it is the lever practitioners can actually pull. You cannot easily control how accurate your AI vendor's model is at the point of procurement. You can control whether junior analysts present their reasoning to senior reviewers, whether validation decisions get written up in ways that build the institutional record, and whether the team treats knowledge transfer as a product of the work rather than a distraction from it.
 
 The [HITL checkpoint](post.html?slug=hitl-design) that felt like compliance overhead turns out to have a second function: it's one of the few remaining mechanisms that forces the learning interaction. If agentic AI handles the draft and a human approves the output, that's not the same learning process as a human who worked through the problem and used the AI as a check. The checkpoint matters, but so does what happens inside it.
+
+> [!QUOTE]
+> What I think I know: the right answer is not to keep purchasing the most accurate model available.
+
 
 ## What I think I know, and what I don't
 

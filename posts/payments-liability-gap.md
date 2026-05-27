@@ -79,6 +79,10 @@ The most important near-term legal signal is the Second Circuit's ruling in *New
 
 The deeper structural problem is that consumer-protection gaps are concentrated on precisely the payment rails that agentic systems have the strongest incentives to use. Until that inversion is addressed — through statutory extension or enforceable network rules — consumers who delegate payment authority to AI agents are accepting risks they likely don't know they're taking. The agents know how to route. The law doesn't know how to follow.
 
+> [!QUOTE]
+> The agents know how to route. The law doesn't know how to follow.
+
+
 *The [next post in this series](post.html?slug=agent-identity-kyc) examines the infrastructure problem underneath the liability gap: banks have no legal category for an AI agent as a party to a transaction, and no established framework for authenticating one.*
 
 [^1]: 12 CFR § 1005.2(m) defines "unauthorized electronic fund transfer" and the "furnished access device" exception. The Electronic Fund Transfer Act is codified at 15 U.S.C. § 1693 et seq. The Consumer Bankers Association's January 2026 Agentic Symposium White Paper provides a thorough analysis of how this exception interacts with agentic delegation, available at [consumerbankers.com](https://consumerbankers.com/wp-content/uploads/2026/01/CBA-Agentic-Symposium-White-Paper-2026-01v2.pdf).
