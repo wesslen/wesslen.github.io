@@ -5,11 +5,11 @@ description: "Lisanne Bainbridge published a six-page paper in 1983 predicting e
 tags: [human-in-the-loop, banking]
 ---
 
-> **TL;DR:** In 1983, Lisanne Bainbridge published six pages arguing that every significant advance in automation generates conditions for its own oversight failure — skill atrophy, a training paradox, and an opacity problem. These map with uncomfortable precision onto every wave of banking automation since the first ATM. The paper has been cited thousands of times in aviation, medicine, and industrial control. It has not appeared once in US banking supervisory text. As agentic AI intensifies all three ironies simultaneously, the debt banking owes to this literature is coming due.
+> **TL;DR:** In 1983, Lisanne Bainbridge argued that every significant advance in automation generates conditions for its own oversight failure — skill atrophy, a training paradox, and an opacity problem. These map with uncomfortable precision onto every wave of banking automation since the first ATM. The paper has been cited thousands of times in aviation, medicine, and industrial control. It has not appeared once in US banking supervisory text. As agentic AI intensifies all three ironies simultaneously, the debt banking owes to this literature is coming due.
 
 If you've watched an AML analyst process 400 alerts in a shift, you've seen Bainbridge's argument in its fully developed form. The analyst isn't making decisions anymore. They're maintaining the appearance of a human in a loop that stopped being supervised somewhere around alert 180.
 
-Lisanne Bainbridge named this dynamic in 1983, and named it precisely: not as individual failure, but as the predictable structural consequence of automation that leaves humans responsible for what it cannot handle.[^1] The paper, "Ironies of Automation," is six pages in *Automatica*. It is among the most-cited works in the human factors and automation research literature. In full-text searches of US banking supervisory documents — SR letters, OCC bulletins, FDIC FILs, CFPB circulars, and FINRA regulatory notices spanning more than two decades — neither Bainbridge's name nor any of her paper's core concepts appears.[^8]
+Lisanne Bainbridge named this dynamic in 1983, and named it precisely: not as individual failure, but as the predictable structural consequence of automation that leaves humans responsible for what it cannot handle.[^1] "Ironies of Automation" is six pages in *Automatica*, among the most-cited works in human factors research. In full-text searches of US banking supervisory documents — SR letters, OCC bulletins, FDIC FILs, CFPB circulars, and FINRA regulatory notices spanning more than two decades — neither Bainbridge's name nor any of her paper's core concepts appears.[^8]
 
 This series, Bainbridge's Debt, is about that gap and what it costs.
 
@@ -49,7 +49,7 @@ What followed was the first banking instance of Bainbridge's skill-atrophy irony
 
 FICO's commercial release in 1989 moved the locus of human judgment from individual transactions to model design and exception handling. Credit officers stopped forming intuitions about applicants because the score dominated the decision. By the late 1990s, the HCI literature had a term for what was happening: the human role had drifted to rubber-stamping the algorithm.
 
-Skitka, Mosier, and Burdick's 1999 aviation study established the empirical baseline for what this drift looks like. Participants with a "very but not perfectly reliable automated aid" underperformed participants with no aid at all, committing both commission errors (acting on wrong recommendations) and omission errors (missing events the aid didn't flag).[^3] The mechanism that banking assumed would catch model errors was, in controlled experimental conditions, making outcomes worse than no model at all.
+A 1999 aviation study by Skitka and colleagues established the empirical baseline for what this drift looks like. Participants with a "very but not perfectly reliable automated aid" underperformed participants with no aid at all, committing both commission errors (acting on wrong recommendations) and omission errors (missing events the aid didn't flag).[^3] The mechanism that banking assumed would catch model errors was, in controlled experimental conditions, making outcomes worse than no model at all.
 
 ### RPA (2000–2018)
 
@@ -63,15 +63,23 @@ All three ironies arrive simultaneously and in more severe form. Skill atrophy a
 
 Each of the first three waves produced the same ironies with a decade of lag before the failure became visible. ATM staffing consequences played out through the late 1970s. Credit-officer deskilling was documented in the early 1990s. The RPA exception-handling problem was recognized by the mid-2010s.
 
-The agentic wave has no decade of lag — deployment velocity has outrun institutional learning cycles. It took a decade to recognize the ATM staffing consequences because the technology scaled slowly and the failures were diffuse; agentic AI reached enterprise deployment in under two years. The systems are operating at scale now, the governance frameworks explicitly exclude them — SR 26-2 footnote 3 carves out generative and agentic AI entirely[^5] — and the human-factors problems Bainbridge identified are present from the moment of deployment.
+The agentic wave has no decade of lag — deployment velocity has outrun institutional learning cycles. Agentic AI reached enterprise deployment in under two years; the governance frameworks explicitly exclude it — SR 26-2 footnote 3 carves out generative and agentic AI entirely[^5] — and the human-factors problems Bainbridge identified are present from the moment of deployment.
 
-The research did not stop in 1983. Parasuraman, Sheridan, and Wickens extended the framework in 2000. A second generation of automation-bias research through the 2000s established empirically what conditions make commission and omission errors more likely, and what training and interface interventions reduce them. That research exists. It is available. It is not in any US banking supervisory document.
-
-What Bainbridge's three ironies predict, in operational terms: declining operator override rates as a skill-atrophy signal; training programs unable to field-test exception handling as the paradox in active form; governance artifacts that substitute chain-of-thought traces for decision provenance as Bainbridge's third irony under a new label. Each is measurable. None is currently required.
+What Bainbridge's three ironies predict, in operational terms: declining operator override rates as a skill-atrophy signal; training programs unable to field-test exception handling as the paradox in active form; and governance artifacts that substitute chain-of-thought traces for decision provenance as Bainbridge's third irony under a new label. Each is measurable. None is currently required.
 
 [The next post in this series](post.html?slug=automation-bias-banking) takes up that evidence directly.
 
 The [hitl-vocabulary post](post.html?slug=hitl-vocabulary) covers the six-term governance vocabulary that banking uses in place of HCI language and maps it against what regulators actually say. The [hitl-design post](post.html?slug=hitl-design) addresses checkpoint design under these constraints. This series is the upstream argument: what the HCI research established before the governance vocabulary existed, and why that sequence matters.
+
+## What Bainbridge also proposed
+
+She didn't only name the ironies. Section 2 of the same paper offers three prescriptions that banking has largely not implemented in the forty-three years since.
+
+The first is periodic manual engagement. "One possibility is to allow the operator to use hands-on control for a short period in each shift." Where that's infeasible, high-fidelity simulation is the necessary substitute — not classroom instruction, which Bainbridge explicitly dismisses as insufficient to build knowledge retrievable under pressure. In banking terms, this means structured override drills against real historical failure cases — the kind of practice that annual policy attestations cannot substitute for.
+
+The second concerns what training should actually develop. Unknown failures cannot be simulated, so the goal is adaptive reasoning — the capacity to respond when procedures run out. Her exact language: "it is ironic to train operators in following instructions and then put them in the system to provide intelligence." Most bank AI governance produces exactly this outcome.
+
+The third sits upstream of training entirely: automatic systems should fail *obviously* rather than degrade gracefully. An LLM that confidently hallucinates while appearing to reason is the structural inverse of this.
 
 ## The irony that Bainbridge didn't quite name
 

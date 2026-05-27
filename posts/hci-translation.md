@@ -15,7 +15,7 @@ This makes sense if you understand what the human-factors monitoring task actual
 
 ## The field-boundary problem
 
-The HCI and Human Factors research literature is substantial. Since Bainbridge's 1983 paper, the relevant work includes Sheridan and Verplank on levels of automation (1978), Parasuraman and Riley on automation overreliance (1997), Skitka et al. on automation bias (1999), and Bansal et al. on complementary team performance (2021). These papers appeared in aviation safety and industrial control journals. Model risk practitioners (typically) don't read them.
+The HCI and Human Factors research literature is substantial. Since Sheridan and Verplank on levels of automation (1978), the relevant work includes Bainbridge's "Ironies of Automation" (1983), Parasuraman and Riley on automation overreliance (1997), Skitka et al. on automation bias (1999), and Bansal et al. on complementary team performance (2021). These papers appeared in aviation safety and industrial control journals. Model risk practitioners (typically) don't read them.
 
 Two disciplines have spent forty years solving the same problem without once citing each other: human factors research and banking model risk management. The HCI literature produces empirical findings on when and how human operators fail to catch automated errors. The MRM literature produces governance frameworks for the same phenomenon. The crosswalk doesn't exist.
 
@@ -46,7 +46,9 @@ Practitioners can start without one. Override rate tracking can be added to ongo
 
 ## The normative model the vocabulary doesn't supply
 
-There is a liability in the "automation bias" framing that the crosswalk should address before it exports the term into governance documentation. Bias is always measured as deviation from a normative baseline; in industry contexts that baseline is almost never specified. Ask a product manager what the analyst's behavior is biased *relative to*, and the conversation typically stops. Gigerenzer and Brighton establish why: a heuristic's accuracy is always relative to the structure of the environment rather than to a universal logical ideal.[^8] The AML analyst running a 96%-false-positive queue who develops rote dismissal patterns may be exhibiting approximately rational behavior given the constraints the system has imposed. The behavior reflects the system design. This doesn't make it costless — missed true positives carry real regulatory weight — but it reattributes the governance problem. If dismissal is locally rational under current system conditions, training the analyst toward careful review is an intervention at the wrong point. The targets are the false-positive rate, the alert design, and the cognitive load the system imposes on the reviewer.
+There is a liability in the "automation bias" framing that the crosswalk should address before it exports the term into governance documentation. Bias is always measured as deviation from a normative baseline; in industry contexts that baseline is almost never specified. Ask a product manager what the analyst's behavior is biased *relative to*, and the conversation typically stops. This is where the field of Cognitive Science too can provide support.
+
+Gigerenzer and Brighton establish why: a heuristic's accuracy is always relative to the structure of the environment rather than to a universal logical ideal.[^8] The AML analyst running a 96%-false-positive queue who develops rote dismissal patterns may be exhibiting approximately rational behavior given the constraints the system has imposed. The behavior reflects the system design. This doesn't make it costless — missed true positives carry real regulatory weight — but it reattributes the governance problem. If dismissal is locally rational under current system conditions, training the analyst toward careful review is an intervention at the wrong point. The targets are the false-positive rate, the alert design, and the cognitive load the system imposes on the reviewer.
 
 Lieder and Griffiths formalize this into a framework directly applicable to governance design.[^9] They propose "resource rationality" as the appropriate normative standard: the best achievable behavior given actual time and computational limits. Applied to banking AI oversight, a credit officer's override behavior should be assessed against the constraints the deployment imposes, with "what does optimal behavior look like given this system's actual demands?" as the governance question rather than "is this person sufficiently attentive?" Until baselines exist per automation tier and task load, "automation bias" identifies a concern the governance framework cannot measure. That difficulty reflects the absent baseline, which can be specified. The fourth row of the table above is the implication: borrowing the term without specifying the baseline leaves governance with a label it cannot operationalize.
 
@@ -73,11 +75,9 @@ US prudential banking supervisors have none of this. The research is available. 
 
 NIST AI 800-4 maps the gaps. It does not fill them. The report explicitly states that it describes challenges to monitoring rather than methods for monitoring; it provides no prescriptive guidance on how to conduct human-factors monitoring because that guidance does not yet exist in a form ready for publication.[^6]
 
-This is the honest position. The gap is real.
-
 What the report establishes is that practitioners deploying AI systems know they cannot do this part. They report the overhead of collecting user feedback as their dominant challenge. Human-factors monitoring's importance is understood. The vocabulary and institutional frameworks to make it tractable are what's missing.
 
-That vocabulary and those methods exist in the HCI literature. They have existed, in empirically validated form, since at least 1997. The crosswalk is the missing piece.
+That vocabulary and those methods exist in the HCI literature. They have existed, in empirically validated form, since at least 1997.
 
 > [!NOTE]
 > The NIST Human-Centered AI program ([nist.gov/programs-projects/human-centered-ai](https://www.nist.gov/programs-projects/human-centered-ai)) includes trust-in-automation scale validation explicitly grounded in the ISO 9241-210:2010 human-centered design standard. Combined with the NIST AI RMF's four functions (GOVERN, MAP, MEASURE, MANAGE), this provides the most concrete current US bridge between HCI concepts and AI governance frameworks, though it carries no regulatory force comparable to SR 26-2.
