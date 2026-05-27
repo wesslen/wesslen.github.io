@@ -834,6 +834,21 @@
     ]
   },
   {
+    "id": "field-boundary-problem",
+    "term": "field-boundary problem",
+    "full": "field-boundary problem",
+    "short": "When two disciplines have been solving the same problem for decades without a shared vocabulary, shared frameworks, or shared institutional memory — so neither cites the other and the crosswalk between them goes unbuilt.",
+    "definition": "A field-boundary problem occurs when two disciplines develop parallel solutions to the same underlying challenge but remain institutionally separated: different journals, different career ladders, different professional vocabularies. Neither community is unaware that automation oversight matters; they have simply built their answers in isolation. The HCI and Human Factors literature has documented, named, and measured the failure modes of human-automation interaction since at least 1978. Banking model risk management has built governance frameworks for the same phenomenon since at least 2011. The vocabulary doesn't connect — 'skill atrophy' and 'ongoing monitoring' describe the same risk, but no standard crosswalk exists. The consequence is that governance frameworks built inside one discipline's vocabulary can look complete from within the framework while remaining systematically incomplete from outside it. The field-boundary problem is distinct from ignorance: the relevant research is accessible in principle. The barrier is institutional, not informational.",
+    "domain": "regulatory",
+    "aliases": [
+      "field boundary problem",
+      "disciplinary boundary problem"
+    ],
+    "used_in": [
+      "hci-translation"
+    ]
+  },
+  {
     "id": "finops",
     "term": "FinOps",
     "full": "Cloud Financial Operations (FinOps)",
