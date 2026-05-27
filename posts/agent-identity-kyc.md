@@ -25,7 +25,6 @@ An AI agent is neither a natural person nor a legal entity. It has no date of bi
 > [!QUOTE]
 > An AI agent is neither a natural person nor a legal entity. It has no date of birth, no address, no taxpayer identification number in any conventional sense.
 
-
 The CIP gap has a specific downstream consequence for liability. If a bank cannot identify an AI agent as a distinct party to a transaction (with its own registered identity, scope of authority, and authorization record), then the only party the bank knows it's dealing with is the account holder. When something goes wrong, the entire dispute pathway runs through the account holder, regardless of whether the account holder actually instructed the specific transaction. This is part of why the "furnished access device" exception in Regulation E is so consequential: the bank sees a transaction originating from a known account, with no record of which agent initiated it or under what authorization.
 
 The current framework may be adequate for enterprise-deployed agents operating at current scale — where the account holder relationship is clear and disputes route predictably — but it breaks specifically for the consumer DIY agent category and high-volume delegated action scenarios where authorization scope is genuinely ambiguous.

@@ -150,7 +150,6 @@ Stage 3 — qualified claims, uncertainty reporting, sharing evaluation details 
 > [!QUOTE]
 > "Emerging practice" is NIST's honest admission that the field isn't there yet. Most of what needs to emerge isn't technically difficult. It's institutionally uncomfortable.
 
-
 "Emerging practice" is NIST's honest admission about the distance between where the field is and where it needs to be. Most of what needs to emerge isn't technically difficult. It's institutionally uncomfortable: running evaluations you might fail, reporting uncertainty you'd rather not quantify, releasing transcripts that expose your methodological choices. None of that is a measurement problem.
 
 [^1]: NIST AI 800-2, "Practices for Automated Benchmark Evaluations of Language Models," Initial Public Draft, January 2026. Center for AI Standards and Innovation (CAISI), U.S. Department of Commerce. https://doi.org/10.6028/NIST.AI.800-2.ipd. The document distinguishes automated benchmarks from red-teaming, human-subject experiments, field testing, and post-deployment monitoring in Table I.1, with explicit criteria for when each method is more appropriate.

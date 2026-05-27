@@ -94,7 +94,6 @@ Part 1 found that the field spent years collecting human annotation for GUI agen
 > [!QUOTE]
 > The field spent two years building better agents. This paper suggests it should have also been building better judges.
 
-
 The field spent two years building better agents. This paper suggests it should have also been building better judges.
 
 [^1]: Rosset et al. (2026), "The Art of Building Verifiers for Computer Use Agents," [arXiv:2604.06240](https://arxiv.org/abs/2604.06240). Microsoft Research and Browserbase. Code and CUAVerifierBench are open-sourced at github.com/microsoft/fara.

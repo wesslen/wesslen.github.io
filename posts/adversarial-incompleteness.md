@@ -19,7 +19,6 @@ The question has a precise mathematical form. A 2025 NIST publication[^1] (updat
 > [!QUOTE]
 > The scope of possible adversarial inputs is not large. It is unbounded.
 
-
 ## The incompleteness result in plain terms
 
 Vassilev introduces a useful term: OOPS — Out-Of-Policy Speech. OOPS is the set of prompts a policy Π deems unacceptable: a policy violation, a jailbreak, or a harmful generation, depending on what Π is trying to prevent. The question they ask is whether OOPS can be enumerated.
@@ -78,7 +77,6 @@ The [metrics post](post.html?slug=metrics-metrics-metrics) argued that measuring
 
 > [!QUOTE]
 > The question isn't whether your red-team program is finished. It can't be. The question is whether it's still running.
-
 
 The question isn't whether your red-team program is finished. It can't be. The question is whether it's still running.
 

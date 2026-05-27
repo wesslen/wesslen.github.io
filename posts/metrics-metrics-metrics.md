@@ -28,7 +28,6 @@ VaR became the standard metric for market risk in the 1990s: a single number tha
 > [!QUOTE]
 > Seeing a number produces overconfidence. Knowing the number is imperfect doesn't protect you from anchoring on it.
 
-
 The broader pattern has a name. Goodhart's Law: when a measure becomes a target, it ceases to be a good measure. Jerry Muller, in *The Tyranny of Metrics*, traces this across education, medicine, and government — the consistent failure mode where an institution starts optimizing the indicator instead of the underlying thing the indicator was supposed to track.[^3] The metric colonizes the goal.
 
 GenAI benchmark-chasing is the same dynamic. When MMLU scores appear in model announcements and procurement conversations, they stop being measurements and become targets. Model developers train toward them. Buyers anchor on them. And the scores gradually decouple from anything that predicts real-world behavior.
@@ -117,7 +116,6 @@ Taleb's observation about VaR is worth sitting with: even people who *know* a me
 
 > [!QUOTE]
 > The field I think GenAI practitioners most need to read isn't ML engineering literature. It's psychometrics.
-
 
 The field I think GenAI practitioners most need to read isn't ML engineering literature. It's psychometrics. Social scientists spent the better part of the 20th century developing tools for measuring things you can't observe directly, under conditions where your measurement instrument affects what it measures, in contexts where the constructs themselves are contested. That is also, with slight vocabulary changes, an exact description of what we're trying to do with GenAI evaluation.
 

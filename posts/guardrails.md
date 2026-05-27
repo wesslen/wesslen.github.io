@@ -21,7 +21,6 @@ That conflation isn't merely imprecise; it's operationally consequential. If you
 > [!QUOTE]
 > The failure mode isn't that the model breaks the rules. It's that the rules are written to prove compliance, not to produce safety — and you end up with systems that look governed and aren't.
 
-
 So what is a guardrail, actually — and what does it mean to design one for an autonomous agent operating inside a bank?
 
 ## The one distinction that matters

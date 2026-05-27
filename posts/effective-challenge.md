@@ -83,7 +83,6 @@ Risk managers involved later reported feeling "not sufficiently independent to c
 > [!QUOTE]
 > The post-mortem doesn’t read like a technical failure — it reads like an influence failure with a technical veneer.
 
-
 ## The case for repeal, steelmanned
 
 The argument isn't that the BPI critique is wrong on its premises. Tens of thousands of people do work jobs whose primary output is confirming compliance with the Model Risk guidance, and examiner interpretation is wildly inconsistent.

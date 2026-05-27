@@ -85,10 +85,8 @@ The risk isn't evenly distributed. Tier 1 banks are positioned to benefit from r
 
 The right question before deployment isn't "is this product legal?" It's "when something goes wrong, and something will go wrong, do the people most exposed to the consequence have any meaningful recourse?"
 
-
 > [!QUOTE]
 > The right question before deployment isn't "is this product legal?" It's "when something goes wrong, and something will go wrong, do the people most exposed to the consequence have any meaningful recourse?"
-
 
 Right now, on the newest rails, the honest answer is often no.
 

@@ -60,7 +60,6 @@ Consensus mechanisms don't fix structured noise; they aggregate it.
 > [!QUOTE]
 > Consensus mechanisms don't fix structured noise; they aggregate it.
 
-
 If human annotators systematically produce exploratory paths on complex tasks, running more annotators produces a larger, equally flawed sample of exploratory paths. Aggregation doesn't fix the underlying confusion; it just captures it more thoroughly. The synthetic pipeline sidesteps this entirely because the teacher doesn't face uncertainty about page structure; it reads element semantics directly and takes the shortest path.
 
 The distinction matters because it predicts where human annotation will fail silently. Correlated noise is invisible to the usual diagnostic signals: inter-annotator agreement will be high (everyone is confused the same way), and training loss will decrease normally (the model learns to imitate exploratory paths, which is technically "correct" from the loss function's perspective). The failure shows up only at evaluation time or in production. The trained model inherits the annotators' uncertainty and learns to hedge in exactly the situations where it should act decisively.

@@ -22,6 +22,8 @@ Two disciplines have spent forty years solving the same problem without once cit
 > [!QUOTE]
 > Two disciplines have spent forty years solving the same problem without once citing each other: human factors research and banking model risk management. The crosswalk doesn't exist.
 
+> [!NOTE]
+> **What is a crosswalk?** In standards and regulatory documentation, a crosswalk is a structured mapping document showing how elements of one framework correspond to elements of another — used to demonstrate alignment, identify gaps, or guide implementation. NIST maintains a [public crosswalk library for the AI RMF](https://airc.nist.gov/airmf-resources/crosswalks/) with entries covering ISO/IEC standards, Singapore's IMDA AI Verify, Korea's Trustworthy AI Guidebook, Japan AISI guidelines, and industry frameworks from BSA and Microsoft. None of them map AI RMF concepts to the HCI or Human Factors research literature.
 
 The vocabulary gap is not incidental. MRM practitioners use "effective challenge," "ongoing monitoring," and "qualified personnel." HCI researchers use "skill atrophy," "automation bias," "supervisory control," and "situation awareness." Both vocabularies describe the conditions under which oversight of deployed AI systems breaks down, with completely different terms and completely different operational implications. When the vocabulary doesn't connect, governance solutions can look correct from inside the framework while being systematically incomplete from outside it.
 

@@ -12,7 +12,6 @@ Consider an AML analyst. She processes around 400 transaction-monitoring alerts 
 > [!QUOTE]
 > She is performing the motions of human oversight without its substance.
 
-
 Parasuraman and Riley named what she is doing in 1997: *disuse*. She has stopped trusting the system, and what began as appropriate skepticism toward a high-false-alarm queue has curdled into something less productive: she is now dismissing alerts she would otherwise catch. Her supervisor reviewing the queue doesn't see disuse. They see a human-in-the-loop with an acceptably low false-negative rate.
 
 What's invisible in that picture is precisely what a governance framework misses when it checks whether humans are present in a process rather than what kind of automation level they're operating at.
