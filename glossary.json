@@ -849,7 +849,8 @@
     "domain": "ai",
     "aliases": [
       "field boundary problem",
-      "disciplinary boundary problem"
+      "disciplinary boundary problem",
+      "field-boundary problem"
     ],
     "used_in": [
       "hci-translation"
