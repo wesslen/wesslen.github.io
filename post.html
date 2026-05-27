@@ -832,7 +832,12 @@
               const gRes = await fetch("./glossary.json");
               if (gRes.ok) {
                 const glossary = await gRes.json();
+                // Apply to prose body first (primary first-occurrence context)
                 applyGlossaryTooltips(proseEl, glossary);
+                // Apply independently to the post description (separate seen set,
+                // so a term mentioned in the teaser also tooltips in the body)
+                const descEl = document.getElementById("post-description");
+                if (descEl) applyGlossaryTooltips(descEl, glossary);
               }
             } catch (e) {
               // Non-fatal: tooltips are an enhancement only
