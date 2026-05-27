@@ -1880,7 +1880,7 @@
     "term": "NIST",
     "full": "National Institute of Standards and Technology",
     "short": "A non-regulatory U.S. federal agency that develops voluntary measurement standards and guidelines — whose standards have a track record of becoming de facto requirements across industries.",
-    "definition": "NIST (National Institute of Standards and Technology) is a bureau of the U.S. Department of Commerce responsible for developing measurement science, standards, and technology guidelines. It has no regulatory authority — NIST standards are voluntary — but they carry significant practical weight because industry, procurement requirements, and regulators frequently adopt them as the baseline expectation. The pattern is consistent across domains: NIST's AES encryption standard (2001) became the global default for symmetric encryption; its SHA-2 hash functions underpin TLS and certificate infrastructure worldwide; its Cybersecurity Framework (2014) is referenced in U.S. banking examination guidance despite never being mandatory. In AI, NIST has published the AI Risk Management Framework (AI RMF, 2023), the Generative AI Profile (NIST AI 600-1, 2024), and — relevant here — NIST AI 800-2 (2026), a practices document for automated benchmark evaluations of language models. These documents are advisory at publication; the Cybersecurity Framework precedent suggests they tend to appear in examination conversations within a few years of release.",
+    "definition": "NIST (National Institute of Standards and Technology) is a bureau of the U.S. Department of Commerce responsible for developing measurement science, standards, and technology guidelines. It has no regulatory authority — NIST standards are voluntary — but they carry significant practical weight because industry, procurement requirements, and regulators frequently adopt them as the baseline expectation. The pattern is consistent across domains: NIST's AES encryption standard (2001) became the global default for symmetric encryption; its SHA-2 hash functions underpin TLS and certificate infrastructure worldwide; its Cybersecurity Framework (2014) is referenced in U.S. banking examination guidance despite never being mandatory. In AI, NIST has published the AI Risk Management Framework (AI RMF, 2023), the Generative AI Profile (NIST AI 600-1, 2024), and a growing 800-series: NIST AI 800-2 (automated benchmark evaluations of language models, January 2026), NIST AI 800-3 (statistical models for benchmark evaluation, February 2026), and NIST AI 800-4 (challenges to monitoring deployed AI systems, March 2026). These documents are advisory at publication; the Cybersecurity Framework precedent suggests they tend to appear in examination conversations within a few years of release.",
     "domain": "regulatory",
     "aliases": [
       "National Institute of Standards and Technology"
@@ -1893,6 +1893,54 @@
       "hitl-design",
       "agent-identity-kyc",
       "nist-benchmark-evals"
+    ]
+  },
+  {
+    "id": "nist-ai-800-2",
+    "term": "NIST AI 800-2",
+    "full": "Practices for Automated Benchmark Evaluations of Language Models",
+    "short": "NIST January 2026 initial public draft establishing a three-stage framework — define objectives, implement and run, analyze and report — for automated benchmark evaluations of language models.",
+    "definition": "NIST AI 800-2 (initial public draft, January 2026) is the closest thing the field currently has to a federal standard for running automated benchmark evaluations of language models. The three-stage framework is: (1) define evaluation objectives and construct validity before writing eval code; (2) implement and run the evaluation with documented protocol settings; (3) analyze and report with statistical uncertainty bounds and qualified claims. The document explicitly carves out red-teaming, human-subject experiments, field testing, and post-deployment monitoring — if your evaluation requires those, it refers you elsewhere. Published by CAISI (formerly the U.S. AI Safety Institute). Carries no regulatory authority but has begun surfacing in examination-adjacent conversations; the NIST AI RMF precedent suggests it will matter in practice before it is ever required. The companion statistical document is NIST AI 800-3.",
+    "domain": "regulatory",
+    "aliases": [
+      "NIST 800-2",
+      "AI 800-2"
+    ],
+    "used_in": [
+      "nist-benchmark-evals",
+      "benchmark-uncertainty"
+    ]
+  },
+  {
+    "id": "nist-ai-800-3",
+    "term": "NIST AI 800-3",
+    "full": "Expanding the AI Evaluation Toolbox with Statistical Models",
+    "short": "NIST February 2026 report formalizing two distinct accuracy estimands for benchmark evaluation — benchmark accuracy and generalized accuracy — with regression-free correction formulas and a GLMM approach for multi-trial evaluations.",
+    "definition": "NIST AI 800-3 (February 2026) formalizes a distinction most benchmark reporting collapses: benchmark accuracy (performance on the specific items in the evaluation pool) and generalized accuracy (expected performance on unseen items from the same construct) are different quantities with different standard error formulas. The naive SE formula (SD / √n treating trials as independent) produces intervals that are wrong in opposite directions depending on which accuracy you are estimating. The report derives regression-free correction formulas for both estimands and validates a generalized linear mixed model (GLMM) that tightens intervals through partial pooling across items — treating item difficulty as a random effect rather than a nuisance. Published by Keller et al. at CAISI. For MRM practitioners: a validation artifact presenting a benchmark score with a standard error should state which accuracy estimand is being reported and which formula produced the bound. After 800-3, using the naive formula constitutes a documented methodological choice, not an oversight. Builds directly on Stage 3 of NIST AI 800-2.",
+    "domain": "regulatory",
+    "aliases": [
+      "NIST 800-3",
+      "AI 800-3"
+    ],
+    "used_in": [
+      "benchmark-uncertainty",
+      "nist-benchmark-evals"
+    ]
+  },
+  {
+    "id": "nist-ai-800-4",
+    "term": "NIST AI 800-4",
+    "full": "Challenges to the Monitoring of Deployed AI Systems",
+    "short": "NIST March 2026 report synthesizing 87 papers and practitioner workshops to identify six monitoring categories for deployed AI — functionality, operations, security, compliance, ethics/fairness, and human factors — flagging human factors as the most underdeveloped.",
+    "definition": "NIST AI 800-4 (March 2026) synthesized findings from three practitioner workshops (over 200 experts, ten federal agencies) and an 87-paper literature review to map challenges in monitoring deployed AI systems. It identified six monitoring categories: functionality, operations, security, compliance, ethics/fairness, and human factors. Human factors was identified as the category with the highest practitioner-reported difficulty — the most underdeveloped of the six. The report explicitly states it describes monitoring challenges rather than methods; it provides no prescriptive guidance because that guidance does not yet exist in publishable form. Published by Rao et al. at CAISI. The report also flags deceptive AI behavior — models that present as cooperative when monitored while pursuing different goals when detection risk is low — as an active monitoring challenge, citing Balesni et al. The human-factors finding is the empirical grounding for the field-boundary problem between HCI research and AI governance frameworks.",
+    "domain": "regulatory",
+    "aliases": [
+      "NIST 800-4",
+      "AI 800-4"
+    ],
+    "used_in": [
+      "hci-translation",
+      "automation-bias-banking"
     ]
   },
   {
