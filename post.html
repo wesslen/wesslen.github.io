@@ -515,6 +515,36 @@
             if (!match) return;
 
             const type = match[1].toUpperCase();
+
+            // ── Pull Quote: [!QUOTE] ──────────────────────────────
+            if (type === "QUOTE") {
+              // Gather all content lines, then split off trailing attribution
+              // Attribution line starts with — (em dash) or -- (double hyphen)
+              const allParas = [...bq.querySelectorAll("p")];
+              let allHtml = (match[3] || "").trim();
+              allParas.slice(1).forEach((p) => {
+                allHtml += "<br>" + p.innerHTML;
+              });
+
+              // Split on last <br> that precedes an em-dash attribution
+              const attrMatch = allHtml.match(/^([\s\S]*?)(?:<br\s*\/?>)?([—].*?)$/);
+              let quoteText = allHtml;
+              let attrText = "";
+              if (attrMatch) {
+                quoteText = attrMatch[1].trim();
+                attrText = attrMatch[2].trim();
+              }
+
+              const fig = document.createElement("figure");
+              fig.className = "pullquote";
+              fig.innerHTML = `
+                <p class="pullquote-text">${quoteText}</p>
+                ${attrText ? `<p class="pullquote-attr">${attrText}</p>` : ""}
+              `.trim();
+              bq.replaceWith(fig);
+              return;
+            }
+
             const meta = ALERT_META[type];
             if (!meta) return;
 

@@ -1083,6 +1083,47 @@ img {
   margin-bottom: 0.4rem;
 }
 
+/* ── Pull Quote ──────────────────────────────────────────── */
+/* Usage in markdown: > [!QUOTE]                             */
+/*                    > Quote text here.                     */
+/*                    > — Attribution, *Work* (year)        */
+.prose .pullquote {
+  margin: 2.5rem 0;
+  padding: 1.75rem 2rem 1.5rem;
+  border-left: 4px solid var(--accent);
+  background: var(--surface);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.prose .pullquote::before {
+  content: "\201C";
+  position: absolute;
+  top: 0.5rem;
+  right: 1.25rem;
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.18;
+  font-family: Georgia, "Times New Roman", serif;
+  pointer-events: none;
+  user-select: none;
+}
+.prose .pullquote-text {
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--text);
+  font-style: italic;
+  margin: 0 0 0.9rem;
+}
+.prose .pullquote-attr {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
 /* ── Citations & Footnotes ───────────────────────────────── */
 /* Inline superscript: [^1] renders as <sup class="cite-ref"> */
 .cite-ref {

@@ -26,6 +26,9 @@ Her second irony, the training paradox, follows directly. Because manual interve
 
 The third irony is less often cited and more urgent now. Operators cannot meaningfully intervene in a system they do not understand. Bainbridge's original formulation was about industrial control systems where automation obscured a process's internal state from the operator. The LLM opacity problem is a structural intensification of this: a 175-billion-parameter transformer does not have an "internal state" that can be made legible to a human reviewer in any practically useful sense, even with chain-of-thought output.
 
+> [!QUOTE]
+> Bainbridge puts it precisely: as control systems advance, the operator's contribution grows more important. The more you automate the ordinary, the more you depend on human judgment for the extraordinary, and the less ready that judgment is when called.
+
 All three ironies describe the same underlying problem: automation creates a human oversight role without designing for the human factors that oversight requires.
 
 ## Four waves, same ironies
@@ -80,6 +83,10 @@ The first is periodic manual engagement. "One possibility is to allow the operat
 The second concerns what training should actually develop. Unknown failures cannot be simulated, so the goal is adaptive reasoning — the capacity to respond when procedures run out. Her exact language: "it is ironic to train operators in following instructions and then put them in the system to provide intelligence." Most bank AI governance produces exactly this outcome.
 
 The third sits upstream of training entirely: automatic systems should fail *obviously* rather than degrade gracefully. An LLM that confidently hallucinates while appearing to reason is the structural inverse of this.
+
+> [!QUOTE]
+> Perhaps the final irony is that it is the most successful automated systems, with rare need for manual intervention, which may need the greatest investment in human operator training.
+> — Lisanne Bainbridge, *Ironies of Automation* (1983)
 
 ## The irony that Bainbridge didn't quite name
 

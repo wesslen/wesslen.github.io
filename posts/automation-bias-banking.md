@@ -70,6 +70,9 @@ The third problem is that regulated banks do not have the option of assigning ac
 
 The HCI literature's prescription was never "remove the human." It was "design the oversight role to match what humans can actually do." That design problem is harder than advancing the automation level. It is also the one that banking governance has not yet solved.
 
+> [!QUOTE]
+> The HCI literature's prescription was never "remove the human." It was "design the oversight role to match what humans can actually do."
+
 ## What Article 14 gets right
 
 The EU AI Act's Article 14 is among the first instances of "automation bias" appearing as an explicit named concept in major-jurisdiction AI governance — a term absent from SR 26-2, PRA SS1/23, OSFI E-23, and the MAS FEAT principles.[^7] Article 14(4)(b) requires that oversight persons be able to "remain aware of the possible tendency of automatically relying or over-relying on the output produced by a high-risk AI system." The credit-scoring and creditworthiness-assessment use cases are explicitly listed in Annex III as high-risk.

@@ -36,7 +36,7 @@ The modern HITL concept traces to a 1978 MIT report by Sheridan and Verplank "[H
 
 Parasuraman et al. (2000) broke that continuum by decoupling the *stage* of automation from the *degree*.[^2] They distinguished four information-processing stages (data acquisition, analysis, decision-selection, and execution) and argued the Sheridan-Verplank levels could be applied independently to each. A system might exhibit high automation for data acquisition but low automation for final decision. That distinction is why "HITL" now means different things at different points in a pipeline — and why an engineer describing a training-time labeling workflow and a regulator describing a validation committee are both technically correct when they call what they're doing "human-in-the-loop."
 
-The canonical warning came three years before Parasuraman's refinement. Lisanne Bainbridge's 1983 paper "Ironies of Automation" observed that automating most of the work leaves humans with degraded manual skills and diminished vigilance precisely when intervention is most needed.[^3] Much of the contemporary debate about agentic AI oversight is restating Bainbridge's point. The paper is worth reading in full; the irony it identifies is architectural: automation reliably creates the conditions for its own oversight failure.
+The canonical warning came five years after Sheridan & Verplank. Lisanne Bainbridge's 1983 paper "Ironies of Automation" observed that automating most of the work leaves humans with degraded manual skills and diminished vigilance precisely when intervention is most needed.[^3] Much of the contemporary debate about agentic AI oversight is restating Bainbridge's point. We've dedicated a [full series](post.html?slug=bainbridge-ironies) to discuss the paper and its impact in depth. The paper is worth reading in full; the irony it identifies is architectural: automation reliably creates the conditions for its own oversight failure.
 
 ## Six variants with consequential distinctions
 
@@ -86,6 +86,9 @@ The convergence across jurisdictions is on a core set of expectations: board-lev
 ## What's categorically different now
 
 Earlier automation waves produced human-readable state at every stage. An operator could look at the system and understand exactly what it was doing, even if intervention was difficult.
+
+> [!QUOTE]
+> The supervisory question for agentic AI isn’t whether a human is in the loop. It’s whether the loop still runs at a speed and transparency at which human judgment can matter.
 
 Agentic AI changes what oversight requires in three specific ways, each structural rather than incremental.
 
