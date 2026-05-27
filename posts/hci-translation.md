@@ -13,14 +13,14 @@ Human factors was the category practitioners found hardest to work with. Not the
 
 This makes sense if you understand what the human-factors monitoring task actually requires. It is harder to explain if you've been told that "human oversight" is the primary control mechanism for high-risk AI systems.
 
+> [!QUOTE]
+> Two disciplines have spent forty years solving the same problem without once citing each other: human factors research and banking model risk management. The crosswalk doesn't exist.
+
 ## The field-boundary problem
 
 The HCI and Human Factors research literature is substantial. Since Sheridan and Verplank on levels of automation (1978), the relevant work includes Bainbridge's "Ironies of Automation" (1983), Parasuraman and Riley on automation overreliance (1997), Skitka et al. on automation bias (1999), and Bansal et al. on complementary team performance (2021). These papers appeared in aviation safety and industrial control journals. Model risk practitioners (typically) don't read them.
 
 Two disciplines have spent forty years solving the same problem without once citing each other: human factors research and banking model risk management. The HCI literature produces empirical findings on when and how human operators fail to catch automated errors. The MRM literature produces governance frameworks for the same phenomenon. The crosswalk doesn't exist.
-
-> [!QUOTE]
-> Two disciplines have spent forty years solving the same problem without once citing each other: human factors research and banking model risk management. The crosswalk doesn't exist.
 
 > [!NOTE]
 > **What is a crosswalk?** In standards and regulatory documentation, a crosswalk is a structured mapping document showing how elements of one framework correspond to elements of another — used to demonstrate alignment, identify gaps, or guide implementation. NIST maintains a [public crosswalk library for the AI RMF](https://airc.nist.gov/airmf-resources/crosswalks/) with entries covering ISO/IEC standards, Singapore's IMDA AI Verify, Korea's Trustworthy AI Guidebook, Japan AISI guidelines, and industry frameworks from BSA and Microsoft. None of them map AI RMF concepts to the HCI or Human Factors research literature.
