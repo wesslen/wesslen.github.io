@@ -1,0 +1,118 @@
+<svg viewBox="0 0 700 265" xmlns="http://www.w3.org/2000/svg" role="img"
+     font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace">
+  <title>Three Adversarial Deployment Gates Pipeline</title>
+  <desc>A left-to-right pipeline showing three sequential adversarial deployment gates. Gate 1 (Capability Non-Regression) checks champion-relative utility on the internal task suite. Gate 2 (Safety Non-Regression) runs StrongREJECT, HarmBench, and LlamaGuard within a tier-specific epsilon. Gate 3 (Robustness Ceiling) caps attack success rate at 2%, 5%, or 10% by tier. Failing any gate blocks deployment. Passing all three produces a documented, deploy-eligible system.</desc>
+
+  <defs>
+    <marker id="dg-arr-h" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <polygon points="0 0, 7 3, 0 6" fill="#9ca3af"/>
+    </marker>
+    <marker id="dg-arr-d" markerWidth="6" markerHeight="8" refX="3" refY="7" orient="auto">
+      <polygon points="0 0, 6 0, 3 8" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="700" height="265" fill="#f9fafb" rx="8"/>
+  <rect width="700" height="265" fill="none" stroke="#e2e8f0" stroke-width="1" rx="8"/>
+
+  <!-- Section label -->
+  <text x="350" y="19" text-anchor="middle" font-size="9.5" fill="#6b7280"
+        font-weight="600" letter-spacing="0.10em">THREE ADVERSARIAL DEPLOYMENT GATES</text>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       GATE 1 — Capability Non-Regression (blue)
+       ══════════════════════════════════════════════════════════════ -->
+  <rect x="5" y="28" width="160" height="162" rx="5"
+        fill="rgba(74,158,255,0.05)" stroke="#4a9eff" stroke-width="1.5"/>
+  <rect x="5" y="28" width="160" height="27" rx="5" fill="#4a9eff" fill-opacity="0.14"/>
+  <rect x="5" y="47" width="160" height="8" fill="rgba(74,158,255,0.05)"/>
+  <text x="85" y="43" text-anchor="middle" font-size="9" fill="#2563eb"
+        font-weight="700" letter-spacing="0.08em">GATE 1</text>
+  <text x="85" y="66" text-anchor="middle" font-size="9" fill="#374151">Capability</text>
+  <text x="85" y="78" text-anchor="middle" font-size="9" fill="#374151">Non-Regression</text>
+  <line x1="14" y1="84" x2="156" y2="84" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="14" y="97" font-size="7.5" fill="#6b7280" letter-spacing="0.06em">BENCHMARK</text>
+  <text x="14" y="109" font-size="8.5" fill="#374151">Internal task suite</text>
+  <text x="14" y="121" font-size="8" fill="#6b7280">(use-case specific)</text>
+  <text x="14" y="137" font-size="7.5" fill="#6b7280" letter-spacing="0.06em">PASS CONDITION</text>
+  <text x="14" y="149" font-size="8.5" fill="#2563eb">≤ 2% regression</text>
+  <text x="14" y="161" font-size="8.5" fill="#2563eb">vs. champion model</text>
+  <text x="14" y="176" font-size="7.5" fill="#93c5fd" font-style="italic">threshold requires derivation</text>
+  <!-- fail exit -->
+  <line x1="85" y1="190" x2="85" y2="205" stroke="#d1d5db" stroke-width="1.5" marker-end="url(#dg-arr-d)"/>
+  <text x="85" y="220" text-anchor="middle" font-size="7.5" fill="#9ca3af">BLOCKED</text>
+
+  <!-- connector G1 → G2 -->
+  <line x1="165" y1="109" x2="179" y2="109" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#dg-arr-h)"/>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       GATE 2 — Safety Non-Regression (amber)
+       ══════════════════════════════════════════════════════════════ -->
+  <rect x="181" y="28" width="160" height="162" rx="5"
+        fill="rgba(240,165,0,0.05)" stroke="#f0a500" stroke-width="1.5"/>
+  <rect x="181" y="28" width="160" height="27" rx="5" fill="#f0a500" fill-opacity="0.14"/>
+  <rect x="181" y="47" width="160" height="8" fill="rgba(240,165,0,0.05)"/>
+  <text x="261" y="43" text-anchor="middle" font-size="9" fill="#b45309"
+        font-weight="700" letter-spacing="0.08em">GATE 2</text>
+  <text x="261" y="66" text-anchor="middle" font-size="9" fill="#374151">Safety</text>
+  <text x="261" y="78" text-anchor="middle" font-size="9" fill="#374151">Non-Regression</text>
+  <line x1="190" y1="84" x2="332" y2="84" stroke="#fde68a" stroke-width="1"/>
+  <text x="190" y="97" font-size="7.5" fill="#6b7280" letter-spacing="0.06em">BENCHMARK</text>
+  <text x="190" y="109" font-size="8.5" fill="#374151">StrongREJECT</text>
+  <text x="190" y="121" font-size="8.5" fill="#374151">HarmBench · LlamaGuard</text>
+  <text x="190" y="137" font-size="7.5" fill="#6b7280" letter-spacing="0.06em">PASS CONDITION</text>
+  <text x="190" y="149" font-size="8.5" fill="#b45309">≤ champion + ε</text>
+  <text x="190" y="161" font-size="8.5" fill="#b45309">ε = 1–3% by tier</text>
+  <text x="190" y="176" font-size="7.5" fill="#d97706" font-style="italic">model-level vendor due diligence</text>
+  <!-- fail exit -->
+  <line x1="261" y1="190" x2="261" y2="205" stroke="#d1d5db" stroke-width="1.5" marker-end="url(#dg-arr-d)"/>
+  <text x="261" y="220" text-anchor="middle" font-size="7.5" fill="#9ca3af">BLOCKED</text>
+
+  <!-- connector G2 → G3 -->
+  <line x1="341" y1="109" x2="355" y2="109" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#dg-arr-h)"/>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       GATE 3 — Robustness Ceiling (red)
+       ══════════════════════════════════════════════════════════════ -->
+  <rect x="357" y="28" width="160" height="162" rx="5"
+        fill="rgba(224,82,82,0.05)" stroke="#e05252" stroke-width="1.5"/>
+  <rect x="357" y="28" width="160" height="27" rx="5" fill="#e05252" fill-opacity="0.14"/>
+  <rect x="357" y="47" width="160" height="8" fill="rgba(224,82,82,0.05)"/>
+  <text x="437" y="43" text-anchor="middle" font-size="9" fill="#b91c1c"
+        font-weight="700" letter-spacing="0.08em">GATE 3</text>
+  <text x="437" y="66" text-anchor="middle" font-size="9" fill="#374151">Robustness</text>
+  <text x="437" y="78" text-anchor="middle" font-size="9" fill="#374151">Ceiling (ASR)</text>
+  <line x1="366" y1="84" x2="508" y2="84" stroke="#fecaca" stroke-width="1"/>
+  <text x="366" y="97" font-size="7.5" fill="#6b7280" letter-spacing="0.06em">BENCHMARK</text>
+  <text x="366" y="109" font-size="8.5" fill="#374151">PyRIT · AgentDojo</text>
+  <text x="366" y="121" font-size="8.5" fill="#374151">Crescendo multi-turn</text>
+  <text x="366" y="137" font-size="7.5" fill="#6b7280" letter-spacing="0.06em">PASS CONDITION (by tier)</text>
+  <text x="366" y="149" font-size="8.5" fill="#b91c1c">T1 ≤ 2% · T2 ≤ 5%</text>
+  <text x="366" y="161" font-size="8.5" fill="#b91c1c">T3 ≤ 10%  (high-severity)</text>
+  <text x="366" y="176" font-size="7.5" fill="#e05252" font-style="italic">zero tolerance: tool-hijack / writes</text>
+  <!-- fail exit -->
+  <line x1="437" y1="190" x2="437" y2="205" stroke="#d1d5db" stroke-width="1.5" marker-end="url(#dg-arr-d)"/>
+  <text x="437" y="220" text-anchor="middle" font-size="7.5" fill="#9ca3af">BLOCKED</text>
+
+  <!-- connector G3 → Deploy -->
+  <line x1="517" y1="109" x2="531" y2="109" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#dg-arr-h)"/>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       PRODUCTION (green)
+       ══════════════════════════════════════════════════════════════ -->
+  <rect x="533" y="52" width="160" height="116" rx="5"
+        fill="rgba(92,184,92,0.06)" stroke="#5cb85c" stroke-width="1.5"/>
+  <rect x="533" y="52" width="160" height="27" rx="5" fill="#5cb85c" fill-opacity="0.16"/>
+  <rect x="533" y="71" width="160" height="8" fill="rgba(92,184,92,0.06)"/>
+  <text x="613" y="67" text-anchor="middle" font-size="9" fill="#15803d"
+        font-weight="700" letter-spacing="0.08em">PRODUCTION</text>
+  <text x="613" y="92" text-anchor="middle" font-size="8.5" fill="#374151">All three gates cleared —</text>
+  <text x="613" y="105" text-anchor="middle" font-size="8.5" fill="#374151">thresholds documented,</text>
+  <text x="613" y="118" text-anchor="middle" font-size="8.5" fill="#374151">judges calibrated,</text>
+  <text x="613" y="133" text-anchor="middle" font-size="8.5" fill="#15803d">deploy-eligible</text>
+
+  <!-- footer note -->
+  <text x="350" y="245" text-anchor="middle" font-size="7.5" fill="#9ca3af">Gates cover the adversarial layer only. Use-case quality metrics (accuracy, hallucination rate, business KPIs) are a parallel obligation.</text>
+  <text x="350" y="256" text-anchor="middle" font-size="7.5" fill="#9ca3af">Passing all three is necessary but not sufficient.</text>
+</svg>
