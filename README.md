@@ -1,6 +1,7 @@
 # wesslen.github.io
 
-A static blog for data science, machine learning, and GenAI writing.
+Drift — an opinionated course on banking AI risk, published as a static blog.
+Ten series (~30 posts) on GenAI and agentic-system risk in banking: governance, agent engineering, evals, adversarial testing, human oversight, and economics.
 No build step. No Jekyll. Just HTML, CSS, JavaScript, and `.md` files.
 
 ---
@@ -75,7 +76,7 @@ python -m http.server 8000
 - Tag pills with deterministic per-tag color
 - Hover shimmer + accent left border on post cards
 - Dot-grid notebook background on hero
-- IBM Plex Mono + IBM Plex Sans typography
+- Inter (body) + JetBrains Mono (code/UI labels) typography
 
 ## Deployment
 

@@ -1,7 +1,7 @@
 ---
 title: "Everything Drifts"
 date: 2026-03-22
-description: "What drift means in AI — and why I named a blog after it."
+description: "Why I named it Drift — and why it's now a course."
 tags: []
 ---
 
@@ -17,7 +17,8 @@ I've kept plenty of private notes: Google docs, Apple Notes, markdown files scat
 
 Writing for an audience — even a small one, even an imaginary one — forces a different kind of honesty. You can't handwave past the part you don't quite understand. You can't leave a vague bullet point and promise yourself you'll come back to it. You have to say the thing, or admit you can't.
 
-> The best way to understand something is to explain it to someone else. The second-best way is to try to write it down as if you were.
+> [!QUOTE]
+> The best way to understand something is to teach it to someone else. The second-best way is to try to write it down as if you were. So here I am.
 
 I'm also motivated by a quiet frustration with how GenAI gets discussed publicly. The coverage tends to oscillate between breathless hype and breathless doom, with very little in the middle — the messy, technically real middle where the actual work happens. I'd like to contribute something from that middle, and specifically from its edges: the places where the frameworks haven't caught up, where the behavior is hardest to predict, where the governance questions are still open.
 
@@ -37,12 +38,18 @@ But something real is happening. The models I work with today are qualitatively 
 
 There's also a certain irony embedded in the name. Drift is a useful shorthand — but as a measurement concept for agentic AI, it tends to get treated as more sufficient than it is. What you're actually looking for depends entirely on the system, the institution, and the specific failure mode you're trying to prevent. That gap between the clean general concept and the messy particular reality is one of the things I keep coming back to.
 
-## What to Expect Here
+## From Notes to a Course
 
-I'm planning to write about four areas. The first is [agentic engineering](post.html?slug=context): context files, orchestration design, multi-session continuity, and what it actually takes to build agents that hold up in production — and stay on the rails when you're not watching. The second is [financial AI and model risk](post.html?slug=sr11-7): what SR 11-7 requires, where it breaks down for modern AI, and what regulatory change is actually coming. The third is [guardrails and governance](post.html?slug=guardrails): what runtime controls mean in an autonomous system operating inside a regulated institution. And the fourth is [GenAI evals](post.html?slug=metrics-metrics-metrics): how to actually know if a system is working, and for what.
+When I started, I said I'd write about four things. That number didn't survive contact with the subject. What began as scattered notes has turned into something with a shape: ten series, around thirty posts, each series roughly a lecture's worth of argument. Somewhere along the way it stopped being a blog I was adding to and started being a curriculum I was, apparently, writing.
+
+So I'm going to call it what it is: an opinionated course on the risk of GenAI and agentic systems in banking. Opinionated because I'm not pretending to neutrality — I have views about what's overbuilt, what's underbuilt, and where the governance is theater. A course because the pieces build on each other in an order, even if you can read them in any order you like.
+
+The arc runs roughly like this. It starts with [the governance baseline](post.html?slug=sr11-7) — the fifteen-year-old model risk framework banks are stretching over systems it was never written for — and where it cracks. Then how agents are [actually built](post.html?slug=context), and what happens when they [start calling each other](post.html?slug=a2a-risks) or [driving a screen](post.html?slug=molmoweb-data-flywheel). Then the hard part: whether you can [measure](post.html?slug=metrics-metrics-metrics) any of it, whether you can [break it](post.html?slug=adversarial-workflow) before someone else does, and what [keeping a human in the loop](post.html?slug=hitl-design) actually buys you — a question the [human-factors literature](post.html?slug=bainbridge-ironies) answered, in part, decades ago. It ends where the stakes are most concrete: [money, identity, and liability](post.html?slug=payments-liability-gap) when an agent transacts, and the [economics](post.html?slug=ai-econ-model) of adopting all of it.
+
+I built it so it can be taught more than one way — a ten-week lunch-and-learn, a semester, or read at your own pace. Each series stands on its own; together they're the course.
 
 The blog sits at an intersection that doesn't have a lot of native coverage. If you work in model risk or AI governance, I hope the technical posts are readable. If you're an ML engineer, I hope the governance posts don't feel like compliance theater. I'm trying to write for both — which may mean occasionally failing both.
 
-Posts will vary in length and formality. Some will be close to polished essays. Others will be working notes — me thinking through a problem in real time, with no guarantee I've resolved it by the end.
+Posts will vary in length and formality. Some are close to polished essays. Others are working notes — me thinking through a problem in real time, with no guarantee I've resolved it by the end. That's true of the course, too: it documents a moving target, which means part of its job is to keep going stale and getting rewritten.
 
 If that sounds useful to you, I'm glad you're here.
