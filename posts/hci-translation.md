@@ -74,7 +74,6 @@ The mapping below is a working draft. Some cells represent judgment calls that w
 
 Ten of twelve rows are gaps. Two are partial. None are fully addressed.
 
-
 ## The normative model the vocabulary doesn't supply
 
 There is a liability in the "automation bias" framing that the crosswalk should address before it exports the term into governance documentation. Bias is always measured as deviation from a normative baseline; in industry contexts that baseline is almost never specified. Ask a product manager what the analyst's behavior is biased *relative to*, and the conversation typically stops. This is where the field of Cognitive Science too can provide support.
