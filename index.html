@@ -57,7 +57,7 @@
             </svg>
           </button>
           <a href="./glossary.html" class="nav-link">glossary</a>
-          <a href="./slides.html" class="nav-link">slides</a>
+          <a href="./slides.html" class="nav-link">modules</a>
           <a href="./about.html" class="nav-link">about</a>
           <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">&#9776;</button>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
@@ -68,7 +68,7 @@
     </header>
     <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
       <a href="./glossary.html" class="nav-link">glossary</a>
-      <a href="./slides.html" class="nav-link">slides</a>
+      <a href="./slides.html" class="nav-link">modules</a>
       <a href="./about.html" class="nav-link">about</a>
     </nav>
 
@@ -317,7 +317,7 @@
 
             const slidesDeck = slidesMap[series.id];
             const slidesLink = slidesDeck
-              ? ` <a href="./${slidesDeck.dir}/index.html" class="series-slides-link" target="_blank" rel="noopener" title="View slide deck">slides ↗</a>`
+              ? ` <a href="./${slidesDeck.dir}/index.html" class="series-slides-link" target="_blank" rel="noopener" title="View module deck">modules ↗</a>`
               : "";
             html += `<div class="series-group-a" data-tags="${[...new Set(posts.flatMap((p) => p.post.tags || []))].join(" ")}">
               <div class="series-header-a">⬡ ${series.title}<span class="series-count">${posts.length} posts</span>${slidesLink}</div>`;

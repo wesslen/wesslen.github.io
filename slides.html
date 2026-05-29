@@ -3,25 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Slides — Drift: Notes on AI on the Edges</title>
+    <title>Modules — Drift: An opinionated course on banking AI risk</title>
     <meta
       name="description"
-      content="Slide decks for each series on the Drift blog — covering agentic engineering, model risk, evaluations, adversarial testing, banking AI, and more."
+      content="Ten course modules — one slide deck per series, covering regulatory drift, agentic engineering, evals, adversarial testing, human factors, and banking AI."
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Drift: Notes on AI on the Edges" />
-    <meta property="og:title" content="Slides — Drift: Notes on AI on the Edges" />
-    <meta
-      property="og:description"
-      content="Slide decks for each series — agentic engineering, model risk, evaluations, adversarial testing, banking AI, and more."
-    />
+    <meta property="og:title" content="Modules — Drift: An opinionated course on banking AI risk" />
+    <meta property="og:description" content="Ten course modules — slide decks for each series in the curriculum arc." />
     <meta property="og:url" content="https://wesslen.github.io/slides.html" />
     <meta property="og:image" content="https://wesslen.github.io/og-default.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Slides — Drift: Notes on AI on the Edges" />
+    <meta name="twitter:title" content="Modules — Drift: An opinionated course on banking AI risk" />
     <meta
       name="twitter:description"
-      content="Slide decks for each series — agentic engineering, model risk, evaluations, adversarial testing, banking AI, and more."
+      content="Ten course modules — slide decks for each series in the curriculum arc."
     />
     <meta name="twitter:image" content="https://wesslen.github.io/og-default.png" />
     <link rel="canonical" href="https://wesslen.github.io/slides.html" />
@@ -199,7 +196,7 @@
             </svg>
           </button>
           <a href="./glossary.html" class="nav-link">glossary</a>
-          <a href="./slides.html" class="nav-link active">slides</a>
+          <a href="./slides.html" class="nav-link active">modules</a>
           <a href="./about.html" class="nav-link">about</a>
           <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">&#9776;</button>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
@@ -210,7 +207,7 @@
     </header>
     <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
       <a href="./glossary.html" class="nav-link">glossary</a>
-      <a href="./slides.html" class="nav-link active">slides</a>
+      <a href="./slides.html" class="nav-link active">modules</a>
       <a href="./about.html" class="nav-link">about</a>
     </nav>
 
@@ -219,15 +216,15 @@
       <div class="slides-hero">
         <h1>
           //
-          <span class="accent">slides</span>
+          <span class="accent">modules</span>
         </h1>
-        <p>One deck per series — HTML for presenting, PDF for sharing.</p>
+        <p>Ten modules, one per series — HTML for presenting, PDF for sharing. ~50 minutes each.</p>
       </div>
 
       <p class="slides-note">
-        Each slide deck covers a complete series from the blog. HTML decks open in-browser via
+        Each module covers a complete series from the course. HTML decks open in-browser via
         <a href="https://github.com/dayhaysoos/open-slide" target="_blank" rel="noopener">open-slide</a>
-        ; PDFs are the same content exported for download and offline sharing. Series without a published deck are
+        ; PDFs are the same content exported for download and offline sharing. Modules without a published deck are
         listed as coming soon.
       </p>
 
@@ -333,7 +330,8 @@
         }
 
         grid.innerHTML = decks
-          .map((deck) => {
+          .map((deck, i) => {
+            const moduleNum = String(i + 1).padStart(2, "0");
             const postCount = deck.posts?.length ?? 0;
             const postLabel = `${postCount} post${postCount !== 1 ? "s" : ""}`;
             const badgeClass = deck.published ? "published" : "soon";
@@ -348,12 +346,12 @@
 
             return `<div class="slide-card">
               <div class="slide-card-header">
-                <p class="slide-card-title">⬡ ${deck.title}</p>
+                <p class="slide-card-title"><span style="color:var(--muted);font-size:0.78rem;font-family:var(--font-mono);margin-right:0.4rem">${moduleNum}</span>${deck.title}</p>
                 <span class="slide-card-badge ${badgeClass}">${badgeLabel}</span>
               </div>
               <div class="slide-card-divider"></div>
               <p class="slide-card-desc">${deck.description}</p>
-              <span class="slide-card-posts">${postLabel} · series</span>
+              <span class="slide-card-posts">${postLabel} · module ${moduleNum}</span>
               ${actions}
             </div>`;
           })
