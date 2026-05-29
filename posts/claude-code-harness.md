@@ -15,8 +15,6 @@ About 1,900 files of TypeScript. Haseeb Qureshi read through the key modules and
 
 Every event — text chunks, tool calls, progress updates, errors, compaction boundaries — flows through a single `yield`-based stream. The CLI, the SDK, and the IDE bridge all consume the same event stream and just render it differently.
 
-> [!TIP]
-> **Plain terms:** A generator is a function that produces values one at a time, pausing between each — like a ticker tape printing one item at a time rather than dumping the whole roll at once. The `yield` keyword is what hands each value to whatever's listening. Claude Code builds its entire event loop on this pattern: every output (a word of text, a tool call, an error) passes through the same tape in order, and every surface — terminal, IDE, browser — just taps into it and displays what arrives.
 
 This matters architecturally. You can chain smaller generators into the main one (`yield*`) — like splicing tributaries into a river without rerouting the whole channel — which is probably why the same core loop can serve such different surfaces without a separate implementation for each. That composability was a deliberate design choice — the same event stream powering the terminal and the IDE reduces the risk of surface-specific bugs.
 

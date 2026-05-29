@@ -202,8 +202,6 @@ The `input-required` state is one of the more thoughtful design choices in the p
 | Streaming | `message/stream` via SSE | Long outputs, real-time status updates |
 | Push notifications | Webhook registration via `tasks/pushNotificationConfig/create` | Hours-long tasks, disconnected clients |
 
-> [!TIP]
-> **Plain terms:** SSE (Server-Sent Events) is a one-way channel where the server pushes updates to the client continuously over a single open HTTP connection, rather than the client polling repeatedly. Think of it as a news ticker that updates automatically rather than a page you refresh. For long agent tasks, streaming over SSE means you see partial results in real time — status changes, incremental output — rather than waiting for the full task to complete before receiving anything.
 
 Streaming over SSE delivers two event types: `TaskStatusUpdateEvent` (state transitions) and `TaskArtifactUpdateEvent` (incremental content). The stream closes when the task reaches a terminal state. Push notifications flip the model — the server HTTP POSTs to a client-supplied webhook URL as task state changes, so the client doesn't need to maintain a connection or poll.[^5]
 

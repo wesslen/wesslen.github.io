@@ -585,6 +585,21 @@
     ]
   },
   {
+    "id": "dead-letter-queue",
+    "term": "dead-letter queue",
+    "full": "Dead-letter queue (DLQ)",
+    "short": "A queue where failed messages or tasks are routed after exhausting retry attempts, preserving them for inspection rather than dropping them silently.",
+    "definition": "A dead-letter queue (DLQ) is a holding area for messages or tasks that have failed processing after exhausting their configured retry budget. Rather than discarding failed items or blocking the main processing queue, a DLQ routes them somewhere they can be inspected, diagnosed, and potentially reprocessed. The name comes from postal services: undeliverable mail goes to the dead letter office rather than being destroyed. For agentic systems, DLQs are a key audit trail mechanism — failed tasks remain recoverable and attributable rather than disappearing silently into logs.",
+    "domain": "agentic",
+    "aliases": [
+      "DLQ",
+      "dead letter queue"
+    ],
+    "used_in": [
+      "agent-harness-design"
+    ]
+  },
+  {
     "id": "deployment-gate",
     "term": "Deployment Gate",
     "full": "Deployment Gate",
@@ -737,6 +752,25 @@
     "used_in": [
       "agent-identity-kyc",
       "agentic-commerce-gap"
+    ]
+  },
+  {
+    "id": "red-team-engagement",
+    "term": "engagement",
+    "full": "red-team engagement",
+    "short": "A bounded, structured adversarial testing exercise with defined scope, phases, and deliverables. Security-industry term; MRM practitioners often call the same activity a red-team exercise or adversarial review.",
+    "definition": "In security consulting, an engagement is a scoped, time-boxed project — analogous to an audit or model validation cycle — in which a team systematically attempts to break a system within agreed rules of engagement. Applied to LLMs, a red-team engagement typically traverses five phases: scope and threat modeling, attack execution, triage, reporting, and retest. Each phase produces artifacts (architecture diagrams, findings logs, ASR dashboards, residual-risk statements) that map directly onto model risk documentation requirements. The term originates in penetration testing practice; model risk and validation teams more familiar with SR 11-7 vocabulary may prefer red-team exercise or adversarial review — these are functionally equivalent.",
+    "domain": "security",
+    "aliases": [
+      "red-team engagement",
+      "red-team exercise",
+      "adversarial review",
+      "adversarial testing engagement"
+    ],
+    "used_in": [
+      "adversarial-incompleteness",
+      "adversarial-workflow",
+      "deployment-gates"
     ]
   },
   {
@@ -954,6 +988,22 @@
     ]
   },
   {
+    "id": "gans",
+    "term": "GANs",
+    "full": "Generative Adversarial Networks",
+    "short": "A machine learning architecture where two models — a generator and a discriminator — compete to improve each other: the generator produces outputs, the discriminator tries to distinguish them from real examples.",
+    "definition": "Generative Adversarial Networks (GANs) pair a generator model (which learns to produce realistic outputs) against a discriminator model (which learns to detect fakes). Their adversarial training dynamic drives both toward higher quality. The pattern has broader applicability beyond image generation: any system where one component produces outputs and a separate, skeptically-tuned component evaluates them borrows the same logic. Agent harness designs use GAN-inspired planner/generator/evaluator architectures because a standalone evaluator trained to be skeptical produces more reliable quality assessment than asking a single model to critique its own output.",
+    "domain": "ml",
+    "aliases": [
+      "GAN",
+      "Generative Adversarial Network",
+      "generative adversarial network"
+    ],
+    "used_in": [
+      "agent-harness-design"
+    ]
+  },
+  {
     "id": "gao",
     "term": "GAO",
     "full": "Government Accountability Office",
@@ -1031,6 +1081,22 @@
     ],
     "used_in": [
       "benchmark-uncertainty"
+    ]
+  },
+  {
+    "id": "generator",
+    "term": "generator",
+    "full": "Generator function (async generator)",
+    "short": "A function that produces values one at a time using `yield`, pausing between each — enabling lazy, composable event streams without materializing all results at once.",
+    "definition": "A generator function uses the `yield` keyword to produce values one at a time, suspending execution between each yield rather than computing everything upfront. Async generators extend this to asynchronous contexts. In agent runtimes like Claude Code, the entire event loop is an async generator: every output — text tokens, tool calls, errors, compaction signals — flows through a single `yield`-based stream that the terminal, IDE, and SDK all consume identically. Generators are composable via `yield*` (splicing tributaries into a main stream), which is why a single core loop can power multiple surfaces without separate implementations.",
+    "domain": "engineering",
+    "aliases": [
+      "async generator",
+      "generator function",
+      "yield-based stream"
+    ],
+    "used_in": [
+      "claude-code-harness"
     ]
   },
   {
@@ -1860,22 +1926,6 @@
     ]
   },
   {
-    "id": "nhi",
-    "term": "non-human identity",
-    "full": "Non-human identity",
-    "short": "Service accounts, API keys, bots, and AI agents that authenticate to systems — a vastly over-permissioned credential class.",
-    "definition": "Non-human identities (NHIs) are the credentials used by automated systems — service accounts, API keys, CI/CD tokens, bots, and AI agents — to authenticate to and take actions within IT environments. Entro Security's 2025 State of Non-Human Identities report found that 97% of NHIs carry excessive privileges. AI agents are a rapidly growing NHI category: they operate at machine speed, initiate hundreds of actions within a single authenticated session, and may access sensitive data across multiple systems without intermediate human authentication. The NIST NCCoE concept paper on agent identity and authorization specifically addresses how to establish least privilege for agents whose required actions cannot be fully predicted at deployment time.",
-    "domain": "security",
-    "aliases": [
-      "NHI",
-      "non-human identities",
-      "non-human principals"
-    ],
-    "used_in": [
-      "a2a-risks"
-    ]
-  },
-  {
     "id": "nist",
     "term": "NIST",
     "full": "National Institute of Standards and Technology",
@@ -1972,6 +2022,22 @@
     "used_in": [
       "sr11-7",
       "context"
+    ]
+  },
+  {
+    "id": "nhi",
+    "term": "non-human identity",
+    "full": "Non-human identity",
+    "short": "Service accounts, API keys, bots, and AI agents that authenticate to systems — a vastly over-permissioned credential class.",
+    "definition": "Non-human identities (NHIs) are the credentials used by automated systems — service accounts, API keys, CI/CD tokens, bots, and AI agents — to authenticate to and take actions within IT environments. Entro Security's 2025 State of Non-Human Identities report found that 97% of NHIs carry excessive privileges. AI agents are a rapidly growing NHI category: they operate at machine speed, initiate hundreds of actions within a single authenticated session, and may access sensitive data across multiple systems without intermediate human authentication. The NIST NCCoE concept paper on agent identity and authorization specifically addresses how to establish least privilege for agents whose required actions cannot be fully predicted at deployment time.",
+    "domain": "security",
+    "aliases": [
+      "NHI",
+      "non-human identities",
+      "non-human principals"
+    ],
+    "used_in": [
+      "a2a-risks"
     ]
   },
   {
@@ -2378,25 +2444,6 @@
     "full": "Reason + Act"
   },
   {
-    "id": "red-team-engagement",
-    "term": "engagement",
-    "full": "red-team engagement",
-    "short": "A bounded, structured adversarial testing exercise with defined scope, phases, and deliverables. Security-industry term; MRM practitioners often call the same activity a red-team exercise or adversarial review.",
-    "definition": "In security consulting, an engagement is a scoped, time-boxed project — analogous to an audit or model validation cycle — in which a team systematically attempts to break a system within agreed rules of engagement. Applied to LLMs, a red-team engagement typically traverses five phases: scope and threat modeling, attack execution, triage, reporting, and retest. Each phase produces artifacts (architecture diagrams, findings logs, ASR dashboards, residual-risk statements) that map directly onto model risk documentation requirements. The term originates in penetration testing practice; model risk and validation teams more familiar with SR 11-7 vocabulary may prefer red-team exercise or adversarial review — these are functionally equivalent.",
-    "domain": "security",
-    "aliases": [
-      "red-team engagement",
-      "red-team exercise",
-      "adversarial review",
-      "adversarial testing engagement"
-    ],
-    "used_in": [
-      "adversarial-incompleteness",
-      "adversarial-workflow",
-      "deployment-gates"
-    ]
-  },
-  {
     "id": "red-teaming",
     "term": "Red-teaming",
     "full": "",
@@ -2678,6 +2725,21 @@
     ],
     "used_in": [
       "hitl-vocabulary"
+    ]
+  },
+  {
+    "id": "sse",
+    "term": "SSE",
+    "full": "Server-Sent Events",
+    "short": "A one-way HTTP streaming protocol where the server pushes updates to the client continuously over a single open connection, without the client polling.",
+    "definition": "Server-Sent Events (SSE) is an HTTP-based protocol that keeps a connection open so the server can push data to the client as it becomes available. Unlike WebSockets (bidirectional) or polling (client-initiated), SSE is unidirectional and reconnects automatically. In agent contexts, SSE is the primary transport for streaming long-running task results: partial outputs, status transitions, and incremental content arrive in real time rather than waiting for task completion.",
+    "domain": "agentic",
+    "aliases": [
+      "Server-Sent Events",
+      "server-sent events"
+    ],
+    "used_in": [
+      "google-adk-a2a"
     ]
   },
   {
