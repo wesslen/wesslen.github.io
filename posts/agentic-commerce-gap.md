@@ -11,6 +11,9 @@ The five-word summary of where agentic AI in banking payments stands today is bo
 
 The technology half has been moving quickly and visibly. Visa TAP launched in October 2025. Mastercard Verifiable Intent shipped in March 2026. Google's Universal Commerce Protocol debuted at NRF in January 2026. Three prior posts in this series have documented what the law and identity infrastructure half looks like. This post is about the "narrowing merchants" half, and what it means for the competitive structure of the industry and the consumers moving through it.
 
+> [!QUOTE]
+> The right question before deployment isn't "is this product legal?" It's "when something goes wrong, and something will go wrong, do the people most exposed to the consequence have any meaningful recourse?"
+
 ## A three-tier market is forming, and regulation is the moat
 
 Something structural is happening to the U.S. banking market around agentic AI, and it has less to do with technology capability than with data access and regulatory position.
@@ -75,7 +78,7 @@ The **CFPB's revised Section 1033 rule** will resolve whether AI agents routed t
 
 ## The honest accounting
 
-This series has covered a lot of institutional ground: MRM frameworks, payment rail liability, identity infrastructure, market structure, open banking, deployment performance. The honest accounting compresses to a few sentences.
+This series has covered a lot of institutional ground: MRM frameworks, payment rail liability, identity infrastructure, market structure, open banking, deployment performance. The accounting compresses to a few sentences.
 
 The technology is real and it's moving. The card network frameworks are genuine progress on the authentication and authorization problem. The stablecoin infrastructure is scaling. Agentic commerce is arriving.
 
@@ -85,10 +88,7 @@ The risk isn't evenly distributed. Tier 1 banks are positioned to benefit from r
 
 The right question before deployment isn't "is this product legal?" It's "when something goes wrong, and something will go wrong, do the people most exposed to the consequence have any meaningful recourse?"
 
-> [!QUOTE]
-> The right question before deployment isn't "is this product legal?" It's "when something goes wrong, and something will go wrong, do the people most exposed to the consequence have any meaningful recourse?"
-
-Right now, on the newest rails, the honest answer is often no.
+Right now, on the newest rails, the answer is often no.
 
 [^1]: JPMorgan data fee regime: Fortune reporting on the ~$300M annual estimate at [fortune.com](https://fortune.com/2025/07/16/jpmorgan-chase-fees-fintechs-plaid-finicity-crypto-wall-street-citigroup-bank-of-america-wells-fargo/); CNBC confirmation of negotiated deals covering 95%+ of pulls at [cnbc.com](https://www.cnbc.com/2025/11/14/jpmorgan-chase-fintech-fees.html); Payments Dive on Plaid's pricing arrangement at [paymentsdive.com](https://www.paymentsdive.com/news/plaid-to-pay-for-jpmorgan-data-open-banking-fintechs/760192/).
 

@@ -16,9 +16,6 @@ This is the third post in a short series on adversarial testing for LLMs in bank
 
 The question has a precise mathematical form. A 2025 NIST publication[^1] (updated April 2026) frames it as follows: for any language model policy Π that rejects a set of unacceptable outputs, the set of prompts that can elicit those outputs cannot be finitely enumerated. The scope of possible adversarial inputs is not large. It is unbounded.
 
-> [!QUOTE]
-> The scope of possible adversarial inputs is not large. It is unbounded.
-
 ## The incompleteness result in plain terms
 
 Vassilev introduces a useful term: OOPS — Out-Of-Policy Speech. OOPS is the set of prompts a policy Π deems unacceptable: a policy violation, a jailbreak, or a harmful generation, depending on what Π is trying to prevent. The question they ask is whether OOPS can be enumerated.
@@ -40,6 +37,9 @@ What static red-teaming misses is the dynamic half. The model updates. Tools are
 The pattern the Vassilev result most directly criticizes is the certification trap: treating a passed deployment gate as evidence that the model is safe, rather than evidence that it resisted the specific attacks in the suite on the specific version tested. Banks are particularly exposed to this trap because the MRM apparatus was built around completion events (model approval, model validation, periodic review), rather than around continuous monitoring of a system that may never reach a stable state. The [guardrails post](post.html?slug=guardrails) touched on a related version of this: the guardrail that passed its initial gate is still running against a threat environment that has moved.
 
 The vocabulary of [HITL timing regimes](post.html?slug=hitl-design) is useful here. Design-time and deploy-time gates are necessary but not sufficient without a runtime monitoring layer that detects when the threat environment has moved. The adversarial testing parallel is direct: pre-deployment red-teaming and deployment gates are necessary; continuous adversarial monitoring is the runtime layer that makes them meaningful over time.
+
+> [!QUOTE]
+> The scope of possible adversarial inputs is not large. It is unbounded.
 
 ## The adaptive alternative
 

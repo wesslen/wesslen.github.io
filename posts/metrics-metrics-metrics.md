@@ -11,6 +11,9 @@ If you've worked on evaluating a GenAI application and sat in a meeting where so
 
 Engineers hit a different version of the same trap: ship the eval, check the box, next sprint. The problem isn't that rubber-stamp evals waste time — it's that they look like they're working, right up until you hit the cliff.
 
+> [!QUOTE]
+> Seeing a number produces overconfidence. Knowing the number is imperfect doesn't protect you from anchoring on it.
+
 The question I keep stumbling over is this: if our metrics aren't measuring what we think they're measuring, are we better off with them or without them?
 
 ## The Brady Bunch Problem
@@ -25,9 +28,6 @@ This isn't new. Finance lived through exactly this problem with Value at Risk.
 
 VaR became the standard metric for market risk in the 1990s: a single number that told you how much you could lose on a bad day, at a given confidence interval. Banks loved it. Regulators blessed it. It was legible, comparable, and auditable — qualities that made it irresistible to regulators and risk committees. It was also wrong in exactly the way that mattered: it performed beautifully in normal market conditions and catastrophically failed to capture tail risk. Nassim Taleb testified to Congress after the financial crisis that risk measurement of this kind has a systematic side effect — it *increases* risk-taking, even among people who know the measure isn't reliable. Seeing a number produces overconfidence. Knowing the number is imperfect doesn't protect you from anchoring on it.[^2]
 
-> [!QUOTE]
-> Seeing a number produces overconfidence. Knowing the number is imperfect doesn't protect you from anchoring on it.
-
 The broader pattern has a name. Goodhart's Law: when a measure becomes a target, it ceases to be a good measure. Jerry Muller, in *The Tyranny of Metrics*, traces this across education, medicine, and government — the consistent failure mode where an institution starts optimizing the indicator instead of the underlying thing the indicator was supposed to track.[^3] The metric colonizes the goal.
 
 GenAI benchmark-chasing is the same dynamic. When MMLU scores appear in model announcements and procurement conversations, they stop being measurements and become targets. Model developers train toward them. Buyers anchor on them. And the scores gradually decouple from anything that predicts real-world behavior.
@@ -38,6 +38,9 @@ GenAI benchmark-chasing is the same dynamic. When MMLU scores appear in model an
 ## Social Scientists Know Something About This
 
 Here's the part most ML practitioners skip: social scientists have been thinking about [measurement theory](https://books.google.com/books/about/Measurement_Theory_and_Applications_for.html?id=caxCDwAAQBAJ) for over a century, and they've developed real tools for it.
+
+> [!QUOTE]
+> The field I think GenAI practitioners most need to read isn't ML engineering literature. It's psychometrics.
 
 Psychometrics — the field that gave us standardized testing, survey design, and educational measurement — is fundamentally in the business of measuring things you can't see directly. You can't observe "reasoning ability" or "mathematical aptitude" any more than you can observe "safety" or "faithfulness" in a language model. What you observe are *indicators* — specific items, tasks, outputs. The hard question, the one psychometricians have been wrestling with since the 1950s, is whether your indicators actually measure the underlying construct.
 
@@ -113,9 +116,6 @@ The practical implication is that verifying your judge should be treated like va
 I've watched this play out in financial services, which has had formal [model risk management](post.html?slug=sr11-7) obligations for fifteen years. SR 11-7 requires validation, documentation, and ongoing monitoring of quantitative models. You'd think that culture would transfer naturally to GenAI evaluation. In my experience, it mostly hasn't — partly because GenAI is arriving through product and engineering channels rather than model development and risk management ones, and partly because the dashboards look authoritative enough that nobody asks what they're actually measuring.
 
 Taleb's observation about VaR is worth sitting with: even people who *know* a metric is imperfect anchor on it anyway. The solution isn't to remove the number — it's to surround the number with the infrastructure that makes it meaningful. In finance, that meant stress testing, scenario analysis, and actual model validation. In GenAI, it means the same thing: test design, eval pipeline engineering, judge calibration, and an honest account of what your metrics can and can't tell you.
-
-> [!QUOTE]
-> The field I think GenAI practitioners most need to read isn't ML engineering literature. It's psychometrics.
 
 The field I think GenAI practitioners most need to read isn't ML engineering literature. It's psychometrics. Social scientists spent the better part of the 20th century developing tools for measuring things you can't observe directly, under conditions where your measurement instrument affects what it measures, in contexts where the constructs themselves are contested. That is also, with slight vocabulary changes, an exact description of what we're trying to do with GenAI evaluation.
 

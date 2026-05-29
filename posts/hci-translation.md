@@ -1,6 +1,6 @@
 ---
 title: "The Last Mile That No One Owns"
-date: 2026-05-26
+date: 2026-05-27
 description: "NIST AI 800-4 found that human-factors monitoring is the most underdeveloped category of post-deployment AI oversight. The cause is a field-boundary problem with a specific cost."
 tags: [human-in-the-loop, banking, regulatory]
 ---
@@ -23,7 +23,7 @@ The HCI and Human Factors research literature is substantial. Since Sheridan and
 Two disciplines have spent forty years solving the same problem without once citing each other: human factors research and banking model risk management. The HCI literature produces empirical findings on when and how human operators fail to catch automated errors. The MRM literature produces governance frameworks for the same phenomenon. The crosswalk doesn't exist.
 
 > [!NOTE]
-> **What is a crosswalk?** In standards and regulatory documentation, a crosswalk is a structured mapping document showing how elements of one framework correspond to elements of another — used to demonstrate alignment, identify gaps, or guide implementation. NIST maintains a [public crosswalk library for the AI RMF](https://airc.nist.gov/airmf-resources/crosswalks/) with entries covering ISO/IEC standards, Singapore's IMDA AI Verify, Korea's Trustworthy AI Guidebook, Japan AISI guidelines, and industry frameworks from BSA and Microsoft. None of them map AI RMF concepts to the HCI or Human Factors research literature.
+> **What is a crosswalk?** In standards and regulatory documentation, a crosswalk is a structured mapping document showing how elements of one framework correspond to elements of another — used to demonstrate alignment, identify gaps, or guide implementation, e.g. see [NIST's standards for mapping relationships](https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8477.pdf). NIST maintains a [public crosswalk library for the AI RMF](https://airc.nist.gov/airmf-resources/crosswalks/) with entries covering ISO/IEC standards, Singapore's IMDA AI Verify, Korea's Trustworthy AI Guidebook, Japan AISI guidelines, and industry frameworks from BSA and Microsoft. None of them map AI RMF concepts to the HCI or Human Factors research literature.
 
 The vocabulary gap is not incidental. MRM practitioners use "effective challenge," "ongoing monitoring," and "qualified personnel." HCI researchers use "skill atrophy," "automation bias," "supervisory control," and "situation awareness." Both vocabularies describe the conditions under which oversight of deployed AI systems breaks down, with completely different terms and completely different operational implications. When the vocabulary doesn't connect, governance solutions can look correct from inside the framework while being systematically incomplete from outside it.
 
@@ -49,6 +49,31 @@ The [Sheridan-Verplank levels of automation](post.html?slug=hitl-vocabulary) map
 None of this is waiting for new research. The concepts exist. The empirical baselines exist. What doesn't exist is an institutional owner for the translation.
 
 Practitioners can start without one. Override rate tracking can be added to ongoing monitoring templates now. Documenting the automation tier (LOA 2–3 vs. 4–5 vs. 9–10) in the model inventory creates the prerequisite for tier-appropriate control selection. Classifying human-factors incidents using the misuse/disuse/abuse taxonomy assigns them to existing risk category owners rather than leaving them orphaned.
+
+## The crosswalk that could exist
+
+The mapping below is a working draft. Some cells represent judgment calls that would require empirical calibration to operationalize. The point is not precision — it is to demonstrate that the mapping is tractable, that it could be built, and that its absence reflects institutional inertia rather than conceptual difficulty.
+
+> [!NOTE]
+> This table is illustrative. Coverage assessments reflect the author's reading of SR 11-7 (2011), SR 26-2 (April 2026), and publicly available guidance as of May 2026.
+
+| HCI Concept | Source | Risk Predicted | Nearest SR 11-7 / SR 26-2 Provision | Observable Metric | US Supervision Coverage |
+|---|---|---|---|---|---|
+| Skill atrophy | Bainbridge 1983 | Operators lose manual competence under high automation; fail on exceptional cases | SR 11-7 §IV human review; SR 26-2 override tracking | Human override rate; periodic manual-only testing | ✗ Gap: no override-rate threshold or baseline |
+| Training paradox | Bainbridge 1983 | Training investment must scale with automation reliability | SR 11-7 §VI ongoing monitoring; SR 26-2 governance | Annual training hours; simulator test performance | ✗ Gap: qualifications specified, maintenance not |
+| Levels of automation | Sheridan-Verplank 1978 | Risk profile and oversight requirements differ fundamentally by automation level | SR 26-2 governance tiers | Documented LOA at validation; tier-specific control matrix | ~ Partial: tiering introduced, controls not differentiated by LOA |
+| Misuse (commission errors) | Parasuraman & Riley 1997; Skitka et al. 1999 | Human approval ≠ independent verification at high reliance; ~20% commission error rate even with explicit fallibility warnings | SR 11-7 §IV "effective challenge" | Commission error rate; sampled independent vs. model-aligned decisions | ✗ Gap: effective challenge defined qualitatively; no commission-error standard |
+| Disuse (alert fatigue) | Parasuraman & Riley 1997 | High false-positive rates make dismissal locally rational; monitoring quality degrades silently | SR 11-7 §IV outcomes analysis; operational risk | Alert dismissal rate; false-positive rate; missed true-positive rate | ~ Partial: false-positive rate tracked; dismissal rate not a monitored risk indicator |
+| Abuse (scope creep) | Parasuraman & Riley 1997 | Deployment beyond validated scope elevates failure risk | SR 11-7 §II model definition; §V model use | Deployment scope audits; out-of-scope use incidents | ~ Partial: scope documentation required; ongoing audits not mandated |
+| Situation awareness — perception (SA Level 1) | Endsley 1995 | Reviewer must perceive system state, not just output, to provide genuine oversight | SR 11-7 §IV human review; explainability provisions | Explanation coverage rate; reviewer-confirmed comprehension | ✗ Gap: explainability addressed at output level; intermediate reasoning not required |
+| Situation awareness — projection (SA Level 3) | Endsley 1995 | Agentic systems require oversight at the planning stage, before irreversible commitment | SR 26-2 fn. 3 (agentic systems excluded from scope) | Pre-action checkpoint rate for irreversible actions | ✗ Gap: agentic oversight standard absent from US banking supervision |
+| Automation bias normative baseline | Skitka et al. 1999 | "Automation bias" is non-operational without per-task, per-LOA behavioral baselines | SR 11-7 §IV behavioral monitoring | Per-LOA behavioral baseline; deviation threshold | ✗ Gap: no US supervisory guidance specifies a behavioral baseline |
+| Resource rationality | Lieder & Griffiths 2017 | Apparent bias may reflect rational adaptation to system design; intervention at wrong level | SR 11-7 §II model design | Alert design quality; cognitive load assessment | ✗ Gap: cognitive ergonomics of oversight design not addressed in any US guidance |
+| Human-AI complementarity | Bansal et al. 2021 | Default deployment does not produce complementarity; deliberate design required | SR 11-7 §II intended use; SR 26-2 governance design | Complementarity metric (team vs. human-only vs. model-only accuracy) | ✗ Gap: no complementarity assessment required |
+| Trust calibration | Lee & See 2004 | Overtrust and undertrust both degrade performance; calibration requires active management | SR 11-7 §IV ongoing monitoring | Trust calibration score; periodic recalibration | ✗ Gap: trust calibration not addressed in SR 11-7 or SR 26-2 |
+
+Ten of twelve rows are gaps. Two are partial. None are fully addressed.
+
 
 ## The normative model the vocabulary doesn't supply
 

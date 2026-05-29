@@ -25,6 +25,9 @@ NIST 800-3 formalizes a distinction that most benchmark reporting collapses: *be
 
 **Generalized accuracy** asks the harder question: how well would this model perform on the full *superpopulation* of items the benchmark represents? The uncertainty here includes both LLM nondeterminism *and* the variance from having drawn a finite sample of items from a larger domain. It's what you actually care about when deciding whether to deploy — you're not deploying to answer GPQA-Diamond questions specifically, you're deploying to handle the domain those questions represent.
 
+> [!QUOTE]
+> For teams whose evaluation results feed directly into deployment decisions or model risk documentation, the question is whether to keep reporting the number that's convenient to compute or the number that's correct. NIST 800-3 has formalized which is which.
+
 The biology exam analogy the paper uses is cleaner than any technical definition: benchmark accuracy is your average score on *this exam* given infinite reattempts; generalized accuracy is your average score on *all biology questions that could have been on the exam* given infinite reattempts. Neither is your single observed score. Both are defined in expectation.
 
 ![Two-panel diagram comparing benchmark accuracy (fixed item set, only LLM nondeterminism as uncertainty source, CI narrower than generalized) and generalized accuracy (full superpopulation, adds item-selection variance, CI correctly wider than naive formula suggests). Both show the same 75.3% point estimate; the naive formula understates uncertainty for generalized accuracy and overstates it for benchmark accuracy.](../img/accuracy-estimands.svg)
@@ -224,9 +227,6 @@ Every model comparison table I've seen (22 models, their GPQA-Diamond scores, th
 Both the benchmark design and the evaluation protocol were correct. The failure is in the statistical framing, and that framing has a name now, a published derivation, and a 22-model simulation backing it up.
 
 For teams whose evaluation results feed directly into deployment decisions or model risk documentation, the question is whether to keep reporting the number that's convenient to compute or the number that's correct. NIST 800-3 has formalized which is which.
-
-> [!QUOTE]
-> The leaderboards you're reading almost certainly report the wrong one.
 
 The leaderboards you're reading almost certainly report the wrong one.
 

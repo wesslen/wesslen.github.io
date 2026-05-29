@@ -11,6 +11,9 @@ The [previous post in this series](post.html?slug=payments-liability-gap) establ
 
 Banks have a legal obligation to answer that question. The problem is that the law doesn't contemplate the entity type they're being asked to identify.
 
+> [!QUOTE]
+> An AI agent is neither a natural person nor a legal entity. It has no date of birth, no address, no taxpayer identification number in any conventional sense. No U.S. banking law has an AAI customer category. No regulatory guidance has created one.
+
 ## The CIP rule and why it doesn't fit
 
 That rule, codified at [31 CFR § 1020.220](https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1020/subpart-B/section-1020.220), requires every bank to develop and implement a written CIP as part of its Bank Secrecy Act compliance program. The requirements are specific: before opening an account, the bank must collect minimum identifying information (full legal name, date of birth, residential address, and taxpayer identification number) and take "reasonable steps" to verify the customer's identity.[^1]
@@ -21,9 +24,6 @@ That rule, codified at [31 CFR § 1020.220](https://www.ecfr.gov/current/title-3
 Those four data elements are defined for two entity types: natural persons and legal entities. CIP interpretive guidance establishes that in agency situations, the bank must obtain identifying information for the principal. What the agent does is a matter for the principal to document.
 
 An AI agent is neither a natural person nor a legal entity. It has no date of birth, no address, no taxpayer identification number in any conventional sense. It is software operating on behalf of a principal — but which principal, and with what scope of authority, may not be determinable from the transaction itself. No U.S. banking law has an AAI customer category. No regulatory guidance has created one.
-
-> [!QUOTE]
-> An AI agent is neither a natural person nor a legal entity. It has no date of birth, no address, no taxpayer identification number in any conventional sense.
 
 The CIP gap has a specific downstream consequence for liability. If a bank cannot identify an AI agent as a distinct party to a transaction (with its own registered identity, scope of authority, and authorization record), then the only party the bank knows it's dealing with is the account holder. When something goes wrong, the entire dispute pathway runs through the account holder, regardless of whether the account holder actually instructed the specific transaction. This is part of why the "furnished access device" exception in Regulation E is so consequential: the bank sees a transaction originating from a known account, with no record of which agent initiated it or under what authorization.
 

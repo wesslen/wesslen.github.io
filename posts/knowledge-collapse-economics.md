@@ -12,6 +12,9 @@ Stack Overflow's question volume has been declining since 2022, and the decline 
 
 The paper isn't primarily about Stack Overflow. It's a formal model of what happens when agentic AI provides context-specific recommendations that substitute for individual learning effort. The central result is uncomfortable: in equilibrium, the knowledge stock can collapse to zero. The mechanism is counterintuitive: the AI gives good enough answers that people stop building the base that would let them ask better questions.
 
+> [!QUOTE]
+> What I think I know: the right answer is not to keep purchasing the most accurate model available.
+
 ## Learning as a joint production problem
 
 The model's key insight is that human learning effort produces two things simultaneously: a private signal about your specific problem, and a thin contribution to the community's general knowledge stock. These share the same production function; you can't acquire one without the other. Economists call this economies of scope in learning.
@@ -57,14 +60,14 @@ The paper also prescribes a specific transition sequence if an organization has 
 
 Lisanne Bainbridge observed in 1983 that automating most of a task leaves human operators with degraded manual skills and diminished vigilance precisely when intervention is most needed — because they have stopped practicing the skills that full-time operation builds.[^4] The automation literature has known this for forty years. The Acemoglu et al. model gives the observation a formal structure it never had: the problem isn't only individual skill atrophy through disuse, but a community-level knowledge collapse driven by a learning externality, where each individual's rational choice not to learn compounds into a structural loss that no single operator can observe or reverse.
 
+> [!QUOTE]
+> Competence is not static. It compounds when practitioners learn, and it depreciates when the learning incentive disappears.
+
 I've been thinking about this in terms of junior analyst development in MRM shops. The model risk lifecycle under SR 11-7 required that validators understand the assumptions, data generating processes, and failure modes of the models they reviewed, not merely whether outputs passed spot checks. That requirement, enforced through documentation standards and validation depth requirements, produced a kind of institutional knowledge stock: practitioners who had worked through enough model internals to recognize when something was wrong.[^5]
 
 Agentic AI that drafts model documentation, flags statistical tests, and writes validation findings changes the marginal return to working through model internals yourself. The recommendation is there. You can sign off or push back. But "push back on what basis?" requires familiarity that accumulates from having done the work. That familiarity is exactly what the learning externality erodes.
 
 [Effective challenge](post.html?slug=effective-challenge), the third pillar of model governance, requires that reviewers have the competence to mount it. Competence is not static. It compounds when practitioners learn, and it depreciates when the learning incentive disappears.
-
-> [!QUOTE]
-> Competence is not static. It compounds when practitioners learn, and it depreciates when the learning incentive disappears.
 
 What the effective challenge framework demands of the organization is precisely the capacity that agentic AI, at high enough precision, systematically undermines.
 
@@ -84,9 +87,6 @@ The paper identifies one parameter that is unambiguously welfare-improving witho
 This is a less glamorous finding than the garbling result, but it is the lever practitioners can actually pull. You cannot easily control how accurate your AI vendor's model is at the point of procurement. You can control whether junior analysts present their reasoning to senior reviewers, whether validation decisions get written up in ways that build the institutional record, and whether the team treats knowledge transfer as a product of the work rather than a distraction from it.
 
 The [HITL checkpoint](post.html?slug=hitl-design) that felt like compliance overhead turns out to have a second function: it's one of the few remaining mechanisms that forces the learning interaction. If agentic AI handles the draft and a human approves the output, that's not the same learning process as a human who worked through the problem and used the AI as a check. The checkpoint matters, but so does what happens inside it.
-
-> [!QUOTE]
-> What I think I know: the right answer is not to keep purchasing the most accurate model available.
 
 ## What I think I know, and what I don't
 

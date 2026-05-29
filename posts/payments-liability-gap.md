@@ -11,6 +11,9 @@ Say your AI assistant books a flight, and it books the wrong one — non-refunda
 
 This is the first post in a three-part series on agentic AI in banking payments. [When Agents Talk to Agents](post.html?slug=a2a-risks) covered the delegation and trust problems at the protocol layer — prompt injection, compromised tool calls, unauthorized scope expansion. This series covers what those problems mean downstream: in the consumer's bank account, and in the courtroom.
 
+> [!QUOTE]
+> The agents know how to route. The law doesn't know how to follow.
+
 ## The four words at the center of the problem
 
 Regulation E governs electronic fund transfers — the legal framework that says if someone steals your debit card and makes unauthorized purchases, your maximum loss is $50 if you report promptly. It's one of the most important consumer protections in the U.S. payments system. And it has an exception that was written for a specific scenario and now applies to a much broader one.
@@ -78,9 +81,6 @@ The Consumer Bankers Association's January 2026 white paper proposes private net
 The most important near-term legal signal is the Second Circuit's ruling in *New York v. Citibank* — expected in late 2026. A ruling for EFTA coverage would significantly strengthen the consumer protection argument for agentic transactions on wire-like rails. A ruling for Citibank would leave the liability vacuum intact and potentially precedent-set the "existing law doesn't cover this" interpretation for agentic transactions broadly. That one ruling matters more than any pending rulemaking.
 
 The deeper structural problem is that consumer-protection gaps are concentrated on precisely the payment rails that agentic systems have the strongest incentives to use. Until that inversion is addressed — through statutory extension or enforceable network rules — consumers who delegate payment authority to AI agents are accepting risks they likely don't know they're taking. The agents know how to route. The law doesn't know how to follow.
-
-> [!QUOTE]
-> The agents know how to route. The law doesn't know how to follow.
 
 *The [next post in this series](post.html?slug=agent-identity-kyc) examines the infrastructure problem underneath the liability gap: banks have no legal category for an AI agent as a party to a transaction, and no established framework for authenticating one.*
 

@@ -17,6 +17,9 @@ The synthetic trajectories look different. An accessibility tree (AxTree)-readin
 
 That difference is where MolmoWeb's most important finding lives: human inference from visual uncertainty versus synthetic lookup from structured data.
 
+> [!QUOTE]
+> If human annotators systematically produce exploratory paths on complex tasks, running more annotators produces a larger, equally flawed sample of exploratory paths. Aggregation doesn't fix the underlying confusion; it just captures it more thoroughly. The synthetic pipeline sidesteps this entirely; it reads element semantics directly and takes the shortest path.
+
 ## What the model actually is
 
 MolmoWeb is not a new architecture. It's the Molmo 2 vision-language model (SigLIP2 vision encoder, Qwen3 language backbone, adapter with tokens interleaved in a single decoder) fine-tuned on web-navigation trajectories through supervised fine-tuning alone.[^3] No RLHF, no DPO, no self-distillation. That's a deliberate design choice: SFT alone is simpler to replicate and easier to validate than a pipeline with reward modeling or preference optimization steps, even if it leaves some performance on the table. The model sees a screenshot, the current URL, and the last 10 action steps, then emits a JSON-formatted `thought` plus a structured `action(args)` call in the ReAct pattern.
@@ -57,16 +60,13 @@ Web navigation is different. The AirTag annotator wasn't wrong because of inatte
 
 Consensus mechanisms don't fix structured noise; they aggregate it.
 
-> [!QUOTE]
-> Consensus mechanisms don't fix structured noise; they aggregate it.
-
 If human annotators systematically produce exploratory paths on complex tasks, running more annotators produces a larger, equally flawed sample of exploratory paths. Aggregation doesn't fix the underlying confusion; it just captures it more thoroughly. The synthetic pipeline sidesteps this entirely because the teacher doesn't face uncertainty about page structure; it reads element semantics directly and takes the shortest path.
 
 The distinction matters because it predicts where human annotation will fail silently. Correlated noise is invisible to the usual diagnostic signals: inter-annotator agreement will be high (everyone is confused the same way), and training loss will decrease normally (the model learns to imitate exploratory paths, which is technically "correct" from the loss function's perspective). The failure shows up only at evaluation time or in production. The trained model inherits the annotators' uncertainty and learns to hedge in exactly the situations where it should act decisively.
 
 Detection is harder than cleaning. To identify structured noise before training, you need a reference path — an optimal sequence against which to measure annotation quality. For web tasks where the answer is verifiable (product price, address, availability), that reference exists in principle. For tasks involving judgment or interpretation, it often doesn't. The MolmoWeb synthetic pipeline sidesteps detection entirely by not relying on human annotations for the semantic-navigation component. That's a stronger move than filtering noisy data: it's avoiding the problem at the source.
 
-The honest position is that traditional MRM frameworks and training data governance standards weren't designed for this case.[^8] The noise is structured, the signal-to-noise ratio may be lower than assumed, and the best-performing pipelines are ones that bypass human annotation in favor of information-privileged synthetic teachers.
+The truth is that traditional MRM frameworks and training data governance standards weren't designed for this case.[^8] The noise is structured, the signal-to-noise ratio may be lower than assumed, and the best-performing pipelines are ones that bypass human annotation in favor of information-privileged synthetic teachers.
 
 That advantage has limits. The AxTree teacher's edge is largest on clean, semantically-structured pages where element labels are reliably exposed. Legacy interfaces, canvas-heavy applications, and pages that don't fully implement accessibility standards are a different problem. Those are often exactly the systems that enterprise automation projects encounter first. For this class of screenshot-only visual agent, on these benchmarks, the ablation is clear: the field spent two years building infrastructure to collect and annotate human web trajectories at scale. MolmoWeb's result suggests we should have been building better teachers instead.
 

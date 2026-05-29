@@ -9,9 +9,6 @@ tags: [human-in-the-loop, banking, regulatory]
 
 Consider an AML analyst. She processes around 400 transaction-monitoring alerts per shift. The false-positive rate on her queue is approximately 96% (a common figure at mid-size institutions).[^1] By mid-shift, her review process has become rote dismissal rather than genuine investigation. She is performing the motions of human oversight without its substance.
 
-> [!QUOTE]
-> She is performing the motions of human oversight without its substance.
-
 Parasuraman and Riley named what she is doing in 1997: *disuse*. She has stopped trusting the system, and what began as appropriate skepticism toward a high-false-alarm queue has curdled into something less productive: she is now dismissing alerts she would otherwise catch. Her supervisor reviewing the queue doesn't see disuse. They see a human-in-the-loop with an acceptably low false-negative rate.
 
 What's invisible in that picture is precisely what a governance framework misses when it checks whether humans are present in a process rather than what kind of automation level they're operating at.
@@ -32,6 +29,9 @@ Banking is not operating at a single level. It is operating across the full rang
 The governance problem is not that banks operate across this range. It is that "[effective challenge](post.html?slug=hitl-vocabulary)", the supervisory expectation SR 11-7 established and SR 26-2 retained, was designed for a Level 4–5 world where a human reviews the model's suggestion before a decision is made. At Level 2–3, where the analyst is principally triaging alerts the system selected and scored, the *disuse* failure mode dominates. Automation bias is a Level 4–5 problem. At Level 9–10, runtime effective challenge is structurally inapplicable: the machine acts before any human can intervene. The governance work shifts to [deploy-time](post.html?slug=hitl-design), where the question becomes whether this level of autonomy was appropriate to authorize and whether the post-hoc monitoring architecture is adequate to detect failure.
 
 The same phrase, applied to systems with completely different human-factors profiles, produces completely different governance outcomes depending on which level is actually running underneath it.
+
+> [!QUOTE]
+> The HCI literature's prescription was never "remove the human." It was "design the oversight role to match what humans can actually do."
 
 ## Misuse, disuse, abuse — the taxonomy that didn't cross fields
 
@@ -72,9 +72,6 @@ The second problem is the failure-mode profile. Automation bias produces individ
 The third problem is that regulated banks do not have the option of assigning accountability to an agent. SR 26-2's effective-challenge requirement, Article 14's human oversight mandate for credit-scoring systems, and ECOA's adverse-action obligations[^10] all presuppose a human who can be held accountable for consequential decisions. A bank that deploys a Level 10 credit-decisioning system is not eliminating human accountability. It is eliminating meaningful human involvement while leaving that accountability intact on paper. That position is considerably harder to defend when something goes wrong.
 
 The HCI literature's prescription was never "remove the human." It was "design the oversight role to match what humans can actually do." That design problem is harder than advancing the automation level. It is also the one that banking governance has not yet solved.
-
-> [!QUOTE]
-> The HCI literature's prescription was never "remove the human." It was "design the oversight role to match what humans can actually do."
 
 ## What Article 14 gets right
 
