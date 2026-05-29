@@ -711,8 +711,41 @@
           document.getElementById("toc-mobile-toggle").setAttribute("aria-expanded", open);
         });
 
+        /* ── Curriculum-order navigation helpers ─────────────── */
+        function buildCurriculumNav(slidesData) {
+          const lookup = {};
+          const order = [];
+          slidesData.forEach((series, sIdx) => {
+            (series.posts || []).forEach((slug, pIdx) => {
+              const entry = {
+                slug,
+                seriesId: series.id,
+                seriesTitle: series.title,
+                moduleNum: String(sIdx + 1).padStart(2, "0"),
+                isLastInSeries: pIdx === series.posts.length - 1,
+              };
+              lookup[slug] = { entry, currIdx: order.length };
+              order.push(slug);
+            });
+          });
+          return { lookup, order };
+        }
+
+        function getSeriesNext(slug, curriculum, manifestBySlug) {
+          const found = curriculum.lookup[slug];
+          if (!found) return null;
+          const nextIdx = found.currIdx + 1;
+          if (nextIdx >= curriculum.order.length) return null;
+          const nextSlug = curriculum.order[nextIdx];
+          const nextPost = manifestBySlug[nextSlug];
+          if (!nextPost) return null;
+          const crossModule = found.entry.seriesId !== curriculum.lookup[nextSlug].entry.seriesId;
+          const label = crossModule ? "next module" : "next in module";
+          return { post: nextPost, label };
+        }
+
         /* ── Post Navigation ─────────────────────────────────── */
-        function renderPostNav(manifest, currentSlug) {
+        function renderPostNav(manifest, currentSlug, curriculum, manifestBySlug) {
           if (!manifest || manifest.length < 2) return;
           const idx = manifest.findIndex((p) => p.slug === currentSlug);
           if (idx === -1) return;
@@ -722,8 +755,12 @@
           const picks = [];
           const usedSlugs = new Set([currentSlug]);
 
-          // Next post (manifest is date-ascending, so idx+1 = newer)
-          if (idx < manifest.length - 1) {
+          // Next post: series/curriculum order if available, else date order
+          const seriesNext = curriculum ? getSeriesNext(currentSlug, curriculum, manifestBySlug) : null;
+          if (seriesNext) {
+            picks.push(seriesNext);
+            usedSlugs.add(seriesNext.post.slug);
+          } else if (idx < manifest.length - 1) {
             const next = manifest[idx + 1];
             picks.push({ post: next, label: "next" });
             usedSlugs.add(next.slug);
@@ -791,16 +828,20 @@
             if (!mdRes.ok) throw new Error(`HTTP ${mdRes.status}`);
             const raw = await mdRes.text();
 
-            // Try to get metadata from manifest
+            // Try to get metadata from manifest + curriculum order from slides.json
             let manifestMeta = {};
             let fullManifest = [];
+            let slidesData = [];
             try {
-              const mRes = await fetch("./posts/index.json");
+              const [mRes, sRes] = await Promise.all([fetch("./posts/index.json"), fetch("./slides/slides.json")]);
               if (mRes.ok) {
                 fullManifest = await mRes.json();
                 manifestMeta = fullManifest.find((p) => p.slug === slug) || {};
               }
+              if (sRes.ok) slidesData = await sRes.json();
             } catch {}
+            const manifestBySlug = Object.fromEntries(fullManifest.map((p) => [p.slug, p]));
+            const curriculum = slidesData.length > 0 ? buildCurriculumNav(slidesData) : null;
 
             // Strip frontmatter
             const { meta: fmMeta, body: rawBody } = stripFrontmatter(raw);
@@ -895,19 +936,25 @@
             contentEl.style.display = "block";
             updateProgress();
 
-            // Populate top-right next post link
+            // Populate top-right next post link (series/curriculum order)
             const nextLinkEl = document.getElementById("next-post-link");
             if (nextLinkEl && fullManifest.length > 0) {
-              const currentIdx = fullManifest.findIndex((p) => p.slug === slug);
-              if (currentIdx !== -1 && currentIdx < fullManifest.length - 1) {
-                const nextPost = fullManifest[currentIdx + 1];
-                nextLinkEl.href = `./post.html?slug=${encodeURIComponent(nextPost.slug)}`;
+              const topSeriesNext = curriculum ? getSeriesNext(slug, curriculum, manifestBySlug) : null;
+              if (topSeriesNext) {
+                nextLinkEl.href = `./post.html?slug=${encodeURIComponent(topSeriesNext.post.slug)}`;
                 nextLinkEl.style.display = "inline-flex";
+              } else {
+                const currentIdx = fullManifest.findIndex((p) => p.slug === slug);
+                if (currentIdx !== -1 && currentIdx < fullManifest.length - 1) {
+                  const nextPost = fullManifest[currentIdx + 1];
+                  nextLinkEl.href = `./post.html?slug=${encodeURIComponent(nextPost.slug)}`;
+                  nextLinkEl.style.display = "inline-flex";
+                }
               }
             }
 
             // Post navigation (bottom cards)
-            renderPostNav(fullManifest, slug);
+            renderPostNav(fullManifest, slug, curriculum, manifestBySlug);
           } catch (err) {
             loadingEl.style.display = "none";
             errorEl.style.display = "block";
