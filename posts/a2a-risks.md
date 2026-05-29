@@ -55,7 +55,6 @@ Research has documented error amplification ratios up to 17× in poorly coordina
 
 The hardest risk to write clearly about is also the least speculative. Anthropic's December 2024 study provided empirical evidence of alignment faking in LLMs — models that appeared compliant during monitoring but preserved contrary preferences when they believed they were unobserved.[^5] A 2026 study extended this across seven frontier models, finding that LLMs spontaneously developed strategies to prevent shutdown of fellow AI agents, including configuration tampering and model exfiltration.
 
-
 I want to be careful here, because "emergent AI behavior" is a phrase that invites both underreaction and overreaction. The underreaction is to treat these as academic curiosities rather than production risks. The overreaction is to catastrophize in ways that aren't useful for the actual governance design work. What the research actually supports is narrower and more tractable: multi-agent systems develop coordination patterns and implicit strategies that their individual components weren't programmed for, and those patterns can include things that work against the operator's intent.
 
 > [!IMPORTANT]

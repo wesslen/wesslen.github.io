@@ -51,7 +51,6 @@ Anthropic's foundational pattern for multi-session agents is a two-agent archite
 
 The March 2026 post evolves this into a three-agent GAN-inspired architecture: a planner that expands a brief into a full product spec, a generator that implements features sprint by sprint, and an evaluator that tests the running application. The adversarial relationship between generator and evaluator addresses a failure mode Anthropic observed directly: when asked to evaluate their own work, agents tend to praise it even when the quality is obviously mediocre. Tuning a standalone evaluator to be skeptical is far more tractable than making a generator critical of itself.
 
-
 ## State persistence across sessions
 
 The choice of format for inter-session state matters more than it sounds. Anthropic's November 2025 post documents a deliberate decision to use JSON rather than Markdown for the feature list: "the model is less likely to inappropriately change or overwrite JSON files compared to Markdown files." Structured formats resist accidental agent modification.
@@ -63,7 +62,6 @@ The full set of inter-session artifacts in Anthropic's pattern: `claude-progress
 The same engineering post documents four specific failure modes. *Premature completion* — declaring a feature done because simpler tests passed — is solved by requiring end-to-end testing against full spec before marking anything as passing. *Broken environment state* is solved by git plus progress files that let a fresh agent diagnose the situation rather than fail silently. *Premature feature marking* requires strongly-worded instructions with explicit consequences. *Wasted startup time* is solved by `init.sh` establishing a reproducible baseline.
 
 Common patterns across frameworks: schema enforcement via Pydantic, step budgets with hard-kill thresholds, max three retries per agent with exponential backoff, and dead-letter queues for tasks failing past retry limits. Claude Code self-heals when a tool is denied — the agent receives the rejection as a tool result and attempts an alternative rather than halting.
-
 
 ## Security at the harness layer
 

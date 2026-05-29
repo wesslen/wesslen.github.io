@@ -202,7 +202,6 @@ The `input-required` state is one of the more thoughtful design choices in the p
 | Streaming | `message/stream` via SSE | Long outputs, real-time status updates |
 | Push notifications | Webhook registration via `tasks/pushNotificationConfig/create` | Hours-long tasks, disconnected clients |
 
-
 Streaming over SSE delivers two event types: `TaskStatusUpdateEvent` (state transitions) and `TaskArtifactUpdateEvent` (incremental content). The stream closes when the task reaches a terminal state. Push notifications flip the model — the server HTTP POSTs to a client-supplied webhook URL as task state changes, so the client doesn't need to maintain a connection or poll.[^5]
 
 ## ADK meets A2A

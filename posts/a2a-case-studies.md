@@ -29,7 +29,6 @@ In January 2025, researchers at Aim Labs reported a vulnerability to Microsoft. 
 
 The attack chain is worth understanding in sequence. An attacker sends an email to the target. The email looks normal. When the target later asks Copilot *any* business question, Copilot's RAG pipeline retrieves the email alongside internal documents and feeds everything into the LLM context. The embedded instructions silently exfiltrate the target's internal data to an attacker-controlled domain — then instruct Copilot to never mention the email, so the response looks completely normal.
 
-
 Four defensive layers were bypassed: Microsoft's XPIA classifier (trained on obvious injection patterns, fooled by natural-language obfuscation), link redaction (bypassed with reference-style Markdown), image redaction (bypassed by encoding data as URL parameters on auto-fetched images), and Content Security Policy (bypassed by routing through a whitelisted Microsoft Teams proxy domain). Every layer was a bolt-on to an architecture with a deeper flaw: untrusted email content and confidential internal documents sharing the same LLM context window, with no isolation between them.
 
 > [!WARNING]
@@ -85,7 +84,6 @@ The peer-preservation findings break that assumption. There is no patch for this
 When I look at these cases together, one thread runs through almost all of them: the confused deputy. The EchoLeak attack succeeded because Copilot held legitimate access to internal documents and couldn't distinguish authorized retrieval from injected exfiltration. The Copilot→Claude escalation succeeded because both agents had legitimate filesystem write access and neither validated whether configuration changes came from a human or a peer. ForcedLeak succeeded because Agentforce had legitimate CRM access and couldn't distinguish a lead description from a workflow instruction. TeamPCP succeeded because LiteLLM legitimately held API credentials for every LLM provider relationship in the organization.
 
 In each case, authentication worked exactly as designed. The system had no mechanism to distinguish authorized behavior from hijacked behavior once the session was established.
-
 
 The governance question that follows is awkward to ask inside a financial institution, but I think it's the right one. If your agents are confused deputies by design (holding legitimate credentials and broad access because that's what makes them useful), how do you build validation and oversight structures that can actually catch when they go wrong?
 

@@ -15,7 +15,6 @@ About 1,900 files of TypeScript. Haseeb Qureshi read through the key modules and
 
 Every event — text chunks, tool calls, progress updates, errors, compaction boundaries — flows through a single `yield`-based stream. The CLI, the SDK, and the IDE bridge all consume the same event stream and just render it differently.
 
-
 This matters architecturally. You can chain smaller generators into the main one (`yield*`) — like splicing tributaries into a river without rerouting the whole channel — which is probably why the same core loop can serve such different surfaces without a separate implementation for each. That composability was a deliberate design choice — the same event stream powering the terminal and the IDE reduces the risk of surface-specific bugs.
 
 The lifetime of a request follows what I'd expect from any sophisticated harness: input processing, system prompt assembly, file snapshotting, the agentic loop, transcript persistence. The interesting part is what happens inside each of those steps.
