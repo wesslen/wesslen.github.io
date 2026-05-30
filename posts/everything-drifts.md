@@ -53,3 +53,15 @@ The blog sits at an intersection that doesn't have a lot of native coverage. If 
 Posts will vary in length and formality. Some are close to polished essays. Others are working notes — me thinking through a problem in real time, with no guarantee I've resolved it by the end. That's true of the course, too: it documents a moving target, which means part of its job is to keep going stale and getting rewritten.
 
 If that sounds useful to you, I'm glad you're here.
+
+## How the Quizzes Work
+
+Each post that has a question pool shows a **// check your understanding** section at the bottom, just above the "more posts" links. It draws five questions at random from a larger pool and randomizes the option order every time, so retaking gives you a genuinely different pass through the material rather than a memory test for answer positions.
+
+The questions are designed for learning, not assessment. Every answer — right or wrong — shows an explanation. The score at the end is there to orient you, not grade you. The goal is that the explanation for a wrong answer is worth as much as getting it right.
+
+Each module also has a **module test**, accessible from the [Modules page](slides.html). It draws ten questions from across all posts in the module — so it tests whether concepts from different posts are connecting, not just whether you remember a single post's argument.
+
+Progress is saved in your browser. A small ✓ badge appears on the post list once you've attempted a quiz, and the module page shows how many posts in each module you've covered. If you clear your browser history, switch browsers, or open the site in a private window, the progress doesn't carry over — there's no account system. This is a static site, and that's a deliberate trade-off: nothing to log in to, nothing stored anywhere but your own machine.
+
+A few things worth knowing before you start. The quizzes cover the *argument* each post makes — why something is true, what a framework implies, where a concept breaks down — not the trivia. If a question asks about the London Whale, the right answer won't depend on the dollar figure; it'll depend on which failure mode the case study illustrates. If you find a question that seems to test the wrong thing, or an explanation that misses the point, the [GitHub repo](https://github.com/wesslen/wesslen.github.io) is the right place to flag it.

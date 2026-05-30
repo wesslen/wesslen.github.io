@@ -2581,3 +2581,52 @@ img {
   gap: 0.75rem;
   flex-wrap: wrap;
 }
+
+/* ── Quiz progress layer ─────────────────────────────── */
+
+/* Revisit nudge (post quiz header) */
+.quiz-revisit-nudge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+/* Browser-local disclaimer (inside quiz end screen) */
+.quiz-local-note {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--muted);
+  margin-top: 1.25rem;
+  opacity: 0.6;
+}
+
+/* Checkmark badge on post index cards */
+.quiz-done-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: #2ea043;
+  border: 1px solid #2ea043;
+  border-radius: 3px;
+  padding: 0 0.3rem;
+  line-height: 1.5;
+  margin-left: 0.45rem;
+  vertical-align: middle;
+  opacity: 0.85;
+  flex-shrink: 0;
+  position: relative;
+  top: -0.05em;
+}
+
+/* Module progress indicator on slides cards */
+.module-progress-indicator {
+  font-family: var(--font-mono);
+  font-size: 0.67rem;
+  color: #2ea043;
+  margin-top: 0.25rem;
+  opacity: 0.9;
+}

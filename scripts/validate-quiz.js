@@ -145,6 +145,9 @@ for (const file of postPoolFiles) {
     else if (q.explanation.trim().length < MIN_EXPLANATION_LEN)
       warn(`${loc} — explanation is short (${q.explanation.trim().length} chars); aim for ≥ ${MIN_EXPLANATION_LEN}`);
 
+    if (typeof q.difficulty !== 'number' || ![1,2,3].includes(q.difficulty))
+      error(`${loc} — "difficulty" must be 1 (foundational), 2 (applied), or 3 (synthesis)`);
+
     // Duplicate ID check (global)
     if (q.id) {
       if (allQuestionIds.has(q.id))
@@ -252,6 +255,11 @@ console.log(`  Total posts with pools : ${Object.keys(poolsBySlug).length}`);
 console.log(`  Total questions        : ${totalQuestions}`);
 console.log(`  Unique IDs             : ${allQuestionIds.size}`);
 console.log(`  Module manifests       : ${moduleFiles.length}`);
+const diffTotals = {1: 0, 2: 0, 3: 0};
+  Object.values(poolsBySlug).flat().forEach((q) => {
+    if (q.difficulty) diffTotals[q.difficulty] = (diffTotals[q.difficulty] || 0) + 1;
+  });
+  console.log(`  Difficulty             : 1-foundational:${diffTotals[1]}  2-applied:${diffTotals[2]}  3-synthesis:${diffTotals[3]}`);
 console.log(`  Objective distribution :`);
 [...ALLOWED_OBJECTIVES].forEach((obj) => {
   const count = objTotals[obj] || 0;

@@ -524,7 +524,7 @@
                 ? `<div class="slide-card-actions">${quizBtn}</div>`
                 : "";
 
-            return `<div class="slide-card">
+            return `<div class="slide-card"${deck.quiz ? ' data-module-posts="' + (deck.posts || []).join(",") + '"' : ""}>
               <div class="slide-card-header">
                 <p class="slide-card-title"><span style="color:var(--muted);font-size:0.78rem;font-family:var(--font-mono);margin-right:0.4rem">${moduleNum}</span>${deck.title}</p>
                 <span class="slide-card-badge ${badgeClass}">${badgeLabel}</span>
@@ -543,6 +543,14 @@
           const btn = e.target.closest("[data-module-id]");
           if (btn) openModuleQuiz(btn.dataset.moduleId, btn.dataset.moduleTitle);
         });
+
+        // Module progress indicators
+        if (typeof window.initModuleProgress === "function") {
+          document.querySelectorAll("[data-module-posts]").forEach((card) => {
+            const slugs = card.dataset.modulePosts.split(",").filter(Boolean);
+            window.initModuleProgress(slugs, card);
+          });
+        }
       });
     </script>
 

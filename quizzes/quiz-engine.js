@@ -12,6 +12,41 @@ if (typeof window === "undefined") { global.window = {}; }
   const POST_QUIZ_N   = 5;   // questions per post quiz
   const MODULE_QUIZ_N = 10;  // questions per module test
 
+
+  /* ── Progress tracking (localStorage) ────────────────── */
+
+  const STORAGE_KEY = "drift-quiz-progress";
+
+  function readProgress() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
+    catch { return {}; }
+  }
+
+  function writeProgress(data) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+    catch { /* storage quota or private mode — fail silently */ }
+  }
+
+  function recordAttempt(slug) {
+    if (!slug) return;
+    const data = readProgress();
+    const prev = data[slug] || { attempts: 0 };
+    data[slug] = {
+      lastAttempted: new Date().toISOString().slice(0, 10),
+      attempts: prev.attempts + 1,
+    };
+    writeProgress(data);
+  }
+
+  function getAttempt(slug) {
+    return readProgress()[slug] || null;
+  }
+
+  function daysSince(isoDate) {
+    const ms = Date.now() - new Date(isoDate).getTime();
+    return Math.floor(ms / 86400000);
+  }
+
   /* ── Utilities ───────────────────────────────────────── */
 
   function shuffle(arr) {
@@ -179,6 +214,12 @@ if (typeof window === "undefined") { global.window = {}; }
     retakeBtn.addEventListener("click", onRetake);
     endActions.appendChild(retakeBtn);
     end.appendChild(endActions);
+
+    const note = document.createElement("p");
+    note.className = "quiz-local-note";
+    note.textContent = "progress saved in this browser only";
+    end.appendChild(note);
+
     container.appendChild(end);
   }
 
@@ -266,7 +307,7 @@ if (typeof window === "undefined") { global.window = {}; }
 
   /* ── Post quiz entry point ───────────────────────────── */
 
-  function startQuiz(section, allQuestions) {
+  function startQuiz(section, allQuestions, slug) {
     const old = section.querySelector(".quiz-body");
     if (old) old.remove();
 
@@ -276,7 +317,9 @@ if (typeof window === "undefined") { global.window = {}; }
 
     const sampled = sample(allQuestions, POST_QUIZ_N).map(prepareQuestion);
     runFlow(body, sampled, 0, [], (results) => {
-      renderPostEndScreen(body, results, () => startQuiz(section, allQuestions));
+      recordAttempt(slug);
+      updateRevisitNudge(section, slug);
+      renderPostEndScreen(body, results, () => startQuiz(section, allQuestions, slug));
     });
   }
 
@@ -313,8 +356,33 @@ if (typeof window === "undefined") { global.window = {}; }
       postContent ? postContent.insertAdjacentElement("afterend", section) : articleCol.appendChild(section);
     }
 
-    startQuiz(section, questions);
+    // Revisit nudge — shown if this post has been attempted before
+    const prev = getAttempt(slug);
+    if (prev) {
+      section.appendChild(buildRevisitNudge(prev));
+    }
+
+    startQuiz(section, questions, slug);
   };
+
+  function buildRevisitNudge(prev) {
+    const days = daysSince(prev.lastAttempted);
+    const timeStr = days === 0 ? "today" : days === 1 ? "yesterday" : `${days} days ago`;
+    const nudge = document.createElement("div");
+    nudge.className = "quiz-revisit-nudge";
+    nudge.id = "quiz-revisit-nudge";
+    nudge.textContent = `last attempted ${timeStr} · ${prev.attempts} attempt${prev.attempts !== 1 ? "s" : ""}`;
+    return nudge;
+  }
+
+  function updateRevisitNudge(section, slug) {
+    const prev = getAttempt(slug);
+    if (!prev) return;
+    const existing = section.querySelector("#quiz-revisit-nudge");
+    const fresh = buildRevisitNudge(prev);
+    if (existing) existing.replaceWith(fresh);
+    else section.insertBefore(fresh, section.querySelector(".quiz-body"));
+  }
 
   /* ── Module quiz entry point ─────────────────────────── */
 
@@ -385,6 +453,39 @@ if (typeof window === "undefined") { global.window = {}; }
 
     startModuleQuiz(containerEl, allQuestions, manifest.n || MODULE_QUIZ_N, postTitles, onClose);
   };
+  /* ── Public: index page post badges ─────────────────── */
+
+  window.initQuizBadges = function () {
+    const progress = readProgress();
+    document.querySelectorAll("[data-slug]").forEach((el) => {
+      const slug = el.dataset.slug;
+      if (!progress[slug]) return;
+      if (el.querySelector(".quiz-done-badge")) return; // already added
+      const badge = document.createElement("span");
+      badge.className = "quiz-done-badge";
+      const days = daysSince(progress[slug].lastAttempted);
+      const label = days === 0 ? "quizzed today" : days === 1 ? "quizzed yesterday" : `quizzed ${days}d ago`;
+      badge.title = label;
+      badge.textContent = "✓";
+      const title = el.querySelector(".row-a-title");
+      if (title) title.appendChild(badge);
+    });
+  };
+
+  /* ── Public: slides page module progress ─────────────── */
+
+  window.initModuleProgress = function (postSlugs, targetEl) {
+    const progress = readProgress();
+    const attempted = postSlugs.filter((s) => progress[s]).length;
+    if (attempted === 0) return;
+    const existing = targetEl.querySelector(".module-progress-indicator");
+    if (existing) existing.remove();
+    const indicator = document.createElement("div");
+    indicator.className = "module-progress-indicator";
+    indicator.textContent = `${attempted}/${postSlugs.length} posts quizzed`;
+    targetEl.appendChild(indicator);
+  };
+
   /* ── CommonJS export shim (for Node.js tests) ───────── */
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = { shuffle, sample, prepareQuestion, letterFor };
