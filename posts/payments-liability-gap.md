@@ -21,7 +21,7 @@ Regulation E governs electronic fund transfers — the legal framework that says
 The exception: Regulation E excludes from the definition of "unauthorized EFT" any transfer "initiated by a person to whom the consumer has furnished the access device."[^1]
 
 > [\!TIP]
-> **What is Regulation E?** Regulation E implements the Electronic Fund Transfer Act (EFTA, 15 U.S.C. § 1693), the federal law governing electronic payments — debit cards, ACH transfers, ATM transactions, and most digital payment flows. Its most important consumer protection is the tiered liability cap for unauthorized transfers: $50 if you report within two days, $500 if you report within sixty days, unlimited liability after that. Regulation Z is the equivalent framework for credit cards. Both were written in the 1970s and 1980s.
+> **What is Regulation E?** Regulation E implements the Electronic Fund Transfer Act (EFTA, 15 U.S.C. § 1693), the federal law governing electronic payments — debit cards, ACH transfers, ATM transactions, and most digital payment flows. Its most important consumer protection is the tiered liability cap for unauthorized transfers: \$ 50 if you report within two days, \$500 if you report within sixty days, unlimited liability after that. Regulation Z is the equivalent framework for credit cards. Both were written in the 1970s and 1980s.
 
 The exception was designed for a simple case: you hand your debit card to your spouse, your spouse makes purchases, you later claim you didn't authorize them. Congress said you can't use Regulation E to dispute transactions initiated by someone you gave your card to. That's reasonable. The problem is that the same language applies — or may apply — to AI agents.
 
