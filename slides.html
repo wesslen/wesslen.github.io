@@ -23,6 +23,7 @@
     <meta name="twitter:image" content="https://wesslen.github.io/og-default.png" />
     <link rel="canonical" href="https://wesslen.github.io/slides.html" />
     <link rel="stylesheet" href="./style.css" />
+    <script src="./quizzes/quiz-engine.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link
       rel="icon"
@@ -171,6 +172,145 @@
           grid-template-columns: 1fr;
         }
       }
+
+      /* ── Module quiz modal ──────────────────────────── */
+      .module-quiz-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 900;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 2rem 1rem;
+        overflow-y: auto;
+      }
+      .module-quiz-dialog {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        width: 100%;
+        max-width: 640px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .module-quiz-dialog-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .module-quiz-dialog-title {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+      }
+      .module-quiz-close {
+        background: none;
+        border: none;
+        color: var(--muted);
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        line-height: 1;
+        transition:
+          color 0.15s,
+          background 0.15s;
+      }
+      .module-quiz-close:hover {
+        color: var(--text);
+        background: var(--surface-2);
+      }
+      .module-quiz-dialog-body {
+        padding: 1.5rem 1.25rem;
+      }
+      .quiz-loading {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-align: center;
+        padding: 2rem 0;
+      }
+      .quiz-progress-bar-wrap {
+        height: 3px;
+        background: var(--border);
+        border-radius: 2px;
+        margin-bottom: 0.5rem;
+        overflow: hidden;
+      }
+      .quiz-progress-bar-fill {
+        height: 100%;
+        background: var(--accent);
+        border-radius: 2px;
+        transition: width 0.3s ease;
+      }
+      .quiz-progress-label {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--muted);
+      }
+      .quiz-end-module {
+        text-align: center;
+      }
+      .quiz-breakdown {
+        margin: 1.25rem auto 1.5rem;
+        max-width: 320px;
+        text-align: left;
+      }
+      .quiz-breakdown-label {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        margin-bottom: 0.6rem;
+      }
+      .quiz-breakdown-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.35rem 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.825rem;
+        gap: 1rem;
+      }
+      .quiz-breakdown-name {
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+      }
+      .quiz-breakdown-score {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--text);
+        flex-shrink: 0;
+      }
+      .quiz-breakdown-score.perfect {
+        color: #2ea043;
+      }
+      .slide-btn-quiz {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        padding: 0.4rem 0.85rem;
+        border-radius: var(--radius);
+        border: 1px solid var(--accent2);
+        background: rgba(124, 58, 237, 0.08);
+        color: var(--accent2);
+        cursor: pointer;
+        letter-spacing: 0.04em;
+        transition:
+          background 0.15s,
+          color 0.15s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .slide-btn-quiz:hover {
+        background: var(--accent2);
+        color: #fff;
+      }
     </style>
   </head>
   <body>
@@ -317,6 +457,40 @@
       }
       window.addEventListener("scroll", updateProgress, { passive: true });
 
+      /* ── Module quiz modal logic ───────────────────────── */
+      // Modal elements are at the bottom of <body>, so defer lookup to DOMContentLoaded
+      let overlay, quizBody, quizTitle;
+
+      function openModuleQuiz(moduleId, moduleTitle) {
+        quizTitle.textContent = `// ${moduleTitle} — module test`;
+        overlay.style.display = "flex";
+        document.body.style.overflow = "hidden";
+        if (typeof window.initModuleQuiz === "function") {
+          window.initModuleQuiz(moduleId, quizBody, closeModuleQuiz);
+        }
+      }
+
+      function closeModuleQuiz() {
+        overlay.style.display = "none";
+        document.body.style.overflow = "";
+        quizBody.innerHTML = "";
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        overlay = document.getElementById("module-quiz-overlay");
+        quizBody = document.getElementById("module-quiz-body");
+        quizTitle = document.getElementById("module-quiz-title");
+        const closeBtn = document.getElementById("module-quiz-close");
+
+        closeBtn.addEventListener("click", closeModuleQuiz);
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) closeModuleQuiz();
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && overlay.style.display !== "none") closeModuleQuiz();
+        });
+      });
+
       /* ── Render slide cards ───────────────────────────────── */
       async function renderSlides() {
         const grid = document.getElementById("slides-grid");
@@ -337,12 +511,18 @@
             const badgeClass = deck.published ? "published" : "soon";
             const badgeLabel = deck.published ? "published" : "coming soon";
 
+            const quizBtn = deck.quiz
+              ? `<button class="slide-btn slide-btn-quiz" data-module-id="${deck.id}" data-module-title="${deck.title}">// test this module</button>`
+              : "";
             const actions = deck.published
               ? `<div class="slide-card-actions">
                   <a href="./${deck.dir}/index.html" class="slide-btn slide-btn-html" target="_blank" rel="noopener">view slides ↗</a>
                   <a href="./${deck.dir}/index.pdf" class="slide-btn slide-btn-pdf" download>download pdf ↓</a>
+                  ${quizBtn}
                 </div>`
-              : "";
+              : quizBtn
+                ? `<div class="slide-card-actions">${quizBtn}</div>`
+                : "";
 
             return `<div class="slide-card">
               <div class="slide-card-header">
@@ -358,8 +538,32 @@
           .join("");
       }
 
-      renderSlides();
+      renderSlides().then(() => {
+        document.getElementById("slides-grid").addEventListener("click", (e) => {
+          const btn = e.target.closest("[data-module-id]");
+          if (btn) openModuleQuiz(btn.dataset.moduleId, btn.dataset.moduleTitle);
+        });
+      });
     </script>
+
+    <!-- ── Module quiz modal ─────────────────────────────── -->
+    <div
+      id="module-quiz-overlay"
+      class="module-quiz-overlay"
+      style="display: none"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="module-quiz-title"
+    >
+      <div class="module-quiz-dialog">
+        <div class="module-quiz-dialog-header">
+          <span class="module-quiz-dialog-title" id="module-quiz-title">// module test</span>
+          <button class="module-quiz-close" id="module-quiz-close" aria-label="Close quiz">✕</button>
+        </div>
+        <div class="module-quiz-dialog-body" id="module-quiz-body"></div>
+      </div>
+    </div>
+
     <script src="./scripts/search.js" defer></script>
     <script src="./scripts/search-modal.js" defer></script>
   </body>

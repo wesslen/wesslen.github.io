@@ -9,7 +9,10 @@
     "lint": "npm run lint:html && npm run lint:md && npm run lint:format",
     "format": "prettier --write \"*.html\" \"*.css\"",
     "build:search": "node scripts/build-search-index.js",
-    "build:theme": "node scripts/build-theme.js"
+    "build:theme": "node scripts/build-theme.js",
+    "validate:quiz": "node scripts/validate-quiz.js",
+    "test:quiz": "node --test scripts/test-quiz.js",
+    "build:quiz": "npm run validate:quiz && npm run test:quiz"
   },
   "devDependencies": {
     "htmlhint": "^1.1.4",

@@ -1,132 +1,133 @@
 [
-  {
-    "id": "agentic-governance",
-    "title": "Regulatory Drift",
-    "description": "SR 26-2, the supersession of SR 11-7, and what effective challenge actually requires when the model under review is a GenAI system.",
-    "dir": "slides/agentic-governance",
-    "posts": [
-      "sr11-7",
-      "effective-challenge"
-    ],
-    "published": true,
-    "date": "2026-05-18"
-  },
-  {
-    "id": "agentic-engineering",
-    "title": "Agentic Engineering",
-    "description": "How harness design, guardrails, and skills supply-chain security determine whether agentic systems are actually governable.",
-    "dir": "slides/agentic-engineering",
-    "posts": [
-      "context",
-      "agent-harness-design",
-      "claude-code-harness",
-      "skills-supply-chain"
-    ],
-    "published": true,
-    "date": "2026-05-18"
-  },
-  {
-    "id": "multi-agent",
-    "title": "Agent to Agent",
-    "description": "A2A protocol design, cross-agent security risks, and real-world case studies of agentic systems in the wild.",
-    "dir": "slides/multi-agent",
-    "posts": [
-      "google-adk-a2a",
-      "a2a-risks",
-      "a2a-case-studies"
-    ],
-    "published": true,
-    "date": "2026-05-18"
-  },
-  {
-    "id": "gui-agents",
-    "title": "GUI Agents",
-    "description": "MolmoWeb's training data inversion result, open-source harness gaps, and the Universal Verifier's backbone-swap finding.",
-    "dir": "slides/gui-agents",
-    "posts": [
-      "molmoweb-data-flywheel",
-      "molmoweb-openness-gap",
-      "gui-agents-verifier"
-    ],
-    "published": false,
-    "date": null
-  },
-  {
-    "id": "evaluations",
-    "title": "The Eval Gap",
-    "description": "Measurement theory, NIST benchmark frameworks, psychometrics, and why most LLM eval pipelines report the wrong uncertainty estimate.",
-    "dir": "slides/evaluations",
-    "posts": [
-      "metrics-metrics-metrics",
-      "nist-benchmark-evals",
-      "benchmark-uncertainty"
-    ],
-    "published": false,
-    "date": null
-  },
-  {
-    "id": "adversarial-testing",
-    "title": "Adversarial Testing",
-    "description": "Five-phase red-teaming, three deployment gates, and why adversarial completeness is provably unachievable — and why you still need the program.",
-    "dir": "slides/adversarial-testing",
-    "posts": [
-      "adversarial-workflow",
-      "deployment-gates",
-      "adversarial-incompleteness"
-    ],
-    "published": true,
-    "date": "2026-05-18"
-  },
-  {
-    "id": "human-in-the-loop",
-    "title": "Human and the Loop",
-    "description": "Guardrail design, sixty years of human oversight vocabulary, and how HITL timing regimes map to MRM governance obligations.",
-    "dir": "slides/human-in-the-loop",
-    "posts": [
-      "guardrails",
-      "hitl-vocabulary",
-      "hitl-design"
-    ],
-    "published": true,
-    "date": "2026-05-18"
-  },
-  {
-    "id": "bainbridge-debt",
-    "title": "Bainbridge's Debt",
-    "description": "Forty years of HCI and human-factors research has named, empirically documented, and partially solved banking's human-automation failure modes. Banking keeps ignoring it.",
-    "dir": "slides/bainbridge-debt",
-    "posts": [
-      "bainbridge-ironies",
-      "automation-bias-banking",
-      "hci-translation"
-    ],
-    "published": false,
-    "date": null
-  },
-  {
-    "id": "banking-ai",
-    "title": "Banking AI",
-    "description": "Rail-by-rail liability gaps, agent identity under CIP rules, and the regulatory vacuum agentic commerce is already operating inside.",
-    "dir": "slides/banking-ai",
-    "posts": [
-      "payments-liability-gap",
-      "agent-identity-kyc",
-      "agentic-commerce-gap"
-    ],
-    "published": true,
-    "date": "2026-05-18"
-  },
-  {
-    "id": "ai-economy",
-    "title": "Economics of AI",
-    "description": "Comparative advantage models, token transfer pricing, and knowledge collapse — the macro and institutional economics of AI adoption.",
-    "dir": "slides/ai-economy",
-    "posts": [
-      "ai-econ-model",
-      "token-transfer-pricing",
-      "knowledge-collapse-economics"
-    ],
-    "published": false,
-    "date": null
-  }
+    {
+        "id": "agentic-governance",
+        "title": "Regulatory Drift",
+        "description": "SR 26-2, the supersession of SR 11-7, and what effective challenge actually requires when the model under review is a GenAI system.",
+        "dir": "slides/agentic-governance",
+        "posts": [
+            "sr11-7",
+            "effective-challenge"
+        ],
+        "published": true,
+        "date": "2026-05-18",
+        "quiz": true
+    },
+    {
+        "id": "agentic-engineering",
+        "title": "Agentic Engineering",
+        "description": "How harness design, guardrails, and skills supply-chain security determine whether agentic systems are actually governable.",
+        "dir": "slides/agentic-engineering",
+        "posts": [
+            "context",
+            "agent-harness-design",
+            "claude-code-harness",
+            "skills-supply-chain"
+        ],
+        "published": true,
+        "date": "2026-05-18"
+    },
+    {
+        "id": "multi-agent",
+        "title": "Agent to Agent",
+        "description": "A2A protocol design, cross-agent security risks, and real-world case studies of agentic systems in the wild.",
+        "dir": "slides/multi-agent",
+        "posts": [
+            "google-adk-a2a",
+            "a2a-risks",
+            "a2a-case-studies"
+        ],
+        "published": true,
+        "date": "2026-05-18"
+    },
+    {
+        "id": "gui-agents",
+        "title": "GUI Agents",
+        "description": "MolmoWeb's training data inversion result, open-source harness gaps, and the Universal Verifier's backbone-swap finding.",
+        "dir": "slides/gui-agents",
+        "posts": [
+            "molmoweb-data-flywheel",
+            "molmoweb-openness-gap",
+            "gui-agents-verifier"
+        ],
+        "published": false,
+        "date": null
+    },
+    {
+        "id": "evaluations",
+        "title": "The Eval Gap",
+        "description": "Measurement theory, NIST benchmark frameworks, psychometrics, and why most LLM eval pipelines report the wrong uncertainty estimate.",
+        "dir": "slides/evaluations",
+        "posts": [
+            "metrics-metrics-metrics",
+            "nist-benchmark-evals",
+            "benchmark-uncertainty"
+        ],
+        "published": false,
+        "date": null
+    },
+    {
+        "id": "adversarial-testing",
+        "title": "Adversarial Testing",
+        "description": "Five-phase red-teaming, three deployment gates, and why adversarial completeness is provably unachievable \u2014 and why you still need the program.",
+        "dir": "slides/adversarial-testing",
+        "posts": [
+            "adversarial-workflow",
+            "deployment-gates",
+            "adversarial-incompleteness"
+        ],
+        "published": true,
+        "date": "2026-05-18"
+    },
+    {
+        "id": "human-in-the-loop",
+        "title": "Human and the Loop",
+        "description": "Guardrail design, sixty years of human oversight vocabulary, and how HITL timing regimes map to MRM governance obligations.",
+        "dir": "slides/human-in-the-loop",
+        "posts": [
+            "guardrails",
+            "hitl-vocabulary",
+            "hitl-design"
+        ],
+        "published": true,
+        "date": "2026-05-18"
+    },
+    {
+        "id": "bainbridge-debt",
+        "title": "Bainbridge's Debt",
+        "description": "Forty years of HCI and human-factors research has named, empirically documented, and partially solved banking's human-automation failure modes. Banking keeps ignoring it.",
+        "dir": "slides/bainbridge-debt",
+        "posts": [
+            "bainbridge-ironies",
+            "automation-bias-banking",
+            "hci-translation"
+        ],
+        "published": false,
+        "date": null
+    },
+    {
+        "id": "banking-ai",
+        "title": "Banking AI",
+        "description": "Rail-by-rail liability gaps, agent identity under CIP rules, and the regulatory vacuum agentic commerce is already operating inside.",
+        "dir": "slides/banking-ai",
+        "posts": [
+            "payments-liability-gap",
+            "agent-identity-kyc",
+            "agentic-commerce-gap"
+        ],
+        "published": true,
+        "date": "2026-05-18"
+    },
+    {
+        "id": "ai-economy",
+        "title": "Economics of AI",
+        "description": "Comparative advantage models, token transfer pricing, and knowledge collapse \u2014 the macro and institutional economics of AI adoption.",
+        "dir": "slides/ai-economy",
+        "posts": [
+            "ai-econ-model",
+            "token-transfer-pricing",
+            "knowledge-collapse-economics"
+        ],
+        "published": false,
+        "date": null
+    }
 ]

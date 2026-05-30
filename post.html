@@ -66,6 +66,7 @@
       };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script src="./quizzes/quiz-engine.js"></script>
   </head>
   <body>
     <!-- Reading progress bar -->
@@ -955,6 +956,11 @@
 
             // Post navigation (bottom cards)
             renderPostNav(fullManifest, slug, curriculum, manifestBySlug);
+
+            // Quiz widget — loads if quizzes/posts/{slug}.json exists
+            if (typeof window.initQuiz === "function") {
+              window.initQuiz(slug);
+            }
           } catch (err) {
             loadingEl.style.display = "none";
             errorEl.style.display = "block";
