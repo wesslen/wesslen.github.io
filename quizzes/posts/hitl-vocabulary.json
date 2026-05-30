@@ -1,0 +1,162 @@
+[
+  {
+    "id": "hv-q01",
+    "post": "hitl-vocabulary",
+    "module": "human-in-the-loop",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "The phrase 'human-in-the-loop' appears in exactly one principal US financial-services supervisory document. Which one, and what does this reveal?",
+    "options": [
+      "SR 11-7 introduced the term in 2011 as part of the effective challenge framework to describe qualified validator review of model outputs.",
+      "FINRA's 2026 Annual Regulatory Oversight Report used 'human in the loop' in scare quotes \u2014 the only time any US financial SRO used the phrase.",
+      "SR 26-2 adopted the term as part of its new GenAI governance framework, establishing it as the primary vocabulary for describing human oversight of automated systems.",
+      "The OCC's 2021 Model Risk Management Comptroller's Handbook introduced it specifically for AI oversight requirements in national bank examination procedures."
+    ],
+    "correct": 1,
+    "explanation": "The post verifies this through site-restricted full-text searches of all major US financial supervisory documents. FINRA \u2014 a broker-dealer SRO with no prudential banking authority \u2014 used the phrase in its 2026 Annual Regulatory Oversight Report, in scare quotes, without defining it operationally. Federal prudential supervisors use equivalent concepts through different vocabulary: 'effective challenge,' 'qualified personnel,' 'expert judgment.' The implication: banking institutions cannot satisfy a formal supervisory expectation using 'human-in-the-loop' language because that expectation is not formally stated in those terms."
+  },
+  {
+    "id": "hv-q02",
+    "post": "hitl-vocabulary",
+    "module": "human-in-the-loop",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "Parasuraman et al. (2000) broke the Sheridan-Verplank automation scale by decoupling stage from degree. Why is this distinction important for AI governance design?",
+    "options": [
+      "It shows that all ten automation levels are equivalent for governance purposes and a single oversight designation can describe an entire AI system.",
+      "A system can be highly automated for data acquisition but require full human decision-making \u2014 each stage needs oversight at its actual level.",
+      "It demonstrates that automation level is fixed by regulation rather than design choice, limiting what governance frameworks can require of deploying institutions.",
+      "It shows that human factors research is more rigorous than banking model risk management and should replace SR 11-7 as the primary governance standard."
+    ],
+    "correct": 1,
+    "explanation": "The post applies this insight directly: 'an engineer describing a training-time labeling workflow and a regulator describing a validation committee are both technically correct when they call what they're doing human-in-the-loop.' The 2000 framework shows these are different things at different pipeline stages. For governance design, this means you cannot specify oversight with a single level designation \u2014 you need to specify which stage of the pipeline is operating at which automation level and what human role exists at each. An AML system operates at Level 2-3 (human investigates alerts) for case investigation but at Level 7 (auto-executes with notification) for suspicious activity reporting."
+  },
+  {
+    "id": "hv-q03",
+    "post": "hitl-vocabulary",
+    "module": "human-in-the-loop",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "What is the precise difference between Human-on-the-Loop (HOTL) and Human-in-the-Loop (HITL) that matters for accountability design?",
+    "options": [
+      "HOTL is a military control concept and HITL is a financial services concept; both describe the same oversight structure under different regulatory vocabularies.",
+      "HITL requires human involvement in every decision cycle; HOTL allows machine execution while a human monitors and retains halt authority between checkpoints.",
+      "HOTL is deprecated and superseded by HITL in modern AI governance frameworks and should not appear in any new institutional policy documents.",
+      "HOTL and HITL describe identical oversight structures with different acronyms from different regulatory traditions but with no meaningful operational distinction."
+    ],
+    "correct": 1,
+    "explanation": "The post's taxonomy establishes this: 'HOTL corresponds to human-supervised autonomy \u2014 systems the human monitors and can halt but does not drive.' HITL requires human intervention in every decision cycle; HOTL requires it for design and monitoring but not for individual decisions. For a bank deploying autonomous agents, HOTL means the system can execute transactions without case-by-case approval while a human monitors and retains halt authority. The accountability implication: whoever authorized the HOTL design \u2014 and defined what constitutes a halt-triggering event \u2014 holds accountability for the actions the system takes between checkpoints."
+  },
+  {
+    "id": "hv-q04",
+    "post": "hitl-vocabulary",
+    "module": "human-in-the-loop",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "EU AI Act Article 14 uses 'human oversight' as the binding concept for high-risk AI systems, including creditworthiness assessment. What does it specifically require that US banking guidance does not?",
+    "options": [
+      "Article 14 requires banks to obtain regulatory pre-approval before deploying any high-risk AI system, creating a licensing obligation absent from US banking supervision.",
+      "Article 14(4)(b) requires operators to detect and address automation bias \u2014 naming the Parasuraman-Riley misuse failure mode in binding regulatory text.",
+      "Article 14 mandates explainability for all AI decisions in credit scoring regardless of impact level, covering a broader scope than any existing US guidance.",
+      "Article 14 sets a minimum 25% human review rate for all AI-assisted credit decisions, a numerical threshold absent from US banking supervisory guidance."
+    ],
+    "correct": 1,
+    "explanation": "The post identifies Article 14's Article 14(4)(b) as the specific provision: operators must 'remain aware of the possible tendency of automatically relying or over-relying on the output produced by a high-risk AI system.' The post notes this is 'one of the first instances of automation bias appearing as an explicit named concept in major-jurisdiction AI governance.' US banking guidance uses 'effective challenge,' 'qualified personnel,' and 'expert judgment' \u2014 vocabulary that specifies organizational structure without naming the human-factors mechanism by which these can fail. EU-supervised banks have a binding requirement to address automation bias; US-supervised banks under SR 26-2 (which excludes GenAI) have no equivalent."
+  },
+  {
+    "id": "hv-q05",
+    "post": "hitl-vocabulary",
+    "module": "human-in-the-loop",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The post identifies three structural ways agentic AI changes what oversight requires \u2014 not incremental differences but categorical ones. Which correctly describes the transparency irony?",
+    "options": [
+      "Agentic systems are actually more transparent than rule-based systems because chain-of-thought reasoning is explicitly verbalized for human reviewers to read.",
+      "The human checkpoint sees an artifact from multi-step reasoning it cannot inspect, and the reasoning trace doesn't reproduce",
+      "Transparency decreases as AI capabilities grow because parameter counts increase beyond what any human interpretability method can adequately decompose.",
+      "Chain-of-thought outputs make agentic systems appear more transparent than prior model generations, even though intermediate steps don't reproduce under re-inspection."
+    ],
+    "correct": 1,
+    "explanation": "The post is precise about what makes the transparency difference categorical. It's not just that agentic systems are harder to understand \u2014 previous AI systems were also opaque. The specific difference is that the reasoning trace doesn't reproduce: a chain-of-thought output is one sampling from a distribution of possible reasoning paths, not a deterministic record of what the model computed. Post-hoc review of why an output was generated cannot reconstruct the actual reasoning path, because the same input given to the model again will produce a different reasoning trace. This means the CFPB's 'reason-code laundering' concern \u2014 whether LLM explanations are genuine decision provenance \u2014 is a structural property, not a documentation problem."
+  },
+  {
+    "id": "hv-q06",
+    "post": "hitl-vocabulary",
+    "module": "human-in-the-loop",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "The post argues that vocabulary and institutional design are not independent: 'a governance committee built around HITL checkpoints and one built around effective challenge with qualified validators will allocate responsibility and accountability differently when something goes wrong.' What is the mechanism?",
+    "options": [
+      "Different vocabularies trigger different regulatory reporting requirements under FINRA and SR 11-7, creating asymmetric documentation obligations across institution types.",
+      "HITL frames oversight as timing \u2014 is a human present? Effective challenge frames it as quality \u2014 does the human have",
+      "HITL vocabulary is more legally defensible in fair lending litigation because it describes a concrete process rather than an abstract standard of quality.",
+      "Only EU-regulated banks can legally use HITL vocabulary in governance documentation; US banks must use effective challenge terminology for prudential supervisors."
+    ],
+    "correct": 1,
+    "explanation": "The post's implication is that this isn't cosmetic. HITL checkpoint governance asks: is a human present before this decision? Effective challenge governance asks: does the human have the competence to recognize a problem, the independence to raise it, and the authority to block action? When a harmful outcome occurs, a HITL governance framework points to whether the human approved it. An effective challenge framework points to whether the approval was substantive \u2014 whether the human was equipped to recognize the problem. The post predicts these produce different accountability outcomes when something goes wrong."
+  },
+  {
+    "id": "hv-q07",
+    "post": "hitl-vocabulary",
+    "module": "human-in-the-loop",
+    "objective": "misconception",
+    "difficulty": 2,
+    "question": "The Sheridan-Verplank scale was designed in 1978 for remotely operated underwater vehicles. What misconception does the post warn against when applying this framework to AI governance?",
+    "options": [
+      "The scale applies to physical control systems only and cannot be validly mapped onto information systems processing financial data and decision outputs.",
+      "The scale's levels describe stages, not whole systems \u2014 a single automation level misrepresents a system operating at different levels",
+      "High automation levels are always preferable for financial applications because they demonstrably reduce human error rates on all routine task categories.",
+      "The scale is too outdated to be useful and should be replaced with a modern AI-specific taxonomy designed for digital decision systems."
+    ],
+    "correct": 1,
+    "explanation": "The post invokes this precisely: 'an engineer describing a training-time labeling workflow and a regulator describing a validation committee are both technically correct when they call what they're doing human-in-the-loop.' The Sheridan-Verplank levels describe stages, not entire systems. Applying a single level to an entire AI deployment misrepresents the oversight structure: a credit underwriting system might be Level 2-3 (human investigates ranked alerts) for initial screening and Level 4-5 (human approves model suggestion) for final decisioning and Level 9-10 (auto-executes with notification) for compliance reporting. Each stage has different oversight requirements."
+  },
+  {
+    "id": "hv-q08",
+    "post": "hitl-vocabulary",
+    "module": "human-in-the-loop",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A US bank's AI governance policy states: 'All material credit decisions require human-in-the-loop review before implementation.' A compliance attorney asks: 'Can this commitment be satisfied by the current ECOA adverse action notice process?' What does the post's analysis suggest?",
+    "options": [
+      "Yes \u2014 ECOA adverse action notices are the formal regulatory mechanism for human review of credit decisions and satisfy any HITL policy commitment.",
+      "ECOA requires explainability after a decision; HITL review requires human involvement before action. Auto-mailed notices satisfy ECOA but fail the HITL commitment.",
+      "No \u2014 only formal regulatory approval of the AI system satisfies a HITL commitment; process-level review is legally insufficient regardless of ECOA compliance.",
+      "Yes, provided the reviewing human has documented authority to override the AI's recommendation in the credit decision system of record."
+    ],
+    "correct": 1,
+    "explanation": "The post's vocabulary analysis illuminates exactly this kind of ambiguity. ECOA/Reg B requires specific, accurate denial reasons (an explainability obligation after the decision). HITL review is an oversight structure before or during the decision process. These overlap but are not equivalent: an adverse action notice can be accurate and specific (satisfying ECOA) while being generated and mailed without human review (failing HITL). Conversely, a human could review and approve every AI recommendation before it's acted on (satisfying HITL) without generating ECOA-compliant notices. The commitment 'human-in-the-loop review before implementation' requires specifying what 'review' means procedurally, not just that a regulatory obligation exists."
+  },
+  {
+    "id": "hv-q09",
+    "post": "hitl-vocabulary",
+    "module": "human-in-the-loop",
+    "objective": "mechanism",
+    "difficulty": 3,
+    "question": "The post identifies three structural changes agentic AI makes to oversight requirements. The third is behavioral drift: 'agentic systems can update their response patterns based on accumulated context and state.' Why is this different from standard model drift?",
+    "options": [
+      "Behavioral drift accumulates faster than weight-level model drift and therefore requires more frequent revalidation cycles to detect before downstream harm occurs.",
+      "Standard model drift tracks distribution statistics; agentic behavioral drift accumulates through context-window state with no established metric to capture it.",
+      "Behavioral drift only affects systems with explicit long-term memory modules; stateless session-scoped agents are structurally immune because context resets between interactions.",
+      "Standard model drift degrades measurable performance metrics; behavioral drift affects only tone and phrasing without changing decision quality or risk outcomes."
+    ],
+    "correct": 1,
+    "explanation": "The post identifies this as the third structural difference: unlike conventional model drift (distribution shift detected against known statistics), agentic behavioral drift accumulates through context-window state. The weights haven't changed; the training data hasn't changed; but the system's effective behavior has shifted because the accumulated context from prior interactions is influencing current responses. Existing monitoring frameworks track performance metrics against holdout benchmarks \u2014 they weren't designed to capture behavioral changes driven by context accumulation within a session or across sessions. This is why the post says these are 'categorically different from the model failures that SR 11-7 was designed to address.'"
+  },
+  {
+    "id": "hv-q10",
+    "post": "hitl-vocabulary",
+    "module": "human-in-the-loop",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The post argues that 'the supervisory question for agentic AI isn't whether a human is in the loop. It's whether the loop still runs at a speed and transparency at which human judgment can matter.' What governance implication follows from this reframing?",
+    "options": [
+      "Banks should slow down agentic AI decision cycles to match human processing speed, accepting substantially higher latency in exchange for genuinely substantive oversight.",
+      "Governance must specify whether the reviewer has information quality, time, and cognitive capacity for genuine judgment \u2014 not just whether a checkpoint exists.",
+      "Human oversight is impossible for agentic AI and must be entirely replaced by automated monitoring and deterministic guardrail controls for all consequential use cases.",
+      "The reframing implies that HITL governance is more important than model risk management for agentic deployments and should supersede SR 11-7 requirements."
+    ],
+    "correct": 1,
+    "explanation": "The post's question \u2014 whether the loop runs at a speed and transparency at which human judgment can matter \u2014 is the governance design question. If the human checkpoint reviews 400 agent outputs per shift without the time or information to assess each one, the checkpoint exists but human judgment doesn't. If the agentic system's intermediate steps are invisible to the reviewer, human approval is rubber-stamping an artifact rather than exercising independent oversight. The implication is that governance frameworks must specify: what information does the human have, how much time to review, what decision authority, and what happens when those conditions can't be met. HITL checklist: Yes is insufficient."
+  }
+]

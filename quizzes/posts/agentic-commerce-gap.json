@@ -1,0 +1,162 @@
+[
+  {
+    "id": "acg-q01",
+    "post": "agentic-commerce-gap",
+    "module": "banking-ai",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "JPMorgan began charging third-party data aggregators for API access in mid-2025. How does this create a structural competitive advantage for Tier 1 banks in the agentic commerce market?",
+    "options": [
+      "The fees fund JPMorgan's internal AI product development budget, giving it first-mover capital that competitors relying entirely on external venture funding cannot match over extended multi-year investment cycles",
+      "Tier 1 banks access their own customer data at zero marginal cost while charging the fintechs that compete against them \u2014 the institution sets prices for data its competitors need to function",
+      "The fees are legally required under GENIUS Act data licensing provisions, which mandate that large banks monetize API access to fund required interoperability infrastructure investment by a specified deadline",
+      "The fees incentivize data quality improvements that benefit all market participants by aligning JPMorgan's revenue directly with the accuracy, completeness, and timeliness of the API data its aggregator partners consume and build products upon"
+    ],
+    "correct": 1,
+    "explanation": "The post describes the three-tier dynamic: 'Tier 1 banks are simultaneously building proprietary AAI capability and monetizing external access to their customer data.' JPMorgan reported approximately 1.89 billion monthly third-party data requests and began charging for them in late June 2025. Plaid \u2014 which serves as the data layer for most fintech and agentic commerce applications \u2014 is now paying JPMorgan for the data access its business model requires. The higher pricing tiers are specifically for payments-related data pulls \u2014 the highest-value agentic use cases. In the absence of an enforceable Section 1033 rule mandating data access terms, this pricing is commercial not regulatory."
+  },
+  {
+    "id": "acg-q02",
+    "post": "agentic-commerce-gap",
+    "module": "banking-ai",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "OpenAI's ChatGPT Instant Checkout was launched September 2025 with major retailer integrations and pulled back by March 2026. What were the primary operational failures?",
+    "options": [
+      "Consumer privacy concerns triggered regulatory intervention that forced the product off the market before it could reach the scale needed to assess its operational viability across retail categories",
+      "Only 12-30 Shopify merchants went live; OpenAI lacked state sales-tax remittance infrastructure; conversion was poor due to single-item carts, missing discount codes, and stale product data",
+      "A security breach compromised consumer payment credentials stored in the Instant Checkout system, forcing an emergency product withdrawal to limit reputational and regulatory exposure for OpenAI",
+      "Major retailers organized a coordinated opposition campaign, leveraging existing supplier relationships with card networks to block the product's merchant adoption across key retail verticals"
+    ],
+    "correct": 1,
+    "explanation": "The post documents the specific operational failures: 'only 12-30 Shopify merchants went live out of millions available; OpenAI had not built state sales-tax remittance infrastructure; conversion was poor due to single-item carts, no discount code support, and stale product data.' The pullback is significant because Instant Checkout was the most prominent agentic commerce deployment from the most prominent AI company, with major retail partnerships announced at launch. Its operational failures reveal that building agentic commerce at scale requires solving logistics, tax infrastructure, and merchant adoption challenges that a language model capability doesn't automatically address."
+  },
+  {
+    "id": "acg-q03",
+    "post": "agentic-commerce-gap",
+    "module": "banking-ai",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "Shopify's July 2025 robots.txt update stated: 'Checkouts are for humans. Automated scraping, buy-for-me agents, or any end-to-end flow that completes payment without a final review step is not permitted.' What structural problem is Shopify trying to address?",
+    "options": [
+      "AI agents generate excessive server load that degrades human shopper experience during peak periods, making it economically rational for merchants to block all agentic traffic to protect their primary revenue-generating customer interactions",
+      "Without an accepted proof-of-authorization model, merchants face fraud liability and chargeback costs with no clear dispute path \u2014 blocking agents is the rational risk-management default under existing card-not-present rules",
+      "AI agents systematically undermine legally mandated price-comparison protections, creating regulatory compliance exposure that blocking agentic checkout traffic is the simplest and most reliable way to avoid",
+      "Shopify is protecting its own emerging agentic commerce product from third-party competition by using robots.txt enforcement to technically block rival AI agents from accessing merchant checkout infrastructure"
+    ],
+    "correct": 1,
+    "explanation": "The post identifies the merchant-side logic: 'without a reliable, accepted proof-of-authorization model, fraud controls block agentic transactions by default. Until Visa TAP or Mastercard Verifiable Intent produce enforceable chargeback-rule amendments, merchants have no commercial reason to accept the risk.' Merchants operating under existing card-not-present rules face chargebacks when consumers dispute agent-initiated transactions. Without a dispute category specifically for agent-overreach (which neither network has yet created as an enforceable rule), merchants absorb the cost. Blocking agents entirely is the rational response to undefined liability \u2014 the 'narrowing merchants' pattern in the post's five-word summary."
+  },
+  {
+    "id": "acg-q04",
+    "post": "agentic-commerce-gap",
+    "module": "banking-ai",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "The Section 1033 open banking rule (October 2024) was enjoined in October 2025 based on the court's reading of 'representative' in the statute. What is the specific consequence for agentic payment agents?",
+    "options": [
+      "Banks are broadly exempt from all data-sharing obligations while the CFPB completes its revised rulemaking, removing any existing legal basis for third-party data access from covered institutions during the rulemaking review period",
+      "If 'representative' excludes commercial aggregators like Plaid, AI agents routed through aggregators have no statutory right to account data \u2014 fully dependent on commercial terms that Tier 1 banks set unilaterally",
+      "The injunction applies only to consumer payment data; commercial and business banking data-sharing obligations remain fully intact and enforceable under the original rule's provisions throughout the rulemaking review period",
+      "Aggregators retain data access under existing bilateral agreements; only the new affirmative right to demand standardized API access on regulated terms is paused during the rulemaking review period"
+    ],
+    "correct": 1,
+    "explanation": "The post maps the consequence precisely: 'If the revised rule adopts the court's fiduciary-relationship reading, Tier 1 banks' data fee advantage becomes structural and permanent.' An agentic payment agent typically works through an aggregator (Plaid, Yodlee) to access account data. If aggregators don't qualify as 'representatives' with a statutory right of access, the agent's data access depends entirely on commercial agreements \u2014 which JPMorgan and other Tier 1 banks can price as they choose. The open banking right that would have given consumers the ability to authorize agent data access regardless of bank cooperation becomes unavailable."
+  },
+  {
+    "id": "acg-q05",
+    "post": "agentic-commerce-gap",
+    "module": "banking-ai",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "The post describes the US regulatory posture as 'permissive and litigation-dependent' versus the EU's 'layered and prescriptive' approach. What is the strongest version of the argument for the US approach?",
+    "options": [
+      "US litigation creates case law addressing actual rather than hypothetical failures, and market adoption decisions rather than regulatory mandates determine use case viability \u2014 producing more efficient governance outcomes over time",
+      "The EU prescriptive approach calcifies requirements around early implementations before markets mature, preventing the efficient discovery of use cases that the US approach enables through voluntary commercial experimentation and iteration",
+      "The US approach faithfully mirrors how traditional financial regulation developed historically, following a proven path from market innovation through failure to evidence-based regulatory response",
+      "The EU approach lacks meaningful extraterritorial enforcement reach, so its prescriptive requirements don't bind non-EU companies that can serve US markets without bearing the associated compliance overhead, regulatory friction, and market-entry costs"
+    ],
+    "correct": 0,
+    "explanation": "The post presents this as an honest account of the policy debate, not as a critique of US policy. The US approach has genuine virtues: markets discover use cases efficiently; litigation addresses actual rather than speculative failures; voluntary standards can adapt faster than regulatory requirements. The post's concern is distributional, not absolute: 'The risk is not evenly distributed. Tier 1 banks are positioned to benefit from regulatory uncertainty as a competitive moat. Tier 3 community banks and their customers are most exposed.' The private ordering bet may produce good outcomes for sophisticated market participants while leaving less sophisticated ones \u2014 consumers who delegate to DIY agents on newer rails \u2014 with inadequate protection."
+  },
+  {
+    "id": "acg-q06",
+    "post": "agentic-commerce-gap",
+    "module": "banking-ai",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A regional bank (Tier 3) is evaluating whether to build an agentic payment product. Applying the post's three-tier market analysis, what structural disadvantages does it face compared to JPMorgan?",
+    "options": [
+      "Tier 3 banks lack the consumer brand recognition and sustained marketing budgets needed to achieve the adoption rates that make any new payment product economically viable during the critical early launch and user-acquisition period",
+      "Tier 3 banks pay Tier 1 banks for cross-bank data access, approximately 62% struggle to build FDX-compliant APIs, and they have no proprietary data advantage to underwrite AI product development",
+      "Regulatory requirements impose materially heavier compliance obligations on smaller community banks than on large systemically important institutions, creating the asymmetric cost structures that disadvantage Tier 3 competitors in new product development",
+      "Tier 3 banks are legally prohibited from partnering with fintech companies on payment product development without prior regulatory approval, adding months of delay to any go-to-market strategy involving third-party AI capabilities"
+    ],
+    "correct": 1,
+    "explanation": "The post's three-tier analysis: Tier 1 builds capability using own data (free) and monetizes external data access (revenue). Tier 2 (fintechs) pay for Tier 1 data access and use it for competing products. Tier 3 (community banks) 'lack the engineering resources to build FDX-compliant APIs at all' and ICBA has lobbied for exemptions from the most burdensome open banking requirements. A regional bank trying to build an agentic payment product is simultaneously a potential data purchaser from Tier 1 (paying for what JPMorgan gets for free), a potential API builder (resource-constrained), and a potential integration partner with fintechs (who are themselves paying Tier 1 data fees). The structural disadvantages compound."
+  },
+  {
+    "id": "acg-q07",
+    "post": "agentic-commerce-gap",
+    "module": "banking-ai",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The post identifies five near-term developments as 'watch points' for the agentic payments trajectory. Which one does it describe as 'the single most important near-term legal signal'?",
+    "options": [
+      "The GENIUS Act's implementing regulations from Treasury and the federal banking agencies, expected in late 2026 and covering stablecoin operational, reporting, and consumer protection requirements for agentic payment use cases at scale",
+      "The Second Circuit ruling in *New York v. Citibank* \u2014 an EFTA-affirming outcome would extend consumer protection to RTP and FedNow agent-initiated pushes, directly addressing the worst current liability gap",
+      "The CFPB's revised Section 1033 rulemaking, which will determine whether commercial aggregators retain statutory rights to access consumer financial data on behalf of authorized third-party agent applications",
+      "The first independently published fraud and dispute-rate data from Visa Intelligent Commerce pilots, enabling the first empirical assessment of whether private-sector frameworks are actually delivering adequate consumer protection"
+    ],
+    "correct": 1,
+    "explanation": "The post designates this explicitly: 'The Second Circuit ruling in New York v. Citibank will determine whether EFTA reaches the customer-to-bank leg of online-initiated wire transfers, and the reasoning will be applied directly to agent-initiated pushes on RTP, FedNow, and similar rails. It's the single most important near-term legal signal in this space.' The stakes: if affirmed, EFTA consumer protections extend to the rails currently identified as having the worst liability gap. If reversed, it could signal that existing law doesn't cover agent-initiated transactions broadly, cementing the vacuum. No other pending development has this scope of impact on the liability framework."
+  },
+  {
+    "id": "acg-q08",
+    "post": "agentic-commerce-gap",
+    "module": "banking-ai",
+    "objective": "misconception",
+    "difficulty": 2,
+    "question": "The absence of independent published fraud and dispute-rate data from major agentic payment deployments (Visa, Mastercard, Amazon Rufus) is described as 'not a minor gap.' What specifically is missing, and why does it matter?",
+    "options": [
+      "The missing data would allow direct comparison of agentic payment fraud rates against card-not-present benchmarks that regulators and merchants use to calibrate chargeback threshold policies across networks",
+      "Without independently published error, dispute, and fraud rates, vendor claims about safety cannot be evaluated \u2014 whether agentic payments are safe at scale is unknown, making regulatory calibration impossible in either direction",
+      "The missing data prevents accurate economic impact calculations for agentic commerce, which are needed to justify the regulatory investment required to close the consumer protection liability gaps the posts identify across payment rails",
+      "The absence creates intellectual property disputes over proprietary transaction datasets, slowing the research collaborations needed to produce the independent assessments that regulators and policymakers require"
+    ],
+    "correct": 1,
+    "explanation": "The post identifies this precisely: 'The absence of data is not a minor gap. It means the vendor-favorable claims cannot be independently evaluated. Until independent dispute-rate data exists, the risk profile of agentic payments is genuinely unknown.' Visa Group President Jenkyn warned in December 2025 that AI-powered identity attacks will materially increase in 2026. Mastercard's 2026 fraud estimate exceeds $485 billion but is not AAI-specific. Neither vendor has published dispute rates for their agentic frameworks. This makes the regulatory debate \u2014 whether the current US private-ordering approach is adequate \u2014 empirically unresolvable. The cases for intervention and against it are both being made without data."
+  },
+  {
+    "id": "acg-q09",
+    "post": "agentic-commerce-gap",
+    "module": "banking-ai",
+    "objective": "boundary",
+    "difficulty": 3,
+    "question": "The EU-US regulatory divergence creates 'trans-Atlantic friction' for banks building agentic payment products. What specific design conflict does a bank face when building for both markets?",
+    "options": [
+      "EU data localization regulations prevent sharing transaction data with US-based systems or personnel, requiring entirely separate data infrastructure for EU and US agentic payment operations regardless of efficiency, operational cost, or compliance considerations",
+      "A US-optimized product using stablecoin rails and light authorization hits MiCA transaction caps and PSD3 SCA mandates in the EU, forcing separate product tracks or a most-restrictive-standard design costly in the US",
+      "EU programming language and security certification requirements differ from US standards, requiring banks to maintain separate development teams for EU and US agentic commerce product lines across all market segments",
+      "The divergence creates friction only for non-bank fintechs; banks operating under bilateral regulatory recognition agreements are exempt from reconciling conflicting EU and US agentic payment design requirements"
+    ],
+    "correct": 1,
+    "explanation": "The post maps the EU stack: MiCA (hard caps on significant non-EUR stablecoin transactions), PSD3/PSR (permitting and regulating delegated Strong Customer Authentication), AI Act (credit scoring as high-risk with Article 14 human oversight), eIDAS 2.0 (government-rooted credentials by December 2026). A product that relies on stablecoin rails for low fees encounters MiCA transaction caps in EU deployment. A product with minimal consumer authorization requirements needs to be redesigned for PSD3. Each EU requirement creates a configuration divergence: the EU-compliant version has features that add friction and cost relative to the US-permissive version, requiring separate product development or a single most-restrictive-standard product."
+  },
+  {
+    "id": "acg-q10",
+    "post": "agentic-commerce-gap",
+    "module": "banking-ai",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The post's closing honest accounting: 'The technology is real. The consumer protection infrastructure is not keeping pace. The risk isn't evenly distributed.' What does this imply for a practitioner's ethical framework when evaluating agentic payment product decisions?",
+    "options": [
+      "Practitioners should decline to build any agentic payment products until federal consumer protection statutes are explicitly and comprehensively updated to cover AI delegation relationships across all payment rails and transaction types, providing a clear legal foundation for product design decisions",
+      "The relevant question before deployment is not 'is this legal?' but 'when something goes wrong, do the most exposed people have meaningful recourse?' \u2014 on newer rails, the answer is often no, which should be material to deployment decisions",
+      "Practitioners have no professional ethical obligations beyond ensuring full compliance with all currently applicable federal and state legal requirements at the time a product is deployed to market",
+      "Consumer protection gaps are a regulatory and legislative problem that falls entirely outside the professional responsibility of product managers, engineers, and risk practitioners who build agentic payment systems"
+    ],
+    "correct": 1,
+    "explanation": "The post closes with this framing precisely: 'The right question before deployment isn't whether this product is legal. It's when something goes wrong, and something will go wrong, do the people most exposed to the consequence have any meaningful recourse? Right now, on the newest rails, the answer is often no.' This frames a practitioner's decision not as legal compliance (the current US approach allows many of these deployments) but as whether the product design accounts for the distributional reality: sophisticated institutional actors and large banks benefit from regulatory flexibility; ordinary consumers who delegate to DIY agents on instant payment rails may absorb losses with no recovery path. The ethical dimension is visible even when the legal dimension is satisfied."
+  }
+]

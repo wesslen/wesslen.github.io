@@ -1,0 +1,162 @@
+[
+  {
+    "id": "ai-q01",
+    "post": "adversarial-incompleteness",
+    "module": "adversarial-testing",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "Vassilev's NIST publication establishes that OOPS (Out-Of-Policy Speech) cannot be finitely enumerated. What does this mean for adversarial test suites?",
+    "options": [
+      "Adversarial testing is mathematically impossible, so organizations should stop investing in red-team exercises entirely.",
+      "Every finite test suite leaves an infinite residual of uncovered inputs",
+      "Only automated testing at scale is effective because human red-teamers cannot generate prompts fast enough.",
+      "Mathematical incompleteness requires formal proof-of-safety approaches rather than empirical red-teaming, which can never satisfy coverage requirements."
+    ],
+    "correct": 1,
+    "explanation": "The diagonalization argument establishes a structural fact: for any finite list of 'blocked' prompts, you can construct a new prompt that produces unacceptable output but isn't on the list. Because this construction works for any finite list, no finite list suffices. What finite evaluation can establish is narrower and more useful: that the model fails on these specific probes, resists this family of attacks, or didn't regress since the last evaluation. The key governance implication is about the frame: treating red-teaming as a completion event (something you finish before release) is conceptually wrong. It's a continuous monitoring program you run."
+  },
+  {
+    "id": "ai-q02",
+    "post": "adversarial-incompleteness",
+    "module": "adversarial-testing",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "AIC (Adaptive Instruction Composition) uses a Neural Thompson Sampling bandit with parameter \u03bb. How does the \u03bb parameter affect test coverage strategy?",
+    "options": [
+      "\u03bb controls the number of parallel test threads running simultaneously, trading throughput for coverage depth.",
+      "High \u03bb prioritizes broad coverage of unexplored regions; low \u03bb concentrates on high-ASR attack families. Both modes",
+      "\u03bb sets the maximum time allocated to each adversarial probe attempt before the bandit moves to the next candidate.",
+      "\u03bb sets the generator model's temperature, controlling how creative versus literal the adversarial prompt variants are."
+    ],
+    "correct": 1,
+    "explanation": "The exploration-exploitation tradeoff governed by \u03bb is the key design variable in AIC. A high-\u03bb bandit explores broadly: it samples regions of the attack space that haven't been adequately probed yet, finding novel attack vectors. A low-\u03bb bandit exploits: it concentrates resources on attack families already known to work, maximizing ASR for the effort. Both modes outperform static curated libraries because they adapt to the specific model being tested. Static libraries find many variants of known attacks; AIC identifies vectors that static libraries miss, which is the operationally relevant capability for continuous monitoring."
+  },
+  {
+    "id": "ai-q03",
+    "post": "adversarial-incompleteness",
+    "module": "adversarial-testing",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "The post distinguishes between the 'certification frame' and the 'continuous monitoring frame' for adversarial testing. What specific governance problem does the certification frame create for language model deployments?",
+    "options": [
+      "Certification frames generate higher costs because they require comprehensive upfront testing rather than distributed ongoing monitoring spend.",
+      "A passed gate certifies resistance to specific attacks at a specific date",
+      "Certification frames require advance regulatory approval that continuous monitoring programs don't, creating timeline delays.",
+      "SR 26-2 mandates annual certification renewal for GenAI deployments, making the certification frame operationally unworkable."
+    ],
+    "correct": 1,
+    "explanation": "The post connects this directly to the HITL design argument about deploy-time vs. runtime governance: 'the SR 11-7 era apparatus was built around completion events (model approval, model validation, periodic review), rather than around continuous monitoring of a system that may never reach a stable state.' A credit scorecard certified in Q1 is essentially the same system in Q4 \u2014 same weights, same inputs, stable threat environment. An LLM agent certified in Q1 may have received a model update, added three new MCP servers, expanded its tool inventory, and had new attack techniques published against it by Q4. The certification was evidence of Q1 robustness against Q1 threats; it's not evidence of Q4 robustness."
+  },
+  {
+    "id": "ai-q04",
+    "post": "adversarial-incompleteness",
+    "module": "adversarial-testing",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "The post argues that 'it does not follow that all test suites are equally incomplete.' What does this claim imply for adversarial testing program design?",
+    "options": [
+      "Organizations with incomplete test suites should stop adversarial testing until they can meet a minimum coverage threshold.",
+      "Suites that adaptively target the territory most likely to matter for a given deployment are",
+      "Test suites should maximize raw probe count regardless of attack family targeting, because volume compensates for incompleteness.",
+      "Incompleteness means programs should be designed by external experts who bring cross-domain knowledge rather than internal teams."
+    ],
+    "correct": 1,
+    "explanation": "The incompleteness result is not a counsel of despair \u2014 it's a reframing of the design problem. Static curated libraries (known DAN variants, standard Crescendo sequences) sample the attack space uniformly from a fixed catalogue. AIC's adaptive sampling identifies which regions of the attack space haven't been adequately probed for this specific model and deployment context, and directs resources there. The question isn't 'have we covered the full space?' \u2014 no test suite can. The question is 'have we covered the territory most likely to matter given what we know about this system and the current threat landscape?' Adaptive methods can answer that question; static ones cannot."
+  },
+  {
+    "id": "ai-q05",
+    "post": "adversarial-incompleteness",
+    "module": "adversarial-testing",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "A continuous adversarial monitoring program should trigger a test suite update when a new attack family appears in the public CVE record. What is the technical justification for this trigger condition?",
+    "options": [
+      "Regulatory requirements mandate testing within 30 days of each CVE publication affecting language model infrastructure.",
+      "A new attack family creates a region of the attack space no existing probe covers",
+      "CVE publication creates direct legal liability requiring immediate documentation of testing and remediation steps.",
+      "New attack families are empirically more severe than existing ones, so CVE publication establishes a priority queue to consume in order."
+    ],
+    "correct": 1,
+    "explanation": "The post's trigger condition logic is precise: 'when the deployment context changes (new tools, new MCP servers, new integration points), the trust boundary register updates and probes targeting those boundaries re-run. The reason this trigger must be that broad is precisely the incompleteness result: after any such change, the model faces a different threat configuration, and the probe suite optimized for the prior configuration may systematically miss the new exposure.' A new attack family (e.g., a novel indirect prompt injection variant exploiting a specific data format) creates a new region of the attack space that no existing probe covers. The prior suite's incompleteness has changed in character."
+  },
+  {
+    "id": "ai-q06",
+    "post": "adversarial-incompleteness",
+    "module": "adversarial-testing",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "The incompleteness result uses a diagonalization argument. The post notes this is 'the same family of argument Cantor and G\u00f6del employed \u2014 though the result here is weaker.' What is the critical difference?",
+    "options": [
+      "The OOPS result applies only to English-language prompts, whereas Cantor's argument applies universally across all formal systems.",
+      "Cantor's diagonalization showed the reals are uncountably infinite \u2014 larger than the naturals. The OOPS result is weaker:",
+      "The OOPS result applies only to language models; Cantor's argument applies to all formal systems including logic and mathematics.",
+      "The OOPS result is actually stronger than Cantor's because it applies to practical deployed systems rather than abstract objects."
+    ],
+    "correct": 1,
+    "explanation": "The post is precise about the mathematical scope: 'The diagonalization method is the same family of argument Cantor and G\u00f6del employed \u2014 though the result here is weaker than Cantor's. Cantor's diagonalization shows the real numbers are uncountably infinite; the OOPS result is the more modest claim that the set of adversarial prompts is countably infinite.' The OOPS result establishes that no finite enumeration suffices \u2014 you can always construct one more adversarial prompt by systematically varying any finite list. This is sufficient to establish the governance point (no finite red-team covers all attacks) without needing the stronger result about uncountable infinities."
+  },
+  {
+    "id": "ai-q07",
+    "post": "adversarial-incompleteness",
+    "module": "adversarial-testing",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A bank has 10 LLM deployments each requiring continuous adversarial monitoring. What is the minimum set of cadences the program should run, and what output should each produce?",
+    "options": [
+      "A single annual red-team exercise covering all deployments simultaneously, producing one consolidated risk report.",
+      "PR-level automated probes, nightly adaptive scans, and quarterly manual campaigns",
+      "Weekly automated scans and monthly manual reviews for each deployment, scaled proportionally to the use case tier.",
+      "Automated probes only \u2014 manual red-teaming is prohibitively expensive at 10 deployments and automation covers the attack surface."
+    ],
+    "correct": 1,
+    "explanation": "The post lays out the three-cadence structure precisely. PR-level catches capability and safety regressions before they reach production. Nightly adaptive scans maintain coverage against a shifting threat surface and produce the time-series that makes trend analysis possible. Quarterly manual campaigns with annual external red-team add creative adversarial intelligence that automated systems cannot replicate. The critical feature differentiating this from a certification frame: all three cadences produce a time-series of control-effectiveness evidence. When a new attack appears in threat intelligence feeds, the nightly scan updates to include it \u2014 the program never claims to be complete, only to be continuously adapting."
+  },
+  {
+    "id": "ai-q08",
+    "post": "adversarial-incompleteness",
+    "module": "adversarial-testing",
+    "objective": "misconception",
+    "difficulty": 2,
+    "question": "The post closes: 'the quality of the ongoing monitoring program is the thing that actually mattered' \u2014 even though no monitoring can catch all attacks. What misconception does this counter?",
+    "options": [
+      "Monitoring programs should delay deployment until they achieve 100% attack coverage across the full attack surface.",
+      "Incompleteness doesn't make monitoring futile \u2014 every model risk control since SR 11-7 has operated under incompleteness",
+      "Only external red-team engagements provide meaningful assurance; internal programs are too close to the deployment to find novel vectors.",
+      "Monitoring quality is inherently unmeasurable because incompleteness prevents specifying a valid coverage denominator."
+    ],
+    "correct": 1,
+    "explanation": "The post's closing paragraph is a direct counter to the 'incompleteness means futility' misreading: 'That's been true of every model risk control since 2011, and it didn't make the controls worthless. It made the quality of the ongoing monitoring program the thing that actually mattered.' Credit scorecards can fail in ways backtesting doesn't capture. AML models miss new money-laundering techniques. The formal incompleteness of these control programs didn't make them worthless \u2014 it made the ongoing investment in improving their coverage the essential work. Adversarial monitoring is the same: you can't catch everything, so the quality of your program \u2014 how well-calibrated to current threats, how adaptive to new attack families \u2014 is the real variable."
+  },
+  {
+    "id": "ai-q09",
+    "post": "adversarial-incompleteness",
+    "module": "adversarial-testing",
+    "objective": "mechanism",
+    "difficulty": 3,
+    "question": "AIC's SBERT contrastive embedding combined with UMAP dimensionality reduction maintains a live 'coverage map' of the adversarial attack space. How does this address static red-teaming's systematic limitation?",
+    "options": [
+      "The coverage map produces visualizations helping human red-teamers identify which attack quadrants to explore next.",
+      "Static libraries find many variants of catalogued attacks while missing adjacent uncatalogued regions",
+      "UMAP reduction lowers computational cost by eliminating semantically redundant probes before submission to the target model.",
+      "The embeddings enable direct comparison of attack success rates across model versions, producing a continuous time-series."
+    ],
+    "correct": 1,
+    "explanation": "The post identifies static curated libraries' limitation: 'Static approaches produce high rates of surface variation but low rates of genuinely novel attack success. They find many variants of attacks already catalogued, while missing vectors in adjacent or novel territory.' The SBERT embedding represents each (prompt, response) pair in a semantic space; UMAP reduction maintains a live picture of coverage. The bandit learns which semantic regions have not been adequately probed and directs testing resources there. The diversity metric \u2014 fraction of successful attacks that are semantically distinct from prior successes \u2014 is the operational measure of coverage beyond known attack vectors."
+  },
+  {
+    "id": "ai-q10",
+    "post": "adversarial-incompleteness",
+    "module": "adversarial-testing",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The three adversarial testing posts form a series: adversarial-workflow (the engagement), deployment-gates (the thresholds), adversarial-incompleteness (why it never ends). What is the series' collective argument about how banks should structure AI risk governance?",
+    "options": [
+      "Banks should outsource all adversarial testing to specialized external firms since internal teams lack structural independence.",
+      "Governance requires a defensible engagement methodology with structural independence, documented quantitative thresholds with traceable derivations",
+      "The complexity of adversarial testing argues for reducing the number of AI applications deployed to a manageable attack surface.",
+      "Regulatory guidance must be updated before banks can implement effective adversarial testing since current frameworks lack specificity."
+    ],
+    "correct": 1,
+    "explanation": "The series traces a single argument across three aspects. Post 1 establishes what a defensible adversarial engagement looks like and why structural independence matters. Post 2 establishes what quantitative thresholds are needed for deployment decisions and why each threshold requires a derivation that survives examiner scrutiny. Post 3 establishes that these two elements together are still insufficient without a continuous monitoring program \u2014 because the attack surface evolves, and what was tested before release is evidence about one moment in time. The complete governance structure requires all three: a rigorous engagement methodology, documented deployment thresholds, and ongoing monitoring that treats deployment as the beginning of the risk management cycle."
+  }
+]

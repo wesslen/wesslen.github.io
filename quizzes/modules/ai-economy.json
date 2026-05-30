@@ -1,0 +1,11 @@
+{
+  "id": "ai-economy",
+  "title": "Economics of AI",
+  "posts": ["ai-econ-model", "token-transfer-pricing", "knowledge-collapse-economics"],
+  "titles": {
+    "ai-econ-model": "Econ 101 and AI",
+    "token-transfer-pricing": "Token Transfer Pricing",
+    "knowledge-collapse-economics": "The Case for Inferior LLMs"
+  },
+  "n": 10
+}

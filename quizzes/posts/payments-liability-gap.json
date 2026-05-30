@@ -1,0 +1,162 @@
+[
+  {
+    "id": "plg-q01",
+    "post": "payments-liability-gap",
+    "module": "banking-ai",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "Regulation E protects consumers against unauthorized electronic fund transfers, but has an exception for transactions 'initiated by a person to whom the consumer has furnished the access device.' Why is this exception potentially fatal to consumer protection for AI agent payments?",
+    "options": [
+      "When a consumer grants an AI agent account access, even unintended transactions may fall outside the 'unauthorized EFT' definition entirely, stripping the $50/$500 liability caps",
+      "AI agents cannot qualify as legal 'persons' under the Electronic Fund Transfer Act, so the agent-initiated transaction would automatically default to unauthorized status with full consumer protection",
+      "The furnished-device exception applies only to physical access devices like debit cards, not to digital API credentials granted programmatically through open banking frameworks",
+      "Regulation E was explicitly amended in 2025 to extend its liability cap protections to cover AI agent-initiated transactions, resolving the delegation gap identified in prior regulatory comment periods"
+    ],
+    "correct": 0,
+    "explanation": "The post identifies this as 'the single most consequential untested legal question in consumer payments right now.' The exception was written for a simple case: you hand your debit card to a family member. The same language may apply when you grant an AI agent API access to your bank account. If the agent makes a transaction you didn't intend, that transaction may fall outside 'unauthorized EFT' entirely \u2014 not because it was authorized, but because you furnished access to the agent that initiated it. No federal court has adjudicated an AI-agent-initiated transaction under EFTA, making the exception's reach uncertain but potentially catastrophic for consumer protection."
+  },
+  {
+    "id": "plg-q02",
+    "post": "payments-liability-gap",
+    "module": "banking-ai",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "The post identifies RTP/FedNow instant payment rails as 'the worst structural fit for agentic errors.' What specific combination of properties produces this assessment?",
+    "options": [
+      "Irrevocability combined with machine-speed execution means an agentic system can commit many transactions before any flag fires, with no chargeback or reversal mechanism for any of them",
+      "RTP and FedNow impose lower per-transaction limits than legacy wire or ACH rails, constraining the dollar-value of agentic commerce use cases that can practically be executed on these networks",
+      "RTP and FedNow employ weaker real-time fraud detection algorithms than card network infrastructure, making them more susceptible to injection attacks and fraudulent instruction chains",
+      "Instant payment rails require merchant registration and credentialing processes that AI agents currently cannot complete, effectively barring agentic transactions from these networks at scale"
+    ],
+    "correct": 0,
+    "explanation": "The post flags this explicitly with a warning: 'RTP and FedNow instant payment networks are the worst structural fit for agentic errors. They were designed for speed and finality \u2014 transactions settle in seconds and are irrevocable.' A human who accidentally sends a wire can sometimes call the bank within minutes; an agentic system executing at machine speed may commit many transactions before detection. Irrevocability means no undo regardless of cause (agent error, injection attack, unauthorized scope). The 'furnished' problem means Regulation E protections may not apply. The result: the rails most economically attractive for agentic commerce (fast, cheap settlement) are also the ones with the weakest consumer protection."
+  },
+  {
+    "id": "plg-q03",
+    "post": "payments-liability-gap",
+    "module": "banking-ai",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "What consumer protection does the GENIUS Act (signed July 2025) explicitly not establish for stablecoin payments?",
+    "options": [
+      "Any federal fraud recovery floor \u2014 no EFTA applicability, no error-resolution mechanism, no mandatory redemption timeline, no agentic-payment-specific provisions",
+      "Reserve requirements mandating that stablecoin issuers hold 100% of outstanding balances in cash or short-term Treasury instruments at all times",
+      "Chartering and licensing requirements that stablecoin issuers must complete with federal or state regulators before they may legally operate in US markets",
+      "Reporting obligations covering stablecoin transactions above specified dollar thresholds, designed to address money laundering and sanctions evasion risks"
+    ],
+    "correct": 0,
+    "explanation": "The post is precise about what the GENIUS Act did and didn't do. It creates real consumer protection against issuer insolvency (100% reserves in cash or short-term Treasuries, first-priority bankruptcy claim for holders, monthly attestation). What it does not do: establish any consumer protection floor for fraud recovery. No EFTA applicability, no mandatory redemption timeline, no error resolution mechanism, no agent-specific provisions for autonomous payment agents. The CFPB's January 2025 proposal to extend Regulation E to stablecoin wallets was withdrawn in May 2025. The governance gap: agentic systems have strong economic incentives to route to stablecoins for low fees and programmability, and those rails have the weakest consumer protection of any in the table."
+  },
+  {
+    "id": "plg-q04",
+    "post": "payments-liability-gap",
+    "module": "banking-ai",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "Visa's Trusted Agent Protocol (TAP) and Mastercard's Verifiable Intent framework both address the agent identity problem. As of April 2026, what critical gap remains in both?",
+    "options": [
+      "Neither scheme has published enforceable chargeback-rule amendments \u2014 agent-initiated transactions still flow through existing card-not-present rules, leaving merchants with no clear dispute path",
+      "Neither framework supports merchant-side verification of agent credentials at the point of transaction authorization, making it impossible to confirm agent identity during the payment flow",
+      "Neither framework can process agent-initiated transactions exceeding $10,000 in a single authorization, which limits coverage for high-value agentic commerce use cases in enterprise and B2B contexts",
+      "Both frameworks require consumers to re-authenticate their identity for each individual agent-initiated transaction, creating friction that makes agentic commerce economically unviable at scale"
+    ],
+    "correct": 0,
+    "explanation": "The post is direct: 'As of April 2026, neither scheme has published enforceable chargeback-rule amendments. Agent-initiated transactions still flow through Visa Core Rules as card-not-present e-commerce, meaning existing CNP chargeback liability continues to apply. Without enforceable rule changes, the private-sector frameworks are architecture without enforcement.' The frameworks provide the technical machinery to identify agents and scope their mandates \u2014 but the chargeback infrastructure that would make this commercially viable for merchants hasn't been updated. Merchants with no clear dispute path are defaulting to blocking agentic traffic entirely."
+  },
+  {
+    "id": "plg-q05",
+    "post": "payments-liability-gap",
+    "module": "banking-ai",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "Both Visa TAP and Mastercard Verifiable Intent assume the agent is 'a known, registerable entity.' What category of agents falls completely outside this assumption?",
+    "options": [
+      "Consumer DIY agents \u2014 personally configured browser workflows built with tools like Claude Chrome integration \u2014 never enrolled with any financial network,",
+      "Enterprise agents deployed and managed by large Tier 1 financial institutions through internal AI development teams with dedicated compliance and security review processes",
+      "Agents from non-US technology vendors that have not completed formal registration with US card networks and therefore cannot access network-based identity verification infrastructure",
+      "AI assistants from major consumer technology companies that have not yet signed formal participation agreements with US payment networks and card scheme operating rules"
+    ],
+    "correct": 0,
+    "explanation": "The post identifies this as the fastest-growing gap: 'The liability exposure is worst precisely for the agents that are becoming most accessible to ordinary consumers \u2014 not enterprise deployments, but one-off browser workflows a person built themselves.' These agents are not enrolled with Visa TAP, not registered with Mastercard Agent Pay, and create no authorization record an issuer can check. When something goes wrong \u2014 the agent misroutes a payment, gets socially engineered by a spoofed merchant \u2014 there is no agent identity to examine, no mandate scope to verify, and no enrollment event to produce in a dispute. The dispute runs entirely through the account holder."
+  },
+  {
+    "id": "plg-q06",
+    "post": "payments-liability-gap",
+    "module": "banking-ai",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "Brown's 'Paying by Robot' paper proposes three fixes to the agentic payments liability problem. The most foundational is amending the 'unauthorized EFT' definition. Why is this the most foundational rather than, say, a private network rule?",
+    "options": [
+      "Private network rules are contractual among participants; a statutory EFTA amendment creates federal consumer rights enforceable against all covered institutions regardless of network membership",
+      "Private network rule amendments require years of negotiation among competing networks, whereas federal statutory amendments can be enacted more quickly through the standard congressional process",
+      "Private network rules would produce fragmented, inconsistent consumer protection that varies across payment networks, creating confusion about which rail offers adequate coverage for agentic transactions",
+      "The CFPB has sole statutory jurisdiction over EFTA amendments and has previously signaled through enforcement actions that it is prepared to act specifically on AI delegation liability issues"
+    ],
+    "correct": 0,
+    "explanation": "The post frames this as the hierarchy of regulatory approaches: statutory amendments create consumer rights; network rules create contractual obligations. The 'furnished access device' exception is a statutory problem \u2014 it's in the EFTA itself, not in network rules. No amount of private network rule-making by Visa or NACHA can override a statutory exception to federal consumer protection. A consumer whose agent initiates an unauthorized transaction can invoke Regulation E only if the statute's 'unauthorized' definition covers their situation. Without a statutory fix, even the most comprehensive network rules leave consumers dependent on institutions' voluntarily more protective policies."
+  },
+  {
+    "id": "plg-q07",
+    "post": "payments-liability-gap",
+    "module": "banking-ai",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A consumer uses a browser-based AI agent to purchase a non-refundable flight on a RTP payment. The agent misinterprets the destination and books the wrong city. Applying the post's five-rail liability framework, what is the consumer's protection situation?",
+    "options": [
+      "Worst-case across all five rails: RTP is irrevocable, Regulation E may not apply due to the furnished-access exception, the DIY agent has no network",
+      "Full Regulation E protection applies because the transaction originated from a consumer account and the agent acted without explicit authorization for the specific flight actually purchased",
+      "Product liability claims against the AI agent's vendor are available because the agent's misinterpretation constitutes a defective product performance under standard consumer protection tort doctrine",
+      "Credit card chargeback protections apply because the original account authorization was initiated by the consumer, making the specific agent behavior irrelevant to the dispute resolution outcome"
+    ],
+    "correct": 0,
+    "explanation": "The post's five-rail table applied: RTP is the worst-fit rail. The transaction settled irrevocably within seconds. Regulation E protections may not apply because the consumer furnished access to the agent (furnished device exception). No Visa TAP or Mastercard registration exists for a DIY browser agent, so there's no identity record for dispute purposes. The bank sees a transaction from a known account; the consumer's claim that the agent 'made an error' is difficult to establish when there's no audit trail of the agent's authorization scope. State law may offer residual protection, but this depends entirely on jurisdiction and has not been tested for AI agent transactions."
+  },
+  {
+    "id": "plg-q08",
+    "post": "payments-liability-gap",
+    "module": "banking-ai",
+    "objective": "misconception",
+    "difficulty": 2,
+    "question": "The card networks are building identity frameworks for agentic payments, and the post gives them credit for moving faster than regulators. What is the most common misconception about what these frameworks have achieved?",
+    "options": [
+      "That authentication solves authorization \u2014 TAP confirms agent identity, Verifiable Intent scopes mandate, but neither prevents the confused deputy problem where a legitimately credentialed agent acts",
+      "That the Visa TAP and Mastercard Verifiable Intent frameworks are already ready for widespread merchant adoption across all transaction categories and dollar-value ranges in 2026",
+      "That the frameworks are too technically complex for smaller merchants and regional banks to implement, when in practice the main barrier is lack of enforceable chargeback rule amendments",
+      "That the frameworks require consumers to pre-register every agent they plan to use before any agentic transaction can proceed, creating an enrollment burden that limits practical adoption"
+    ],
+    "correct": 0,
+    "explanation": "The post distinguishes identity from authority from intent. TAP confirms identity; Verifiable Intent specifies scope. Neither confirms that the agent was acting on legitimate principal intent rather than a corrupted instruction. The confused deputy problem \u2014 an agent with valid credentials that has been deceived into acting outside its intent \u2014 is the residual risk that neither framework addresses. A wire-fraud injection that causes an agent to initiate a payment to the attacker's account will produce a transaction where the agent's TAP identity is valid and the transaction falls within the Verifiable Intent scope (if the injected instruction chose a permitted merchant category), but the consumer never intended it."
+  },
+  {
+    "id": "plg-q09",
+    "post": "payments-liability-gap",
+    "module": "banking-ai",
+    "objective": "mechanism",
+    "difficulty": 3,
+    "question": "The *New York v. Citibank* case (S.D.N.Y. 2025) held that EFTA can reach the customer-to-bank leg of online-initiated wire transfers. Why does the Second Circuit's ruling matter so much for agentic payments specifically?",
+    "options": [
+      "If affirmed, the reasoning extends EFTA consumer protection to RTP and FedNow agent-initiated pushes \u2014 the rails with the worst current liability gap",
+      "The ruling determines whether banks can lawfully charge processing fees specifically for wire transfers initiated by AI agents under existing tariff and fee disclosure regulatory frameworks",
+      "The ruling determines whether Citibank bears direct institutional liability for losses caused by third-party AI agent errors on transactions processed through the bank's payment infrastructure",
+      "The ruling affects only transactions initiated by the bank's own internal AI agents; the reasoning would not extend to third-party consumer agents or fintech-developed agentic commerce tools"
+    ],
+    "correct": 0,
+    "explanation": "The post calls this 'the single most important near-term legal signal in this space.' Wire transfers have historically offered consumers almost no protection under UCC Article 4A. Judge Oetken's 2025 ruling that EFTA can reach the customer-to-bank leg of online-initiated wire transfers would, if affirmed on appeal, apply EFTA consumer protections to the initiation of wire-like transfers \u2014 including RTP and FedNow pushes that flow through the same infrastructure. This would significantly strengthen consumer protection claims for the rails currently identified as having the worst liability gap. A reversal would do the opposite and potentially signal that 'existing principles' arguments for agent payment protection will face judicial skepticism."
+  },
+  {
+    "id": "plg-q10",
+    "post": "payments-liability-gap",
+    "module": "banking-ai",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The post closes: 'The consumer-protection vacuum is worst precisely on the rails that agentic systems have the strongest economic incentive to use.' What structural feature produces this inversion?",
+    "options": [
+      "Rails with the best economics for agentic use \u2014 low fees, fast settlement, programmability \u2014 were designed without fraud-recovery mechanisms suited to AI delegation,",
+      "Regulators deliberately created weaker consumer protections on newer payment rails to reduce barriers to adoption, assuming that market competition would produce adequate consumer safeguards over time",
+      "Payment network operators explicitly excluded agentic transactions from consumer protection provisions when designing and launching new payment infrastructure, anticipating future governance frameworks",
+      "The inversion is a temporary misalignment between technology and regulation that will self-correct naturally as network rules evolve to address agentic commerce, without requiring statutory intervention"
+    ],
+    "correct": 0,
+    "explanation": "The post's structural argument: credit cards have zero-liability policies, chargeback infrastructure, and dispute processes \u2014 but also 2-3% interchange fees and settlement delays that make them economically unattractive for high-volume agentic commerce. RTP, FedNow, and stablecoins offer near-zero fees, instant settlement, and programmable conditions \u2014 exactly what agentic commerce needs \u2014 but were designed (RTP, FedNow) or regulated (stablecoins under GENIUS Act) without consumer fraud recovery mechanisms suited to AI delegation. The result: the rails most economically suited to agentic commerce are those where consumers, when something goes wrong, have the least recourse. The inversion is structural, not accidental, and resolving it requires either extending consumer protection to new rails or accepting that agentic commerce will route through more expensive consumer-protected rails."
+  }
+]

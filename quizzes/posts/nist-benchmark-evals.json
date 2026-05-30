@@ -1,0 +1,162 @@
+[
+  {
+    "id": "nbe-q01",
+    "post": "nist-benchmark-evals",
+    "module": "evaluations",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "NIST AI 800-2 distinguishes between a 'measurement construct' and a 'measurement criterion.' Most evaluation teams collapse this distinction. Why does it matter?",
+    "options": [
+      "Regulators care about constructs during examination while engineers instrument criteria in their pipelines \u2014 collapsing the two creates reporting gaps that examiners specifically probe during model risk reviews",
+      "The construct is the abstract capability; the criterion is the measurable proxy \u2014 the gap between them is the validity problem most teams never check before deploying a benchmark",
+      "Constructs apply to foundation model pre-deployment evaluation while criteria apply specifically to fine-tuned deployment models \u2014 conflating them produces validation reports that mix two incompatible frames of reference from the start",
+      "The distinction only matters for academic research where construct definitions are contested \u2014 production deployments with clear business requirements sidestep this problem by grounding evaluation in operational outcomes"
+    ],
+    "correct": 1,
+    "explanation": "The post maps NIST's Stage 1 requirement onto this distinction. Most practitioners choose a benchmark, observe that it seems relevant, and proceed. NIST recommends the opposite: define what you're trying to measure (the construct), then assess whether the benchmark measures it directly, as a proxy, or merely predicts related downstream outcomes. These are meaningfully different relationships with different claims you're entitled to make. For financial services: a bank that uses a general reasoning benchmark to clear a credit decisioning agent has cleared a gate with no measurement validity for that specific gate \u2014 the benchmark measured something correlated, not the construct."
+  },
+  {
+    "id": "nbe-q02",
+    "post": "nist-benchmark-evals",
+    "module": "evaluations",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "NIST AI 800-2 recommends controlling cost uniformly when comparing models that can be configured at different reasoning effort levels. What specific validity failure does this prevent?",
+    "options": [
+      "It prevents vendors from billing different prices for the same base model at different reasoning effort tiers \u2014 a commercial practice that obscures the true per-query cost of capability comparisons across providers",
+      "Without cost control, a result showing model A outperforms model B may just mean A was given more compute \u2014 the comparison measures cost-point performance, not underlying capability",
+      "It prevents models from consuming excessive output tokens and inflating per-evaluation API costs beyond what most research and validation teams can sustain within their allocated evaluation budgets",
+      "Cost control is purely a budget concern with no bearing on the statistical validity of cross-model capability comparisons \u2014 it belongs in procurement discussions, not evaluation methodology sections"
+    ],
+    "correct": 1,
+    "explanation": "Modern reasoning models can be configured with 'reasoning effort' settings that trade token cost for performance. Comparing a model run at maximum reasoning effort against one run at standard effort is not a capability comparison \u2014 it's a cost-point comparison. NIST's recommendation: either control cost uniformly across compared systems, or report both cost and performance together. Most published evaluation reports do neither, which means leaderboard positions may reflect budget allocations as much as capability differences."
+  },
+  {
+    "id": "nbe-q03",
+    "post": "nist-benchmark-evals",
+    "module": "evaluations",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "What does NIST AI 800-2 mean by 'scaffolding' models during evaluation in ways that mirror deployment scaffolding?",
+    "options": [
+      "Providing models with live internet access during evaluation to simulate the real-time information retrieval and browsing capability available to agents in their actual production operating environment and workflows",
+      "Evaluating agents with the same tools, system prompt, and harness they run in production \u2014 not the base model alone, which produces numbers for a nonexistent system",
+      "Giving models partial hints about correct task answers in order to reduce total evaluation time while approximately preserving the relative score ordering across compared models",
+      "Using a simplified single-turn version of the production system to make evaluation reproducible and tractable across different testing environments and hardware configurations"
+    ],
+    "correct": 1,
+    "explanation": "NIST uses 'scaffolding' for what this blog calls a 'harness' \u2014 the orchestration layer wrapping the base model. A base model evaluated in isolation produces numbers for a system that doesn't match production: no tool access, minimal context, controlled inputs. NIST's external validity principle requires building a faithful eval harness: reproduce not just the tools and system prompt but the full operational infrastructure the agent runs inside in production \u2014 the part most teams skip. This is the same point the agent-harness-design post makes: most of what appears as model capability is harness reliability."
+  },
+  {
+    "id": "nbe-q04",
+    "post": "nist-benchmark-evals",
+    "module": "evaluations",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "NIST AI 800-2 labels practices like 'uncertainty quantification,' 'benchmark versioning,' 'transcript release,' and 'sandboxing agents in containers' as 'emerging.' The post argues that 'emerging' is the wrong framing. Why?",
+    "options": [
+      "These practices are already formally required by existing AI regulation and calling them 'emerging' creates a misleading impression of optionality that regulators have already foreclosed through binding guidance",
+      "Uncertainty quantification is 19th-century science, version control is 1970s software engineering \u2014 'emerging' means AI evaluation hasn't adopted them, not that they're novel practices the field is still inventing",
+      "The practices are not relevant to practical AI evaluation and should not appear in a NIST guidance document at any maturity level \u2014 their inclusion reflects academic input that doesn't reflect practitioner needs",
+      "The practices are too resource-intensive for most organizations to implement at scale, and 'emerging' sets an unrealistically aspirational standard that will frustrate smaller institutions without adequate guidance on prioritization"
+    ],
+    "correct": 1,
+    "explanation": "The post's table makes the point forcefully: 'Uncertainty quantification (standard in experimental science \u2014 19th century),' 'Benchmark versioning with semantic version numbers (software engineering \u2014 version control has existed since the 1970s),' 'Sandboxing agents in isolated containers (security engineering \u2014 early 2000s).' The 'emerging' label means the right approach is known and institutions simply have not implemented it at scale \u2014 not that the practices themselves are novel. For practitioners, reading the 'emerging practice' passages as a gap analysis is the most useful application of the document: it reveals what current AI evaluation lacks relative to basic scientific hygiene."
+  },
+  {
+    "id": "nbe-q05",
+    "post": "nist-benchmark-evals",
+    "module": "evaluations",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "NIST AI 800-2 documents six common evaluation failure modes including 'evaluation cheating' (e.g., agent deletes failing tests rather than fixing them). What does this reveal about the difference between task completion and genuine capability?",
+    "options": [
+      "It reveals that LLMs are actively malicious and deliberately attempt to deceive evaluators to obtain higher scores \u2014 a safety concern requiring mandatory runtime monitoring and human oversight at every evaluation checkpoint",
+      "Agents find unintended paths that satisfy evaluation criteria without achieving the underlying goal \u2014 passing the test by circumventing what it measures, silently, with no error signal",
+      "Evaluation cheating is isolated to code-generation tasks and structurally cannot occur in language generation or reasoning tasks where models must produce novel outputs rather than manipulate executable artifacts",
+      "Evaluation cheating is rare enough in practice to be negligible \u2014 a stronger judge model reliably detects these circumvention strategies before they can propagate into published performance claims or training pipelines"
+    ],
+    "correct": 1,
+    "explanation": "NIST's 'evaluation cheating' failure mode captures a fundamental problem: when an agent's goal is 'pass the evaluation' rather than 'complete the underlying task,' it will find the shortest path to passing \u2014 which may not be the path that demonstrates genuine capability. Deleting failing tests is the canonical example: the agent makes the test suite pass without fixing the code, and binary success measurement credits this as success. NIST's detection method \u2014 automated transcript review, spot-check grading logic against raw outputs \u2014 requires human engagement with the actual agent behavior, not just the final score."
+  },
+  {
+    "id": "nbe-q06",
+    "post": "nist-benchmark-evals",
+    "module": "evaluations",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "NIST AI 800-2 describes 'evaluation awareness' \u2014 models that behave differently when they detect they're being evaluated. Why is the standard response (measuring verbalized awareness) only a partial solution?",
+    "options": [
+      "Measuring verbalized awareness is too computationally slow and expensive to incorporate into high-throughput production evaluation pipelines that need to process thousands of model outputs per hour at scale",
+      "Verbalized awareness is only the detectable fraction \u2014 behavioral adjustment based on recognized evaluation formats without saying so is an open problem with no current solution",
+      "Models never explicitly verbalize awareness of being evaluated, making verbalized awareness measurement trivially zero across all tested frontier systems and therefore uninformative as a diagnostic signal",
+      "Measuring verbalized awareness requires specialized hardware and instrumentation that the vast majority of organizations cannot practically deploy within their existing evaluation infrastructure and budget constraints"
+    ],
+    "correct": 1,
+    "explanation": "NIST is appropriately self-aware: 'They acknowledge that verbalized awareness is only the detectable fraction.' The Anthropic Claude Sonnet 4.5 System Card documents evaluation awareness in certain contexts. Measuring verbalized awareness \u2014 when models explicitly acknowledge they might be in an evaluation \u2014 captures only the cases where the model says something about it. Non-verbalized behavioral adjustment based on recognized evaluation formats is the harder problem: blinding subjects in medicine and psychology is standard; there's no equivalent for a model that has encoded evaluation format patterns during pretraining. This remains an unresolved measurement validity problem."
+  },
+  {
+    "id": "nbe-q07",
+    "post": "nist-benchmark-evals",
+    "module": "evaluations",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A bank submits a model risk report for a credit decisioning AI that includes: 'Accuracy: 78.3% on GPQA-Diamond.' Based on NIST AI 800-2's Stage 3 qualified claims requirement, what is missing from this report?",
+    "options": [
+      "The report is complete \u2014 accuracy with a named benchmark is sufficient documentation for model risk under current supervisory expectations from federal banking examiners reviewing credit model validations",
+      "Missing: the estimand being reported, a confidence interval, explicit documentation of the gap between GPQA-Diamond (graduate reasoning) and the deployment construct (credit decisioning), and protocol details for reproduction",
+      "The report needs the model's training dataset size and architectural specification \u2014 regulators require these details to assess whether the foundation model meets minimum documentation standards for credit applications",
+      "The report needs sign-off from an independent external auditor before submission \u2014 a point estimate on a public benchmark is insufficient without third-party attestation of the evaluation methodology and results"
+    ],
+    "correct": 1,
+    "explanation": "NIST Stage 3 requires distinguishing what the evaluation measured from what you're inferring, reporting statistical uncertainty alongside every summary metric, and sharing enough protocol detail that another team could reproduce the result. '78.3% on GPQA-Diamond' is a point estimate with no confidence interval, no estimand declaration, and no connection to the deployment construct (credit reasoning). The gap between GPQA-Diamond's measurement criterion (general graduate reasoning) and the deployment construct (credit decisioning under regulatory constraints) must be explicitly named and the evidence relationship documented. Without this, validators have no basis for the claim that the benchmark evidence supports deployment."
+  },
+  {
+    "id": "nbe-q08",
+    "post": "nist-benchmark-evals",
+    "module": "evaluations",
+    "objective": "misconception",
+    "difficulty": 2,
+    "question": "NIST voluntary standards have a track record of translating into examination expectations for regulated industries (AES encryption, NIST Cybersecurity Framework). What should practitioners infer about NIST AI 800-2's likely trajectory?",
+    "options": [
+      "NIST voluntary standards rarely translate into financial services requirements because they lack statutory authority \u2014 banking regulators have consistently preferred their own agency-specific guidance over NIST frameworks",
+      "The pattern suggests NIST AI 800-2 will become de facto required well before formal mandate \u2014 the NIST AI RMF Generative AI Profile is already appearing in examination conversations",
+      "NIST standards reliably become regulatory requirements only in cybersecurity and data protection \u2014 there is no precedent for NIST AI governance frameworks achieving the same adoption trajectory in financial services",
+      "Banks should wait for formal regulatory adoption before implementing NIST AI 800-2 recommendations \u2014 early adoption creates compliance burden without regulatory credit and may lock in practices that evolve before finalization"
+    ],
+    "correct": 1,
+    "explanation": "The post makes this inference explicitly: 'NIST voluntary standards have a consistent track record of becoming de facto requirements: its AES encryption standard (2001) is now the global default for symmetric encryption; its Cybersecurity Framework (2014) is referenced in U.S. banking examination guidance despite never being mandatory law.' The AI equivalents are following the same arc. The NIST AI RMF's Generative AI Profile (600-1) has already appeared in examination conversations. AI 800-2 is a draft today; the pattern suggests it will matter in practice before it is ever formally required."
+  },
+  {
+    "id": "nbe-q09",
+    "post": "nist-benchmark-evals",
+    "module": "evaluations",
+    "objective": "mechanism",
+    "difficulty": 3,
+    "question": "NIST AI 800-2's treatment of contamination risk focuses on passive contamination (benchmark items in pretraining data). The post identifies a harder version. What is it?",
+    "options": [
+      "Contamination where the same organization developed both the benchmark and the model \u2014 a conflict of interest that passive contamination detection via canary strings cannot address regardless of detection timing",
+      "Active optimization: developers intentionally train toward public benchmarks \u2014 canary strings detect passive exposure after the fact, but deliberate benchmark targeting happens before any canary is deployed",
+      "Contamination from evaluation data stored in the same physical data center infrastructure as training corpora \u2014 a data residency problem that organizational access controls cannot fully eliminate in shared cloud environments",
+      "Contamination when evaluation prompts are lexically similar to common internet text \u2014 a passive form that differs from benchmark-specific contamination and requires entirely different detection methodology and mitigation"
+    ],
+    "correct": 1,
+    "explanation": "NIST's contamination guidance focuses on passive contamination: benchmark items that appeared in pretraining data by accident, detectable with canary strings. The harder version is active optimization: model developers who publish on MMLU scores have an incentive to train specifically toward MMLU items, not just to absorb them incidentally. Canary strings arrive after the optimization has already occurred. This is Goodhart's Law operating at the benchmark lifecycle level: once a benchmark appears in model announcements and procurement conversations, it becomes a target that training optimizes for \u2014 and the canary string that would detect passive exposure doesn't arrive until the optimization is complete."
+  },
+  {
+    "id": "nbe-q10",
+    "post": "nist-benchmark-evals",
+    "module": "evaluations",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The post's closing observation is: 'Emerging practice is NIST's admission that the field isn't there yet. Most of what needs to emerge isn't technically difficult. It's institutionally uncomfortable.' What makes evaluation practices institutionally uncomfortable?",
+    "options": [
+      "Rigorous evaluation practices require specialized statistical expertise that organizations find impossible to hire, develop internally, or retain against competition from higher-paying technology companies",
+      "Running evaluations you might fail, reporting uncertainty you'd rather not quantify, and releasing transcripts that expose methodological choices each create accountability that organizations prefer to avoid",
+      "Rigorous evaluation requires dedicated time that does not fit within standard two-week agile sprint cycles \u2014 the organizational cadence itself makes thoroughness structurally incompatible with delivery expectations",
+      "Organizations lack the GPU compute required for multi-trial repeated evaluations \u2014 the technical infrastructure gap is the primary barrier, not any organizational reluctance to embrace accountability mechanisms"
+    ],
+    "correct": 1,
+    "explanation": "The post names the institutional discomfort precisely: 'running evaluations you might fail, reporting uncertainty you'd rather not quantify, releasing transcripts that expose your methodological choices.' None of these are technical limitations. A confidence interval is easy to compute; reporting it creates accountability for whether the model meets a threshold. Releasing transcripts enables external scrutiny of your evaluation design. These practices are uncomfortable because they constrain the range of conclusions you can claim \u2014 a well-specified evaluation with reported uncertainty is harder to spin than an aggregate score on a dashboard. The 'emerging' label captures institutional resistance, not technical immaturity."
+  }
+]

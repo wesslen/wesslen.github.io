@@ -1,0 +1,162 @@
+[
+  {
+    "id": "cch-q01",
+    "post": "claude-code-harness",
+    "module": "agentic-engineering",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "Claude Code uses four distinct compaction layers rather than one. What does this reveal about how production harness complexity actually develops?",
+    "options": [
+      "Four layers were planned upfront as a deliberate defense-in-depth compaction strategy from the initial architecture.",
+      "The four layers resulted from technical debt Anthropic has accumulated and hasn't fully cleaned up yet.",
+      "Each layer addresses a different production failure mode \u2014 the architecture reflects accumulated failures over",
+      "Four compaction passes are required to achieve acceptable compression ratios on long agentic coding conversations."
+    ],
+    "correct": 2,
+    "explanation": "The four layers \u2014 proactive (monitors token count and compacts before limits), reactive (fallback when proactive misses), snip (truncates rather than summarizes for automated runs), and marble_origami/context collapse (compresses verbose tool results mid-conversation) \u2014 each exist because the previous ones failed in specific observed ways. Nobody designs 'I'll need four compaction layers' upfront. You add each one after watching users hit the context ceiling in a new way. The post's lesson: production harness architecture accumulates scars more than it executes designs."
+  },
+  {
+    "id": "cch-q02",
+    "post": "claude-code-harness",
+    "module": "agentic-engineering",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The Claude Code source uses a Blake2b hash of static system prompt content as a cache key with `scope: 'global'`. What is the practical effect of this design?",
+    "options": [
+      "It prevents users from sharing prompts with each other by hashing content for cross-session privacy enforcement.",
+      "Static prompt content is cached globally across users' sessions \u2014 a ~3,000-token static prefix",
+      "The hash lets users detect whether their system prompt has been silently modified between sessions.",
+      "It compresses the system prompt to reduce API transmission bandwidth costs on every outbound request."
+    ],
+    "correct": 1,
+    "explanation": "The prompt cache boundary split (static above, dynamic below) combined with `scope: 'global'` caching creates a cross-user cache hit. When any user's request arrives, the API recognizes the static prefix by its Blake2b hash and skips reprocessing \u2014 even for a completely different user's session. The result: a larger, more expensive static system prompt (detailed behavioral guidelines, safety instructions) is essentially free after the first hit across the entire user base, while per-session dynamic content (CLAUDE.md files, environment info) remains uncached and fully paid for each session."
+  },
+  {
+    "id": "cch-q03",
+    "post": "claude-code-harness",
+    "module": "agentic-engineering",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "In Claude Code's architecture, when a tool call is denied by the permission system, how does the system handle the denial?",
+    "options": [
+      "The session is immediately terminated and the user must restart with an entirely new session context.",
+      "A modal dialog appears asking the user to manually approve or retry the blocked action before proceeding.",
+      "The denial is wrapped as a tool result fed back to the model, so it can reason",
+      "The model logs the denial internally and surfaces it in a summary report at the end of the session."
+    ],
+    "correct": 2,
+    "explanation": "Claude Code packages the denial in the same format as any other tool response \u2014 'permission denied' arrives the same way 'file not found' would. The model can then reason about what alternatives are available, try a different approach, or explain to the user what it tried and was blocked. The system also tracks denial patterns across sessions and reports them to the SDK caller so IDE integrations can surface trends like 'user consistently denies bash commands in /etc.' This turns permission walls into feedback rather than dead ends."
+  },
+  {
+    "id": "cch-q04",
+    "post": "claude-code-harness",
+    "module": "agentic-engineering",
+    "objective": "mechanism",
+    "difficulty": 3,
+    "question": "A comment in query.ts is written in mock-medieval English to warn about API constraints around thinking block preservation. What does this reveal about where complexity lives in production systems?",
+    "options": [
+      "It reveals that Anthropic engineers prioritize code readability theater over genuine long-term maintainability standards.",
+      "Engineers write warnings in unusual styles after something breaks badly",
+      "The comment is a legacy artifact from when Claude Code was originally an internal academic research project.",
+      "Unusual comment formatting signals code that should be refactored but has been deprioritized on the roadmap."
+    ],
+    "correct": 1,
+    "explanation": "The post makes this explicit: 'This is a warning from someone who lost a day to a subtle API constraint... written in a style designed to make sure no one skims past it.' The mock-medieval English is attention engineering \u2014 the engineer knew the constraint was subtle enough that future maintainers might skim it, and chose a style that forces a pause. The broader principle: the comments engineers write after something breaks tell you where the actual complexity lives \u2014 the parts that aren't obvious from first principles, that have to be learned through failure."
+  },
+  {
+    "id": "cch-q05",
+    "post": "claude-code-harness",
+    "module": "agentic-engineering",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "Claude Code's session persistence is asymmetric: user messages are `await`ed (synchronous writes) but assistant messages are fire-and-forget. What failure mode does this asymmetry address?",
+    "options": [
+      "Assistant messages are larger and would block the UI thread if written synchronously to the session store.",
+      "If the process dies before the API responds, the user message is lost unless written synchronously",
+      "User messages contain PII that requires synchronous audit logging under enterprise compliance requirements.",
+      "The asymmetry is a performance optimization that reduces write latency for the statistically dominant code path."
+    ],
+    "correct": 1,
+    "explanation": "The source comment explains: if the process is killed before the API responds, the transcript needs to be resumable from the point the user message was accepted. The user's message is the only information that exists exclusively on the client side at that moment \u2014 if the process dies, it's gone unless written synchronously first. Assistant messages are already durable in the API response: if the process dies during response streaming, the response can be replayed. Someone lost a session; the fix is one targeted `await` on user messages only."
+  },
+  {
+    "id": "cch-q06",
+    "post": "claude-code-harness",
+    "module": "agentic-engineering",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "Raschka speculatively claimed that dropping a capable open-weight model into a production-quality harness would perform comparably to frontier models. What is the significance of this claim?",
+    "options": [
+      "It suggests open-weight models should always be preferred over closed models purely for cost efficiency.",
+      "Most of what users observe as model capability in shipped products is substantially harness",
+      "The claim is speculative and should be entirely disregarded without rigorous controlled empirical validation.",
+      "Frontier model providers are overcharging for marginal capability improvements above open-weight alternatives."
+    ],
+    "correct": 1,
+    "explanation": "The post explicitly endorses this reasoning. If the gap between a 500K-line production harness and a minimal harness is larger than the gap between frontier models, then product-level performance comparisons (Claude Code vs. Cursor vs. Copilot) are measuring harness quality as much as model quality. This reframes 'what is model capability' in any shipped product \u2014 when Claude Code works well, it looks like model capability; when something breaks, it's usually one of the harness layers. What users experience as model intelligence is substantially harness reliability doing its job invisibly."
+  },
+  {
+    "id": "cch-q07",
+    "post": "claude-code-harness",
+    "module": "agentic-engineering",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The `__SYSTEM_PROMPT_DYNAMIC_BOUNDARY__` marker splits the Claude Code system prompt into static and dynamic halves. What engineering problem does this solve?",
+    "options": [
+      "It allows different safety policies to apply to different user types within the same deployed codebase.",
+      "The static half is cached globally across users; the dynamic half changes per-session \u2014 the split",
+      "The boundary prevents user-supplied content from overriding safety guidelines by ensuring system instructions appear first.",
+      "It enables the system prompt to exceed the API's maximum context length by chunking it across multiple requests."
+    ],
+    "correct": 1,
+    "explanation": "The cache boundary is a cost-amortization architecture. The static half \u2014 roughly 3,000 tokens of behavioral instructions, coding style, and safety guidelines \u2014 is hashed and cached globally. Every user's session benefits from the cache hit without having contributed to it. The dynamic half changes per-session: the user's project CLAUDE.md files, MCP server instructions, environment info. This design gets large-static-prompt quality at near-zero marginal cost after the first hit, while remaining fully flexible to per-user project context."
+  },
+  {
+    "id": "cch-q08",
+    "post": "claude-code-harness",
+    "module": "agentic-engineering",
+    "objective": "misconception",
+    "difficulty": 2,
+    "question": "The `process.env.USER_TYPE === 'ant'` check gives internal Anthropic engineers different system prompt instructions than external users. What does this reveal about how to interpret public-facing model capability claims?",
+    "options": [
+      "Internal engineers bypass safety features because they hold higher security clearance and verified Anthropic identity.",
+      "The external product has conservative safety margins baked in that internal engineers don't need",
+      "Anthropic runs entirely different underlying model versions for internal development versus external product deployments.",
+      "The ant check is a debugging artifact that shouldn't appear in a production codebase and should be removed."
+    ],
+    "correct": 1,
+    "explanation": "The post makes this inference explicit: 'Anthropic is running different quality bars internally \u2014 which implies they know the external product has safety margins baked in that internal engineers don't need.' An external Claude Code that hedges more, gets explicit guardrails about test pass claims, and receives conciseness-specific A/B-tested prompt wording is experiencing a deliberately constrained version of the model's capability. The public-facing product is a policy-shaped artifact. The source also shows A/B testing of prompt wording with exact token-reduction measurements \u2014 the conservative margins are deliberately calibrated, not accidental."
+  },
+  {
+    "id": "cch-q09",
+    "post": "claude-code-harness",
+    "module": "agentic-engineering",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A team builds a custom agent and finds it frequently restarts tasks from scratch after tool failures, losing prior progress. Based on the harness patterns described, what is the most likely root cause and fix?",
+    "options": [
+      "The model isn't capable enough to recover from tool failures; upgrading to a larger frontier model is the fix.",
+      "The harness lacks retry logic and structured inter-session state \u2014 implement max-three-retries with exponential backoff and progress",
+      "The agent's context window is too small to maintain full task history across tool failure recovery cycles.",
+      "Tool failures indicate API rate limiting that needs to be addressed at the network infrastructure layer."
+    ],
+    "correct": 1,
+    "explanation": "The failure pattern \u2014 restarting from scratch after tool failures \u2014 maps to two documented failure modes: no retry logic (single transient errors terminate the task) and no structured inter-session state (a fresh agent has no way to diagnose what happened and where to resume). The correct fix: harness-level retry logic (max three retries with exponential backoff) prevents unnecessary failures, and structured progress logs (claude-progress.txt, feature_list.json, git history with descriptive commits) let a fresh agent re-orient. This is precisely why harness error recovery exists as a distinct subsystem from model reasoning."
+  },
+  {
+    "id": "cch-q10",
+    "post": "claude-code-harness",
+    "module": "agentic-engineering",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The post concludes: 'The actual API call is maybe 200 lines. Everything else is the harness.' What is the practical implication for teams estimating engineering investment to build production-grade agents?",
+    "options": [
+      "Teams should focus on prompt engineering rather than infrastructure investment for production-grade agent deployments.",
+      "The core loop is a commodity; engineering investment is in five surrounding subsystems accumulated",
+      "Production harnesses require at least 500K lines of code to function properly at any meaningful scale.",
+      "Agent engineering should be outsourced entirely because it is too specialized and complex to build in-house."
+    ],
+    "correct": 1,
+    "explanation": "The core agent loop \u2014 call LLM, execute tools, feed results back \u2014 takes perhaps a weekend to implement and is roughly the same across frameworks. What Claude Code's 500K lines represent is years of production failures: each one adding another compaction layer, another asymmetry in persistence guarantees, another failure mode turned into a handled edge case. Teams building agents without this investment will re-discover each failure mode in production. The estimate for 'building an agent' should include 'building the loop plus everything the harness does' \u2014 a categorically different scope than the core loop alone."
+  }
+]

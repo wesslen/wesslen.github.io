@@ -1,0 +1,12 @@
+{
+  "id": "agentic-engineering",
+  "title": "Agentic Engineering",
+  "posts": ["context", "agent-harness-design", "claude-code-harness", "skills-supply-chain"],
+  "titles": {
+    "context": "Context Files",
+    "agent-harness-design": "Harness Design",
+    "claude-code-harness": "Inside Claude Code",
+    "skills-supply-chain": "Skills Supply Chain"
+  },
+  "n": 10
+}

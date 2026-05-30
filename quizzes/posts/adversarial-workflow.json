@@ -1,0 +1,162 @@
+[
+  {
+    "id": "aw-q01",
+    "post": "adversarial-workflow",
+    "module": "adversarial-testing",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "The post opens by comparing adversarial testing of a credit scorecard (input perturbation) with what an LLM actually needs. What is the critical difference in attack surface?",
+    "options": [
+      "Credit scorecards are simpler than LLMs and therefore do not require adversarial robustness testing at all.",
+      "Input perturbation tests distributional robustness to noisy data; LLMs also face intentional behavioral attacks like",
+      "LLMs require substantially more computational resources and specialized tooling for adversarial testing than scorecard models.",
+      "Credit scorecard adversarial testing is performed by regulators during examination; LLM adversarial testing is performed by developers."
+    ],
+    "correct": 1,
+    "explanation": "The gap the post identifies is categorical: input perturbation tests distributional robustness \u2014 how the model responds to noisy but well-intentioned inputs. Prompt injection, jailbreaking, and goal hijacking are intentional attacks by adversarial actors who can craft inputs specifically to circumvent behavioral constraints. A credit scorecard doesn't have a system prompt that can be overridden. An LLM serving an adverse-action process has a text input channel from untrusted sources that can carry override instructions. The validation program that didn't probe those paths 'validated a portion of the system that wasn't where the failures live.'"
+  },
+  {
+    "id": "aw-q02",
+    "post": "adversarial-workflow",
+    "module": "adversarial-testing",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "What is the adversarial testing scope defined in this post \u2014 what exactly is being tested?",
+    "options": [
+      "The underlying foundation model weights, pretraining data quality, and safety fine-tuning used by the model vendor.",
+      "The specific deployment \u2014 its system prompt, tools, and runtime configuration \u2014 not the base",
+      "All AI systems in a bank's technology stack simultaneously, evaluated as an interconnected system rather than individually.",
+      "Only customer-facing AI applications; internal tools and back-office systems are explicitly excluded from adversarial testing scope."
+    ],
+    "correct": 1,
+    "explanation": "The post is explicit about scoping to the use case: 'Under SR 11-7, the unit of validation was always the model use, and that logic carries forward.' The same foundation model deployed in two different configurations \u2014 different system prompts, different tool inventories, different memory architectures \u2014 creates two different adversarial surfaces. A wire-transfer agent with tool access to initiate payments has different trust boundaries than a KYC summarizer that only reads documents. Each use case requires its own adversarial testing engagement, not a single model-level assessment."
+  },
+  {
+    "id": "aw-q03",
+    "post": "adversarial-workflow",
+    "module": "adversarial-testing",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The post identifies indirect prompt injection (IPI), tool-call hijacking, and memory poisoning as 'the three classes that break traditional model-risk assumptions.' What assumption does each break?",
+    "options": [
+      "All three break the assumption that models cannot access or modify external systems during normal operation.",
+      "IPI breaks the assumption that retrieved documents are data not instructions; tool-call hijacking breaks secure tool boundaries;",
+      "All three break the assumption that system prompts remain immutable and cannot be overridden at runtime by any input.",
+      "All three break the assumption that human review checkpoints can catch adversarial inputs before they reach the model."
+    ],
+    "correct": 1,
+    "explanation": "Each of the three breaks a different assumption. IPI: the traditional model takes data inputs; LLMs that retrieve documents are taking inputs that can contain executable instructions, making every retrieved artifact a potential attack vector. Tool-call hijacking: tool boundaries were assumed secure in both directions \u2014 a malicious tool server can inject instructions into the agent's context just as the agent can misuse tool access. Memory poisoning: session-scoped injection ends when the session ends; persistent memory means a successful injection can outlast the attack and re-activate in future sessions \u2014 a failure mode static models simply don't have."
+  },
+  {
+    "id": "aw-q04",
+    "post": "adversarial-workflow",
+    "module": "adversarial-testing",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "Microsoft's 'Lessons from Red Teaming 100 Generative AI Products' identified a lesson that matters most for MRM program design: red-teaming is not safety benchmarking. What is the distinction?",
+    "options": [
+      "Red-teaming is more expensive than benchmarking and should be reserved exclusively for the highest-risk deployment categories.",
+      "Benchmarks measure regression on known attack patterns; red-teaming measures exploitability in a specific deployment context",
+      "Red-teaming requires human testers with specialized expertise while safety benchmarking can be run fully automatically.",
+      "Safety benchmarks are run before deployment during development; red-teaming is a post-deployment monitoring activity only."
+    ],
+    "correct": 1,
+    "explanation": "The post cites Microsoft's lesson directly: 'red-teaming is not safety benchmarking.' Benchmarks measure whether the model has regressed on attack types you already know about \u2014 useful for regression tracking but insufficient as a safety characterization. Red-teaming measures whether a specific deployment can be exploited in its operational context: with its specific tool inventory, system prompt, user population, and integration points. A model that fully passes StrongREJECT and HarmBench can still be vulnerable to an indirect prompt injection through its specific RAG data source, or to a multi-turn social engineering attack that exploits its particular persona."
+  },
+  {
+    "id": "aw-q05",
+    "post": "adversarial-workflow",
+    "module": "adversarial-testing",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "Phase 1 of the five-phase adversarial engagement produces an Agent Architecture Diagram and a Trust Boundary Register with blast-radius estimates. Why is blast radius specifically part of the scope document?",
+    "options": [
+      "Blast radius is a formal regulatory requirement specified in SR 26-2 for all agentic AI system documentation.",
+      "Blast radius determines severity classification and testing priority \u2014 a finding that dispatches a SWIFT message",
+      "Blast radius is needed to calculate the budget allocation for the adversarial testing engagement across its five phases.",
+      "Blast radius replaces the threat severity rating system previously used in OWASP vulnerability classification for LLM applications."
+    ],
+    "correct": 1,
+    "explanation": "The post makes this explicit: 'A finding that dispatches a SWIFT message to a third party is a different severity class than a finding that produces a hallucinated justification in an internal audit log. The MRM rubric should reflect that distinction explicitly.' Blast radius \u2014 financial exposure, data affected, downstream systems reachable, regulatory consequence \u2014 is what makes severity meaningful. Without it, a trust boundary register is just a list of components. With blast radius estimates, it becomes the basis for prioritizing which boundaries get the most adversarial attention and which findings require immediate remediation vs. scheduled mitigation."
+  },
+  {
+    "id": "aw-q06",
+    "post": "adversarial-workflow",
+    "module": "adversarial-testing",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A bank's red team includes the same adversarial ML specialists who designed the target agent's prompt architecture. The team produces a thorough findings report with low attack success rates. Why is this insufficient as a control?",
+    "options": [
+      "External red teams are formally required by SR 26-2 for all adversarial testing on agentic AI deployments in banking.",
+      "SR 11-7 warned against developers validating their own models; testers who designed the system are systematically unlikely",
+      "The findings report requires independent third-party review and co-signature before it constitutes a valid control artifact.",
+      "Banks should prohibit internal staff from any adversarial testing and must exclusively use external contractors."
+    ],
+    "correct": 1,
+    "explanation": "The post names this directly: 'A recurring pattern in adversarial testing programs is that the adversarial-ML specialists brought in for red-teaming were the same people who had advised on the agent's prompt architecture. Structurally, that's the same problem as a developer validating their own model.' SR 11-7's 2011 warning about asymmetric user challenges applies in full: the people closest to the model are least likely to probe it hard, because their mental model of its vulnerabilities is shaped by how they built it. The independence requirement for adversarial testing is structural, not procedural."
+  },
+  {
+    "id": "aw-q07",
+    "post": "adversarial-workflow",
+    "module": "adversarial-testing",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The post specifies that Garak probe scores 'are not normalized and not comparable across probe families.' What is the correct use of Garak in an MRM program?",
+    "options": [
+      "Garak scores should be normalized by dividing each family's raw score by the total number of probes in that family.",
+      "Garak is useful for regression tracking within a single deployment over time \u2014 comparing the same probe families",
+      "Garak is primarily designed for comparing adversarial robustness across different foundation model vendors at a fixed configuration.",
+      "Garak scores are directly comparable across probe families when the deployment uses a consistent model version without fine-tuning."
+    ],
+    "correct": 1,
+    "explanation": "Garak's documentation is explicit and the post quotes it directly: 'probe scores are not normalized and not comparable across probe families \u2014 its value is regression tracking within a single deployment, not cross-system comparison.' In MRM terms: Garak is a control effectiveness tracking tool, not a benchmark. Its value is detecting whether a deployment's adversarial robustness has changed since the last release \u2014 did the new system prompt strengthen or weaken resistance to encoding-based injection? It cannot tell you whether deployment A is more secure than deployment B on any given attack type."
+  },
+  {
+    "id": "aw-q08",
+    "post": "adversarial-workflow",
+    "module": "adversarial-testing",
+    "objective": "boundary",
+    "difficulty": 3,
+    "question": "The post argues that most adversarial testing programs 'are producing documentation of a control rather than the control itself.' What distinguishes the two?",
+    "options": [
+      "Documentation of a control requires substantially more time and organizational resources than implementing the actual security control.",
+      "An effective control requires structural independence, adversarial ML competence, findings routed to a body with deployment",
+      "Documentation of a control is always sufficient in regulated environments because examiners review only written artifacts.",
+      "The distinction only becomes material when measured attack success rates exceed a 10% threshold during red-team exercises."
+    ],
+    "correct": 1,
+    "explanation": "The post closes on this distinction precisely: 'Most programs currently operating under that name are producing documentation of a control rather than the control itself.' A five-phase workflow with artifact checklists that was conducted by the team that built the system, or by testers who lack adversarial ML competence, or whose findings route to a committee that lacks authority to block deployment, has all the forms of a red-team program. It produces findings logs, severity ratings, OWASP cross-references. But it doesn't produce the security assurance that the forms were designed to represent. The documentation is there; the control isn't."
+  },
+  {
+    "id": "aw-q09",
+    "post": "adversarial-workflow",
+    "module": "adversarial-testing",
+    "objective": "misconception",
+    "difficulty": 1,
+    "question": "Neither SR 11-7 nor SR 26-2 uses the words 'adversarial testing,' 'red team,' 'prompt injection,' or 'jailbreak.' What is the interpretive argument for why adversarial testing is still a model risk obligation?",
+    "options": [
+      "Banks not performing adversarial testing will face enforcement action regardless of what formal guidance currently specifies.",
+      "SR 11-7 Section V's sensitivity analysis and outcomes analysis requirements have been gaining traction in examination conversations as",
+      "The FDIC has issued informal verbal guidance requiring adversarial testing for all GenAI deployments above a minimum volume threshold.",
+      "Adversarial testing is optional for banks under $10B in assets but mandatory for institutions exceeding that total asset threshold."
+    ],
+    "correct": 1,
+    "explanation": "The post describes the regulatory interpretation carefully: 'The interpretive argument that these activities fall under SR 11-7 Section V's sensitivity analysis and outcomes analysis clauses has been gaining traction in examination conversations since roughly 2024, most visibly through practitioner references to NIST-AI-600-1.' SR 26-2's formal exclusion of GenAI and agentic AI from scope doesn't create a safe harbor \u2014 it leaves the question formally unaddressed. NIST 600-1's suggested actions (MS-1.1-006, MS-2.6) direct organizations toward red-teaming by experts. The regulatory gap creates uncertainty, not exemption."
+  },
+  {
+    "id": "aw-q10",
+    "post": "adversarial-workflow",
+    "module": "adversarial-testing",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The post maps the five-phase adversarial engagement artifacts onto SR 11-7's three validation pillars. How does the mapping work, and what does it reveal about extending MRM frameworks to adversarial testing?",
+    "options": [
+      "The mapping fails entirely because adversarial testing does not fit the scope or intent of any SR 11-7 pillar.",
+      "Conceptual soundness maps to capability non-regression, ongoing monitoring maps to safety non-regression, and outcomes analysis maps to robustness",
+      "The three-pillar mapping only applies to Tier 1 use cases; lower-tier deployments don't require full three-pillar coverage.",
+      "SR 26-2's exclusion of GenAI makes any SR 11-7 pillar mapping legally invalid for new agentic deployments."
+    ],
+    "correct": 1,
+    "explanation": "The post makes this explicit: 'Examiners are increasingly accepting this mapping when the derivations are documented, but it is not codified anywhere you can point to.' The three-gate deployment pattern (capability non-regression \u2192 safety non-regression \u2192 robustness ceiling) maps directly onto SR 11-7's three validation pillars. What changes is the content: conceptual soundness now asks about attack surface and trust boundary soundness, not just model methodology; outcomes analysis requires adversarial performance evidence, not just backtesting. The structural logic of MRM validation carries over; the substance has to adapt to the new failure modes LLMs introduce."
+  }
+]

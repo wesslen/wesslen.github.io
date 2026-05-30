@@ -267,6 +267,86 @@ console.log(`  Objective distribution :`);
   console.log(`    ${obj.padEnd(14)} ${String(count).padStart(3)}  ${bar}`);
 });
 
+
+/* ── 4b. Length-balance check ───────────────────────── */
+// Detects the "length cuing" flaw: if correct answers are systematically
+// longer than their distractors, a test-taker can guess by word count alone.
+//
+// Metrics:
+//   rank1Rate  – fraction of questions where the correct option is the
+//                longest (word count). Random chance = 25% for 4 options.
+//   medianRatio – median of (words_correct / mean_words_distractors).
+//                 1.0 = perfectly equal; 2.0 = correct is twice as long.
+//
+// Thresholds (tuned for "warn before it becomes obvious; fail when it's
+// blatant"). These are intentionally loose so some natural variation is
+// preserved — do not tighten them below Warn without re-checking all pools.
+//
+//   rank1Rate  :  Warn > 0.35  |  Error > 0.55
+//   medianRatio:  Warn > 1.80  |  Error > 2.50
+
+{
+  const allQ = Object.values(poolsBySlug).flat();
+  if (allQ.length > 0) {
+    const wordCount = (s) => s.trim().split(/\s+/).length;
+
+    let rank1Count = 0;
+    const ratios = [];
+
+    for (const q of allQ) {
+      if (!Array.isArray(q.options) || q.options.length < 2) continue;
+      if (typeof q.correct !== "number") continue;
+
+      const lengths = q.options.map((o) => wordCount(o));
+      const correctLen = lengths[q.correct];
+
+      // rank within this question (1 = longest)
+      const sorted = [...lengths].sort((a, b) => b - a);
+      const rank = sorted.indexOf(correctLen) + 1;
+      if (rank === 1) rank1Count++;
+
+      // ratio of correct length to average distractor length
+      const distractorLens = lengths.filter((_, i) => i !== q.correct);
+      const avgDistractor = distractorLens.reduce((a, b) => a + b, 0) / distractorLens.length;
+      if (avgDistractor > 0) ratios.push(correctLen / avgDistractor);
+    }
+
+    ratios.sort((a, b) => a - b);
+    const medianRatio = ratios.length % 2 === 0
+      ? (ratios[ratios.length / 2 - 1] + ratios[ratios.length / 2]) / 2
+      : ratios[Math.floor(ratios.length / 2)];
+
+    const rank1Rate = rank1Count / allQ.length;
+
+    // ── Thresholds ──────────────────────────────────────
+    const R1_WARN  = 0.35;
+    const R1_ERROR = 0.55;
+    const MR_WARN  = 1.80;
+    const MR_ERROR = 2.50;
+
+    const pct = (n) => `${(n * 100).toFixed(1)}%`;
+    const fix = (n) => n.toFixed(2);
+
+    console.log("\n── Length balance ────────────────────────────────────");
+    console.log(`  Correct = longest option : ${rank1Count}/${allQ.length} = ${pct(rank1Rate)}  (random chance ≈ 25%)`);
+    console.log(`  Median ratio             : ${fix(medianRatio)}x  (1.0 = equal length)`);
+
+    if (rank1Rate > R1_ERROR)
+      error(`Length cuing: correct answer is longest in ${pct(rank1Rate)} of questions (error threshold ${pct(R1_ERROR)}). Rewrite distractors to match length.`);
+    else if (rank1Rate > R1_WARN)
+      warn(`Length cuing: correct answer is longest in ${pct(rank1Rate)} of questions (warn threshold ${pct(R1_WARN)}). Consider expanding distractors.`);
+    else
+      console.log(`  ✓ rank-1 rate ${pct(rank1Rate)} is within the ${pct(R1_WARN)} warn threshold`);
+
+    if (medianRatio > MR_ERROR)
+      error(`Length cuing: median ratio ${fix(medianRatio)}x exceeds error threshold (${MR_ERROR}x). Correct answers are too much longer than distractors.`);
+    else if (medianRatio > MR_WARN)
+      warn(`Length cuing: median ratio ${fix(medianRatio)}x exceeds warn threshold (${MR_WARN}x).`);
+    else
+      console.log(`  ✓ median ratio ${fix(medianRatio)}x is within the ${MR_WARN}x warn threshold`);
+  }
+}
+
 /* ── 5. Report & exit ────────────────────────────────── */
 
 if (warnings.length > 0) {

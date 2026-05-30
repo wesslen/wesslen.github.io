@@ -1,0 +1,162 @@
+[
+  {
+    "id": "ttp-q01",
+    "post": "token-transfer-pricing",
+    "module": "ai-economy",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "Banks built Funds Transfer Pricing (FTP) to solve a cross-subsidy problem. The post argues that treating LLM API spend as flat IT overhead reproduces the same problem that FTP was built to fix. What is the direct analogy?",
+    "options": [
+      "Pre-FTP, business units pocketed the term premium without bearing duration risk; without token pricing, a unit using premium reasoning models books the productivity credit while",
+      "Both FTP and token pricing require daily mark-to-market valuation of positions against external benchmark rates, creating parallel governance challenges for treasury and AI platform teams",
+      "Both FTP and token pricing involve managing foreign currency exposure from international providers, requiring centralized hedging to prevent individual units from taking uncoordinated positions",
+      "Both are mandatory regulatory requirements imposed on US banks above $30 billion in total assets, carrying examination scrutiny that makes informal governance insufficient for most large institutions"
+    ],
+    "correct": 0,
+    "explanation": "The post establishes this analogy precisely: 'The business unit that builds a customer-facing agent on a reasoning model and the business unit that runs batch compliance summarization on a budget model both draw from the same undifferentiated pool. When the bill arrives, nobody is accountable for the spread between those choices.' In pre-FTP banking, mortgage desks could show profit by exploiting the yield curve without bearing duration risk \u2014 the treasury held the exposure. Token pooling has the same structure: the unit making expensive model choices books the productivity credit; the organization absorbs the cost. FTP solved this by making the true cost of funds visible at the product level; token transfer pricing does the same for compute."
+  },
+  {
+    "id": "ttp-q02",
+    "post": "token-transfer-pricing",
+    "module": "ai-economy",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "As of mid-2026, what is the approximate output token cost ratio between premium reasoning models (e.g., GPT-5.2 Pro) and ultra-low-cost models (e.g., GPT-5 Nano)?",
+    "options": [
+      "Approximately 2-3\u00d7 \u2014 within standard procurement substitution range, manageable through normal vendor negotiation without dedicated governance infrastructure",
+      "Approximately 420\u00d7 \u2014 making model selection a capital allocation decision rather than a configuration detail, with millions in annual cost difference at",
+      "Approximately 10\u00d7 \u2014 significant for high-volume workloads but manageable through standard technology procurement processes without dedicated AI cost governance",
+      "Approximately 50\u00d7 \u2014 large enough to warrant attention for sustained workloads but not material for occasional or low-frequency inference tasks in most banking applications"
+    ],
+    "correct": 1,
+    "explanation": "The post's pricing table makes the spread concrete: ultra-low-cost output at $0.40/M tokens vs. premium reasoning at $168/M tokens \u2014 a 420\u00d7 ratio on output tokens. This is not a marginal cost difference; it's a capital allocation difference. A business unit that defaults to premium reasoning models for tasks that budget models could handle adequately is making decisions that would represent millions in annual compute costs at enterprise scale. The post's FTP analogy: 'the decision of which model handles which workload is a capital allocation decision dressed up as a configuration setting.'"
+  },
+  {
+    "id": "ttp-q03",
+    "post": "token-transfer-pricing",
+    "module": "ai-economy",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "FTP's 'basis risk absorption' function is one of four mechanics the post maps to token transfer pricing. What does this mean in the token context?",
+    "options": [
+      "The central AI platform buys external capacity and lends it to departments at stable internal rates, absorbing API price volatility so business units can plan against",
+      "The platform absorbs financial losses whenever API providers change pricing without adequate contractual notice, protecting individual business units from unexpected budget overruns mid-year",
+      "Basis risk refers to measurable quality differences between benchmark and actual model outputs, which the platform absorbs by routing workloads to higher-quality models when quality falls below threshold",
+      "The platform absorbs the operational risk that AI model capabilities will change unexpectedly between procurement cycles, protecting business units from mid-year performance disruption"
+    ],
+    "correct": 0,
+    "explanation": "The post maps FTP's basis risk absorption directly: 'The AI platform absorbs the volatility of external API price changes so business units get stable internal rates to plan against.' API providers change prices, introduce new models at different price points, and offer volume discounts for committed capacity. An individual business unit cannot negotiate these dynamics efficiently. A central AI treasury buys capacity in aggregate (securing committed capacity discounts), manages the portfolio across price tiers, and passes stable internal rates to business units \u2014 absorbing the external price volatility that individual units couldn't hedge against. This is identical to treasury's role in absorbing funding market volatility for individual lending desks."
+  },
+  {
+    "id": "ttp-q04",
+    "post": "token-transfer-pricing",
+    "module": "ai-economy",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The post's matched maturity FTP analogy maps latency tiers to loan duration. How does a real-time customer-facing inference workload differ from a batch compliance report, in FTP terms?",
+    "options": [
+      "Real-time inference is like a demand deposit \u2014 on-demand, synchronous, requiring reserved capacity; batch compliance is like a term loan \u2014 predictable, asynchronous, eligible",
+      "Real-time workloads carry higher business priority and should receive lower internal transfer prices to encourage adoption of AI in customer-facing applications where impact is highest",
+      "Both workload types should carry the same blended internal rate to simplify management accounting and avoid the organizational friction of differentiating internal prices across business units",
+      "Real-time inference workloads should be fully outsourced to specialized cloud providers rather than governed internally, avoiding the complexity of latency-differentiated internal rate-setting altogether"
+    ],
+    "correct": 0,
+    "explanation": "The matched maturity analogy is direct: 'A customer-facing fraud agent requiring real-time inference is a high-liquidity demand: think demand deposit. A batch compliance report running overnight is scheduled and predictable, closer to a term loan.' In banking FTP, demand deposits are funded at short-term rates (cheap but volatile) while mortgages are matched to long-duration funding (more expensive). For compute: real-time inference requires reserved GPU capacity (expensive, always available), while batch workloads can use spot pricing or off-peak reserved capacity (cheaper, scheduled). Charging the same blended rate for both is the token equivalent of originating demand deposits and 30-year mortgages at the same internal funding cost."
+  },
+  {
+    "id": "ttp-q05",
+    "post": "token-transfer-pricing",
+    "module": "ai-economy",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "Jensen Huang's proposal to give engineers token budgets as part of compensation is a valid insight about individual behavior but insufficient for organizational governance. What specific problem does it leave unaddressed?",
+    "options": [
+      "Individual budgets address personal consumption incentives but leave unanswered how the institution allocates its total token pool across units and which workloads justify which model tiers",
+      "Individual token budgets create compensation inequality between engineers at different seniority levels, generating organizational friction that undermines the collaborative culture needed for effective AI deployment",
+      "Token budget programs require employment contract modifications that most large financial institutions resist due to the legal complexity of mid-cycle compensation structure changes under existing HR frameworks",
+      "Individual budgets work appropriately for engineers but fail for executives and senior leaders who require unrestricted model access to use AI effectively in strategic planning and decision-making contexts"
+    ],
+    "correct": 0,
+    "explanation": "The post frames Huang's insight precisely: 'Huang's model is individual-level governance. It addresses how to motivate this engineer to use AI well. It doesn't address how the institution allocates its total token pool across business units, which use cases justify which model tiers, or what happens when an API price shock makes the entire organizational pool more expensive overnight.' Individual budgets create individual accountability; they don't create organizational price signals about which workloads justify which model tiers. A team where every engineer has a token budget may still collectively use premium reasoning for tasks that budget models could handle, because individual incentives don't encode the cross-unit allocation question."
+  },
+  {
+    "id": "ttp-q06",
+    "post": "token-transfer-pricing",
+    "module": "ai-economy",
+    "objective": "misconception",
+    "difficulty": 2,
+    "question": "The post warns about 'Token Maxing' \u2014 when AI usage becomes a KPI, teams optimize toward the metric rather than genuine productivity. This is Goodhart's Law at the compute layer. What is the most effective structural response?",
+    "options": [
+      "Replace activity metrics with cost-per-outcome metrics \u2014 what the team produced relative to compute cost \u2014 requiring workflow-level metering rather than department-level aggregates to make the measurement actionable",
+      "Remove all AI usage metrics entirely and rely exclusively on qualitative manager assessment of individual and team productivity, eliminating any quantitative signal that could be gamed by motivated teams",
+      "Set hard per-individual daily token caps to prevent excessive consumption by high-volume users who disproportionately drive the organization's total API spend without commensurate productivity gains",
+      "Require explicit manager approval for any individual AI session exceeding a predetermined daily threshold, creating a friction point that discourages token maxing through administrative overhead"
+    ],
+    "correct": 0,
+    "explanation": "The post applies the metrics-metrics-metrics insight to compute governance: 'FTP changed the denominator: volume wasn't the variable, profitable-after-funding-cost volume was. The behavior changed because the measurement changed.' The token equivalent: rather than measuring how much AI a team uses (which rewards Token Maxing), measure cost per unit of outcome \u2014 reduction in time-to-close on a credit memo, compliance coverage per analyst hour, false-positive escalation rate. This requires metering granularity at the feature or workflow level. Department-level budgets tell you a unit overspent; feature-level metering tells you which workload drove it and whether the spend was justified by the outcome."
+  },
+  {
+    "id": "ttp-q07",
+    "post": "token-transfer-pricing",
+    "module": "ai-economy",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A bank wants to implement Token Transfer Pricing. The post identifies three organizational requirements. Which one is described as 'the hard part'?",
+    "options": [
+      "An explicit owner with authority spanning AI platform management, financial oversight, and second-line governance \u2014 the mechanics are straightforward; the organizational authority to enforce internal pricing is not",
+      "A metering layer with cost attribution granularity below the department level, capable of tracking token consumption by individual workflow, feature, or use case rather than by organizational unit",
+      "A written internal pricing policy that formally distinguishes between latency tiers and model quality levels, creating the governance document that examiners and second-line teams can review and challenge",
+      "A real-time reporting system that shows each business unit its compute costs as they accumulate, creating the visibility needed for business units to manage their own AI spending proactively"
+    ],
+    "correct": 0,
+    "explanation": "The post identifies this precisely: 'That last element is the hard part. The mechanics are straightforward. The organizational authority to set and enforce internal transfer prices is not.' FTP became a governance mechanism because treasury gained explicit authority over internal funding rates \u2014 authority backed by regulatory requirements and executive mandate. Token transfer pricing requires an equivalent authority: who can tell the fraud team that their real-time reasoning model use is priced at 5\u00d7 the batch compliance team's model, and can enforce that pricing? Under SR 26-2's GenAI exclusion, this organizational seat lacks formal regulatory scaffolding. The answer requires institutions to build the authority structure without a regulatory requirement to do so."
+  },
+  {
+    "id": "ttp-q08",
+    "post": "token-transfer-pricing",
+    "module": "ai-economy",
+    "objective": "mechanism",
+    "difficulty": 3,
+    "question": "The Savings and Loan crisis is the post's cautionary case for what happens without FTP-equivalent governance. What is the direct parallel to token economics?",
+    "options": [
+      "S&Ls funded long-duration mortgages with short-term deposits \u2014 no internal price signal surfaced the mismatch \u2014 and when rates spiked, funding costs exceeded yields",
+      "S&Ls failed because they lacked real-time technology to track interest rate exposure, just as banks today lack real-time token metering to track compute cost exposure across distributed AI deployments",
+      "S&Ls were regulated under a different framework than commercial banks, creating the same regulatory arbitrage dynamic that makes AI governance inconsistent across institution types today",
+      "The S&L crisis was primarily driven by fraud and regulatory forbearance rather than governance failure, making it a cautionary tale about enforcement rather than about internal pricing or cost allocation"
+    ],
+    "correct": 0,
+    "explanation": "The post makes the analogy explicit: 'S&Ls funded long-duration fixed-rate mortgages with short-term deposits \u2014 implicitly borrowing short to lend long, pocketing the term premium, and leaving duration risk with the institution. There was no internal pricing signal to surface the mismatch. When interest rates spiked in 1979-1982, funding costs exceeded asset yields across the industry. The resolution cost US taxpayers roughly $130 billion. FTP was developed in response to exactly this class of cross-subsidy failure.' The token parallel: business units pocketing AI productivity gains from premium model usage while the organization absorbs the cost. An API price shock (equivalent to the 1979 rate spike) surfaces the mismatch as a budget crisis rather than a managed portfolio decision."
+  },
+  {
+    "id": "ttp-q09",
+    "post": "token-transfer-pricing",
+    "module": "ai-economy",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "The post argues that 'effective challenge on model selection before deployment' is necessary to prevent Token Maxing. Why is pre-deployment the right point for this challenge rather than post-deployment monitoring?",
+    "options": [
+      "Once deployed on a premium model, organizational inertia and operational dependencies make switching costly even when monitoring confirms the choice was unjustified",
+      "Post-deployment monitoring of AI workload costs is technically infeasible with current observability tooling, making pre-deployment challenge the only practical governance intervention available to risk teams",
+      "Pre-deployment model selection challenge is explicitly required by SR 26-2 for all GenAI deployments regardless of model tier, creating a mandatory governance gate before any production launch",
+      "Post-deployment monitoring creates regulatory evidentiary records that increase the bank's litigation exposure in disputes over AI-assisted decisions, making pre-deployment challenge strategically preferable"
+    ],
+    "correct": 0,
+    "explanation": "The post frames pre-deployment challenge as the natural corollary of Token Transfer Pricing governance: 'effective challenge on model selection before deployment, when the choice can still change: someone whose job it is to ask whether a reasoning model is actually warranted for this task, or whether the team reached for it because it was available at zero marginal internal cost.' Post-deployment monitoring tells you that a workload is using premium models expensively; it doesn't reverse the choice. The governance value of pre-deployment challenge is that it inserts the 'do we actually need this tier?' question before the workload's operational dependencies make the answer moot."
+  },
+  {
+    "id": "ttp-q10",
+    "post": "token-transfer-pricing",
+    "module": "ai-economy",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The post argues token economics is following the same maturity curve as cloud FinOps, 'just faster and with less visibility.' What does this predict about the governance timeline for token economics?",
+    "options": [
+      "The 420\u00d7 model spread makes the governance gap economically acute faster than cloud did \u2014 banks that build token governance before the bill forces it avoid the reactive unwinding cycle",
+      "Token economics will take roughly a decade to mature, mirroring the historical FinOps timeline, since behavioral cost drivers require the same multi-year cultural change that cloud cost governance demanded",
+      "Token economics is fundamentally different from cloud economics \u2014 costs are behavioral rather than provisioned \u2014 so cloud FinOps frameworks and institutional lessons do not transfer and must be rebuilt from scratch",
+      "The governance timeline is irrelevant because AI productivity gains will consistently outpace any governance costs across all plausible adoption scenarios for the foreseeable period of rapid model capability improvement"
+    ],
+    "correct": 0,
+    "explanation": "The post identifies the pattern: 'Cloud computing went through this same transition. The initial land-grab phase treated cloud spend as IT overhead until the bill got large enough that finance noticed. FinOps emerged as the discipline for governing cloud unit economics at the team and feature level. Token economics is following the same curve, except faster and with less visibility, because the cost driver is a behavior (how you prompt, what model you select, whether you cache) rather than a provisioned resource you can see in a dashboard.' The prediction: the organizations that build token governance infrastructure before the bill gets large enough to force it will avoid the reactive cycle. The 420\u00d7 spread makes the stakes higher and the curve steeper than cloud FinOps was."
+  }
+]

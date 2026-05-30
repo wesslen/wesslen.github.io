@@ -1,0 +1,162 @@
+[
+  {
+    "id": "mdf-q01",
+    "post": "molmoweb-data-flywheel",
+    "module": "gui-agents",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "MolmoWeb's Table 6 shows synthetic trajectories beat human demonstrations by 17.6 points on WebVoyager at matched scale. What is the most important implication for annotation investment decisions?",
+    "options": [
+      "Human annotators should be replaced immediately \u2014 synthetic pipelines now dominate on visual web tasks, making crowdwork annotation economically indefensible for any GUI agent training budget",
+      "The field may have been misallocating effort; the teacher's advantage is epistemic, not scale-based, since it reads element semantics the annotator must infer from pixels",
+      "Human demonstrations remain indispensable for tasks where web pages expose no accessibility tree \u2014 synthetic pipelines only generalize to semantically rich, well-structured page environments",
+      "The 17-point gap overstates the benefit because WebVoyager selects tasks biased toward structured e-commerce pages where accessibility labels are reliably available and complete"
+    ],
+    "correct": 1,
+    "explanation": "The ablation's significance is structural, not just quantitative. The synthetic teacher (an AxTree-reading Gemini agent) has access to element semantics that the trained model won't have at runtime. It terminates in 11 steps on a task where the human annotator spent 28 steps scrolling and ultimately submitted the wrong product. This isn't a volume advantage \u2014 it's an epistemic advantage. The teacher doesn't face uncertainty about page structure; it reads element semantics directly. The implication: annotation investment in visual web task training should prioritize building better teachers over collecting more human demonstrations."
+  },
+  {
+    "id": "mdf-q02",
+    "post": "molmoweb-data-flywheel",
+    "module": "gui-agents",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The post describes the AirTag annotation example where a worker spent 28 steps and submitted: 'The latest iPhone model was 17 pro max...' This is not described as carelessness. What is the correct diagnosis?",
+    "options": [
+      "The annotator lacked domain expertise in Apple product taxonomy \u2014 better screener questions and qualification gates would have filtered this worker before task assignment",
+      "The annotator navigated genuine structural confusion \u2014 AirTag and iPhone categories overlap in Apple navigation space, producing correlated exploratory paths rather than individual random error",
+      "The crowdwork platform's per-task payment structure created financial pressure to rush ambiguous tasks, causing systematic speed-accuracy tradeoffs that aggregate data collection cannot correct",
+      "The annotation interface failed to surface the product category constraint clearly enough, making this a UX design failure rather than a worker error or structural task ambiguity"
+    ],
+    "correct": 1,
+    "explanation": "The post is precise: 'The worker didn't lose track of precision; they lost track of the task category entirely.' This is structural confusion arising from the task's inherent ambiguity, not inattention. The AirTag and iPhone categories are genuinely proximate in the navigation space; the annotator was navigating real uncertainty. This is what makes it structured noise: the error is correlated with task difficulty and interface ambiguity, not random. Multiple annotators facing the same confusing interface would produce similar exploratory paths \u2014 consensus mechanisms aggregate the confusion rather than canceling it."
+  },
+  {
+    "id": "mdf-q03",
+    "post": "molmoweb-data-flywheel",
+    "module": "gui-agents",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "MolmoWeb's training uses 'synthetic' trajectories, but the synthetic teacher had information the trained model won't have at runtime. What exactly is the asymmetry?",
+    "options": [
+      "The teacher uses substantially more inference compute per step than the trained model is allocated at runtime, giving it reasoning capacity the deployed agent cannot match",
+      "The teacher reads the accessibility tree with full element semantics; MolmoWeb at runtime sees only raw screenshots and must reconstruct click targets from pixels",
+      "The teacher operates a larger base model whose world knowledge cannot be distilled into the student's parameter budget through standard supervised fine-tuning",
+      "The teacher consults ground-truth answer keys from a curated database that the student model is explicitly blocked from accessing during deployment inference"
+    ],
+    "correct": 1,
+    "explanation": "The asymmetry is the core finding that drives the 17-point gap. The AxTree-reading Gemini teacher reads structured element labels \u2014 IDs, roles, text content \u2014 and clicks with certainty. The trained MolmoWeb agent at runtime sees only a raw screenshot and must infer what's clickable, where elements are, and what they contain. Click coordinates are emitted as floats normalized to [0,100] \u2014 a direct inheritance of Molmo's pointing convention \u2014 requiring the model to carry OCR burden the teacher never had. MolmoWeb ships a grounding specialist (MolmoWeb-Ground-8B) specifically to address this gap, and the paper acknowledges it as an open problem."
+  },
+  {
+    "id": "mdf-q04",
+    "post": "molmoweb-data-flywheel",
+    "module": "gui-agents",
+    "objective": "misconception",
+    "difficulty": 2,
+    "question": "The standard assumption in training data governance is that human labels are 'noisy but unbiased' \u2014 random errors cancel with enough data. Why does the post argue web navigation annotation violates this assumption?",
+    "options": [
+      "Crowdwork platforms select for annotators who optimize speed over accuracy, creating a systematic throughput bias that worsens as task complexity increases and cannot be corrected by adding more annotators",
+      "Web navigation noise is structural: annotators facing the same confusing interface all produce exploratory paths, so consensus mechanisms aggregate correlated errors rather than canceling them",
+      "Per-task payment structures incentivize annotators to complete difficult tasks faster than their actual ability level supports, generating a systematic financial-incentive bias across all hard navigation examples",
+      "Web interfaces change dynamically during annotation collection windows, causing systematic temporal drift in label quality that volume scaling cannot compensate for across multi-week campaigns"
+    ],
+    "correct": 1,
+    "explanation": "The post makes this precise: 'If human annotators systematically produce exploratory paths on complex tasks, running more annotators produces a larger, equally flawed sample of exploratory paths. Aggregation doesn't fix the underlying confusion; it just captures it more thoroughly.' The IRT analogy from the companion post on metrics is relevant: inter-annotator agreement will be high (everyone is confused the same way) and training loss will decrease normally (the model learns to imitate exploratory paths). The failure only shows up at evaluation or in production \u2014 the trained model inherits the annotators' uncertainty and learns to hedge in exactly the situations where it should act decisively."
+  },
+  {
+    "id": "mdf-q05",
+    "post": "molmoweb-data-flywheel",
+    "module": "gui-agents",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "What does MolmoWeb's Apache 2.0 release include that makes it the post's 'most credible open attempt at a GUI agent to date'?",
+    "options": [
+      "A managed cloud deployment service with pre-provisioned GPU clusters, autoscaling, production SLAs, and dedicated support from Ai2's engineering team \u2014 lowering barrier to enterprise adoption",
+      "Model weights, training data, training code, evaluation suite, annotation tool, and paper \u2014 all under open licenses, unlike most labs that ship only weights",
+      "A tiered commercial marketplace where practitioners purchase domain-specific fine-tuned variants with accuracy guarantees, versioned APIs, and long-term vendor support contracts for production use",
+      "Official browser extension integrations with Chrome, Firefox, and Safari developed via formal browser-vendor partnership agreements that satisfy enterprise IT security and deployment approval requirements"
+    ],
+    "correct": 1,
+    "explanation": "The post frames MolmoWeb's unusual completeness as the basis for the 'OLMo of GUI agents' comparison Ai2 makes themselves. OLMo's full-stack openness (weights, training data, training code, evaluation suite) was what made it credible for academic and practitioner validation. MolmoWeb releases the same stack: model weights, training data with its full 278.5K trajectory mixture, the training code via `run_train.sh`, the benchmark runner CLI, and the Chrome extension for recording human demonstrations. This completeness is what enables the audit the Part 2 post performs \u2014 you can only find the `run_train.sh` defaults gap because the training code was released."
+  },
+  {
+    "id": "mdf-q06",
+    "post": "molmoweb-data-flywheel",
+    "module": "gui-agents",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The MolmoWebMix 10%-of-data ablation shows that 10% of the training mixture achieves 85\u201390% of full-data performance. What governance implication does the post draw from this?",
+    "options": [
+      "Banks can safely cut training compute costs by subsampling 10% of available trajectories \u2014 the performance penalty is small enough to be acceptable in cost-sensitive enterprise deployment scenarios",
+      "The mixture is data-redundant; curation quality matters more than volume, but identifying the right 10% before training on everything is an unsolved chicken-and-egg problem",
+      "Synthetic pipelines are inherently inefficient data generators and should be replaced with smaller curated human-annotated datasets assembled by domain-expert annotators with structured quality review",
+      "The 10% result proves web agent training datasets can be dramatically compressed without quality loss, making large-scale trajectory collection campaigns a wasted organizational investment"
+    ],
+    "correct": 1,
+    "explanation": "The post draws a specific implication: 'If 90% of the trajectories are providing marginal signal, volume isn't the variable that matters \u2014 curation quality is.' The practical challenge is that identifying the right 10% before training on everything is not yet solved. The model can't know which trajectories are most informative until after training, creating a chicken-and-egg problem. The governance relevance: organizations building training data pipelines for agent systems should invest in curation and quality assessment infrastructure, not just volume collection \u2014 but this requires developing the tools to identify high-signal data before training, not after."
+  },
+  {
+    "id": "mdf-q07",
+    "post": "molmoweb-data-flywheel",
+    "module": "gui-agents",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A bank is evaluating a GUI agent for internal workflow automation built on a vision-only agent (screenshot-based, no DOM access). The vendor claims human-level accuracy on internal portal tasks. Based on MolmoWeb's findings, what validation question should the bank prioritize?",
+    "options": [
+      "Whether the agent's training data included screenshots from competing vendors' internal portals, creating IP contamination risk that legal, procurement, and compliance teams would need to formally adjudicate before deployment",
+      "What the error profile looks like on legacy interfaces \u2014 the teacher's advantage is largest on clean accessible pages, not the systems a bank deploys against",
+      "Whether the agent supports keyboard shortcut navigation alongside mouse clicks, satisfying WCAG 2.1 AA accessibility compliance obligations for public-facing banking applications in regulated markets",
+      "What the agent's model parameter count and hardware requirements are, and whether those fit within the bank's existing GPU infrastructure procurement and capacity planning constraints"
+    ],
+    "correct": 1,
+    "explanation": "The post identifies a key boundary condition: 'The AxTree teacher's edge is largest on clean, semantically-structured pages where element labels are reliably exposed. Legacy interfaces, canvas-heavy applications, and pages that don't fully implement accessibility standards are a different problem.' Enterprise banking systems \u2014 particularly older core banking interfaces, regulatory reporting portals, and legacy COBOL-backed front-ends \u2014 are often exactly the systems that break vision-only agents most severely. Benchmark performance on public web tasks may not transfer to the specific interface classes that enterprise automation projects encounter first."
+  },
+  {
+    "id": "mdf-q08",
+    "post": "molmoweb-data-flywheel",
+    "module": "gui-agents",
+    "objective": "mechanism",
+    "difficulty": 3,
+    "question": "The MolmoWeb multi-agent synthetic pipeline (planner + GPT-4o screenshot verifier + AxTree operator) scores 78.5% vs. 74.4% for single-agent on WebVoyager. What does this suggest about synthetic data generation strategy?",
+    "options": [
+      "Larger foundation models always produce higher-quality training trajectories regardless of pipeline architecture \u2014 the GPT-4o verifier's model size is the primary driver of the 4-point quality difference",
+      "Task decomposition \u2014 separating planning, verification, and execution into specialized roles \u2014 produces better trajectories than a single generalist agent, mirroring execution-side architectural insights",
+      "Human verification checkpoints must remain in the loop for synthetic pipelines to achieve production-quality trajectories even when the primary generation is fully automated and scalable",
+      "The GPT-4o verifier's primary function is screening for copyright-protected content embedded in web navigation trajectories generated by the AxTree operator during automated data collection"
+    ],
+    "correct": 1,
+    "explanation": "The 4-point gap between multi-agent and single-agent synthetic pipelines reflects the same insight that drives multi-agent task systems: specialized roles outperform generalists at complex tasks. The planner decomposes the task; the AxTree operator executes with semantic access; the GPT-4o screenshot verifier independently confirms success from a visual perspective without AxTree access. Each component does what it's best at. The architectural insight transfers: whether building task execution agents or data generation pipelines, decomposition into specialized roles that verify each other's work produces better outcomes than a single generalist agent."
+  },
+  {
+    "id": "mdf-q09",
+    "post": "molmoweb-data-flywheel",
+    "module": "gui-agents",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "The post notes that MolmoWeb was released after SR 26-2 excluded GenAI and agentic AI from its scope. What does this mean for banking teams deploying MolmoWeb-based agents?",
+    "options": [
+      "SR 26-2's exclusion creates a complete regulatory safe harbor \u2014 banks face no enforceable governance obligations for MolmoWeb-based deployments under current supervisory guidance from federal banking regulators",
+      "No binding framework mandates the audit the post describes, but underlying MRM principles still apply and governance gaps for synthetic training pipelines remain formally unaddressed",
+      "Banks must obtain individual written regulatory approval from their primary federal examiner before deploying any GUI agent technology in any operational workflow",
+      "SR 26-2's GenAI exclusion is explicitly temporary \u2014 banks should pause all GUI agent deployments until dedicated GenAI governance guidance replaces or supplements the existing framework"
+    ],
+    "correct": 1,
+    "explanation": "The post makes this explicit: 'SR 26-2 explicitly excludes GenAI and agentic AI systems from scope. The governance gap for synthetic training pipelines in agentic deployments has no formal regulatory answer yet.' The exclusion creates a gap precisely where the governance questions are most acute: a bank deploying a GUI agent needs a way to evaluate whether the training pipeline is sound and whether benchmark numbers are reproducible. No formal framework specifies what 'adequate validation' means in this context. The underlying MRM principles still apply by analogy \u2014 the audits the post describes are good practice \u2014 but banks are doing so without formal supervisory guidance on what's required."
+  },
+  {
+    "id": "mdf-q10",
+    "post": "molmoweb-data-flywheel",
+    "module": "gui-agents",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The post argues: 'For this class of screenshot-only visual agent, on these benchmarks, the field spent two years building infrastructure to collect and annotate human web trajectories at scale. MolmoWeb's result suggests we should have been building better teachers instead.' What general principle does this illustrate about AI development prioritization?",
+    "options": [
+      "Open-source labs allocate training compute more efficiently than commercial organizations constrained by competitive secrecy, investor timelines, and the need to ship revenue-generating products quickly",
+      "When the teacher has privileged information the student won't have at runtime, the investment should go to teacher quality, not more demonstrations under the same constraint",
+      "Supervised fine-tuning from epistemically privileged expert demonstrations always outperforms reinforcement learning from a reward signal for GUI navigation tasks, regardless of how well-calibrated the reward function is designed to be",
+      "Academic research labs systematically outperform commercial organizations on data collection efficiency because they operate without the time-to-market pressure that degrades annotation quality at scale"
+    ],
+    "correct": 1,
+    "explanation": "The principle the post illustrates is about the information structure of the learning problem. Human annotators and the trained model share the same information constraint (pixels only). The AxTree teacher has information the student won't \u2014 and that epistemic gap is what produces the 17-point quality difference. Scaling human annotation collects more examples of the same constrained-information decision process. The right investment is building teachers with access to the privileged information (structured semantics) that produces optimal trajectories, then training the student to approach that quality from its constrained (pixels only) perspective. This applies beyond web agents: in any domain where a more informed teacher can produce better demonstrations, the investment should go to teacher quality, not demonstration volume."
+  }
+]

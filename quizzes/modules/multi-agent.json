@@ -1,0 +1,11 @@
+{
+  "id": "multi-agent",
+  "title": "Agent to Agent",
+  "posts": ["google-adk-a2a", "a2a-risks", "a2a-case-studies"],
+  "titles": {
+    "google-adk-a2a": "ADK & A2A Protocol",
+    "a2a-risks": "A2A Risk Surface",
+    "a2a-case-studies": "Five Failures"
+  },
+  "n": 10
+}

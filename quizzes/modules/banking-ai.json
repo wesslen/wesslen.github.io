@@ -1,0 +1,11 @@
+{
+  "id": "banking-ai",
+  "title": "Banking AI",
+  "posts": ["payments-liability-gap", "agent-identity-kyc", "agentic-commerce-gap"],
+  "titles": {
+    "payments-liability-gap": "Who Pays When the Agent Gets It Wrong?",
+    "agent-identity-kyc": "Banks Don't Know Who Your Agent Is",
+    "agentic-commerce-gap": "Fast Technology, Slow Law"
+  },
+  "n": 10
+}

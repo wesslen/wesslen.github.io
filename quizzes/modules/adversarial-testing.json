@@ -1,0 +1,11 @@
+{
+  "id": "adversarial-testing",
+  "title": "Adversarial Testing",
+  "posts": ["adversarial-workflow", "deployment-gates", "adversarial-incompleteness"],
+  "titles": {
+    "adversarial-workflow": "The Red-Team Workflow",
+    "deployment-gates": "Three Deployment Gates",
+    "adversarial-incompleteness": "Why It Never Ends"
+  },
+  "n": 10
+}

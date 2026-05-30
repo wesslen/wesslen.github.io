@@ -1,0 +1,162 @@
+[
+  {
+    "id": "mog-q01",
+    "post": "molmoweb-openness-gap",
+    "module": "gui-agents",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The `run_train.sh` script defaults to 500 steps (vs. the paper's 50,000), the 4B model (vs. the paper's 8B for headline numbers), and half the global batch size \u2014 with no warning in the README. What governance risk does this represent?",
+    "options": [
+      "The defaults are clearly labeled as quick-start settings; any practitioner who reads the accompanying README carefully before running the script would immediately recognize they are non-production configurations",
+      "A practitioner running `bash run_train.sh` without careful comparison trains at ~1% of the paper's compute budget and produces nothing resembling the published benchmark result \u2014 a silent failure",
+      "The 4B model performs within one point of the 8B on all reported benchmarks, so the size mismatch is functionally irrelevant to any deployment decision a practitioner would make from the repo",
+      "The mismatch only affects academic researchers reproducing ablations; practitioners deploying via a vendor API would use hosted weights and never interact with the training script at all"
+    ],
+    "correct": 1,
+    "explanation": "The post is direct: 'A naive `bash run_train.sh` runs roughly one-hundredth of the paper's training compute, on the smaller model, with half the global batch size. There is no warning in the README.' In model risk terms, this is a documentation gap that independent validation is designed to catch \u2014 specifically the comparison of stated experimental conditions against reported configuration details. The defaults mismatch is also the most instructive pattern for banking teams: it represents behavioral assumptions that survive the publication process and will never be caught without someone who reads the defaults table and compares it against the paper's reported settings."
+  },
+  {
+    "id": "mog-q02",
+    "post": "molmoweb-openness-gap",
+    "module": "gui-agents",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "The post identifies that pass@4 (94.7% on WebVoyager, the headline number in most external coverage) is not achievable from the released benchmark runner CLI. What does this mean for reproducibility claims?",
+    "options": [
+      "The headline number is fabricated; Ai2 cannot actually achieve 94.7% on WebVoyager under any conditions using the released model weights and benchmark infrastructure",
+      "Reproducing the headline requires implementing parallel-rollout-with-VLM-judge orchestration independently \u2014 the released CLI exposes only pass@1, not what the model card advertises",
+      "Running the CLI four times and selecting the best overall result is a valid approximation of pass@4 that any practitioner could reasonably use to reproduce the published number",
+      "Only Ai2 has the proprietary GPU cluster infrastructure required to run the parallel rollout evaluation that produces the 94.7% headline figure"
+    ],
+    "correct": 1,
+    "explanation": "The benchmark runner exposes `agent_type`, `benchmark`, `num_workers`, `max_steps`, `env_type`, and `inference_mode` \u2014 no `pass_at_k`, `n_rollouts`, or `best_of_n` flag. The paper describes m=5 parallel rollouts per task with VLM-judge best-of-N selection. A practitioner who wants to reproduce 94.7% must implement that orchestration independently. The post's point is not that Ai2 fabricated the result \u2014 it's that the gap between what the model card advertises and what the released tooling enables is a reproducibility gap that practitioners won't discover without deep engagement with the implementation."
+  },
+  {
+    "id": "mog-q03",
+    "post": "molmoweb-openness-gap",
+    "module": "gui-agents",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The LLM-judge contamination loop: the multi-agent synthetic training pipeline uses GPT-4o as a screenshot verifier; the WebVoyager benchmark judge is also GPT-4o. Why does the post flag this?",
+    "options": [
+      "Reusing the same model for training data generation and evaluation is explicitly prohibited by reproducibility guidelines that govern publication in major ML venues",
+      "The same model that filtered which trajectories MolmoWeb learned from also decides what counts as benchmark success \u2014 training filter and evaluation signal share an inductive bias",
+      "GPT-4o has a well-documented tendency to approve outputs resembling its own generation style, inflating scores by a calculable percentage that researchers can easily correct for",
+      "This contamination loop has been proven in ablations to inflate WebVoyager benchmark scores by a specific number of percentage points that can be subtracted from the headline figure"
+    ],
+    "correct": 1,
+    "explanation": "The post is careful not to claim catastrophic contamination: 'The verifier's decisions reduce to a binary success label feeding the training sample filter, not direct preference supervision \u2014 but the dominant evaluation signal shares an inductive bias with the dominant training filter.' The concern is about systematic bias: whatever GPT-4o's particular decision patterns are (what it considers a 'successful' web interaction), those patterns influence both which trajectories the model learns from and which of the model's outputs count as successful at evaluation. The inductive bias is shared, not independent \u2014 which is the property you want in the verification signal."
+  },
+  {
+    "id": "mog-q04",
+    "post": "molmoweb-openness-gap",
+    "module": "gui-agents",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "The post repeatedly praises Ai2's transparency while documenting significant reproducibility gaps. What is the post's main point?",
+    "options": [
+      "Ai2 is deliberately misrepresenting MolmoWeb's capabilities to attract enterprise adoption from banking teams who lack the technical depth to audit the released code",
+      "These patterns are endemic to shipping complex ML quickly; they're findable because Ai2 released everything \u2014 banking teams should run this audit before deploying",
+      "Open-source AI research is structurally less reliable than proprietary research because publication pressure consistently incentivizes releasing incomplete implementations with poorly documented configuration gaps and shortcuts",
+      "Academic ML researchers should withhold releases until every implementation detail is fully documented, since incomplete releases create more confusion than they resolve in practitioner communities"
+    ],
+    "correct": 1,
+    "explanation": "The post is explicit: 'AI2 is being more transparent than almost any research lab in the GUI agent space. The patterns I'm naming are findable precisely because they released everything.' The point is about what practitioners need to do: the same patterns that appear in the most carefully documented open GUI agent release will appear in banking deployments moving faster and with less documentation discipline \u2014 and HuggingFace download numbers suggest most practitioners are not engaging deeply with the internals. The audit the post performs is what MRM validation should do, regardless of whether the research lab is transparent."
+  },
+  {
+    "id": "mog-q05",
+    "post": "molmoweb-openness-gap",
+    "module": "gui-agents",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The `[ANSWER]` termination contract for MolmoWeb is implicit \u2014 it surfaces in the demo notebook and as the closing string in HumanTrajs samples, but is absent from the README. Why does this matter for deployment?",
+    "options": [
+      "Its absence prevents deployers from customizing or overriding termination behavior to suit domain-specific workflow requirements, violating the principle of configuration transparency for production integration environments",
+      "The termination contract governs when the agent considers itself done \u2014 undocumented in the README, it becomes an invisible integration hazard for systems wrapping the agent's output",
+      "The `[ANSWER]` prefix causes known compatibility failures with specific JavaScript-based web automation frameworks widely used in enterprise integration layers and CI/CD pipelines",
+      "The implicit termination string reveals that MolmoWeb was originally prototyped for a question-answering task and was only later adapted to general web navigation use cases by the Ai2 team"
+    ],
+    "correct": 1,
+    "explanation": "The termination contract is a behavioral property that every integration must handle correctly. If a downstream system strips the `[ANSWER]` prefix before passing output to the user, it might miss that the task is complete. If it doesn't strip it, the prefix appears in user-facing output. If it uses the presence of `send_msg_to_user` as the termination signal (rather than the `[ANSWER]` prefix specifically), it may terminate too early. A termination contract that's absent from the README but present in demo notebooks and training data samples is an integration hazard \u2014 deployers who don't read the demo notebook won't know the contract exists."
+  },
+  {
+    "id": "mog-q06",
+    "post": "molmoweb-openness-gap",
+    "module": "gui-agents",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "MolmoWeb has no URL allowlist, no URL blocklist, and no prompt injection mitigation for on-screen text. The lead author's documented mitigation is 'don't ask the model to do sensitive things.' Why is this inadequate for enterprise banking deployment?",
+    "options": [
+      "Enterprise procurement policies require URL allowlists as a general IT governance control applied to all third-party software integrations, regardless of the actual security risk profile of the specific vendor tool",
+      "Banking GUI agents exist to handle sensitive workflows \u2014 any portal can inject instructions via on-screen text, making 'don't do sensitive things' self-defeating",
+      "Prompt injection risk exists only on publicly accessible websites; authenticated internal portals protected by SSO and VPN are structurally isolated from this class of attack vector",
+      "Internal banking portals undergo mandatory security review during development, making it impossible for them to display on-screen text that could serve as a prompt injection payload"
+    ],
+    "correct": 1,
+    "explanation": "The post's logic is precise: 'Don't ask the model to do sensitive things' is defensible for a research demo; it fails immediately in enterprise deployment, because the entire value proposition of deploying a GUI agent in banking is handling sensitive workflows \u2014 loan origination, regulatory reporting, trade reconciliation. Any authenticated portal the agent visits can display text attempting to redirect its behavior. The minimal production mitigation is confining agent navigation to an allowlist of approved URLs, treating off-allowlist navigation as a task failure requiring human review."
+  },
+  {
+    "id": "mog-q07",
+    "post": "molmoweb-openness-gap",
+    "module": "gui-agents",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A banking team evaluates MolmoWeb for automating internal regulatory reporting. They note the repo has 543 stars, an updated README, and zero open issues or pull requests. They interpret this as indicating high quality and low known issues. What does the post suggest is the correct interpretation?",
+    "options": [
+      "Zero open issues is a strong positive signal \u2014 active users who found problems would have opened issues, so their absence indicates the community has reviewed the code thoroughly and found no actionable defects",
+      "Zero issues signals that few practitioners are engaging deeply with the internals \u2014 the defaults mismatch and implicit termination contract exist in the code regardless of whether anyone filed a GitHub issue",
+      "A small focused maintainer team consistently ships higher-quality software than large distributed communities because architectural coherence outweighs raw contributor count in complex ML systems",
+      "Zero open issues combined with an updated README confirms the repository is production-ready and has cleared the internal quality bar Ai2 applies before recommending enterprise deployment scenarios"
+    ],
+    "correct": 1,
+    "explanation": "The post inverts the standard interpretation: 'The repo has 543 stars, an updated README, and a visible primary committer, but no GitHub Actions workflows, no `tests/` directory, and zero open issues or pull requests. For a banking team evaluating this as a foundation for internal tooling, the absence of community-surfaced issues signals low engagement with the internals; it doesn't mean the issues don't exist.' The defaults mismatch, the ScreenSpot dual-use concern, and the implicit termination contract are real issues that low community engagement hasn't surfaced in GitHub. They exist in the code regardless."
+  },
+  {
+    "id": "mog-q08",
+    "post": "molmoweb-openness-gap",
+    "module": "gui-agents",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "The post argues that the `run_train.sh` defaults mismatch is 'the most instructive pattern' from the code drop. Why this one among all the issues identified?",
+    "options": [
+      "It is the easiest defect to fix \u2014 a one-line change to the script \u2014 making it the highest-leverage finding relative to the effort required for remediation in any deployment context",
+      "The failure is invisible: the script runs, a model is produced, and nothing warns you that you trained at 1% of the paper's compute budget",
+      "It affects the largest absolute number of practitioners who downloaded the repository, since more teams attempt fine-tuning than implement the multi-agent evaluation pipeline from scratch",
+      "It reveals a systematic training pipeline documentation problem that reappears consistently across all of Ai2's open-source model releases, including OLMo, Molmo, and related projects released under similar conditions"
+    ],
+    "correct": 1,
+    "explanation": "The post makes this explicit: 'The specific pattern I find most instructive is the `run_train.sh` default mismatch. The script exists, it runs, and it will produce a trained model. It will just produce a model trained at a fraction of the paper's compute budget, and nothing warns you.' This is a documentation gap that independent validation is designed to catch \u2014 the kind of thing an independent validator who reads the defaults table and compares it against the paper's reported configuration would flag. Under time pressure, that comparison often doesn't happen. It's the most instructive because it's both consequential (1% vs. 100% of training compute) and silent (no error, no warning, a model is produced)."
+  },
+  {
+    "id": "mog-q09",
+    "post": "molmoweb-openness-gap",
+    "module": "gui-agents",
+    "objective": "mechanism",
+    "difficulty": 3,
+    "question": "MolmoWeb's ReAct loop re-encodes the full prompt and screenshot history on every step, with no session ID, no KV-cache reuse, and no streaming. What practical constraint does this create for long-horizon tasks?",
+    "options": [
+      "Long multi-step tasks require sustained network connectivity that enterprise VPN and firewall configurations frequently interrupt, leaving the agent stranded mid-task with no built-in recovery mechanism or state checkpoint",
+      "The 10,240-token context cap means long sessions with embedded screenshots silently truncate \u2014 early context drops without error or warning as the rollout lengthens",
+      "Long tasks generate an excessive volume of HTTP requests per minute that enterprise web application firewalls will throttle or block under standard rate-limiting policies",
+      "The ReAct pattern requires mandatory human review checkpoints after every ten navigation steps, making long autonomous workflows operationally incompatible with enterprise deployment at scale"
+    ],
+    "correct": 1,
+    "explanation": "The post identifies this as a sharp edge: 'The `max_position_embeddings = 10240` context cap (versus Molmo2's 36,864) is a related sharp edge: long sessions with embedded screenshots will silently truncate.' This is confirmed as the proximate cause of vLLM crash issue #38660. In a 30-step rollout where each step includes a screenshot embedded as visual tokens, the context can approach the cap, causing early step content (the original task description, early navigation steps) to silently disappear from the model's attention. The silence is the key risk: there's no error, no warning, the agent continues \u2014 it just loses track of what it was supposed to do."
+  },
+  {
+    "id": "mog-q10",
+    "post": "molmoweb-openness-gap",
+    "module": "gui-agents",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The post argues that the patterns it documents in MolmoWeb \u2014 defaults mismatches, implicit contracts, evaluation overlaps \u2014 should be expected in banking deployments 'moving faster and with less documentation discipline.' What does this predict about the MRM challenge for GUI agents in banking?",
+    "options": [
+      "Banks should only deploy GUI agents from vendors who publicly release complete training code, training data, evaluation scripts, and full model documentation under open licenses",
+      "The same gaps visible in the most carefully documented open release will appear invisibly in closed deployments where no code exists to audit",
+      "GUI agents are categorically too risky for regulated banking until international standards bodies publish formal GUI agent validation frameworks with explicit supervisory backing and examination guidance",
+      "Banks should partner directly with Ai2 or similar academic labs whose documentation discipline exceeds what commercial vendors and internal engineering teams can realistically sustain"
+    ],
+    "correct": 1,
+    "explanation": "The post's prediction is explicit: 'If these patterns appear in the most carefully documented open GUI agent release to date, I'd expect similar patterns to be common in regulated banking deployments moving faster and with less documentation discipline.' For closed-weight commercial API deployments, the code to audit doesn't exist \u2014 practitioners cannot find the defaults table. For internal banking builds under time pressure, the comparison of training conditions to paper conditions won't happen. The MRM challenge is building validation processes that catch these behavioral assumptions without source code access, using behavioral testing and documentation challenges instead."
+  }
+]

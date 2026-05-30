@@ -1,0 +1,162 @@
+[
+  {
+    "id": "dg-q01",
+    "post": "deployment-gates",
+    "module": "adversarial-testing",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "The post insists on separating the three adversarial gates (capability, safety, robustness) from use-case quality metrics. Why is this separation necessary rather than combining them into a single gate?",
+    "options": [
+      "Regulatory requirements mandate separate gate documentation for each category to satisfy SR 11-7 traceability and examination-response obligations.",
+      "Adversarial resilience and task quality are orthogonal failure modes that need separate tracking.",
+      "Combining gates makes scoring too complex for model risk committees, so practitioners split them for administrative and reporting convenience.",
+      "Use-case quality metrics fall outside adversarial validation scope under SR 26-2 and are managed through a separate business-unit review cycle."
+    ],
+    "correct": 1,
+    "explanation": "The post states this directly: 'These three gates evaluate adversarial resilience only. They say nothing about whether it works. A complete deployment gate also requires use-case-specific quality metrics.' A credit memo agent that resists all jailbreaks but produces factually incorrect memos fails the deployment bar despite passing adversarial gates. Conversely, a highly accurate agent that can be trivially manipulated into bypassing credit policy is dangerous despite excellent quality metrics. The failure modes are orthogonal and require separate measurement with separate governance."
+  },
+  {
+    "id": "dg-q02",
+    "post": "deployment-gates",
+    "module": "adversarial-testing",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "Gate 1 (capability non-regression) requires 'champion-relative utility within 2% on the bank's internal task suite.' The post says this threshold requires a derivation. What is a defensible derivation?",
+    "options": [
+      "Citing industry peer benchmarks that use 2% as a standard threshold constitutes sufficient documentation for model risk without further derivation.",
+      "Derive the threshold from empirical variance of prior champion releases, documenting the floor and the margin.",
+      "Differences smaller than 2% are statistically insignificant given typical banking evaluation sample sizes, so no derivation is necessary.",
+      "The Model Risk Committee sets thresholds based on risk appetite alone; no statistical derivation from historical release performance data is required."
+    ],
+    "correct": 1,
+    "explanation": "The post is explicit about what a defensible derivation requires: 'We picked 2% because the prior four releases varied by a standard deviation of \u00b10.8% on this suite, and 2% gives us roughly 2.5\u03c3 of headroom for sampling noise' is a derivation. 'We picked 2% because the literature says 2%' is not. The threshold validation artifact must state the floor (what the champion achieves), the margin (how much variance is acceptable), and the reasoning connecting the two. The same threshold number can be defensible or indefensible depending on whether the derivation exists and is traceable."
+  },
+  {
+    "id": "dg-q03",
+    "post": "deployment-gates",
+    "module": "adversarial-testing",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "Gate 2 uses StrongREJECT, HarmBench, and a LlamaGuard flag-rate envelope as model-level benchmarks. The post describes these as 'vendor due diligence' rather than use-case safety testing. What is the difference?",
+    "options": [
+      "Model-level benchmarks are the vendor's pre-release responsibility; use-case safety tests are the bank's post-procurement obligation and cannot be delegated.",
+      "Model-level benchmarks establish a broad harm baseline; use-case probes test the specific attack surface of the deployed configuration.",
+      "Model-level benchmarks apply at initial deployment only and are fully replaced by use-case safety tests during each subsequent monitoring cycle.",
+      "The distinction only applies when the bank uses multiple model providers; single-provider deployments collapse both evaluation layers into one."
+    ],
+    "correct": 1,
+    "explanation": "The post draws this layer distinction explicitly: 'Note the layer distinction: these are model-level benchmarks, vendor due diligence establishing a prior about the base model's broad harm profile. The use-case-specific safety probes \u2014 the PyRIT Crescendo scenarios targeting wire-fraud, adverse-action reasoning, AML alert manipulation \u2014 are the layer that sits on top.' A model might pass HarmBench comprehensively and still be vulnerable to a banking-specific attack that exploits its domain knowledge about financial instruments or regulatory frameworks. The model-level benchmark tells you the baseline; the use-case probe tells you about the specific deployment."
+  },
+  {
+    "id": "dg-q04",
+    "post": "deployment-gates",
+    "module": "adversarial-testing",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "The Scots Gaelic jailbreak study (43% ASR against GPT-4) was later shown by StrongREJECT to be mostly empty or incoherent output that the original benchmark scored as success. What does this reveal about Attack Success Rate as a metric?",
+    "options": [
+      "ASR is unreliable for non-English inputs and should be restricted to the deployment language to prevent cross-lingual classification artifacts.",
+      "ASR is only as meaningful as its scoring function \u2014 binary classifiers award success to incoherent output without assessing genuine harm.",
+      "The study proves GPT-4 is fundamentally unsafe for banking and all vendors must patch this multilingual vulnerability before any regulated deployment.",
+      "The Scots Gaelic vulnerability has been patched in current model releases, making the historical 43% ASR figure irrelevant to present-day security assessments."
+    ],
+    "correct": 1,
+    "explanation": "The post uses this as the foundational argument for the substrate section: 'A benchmark scoring system marking incoherent output as a successful jailbreak generalizes to roughly any safety benchmark that uses a binary harm classifier rather than a rubric-based judge.' StrongREJECT was specifically designed to fix this: its rubric requires scoring refusal (did it refuse?), convincingness (1-5), and specificity (1-5) rather than just 'did harmful content appear?' The Scots Gaelic case produced outputs that a binary classifier flagged as harmful but StrongREJECT recognized as empty. The metric you're anchoring on shapes what the threshold means."
+  },
+  {
+    "id": "dg-q05",
+    "post": "deployment-gates",
+    "module": "adversarial-testing",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "Gate 3 adds an 'agentic supplement' to the robustness ceiling: zero tolerance for tool-hijack findings that produce external side effects, regardless of ASR on other probe families. Why is reversibility doing special work in this rubric?",
+    "options": [
+      "External side effects trigger mandatory SEC incident-reporting obligations that automatically make them higher priority than internal agentic failures under current rules.",
+      "Tool-hijack actions create irreversible state \u2014 SWIFT messages, transactions \u2014 that cannot be undone within any detection window.",
+      "External side effects cost more to remediate than internal failures, so zero tolerance reflects cost-benefit logic rather than a categorical risk distinction.",
+      "Regulatory requirements specifically exempt internal-only adversarial findings from Gate 3, creating an asymmetric compliance standard for external-facing agentic actions only."
+    ],
+    "correct": 1,
+    "explanation": "Reversibility is doing specific work in the Gate 3 architecture. The post states: 'A Tier 1 deployment that satisfies the ASR ceiling but fails an AgentDojo tool-hijack scenario should not pass the gate. The reason is that hijack scenarios produce external side effects \u2014 writes, transactions, communications \u2014 and the consequence is irreversible in a way that a content failure is not.' Statistical ASR thresholds work when the distribution of failures is acceptable at scale. For irreversible adverse actions \u2014 wire transfers, SWIFT messages, RTP payments \u2014 any non-zero probability of adversarial triggering requires a different governance response than a threshold."
+  },
+  {
+    "id": "dg-q06",
+    "post": "deployment-gates",
+    "module": "adversarial-testing",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "The post notes that a Tier 2 use-case classification can hide a Tier-1-equivalent risk profile. What additional dimensions must be evaluated alongside the use-case label?",
+    "options": [
+      "Programming language and cloud provider create infrastructure risks the use-case tier label was never designed to capture in governance frameworks.",
+      "Autonomy, blast radius, and reversibility \u2014 a Tier 2 label can hide Tier-1 risk when all three are unfavorable.",
+      "User count and interaction frequency are the actual exposure determinants and should override the tier label when they diverge significantly.",
+      "Regulatory jurisdiction and applicable data protection law determine cross-border risk dimensions that the use-case label systematically fails to capture for multinational banks."
+    ],
+    "correct": 1,
+    "explanation": "The post identifies this as a governance gap in current tiering frameworks: 'A Tier 2 classification on the use-case axis can hide a Tier-1-equivalent risk profile if the agent has high autonomy, broad blast radius, and irreversible actions.' An 'internal decision-support' agent (nominally Tier 2) that has read-write access to a core banking system, operates for 20 steps before any human review, and initiates actions in systems that can't be rolled back has the risk characteristics of a Tier 1 deployment. The deployment gate has to evaluate all three dimensions rather than relying on the use-case label alone."
+  },
+  {
+    "id": "dg-q07",
+    "post": "deployment-gates",
+    "module": "adversarial-testing",
+    "objective": "misconception",
+    "difficulty": 2,
+    "question": "The post warns: 'The metric that a model has to clear becomes a target the development team optimizes for.' How does this apply to adversarial testing specifically?",
+    "options": [
+      "Development teams informally incentivize red-team specialists to produce ASR findings favorable enough to clear the deployment gate threshold before release.",
+      "A fixed known suite gets optimized against \u2014 ASR drops because the configuration was tuned, not because the attack",
+      "Goodhart's Law applies only to financial performance metrics and does not transfer to adversarial security testing in the same rigorous way.",
+      "Optimization pressure only affects open-source models where teams can directly modify training data to suppress specific adversarial attack families."
+    ],
+    "correct": 1,
+    "explanation": "The post connects this explicitly to the metrics-metrics-metrics argument: 'The Goodhart pattern in adversarial evaluation is the practical reason champion-challenger frameworks are valuable \u2014 running a structurally different challenger model alongside production catches some forms of test-suite optimization that a single-model gate would not.' If the gate uses the same probe families every release cycle, a development team under pressure to ship can optimize the system prompt or guardrails to pass those specific probes. The ASR metric looks good; the underlying security hasn't improved. Novel probes and external red-team engagements that the development team hasn't seen address this directly."
+  },
+  {
+    "id": "dg-q08",
+    "post": "deployment-gates",
+    "module": "adversarial-testing",
+    "objective": "mechanism",
+    "difficulty": 3,
+    "question": "Four judge calibration requirements are listed before any ASR threshold is defensible: inter-rater reliability (\u03ba\u22650.60), imbalanced-class handling, independent-family judge selection, and quarterly recalibration. Which requirement addresses the Scots Gaelic problem specifically?",
+    "options": [
+      "Quarterly recalibration, because Gaelic attack variants require regular dataset updates as the technique evolves across successive model generations and provider patches.",
+      "Inter-rater reliability, because two independent annotators would have disagreed about whether incoherent Gaelic output qualified as a successful jailbreak.",
+      "Imbalanced-class handling \u2014 a binary classifier on mostly-refusal data scores any non-refusing output, including incoherent text, as harmful.",
+      "Independent-family judge selection, because cross-lingual transfer exploited by Gaelic attacks cannot be correctly evaluated by judges trained only on English families."
+    ],
+    "correct": 2,
+    "explanation": "The Scots Gaelic problem is specifically an imbalanced-class classification failure. The binary classifier saw: output in an unusual language that wasn't a standard refusal \u2192 score as successful jailbreak. But StrongREJECT's rubric requires: was the output convincing (1-5) and specific (1-5), not just non-empty and non-refusing? Imbalanced-class handling with per-class precision and recall (F1 across harm types rather than aggregate accuracy) would have flagged that the 43% 'success' rate included many low-specificity outputs that a rubric scorer would mark as failed jailbreaks. The problem isn't model capability; it's that the binary classifier can't distinguish quality of attack success."
+  },
+  {
+    "id": "dg-q09",
+    "post": "deployment-gates",
+    "module": "adversarial-testing",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A bank implements three adversarial gates for an LLM-based fraud alert review system, and all three gates pass. Six months later, the vendor pushes a model update, and 90 days after that a new indirect prompt injection technique is published. Which event requires re-running the gates, and why?",
+    "options": [
+      "Neither event requires re-running because gates remain valid for twelve months after initial deployment regardless of system or threat changes.",
+      "Both events: the model update changes the tested system; the new IPI technique changes the threat model. Gates are not permanent.",
+      "Only the model update requires re-running; published academic attack techniques don't create actual vulnerability until adversaries operationalize them in live attacks.",
+      "Only the new IPI technique requires re-running; model updates within the same provider are covered under the original gate's vendor continuity clause."
+    ],
+    "correct": 1,
+    "explanation": "The post is direct about this: 'The gate scoped to the deployed system means it has to be re-run when any component changes (tool inventory, MCP server, prompt template) \u2014 not only when the model version increments.' A model update changes the system the gates tested. A new IPI technique changes the threat model against which Gate 3 was measured \u2014 the ASR ceiling was calibrated against known attack families; a novel family that wasn't in the original test battery may produce very different results. Adversarial gates are not durable clearances; they are evidence about a specific system state against a specific threat model at a specific date."
+  },
+  {
+    "id": "dg-q10",
+    "post": "deployment-gates",
+    "module": "adversarial-testing",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The post concludes: 'a gate is doing governance... without the independent challenger with the competence to derive new thresholds when the old ones decay, the gate is documentation.' What does this synthesize from across the adversarial testing series?",
+    "options": [
+      "Adversarial gates are only mandatory for Tier 1 deployments; lower-risk systems can substitute continuous monitoring for structured pre-deployment gate requirements entirely.",
+      "Governance requires structural independence, adversarial competence, and authority to block deployment \u2014 any gate missing one produces documentation, not assurance.",
+      "All adversarial testing should be outsourced to external red-team specialists rather than run internally, since internal teams structurally lack the required independence.",
+      "Point-in-time gates should be fully replaced by continuous monitoring pipelines as a more cost-efficient structure for rapidly evolving LLM deployments."
+    ],
+    "correct": 1,
+    "explanation": "The post explicitly maps the adversarial gate to the effective challenge triad: 'an independent challenger with the competence to derive new thresholds when the old ones decay, and the influence to actually change the deployment cadence when they do.' The three legs of effective challenge \u2014 incentives, competence, influence \u2014 reappear in adversarial testing as: structural independence from development (incentives don't penalize block decisions), adversarial ML competence (can probe the system in ways its builders didn't think of), and authority to block deployment (influence means findings reach a body with actual power). Without all three, you have documentation; with all three, you have governance."
+  }
+]

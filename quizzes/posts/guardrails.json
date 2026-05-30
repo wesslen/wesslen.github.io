@@ -1,0 +1,162 @@
+[
+  {
+    "id": "gr-q01",
+    "post": "guardrails",
+    "module": "human-in-the-loop",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "FinRegLab's 2025 market scan defined guardrails as 'constraints to restrict function AND ongoing monitoring and troubleshooting.' The post argues this conflation is 'operationally consequential.' Why?",
+    "options": [
+      "Conflating the two causes teams to over-invest in monitoring tooling while under-investing in the runtime interception layer that actually stops harmful outputs.",
+      "If teams confuse guardrails with tests or metrics, systems look governed but lack actual runtime interception \u2014 the thing that stops",
+      "The conflation makes regulatory reporting more difficult because examiners expect separate line items for monitoring and interception in the model risk inventory.",
+      "Teams that conflate the terms apply guardrails to the wrong risk tier, concentrating controls on low-risk use cases while leaving high-risk deployments exposed."
+    ],
+    "correct": 1,
+    "explanation": "The post's central definitional point: a guardrail is a runtime intervention mechanism that intercepts, evaluates, and passes or blocks model behavior while it's happening. Tests verify correctness in development. Metrics quantify aggregate performance for retraining or audit. In a RAG-based system, a metric tells you hallucination risk is elevated in 3% of responses; a guardrail is what actually stops that 3% from going out. Conflating them produces systems that are beautifully instrumented (metrics everywhere) but have no actual runtime interception \u2014 the metric describes a problem the guardrail would have prevented."
+  },
+  {
+    "id": "gr-q02",
+    "post": "guardrails",
+    "module": "human-in-the-loop",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "The post provides a taxonomy of guardrail types: input, output, tool, and structural. Which type is described as 'often undercounted'?",
+    "options": [
+      "Input guardrails, because prompt injection attack patterns are not yet well documented in standard banking threat libraries used for control design.",
+      "Structural guardrails \u2014 schema validation, format enforcement \u2014 are undercounted, though in agentic pipelines a malformed JSON is a production incident.",
+      "Tool guardrails, because tool permissions are typically managed by a separate infrastructure team that does not coordinate with the model risk inventory.",
+      "Output guardrails, because toxicity classifiers are computationally expensive at scale and teams routinely deprioritize them in latency-sensitive customer-facing deployments."
+    ],
+    "correct": 1,
+    "explanation": "The post flags this explicitly: 'The structural category tends to be undercounted. In financial workflows where an agent's output is consumed directly by downstream automated systems \u2014 payment gateways, credit scoring engines \u2014 a malformed JSON object isn't an edge case, it's a production incident.' Structural guardrails (schema validation, type checking, data integrity checks) are often treated as engineering hygiene rather than risk controls, even though they are the primary defense against agent outputs corrupting downstream systems that implicitly trust the format. In agentic pipelines where one agent's output is another's input, structural guardrails protect the entire chain."
+  },
+  {
+    "id": "gr-q03",
+    "post": "guardrails",
+    "module": "human-in-the-loop",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The post describes a 'cascade' design for real-time guardrail deployment: fast internal probe first, expensive classifier only when ambiguous. Why is this architecture necessary rather than simply using the most accurate classifier?",
+    "options": [
+      "Accurate classifiers are not yet commercially available for financial services use cases and will not reach sufficient maturity for several more years.",
+      "Sub-500ms latency budgets can't absorb a strong reasoning model as a real-time monitor \u2014 the cascade reserves the expensive path",
+      "Strong classifiers generate higher false-positive rates than fast deterministic probes, so routing all traffic through them increases unnecessary production blocks.",
+      "Regulatory requirements explicitly limit security check latency to under 50ms, a standard that strong classifiers cannot consistently meet at production throughput."
+    ],
+    "correct": 1,
+    "explanation": "The post's latency table makes this concrete: deterministic (regex/rules) is <5ms at near-zero cost; classifier-based (small model) is 50-150ms at low cost; reasoning-based (flash LLM) is 200-500ms at moderate cost; reasoning-based (strong LLM) is 1-3s at high cost. For a customer-facing chatbot with a 500ms budget, a strong reasoning model as real-time guardrail consumes the entire latency allowance before the actual response is generated. The cascade solves this: trivial violations (explicit slurs, known injection patterns) go through the fast path; only ambiguous cases escalate to the expensive classifier."
+  },
+  {
+    "id": "gr-q04",
+    "post": "guardrails",
+    "module": "human-in-the-loop",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "The post states that SR 11-7 and subsequent regulatory guidance 'have nothing specific to say about behavioral guardrails.' What is the governance gap this creates for banks?",
+    "options": [
+      "Banks are completely exempt from supervisory oversight of behavioral controls, creating a regulatory arbitrage opportunity relative to non-bank AI deployers.",
+      "Behavioral controls don't map onto existing validation frameworks, and regulators haven't specified the required standard for these controls.",
+      "Behavioral guardrails fall under cybersecurity frameworks rather than model risk management, creating a dual-reporting obligation most banks have not yet reconciled.",
+      "SR 26-2 has closed this gap with new GenAI behavioral testing provisions, but implementation guidance is still pending from the prudential supervisors."
+    ],
+    "correct": 1,
+    "explanation": "The post is precise: 'SR 11-7 and the regulatory guidance that's followed it have nothing specific to say about behavioral guardrails. Structural and output controls map reasonably well onto existing validation frameworks. Behavioral controls don't, and regulators haven't said what they expect.' SR 26-2 explicitly excludes GenAI and agentic AI from scope entirely, making the gap larger, not smaller. Banks implementing prompt injection classifiers, jailbreak detection, and goal hijacking controls are making their own determinations about validation standards for controls that regulators have never specified."
+  },
+  {
+    "id": "gr-q05",
+    "post": "guardrails",
+    "module": "human-in-the-loop",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The post identifies memory poisoning as a frontier problem in guardrail design. What is the specific property that makes it categorically different from standard prompt injection?",
+    "options": [
+      "Memory poisoning requires significantly more technical sophistication to execute, limiting it to well-resourced adversaries rather than opportunistic attackers with standard toolkits.",
+      "Standard injection is session-scoped; memory poisoning embeds hostile directives in persistent long-term memory, reactivating across future sessions until explicitly removed.",
+      "Memory poisoning exclusively affects enterprise-grade deployments with dedicated persistent storage infrastructure; stateless consumer-facing deployments are structurally immune to this attack class.",
+      "Memory poisoning bypasses safety training in ways session-scoped injection cannot, because stored directives appear as facts rather than instructions the safety layer recognizes."
+    ],
+    "correct": 1,
+    "explanation": "The post identifies this structural property: 'a compromised low-privilege summarization agent becomes a potential vector for cross-agent injection targeting a high-privilege transaction agent.' The key distinction is persistence: a malicious instruction embedded in a document the agent retrieves, stores in its memory bank, and later acts on persists across sessions. Future interactions where the agent retrieves that memory will be affected by the poison until someone audits the memory contents and removes it. This is why the post says 'the same context engineering infrastructure that underpins multi-session continuity creates a durable attack surface.'"
+  },
+  {
+    "id": "gr-q06",
+    "post": "guardrails",
+    "module": "human-in-the-loop",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "The post warns: 'The failure mode isn't that the model breaks the rules. It's that the rules are written to prove compliance, not to produce safety.' What distinguishes rules that produce compliance theater from rules that produce safety?",
+    "options": [
+      "Rules that produce safety are always written by external compliance consultants with cross-industry adversarial experience rather than by internal teams close to the deployment.",
+      "Safety rules are calibrated to actual failure modes and real attack paths; compliance theater rules are generic and written to satisfy auditors.",
+      "Rules that produce safety are always more restrictive than compliance rules, blocking a larger fraction of model outputs to achieve broader harm coverage.",
+      "Compliance theater only emerges in poorly aligned models; well-aligned foundation models handle safety generically without needing operationally specific behavioral rules."
+    ],
+    "correct": 1,
+    "explanation": "The post's closing argument frames the distinction as the harder problem: who owns the attack surface when behavioral guardrails don't cleanly belong to security or model risk. Compliance theater emerges when guardrails are designed to satisfy an auditor's checklist rather than to intercept the specific failure modes the deployment faces. 'Has an output guardrail' is different from 'has an output guardrail validated to catch the specific categories of harmful output this use case can generate.' The latter requires knowing what harmful output this deployment can produce \u2014 which requires the adversarial testing program the companion posts describe."
+  },
+  {
+    "id": "gr-q07",
+    "post": "guardrails",
+    "module": "human-in-the-loop",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A bank's credit underwriting agent generates adverse action letter drafts that a human loan officer reviews before sending. The guardrail taxonomy would classify this as 'HITL required' at the High tier. What guardrail problem does the post flag with the HITL column's Yes/No answer?",
+    "options": [
+      "The HITL column should specify whether the reviewer can modify the draft or only approve or reject it, because modification authority changes the risk profile.",
+      "A Yes/No HITL field doesn't reveal whether the loop is effective \u2014 what information the reviewer has, what authority, whether they can intervene.",
+      "High-tier applications should require multi-person approval rather than a single reviewer, and the binary Yes/No field cannot capture this distinction.",
+      "HITL requirements become unnecessary once output guardrail accuracy is sufficiently high, so the column should track guardrail precision rather than human presence."
+    ],
+    "correct": 1,
+    "explanation": "The post refers to its companion post (hitl-design) for exactly this problem: 'the HITL column deserves more scrutiny than a Yes/No answer implies.' Knight Capital had runtime HITL in form \u2014 monitoring tools and alert pipelines. What it lacked was deploy-time validation that those mechanisms would function under production conditions. The same risk applies to adverse action review: a human officer who receives 400 drafts per shift may be exhibiting the disuse failure mode \u2014 rote approval \u2014 long before anything goes wrong. The checklist says HITL: Yes. The effective challenge question is whether that HITL is substantive."
+  },
+  {
+    "id": "gr-q08",
+    "post": "guardrails",
+    "module": "human-in-the-loop",
+    "objective": "misconception",
+    "difficulty": 2,
+    "question": "The post's non-determinism section argues for layering deterministic guards as the 'final outer boundary' with probabilistic classifiers in the middle. What is the most common misconception about this layering strategy?",
+    "options": [
+      "Practitioners assume deterministic guards are more expensive to operate than probabilistic classifiers when the operational cost relationship is actually the reverse at scale.",
+      "Stronger probabilistic classifiers can't substitute for deterministic guards on hard limits \u2014 99.5% accuracy still fails non-deterministically at banking scale.",
+      "Probabilistic classifiers should always be placed before deterministic guards in the pipeline sequence so that the cheaper probabilistic check fires first.",
+      "Layering is only necessary for Tier 1 customer-facing applications; internal-only deployments can safely rely on a single probabilistic classifier for all cases."
+    ],
+    "correct": 1,
+    "explanation": "The post makes this distinction structural: 'A deterministic validation layer executes after the LLM proposes an action and has no flexibility. Either the data passes the check or the transaction stops. That boundary is non-negotiable for anything touching execution.' A probabilistic classifier at 99.5% accuracy generates ~1 error per 200 transactions \u2014 at banking scale, this is not an acceptable control for hard operational limits. Deterministic guards (schema validation, amount thresholds, recipient allowlists) are the appropriate control type for hard limits precisely because they fail predictably rather than probabilistically. Probabilistic classifiers belong in the middle of the stack, where some rate of incorrect decisions is acceptable."
+  },
+  {
+    "id": "gr-q09",
+    "post": "guardrails",
+    "module": "human-in-the-loop",
+    "objective": "boundary",
+    "difficulty": 3,
+    "question": "The post asks whether guardrails are 'a technical problem with governance implications or a governance problem that requires technical implementation.' Why does this framing question matter for institutional ownership?",
+    "options": [
+      "The framing determines whether the legal team or the engineering team holds final sign-off authority over guardrail design before production deployment.",
+      "Who owns guardrail design determines whether it gets adversarial ML competence from security or validation frameworks from model risk",
+      "The framing only matters for Tier 1 customer-facing deployments; internal-only applications can assign ownership to whichever team manages model infrastructure.",
+      "The framing determines the budget source: technical problems draw from IT capital, governance from compliance operating expense, creating a structural funding gap."
+    ],
+    "correct": 1,
+    "explanation": "The post closes with this observation explicitly: 'Across most institutions, neither team has claimed it \u2014 and so far, that's been fine. That won't stay true.' The governance implication is real: security teams know adversarial attack surfaces but don't know what SR 11-7's validation pillars require. Model risk teams know validation frameworks but may lack adversarial ML competence. A guardrail that neither team owns produces compliance theater from the risk side and incomplete coverage from the security side. The ownership question determines whose expertise gets applied and whose competency gap becomes the control's weakness."
+  },
+  {
+    "id": "gr-q10",
+    "post": "guardrails",
+    "module": "human-in-the-loop",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The guardrail, adversarial testing, and effective challenge posts all converge on the same structural argument about governance in banking AI. What is it?",
+    "options": [
+      "Banks should implement all available controls simultaneously rather than prioritizing by tier, because any untested combination creates unquantifiable residual exposure.",
+      "Controls that look like governance fail to reduce risk when they lack competence, structural independence, and authority to block deployment.",
+      "Technology teams should lead AI governance because they have the most relevant domain expertise; compliance and model risk should be in a supporting role.",
+      "Regulatory frameworks must be substantially updated before banks can implement effective AI governance, because current guidance lacks the specificity to design meaningful controls."
+    ],
+    "correct": 1,
+    "explanation": "The convergent argument across all three posts maps directly to SR 11-7's effective challenge triad. Guardrails: the control that looks governed ('guardrail: present') may not actually intercept the failure mode it was designed for. Adversarial testing: the engagement that looks like red-teaming (five-phase workflow, OWASP cross-reference) may be documentation of a control rather than the control. Effective challenge: the validation process that generates a risk report may satisfy procedural obligations without the competence to challenge what it's reviewing. In each case, the form is present and the substance is what determines whether risk is actually managed."
+  }
+]

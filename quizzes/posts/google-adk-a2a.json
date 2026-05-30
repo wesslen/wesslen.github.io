@@ -1,0 +1,162 @@
+[
+  {
+    "id": "gaa-q01",
+    "post": "google-adk-a2a",
+    "module": "multi-agent",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "What is the intended design relationship between ADK, MCP, and A2A according to Google's own framing?",
+    "options": [
+      "ADK replaces MCP; A2A is an optional extension available only for large enterprise deployments.",
+      "Build with ADK, equip with MCP, communicate with A2A \u2014 ADK is the construction",
+      "A2A handles all inter-service communication; ADK and MCP are reserved for internal agent logic only.",
+      "MCP is the primary protocol; ADK and A2A are Google-specific implementations of established MCP patterns."
+    ],
+    "correct": 1,
+    "explanation": "Google's stated design philosophy divides responsibilities cleanly: ADK provides the construction framework (agent types, event loop, session management), MCP handles vertical integration (connecting agents to databases, APIs, file systems), and A2A handles horizontal integration (connecting agents to other agents across frameworks and organizations). The protocols compose rather than compete: a LoanProcessor agent uses MCP to call a credit-check API, then uses A2A to delegate to a DisbursementAgent operated by a different team."
+  },
+  {
+    "id": "gaa-q02",
+    "post": "google-adk-a2a",
+    "module": "multi-agent",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "In ADK's cooperative event loop, state changes are 'only guaranteed persisted after the carrying event has been yielded and processed by the Runner.' What subtle bug does this prevent?",
+    "options": [
+      "It prevents agents from overwriting each other's state during simultaneous parallel execution across concurrent sessions.",
+      "An agent reading state it just wrote before yielding reads an uncommitted value",
+      "It prevents the agent from accumulating too many uncommitted state changes before flushing them to storage.",
+      "It ensures state changes are encrypted before being stored durably by the SessionService at rest."
+    ],
+    "correct": 1,
+    "explanation": "The cooperative event loop's critical property is ordering: state changes are carried as deltas on events and only committed when the Runner processes the yield. An agent that writes to `session.state['result']` and then reads `session.state['result']` in the next line \u2014 before yielding \u2014 reads an uncommitted value. The framework guarantees that when an agent resumes after yielding, the state it just wrote is durably committed. This is why 'cooperative' matters: the voluntary yield point is the commit boundary."
+  },
+  {
+    "id": "gaa-q03",
+    "post": "google-adk-a2a",
+    "module": "multi-agent",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "What is an Agent Card in the A2A protocol?",
+    "options": [
+      "A business card-style UI component showing an agent's current operational status on a monitoring dashboard.",
+      "A JSON document at `/.well-known/agent-card.json` declaring an agent's capabilities, endpoint URL, authentication requirements, and supported",
+      "A cryptographic certificate that proves an agent's claimed identity to a remote server before session establishment.",
+      "A configuration file specifying which ADK agent types a remote system supports for compatibility matching."
+    ],
+    "correct": 1,
+    "explanation": "Agent Cards are the discovery mechanism for A2A. Every A2A agent publishes one at a well-known URI, declaring everything a client agent needs to know: what it can do (skills), how to reach it (endpoint URL), how to authenticate, what modalities it supports, and whether it handles streaming or push notifications. Cards can be cryptographically signed via JWS so clients can verify they haven't been tampered with. This programmatic discovery is what makes A2A agents self-integrating \u2014 no human-mediated setup required."
+  },
+  {
+    "id": "gaa-q04",
+    "post": "google-adk-a2a",
+    "module": "multi-agent",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "ADK's state scoping uses key prefixes (no prefix, `app:`, `user:`, `temp:`). How does the `app:` prefix support policy enforcement in financial applications?",
+    "options": [
+      "`app:` state is read-only at runtime for sessions but writable at configuration time \u2014 policy parameters",
+      "`app:` state persists indefinitely and is the only state type that survives a complete agent shutdown and restart.",
+      "`app:` state is encrypted at rest using platform-managed keys, making it suitable for sensitive financial data.",
+      "`app:` state is automatically backed up to a durable database, ensuring reliable recovery across unexpected crashes."
+    ],
+    "correct": 0,
+    "explanation": "The `app:` prefix creates a write-restricted state scope: it can be read by any session, but individual sessions cannot override it \u2014 writes are restricted to higher-privilege configuration operations. For financial applications, this means policy parameters like maximum transaction amounts or permitted product categories can be set at configuration time and read-only at runtime. A session can read `app:max_credit_limit` but cannot write to it. However, the post notes a key limit: an agent can still read `app:` values and pass them to tools or sub-agents in unexpected ways, so defense-in-depth still matters."
+  },
+  {
+    "id": "gaa-q05",
+    "post": "google-adk-a2a",
+    "module": "multi-agent",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "A2A and MCP are sometimes described as competing. What is the most accurate characterization of their relationship?",
+    "options": [
+      "A2A and MCP are competing standards; organizations building multi-agent systems must choose one and standardize.",
+      "A2A handles vertical agent-to-tool integration; MCP handles horizontal peer-to-peer communication between agents.",
+      "A2A handles horizontal peer-to-peer agent communication; MCP handles vertical agent-to-tool access. The two compose",
+      "MCP is the open standard; A2A is Google's proprietary alternative designed to lock in Google Cloud customers."
+    ],
+    "correct": 2,
+    "explanation": "The distinction is the unit of work and relationship type. MCP handles tool invocation \u2014 an agent connecting to a database, API, or file system to retrieve or manipulate data. A2A handles peer collaboration \u2014 agents from different frameworks, organizations, or codebases coordinating on tasks with full state management. A LoanProcessor agent uses MCP to query a credit-check API (vertical: agent to tool) and uses A2A to delegate disbursement to a DisbursementAgent operated by treasury (horizontal: agent to peer agent)."
+  },
+  {
+    "id": "gaa-q06",
+    "post": "google-adk-a2a",
+    "module": "multi-agent",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "The A2A protocol's `input-required` task state is described as 'one of the more thoughtful design choices.' What problem does it solve that a simpler request/response model cannot handle cleanly?",
+    "options": [
+      "It allows the server agent to pause internally and run additional validation checks before sending a response.",
+      "It handles interactive multi-turn tasks within the same task context \u2014 the task pauses legitimately for clarification",
+      "It enables the client agent to modify its original request after the remote agent has already started processing.",
+      "It triggers automatic human-in-the-loop review when agent confidence drops below a configurable threshold."
+    ],
+    "correct": 1,
+    "explanation": "Many real-world agent tasks are interactive: the agent needs clarification mid-execution that wasn't known at request time. A simple request/response model would require starting a new request with all context re-specified. A2A's `input-required` state handles this within the existing task context: the task transitions to `input-required`, the client responds with additional input, and the task resumes in `working` state \u2014 preserving the full history and context of the interaction. This is why the A2A task state machine includes `input-required` and `auth-required` as explicit legitimate states rather than error conditions."
+  },
+  {
+    "id": "gaa-q07",
+    "post": "google-adk-a2a",
+    "module": "multi-agent",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "ADK's `before_model_callback` can intercept and short-circuit LLM calls entirely by returning a value rather than None. What is the primary efficiency advantage of this placement for guardrail checks?",
+    "options": [
+      "It runs in parallel with the LLM call, reducing total latency without blocking the model's processing pipeline.",
+      "Intercepting before the LLM call avoids the full token cost and latency",
+      "It allows the guardrail to inspect and modify the model's generated response after it has been fully produced.",
+      "It provides access to the model's internal reasoning chain before the final response token is generated."
+    ],
+    "correct": 1,
+    "explanation": "Placing guardrail checks in `before_model_callback` is the most efficient position in the pipeline. The callback receives the complete `LlmRequest` \u2014 the full prompt including tool definitions \u2014 before any API call is made. If the input fails a safety check, returning a hardcoded `LlmResponse` short-circuits the entire API call. You avoid the token cost, the latency, and the API rate limit consumption of processing a request that would have been refused or rejected post-hoc. Contrast with `after_model_callback`, which catches safety issues but has already spent the token budget."
+  },
+  {
+    "id": "gaa-q08",
+    "post": "google-adk-a2a",
+    "module": "multi-agent",
+    "objective": "transfer",
+    "difficulty": 3,
+    "question": "A bank deploys an ADK-based multi-agent system for loan processing. A developer proposes using Google Search as a built-in tool alongside custom credit verification tools in a single LlmAgent. What constraint does the post identify, and what is the correct pattern?",
+    "options": [
+      "Google Search is not permitted in regulated financial applications under SR 26-2 model governance guidance.",
+      "Built-in tools like Google Search generally cannot be mixed with custom tools in the same agent",
+      "Custom tools must be registered with Google Cloud before they can be mixed with any built-in tool.",
+      "There is no constraint \u2014 built-in and custom tools can be freely mixed in any LlmAgent configuration."
+    ],
+    "correct": 1,
+    "explanation": "The post notes this as a real constraint: 'Built-in tools work at the Gemini API level and generally can't be mixed with other tools in the same agent.' The workaround is wrapping the built-in tool in a dedicated sub-agent and using that sub-agent as an `AgentTool` from the parent. It adds an extra orchestration layer, but it keeps the tool call graphs clean and the agent architectures composable. This is a practical consideration for multi-agent systems that need both external data (Google Search, Vertex AI Search) and custom business logic."
+  },
+  {
+    "id": "gaa-q09",
+    "post": "google-adk-a2a",
+    "module": "multi-agent",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "The post concludes that A2A 'tells you who you're talking to; it doesn't tell you whether the remote agent will behave safely under adversarial inputs.' What is the significance of this limitation for regulated deployments?",
+    "options": [
+      "It means A2A should not be used in any production deployment until the protocol adds behavioral safety verification.",
+      "Authentication and behavioral safety are orthogonal \u2014 A2A proves identity, but whether a remote agent handles adversarial",
+      "The limitation only applies to agents operated by third parties; internally operated agents are not affected.",
+      "This limitation was resolved in A2A v1.0 through behavioral attestation fields added to the Agent Card specification."
+    ],
+    "correct": 1,
+    "explanation": "The post's closing observation is the most important for regulated deployment: A2A's security model handles transport-layer authentication well (Agent Cards, bearer tokens, mutual TLS). What it doesn't specify is application-layer trust: whether the remote agent will behave predictably under adversarial inputs, whether it will honor the semantics its Agent Card claims, or what happens when a chain of delegated tasks fails midway with no circuit breaker. For a regulated institution that needs to understand the failure modes of every component in a processing pipeline, these are the properties that determine whether a multi-agent system is safe to deploy \u2014 and A2A is currently silent on them."
+  },
+  {
+    "id": "gaa-q10",
+    "post": "google-adk-a2a",
+    "module": "multi-agent",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "ADK's `LlmAgent.output_key` parameter writes an agent's response to `session.state[output_key]`. How does this enable data flow in a multi-agent pipeline without explicit message passing?",
+    "options": [
+      "output_key creates a direct named communication channel between two specific agents in the processing pipeline.",
+      "Downstream agents reference upstream output by embedding `{output_key}` in their instructions",
+      "output_key causes the agent to return its response to the parent orchestrator for explicit downstream routing.",
+      "output_key stores results in a shared database that all agents in the pipeline query independently at runtime."
+    ],
+    "correct": 1,
+    "explanation": "The `output_key` parameter is ADK's mechanism for implicit data flow. An upstream agent's final response text is automatically written to `session.state[output_key]`. A downstream agent references it with `{output_key}` in its instructions \u2014 ADK templates in the value at prompt construction time. This enables pipeline composition through shared state: a `SequentialAgent` can chain a research agent into a synthesis agent into a formatting agent, each reading the previous agent's output from session state without any explicit message-passing code. The state scratchpad is the shared working memory; `output_key` is how agents write named slots into it."
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "id": "human-in-the-loop",
+  "title": "Human and the Loop",
+  "posts": ["guardrails", "hitl-vocabulary", "hitl-design"],
+  "titles": {
+    "guardrails": "What 'Guardrail' Means",
+    "hitl-vocabulary": "A Borrowed Term",
+    "hitl-design": "Where to Put the Human"
+  },
+  "n": 10
+}

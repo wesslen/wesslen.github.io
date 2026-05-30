@@ -7,8 +7,8 @@
     "question": "OCC Bulletin 2000-16 required validation personnel to be 'as independent as possible.' What specific gap did SR 11-7's effective challenge concept fill?",
     "options": [
       "It introduced mandatory annual validation cycles for all models",
-      "It identified the specific ways structural independence can fail: perverse incentives, inadequate competence, and absent influence",
-      "It required banks to create formal model inventories for the first time",
+      "It named the specific ways structural independence can fail: perverse incentives, inadequate competence, absent influence",
+      "It required banks to create formal model inventories for the first time across all model types",
       "It mandated board-level Model Risk Committees at every large institution"
     ],
     "correct": 1,
@@ -23,7 +23,7 @@
     "question": "SR 11-7 defines a model as a system that produces 'quantitative estimates.' Which of the following best captures the governance challenge this definition creates for LLMs in banking?",
     "options": [
       "LLMs are too computationally expensive for most banks to validate under existing budgets",
-      "LLMs that generate text rather than point estimates may fall outside the definition entirely, creating a governance gap",
+      "LLMs that generate text rather than point estimates may fall outside the definition",
       "LLMs can be validated using the same backtesting methods as traditional regression models",
       "The 'quantitative estimates' definition was clarified by SR 26-2 to explicitly include LLM outputs"
     ],
@@ -40,7 +40,7 @@
     "options": [
       "It repealed SR 11-7 entirely, adopting BPI's position on deregulation",
       "It updated SR 11-7's model definition to explicitly cover LLMs and agentic AI",
-      "It superseded SR 11-7 with joint tri-agency guidance that explicitly excluded GenAI and agentic AI from scope",
+      "It superseded SR 11-7 with joint tri-agency guidance that explicitly excluded GenAI and",
       "It endorsed a principles-based approach that delegated all AI governance decisions to individual banks"
     ],
     "correct": 2,
@@ -55,7 +55,7 @@
     "question": "The London Whale trading loss ($6.2B) is described as 'an influence failure with a technical veneer.' What does that characterization mean?",
     "options": [
       "The traders used models so complex that even quantitative experts couldn't understand them",
-      "Risk managers had concerns about the model but lacked the organizational standing to force change, even though structural separation existed",
+      "Risk managers had concerns about the model but lacked the organizational standing to force",
       "The model's Excel errors were the root cause, which no oversight process could have caught",
       "The loss was primarily a competence failure \u2014 validators didn't understand the VaR methodology"
     ],
@@ -87,7 +87,7 @@
     "question": "Which of the following best represents the strongest version of the argument for SR 11-7 repeal, as the post presents it?",
     "options": [
       "MRM compliance costs are prohibitive for community banks",
-      "The framework has become a process-driven bureaucracy that delays AI adoption by months without commensurate risk reduction, while applying identical standards to both high-risk capital models and low-risk operational tools",
+      "The framework has become a process-driven bureaucracy that delays AI adoption by months without",
       "Effective challenge is no longer relevant once AI systems are more accurate than human analysts",
       "Banks should be free to design their own risk management frameworks without regulatory prescription"
     ],
@@ -103,7 +103,7 @@
     "question": "A bank deploys a vendor-provided fraud detection tool accessed entirely through a third-party API. Under SR 11-7 as written in 2011, what is the bank's MRM obligation?",
     "options": [
       "Exclude it from the model inventory since the vendor, not the bank, developed it",
-      "Apply the same MRM standards as to in-house models, even though it cannot inspect the underlying methodology",
+      "Apply the same MRM standards as to in-house models, even though it cannot",
       "Validate only the bank's configuration layer, treating the vendor model as out of scope",
       "Exempt it as commercial software under the standard 'tools' carve-out"
     ],
@@ -119,7 +119,7 @@
     "question": "FINMA stated that 'some AI model results cannot be understood, explained or reproduced and therefore cannot be critically assessed.' Which leg of the effective challenge triad does this describe \u2014 and why is it different from a conventional version of that failure?",
     "options": [
       "An incentives failure, because validators lack the compensation to attract staff who understand foundation models",
-      "A competence failure, but one that is structural and epistemic rather than a skills gap that hiring could fix",
+      "A competence failure, but one that is structural and epistemic rather than a skills",
       "An influence failure, because regulators have not granted validators authority over vendor-controlled models",
       "A governance failure, because bank boards have not committed adequate resources to model risk"
     ],
@@ -135,7 +135,7 @@
     "question": "SR 26-2 is 'primarily scoped to banking organizations with more than $30 billion in total assets.' What is the most accurate statement about what this means for community banks?",
     "options": [
       "Community banks are fully exempt from all model risk management requirements under the new guidance",
-      "Community banks face lighter formal regulatory pressure but inherit the same conceptual governance vacuum for GenAI",
+      "Community banks face lighter formal regulatory pressure but inherit the same conceptual governance vacuum",
       "Community banks must comply with SR 26-2 under examination standards even though not explicitly in scope",
       "Community banks were addressed separately in companion guidance issued simultaneously with SR 26-2"
     ],
@@ -151,7 +151,7 @@
     "question": "The post argues that GenAI amplifies \u2014 rather than eliminates \u2014 the need for effective challenge. Which answer best explains the mechanism of that argument?",
     "options": [
       "GenAI models are more expensive to validate, requiring larger and better-compensated MRM teams",
-      "The three failure modes effective challenge was designed to prevent \u2014 perverse incentives, inadequate competence, absent influence \u2014 are precisely the failure modes GenAI sharpens",
+      "The three failure modes effective challenge was designed to prevent \u2014 perverse incentives, inadequate competence",
       "GenAI models are more interpretable than statistical models, so effective challenge requires less effort but more frequency",
       "SR 26-2's exclusion of GenAI makes effective challenge legally inapplicable to these systems"
     ],

@@ -1,0 +1,162 @@
+[
+  {
+    "id": "bu-q01",
+    "post": "benchmark-uncertainty",
+    "module": "evaluations",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "NIST AI 800-3 formalizes two distinct accuracy notions that most benchmark reporting conflates. What is the key difference between 'benchmark accuracy' and 'generalized accuracy'?",
+    "options": [
+      "Benchmark accuracy uses automated judges while generalized accuracy requires human raters to validate each model output, making the two estimands subject to different sources of measurement error",
+      "Benchmark accuracy is performance on the specific items drawn. Generalized accuracy estimates performance on the full superpopulation those items represent \u2014 what actually matters for deployment decisions",
+      "Benchmark accuracy is reported internally by model vendors while generalized accuracy is independently computed by neutral third parties to remove conflicts of interest from published leaderboard performance results",
+      "Benchmark accuracy applies to single-trial runs while generalized accuracy requires multiple independent trials per item to average out the non-deterministic variance that LLM temperature sampling introduces across replications"
+    ],
+    "correct": 1,
+    "explanation": "The biology exam analogy from the paper is precise: benchmark accuracy is your average score on this exam given infinite reattempts; generalized accuracy is your average score on all biology questions that could have been on the exam given infinite reattempts. For deployment decisions, you care about generalized accuracy \u2014 you're not deploying to answer GPQA-Diamond questions specifically, but to handle the domain those questions represent. The distinction matters because the two estimands have different standard errors, different formulas, and different implications for what the reported number claims about production performance."
+  },
+  {
+    "id": "bu-q02",
+    "post": "benchmark-uncertainty",
+    "module": "evaluations",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The naive standard error formula SE = \u03c3/\u221a(n\u00b7t) is wrong for multi-trial evaluations. In what direction is the error, and why?",
+    "options": [
+      "The formula overestimates uncertainty symmetrically for both benchmark and generalized accuracy \u2014 applying a correction factor based on ICC would bring both estimands into proper calibration simultaneously",
+      "For benchmark accuracy the naive formula is overconfident (CIs too narrow) because it understates within-item variance; for generalized accuracy it is under-confident (CIs too wide) because it misses item-selection variance",
+      "The formula only produces meaningful errors when the trial count exceeds 10 \u2014 for five or fewer trials per item it remains a sufficiently accurate approximation for both benchmark and generalized accuracy estimands",
+      "The formula underestimates uncertainty for both estimands because it systematically ignores the additional variance introduced by LLM temperature sampling across repeated runs on identical evaluation items"
+    ],
+    "correct": 1,
+    "explanation": "The direction of error is opposite for the two estimands, and this is the post's central structural finding. The naive denominator \u221a(n\u00b7t) treats all n\u00d7t observations as independent. For benchmark accuracy: trials on the same item share item difficulty (they're correlated), so the naive formula double-counts item-level variation and produces CIs that are too narrow \u2014 overconfident. For generalized accuracy: the naive formula ignores item-selection variance entirely (the uncertainty from having drawn a finite sample from a larger domain), producing CIs that are too wide \u2014 underconfident. Both errors stem from the same source: ignoring the clustered structure of multi-trial data."
+  },
+  {
+    "id": "bu-q03",
+    "post": "benchmark-uncertainty",
+    "module": "evaluations",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "What is the practical implication of the GLMM's partial pooling mechanism for benchmark evaluation?",
+    "options": [
+      "Partial pooling reduces the minimum number of evaluation items needed for a valid capability estimate \u2014 teams can use shorter benchmarks and still produce statistically defensible results for model risk reports",
+      "Each model's capability estimate borrows information from how all other models performed on the same items \u2014 consistently hard items are identified and adjusted for across all models simultaneously",
+      "Partial pooling combines results from multiple evaluation runs at different points in time into a single harmonized accuracy estimate, correcting for model drift between the runs being averaged together",
+      "Partial pooling allows multiple models to share GPU computation resources during evaluation, reducing the per-model evaluation cost in large comparative studies with many candidate systems"
+    ],
+    "correct": 1,
+    "explanation": "Partial pooling is the mechanism that makes the GLMM more efficient than the naive formula. Each model's capability estimate (\u03b8\u1d62) is fit jointly with all other models' estimates and all item difficulty estimates (\u03b4\u2c7c). If GPQA-Diamond's Chemistry items are consistently hard across all 22 tested models, the GLMM infers a large positive \u03b4\u2c7c for Chemistry items and adjusts every model's \u03b8\u1d62 accordingly. A model at 70% on an unusually hard item set is treated differently from one at 70% on easy items. The naive average treats both identically. The result: GLMM CIs are narrower than regression-free CIs on the same data, without sacrificing coverage accuracy, because the shared difficulty structure is explicitly modeled."
+  },
+  {
+    "id": "bu-q04",
+    "post": "benchmark-uncertainty",
+    "module": "evaluations",
+    "objective": "mechanism",
+    "difficulty": 3,
+    "question": "NIST's BIG-Bench Hard analysis found one 'Date Understanding' item with estimated difficulty \u03b4\u0302 = 7.58, meaning every tested model answered it incorrectly. What does the GLMM reveal that a simple accuracy table would not?",
+    "options": [
+      "The item should be removed from the benchmark \u2014 its extreme difficulty makes it statistically uninformative for discriminating among frontier models and it drags down aggregate scores for all tested systems",
+      "An extreme positive random effect flags a potential item quality problem \u2014 inspection revealed two defensible answers, while a simple accuracy table would silently aggregate the 0% into the overall score",
+      "The item should receive higher weight in scoring because extreme difficulty provides maximum discrimination between models with genuinely different capability levels across the tested benchmark domain",
+      "The extreme \u03b4\u0302 simply confirms that frontier models share a genuine common blind spot on date arithmetic \u2014 it is a valid hard item that accurately reflects a consistent cross-model capability limitation"
+    ],
+    "correct": 1,
+    "explanation": "The post describes the specific ambiguous item: 'Jane booked a flight for tomorrow, July 29, 2002. What is the date 24 hours later?' with both 07/29/2002 and 07/30/2002 as defensible answers. The answer key lists one; all tested models chose the other. \u03b4\u0302 = 7.58 is the GLMM's signal that something structurally unusual is happening with this item \u2014 either genuine universal model blind spot or item defect. The GLMM makes item-level diagnostics possible; a simple accuracy table aggregates the 0% score into the overall estimate without flagging it. Post-hoc item audits based on extreme random effect estimates can identify problematic items before they propagate into training or published conclusions."
+  },
+  {
+    "id": "bu-q05",
+    "post": "benchmark-uncertainty",
+    "module": "evaluations",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A model risk report states: 'The model achieved 75.3% accuracy on GPQA-Diamond (n=198, t=8), SE = \u00b11.2%, calculated as standard deviation divided by square root of sample size.' Based on NIST AI 800-3, what is the specific methodological error?",
+    "options": [
+      "The sample of 198 items is insufficient to produce a valid confidence interval for model risk documentation \u2014 NIST AI 800-3 recommends a minimum of 500 items for benchmark evaluations used in regulatory submissions",
+      "The formula SE = \u03c3/\u221a(n\u00b7t) treats 8 correlated trials per item as independent observations \u2014 NIST 800-3 shows this produces miscalibrated CIs; the correct formula depends on which estimand is being reported",
+      "GPQA-Diamond is not an appropriate benchmark for credit decisioning AI \u2014 NIST 800-3 requires benchmarks that directly measure the deployment construct rather than correlated general reasoning capabilities",
+      "Eight trials per item is below NIST's minimum recommendation of ten trials for multi-trial evaluations used in high-stakes model risk reports submitted to federal banking examiners"
+    ],
+    "correct": 1,
+    "explanation": "The formula SE = \u03c3/\u221a(n\u00b7t) with n\u00b7t = 1,584 is exactly the naive formula NIST 800-3 demonstrates is wrong. It treats 8 trials on the same item as 8 independent observations from different items. For benchmark accuracy, the correct formula uses within-item binomial variance: SE_BA = \u221a\u03a3[z\u0304\u1d62\u2c7c(1-z\u0304\u1d62\u2c7c)/(n\u00b2(t-1))]. For generalized accuracy, the correct formula uses across-item variance: SE_GA = std(z\u0304\u1d62\u00b7)/\u221an. After NIST 800-3, reporting the naive formula is a documented methodological choice, not an oversight \u2014 it should be justified or corrected."
+  },
+  {
+    "id": "bu-q06",
+    "post": "benchmark-uncertainty",
+    "module": "evaluations",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "The NIST GPQA-Diamond analysis found that Chemistry items have a mean random effect of +0.59 vs. Physics at \u22120.55. This holds across all 22 tested models. What does this reveal that aggregate accuracy scores cannot?",
+    "options": [
+      "Frontier models as a class are better at physics reasoning than chemistry reasoning \u2014 a finding that should directly inform which subject domains practitioners use when constructing new evaluation benchmarks",
+      "Structural domain difficulty \u2014 Chemistry consistently harder than Physics across all 22 models \u2014 is a benchmark-level property invisible in aggregate scores but legible once item difficulty is modeled",
+      "Chemistry questions on GPQA-Diamond are more poorly worded and ambiguous than Physics questions \u2014 a quality control finding that should trigger item revision before the benchmark is used in future evaluations",
+      "Models should always be evaluated separately by domain and never given a single aggregate score \u2014 domain-level decomposition is the only evaluation design that provides actionable information for practitioners"
+    ],
+    "correct": 1,
+    "explanation": "The GLMM's domain-level diagnostics reveal that the Chemistry harder-than-Physics finding holds across all 22 tested frontier models, ruling out individual model differences as the explanation. This is a benchmark-level structural property: GPQA-Diamond Chemistry items require a type of reasoning that frontier models as a class find harder than Physics items require. Human-labeled difficulty categories distribute similarly across domains, ruling out annotation imbalance. This finding is invisible in any model's individual 'percent correct on GPQA-Diamond' number \u2014 it only becomes visible when item difficulty variation is explicitly modeled across a diverse pool of models."
+  },
+  {
+    "id": "bu-q07",
+    "post": "benchmark-uncertainty",
+    "module": "evaluations",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "NIST's BIG-Bench Hard Movie Recommendation task has ICC = 0.83 with t=5 trials, yielding EST \u2248 0.23 \u2014 five trials producing ~1.15 effective independent observations. What does this mean for evaluation budget allocation?",
+    "options": [
+      "Movie Recommendation should be removed from BIG-Bench Hard \u2014 an ICC of 0.83 means it provides no discriminating information and wastes evaluation budget that could fund more informative task categories",
+      "Five trials on Movie Recommendation is nearly the same information as one \u2014 the model consistently solves or fails each item, so budget should go to more diverse items instead",
+      "A high ICC of 0.83 confirms Movie Recommendation is the most reliable task in BIG-Bench Hard \u2014 evaluation teams should invest most heavily in tasks with high ICC to maximize measurement consistency",
+      "An ICC above 0.5 signals the task is measuring language fluency rather than task-completion capability \u2014 it should be replaced with tasks that have ICC below 0.3 to ensure genuine capability is being assessed"
+    ],
+    "correct": 1,
+    "explanation": "The Effective Samples per Trial formula \u2014 EST = 1/(1 + (t-1)\u00b7ICC) \u2014 quantifies information gain per additional trial. At ICC = 0.83 and t=5: EST \u2248 0.23. Five trials contribute ~1.15 effective independent observations. The model's performance on Movie Recommendation is highly consistent within items: it either knows them or doesn't, and retrying doesn't add information. The actionable implication: for tasks with high ICC, evaluate budget should prioritize item diversity (different questions) over trial depth (more attempts at the same question). For Web of Lies (ICC = 0.12), additional trials are informative; for Movie Recommendation, they're redundant."
+  },
+  {
+    "id": "bu-q08",
+    "post": "benchmark-uncertainty",
+    "module": "evaluations",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "NIST 800-3's GLMM is the Rasch model with an inverted role assignment: LLMs are fixed effects, items are random effects. What is the significance of this inversion from standard IRT?",
+    "options": [
+      "The inversion makes maximum likelihood estimation computationally tractable on standard hardware without specialized psychometric software \u2014 it is primarily an engineering convenience rather than a conceptual statistical choice",
+      "Standard IRT models examinees as random effects and items as fixed; the inversion is correct for LLM evaluation because we want inference about specific named systems, not a population of test-takers",
+      "The inversion allows the GLMM to be fitted without a reference population of historical test-takers as an anchor \u2014 eliminating the need for norm group data that is unavailable in LLM evaluation contexts",
+      "Standard Rasch is not valid for binary success/failure outcomes \u2014 the role inversion corrects this fundamental statistical limitation and makes the model applicable to the dichotomous item responses LLMs produce"
+    ],
+    "correct": 1,
+    "explanation": "The role inversion is the key adaptation that makes the Rasch model appropriate for LLM evaluation. In educational testing, you want to generalize about a population of examinees (random effects) given a fixed set of carefully constructed items (fixed effects). In LLM evaluation, you want to estimate specific named systems (fixed effects: 'this is GPT-4o, this is Claude Sonnet 4.6') from a sample of items drawn from a domain (random effects: GPQA-Diamond's 198 items are a sample from the domain of hard graduate-level reasoning problems). Getting this right means item difficulty variation correctly enters the model as uncertainty, rather than inflating model capability estimates for systems that happened to see easy item draws."
+  },
+  {
+    "id": "bu-q09",
+    "post": "benchmark-uncertainty",
+    "module": "evaluations",
+    "objective": "misconception",
+    "difficulty": 2,
+    "question": "The post argues that reporting the naive SE formula for LLM evaluation, after NIST AI 800-3, is now 'a documented methodological choice, not an oversight.' Why does this framing change the accountability picture?",
+    "options": [
+      "It means organizations using the naive formula are now in formal violation of binding NIST regulatory requirements \u2014 examiners can cite AI 800-3 as the specific standard the organization failed to meet",
+      "Before 800-3, the naive formula was an accepted convention. After 800-3, choosing it over the documented correct formula is an explicit decision that validators and examiners can now interrogate and challenge",
+      "The framing is legally irrelevant because confidence intervals are not currently required in model risk reports under SR 11-7, SR 26-2, or any other binding federal banking supervisory guidance in force",
+      "It means the naive formula is formally banned from academic publication in peer-reviewed venues \u2014 journals now require authors to demonstrate awareness of NIST 800-3 and justify any deviation from its recommended formulas"
+    ],
+    "correct": 1,
+    "explanation": "The accountability shift is real and practical. Before 800-3, a model risk report with the naive SE formula could be defended as 'this is what everyone uses.' After 800-3 formally documents the correct formulas, publishes the simulation evidence, and specifies which estimand each formula serves, a report using the naive formula is using a formula that the author can now be asked about: 'Are you aware that NIST AI 800-3 demonstrates this formula produces miscalibrated CIs for multi-trial evaluations? Why did you choose to use it?' The standard of care has changed."
+  },
+  {
+    "id": "bu-q10",
+    "post": "benchmark-uncertainty",
+    "module": "evaluations",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The post concludes: 'The leaderboards you're reading almost certainly report the wrong error bar.' Taken with the metrics-metrics-metrics and nist-benchmark-evals posts, what is the cumulative implication for how practitioners should read AI capability comparisons?",
+    "options": [
+      "All published AI benchmark comparisons should be discarded as unreliable \u2014 the measurement infrastructure problems are severe enough that practitioners should commission all evaluations from scratch internally",
+      "Capability comparisons have compounding problems: the benchmark may not measure the intended construct, scores may reflect benchmark-optimized training, CIs use the wrong formula, and the estimand may be wrong for deployment",
+      "Practitioners should rely exclusively on internal evaluations rather than any published benchmark comparisons \u2014 external results cannot be trusted because organizational incentives systematically bias what gets reported",
+      "The only reliable source of AI capability information is direct measurement in live production environments \u2014 pre-deployment evaluation is too artificial to reliably predict real-world system behavior at the granularity practitioners need"
+    ],
+    "correct": 1,
+    "explanation": "The three posts trace compounding measurement problems: metrics-metrics-metrics established that constructs can differ from indicators (a benchmark measuring distribution rather than the underlying capability), nist-benchmark-evals showed that most evaluation protocols miss basic scientific practices, and benchmark-uncertainty shows that the statistical mechanics of the reported numbers are wrong. A leaderboard position implicitly claims: 'this benchmark measures the construct I care about (validity), the protocol was sound (external validity), and the number reported is statistically correct (statistical validity).' All three can be wrong simultaneously. Practitioners should interrogate each claim separately rather than treating a published number as an authoritative capability statement."
+  }
+]

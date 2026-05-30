@@ -1,0 +1,11 @@
+{
+  "id": "gui-agents",
+  "title": "GUI Agents",
+  "posts": ["molmoweb-data-flywheel", "molmoweb-openness-gap", "gui-agents-verifier"],
+  "titles": {
+    "molmoweb-data-flywheel": "Training Data Inversion",
+    "molmoweb-openness-gap": "The Openness Gap",
+    "gui-agents-verifier": "The Verification Gap"
+  },
+  "n": 10
+}

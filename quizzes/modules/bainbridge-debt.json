@@ -1,0 +1,11 @@
+{
+  "id": "bainbridge-debt",
+  "title": "Bainbridge's Debt",
+  "posts": ["bainbridge-ironies", "automation-bias-banking", "hci-translation"],
+  "titles": {
+    "bainbridge-ironies": "Six Pages That Keep Coming True",
+    "automation-bias-banking": "Why 'The Analyst Will Catch It' Fails",
+    "hci-translation": "The Last Mile Nobody Owns"
+  },
+  "n": 10
+}

@@ -7,7 +7,7 @@
     "question": "SR 11-7 replaced the concept of 'independent review' from OCC 2000-16 with 'effective challenge.' What is the critical distinction?",
     "options": [
       "Effective challenge requires annual validation rather than periodic review",
-      "Independent review required only structural separation; effective challenge added that separation without competence and influence produces compliance theater",
+      "Independent review required only structural separation; effective challenge added that separation without competence",
       "Effective challenge applies only to credit models, while independent review covered all quantitative methods",
       "Effective challenge was adopted from UK PRA SS1/23, which predates SR 11-7"
     ],
@@ -23,7 +23,7 @@
     "question": "The post calls the influence leg 'the hardest leg in 2011 and harder now.' Why is influence harder to preserve for foundation models than for traditional credit scorecards?",
     "options": [
       "Foundation models require more validators than banks can realistically hire",
-      "Banks cannot retire or remediate a vendor-controlled foundation model the way they can a proprietary scorecard \u2014 the vendor controls versioning and release cadence",
+      "Banks cannot retire or remediate a vendor-controlled foundation model the way they can",
       "Foundation models are explicitly exempt from SR 11-7's influence requirements under the GenAI exclusion",
       "First-line teams no longer report through board-level Model Risk Committees"
     ],
@@ -55,9 +55,9 @@
     "question": "The post steelmans BPI's repeal argument. Which element is most directly supported by evidence cited in the post?",
     "options": [
       "MRM functions are staffed by people who don't understand modern AI systems",
-      "COVID-era model failures went through MRM functions that approved all those models, suggesting the apparatus isn't preventing what it's designed to prevent",
+      "COVID-era failures went through MRM functions that approved all those models",
       "The three-lines-of-defense structure was designed for financial crisis scenarios, not AI deployments",
-      "Effective challenge has never been operationally defined by any major regulator"
+      "Effective challenge has never been operationally defined by any major banking regulator in binding guidance"
     ],
     "correct": 1,
     "explanation": "The EY/GARP white paper cited in the post makes this argument directly: MRM has 'inadvertently been transformed into a process-driven activity,' and COVID-era MRM functions 'approved all those models' that later failed. This is the strongest empirical counterweight to the triad \u2014 it suggests the apparatus can satisfy procedural requirements while missing material model problems. The counterargument is that this is a failure of the apparatus, not the underlying concept.",
@@ -71,7 +71,7 @@
     "question": "A bank's GenAI system is deployed by the Technology organization as a vendor API feature, bypassing the standard model risk management intake process. Which leg of the effective challenge triad is most directly threatened?",
     "options": [
       "Competence \u2014 Technology teams typically don't have MRM training to evaluate LLMs",
-      "Influence \u2014 MRM's authority to challenge deployment depends on being part of the process; routing through Technology structurally bypasses that authority",
+      "Influence \u2014 MRM's authority to challenge deployment depends on being part of the",
       "Incentives \u2014 Technology teams are compensated more than MRM teams, creating asymmetric pressure",
       "All three legs equally \u2014 the Technology deployment model undermines the entire framework simultaneously"
     ],
@@ -87,7 +87,7 @@
     "question": "The post argues that repealing SR 11-7 'removes the framework's conceptual spine to deal with scar tissue from how the spine has been applied.' What does this mean?",
     "options": [
       "Repeal would eliminate all model risk management requirements at US banks entirely",
-      "Repeal conflates the effective challenge triad \u2014 the core insight \u2014 with the compliance apparatus built around it, which is the actual problem",
+      "Repeal conflates the effective challenge triad \u2014 the core insight \u2014 with the compliance",
       "Repeal would make US banks subject to EU AI Act requirements by default",
       "The scar tissue metaphor refers specifically to the Excel errors that caused the London Whale loss"
     ],
@@ -103,7 +103,7 @@
     "question": "SR 26-2's exclusion of GenAI from scope means, in the post's framing, that:",
     "options": [
       "Banks can freely deploy GenAI without any model risk oversight obligations",
-      "The formal regulatory framework stepped back from the hardest governance question, leaving effective challenge as an organizing concept without regulatory backing for GenAI",
+      "The formal regulatory framework stepped back from the hardest governance question, leaving effective challenge as",
       "SR 26-2 was a temporary measure, with AI-specific guidance expected within 90 days",
       "GenAI is exempt from effective challenge requirements but remains subject to all other SR 11-7 validation obligations"
     ],
@@ -119,7 +119,7 @@
     "question": "The post calls AI-augmented oversight \u2014 using LLMs to monitor other LLMs \u2014 'intellectually the most interesting and operationally the most fragile.' What is the specific fragility?",
     "options": [
       "LLM monitoring systems are too expensive to run at the scale required for enterprise banking",
-      "The monitoring LLM is itself a model subject to MRM requirements, creating a governance regress the framework wasn't designed to handle",
+      "The monitoring LLM is itself a model subject to MRM requirements, creating a governance",
       "LLMs cannot monitor other LLMs because models trained on similar data share the same blind spots",
       "Regulatory guidance explicitly prohibits using AI systems to review other AI systems"
     ],
@@ -135,7 +135,7 @@
     "question": "The post identifies C-suite mandates for rapid agentic deployment as a threat to the influence leg. What is the mechanism of that threat?",
     "options": [
       "C-suite executives can directly overrule MRM findings by invoking executive authority",
-      "Rapid deployment mandates signal that second-line authority is subordinate to adoption velocity, undermining senior management's practical willingness to invoke structural independence when it matters",
+      "Rapid deployment mandates signal that second-line authority is subordinate to adoption velocity, undermining senior management's",
       "Agentic systems operate faster than MRM review processes can keep pace with, making sequential review structurally impossible",
       "C-suite mandates change compensation structures in ways that create incentive failures in second-line teams"
     ],
@@ -151,7 +151,7 @@
     "question": "The post's 'what I think holds, and what I don't' section makes an explicit admission of uncertainty. Which of the following captures what the author is genuinely uncertain about?",
     "options": [
       "Whether effective challenge was ever an effective governance mechanism for traditional models",
-      "Whether any of the proposed adaptations \u2014 continuous monitoring, red-teaming, champion-challenger \u2014 can deliver substantive challenge in practice, or will reproduce the apparatus-standing-in-for-the-principle problem in a new form",
+      "Whether any of the proposed adaptations \u2014 continuous monitoring, red-teaming, champion-challenger \u2014 can deliver",
       "Whether SR 26-2 will be superseded by a more comprehensive AI governance framework before 2028",
       "Whether the London Whale case was actually an influence failure or primarily a competence failure"
     ],
