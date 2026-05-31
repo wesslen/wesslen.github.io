@@ -2665,7 +2665,9 @@ img {
 .index-intro-feature::before {
   content: "";
   position: absolute;
-  left: 0; top: 0; bottom: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
   width: 3px;
   background: var(--accent);
 }
@@ -2785,7 +2787,9 @@ img {
   border-radius: 4px;
   text-decoration: none;
   border: 1px solid;
-  transition: background 0.12s, color 0.12s;
+  transition:
+    background 0.12s,
+    color 0.12s;
   line-height: 1.5;
 }
 .slide-btn-html {
@@ -2816,7 +2820,9 @@ img {
   color: var(--accent2);
   cursor: pointer;
   letter-spacing: 0.04em;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
   text-decoration: none;
   display: inline-block;
 }
@@ -2857,7 +2863,9 @@ img {
   color: var(--muted);
   flex-shrink: 0;
   margin-top: 0.32rem;
-  transition: transform 0.15s, color 0.15s;
+  transition:
+    transform 0.15s,
+    color 0.15s;
 }
 .scp-item:hover .scp-chevron {
   transform: rotate(90deg);
@@ -2996,7 +3004,9 @@ img {
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   line-height: 1;
-  transition: color 0.15s, background 0.15s;
+  transition:
+    color 0.15s,
+    background 0.15s;
 }
 .module-quiz-close:hover {
   color: var(--text);

@@ -310,9 +310,7 @@
                     .slice(0, 3)
                     .map((t) => `<span class="row-a-tag" style="${tagStyle(t)}">${t}</span>`)
                     .join("");
-                  const draftBadge = post.draft
-                    ? ` <span class="draft-badge">draft</span>`
-                    : "";
+                  const draftBadge = post.draft ? ` <span class="draft-badge">draft</span>` : "";
                   return `
                   <div class="scp-item" data-slug="${slug}">
                     <div class="scp-header">
