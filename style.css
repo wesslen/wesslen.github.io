@@ -2630,3 +2630,489 @@ img {
   margin-top: 0.25rem;
   opacity: 0.9;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   Index page: intro feature + module grid
+   ═══════════════════════════════════════════════════════════ */
+
+.index-modules {
+  padding: 1.5rem 1.5rem 4rem;
+}
+.index-modules-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* ── Wide intro post card ─────────────────────────────── */
+.index-intro-feature {
+  display: grid;
+  grid-template-columns: minmax(auto, 220px) 1fr;
+  grid-template-areas:
+    "label desc"
+    "title desc"
+    "link  desc";
+  align-items: start;
+  column-gap: 2rem;
+  row-gap: 0.3rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent-dim);
+  padding: 1rem 1.5rem 1rem 1.75rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.index-intro-feature::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+}
+.intro-feature-label {
+  grid-area: label;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+  align-self: end;
+}
+.intro-feature-title {
+  grid-area: title;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  line-height: 1.3;
+}
+.intro-feature-title:hover {
+  opacity: 0.8;
+}
+.intro-feature-desc {
+  grid-area: desc;
+  align-self: center;
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+.intro-feature-link {
+  grid-area: link;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  text-decoration: none;
+  align-self: start;
+}
+.intro-feature-link:hover {
+  opacity: 0.8;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Slide card grid (shared: index.html + slides.html)
+   ═══════════════════════════════════════════════════════════ */
+
+.slides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+.slide-card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem 1.4rem 1.1rem;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: border-color 0.15s;
+  min-width: 0;
+}
+.slide-card:hover {
+  border-color: var(--accent2);
+}
+.slide-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.slide-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin: 0;
+}
+.slide-card-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.15em 0.55em;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.slide-card-badge.published {
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+.slide-card-badge.soon {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.slide-card-desc {
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+}
+.slide-card-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  flex-wrap: wrap;
+}
+.slide-btn {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.3em 0.85em;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid;
+  transition:
+    background 0.12s,
+    color 0.12s;
+  line-height: 1.5;
+}
+.slide-btn-html {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.slide-btn-html:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+.slide-btn-pdf {
+  background: var(--accent2-dim);
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+.slide-btn-pdf:hover {
+  background: var(--accent2);
+  color: var(--bg);
+}
+.slide-btn-quiz {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent2);
+  background: rgba(124, 58, 237, 0.08);
+  color: var(--accent2);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition:
+    background 0.15s,
+    color 0.15s;
+  text-decoration: none;
+  display: inline-block;
+}
+.slide-btn-quiz:hover {
+  background: var(--accent2);
+  color: #fff;
+}
+.slide-card-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.25rem 0;
+}
+
+/* ── Slide card post items (scp) ──────────────────────── */
+.scp-list {
+  border-top: 1px solid var(--border);
+  margin-top: 0.1rem;
+  padding-top: 0.15rem;
+  min-width: 0;
+}
+.scp-item {
+  position: relative;
+  border-radius: 3px;
+  transition: background 0.12s;
+  min-width: 0;
+}
+.scp-item:hover {
+  background: var(--surface-2);
+}
+.scp-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  padding: 0.3rem 0.3rem 0.2rem;
+}
+.scp-chevron {
+  font-size: 0.5rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  margin-top: 0.32rem;
+  transition:
+    transform 0.15s,
+    color 0.15s;
+}
+.scp-item:hover .scp-chevron {
+  transform: rotate(90deg);
+  color: var(--accent);
+}
+.scp-title-row {
+  flex: 1;
+  min-width: 0;
+}
+.scp-title {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+.scp-item:hover .scp-title {
+  color: var(--accent);
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+.scp-date {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--muted);
+  margin-top: 0.1rem;
+  opacity: 0.7;
+}
+.scp-quiz-check {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  margin-top: 0.18rem;
+  opacity: 0.4;
+  line-height: 1;
+  user-select: none;
+}
+.scp-quiz-done {
+  color: #2ea043;
+  opacity: 1;
+}
+.scp-expand {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.65rem 0.75rem;
+  box-shadow: var(--shadow-md);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+.scp-item:hover .scp-expand {
+  opacity: 1;
+  pointer-events: auto;
+}
+.scp-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0.15rem 0 0.3rem;
+}
+.scp-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.4rem;
+}
+.scp-link {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+.scp-link:hover {
+  opacity: 0.8;
+}
+.scp-tags {
+  display: flex;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+}
+
+/* ── Module quiz modal ────────────────────────────────── */
+.module-quiz-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 900;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 1rem;
+  overflow-y: auto;
+}
+.module-quiz-dialog {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.module-quiz-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.module-quiz-dialog-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+.module-quiz-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  line-height: 1;
+  transition:
+    color 0.15s,
+    background 0.15s;
+}
+.module-quiz-close:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+.module-quiz-dialog-body {
+  padding: 1.5rem 1.25rem;
+}
+.quiz-loading {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+  padding: 2rem 0;
+}
+.quiz-progress-bar-wrap {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+.quiz-progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.quiz-progress-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+.quiz-end-module {
+  text-align: center;
+}
+.quiz-breakdown {
+  margin: 1.25rem auto 1.5rem;
+  max-width: 320px;
+  text-align: left;
+}
+.quiz-breakdown-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6rem;
+}
+.quiz-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.825rem;
+  gap: 1rem;
+}
+.quiz-breakdown-name {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+.quiz-breakdown-score {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text);
+  flex-shrink: 0;
+}
+.quiz-breakdown-score.perfect {
+  color: #2ea043;
+}
+
+/* ── Module grid responsive ───────────────────────────── */
+@media (max-width: 640px) {
+  /* Single-column card grid */
+  .slides-grid {
+    grid-template-columns: 1fr;
+  }
+  .index-modules {
+    padding: 1rem 1rem 3rem;
+  }
+
+  /* Intro feature: collapse 2-col grid to stacked single column */
+  .index-intro-feature {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "label"
+      "title"
+      "desc"
+      "link";
+    row-gap: 0.4rem;
+    padding: 0.85rem 1.1rem 0.85rem 1.4rem;
+  }
+  .intro-feature-desc {
+    align-self: auto;
+  }
+
+  /* Tooltip: clamp to card width so it can't bleed off screen */
+  .scp-expand {
+    left: 0;
+    right: 0;
+    max-width: 100%;
+  }
+
+  /* Slide card: tighter padding on small screens */
+  .slide-card {
+    padding: 1rem 1rem 0.9rem;
+  }
+}
