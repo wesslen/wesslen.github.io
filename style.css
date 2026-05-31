@@ -2728,6 +2728,7 @@ img {
   flex-direction: column;
   gap: 0.6rem;
   transition: border-color 0.15s;
+  min-width: 0;
 }
 .slide-card:hover {
   border-color: var(--accent2);
@@ -2834,11 +2835,13 @@ img {
   border-top: 1px solid var(--border);
   margin-top: 0.1rem;
   padding-top: 0.15rem;
+  min-width: 0;
 }
 .scp-item {
   position: relative;
   border-radius: 3px;
   transition: background 0.12s;
+  min-width: 0;
 }
 .scp-item:hover {
   background: var(--surface-2);
@@ -3064,11 +3067,39 @@ img {
 }
 
 /* ── Module grid responsive ───────────────────────────── */
-@media (max-width: 540px) {
+@media (max-width: 640px) {
+  /* Single-column card grid */
   .slides-grid {
     grid-template-columns: 1fr;
   }
   .index-modules {
     padding: 1rem 1rem 3rem;
+  }
+
+  /* Intro feature: collapse 2-col grid to stacked single column */
+  .index-intro-feature {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "label"
+      "title"
+      "desc"
+      "link";
+    row-gap: 0.4rem;
+    padding: 0.85rem 1.1rem 0.85rem 1.4rem;
+  }
+  .intro-feature-desc {
+    align-self: auto;
+  }
+
+  /* Tooltip: clamp to card width so it can't bleed off screen */
+  .scp-expand {
+    left: 0;
+    right: 0;
+    max-width: 100%;
+  }
+
+  /* Slide card: tighter padding on small screens */
+  .slide-card {
+    padding: 1rem 1rem 0.9rem;
   }
 }
