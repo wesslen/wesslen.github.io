@@ -5,15 +5,15 @@
     "module": "ai-economy",
     "objective": "mechanism",
     "difficulty": 2,
-    "question": "Leukhina's comparative advantage model shows that at a 4\u00d7 AI productivity gain, unskilled workers become optimally unemployed. The key mechanism is a supervision trade-off. What specifically tips the calculation toward displacement?",
+    "question": "Leukhina's comparative advantage model shows that at a 4× AI productivity gain, unskilled workers become optimally unemployed. The key mechanism is a supervision trade-off. What specifically tips the calculation toward displacement?",
     "options": [
-      "At 4\u00d7 AI, the opportunity cost of supervisor time spent overseeing one unskilled worker (0.25 \u00d7 48 = 12 apples) exceeds that worker's output (9 apples), making displacement the rational optimization",
-      "AI systems can perform every unskilled task at a fraction of the labor cost, making human workers in those roles economically redundant regardless of any supervision overhead they impose on skilled workers",
-      "Unskilled workers become proportionally less capable as skilled workers and AI systems grow more productive, widening the quality gap until the output differential tips unambiguously toward full displacement",
-      "Advanced AI requires skilled workers to spend substantially more time on maintenance and system oversight, reducing their available supervision capacity and shrinking the effective workforce they can support"
+      "At 4× AI, the opportunity cost of supervisor time spent overseeing one unskilled worker (0.25 × 48 = 12 apples) exceeds that worker's output (9 apples), making full displacement the rational optimization for profit-maximizing firms at that productivity ratio.",
+      "AI systems can perform every unskilled task at a fraction of the labor cost, making human workers in those roles economically redundant regardless of any supervision overhead they impose on skilled workers.",
+      "Unskilled workers become proportionally less capable as skilled workers and AI systems grow more productive, widening the quality gap until the output differential tips unambiguously toward full displacement.",
+      "Advanced AI requires skilled workers to spend substantially more time on maintenance and system oversight, reducing their available supervision capacity and shrinking the effective workforce they can support."
     ],
     "correct": 0,
-    "explanation": "The model's key insight is about the opportunity cost of supervision. Every unskilled worker requires \u03c3 = 0.25 of a skilled worker's time. At baseline AI productivity (skilled produces 12 apples), the opportunity cost of supervision is 0.25 \u00d7 12 = 3 apples \u2014 less than the 9 the unskilled worker produces. Employing them is worthwhile. At 4\u00d7 AI productivity (skilled produces 48 apples), the opportunity cost becomes 0.25 \u00d7 48 = 12 apples \u2014 more than the 9 the unskilled worker produces. The supervision cost exceeds the output benefit, making displacement the rational optimization."
+    "explanation": "The model's key insight is about the opportunity cost of supervision. Every unskilled worker requires σ = 0.25 of a skilled worker's time. At baseline AI productivity (skilled produces 12 apples), the opportunity cost of supervision is 0.25 × 12 = 3 apples — less than the 9 the unskilled worker produces. Employing them is worthwhile. At 4× AI productivity (skilled produces 48 apples), the opportunity cost becomes 0.25 × 48 = 12 apples — more than the 9 the unskilled worker produces. The supervision cost exceeds the output benefit, making displacement the rational optimization."
   },
   {
     "id": "aem-q02",
@@ -21,15 +21,15 @@
     "module": "ai-economy",
     "objective": "boundary",
     "difficulty": 2,
-    "question": "The post derives a critical supervision threshold \u03c3* = 9/48 \u2248 0.1875. What happens if \u03c3 < \u03c3* (supervision tools reduce cost below this level)?",
+    "question": "The post derives a critical supervision threshold σ* = 9/48 ≈ 0.1875. What happens if σ < σ* (supervision tools reduce cost below this level)?",
     "options": [
-      "The opportunity-cost arithmetic reverses \u2014 supervision cost no longer exceeds worker output at 4\u00d7 AI \u2014 so unskilled workers remain viable, and AI management tools that reduce",
-      "The model predicts complete automation of all job categories regardless of skill level, since any supervision cost reduction at 4\u00d7 AI simply accelerates the timeline to full workforce displacement",
-      "Below the threshold unskilled workers become more productive per hour than skilled workers, reversing the comparative advantage and generating a new equilibrium with different employment composition",
-      "The threshold only becomes binding when consumer demand constraints are simultaneously active, meaning reduced supervision costs alone are insufficient to prevent displacement in a demand-constrained economy"
+      "The opportunity-cost arithmetic reverses — supervision cost no longer exceeds worker output at 4× AI — so unskilled workers remain viable, and AI management tools that reduce.",
+      "The model predicts complete automation of all job categories regardless of skill level, since any supervision cost reduction at 4× AI simply accelerates the timeline to full workforce displacement.",
+      "Below the threshold unskilled workers become more productive per hour than skilled workers, reversing the comparative advantage and generating a new equilibrium with different employment composition.",
+      "The threshold only becomes binding when consumer demand constraints are simultaneously active, meaning reduced supervision costs alone are insufficient to prevent displacement in a demand-constrained economy."
     ],
     "correct": 0,
-    "explanation": "The break-even condition is precisely: unskilled workers are optimally employed if a_U^A > \u03c3 \u00b7 a_S^{A'}. At 4\u00d7 AI, this becomes 9 > \u03c3 \u00b7 48, giving \u03c3* = 9/48 = 0.1875. If supervision tools bring \u03c3 below 0.1875 (one skilled worker can supervise more than ~5.3 unskilled workers), unskilled employment remains viable regardless of AI productivity gains at this level. This makes AI management tools \u2014 automated QA, code review assistance, scheduling \u2014 directly relevant to labor market outcomes, not just productivity metrics: they determine which side of the displacement threshold the economy sits on."
+    "explanation": "The break-even condition is precisely: unskilled workers are optimally employed if a_U^A > σ · a_S^{A'}. At 4× AI, this becomes 9 > σ · 48, giving σ* = 9/48 = 0.1875. If supervision tools bring σ below 0.1875 (one skilled worker can supervise more than ~5.3 unskilled workers), unskilled employment remains viable regardless of AI productivity gains at this level. This makes AI management tools — automated QA, code review assistance, scheduling — directly relevant to labor market outcomes, not just productivity metrics: they determine which side of the displacement threshold the economy sits on."
   },
   {
     "id": "aem-q03",
@@ -39,13 +39,13 @@
     "difficulty": 3,
     "question": "The post identifies a key limitation in Leukhina's model: 'the model proves that a Pareto improvement is feasible; it doesn't model the mechanism by which it happens.' What is the practical policy implication of this distinction?",
     "options": [
-      "The model shows productivity gains are large enough to compensate displaced workers if redistribution occurs \u2014 but redistribution is a policy mechanism the model doesn't supply, so",
-      "The model's Pareto proof is logically invalid because genuine Pareto improvements cannot occur in competitive labor markets where displaced workers have no claim on productivity gains from capital owners",
-      "The Pareto improvement the model identifies materializes automatically through market wage adjustments, meaning no active redistribution policy is required for all workers to benefit from AI productivity gains",
-      "The model's limitation is severe enough to invalidate its core results, and policymakers should disregard displacement findings until the redistribution mechanism is formally specified within the model structure"
+      "The model shows productivity gains are large enough to compensate displaced workers if redistribution occurs — but redistribution is a policy mechanism the model doesn't supply, so.",
+      "The model's Pareto proof is logically invalid because genuine Pareto improvements cannot occur in competitive labor markets where displaced workers have no claim on productivity gains from capital owners.",
+      "The Pareto improvement the model identifies materializes automatically through market wage adjustments, meaning no active redistribution policy is required for all workers to benefit from AI productivity gains.",
+      "The model's limitation is severe enough to invalidate its core results, and policymakers should disregard displacement findings until the redistribution mechanism is formally specified within the model structure."
     ],
     "correct": 0,
-    "explanation": "The post makes this distinction precise: 'the model proves that a Pareto improvement is feasible; it doesn't model the mechanism by which it happens. That mechanism is policy.' Leukhina's model shows that total output nearly triples when unskilled workers are displaced at 4\u00d7 AI \u2014 enough surplus to compensate displaced workers and still improve outcomes for everyone. But that surplus doesn't automatically reach displaced workers. Without redistribution, displaced workers' income goes to zero, their demand falls, and the expected consumption gains for 'everyone' fail to materialize. The model proves feasibility; redistribution policy determines actuality."
+    "explanation": "The post makes this distinction precise: 'the model proves that a Pareto improvement is feasible; it doesn't model the mechanism by which it happens. That mechanism is policy.' Leukhina's model shows that total output nearly triples when unskilled workers are displaced at 4× AI — enough surplus to compensate displaced workers and still improve outcomes for everyone. But that surplus doesn't automatically reach displaced workers. Without redistribution, displaced workers' income goes to zero, their demand falls, and the expected consumption gains for 'everyone' fail to materialize. The model proves feasibility; redistribution policy determines actuality."
   },
   {
     "id": "aem-q04",
@@ -55,13 +55,13 @@
     "difficulty": 2,
     "question": "The demand effects scenario shows that at 0% redistribution, aggregate demand falls to 5/6 of its potential. Why does this matter beyond the direct income effect on displaced workers?",
     "options": [
-      "Demand destruction from displacement partially offsets output gains \u2014 displaced workers who lose income stop purchasing goods entirely, so actual welfare gains are smaller than productivity numbers suggest",
-      "Lower aggregate demand reduces business investment in AI development itself, creating a feedback loop that slows the productivity gains which originally drove displacement in the first place",
-      "The 5/6 shortfall only matters materially when demand elasticity for the relevant goods falls below a specific threshold that may not apply to the sectors most exposed to AI-driven displacement",
-      "Demand effects are already incorporated in Leukhina's baseline model and require no separate accounting since the model's production function implicitly captures the purchasing power effects of displacement"
+      "Demand destruction from displacement partially offsets output gains — displaced workers who lose income stop purchasing goods entirely, so actual welfare gains are smaller than productivity numbers suggest.",
+      "Lower aggregate demand reduces business investment in AI development itself, creating a feedback loop that slows the productivity gains which originally drove displacement in the first place.",
+      "The 5/6 shortfall only matters materially when demand elasticity for the relevant goods falls below a specific threshold that may not apply to the sectors most exposed to AI-driven displacement.",
+      "Demand effects are already incorporated in Leukhina's baseline model and require no separate accounting since the model's production function implicitly captures the purchasing power effects of displacement."
     ],
     "correct": 0,
-    "explanation": "The post traces the feedback loop: 'demand doesn't emerge from nowhere \u2014 it's funded by income.' In a closed economy, the purchasing power of the 40 displaced workers represents approximately 1/6 of aggregate income (they produced 360 of 2,640 apple-units at baseline). When they exit the labor force without redistribution, that purchasing power disappears. The output gain from displacement exists, but the ability to absorb it is reduced. Output rises to 8,800 combined units vs. 2,640 at baseline \u2014 a 3.3\u00d7 gain \u2014 but effective demand is only 5/6 of that at zero redistribution. This is the demand constraint that post-Keynesian economists have argued is underweighted in productivity-focused accounts of technological change."
+    "explanation": "The post traces the feedback loop: 'demand doesn't emerge from nowhere — it's funded by income.' In a closed economy, the purchasing power of the 40 displaced workers represents approximately 1/6 of aggregate income (they produced 360 of 2,640 apple-units at baseline). When they exit the labor force without redistribution, that purchasing power disappears. The output gain from displacement exists, but the ability to absorb it is reduced. Output rises to 8,800 combined units vs. 2,640 at baseline — a 3.3× gain — but effective demand is only 5/6 of that at zero redistribution. This is the demand constraint that post-Keynesian economists have argued is underweighted in productivity-focused accounts of technological change."
   },
   {
     "id": "aem-q05",
@@ -69,15 +69,15 @@
     "module": "ai-economy",
     "objective": "transfer",
     "difficulty": 2,
-    "question": "The skill-leveling scenario (\u03b3 parameter) finds that if just 20% of unskilled workers adopt AI tools (\u03b3 = 0.2), the displacement threshold goes to infinity \u2014 no AI gain justifies their displacement. What does this predict about near-term labor market dynamics?",
+    "question": "The skill-leveling scenario (γ parameter) finds that if just 20% of unskilled workers adopt AI tools (γ = 0.2), the displacement threshold goes to infinity — no AI gain justifies their displacement. What does this predict about near-term labor market dynamics?",
     "options": [
-      "Even partial skill diffusion substantially raises the displacement threshold \u2014 not by making workers fully AI-proficient, but by changing the opportunity-cost arithmetic enough that the model's displacement",
-      "20% AI tool adoption by unskilled workers creates a permanent structural barrier to automation of their jobs, making displacement impossible regardless of any future increases in AI productivity multipliers",
-      "The threshold effect proves that targeted education policy alone can fully prevent AI-driven labor market displacement across all industries and occupation types without requiring complementary redistribution policy",
-      "The \u03b3 parameter applies specifically to manufacturing workers with physical production tasks; service-sector knowledge workers face displacement dynamics that follow entirely different mathematical relationships"
+      "Even partial skill diffusion substantially raises the displacement threshold — not by making workers fully AI-proficient, but by changing the opportunity-cost arithmetic enough that the model's displacement.",
+      "20% AI tool adoption by unskilled workers creates a permanent structural barrier to automation of their jobs, making displacement impossible regardless of any future increases in AI productivity multipliers.",
+      "The threshold effect proves that targeted education policy alone can fully prevent AI-driven labor market displacement across all industries and occupation types without requiring complementary redistribution policy.",
+      "The γ parameter applies specifically to manufacturing workers with physical production tasks; service-sector knowledge workers face displacement dynamics that follow entirely different mathematical relationships."
     ],
     "correct": 0,
-    "explanation": "The model's math: at \u03b3 = 0.2, the denominator (3 - 15\u03b3) = 0, meaning the displacement threshold m* goes to infinity. Workers are never displaced regardless of the AI multiplier. At \u03b3 = 0.1 (10% partial adoption), the threshold rises from 3\u00d7 to 5.2\u00d7 \u2014 displacement requires a higher AI multiplier. The policy implication: making AI tools accessible to workers who would otherwise be displaced can change whether displacement is the rational outcome, not just the distributional impact. This is why the post's personal note about teaching matters: skill diffusion is the lever that changes the model's structural prediction, not just its distributional consequences."
+    "explanation": "The model's math: at γ = 0.2, the denominator (3 - 15γ) = 0, meaning the displacement threshold m* goes to infinity. Workers are never displaced regardless of the AI multiplier. At γ = 0.1 (10% partial adoption), the threshold rises from 3× to 5.2× — displacement requires a higher AI multiplier. The policy implication: making AI tools accessible to workers who would otherwise be displaced can change whether displacement is the rational outcome, not just the distributional impact. This is why the post's personal note about teaching matters: skill diffusion is the lever that changes the model's structural prediction, not just its distributional consequences."
   },
   {
     "id": "aem-q06",
@@ -85,15 +85,15 @@
     "module": "ai-economy",
     "objective": "misconception",
     "difficulty": 2,
-    "question": "The MIT Work of the Future task force quote \u2014 'No economic law dictates that the creation of new work must equal or exceed the elimination of old work. Still, history shows that they tend to evolve together' \u2014 is characterized as a 'carefully hedged equivocation.' Why?",
+    "question": "The MIT Work of the Future task force quote — 'No economic law dictates that the creation of new work must equal or exceed the elimination of old work. Still, history shows that they tend to evolve together' — is characterized as a 'carefully hedged equivocation.' Why?",
     "options": [
-      "The historical observation invokes a pattern as comfort without engaging the specific supervision-ratio conditions under which Leukhina's model predicts that historical pattern breaks down",
-      "The quote is empirically inaccurate \u2014 historical evidence actually shows that new work creation has consistently failed to match the pace of old work elimination during major technological transitions",
-      "The task force lacks sufficient authority or technical expertise to make credible empirical claims about labor market dynamics driven by AI-specific technological changes in production functions",
-      "The quote implies that technological progress is net harmful to workers rather than beneficial in aggregate, contradicting decades of historical evidence on wages and employment following earlier automation waves"
+      "The historical observation invokes a pattern as comfort without engaging the specific supervision-ratio conditions under which Leukhina's model predicts that historical pattern breaks down.",
+      "The quote is empirically inaccurate — historical evidence actually shows that new work creation has consistently failed to match the pace of old work elimination during major technological transitions.",
+      "The task force lacks sufficient authority or technical expertise to make credible empirical claims about labor market dynamics driven by AI-specific technological changes in production functions.",
+      "The quote implies that technological progress is net harmful to workers rather than beneficial in aggregate, contradicting decades of historical evidence on wages and employment following earlier automation waves."
     ],
     "correct": 0,
-    "explanation": "The post characterizes this as an equivocation because it does two things simultaneously: acknowledges the absence of an economic law guaranteeing good outcomes, then invokes historical patterns to provide comfort. Leukhina's model is more specific: it identifies the precise conditions under which the 'tend to evolve together' pattern breaks \u2014 a supervision ratio above the critical threshold combined with a sufficiently large AI productivity gain. The historical pattern may have held because previous technological waves didn't produce supervision-ratio economics of this kind. The quote provides comfort without engaging with the mechanism that determines whether the historical pattern continues."
+    "explanation": "The post characterizes this as an equivocation because it does two things simultaneously: acknowledges the absence of an economic law guaranteeing good outcomes, then invokes historical patterns to provide comfort. Leukhina's model is more specific: it identifies the precise conditions under which the 'tend to evolve together' pattern breaks — a supervision ratio above the critical threshold combined with a sufficiently large AI productivity gain. The historical pattern may have held because previous technological waves didn't produce supervision-ratio economics of this kind. The quote provides comfort without engaging with the mechanism that determines whether the historical pattern continues."
   },
   {
     "id": "aem-q07",
@@ -101,15 +101,15 @@
     "module": "ai-economy",
     "objective": "scope",
     "difficulty": 1,
-    "question": "The post's interactive model has five scenarios. What does Scenario 5 (redistribution rate \u03c1) specifically model that the other four don't?",
+    "question": "The post's interactive model has five scenarios. What does Scenario 5 (redistribution rate ρ) specifically model that the other four don't?",
     "options": [
-      "The demand feedback loop \u2014 whether output gains from displacement can actually be consumed if displaced workers lose income",
-      "The long-run general equilibrium effects of AI adoption across multiple industries simultaneously, capturing cross-sector labor reallocation that single-sector models systematically miss",
-      "The effect of government regulation on the pace and sectoral distribution of AI adoption, which determines the timeline over which displacement pressure builds and labor markets must adjust",
-      "The international trade consequences of differential AI productivity gains across countries, which shift comparative advantage and generate trade flows that redistribute the gains from AI unevenly"
+      "The demand feedback loop — whether output gains from displacement can actually be consumed if displaced workers lose income.",
+      "The long-run general equilibrium effects of AI adoption across multiple industries simultaneously, capturing cross-sector labor reallocation that single-sector models systematically miss.",
+      "The effect of government regulation on the pace and sectoral distribution of AI adoption, which determines the timeline over which displacement pressure builds and labor markets must adjust.",
+      "The international trade consequences of differential AI productivity gains across countries, which shift comparative advantage and generate trade flows that redistribute the gains from AI unevenly."
     ],
     "correct": 0,
-    "explanation": "Scenarios 1-4 examine the production-side mechanics: the baseline displacement result, the supervision elasticity threshold, skill-leveling dynamics, and the AI productivity multiplier. Scenario 5 is the only one that models the demand side: what happens to the economy's ability to absorb productivity gains if the workers displaced by those gains lose their purchasing power. It's also the scenario most directly relevant to policy: \u03c1 is not a technology parameter or a market parameter \u2014 it's a redistribution rate that represents policy choices. The post's final observation \u2014 the model proves feasibility, not actuality \u2014 is what Scenario 5 is showing."
+    "explanation": "Scenarios 1-4 examine the production-side mechanics: the baseline displacement result, the supervision elasticity threshold, skill-leveling dynamics, and the AI productivity multiplier. Scenario 5 is the only one that models the demand side: what happens to the economy's ability to absorb productivity gains if the workers displaced by those gains lose their purchasing power. It's also the scenario most directly relevant to policy: ρ is not a technology parameter or a market parameter — it's a redistribution rate that represents policy choices. The post's final observation — the model proves feasibility, not actuality — is what Scenario 5 is showing."
   },
   {
     "id": "aem-q08",
@@ -119,10 +119,10 @@
     "difficulty": 2,
     "question": "The model uses 'skilled' vs. 'unskilled' as categories. The post notes: 'skilled means effective at harnessing AI productivity gains, which doesn't map cleanly onto education level or job title.' What governance or policy implication follows from this clarification?",
     "options": [
-      "Displacement risk is better identified by AI-effectiveness in a specific workflow than by educational attainment or job title",
-      "Educational credentials should be excluded from consideration in hiring decisions for AI-intensive roles, since credential-based assessment systematically misidentifies who has the AI-effectiveness needed for productive employment",
-      "Standard occupational classification systems in government labor market datasets are so outdated that they must be replaced entirely with new AI-specific taxonomies before policy analysis can be credible",
-      "The skilled/unskilled distinction the model uses proves the specific prediction that AI will eliminate all middle-skill occupations through the job polarization mechanism documented in prior automation research"
+      "Displacement risk is better identified by AI-effectiveness in a specific workflow than by educational attainment or job title.",
+      "Educational credentials should be excluded from consideration in hiring decisions for AI-intensive roles, since credential-based assessment systematically misidentifies who has the AI-effectiveness needed for productive employment.",
+      "Standard occupational classification systems in government labor market datasets are so outdated that they must be replaced entirely with new AI-specific taxonomies before policy analysis can be credible.",
+      "The skilled/unskilled distinction the model uses proves the specific prediction that AI will eliminate all middle-skill occupations through the job polarization mechanism documented in prior automation research."
     ],
     "correct": 0,
     "explanation": "The post makes this clarification explicitly: 'skilled means effective at harnessing AI productivity gains, which doesn't map cleanly onto education level or job title.' A highly-educated professional who cannot effectively use AI tools for their specific domain is 'unskilled' in the model's terms; a tradesperson who has integrated AI-assisted design tools effectively is 'skilled.' This reframing has direct implications for workforce development policy: the intervention that matters is developing AI-effectiveness in specific workflows, not raising general education levels. Job displacement prediction based on educational attainment or traditional skill taxonomies will systematically misidentify who is at risk."
@@ -133,15 +133,15 @@
     "module": "ai-economy",
     "objective": "mechanism",
     "difficulty": 3,
-    "question": "The supervision elasticity scenario uses \u03c3(m) = 0.25 \u00b7 m^{-\u03b1} where \u03b1 \u2208 [0,1). At \u03b1 = 0.5, the displacement threshold rises from 3\u00d7 to 9\u00d7. What is the practical interpretation of the \u03b1 parameter for organizations deploying AI management tools?",
+    "question": "The supervision elasticity scenario uses σ(m) = 0.25 · m^{-α} where α ∈ [0,1). At α = 0.5, the displacement threshold rises from 3× to 9×. What is the practical interpretation of the α parameter for organizations deploying AI management tools?",
     "options": [
-      "\u03b1 is the elasticity of supervision cost to AI productivity \u2014 organizations investing in AI-assisted supervision implicitly raise \u03b1, which raises the productivity multiplier required before displacement",
-      "\u03b1 measures the percentage of supervision tasks that AI can fully automate without human involvement, with higher values indicating more comprehensive automation of the quality-assurance and coordination functions",
-      "\u03b1 represents the fraction of the total worker population that has voluntarily adopted AI tools for self-directed productivity improvement, separate from any organizational deployment or training program",
-      "\u03b1 is a purely theoretical parameter defined only in the model's mathematical structure \u2014 it cannot be estimated, measured, or influenced by any specific organizational investment or management decision"
+      "α is the elasticity of supervision cost to AI productivity — organizations investing in AI-assisted supervision implicitly raise α, which raises the productivity multiplier required before displacement.",
+      "α measures the percentage of supervision tasks that AI can fully automate without human involvement, with higher values indicating more comprehensive automation of the quality-assurance and coordination functions.",
+      "α represents the fraction of the total worker population that has voluntarily adopted AI tools for self-directed productivity improvement, separate from any organizational deployment or training program.",
+      "α is a purely theoretical parameter defined only in the model's mathematical structure — it cannot be estimated, measured, or influenced by any specific organizational investment or management decision."
     ],
     "correct": 0,
-    "explanation": "\u03b1 is the elasticity that determines how quickly supervision costs fall as AI productivity improves. At \u03b1 = 0, supervision costs are fixed regardless of AI improvement \u2014 the baseline Leukhina result. At \u03b1 = 0.5, supervision cost falls as the square root of the AI multiplier, dramatically raising the displacement threshold. Organizations deploying AI management tools \u2014 systems that reduce the time skilled workers spend on supervision, QA, coordination \u2014 are implicitly raising \u03b1 in their organization's human capital deployment. This reframes AI management tool investment: it's not just a productivity optimization, it's a choice that affects the supervision ratio threshold that determines whether automation of supervised workers is rational."
+    "explanation": "α is the elasticity that determines how quickly supervision costs fall as AI productivity improves. At α = 0, supervision costs are fixed regardless of AI improvement — the baseline Leukhina result. At α = 0.5, supervision cost falls as the square root of the AI multiplier, dramatically raising the displacement threshold. Organizations deploying AI management tools — systems that reduce the time skilled workers spend on supervision, QA, coordination — are implicitly raising α in their organization's human capital deployment. This reframes AI management tool investment: it's not just a productivity optimization, it's a choice that affects the supervision ratio threshold that determines whether automation of supervised workers is rational."
   },
   {
     "id": "aem-q10",
@@ -149,14 +149,14 @@
     "module": "ai-economy",
     "objective": "synthesis",
     "difficulty": 3,
-    "question": "The post closes with a personal reflection on teaching AI tools as adjunct work alongside a full-time job \u2014 expensive, time-consuming, and undercompensated. How does this connect to the model's structural prediction?",
+    "question": "The post closes with a personal reflection on teaching AI tools as adjunct work alongside a full-time job — expensive, time-consuming, and undercompensated. How does this connect to the model's structural prediction?",
     "options": [
-      "The model identifies skill diffusion as the displacement-prevention lever \u2014 but adjunct economics make sustained teaching individually irrational, illustrating that the mechanism most needed faces its own institutional incentive misalignment",
-      "The personal reflection is anecdotal and does not connect to the formal economic model \u2014 adjunct teaching experiences do not constitute evidence about macro-level skill diffusion dynamics or displacement thresholds",
-      "The reflection simply demonstrates that teaching AI tools is only economically viable as a full-time dedicated profession, not as supplementary adjunct work alongside a primary employment commitment",
-      "The adjunct economics anecdote shows the model's skill-leveling scenario requires implausible diffusion rates \u2014 the economic barriers to teaching are so severe that \u03b3 = 0.2 adoption cannot realistically be achieved"
+      "The model identifies skill diffusion as the displacement-prevention lever — but adjunct economics make sustained teaching individually irrational, illustrating that the mechanism most needed faces its own deep institutional incentive misalignment requiring policy intervention.",
+      "The personal reflection is anecdotal and does not connect to the formal economic model — adjunct teaching experiences do not constitute evidence about macro-level skill diffusion dynamics or displacement thresholds.",
+      "The reflection simply demonstrates that teaching AI tools is only economically viable as a full-time dedicated profession, not as supplementary adjunct work alongside a primary employment commitment.",
+      "The adjunct economics anecdote shows the model's skill-leveling scenario requires implausible diffusion rates — the economic barriers to teaching are so severe that γ = 0.2 adoption cannot realistically be achieved."
     ],
     "correct": 0,
-    "explanation": "The post's conclusion connects model mechanism to personal economics: 'The model's implicit finding \u2014 that skill diffusion is the lever that matters most for keeping this from turning into a macro problem \u2014 keeps pointing back at the same unglamorous answer. Maybe I just need to keep teaching.' But the footnote makes the economic constraint visible: 'I have taught as an adjunct, which means the economics of teaching \u2014 low per-course pay, no benefits, high preparation overhead \u2014 actively discourage sustained periods at the pace the model's implicit policy prescription would require.' The model identifies what needs to happen (skill diffusion); the footnote shows that the institutional economics of the activity most needed to produce it are misaligned. This is the level of analysis the model cannot reach."
+    "explanation": "The post's conclusion connects model mechanism to personal economics: 'The model's implicit finding — that skill diffusion is the lever that matters most for keeping this from turning into a macro problem — keeps pointing back at the same unglamorous answer. Maybe I just need to keep teaching.' But the footnote makes the economic constraint visible: 'I have taught as an adjunct, which means the economics of teaching — low per-course pay, no benefits, high preparation overhead — actively discourage sustained periods at the pace the model's implicit policy prescription would require.' The model identifies what needs to happen (skill diffusion); the footnote shows that the institutional economics of the activity most needed to produce it are misaligned. This is the level of analysis the model cannot reach."
   }
 ]

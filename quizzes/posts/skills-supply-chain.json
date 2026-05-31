@@ -8,12 +8,12 @@
     "question": "Standard prompt injection is described as 'session-scoped.' How does a backdoored skills file differ in threat profile?",
     "options": [
       "Skills files are more dangerous because they can initiate direct network requests, which prompt injection cannot do.",
-      "A backdoored skills file loads automatically before every session and persists in the shared repo until",
+      "A backdoored skills file loads automatically before every session and persists in the shared repo until explicitly removed — giving an attacker persistent, session-level code execution that survives model updates and credential rotations alike.",
       "Session-scoped injection requires more technical sophistication to execute than crafting a convincing malicious skills file.",
       "Skills files carry cryptographic signatures making them structurally harder to compromise than prompt injection vectors."
     ],
     "correct": 1,
-    "explanation": "Persistence is what makes skills supply chain attacks categorically different from standard injection. A malicious webpage reaches one session; when it ends, so does the attack. A backdoored skills file loads before every session starts. In a team environment where skills are committed to a shared repository, a single compromised file affects every developer's agent runs across all future sessions until someone identifies it and removes it. The same properties that make skills useful \u2014 automatic loading, compaction survival, codebase portability \u2014 are exactly what makes a compromised one hard to contain."
+    "explanation": "Persistence is what makes skills supply chain attacks categorically different from standard injection. A malicious webpage reaches one session; when it ends, so does the attack. A backdoored skills file loads before every session starts. In a team environment where skills are committed to a shared repository, a single compromised file affects every developer's agent runs across all future sessions until someone identifies it and removes it. The same properties that make skills useful — automatic loading, compaction survival, codebase portability — are exactly what makes a compromised one hard to contain."
   },
   {
     "id": "ssc-q02",
@@ -24,7 +24,7 @@
     "question": "The ClawHub attackers embedded malware in `better-polymarket` by hiding the payload around line 180 of an otherwise working skill. Why did this bypass typical security review?",
     "options": [
       "The malware used encryption preventing any static analysis tool from scanning the file during marketplace review.",
-      "Security reviewers focus on installation hooks and setup scripts \u2014 hiding the payload in operational",
+      "Security reviewers focus on installation hooks and setup scripts — hiding the payload in operational skill logic shifts the attack to runtime, where it executes with the same trust level as legitimate skill functionality.",
       "The marketplace disabled code review for skills that exceeded a minimum star-rating threshold from prior users.",
       "The attacker used obfuscation making the malicious line visually indistinguishable from an inline comment."
     ],
@@ -40,12 +40,12 @@
     "question": "Rehberger demonstrated that invisible Unicode Tag codepoints embedded in a SKILL.md file could inject instructions visible to models but completely invisible in text editors and code review tools. What makes this fundamentally different from other obfuscation techniques?",
     "options": [
       "Unicode Tags are more efficient because they add no measurable file size overhead compared to other methods.",
-      "The review surface and execution surface differ \u2014 a developer reads rendered text and sees nothing",
+      "The review surface and execution surface differ — a developer reads rendered text and sees nothing.",
       "Unicode Tags can only be embedded by attackers with direct write access to the repository hosting service.",
       "Unlike Base64 encoding, Unicode Tags are not detectable by any standard security scanner or analysis tool."
     ],
     "correct": 1,
-    "explanation": "Standard obfuscation (Base64, ROT13) is invisible to humans but still needs some mechanism that analysis tools can detect. Unicode Tag codepoints render as completely blank in every standard text editor, code review interface, and diff tool \u2014 genuinely invisible to the entire human review apparatus. The model reads the file character by character and executes the hidden instruction. There's no bypass needed; the attack lives in the gap between human visual perception and the model's byte-level reading. Rehberger confirmed this against Claude and Gemini; a SKILL.md appeared completely unchanged in diff views while the hidden instruction executed."
+    "explanation": "Standard obfuscation (Base64, ROT13) is invisible to humans but still needs some mechanism that analysis tools can detect. Unicode Tag codepoints render as completely blank in every standard text editor, code review interface, and diff tool — genuinely invisible to the entire human review apparatus. The model reads the file character by character and executes the hidden instruction. There's no bypass needed; the attack lives in the gap between human visual perception and the model's byte-level reading. Rehberger confirmed this against Claude and Gemini; a SKILL.md appeared completely unchanged in diff views while the hidden instruction executed."
   },
   {
     "id": "ssc-q04",
@@ -57,11 +57,11 @@
     "options": [
       "The marketplace had automated detection but it generated too many false positives to be operationally actionable.",
       "The attack was caught and contained within two weeks, demonstrating that marketplace monitoring functions effectively.",
-      "Malicious skill creation is scaling faster than manual auditing can contain \u2014 reproducing npm/PyPI supply chain",
+      "Malicious skill creation is scaling faster than manual auditing can contain — reproducing npm/PyPI supply chain.",
       "The 824 figure is inflated because the scanner misclassified many legitimate skills as malicious due to heuristic errors."
     ],
     "correct": 2,
-    "explanation": "The doubling of malicious content in two weeks while the marketplace tripled in size is the scaling signature of an automated attack outpacing manual governance. The audit happened because Koi's security team and their bot did it themselves \u2014 not because the platform detected the problem. The HTML comment vulnerability had been publicly demonstrated and left unfixed; the Unicode Tag technique had been reported to model vendors for two years. What's missing is institutional incentive to require either the fixes or the governance. The question is whether oversight catches up before or after autonomous exploit development becomes economically rational at scale."
+    "explanation": "The doubling of malicious content in two weeks while the marketplace tripled in size is the scaling signature of an automated attack outpacing manual governance. The audit happened because Koi's security team and their bot did it themselves — not because the platform detected the problem. The HTML comment vulnerability had been publicly demonstrated and left unfixed; the Unicode Tag technique had been reported to model vendors for two years. What's missing is institutional incentive to require either the fixes or the governance. The question is whether oversight catches up before or after autonomous exploit development becomes economically rational at scale."
   },
   {
     "id": "ssc-q05",
@@ -72,12 +72,12 @@
     "question": "Password-protected ZIP archives are a delivery mechanism for malicious skills. What does the password actually protect against?",
     "options": [
       "It protects against end users accidentally opening and executing the archive without prior explicit authorization.",
-      "The password prevents automated antivirus scanners from inspecting encrypted archive contents",
+      "The password prevents automated antivirus scanners from inspecting encrypted archive contents.",
       "It ensures only authenticated marketplace accounts can successfully download and extract the skill package.",
       "The password verifies the skill originated from the original developer and hasn't been modified by third parties."
     ],
     "correct": 1,
-    "explanation": "This is explicitly documented in Koi's ClawHub disclosure: password-protected archives bypass automated antivirus analysis because scanners cannot inspect encrypted content. The user receives the password in a 'Prerequisites' section that looks like a normal software requirement, but the actual purpose is scanner evasion. The malicious payload reaches the user's machine without being flagged during transit or at download time. This is the same technique documented in criminal marketplace listings for malware delivery \u2014 adapted to the skills ecosystem."
+    "explanation": "This is explicitly documented in Koi's ClawHub disclosure: password-protected archives bypass automated antivirus analysis because scanners cannot inspect encrypted content. The user receives the password in a 'Prerequisites' section that looks like a normal software requirement, but the actual purpose is scanner evasion. The malicious payload reaches the user's machine without being flagged during transit or at download time. This is the same technique documented in criminal marketplace listings for malware delivery — adapted to the skills ecosystem."
   },
   {
     "id": "ssc-q06",
@@ -88,12 +88,12 @@
     "question": "The post identifies `context: fork` in the skills spec as a compounding risk factor when combined with a compromised agent. What is the mechanism?",
     "options": [
       "Fork mode allows skills to bypass the permission checks that would otherwise catch malicious behavior at runtime.",
-      "A skill with `context: fork` runs as a background process outside the visible conversation",
+      "A skill with `context: fork` runs as a background process outside the visible conversation.",
       "Fork mode creates additional copies of the skills directory that are harder to enumerate and fully audit.",
       "Context forks increase memory usage substantially, making detection of malicious background processes impractical."
     ],
     "correct": 1,
-    "explanation": "This is the skills-layer version of the memory poisoning problem: the same architectural property that makes persistent context useful creates a durable attack surface. `context: fork` runs the skill as a background process outside the main conversation thread \u2014 outside the user's visible history. An agent already compromised through any attack vector can write a malicious skill with `context: fork` configured, making it both persistent (loads every session) and invisible (runs outside conversation history). This completes the chain from initial compromise to durable, undetectable persistence."
+    "explanation": "This is the skills-layer version of the memory poisoning problem: the same architectural property that makes persistent context useful creates a durable attack surface. `context: fork` runs the skill as a background process outside the main conversation thread — outside the user's visible history. An agent already compromised through any attack vector can write a malicious skill with `context: fork` configured, making it both persistent (loads every session) and invisible (runs outside conversation history). This completes the chain from initial compromise to durable, undetectable persistence."
   },
   {
     "id": "ssc-q07",
@@ -105,11 +105,11 @@
     "options": [
       "The repository will become too large for efficient cloning due to the accumulated skills file storage overhead.",
       "Skills from different sources may conflict with each other, causing inconsistent or unpredictable agent behavior.",
-      "Like Knight Capital's dormant Power Peg algorithm, skills installed and forgotten still load metadata into every",
+      "Like Knight Capital's dormant Power Peg algorithm, skills installed and forgotten still load metadata into every session context — dormancy does not mean inertness, and forgotten tools remain active attack surface.",
       "Marketplace skills may not work correctly with the team's specific project configuration or toolset."
     ],
     "correct": 2,
-    "explanation": "The post draws this parallel explicitly: 'dead code doesn't become inert through disuse; it just becomes invisible.' A skill installed six months ago still loads its metadata into the system prompt every session. In a team environment where skills accumulate across members and sources, the aggregate effect becomes difficult to audit. Unlike dead code that does nothing, a malicious skill actively executes every time \u2014 dormancy doesn't make it safe. This is a specific governance failure: no process for auditing installed skills, no inventory of what's running, no mechanism to detect drift from the original install."
+    "explanation": "The post draws this parallel explicitly: 'dead code doesn't become inert through disuse; it just becomes invisible.' A skill installed six months ago still loads its metadata into the system prompt every session. In a team environment where skills accumulate across members and sources, the aggregate effect becomes difficult to audit. Unlike dead code that does nothing, a malicious skill actively executes every time — dormancy doesn't make it safe. This is a specific governance failure: no process for auditing installed skills, no inventory of what's running, no mechanism to detect drift from the original install."
   },
   {
     "id": "ssc-q08",
@@ -119,13 +119,13 @@
     "difficulty": 1,
     "question": "Claude Code appeared to have added Unicode Tag detection by February 2026. What does the post recommend practitioners do given this information?",
     "options": [
-      "No further action needed \u2014 if Claude Code detects Unicode Tag attacks, the threat is effectively resolved.",
-      "Detection may have been incidental rather than deliberate; equivalent protection didn't exist in claude.ai at",
+      "No further action needed — if Claude Code detects Unicode Tag attacks, the threat is effectively resolved.",
+      "Detection may have been incidental rather than deliberate; equivalent protection didn't exist in claude.ai at the same time, meaning the mitigation was partial and its provenance uncertain — making independent regression monitoring essential.",
       "Practitioners should switch from Claude Code to claude.ai, where Unicode protection is more comprehensive.",
       "Unicode Tags are no longer viable since all major vendors implemented detection simultaneously after the disclosure."
     ],
     "correct": 1,
-    "explanation": "The post is explicit: Rehberger 'couldn't determine whether this was an intentional mitigation or an incidental change, which is why watching for regression matters.' The detection appeared in Claude Code but not in claude.ai at the same date \u2014 protection was partial and its provenance uncertain. This is the precise case where treating a single detection event as comprehensive coverage creates false confidence. The `aid` scanner provides independent, reproducible detection that doesn't depend on the model vendor's current state or whether a recent update happened to include protection."
+    "explanation": "The post is explicit: Rehberger 'couldn't determine whether this was an intentional mitigation or an incidental change, which is why watching for regression matters.' The detection appeared in Claude Code but not in claude.ai at the same date — protection was partial and its provenance uncertain. This is the precise case where treating a single detection event as comprehensive coverage creates false confidence. The `aid` scanner provides independent, reproducible detection that doesn't depend on the model vendor's current state or whether a recent update happened to include protection."
   },
   {
     "id": "ssc-q09",
@@ -133,15 +133,15 @@
     "module": "agentic-engineering",
     "objective": "synthesis",
     "difficulty": 3,
-    "question": "All three attack vectors in this post \u2014 malicious marketplace skills, invisible Unicode Tags, and agent self-modification \u2014 exploit the same fundamental property. What is it, and what governance implication does it carry?",
+    "question": "All three attack vectors in this post — malicious marketplace skills, invisible Unicode Tags, and agent self-modification — exploit the same fundamental property. What is it, and what governance implication does it carry?",
     "options": [
       "All three require the attacker to have physical access to the developer's machine or local workstation.",
-      "All three exploit agent obedience \u2014 the same property making skills effective makes malicious skills equally",
+      "All three exploit agent obedience — the same property making skills effective makes malicious skills equally.",
       "All three can be detected and blocked by standard antivirus software with regularly updated signature databases.",
       "All three are version-controlled attacks that can be fully reverted by restoring git history to an earlier state."
     ],
     "correct": 1,
-    "explanation": "The post opens with this observation: 'The central bet of context engineering is obedience... That obedience is the feature. It's also the attack surface.' ETH Zurich's finding that agents follow bad instructions as reliably as good ones is the mechanism behind all three vectors. A governance implication flows directly: if you'd give a piece of software shell access to your machine, you can install its skills. If you wouldn't \u2014 if it's from an anonymous marketplace account \u2014 the risk profile is the same as running untrusted code. The security posture for skills should match the security posture for executed code."
+    "explanation": "The post opens with this observation: 'The central bet of context engineering is obedience... That obedience is the feature. It's also the attack surface.' ETH Zurich's finding that agents follow bad instructions as reliably as good ones is the mechanism behind all three vectors. A governance implication flows directly: if you'd give a piece of software shell access to your machine, you can install its skills. If you wouldn't — if it's from an anonymous marketplace account — the risk profile is the same as running untrusted code. The security posture for skills should match the security posture for executed code."
   },
   {
     "id": "ssc-q10",
@@ -152,11 +152,11 @@
     "question": "The post ends with Honnibal's 'tipping point' framing: the moment when autonomous exploit development targeting skills marketplaces yields a positive return on investment. What does this predict about the trajectory of these threats?",
     "options": [
       "Autonomous exploit development is already economically rational, meaning the attack wave has effectively already begun.",
-      "Before the tipping point, attacks are manual and time-bounded; after it, the attack surface is",
+      "Before the tipping point, attacks are manual and time-bounded; after it, the attack surface is automated and scales at compute speed, making platform-level defenses the only viable response to industrialized skill-injection campaigns.",
       "The tipping point refers to when enough security researchers identify the problem to create adequate detection tooling.",
       "Once attacks become automated, they're easier to detect because automated attacks produce consistent, recognizable signatures."
     ],
     "correct": 1,
-    "explanation": "The tipping point framing is about the transition from manual attack economics to automated attack economics. At current scale, manual attack was profitable enough to generate 824 malicious skills. At marketplace scale where automated adversarial skill generation becomes viable \u2014 testing which attack patterns evade detection, generating plausible-looking documentation, rotating delivery mechanisms \u2014 the problem becomes qualitatively different. The 824-skill campaign required human effort; the post-tipping-point campaign runs at compute speed. The governance question is identical to npm and PyPI: does institutional investment in platform security precede or follow the industrialization of the attack?"
+    "explanation": "The tipping point framing is about the transition from manual attack economics to automated attack economics. At current scale, manual attack was profitable enough to generate 824 malicious skills. At marketplace scale where automated adversarial skill generation becomes viable — testing which attack patterns evade detection, generating plausible-looking documentation, rotating delivery mechanisms — the problem becomes qualitatively different. The 824-skill campaign required human effort; the post-tipping-point campaign runs at compute speed. The governance question is identical to npm and PyPI: does institutional investment in platform security precede or follow the industrialization of the attack?"
   }
 ]

@@ -319,10 +319,11 @@ console.log(`  Objective distribution :`);
     const rank1Rate = rank1Count / allQ.length;
 
     // ── Thresholds ──────────────────────────────────────
-    const R1_WARN  = 0.35;
-    const R1_ERROR = 0.55;
-    const MR_WARN  = 1.80;
-    const MR_ERROR = 2.50;
+    const R1_LOWER_WARN  = 0.15;  // below this = inverse cuing (never longest)
+    const R1_WARN        = 0.35;
+    const R1_ERROR       = 0.55;
+    const MR_WARN        = 1.80;
+    const MR_ERROR       = 2.50;
 
     const pct = (n) => `${(n * 100).toFixed(1)}%`;
     const fix = (n) => n.toFixed(2);
@@ -335,8 +336,10 @@ console.log(`  Objective distribution :`);
       error(`Length cuing: correct answer is longest in ${pct(rank1Rate)} of questions (error threshold ${pct(R1_ERROR)}). Rewrite distractors to match length.`);
     else if (rank1Rate > R1_WARN)
       warn(`Length cuing: correct answer is longest in ${pct(rank1Rate)} of questions (warn threshold ${pct(R1_WARN)}). Consider expanding distractors.`);
+    else if (rank1Rate < R1_LOWER_WARN)
+      warn(`Inverse length cuing: correct answer is NEVER the longest in ${pct(rank1Rate)} of questions (lower warn threshold ${pct(R1_LOWER_WARN)}). A student who notices this pattern gains a free elimination per question. Extend some correct answers.`);
     else
-      console.log(`  ✓ rank-1 rate ${pct(rank1Rate)} is within the ${pct(R1_WARN)} warn threshold`);
+      console.log(`  ✓ rank-1 rate ${pct(rank1Rate)} is within the acceptable ${pct(R1_LOWER_WARN)}–${pct(R1_WARN)} range`);
 
     if (medianRatio > MR_ERROR)
       error(`Length cuing: median ratio ${fix(medianRatio)}x exceeds error threshold (${MR_ERROR}x). Correct answers are too much longer than distractors.`);

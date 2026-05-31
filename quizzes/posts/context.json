@@ -8,12 +8,12 @@
     "question": "A developer asks: 'Should I put our deployment procedure in CLAUDE.md or a skills file?' What is the key distinction that should guide this decision?",
     "options": [
       "CLAUDE.md is for individual projects; skills files are for organizations and load across all repos in a workspace.",
-      "Context files are informative and load every turn as the agent's standing brief; skills are procedural",
+      "Context files are informative and load every turn as the agent's standing brief; skills are procedural.",
       "Skills files always save token costs because they compress and cache content before injecting into the session.",
       "CLAUDE.md has a hard 200-line runtime limit enforced by the SDK, so longer procedures are always rejected."
     ],
     "correct": 1,
-    "explanation": "The distinction is role and loading behavior. Context files inject persistent knowledge at every turn \u2014 they're the agent's standing brief. Skills are procedural playbooks that only consume full tokens when invoked. A deployment procedure is a skill: it matters only when someone asks to deploy, not every conversation turn. Metadata (~50\u2013100 tokens) loads at startup; the full body loads on demand. Putting it in CLAUDE.md would bloat every request unnecessarily."
+    "explanation": "The distinction is role and loading behavior. Context files inject persistent knowledge at every turn — they're the agent's standing brief. Skills are procedural playbooks that only consume full tokens when invoked. A deployment procedure is a skill: it matters only when someone asks to deploy, not every conversation turn. Metadata (~50–100 tokens) loads at startup; the full body loads on demand. Putting it in CLAUDE.md would bloat every request unnecessarily."
   },
   {
     "id": "context-q02",
@@ -21,15 +21,15 @@
     "module": "agentic-engineering",
     "objective": "mechanism",
     "difficulty": 2,
-    "question": "ETH Zurich's AGENTbench study found that LLM-generated context files reduced task success rates by ~2% while increasing costs 20\u201323%. What mechanism explains this counterintuitive result?",
+    "question": "ETH Zurich's AGENTbench study found that LLM-generated context files reduced task success rates by ~2% while increasing costs 20–23%. What mechanism explains this counterintuitive result?",
     "options": [
       "LLMs produce invalid Markdown syntax, causing parse errors that trigger expensive retry loops at the harness level.",
-      "Agents followed every instruction faithfully \u2014 including redundant style guides and directory overviews \u2014 spending",
+      "Agents followed every instruction faithfully — including redundant style guides and directory overviews — spending.",
       "LLM-generated files contradict user-written CLAUDE.md entries, and agents spend extra tokens resolving those per-turn conflicts.",
       "Agents treat LLM-generated instructions as lower-trust and separately verify each one, doubling inference calls per turn."
     ],
     "correct": 1,
-    "explanation": "The ETH Zurich finding is not about disobedience \u2014 it's about obedience to the wrong things. Agents followed every instruction, including redundant style guides and sprawling directory overviews that added cost without benefit. The obedience that makes guardrails effective makes bad instructions equally expensive to follow. Human-written context files showed ~4% improvement, but only in poorly-documented repos where they substituted for missing documentation."
+    "explanation": "The ETH Zurich finding is not about disobedience — it's about obedience to the wrong things. Agents followed every instruction, including redundant style guides and sprawling directory overviews that added cost without benefit. The obedience that makes guardrails effective makes bad instructions equally expensive to follow. Human-written context files showed ~4% improvement, but only in poorly-documented repos where they substituted for missing documentation."
   },
   {
     "id": "context-q03",
@@ -39,13 +39,13 @@
     "difficulty": 1,
     "question": "What is the most common misconception developers hold about context file size and agent performance?",
     "options": [
-      "Longer context files always improve agent performance by giving the model more complete information to reason from.",
+      "Longer context files always improve agent performance by giving the model more complete information to reason from, without any performance penalty from increased context length or distraction from tangentially relevant content.",
       "Context files above 100 lines are automatically truncated by the SDK before reaching the model's context window.",
       "Only the final instructions in a context file are attended to; earlier entries receive no measurable model attention.",
       "Context file session persistence is an enterprise-tier feature unavailable in standard free developer-plan deployments."
     ],
     "correct": 0,
-    "explanation": "Larger context files don't improve performance and can degrade it. The 'lost-in-the-middle' problem means models attend strongly to context boundaries but weakly to content in the middle \u2014 a sprawling CLAUDE.md causes critical constraints placed at position 10 to receive 30%+ less attention than the same constraint at position 1. The research recommendation: keep primary context files under 200 lines and put the most critical constraints at the top."
+    "explanation": "Larger context files don't improve performance and can degrade it. The 'lost-in-the-middle' problem means models attend strongly to context boundaries but weakly to content in the middle — a sprawling CLAUDE.md causes critical constraints placed at position 10 to receive 30%+ less attention than the same constraint at position 1. The research recommendation: keep primary context files under 200 lines and put the most critical constraints at the top."
   },
   {
     "id": "context-q04",
@@ -55,13 +55,13 @@
     "difficulty": 2,
     "question": "A developer wants to ensure their agent NEVER runs `rm -rf` on the production database path. They write this instruction into CLAUDE.md. What is the key problem, and what is the correct mechanism?",
     "options": [
-      "There is no problem \u2014 CLAUDE.md instructions are treated as hard constraints and enforced identically to system-level rules.",
-      "CLAUDE.md is advisory; the model exercises judgment about which instructions apply. Truly non-negotiable constraints require runtime",
+      "There is no problem — CLAUDE.md instructions are treated as hard constraints and enforced identically to system-level rules.",
+      "CLAUDE.md is advisory; the model exercises judgment about which instructions apply. Truly non-negotiable constraints require runtime.",
       "Procedural prohibitions belong in skills files, not CLAUDE.md, where the runtime enforces them as immutable guardrails.",
       "Filesystem path references in CLAUDE.md are stripped during parsing and never reach the model's context window."
     ],
     "correct": 1,
-    "explanation": "Context files are advisory \u2014 Claude exercises judgment about which instructions apply in context. A sufficiently adversarial prompt could cause the model to decide the instruction doesn't apply in this case. For truly non-negotiable constraints, especially around destructive operations, hooks are the correct mechanism: shell commands that fire at specific lifecycle events regardless of what the model decides. Context files express intent; hooks enforce it deterministically."
+    "explanation": "Context files are advisory — Claude exercises judgment about which instructions apply in context. A sufficiently adversarial prompt could cause the model to decide the instruction doesn't apply in this case. For truly non-negotiable constraints, especially around destructive operations, hooks are the correct mechanism: shell commands that fire at specific lifecycle events regardless of what the model decides. Context files express intent; hooks enforce it deterministically."
   },
   {
     "id": "context-q05",
@@ -77,7 +77,7 @@
       "Building custom benchmark suites to measure agent performance against domain-specific tasks and quality thresholds."
     ],
     "correct": 2,
-    "explanation": "Context engineering is the practice of encoding what agents need to know into persistent, version-controlled files rather than re-explaining it each session. Instead of prompting the same conventions, architectural decisions, and gotchas repeatedly, you write them once in CLAUDE.md or AGENTS.md that the agent reads at session start. The version-control aspect is essential \u2014 when committed, every team member's agent works from the same baseline immediately."
+    "explanation": "Context engineering is the practice of encoding what agents need to know into persistent, version-controlled files rather than re-explaining it each session. Instead of prompting the same conventions, architectural decisions, and gotchas repeatedly, you write them once in CLAUDE.md or AGENTS.md that the agent reads at session start. The version-control aspect is essential — when committed, every team member's agent works from the same baseline immediately."
   },
   {
     "id": "context-q06",
@@ -88,12 +88,12 @@
     "question": "A team's coding agent confidently implements modules in Vue.js despite the team switching to React six months ago. The CLAUDE.md still says 'use Vue.js for frontend.' The agent performs well on all other tasks. What is the most accurate diagnosis?",
     "options": [
       "The model's training data predates the React adoption, so it defaults to Vue.js patterns from pretraining.",
-      "The agent has the staleness problem: context files don't self-update, so it faithfully follows instructions",
+      "The agent has the staleness problem: context files don't self-update, so it faithfully follows instructions.",
       "A syntax error in CLAUDE.md is causing the Vue.js instruction to override React configuration elsewhere.",
       "The agent requires a framework-mismatch linter integrated into CI to detect and flag technology drift before commits."
     ],
     "correct": 1,
-    "explanation": "This is the staleness problem: the agent isn't malfunctioning \u2014 it's doing exactly what it was told. The problem is that what it was told became false six months ago. Context files require the same maintenance discipline as documentation, and they accumulate: design directions get abandoned but the file still says they're current. The agent's confident, high-quality Vue.js output is the most frustrating version of this failure \u2014 perfectly rational given stale instructions."
+    "explanation": "This is the staleness problem: the agent isn't malfunctioning — it's doing exactly what it was told. The problem is that what it was told became false six months ago. Context files require the same maintenance discipline as documentation, and they accumulate: design directions get abandoned but the file still says they're current. The agent's confident, high-quality Vue.js output is the most frustrating version of this failure — perfectly rational given stale instructions."
   },
   {
     "id": "context-q07",
@@ -105,11 +105,11 @@
     "options": [
       "Skills are too large for most context windows and must load incrementally to avoid hitting the per-session token limit.",
       "Progressive disclosure is a mandatory requirement in the AGENTS.md specification that all compliant SDK runtimes must implement.",
-      "Context facts apply every turn; skill procedures apply only when invoked \u2014 loading only metadata at startup",
+      "Context facts apply every turn; skill procedures apply only when invoked — loading only metadata at startup.",
       "Security policies require full skill bodies to remain locked until the user explicitly names the skill they want invoked."
     ],
     "correct": 2,
-    "explanation": "The distinction tracks the nature of the content. Build commands and architectural constraints apply to every conversation \u2014 paying to load them upfront is justified. A deployment procedure or ticket-creation workflow is only relevant when that specific task arises. Progressive disclosure keeps startup token cost low and loads the full procedure only when the user's request matches the skill's metadata. A project with 20 skills costs ~2,000 tokens at startup versus loading everything upfront."
+    "explanation": "The distinction tracks the nature of the content. Build commands and architectural constraints apply to every conversation — paying to load them upfront is justified. A deployment procedure or ticket-creation workflow is only relevant when that specific task arises. Progressive disclosure keeps startup token cost low and loads the full procedure only when the user's request matches the skill's metadata. A project with 20 skills costs ~2,000 tokens at startup versus loading everything upfront."
   },
   {
     "id": "context-q08",
@@ -120,12 +120,12 @@
     "question": "The post applies the 'vibe coding is legacy coding' critique to context files. What is its most precise concern?",
     "options": [
       "Context files complicate code review because reviewers must understand both the codebase and the file's implicit assumptions.",
-      "Context files used as a crutch optimize for smoother prompting without reducing obscurity, leaving no one",
+      "Context files used as a crutch optimize for smoother prompting without reducing obscurity, leaving no one.",
       "Context files written in natural language introduce interpretive ambiguity that formal specification languages would eliminate entirely.",
-      "The critique doesn't apply to context files \u2014 they are passive documentation artifacts with no runtime execution risk."
+      "The critique doesn't apply to context files — they are passive documentation artifacts with no runtime execution risk."
     ],
     "correct": 1,
-    "explanation": "The post applies this carefully. At their best, context files are a forcing function \u2014 you can't write a good CLAUDE.md without articulating why your conventions exist. Done well, it's documentation-as-understanding. The organizational version is more dangerous: in a large team where everyone works through agents and the context file is the last layer between developers and a codebase they've stopped reading closely, when that file goes stale there may be nobody left who can tell the difference \u2014 or triage the resulting production incident."
+    "explanation": "The post applies this carefully. At their best, context files are a forcing function — you can't write a good CLAUDE.md without articulating why your conventions exist. Done well, it's documentation-as-understanding. The organizational version is more dangerous: in a large team where everyone works through agents and the context file is the last layer between developers and a codebase they've stopped reading closely, when that file goes stale there may be nobody left who can tell the difference — or triage the resulting production incident."
   },
   {
     "id": "context-q09",
@@ -136,12 +136,12 @@
     "question": "DESIGN.md from Google Stitch uses semantic language ('pill-shaped' for a rounded border) rather than raw CSS values. What principle does this reveal about designing context files for AI consumption?",
     "options": [
       "Context files should always use natural language and avoid technical values so models can generalize across environments.",
-      "Each domain benefits from a context file shaped to what agents need \u2014 DESIGN.md uses design intent",
+      "Each domain benefits from a context file shaped to what agents need — DESIGN.md uses design intent.",
       "Design agents require a separately fine-tuned model from coding agents, so design context files must use a different schema.",
       "Context files should omit precise technical specifications because models interpret CSS values inconsistently across framework versions."
     ],
     "correct": 1,
-    "explanation": "DESIGN.md's semantic language choice \u2014 border radius as 'pill-shaped,' shadows as 'whisper-soft diffused' \u2014 optimizes for the actual consumer: an AI model that benefits more from design intent than mechanical CSS reproduction. This is the broader principle: each specialist domain benefits from a context file shaped to what an agent needs to know about that domain. The pattern extends to API.md for endpoint conventions, SCHEMA.md for data relationships, COMPLIANCE.md for regulatory constraints \u2014 any domain where persistent, purpose-built knowledge improves agent performance."
+    "explanation": "DESIGN.md's semantic language choice — border radius as 'pill-shaped,' shadows as 'whisper-soft diffused' — optimizes for the actual consumer: an AI model that benefits more from design intent than mechanical CSS reproduction. This is the broader principle: each specialist domain benefits from a context file shaped to what an agent needs to know about that domain. The pattern extends to API.md for endpoint conventions, SCHEMA.md for data relationships, COMPLIANCE.md for regulatory constraints — any domain where persistent, purpose-built knowledge improves agent performance."
   },
   {
     "id": "context-q10",
@@ -152,11 +152,11 @@
     "question": "Security analysis found that only 14.5% of real-world context files include security instructions. What is the governance implication the post draws from this finding?",
     "options": [
       "Context files are productivity tools; security constraints belong in a separate document maintained by the security team.",
-      "If you define what the agent can do, you must also define what it cannot",
+      "If you define what the agent can do, you must also define what it cannot.",
       "Security instructions in context files are redundant because foundation models already have comprehensive built-in safety training.",
       "The 14.5% gap is purely organizational: security teams are excluded from context file authorship workflows."
     ],
     "correct": 1,
-    "explanation": "The post is direct: 'If you're defining what the agent can do, also define what it can't \u2014 especially around destructive operations and credential handling.' A context file that specifies build commands and coding conventions but says nothing about what the agent is prohibited from doing leaves the agent's behavior under adversarial conditions undefined. The 14.5% figure reflects a gap between what context files encode and what they need to encode to function as a complete behavioral specification."
+    "explanation": "The post is direct: 'If you're defining what the agent can do, also define what it can't — especially around destructive operations and credential handling.' A context file that specifies build commands and coding conventions but says nothing about what the agent is prohibited from doing leaves the agent's behavior under adversarial conditions undefined. The 14.5% figure reflects a gap between what context files encode and what they need to encode to function as a complete behavioral specification."
   }
 ]

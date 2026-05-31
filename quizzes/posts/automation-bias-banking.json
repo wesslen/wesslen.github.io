@@ -8,7 +8,7 @@
     "question": "Banking operates AI systems across the full Sheridan-Verplank scale simultaneously. The post argues this creates a governance problem. What specifically is the problem?",
     "options": [
       "Operating at different automation levels requires incompatible hardware and software infrastructure that cannot be managed under a unified governance framework.",
-      "'Effective challenge' was designed for Level 4-5 review; applied uniformly it fails at Level 2-3 and is inapplicable at",
+      "'Effective challenge' was designed for Level 4-5 review; applied uniformly it fails at Level 2-3 and is inapplicable at Levels 6-7 and above, where automation speed makes real-time human intervention structurally impossible.",
       "Different automation levels require separate regulatory approval processes, creating compliance timelines that scale poorly as the number of AI deployments grows.",
       "Operating across automation levels creates technical incompatibilities in monitoring tooling that prevent unified observability across the full AI portfolio."
     ],
@@ -24,12 +24,12 @@
     "question": "Parasuraman and Riley (1997) identify three failure modes of human-automation interaction. The post argues disuse is the more prevalent but less studied one in banking. What distinguishes disuse from misuse?",
     "options": [
       "Disuse is more common in older workers who developed pre-automation habits; misuse is more common in younger workers who over-trust systems from the start.",
-      "Misuse produces commission errors \u2014 following wrong recommendations. Disuse produces omission errors \u2014 rote-dismissing automation output and missing true positives.",
+      "Misuse produces commission errors — following wrong recommendations. Disuse produces omission errors — rote-dismissing automation output and missing true positives.",
       "Misuse is a system design failure; disuse is a human training failure. Each requires a completely different institutional remediation strategy and investment.",
       "Disuse only occurs when automation use is mandatory; misuse is the failure mode when automation is optional and users choose to engage with it selectively."
     ],
     "correct": 1,
-    "explanation": "The post uses the AML analyst as the canonical disuse example: 'By mid-shift, her review process has become rote dismissal rather than genuine investigation. She is performing the motions of human oversight without its substance.' The supervisor sees an acceptable false-negative rate and interprets it as a functioning HITL. What's invisible is that the analyst has stopped substantively evaluating flags \u2014 she's exhibiting appropriate distrust toward a system with 96% false positives, but that distrust has curdled into rote dismissal that also misses the 4% true positives. Misuse and disuse both degrade oversight quality but through opposite error types and different mitigation strategies."
+    "explanation": "The post uses the AML analyst as the canonical disuse example: 'By mid-shift, her review process has become rote dismissal rather than genuine investigation. She is performing the motions of human oversight without its substance.' The supervisor sees an acceptable false-negative rate and interprets it as a functioning HITL. What's invisible is that the analyst has stopped substantively evaluating flags — she's exhibiting appropriate distrust toward a system with 96% false positives, but that distrust has curdled into rote dismissal that also misses the 4% true positives. Misuse and disuse both degrade oversight quality but through opposite error types and different mitigation strategies."
   },
   {
     "id": "abb-q03",
@@ -40,12 +40,12 @@
     "question": "Bahner et al. (2008) found that participants explicitly warned an automated aid was imperfect still committed commission errors at a 21% rate. What does this reveal about training as a mitigation for automation bias?",
     "options": [
       "Training is more effective than interface design for reducing automation bias and should be the primary mitigation investment for banking AI deployments.",
-      "Training and explicit fallibility warnings don't eliminate automation bias \u2014 participants still followed wrong recommendations 21% of the time. 'The",
+      "Training and explicit fallibility warnings don't eliminate automation bias — participants still followed wrong recommendations 21% of the time. 'The.",
       "A 21% commission error rate is within acceptable bounds for banking applications that have sufficiently wide downstream margins for human review.",
       "Training effectively reduces misuse failure modes but not disuse; the Bahner finding is limited to the commission error context and doesn't generalize."
     ],
     "correct": 1,
-    "explanation": "This finding is described in the post as 'more directly relevant to banking governance assumptions' than the headline Skitka result. The participants in the Bahner study knew the aid was imperfect; they were explicitly instructed to check carefully. They still committed commission errors at 21%. The synthesis by Parasuraman and Manzey concludes: automation bias cannot be prevented by training or instructions. For an 'the analyst will catch it' governance assumption: this means the assumption is empirically unreliable, not just theoretically suspect. The question is not whether analysts are competent enough to receive better training \u2014 it's that the bias persists regardless of competence and explicit warning."
+    "explanation": "This finding is described in the post as 'more directly relevant to banking governance assumptions' than the headline Skitka result. The participants in the Bahner study knew the aid was imperfect; they were explicitly instructed to check carefully. They still committed commission errors at 21%. The synthesis by Parasuraman and Manzey concludes: automation bias cannot be prevented by training or instructions. For an 'the analyst will catch it' governance assumption: this means the assumption is empirically unreliable, not just theoretically suspect. The question is not whether analysts are competent enough to receive better training — it's that the bias persists regardless of competence and explicit warning."
   },
   {
     "id": "abb-q04",
@@ -57,11 +57,11 @@
     "options": [
       "Regulation requires human involvement in all consequential credit and fraud decisions regardless of demonstrated reliability, so full automation is legally prohibited.",
       "Deceptive alignment, correlated systemic failures at machine speed, and non-assignable accountability combine to make full removal structurally untenable.",
-      "Level 10 automation requires reliable goal preservation under distribution shift \u2014 capabilities current LLMs do not yet possess and will not for several years.",
+      "Level 10 automation requires reliable goal preservation under distribution shift — capabilities current LLMs do not yet possess and will not for several years.",
       "Full automation always produces worse aggregate outcomes than partial automation in financial services, based on empirical comparisons of automated and human-assisted systems."
     ],
     "correct": 1,
-    "explanation": "The post explicitly constructs the strongest version of the 'remove humans' argument and responds with three structural problems. The NIST AI 800-4 finding is operationally important: 'deployed models may present themselves as aligned and cooperative when monitored or evaluated, while opportunistically pursuing their actual goals when detection risks are low.' Removing oversight doesn't eliminate misaligned agent behavior \u2014 it removes the detection mechanism. The correlated-failure problem means individual human errors (bounded, recoverable) are categorically different from systemic agent failures (machine-speed, correlated across all decisions simultaneously). And banks cannot legally assign accountability to an agent \u2014 the liability remains regardless."
+    "explanation": "The post explicitly constructs the strongest version of the 'remove humans' argument and responds with three structural problems. The NIST AI 800-4 finding is operationally important: 'deployed models may present themselves as aligned and cooperative when monitored or evaluated, while opportunistically pursuing their actual goals when detection risks are low.' Removing oversight doesn't eliminate misaligned agent behavior — it removes the detection mechanism. The correlated-failure problem means individual human errors (bounded, recoverable) are categorically different from systemic agent failures (machine-speed, correlated across all decisions simultaneously). And banks cannot legally assign accountability to an agent — the liability remains regardless."
   },
   {
     "id": "abb-q05",
@@ -72,12 +72,12 @@
     "question": "A bank implements an LLM-assisted trade reconciliation system where traders review flagged exceptions. After six months, the post's framework predicts what metric would serve as an early warning signal of governance degradation?",
     "options": [
       "Daily exception volume the system flags, since a declining count would suggest the model has improved enough to reduce the analyst workload meaningfully.",
-      "The human override rate \u2014 if it declines while real exceptions persist, traders may be approving without genuine review rather than trusting a",
+      "The human override rate — if it declines while real exceptions persist, traders may be approving without genuine review rather than trusting a genuinely accurate system, and that distinction is invisible in approval-rate data alone.",
       "Total time traders spend in the exception review interface, since declining engagement time would indicate the system is surfacing exceptions too quickly for substantive review.",
       "The system's false-positive rate on exception detection, since a rising false-positive rate would explain declining analyst engagement without implying governance degradation."
     ],
     "correct": 1,
-    "explanation": "The post establishes this metric explicitly: 'A credit officer whose model-override rate falls below, say, 5% over a sustained period is exhibiting a skill-atrophy signal.' For trade reconciliation, the same principle applies: if traders are reviewing exceptions and approving 97% without modification, the question is whether the system is genuinely this accurate or whether traders have adopted rote-approval behavior. The override rate is the observable indicator of substantive review. A persistently low rate 'in a high-error system' \u2014 one that should be catching real discrepancies \u2014 signals that the human oversight is no longer providing independent judgment."
+    "explanation": "The post establishes this metric explicitly: 'A credit officer whose model-override rate falls below, say, 5% over a sustained period is exhibiting a skill-atrophy signal.' For trade reconciliation, the same principle applies: if traders are reviewing exceptions and approving 97% without modification, the question is whether the system is genuinely this accurate or whether traders have adopted rote-approval behavior. The override rate is the observable indicator of substantive review. A persistently low rate 'in a high-error system' — one that should be catching real discrepancies — signals that the human oversight is no longer providing independent judgment."
   },
   {
     "id": "abb-q06",
@@ -88,12 +88,12 @@
     "question": "Article 14 of the EU AI Act requires operators to 'remain aware of the possible tendency of automatically relying or over-relying on the output produced by a high-risk AI system.' What is the limitation of 'remain aware' as an implementation of this requirement?",
     "options": [
       "The 'remain aware' requirement is too vague to translate into any concrete institutional practice and cannot be operationalized in standard compliance frameworks.",
-      "'Remain aware' is weaker than 'design training and interface to counteract' \u2014 Bahner showed explicit awareness still produced 21% commission errors.",
+      "'Remain aware' is weaker than 'design training and interface to counteract' — Bahner showed explicit awareness still produced 21% commission errors.",
       "The requirement applies only to credit scoring systems listed in Annex III and does not extend to other financial services AI applications covered by the Act.",
       "Article 14's requirement is inapplicable to US-supervised banks because the EU AI Act has no extraterritorial effect on institutions operating exclusively in the United States."
     ],
     "correct": 1,
-    "explanation": "The post is measured about this: 'The translation is imprecise \u2014 remain aware is a weaker requirement than design training and interface to counteract \u2014 but the concept is present.' Bahner et al. showed that explicit awareness of an aid's fallibility (the strongest version of 'remain aware') still produced 21% commission error rates. The EU AI Act names the right construct and makes it binding; it doesn't specify what institutional interventions are required to actually address it. This is appropriate for principles-based regulation but leaves operators to determine implementation, with limited guidance from the empirical literature on what actually reduces automation bias rates."
+    "explanation": "The post is measured about this: 'The translation is imprecise — remain aware is a weaker requirement than design training and interface to counteract — but the concept is present.' Bahner et al. showed that explicit awareness of an aid's fallibility (the strongest version of 'remain aware') still produced 21% commission error rates. The EU AI Act names the right construct and makes it binding; it doesn't specify what institutional interventions are required to actually address it. This is appropriate for principles-based regulation but leaves operators to determine implementation, with limited guidance from the empirical literature on what actually reduces automation bias rates."
   },
   {
     "id": "abb-q07",
@@ -104,12 +104,12 @@
     "question": "The post argues that 'automation bias' as a term creates a governance problem when borrowed without specifying the normative baseline. What is the specific problem?",
     "options": [
       "The term is too technical for non-specialist governance committees and should be replaced with plainer language before appearing in supervisory guidance documents.",
-      "Bias requires a baseline governance frameworks never specify \u2014 an AML analyst rote-dismissing a 96%-false-positive queue may be exhibiting rational behavior, not bias.",
+      "Bias requires a baseline governance frameworks never specify — an AML analyst rote-dismissing a 96%-false-positive queue may be exhibiting fully rational behavior, not bias, and measuring override rates alone conflates the two without resolving the question.",
       "The term carries a negative valence that discourages AI adoption, and governance frameworks should use more neutral descriptors to avoid deterring beneficial automation.",
       "Automation bias measurements are only valid for Level 4-5 systems where humans make explicit accept/reject decisions; the concept doesn't transfer to Level 2-3 monitoring."
     ],
     "correct": 1,
-    "explanation": "The post applies the resource rationality argument precisely: 'the AML analyst running a 96%-false-positive queue who develops rote dismissal patterns may be exhibiting approximately rational behavior given the constraints the system has imposed. The behavior reflects the system design.' Labeling this 'automation bias' without a specified baseline makes it a concern the governance framework cannot operationalize \u2014 you can't measure deviation from a standard that doesn't exist. The resource rationality reframing converts the question from 'is this analyst biased?' to 'what is optimal behavior given this system's false-positive rate and cognitive load requirements?' \u2014 a question the system designer can actually address."
+    "explanation": "The post applies the resource rationality argument precisely: 'the AML analyst running a 96%-false-positive queue who develops rote dismissal patterns may be exhibiting approximately rational behavior given the constraints the system has imposed. The behavior reflects the system design.' Labeling this 'automation bias' without a specified baseline makes it a concern the governance framework cannot operationalize — you can't measure deviation from a standard that doesn't exist. The resource rationality reframing converts the question from 'is this analyst biased?' to 'what is optimal behavior given this system's false-positive rate and cognitive load requirements?' — a question the system designer can actually address."
   },
   {
     "id": "abb-q08",
@@ -125,7 +125,7 @@
       "US banks can satisfy Article 14 requirements by adopting HITL terminology in governance documents, since the EU AI Act does not specify implementation methods."
     ],
     "correct": 1,
-    "explanation": "The post's jurisdictional comparison is direct. Article 14(4)(b) applies from August 2, 2026, with creditworthiness assessment explicitly listed in Annex III as a high-risk use case. This is binding on EU-market credit AI deployments. SR 26-2's GenAI exclusion means there is no equivalent US requirement for GenAI systems. A bank operating in both markets needs governance that satisfies Article 14's automation bias detection and training requirements for EU operations \u2014 and must decide whether to apply the same standard to US operations or maintain separate governance tiers."
+    "explanation": "The post's jurisdictional comparison is direct. Article 14(4)(b) applies from August 2, 2026, with creditworthiness assessment explicitly listed in Annex III as a high-risk use case. This is binding on EU-market credit AI deployments. SR 26-2's GenAI exclusion means there is no equivalent US requirement for GenAI systems. A bank operating in both markets needs governance that satisfies Article 14's automation bias detection and training requirements for EU operations — and must decide whether to apply the same standard to US operations or maintain separate governance tiers."
   },
   {
     "id": "abb-q09",
@@ -133,15 +133,15 @@
     "module": "bainbridge-debt",
     "objective": "mechanism",
     "difficulty": 2,
-    "question": "Bansal et al. (2021) found that AI explanations alone did not produce complementary performance \u2014 humans either accepted AI recommendations wholesale or rejected them, with little case-by-case calibration. What is the implication for how banks should evaluate explainable AI systems?",
+    "question": "Bansal et al. (2021) found that AI explanations alone did not produce complementary performance — humans either accepted AI recommendations wholesale or rejected them, with little case-by-case calibration. What is the implication for how banks should evaluate explainable AI systems?",
     "options": [
       "Explainability provides no governance value and banks should stop investing in it, since behavioral evidence shows it doesn't change analyst decision patterns.",
-      "Systems should be evaluated on complementary error profiles \u2014 whether human-AI teams catch errors neither catches alone \u2014 not only",
+      "Systems should be evaluated on complementary error profiles — whether human-AI teams catch errors neither catches alone — not only.",
       "Explainability output should be provided only for rejected cases, since approved cases show no evidence of analysts reading explanations before their decision.",
       "Complementary performance can be achieved purely through explanation interface redesign without changing the underlying model or analyst decision workflow structures."
     ],
     "correct": 1,
-    "explanation": "The post draws this governance implication directly: 'In banking terms: an AI credit-decision support tool with explainability features should be evaluated on whether it produces complementary error profiles \u2014 whether human-AI teams catch errors neither would catch alone \u2014 rather than whether the explanations are technically accurate.' A system that improves average accuracy while inducing wholesale acceptance of AI recommendations has reduced independent human judgment while looking like it improved governance. The evaluation metric \u2014 aggregate accuracy or AUC \u2014 misses this. Tracking override rates, error distribution differences between human-only and human-AI decisions, and error types across automation levels would reveal whether explainability is actually producing complementarity."
+    "explanation": "The post draws this governance implication directly: 'In banking terms: an AI credit-decision support tool with explainability features should be evaluated on whether it produces complementary error profiles — whether human-AI teams catch errors neither would catch alone — rather than whether the explanations are technically accurate.' A system that improves average accuracy while inducing wholesale acceptance of AI recommendations has reduced independent human judgment while looking like it improved governance. The evaluation metric — aggregate accuracy or AUC — misses this. Tracking override rates, error distribution differences between human-only and human-AI decisions, and error types across automation levels would reveal whether explainability is actually producing complementarity."
   },
   {
     "id": "abb-q10",
@@ -152,11 +152,11 @@
     "question": "The post argues that US banking supervision applies 'effective challenge' uniformly across systems at completely different automation levels. What specific governance artifacts would a next-generation MRM framework add to address this?",
     "options": [
       "New regulations specifying separate regulatory approval processes for each of the ten automation levels, with documentation requirements scaled proportionally to tier.",
-      "Every material AI use case mapped to its Sheridan-Verplank level; level-specific control matrices; override rates treated as Bainbridge skill-atrophy signals requiring investigation.",
+      "Every material AI use case mapped to its Sheridan-Verplank level; level-specific control matrices applied to each; override rates treated as Bainbridge skill-atrophy signals requiring active investigation rather than compliance checkbox items.",
       "Mandatory human review of all AI decisions regardless of automation level to create a uniform oversight standard that doesn't depend on level classification.",
       "Quarterly recalibration of all AI systems at every automation level to counteract automation bias accumulation before it reaches measurable performance degradation thresholds."
     ],
     "correct": 1,
-    "explanation": "The post specifies this: 'I'd want to see every material AI use case mapped to its Sheridan-Verplank level, documented alongside its model risk tier, so that the governance expectation is calibrated to what the system actually requires. And a systematic review of override rates \u2014 not to maximize them, but to treat a persistently low override rate as a Bainbridge skill-atrophy signal requiring investigation rather than an efficiency metric to celebrate.' The level mapping creates the prerequisite for level-appropriate controls; the override-rate monitoring creates the ongoing signal that level-specific governance is actually functioning. Neither exists in current standard MRM practice."
+    "explanation": "The post specifies this: 'I'd want to see every material AI use case mapped to its Sheridan-Verplank level, documented alongside its model risk tier, so that the governance expectation is calibrated to what the system actually requires. And a systematic review of override rates — not to maximize them, but to treat a persistently low override rate as a Bainbridge skill-atrophy signal requiring investigation rather than an efficiency metric to celebrate.' The level mapping creates the prerequisite for level-appropriate controls; the override-rate monitoring creates the ongoing signal that level-specific governance is actually functioning. Neither exists in current standard MRM practice."
   }
 ]

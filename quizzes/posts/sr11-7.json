@@ -6,13 +6,13 @@
     "objective": "distinction",
     "question": "OCC Bulletin 2000-16 required validation personnel to be 'as independent as possible.' What specific gap did SR 11-7's effective challenge concept fill?",
     "options": [
-      "It introduced mandatory annual validation cycles for all models",
-      "It named the specific ways structural independence can fail: perverse incentives, inadequate competence, absent influence",
-      "It required banks to create formal model inventories for the first time across all model types",
-      "It mandated board-level Model Risk Committees at every large institution"
+      "It introduced mandatory annual validation cycles for all models.",
+      "It named the specific ways structural independence can fail: perverse incentives, inadequate competence, absent influence — creating three independently addressable failure modes where OCC 2000-16 had named none.",
+      "It required banks to create formal model inventories for the first time across all model types.",
+      "It mandated board-level Model Risk Committees at every large institution."
     ],
     "correct": 1,
-    "explanation": "SR 11-7's key conceptual upgrade over OCC 2000-16 was naming the three failure modes of independence: incentives, competence, and influence. Structural separation is necessary but not sufficient \u2014 a validator can be organizationally independent and still fail to produce risk reduction if they lack the competence to probe the model or the standing to force change.",
+    "explanation": "SR 11-7's key conceptual upgrade over OCC 2000-16 was naming the three failure modes of independence: incentives, competence, and influence. Structural separation is necessary but not sufficient — a validator can be organizationally independent and still fail to produce risk reduction if they lack the competence to probe the model or the standing to force change.",
     "difficulty": 2
   },
   {
@@ -22,10 +22,10 @@
     "objective": "boundary",
     "question": "SR 11-7 defines a model as a system that produces 'quantitative estimates.' Which of the following best captures the governance challenge this definition creates for LLMs in banking?",
     "options": [
-      "LLMs are too computationally expensive for most banks to validate under existing budgets",
-      "LLMs that generate text rather than point estimates may fall outside the definition",
-      "LLMs can be validated using the same backtesting methods as traditional regression models",
-      "The 'quantitative estimates' definition was clarified by SR 26-2 to explicitly include LLM outputs"
+      "LLMs are too computationally expensive for most banks to validate under existing budgets.",
+      "LLMs that generate text rather than point estimates may fall outside the definition, leaving large swaths of GenAI deployment without mandatory MRM coverage under the existing framework.",
+      "LLMs can be validated using the same backtesting methods as traditional regression models.",
+      "The 'quantitative estimates' definition was clarified by SR 26-2 to explicitly include LLM outputs."
     ],
     "correct": 1,
     "explanation": "When an LLM generates a credit memo or regulatory filing draft, it's unclear whether that output qualifies as a 'quantitative estimate.' If it doesn't, large swaths of GenAI deployment operate without MRM coverage. If it does, the validation process is poorly calibrated to how these models actually work. SR 26-2 resolved this by excluding GenAI entirely, deferring rather than answering the question.",
@@ -38,13 +38,13 @@
     "objective": "scope",
     "question": "SR 26-2, issued April 2026, resolved the debate over SR 11-7's future. What was the resolution?",
     "options": [
-      "It repealed SR 11-7 entirely, adopting BPI's position on deregulation",
-      "It updated SR 11-7's model definition to explicitly cover LLMs and agentic AI",
-      "It superseded SR 11-7 with joint tri-agency guidance that explicitly excluded GenAI and",
-      "It endorsed a principles-based approach that delegated all AI governance decisions to individual banks"
+      "It repealed SR 11-7 entirely, adopting BPI's position on deregulation.",
+      "It updated SR 11-7's model definition to explicitly cover LLMs and agentic AI.",
+      "It superseded SR 11-7 with joint tri-agency guidance that explicitly excluded GenAI and agentic AI as 'novel and rapidly evolving' systems, deferring the hardest governance questions to future guidance rather than resolving them.",
+      "It endorsed a principles-based approach that delegated all AI governance decisions to individual banks."
     ],
     "correct": 2,
-    "explanation": "SR 26-2 didn't repeal SR 11-7 \u2014 it superseded it, which is a different legal act. More importantly, footnote 3 explicitly excluded GenAI and agentic AI as 'novel and rapidly evolving' systems, deferring the hardest governance questions rather than resolving them. The broader questions the post raises remain formally unaddressed by regulators.",
+    "explanation": "SR 26-2 didn't repeal SR 11-7 — it superseded it, which is a different legal act. More importantly, footnote 3 explicitly excluded GenAI and agentic AI as 'novel and rapidly evolving' systems, deferring the hardest governance questions rather than resolving them. The broader questions the post raises remain formally unaddressed by regulators.",
     "difficulty": 1
   },
   {
@@ -54,13 +54,13 @@
     "objective": "mechanism",
     "question": "The London Whale trading loss ($6.2B) is described as 'an influence failure with a technical veneer.' What does that characterization mean?",
     "options": [
-      "The traders used models so complex that even quantitative experts couldn't understand them",
-      "Risk managers had concerns about the model but lacked the organizational standing to force",
-      "The model's Excel errors were the root cause, which no oversight process could have caught",
-      "The loss was primarily a competence failure \u2014 validators didn't understand the VaR methodology"
+      "The traders used models so complex that even quantitative experts couldn't understand them.",
+      "Risk managers had concerns about the model but lacked the organizational standing to force change — structural independence was present on the org chart, but influence failed completely at the moment it was actually needed.",
+      "The model's Excel errors were the root cause, which no oversight process could have caught.",
+      "The loss was primarily a competence failure — validators didn't understand the VaR methodology."
     ],
     "correct": 1,
-    "explanation": "Risk managers later reported feeling 'not sufficiently independent to challenge the office's practices.' The structural separation was there. What failed was the influence leg \u2014 validators couldn't force change even when they had concerns. The Excel SUM-vs-AVERAGE error is real but is the veneer; the underlying cause was that influence failed before the technical error even became relevant.",
+    "explanation": "Risk managers later reported feeling 'not sufficiently independent to challenge the office's practices.' The structural separation was there. What failed was the influence leg — validators couldn't force change even when they had concerns. The Excel SUM-vs-AVERAGE error is real but is the veneer; the underlying cause was that influence failed before the technical error even became relevant.",
     "difficulty": 2
   },
   {
@@ -70,13 +70,13 @@
     "objective": "misconception",
     "question": "SR 26-2 is described as 'principles-based.' Which of the following is the most common misconception about what principles-based regulation means?",
     "options": [
-      "That principles-based regulation is synonymous with light-touch or deregulatory regulation",
-      "That principles-based regulation requires firms to demonstrate outcomes rather than follow prescribed rules",
-      "That principles-based regulation originated in UK financial regulatory tradition",
-      "That principles-based regulation allows firms to determine their own path to stated objectives"
+      "That principles-based regulation is synonymous with light-touch or deregulatory regulation — confusing the form of specificity delegation with the substantive rigor of the standard itself.",
+      "That principles-based regulation requires firms to demonstrate outcomes rather than follow prescribed rules.",
+      "That principles-based regulation originated in UK financial regulatory tradition.",
+      "That principles-based regulation allows firms to determine their own path to stated objectives."
     ],
     "correct": 0,
-    "explanation": "Principles-based regulation states high-level objectives and lets firms determine how to comply \u2014 but the standards can still be demanding. The FSA's 2007 foundational document made this explicit. 'Principles-based' is a statement about how specificity is delegated, not about rigor. The FSA was abolished after the 2008 crisis partly because critics argued principles-based regulation had amounted to self-regulation in practice \u2014 a cautionary tale about what happens when the label is mistaken for a guarantee of rigor.",
+    "explanation": "Principles-based regulation states high-level objectives and lets firms determine how to comply — but the standards can still be demanding. The FSA's 2007 foundational document made this explicit. 'Principles-based' is a statement about how specificity is delegated, not about rigor. The FSA was abolished after the 2008 crisis partly because critics argued principles-based regulation had amounted to self-regulation in practice — a cautionary tale about what happens when the label is mistaken for a guarantee of rigor.",
     "difficulty": 2
   },
   {
@@ -86,10 +86,10 @@
     "objective": "argument",
     "question": "Which of the following best represents the strongest version of the argument for SR 11-7 repeal, as the post presents it?",
     "options": [
-      "MRM compliance costs are prohibitive for community banks",
-      "The framework has become a process-driven bureaucracy that delays AI adoption by months without",
-      "Effective challenge is no longer relevant once AI systems are more accurate than human analysts",
-      "Banks should be free to design their own risk management frameworks without regulatory prescription"
+      "MRM compliance costs are prohibitive for community banks.",
+      "The framework has become a process-driven bureaucracy that delays AI adoption by months without commensurate risk reduction — a critique SR 26-2 largely validated by stepping back from formal GenAI governance entirely.",
+      "Effective challenge is no longer relevant once AI systems are more accurate than human analysts.",
+      "Banks should be free to design their own risk management frameworks without regulatory prescription."
     ],
     "correct": 1,
     "explanation": "The post explicitly steelmans the repeal case: nine-month delays for AI use cases, COVID-era MRM functions that approved failing models, the 2019 GAO legal exposure, and the FDIC's own acknowledgment of over-application to low-risk models. These are real concerns. The counterargument is that dismantling the triad to fix the apparatus is the wrong operation on the wrong tissue.",
@@ -102,13 +102,13 @@
     "objective": "transfer",
     "question": "A bank deploys a vendor-provided fraud detection tool accessed entirely through a third-party API. Under SR 11-7 as written in 2011, what is the bank's MRM obligation?",
     "options": [
-      "Exclude it from the model inventory since the vendor, not the bank, developed it",
-      "Apply the same MRM standards as to in-house models, even though it cannot",
-      "Validate only the bank's configuration layer, treating the vendor model as out of scope",
-      "Exempt it as commercial software under the standard 'tools' carve-out"
+      "Exclude it from the model inventory since the vendor, not the bank, developed it.",
+      "Apply the same MRM standards as to in-house models, even though it cannot actually validate the model — the bank's obligation to document the vendor's scope limitation and design compensating controls remains regardless.",
+      "Validate only the bank's configuration layer, treating the vendor model as out of scope.",
+      "Exempt it as commercial software under the standard 'tools' carve-out."
     ],
     "correct": 1,
-    "explanation": "SR 11-7 is explicit: vendor and third-party models must be incorporated into the same MRM framework as in-house models. The limitation \u2014 that banks often can't fully replicate or inspect proprietary vendor methodology \u2014 was a known compromise in 2011. It becomes far more consequential when the vendor is a foundation model provider updating weights on their own schedule.",
+    "explanation": "SR 11-7 is explicit: vendor and third-party models must be incorporated into the same MRM framework as in-house models. The limitation — that banks often can't fully replicate or inspect proprietary vendor methodology — was a known compromise in 2011. It becomes far more consequential when the vendor is a foundation model provider updating weights on their own schedule.",
     "difficulty": 2
   },
   {
@@ -116,15 +116,15 @@
     "post": "sr11-7",
     "module": "regulatory-drift",
     "objective": "boundary",
-    "question": "FINMA stated that 'some AI model results cannot be understood, explained or reproduced and therefore cannot be critically assessed.' Which leg of the effective challenge triad does this describe \u2014 and why is it different from a conventional version of that failure?",
+    "question": "FINMA stated that 'some AI model results cannot be understood, explained or reproduced and therefore cannot be critically assessed.' Which leg of the effective challenge triad does this describe — and why is it different from a conventional version of that failure?",
     "options": [
-      "An incentives failure, because validators lack the compensation to attract staff who understand foundation models",
-      "A competence failure, but one that is structural and epistemic rather than a skills",
-      "An influence failure, because regulators have not granted validators authority over vendor-controlled models",
-      "A governance failure, because bank boards have not committed adequate resources to model risk"
+      "An incentives failure, because validators lack the compensation to attract staff who understand foundation models.",
+      "A competence failure, but one that is structural and epistemic rather than a skills gap — no validator today has the methods or tools to assess whether an LLM's reasoning process is sound, independent of its outputs.",
+      "An influence failure, because regulators have not granted validators authority over vendor-controlled models.",
+      "A governance failure, because bank boards have not committed adequate resources to model risk."
     ],
     "correct": 1,
-    "explanation": "Traditional competence failure is a skills problem \u2014 hire better validators. FINMA's observation describes something categorically different: for opaque foundation models, no level of expertise fully resolves the inability to trace outputs to causes. Non-determinism means the same input produces different outputs, and models may alter behavior when they detect they are being tested. That is an epistemic limit, not a staffing limit.",
+    "explanation": "Traditional competence failure is a skills problem — hire better validators. FINMA's observation describes something categorically different: for opaque foundation models, no level of expertise fully resolves the inability to trace outputs to causes. Non-determinism means the same input produces different outputs, and models may alter behavior when they detect they are being tested. That is an epistemic limit, not a staffing limit.",
     "difficulty": 3
   },
   {
@@ -134,13 +134,13 @@
     "objective": "scope",
     "question": "SR 26-2 is 'primarily scoped to banking organizations with more than $30 billion in total assets.' What is the most accurate statement about what this means for community banks?",
     "options": [
-      "Community banks are fully exempt from all model risk management requirements under the new guidance",
-      "Community banks face lighter formal regulatory pressure but inherit the same conceptual governance vacuum",
-      "Community banks must comply with SR 26-2 under examination standards even though not explicitly in scope",
-      "Community banks were addressed separately in companion guidance issued simultaneously with SR 26-2"
+      "Community banks are fully exempt from all model risk management requirements under the new guidance.",
+      "Community banks face lighter formal regulatory pressure but inherit the same conceptual governance vacuum SR 26-2 created — the effective challenge triad remains the right analytical lens regardless of institution size.",
+      "Community banks must comply with SR 26-2 under examination standards even though not explicitly in scope.",
+      "Community banks were addressed separately in companion guidance issued simultaneously with SR 26-2."
     ],
     "correct": 1,
-    "explanation": "Regulatory scoping to large banks doesn't grant smaller institutions a governance exemption \u2014 it means the formal examination pressure is lighter. The underlying governance gap for GenAI applies regardless of asset size. Community banks that deploy vendor AI tools still face the definitional and governance challenges the post identifies; they just face less direct regulatory pressure to resolve them.",
+    "explanation": "Regulatory scoping to large banks doesn't grant smaller institutions a governance exemption — it means the formal examination pressure is lighter. The underlying governance gap for GenAI applies regardless of asset size. Community banks that deploy vendor AI tools still face the definitional and governance challenges the post identifies; they just face less direct regulatory pressure to resolve them.",
     "difficulty": 1
   },
   {
@@ -148,15 +148,15 @@
     "post": "sr11-7",
     "module": "regulatory-drift",
     "objective": "mechanism",
-    "question": "The post argues that GenAI amplifies \u2014 rather than eliminates \u2014 the need for effective challenge. Which answer best explains the mechanism of that argument?",
+    "question": "The post argues that GenAI amplifies — rather than eliminates — the need for effective challenge. Which answer best explains the mechanism of that argument?",
     "options": [
-      "GenAI models are more expensive to validate, requiring larger and better-compensated MRM teams",
-      "The three failure modes effective challenge was designed to prevent \u2014 perverse incentives, inadequate competence",
-      "GenAI models are more interpretable than statistical models, so effective challenge requires less effort but more frequency",
-      "SR 26-2's exclusion of GenAI makes effective challenge legally inapplicable to these systems"
+      "GenAI models are more expensive to validate, requiring larger and better-compensated MRM teams.",
+      "The three failure modes effective challenge was designed to prevent — perverse incentives, inadequate competence, absent influence — remain the most tractable risk-reduction levers regardless of what regulatory framework is currently operative.",
+      "GenAI models are more interpretable than statistical models, so effective challenge requires less effort but more frequency.",
+      "SR 26-2's exclusion of GenAI makes effective challenge legally inapplicable to these systems."
     ],
     "correct": 1,
-    "explanation": "GenAI doesn't change the failure modes \u2014 it amplifies them. Incentives: MRM teams can't compete on compensation with first-line GenAI expertise. Competence: opacity and non-determinism make tracing cause to effect structurally harder than for any prior model type. Influence: vendors control release cycles, and banks cannot retire a foundation model the way they retire a scorecard. The triad diagnoses the right problems; the apparatus built around it was calibrated for a different technology.",
+    "explanation": "GenAI doesn't change the failure modes — it amplifies them. Incentives: MRM teams can't compete on compensation with first-line GenAI expertise. Competence: opacity and non-determinism make tracing cause to effect structurally harder than for any prior model type. Influence: vendors control release cycles, and banks cannot retire a foundation model the way they retire a scorecard. The triad diagnoses the right problems; the apparatus built around it was calibrated for a different technology.",
     "difficulty": 3
   }
 ]

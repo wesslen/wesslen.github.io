@@ -8,7 +8,7 @@
     "question": "The post draws a sharp line between what context files do and what a harness does. Which best captures this division?",
     "options": [
       "Context files handle authentication; harnesses handle authorization at the tool-call and API-permission level.",
-      "Context files encode what the agent should know; harnesses enforce what instructions alone cannot guarantee",
+      "Context files encode what the agent should know; harnesses enforce what instructions alone cannot guarantee, separating the informational layer from the structural enforcement layer in production agent design.",
       "Context files are for long-running tasks; harnesses are designed for short, single-turn stateless interactions.",
       "Context files are written by developers; harnesses are generated automatically by the orchestration framework at runtime."
     ],
@@ -25,11 +25,11 @@
     "options": [
       "JSON files are smaller and consume fewer context window tokens when read into the agent session at startup.",
       "Markdown formatting breaks when agents add code blocks or headers, corrupting the state file's structure over time.",
-      "Agents resist accidentally modifying JSON \u2014 its rigid structure discourages the freeform prose insertions that drift",
+      "Agents resist accidentally modifying JSON — its rigid structure discourages the freeform prose insertions that drift.",
       "JSON is required by the A2A protocol specification for any cross-agent state transfer across framework boundaries."
     ],
     "correct": 2,
-    "explanation": "Agents are trained to generate and modify Markdown freely \u2014 it's the medium of conversational output. JSON's rigid structure creates a natural barrier against unintended modification: no freeform prose insertion, no heading restructuring, no 'helpful' additions. When an agent reads a feature list in JSON it's less likely to add narrative context or restructure entries. The filesystem-as-message-bus pattern (JSON for state, git for history) produces an inspectable, replayable inter-session record resistant to agent drift."
+    "explanation": "Agents are trained to generate and modify Markdown freely — it's the medium of conversational output. JSON's rigid structure creates a natural barrier against unintended modification: no freeform prose insertion, no heading restructuring, no 'helpful' additions. When an agent reads a feature list in JSON it's less likely to add narrative context or restructure entries. The filesystem-as-message-bus pattern (JSON for state, git for history) produces an inspectable, replayable inter-session record resistant to agent drift."
   },
   {
     "id": "ahd-q03",
@@ -40,12 +40,12 @@
     "question": "What is 'the harness' in the context of AI agent engineering?",
     "options": [
       "The system prompt that tells the agent how to behave and what constraints apply during a session.",
-      "The orchestration layer managing the execution loop, tool routing, error recovery, and inter-session continuity",
-      "The hardware infrastructure \u2014 GPUs and servers \u2014 that runs the underlying language model at inference time.",
+      "The orchestration layer managing the execution loop, tool routing, error recovery, and inter-session continuity.",
+      "The hardware infrastructure — GPUs and servers — that runs the underlying language model at inference time.",
       "The evaluation framework used to measure agent performance on standardized benchmark and domain-specific tasks."
     ],
     "correct": 1,
-    "explanation": "The harness is the engineering layer that surrounds the model API call. The core loop \u2014 call the LLM, check for tool calls, execute them, feed results back \u2014 is roughly the same across frameworks. The harness is everything else: what happens when the context window fills at hour four, when a tool fails three times in a row, when the model needs to resume from yesterday's session. Anthropic's position: harness architecture is the single largest lever for agent reliability in production."
+    "explanation": "The harness is the engineering layer that surrounds the model API call. The core loop — call the LLM, check for tool calls, execute them, feed results back — is roughly the same across frameworks. The harness is everything else: what happens when the context window fills at hour four, when a tool fails three times in a row, when the model needs to resume from yesterday's session. Anthropic's position: harness architecture is the single largest lever for agent reliability in production."
   },
   {
     "id": "ahd-q04",
@@ -57,11 +57,11 @@
     "options": [
       "Summarization is too slow for real-time interactions because it requires an additional synchronous LLM call.",
       "Summarization destroys the agent's ability to reference specific earlier conversation turns by their original wording.",
-      "Agents may still exhibit context anxiety \u2014 rushing or cutting corners as the window",
+      "Agents may still exhibit context anxiety — rushing or cutting corners as the context window fills — even with structured memory, because the compressive pressure is architectural and persists regardless of how context is organized.",
       "Summarization requires a second LLM call that doubles API costs without improving task completion rates."
     ],
     "correct": 2,
-    "explanation": "Anthropic's November 2025 engineering post identified two failure modes in summarization-based approaches: agents that attempt to one-shot complex work (trying to finish before context runs out) and agents that declare jobs done prematurely when they see existing progress in a compacted conversation. Context anxiety \u2014 the agent's tendency to cut corners as it senses the window filling \u2014 persists even with summarization. A full context reset eliminates this at the cost of requiring a rich handoff artifact. The post's lesson: compaction strategy is not a permanent architectural decision."
+    "explanation": "Anthropic's November 2025 engineering post identified two failure modes in summarization-based approaches: agents that attempt to one-shot complex work (trying to finish before context runs out) and agents that declare jobs done prematurely when they see existing progress in a compacted conversation. Context anxiety — the agent's tendency to cut corners as it senses the window filling — persists even with summarization. A full context reset eliminates this at the cost of requiring a rich handoff artifact. The post's lesson: compaction strategy is not a permanent architectural decision."
   },
   {
     "id": "ahd-q05",
@@ -72,12 +72,12 @@
     "question": "A team's multi-session coding agent consistently begins each new session by re-examining the codebase from scratch, even though a claude-progress.txt log exists. What does this reveal about harness design?",
     "options": [
       "The progress file format is incompatible with the agent's context window parsing logic and is silently skipped.",
-      "Without explicit harness startup logic enforcing progress-file reads first, agents skip available state",
+      "Without explicit harness startup logic enforcing progress-file reads first, agents skip available state.",
       "The agent doesn't trust externally generated logs and builds its own understanding from the codebase directly.",
       "Progress files must be in JSON; Markdown logs are not reliably parsed by the agent's session initialization logic."
     ],
     "correct": 1,
-    "explanation": "This is the precise failure mode Anthropic documented: 'without explicit harness logic prompting agents to read progress files first, they skip them and start from scratch \u2014 even when the files are present and well-structured.' The context file can describe the init pattern; what it cannot do is guarantee the agent executes the startup sequence in the right order. That enforcement requires explicit harness startup logic: read progress, check git log, run health check, select next task \u2014 in that specific order, every time."
+    "explanation": "This is the precise failure mode Anthropic documented: 'without explicit harness logic prompting agents to read progress files first, they skip them and start from scratch — even when the files are present and well-structured.' The context file can describe the init pattern; what it cannot do is guarantee the agent executes the startup sequence in the right order. That enforcement requires explicit harness startup logic: read progress, check git log, run health check, select next task — in that specific order, every time."
   },
   {
     "id": "ahd-q06",
@@ -88,12 +88,12 @@
     "question": "The post argues that 'eval scores that appear to reflect model capability may actually be measuring harness design choices.' What is the core claim?",
     "options": [
       "Model vendors inflate benchmark scores by using better hardware during official evaluations than in production.",
-      "When you evaluate 'an agent,' you evaluate the harness and model together",
+      "When you evaluate 'an agent,' you evaluate the harness and model together.",
       "Eval scores should be ignored entirely in favor of qualitative transcript review and informed human judgment.",
       "Open-source models score poorly primarily because they lack proprietary harness improvements that closed-model vendors ship."
     ],
     "correct": 1,
-    "explanation": "The post uses Anthropic's concrete illustration: Opus 4.5 solved a flight-booking benchmark by discovering a policy loophole. It failed the evaluation as written but found a better solution for the user. The evaluation harness defined success too narrowly. The general principle: don't take eval scores at face value until someone reads actual transcripts and verifies grading criteria reflect genuine task success. Calibrating an evaluator agent requires the same iterative refinement as the task agent \u2014 it's harness work that's easy to forget when the bottleneck looks like model behavior."
+    "explanation": "The post uses Anthropic's concrete illustration: Opus 4.5 solved a flight-booking benchmark by discovering a policy loophole. It failed the evaluation as written but found a better solution for the user. The evaluation harness defined success too narrowly. The general principle: don't take eval scores at face value until someone reads actual transcripts and verifies grading criteria reflect genuine task success. Calibrating an evaluator agent requires the same iterative refinement as the task agent — it's harness work that's easy to forget when the bottleneck looks like model behavior."
   },
   {
     "id": "ahd-q07",
@@ -101,10 +101,10 @@
     "module": "agentic-engineering",
     "objective": "misconception",
     "difficulty": 2,
-    "question": "A team argues: 'We don't need to invest in harness design \u2014 we'll use a more capable model.' What does the post's main thesis identify as wrong with this reasoning?",
+    "question": "A team argues: 'We don't need to invest in harness design — we'll use a more capable model.' What does the post's main thesis identify as wrong with this reasoning?",
     "options": [
       "More capable models are always more expensive and rarely available through standard commercial APIs at scale.",
-      "A well-designed harness running a smaller model can outperform a naive setup with a larger",
+      "A well-designed harness running a smaller model can outperform a naive setup with a larger model, because harness architecture determines whether the model's capabilities are actually utilized in production rather than wasted on scaffolding failures.",
       "More capable models have shorter context windows, making harness design more important for smaller cheaper models.",
       "Model capability refers to single-turn performance only; harnesses operate at session scope and have no effect."
     ],
@@ -120,12 +120,12 @@
     "question": "The post describes a three-agent 'GAN-inspired' architecture: planner, generator, and evaluator. What specific failure mode does a separate adversarial evaluator address that the generator cannot address by self-evaluation?",
     "options": [
       "Generators can't run test suites, so a separate evaluator agent is needed to execute tests and report results.",
-      "Agents that generate and evaluate their own work tend to approve it even when mediocre",
+      "Agents that generate and evaluate their own work tend to approve it even when mediocre.",
       "Multi-agent architectures require a specialized evaluator to prevent context window overflow during review passes.",
       "Evaluators have access to external APIs and databases that generator agents are not permitted to call directly."
     ],
     "correct": 1,
-    "explanation": "Directly from Anthropic's March 2026 engineering post: agents that generate work and then evaluate it tend to find it adequate. 'Out of the box, Claude is a poor QA agent. In early runs, I watched it identify legitimate issues, then talk itself into deciding they weren't a big deal and approve the work anyway.' Tuning a standalone skeptical evaluator is tractable through transcript review and prompt iteration. Making a generator critical of its own output requires simultaneously optimizing for completion and for doubt about that completion \u2014 a fundamentally harder problem."
+    "explanation": "Directly from Anthropic's March 2026 engineering post: agents that generate work and then evaluate it tend to find it adequate. 'Out of the box, Claude is a poor QA agent. In early runs, I watched it identify legitimate issues, then talk itself into deciding they weren't a big deal and approve the work anyway.' Tuning a standalone skeptical evaluator is tractable through transcript review and prompt iteration. Making a generator critical of its own output requires simultaneously optimizing for completion and for doubt about that completion — a fundamentally harder problem."
   },
   {
     "id": "ahd-q09",
@@ -133,15 +133,15 @@
     "module": "agentic-engineering",
     "objective": "mechanism",
     "difficulty": 3,
-    "question": "Token usage scales roughly as: standard chat (1\u00d7), single-agent loop (4\u00d7), multi-agent system (15\u00d7). Why does multi-agent scaling jump so dramatically from single-agent?",
+    "question": "Token usage scales roughly as: standard chat (1×), single-agent loop (4×), multi-agent system (15×). Why does multi-agent scaling jump so dramatically from single-agent?",
     "options": [
       "Multi-agent systems require redundant context copies to prevent agents from producing contradictory outputs.",
-      "Tool responses account for 67.6% of total tokens \u2014 in multi-agent systems, accumulated tool",
+      "Tool responses account for 67.6% of total tokens — in multi-agent systems, accumulated tool outputs across agents compound this further, making tool response verbosity the primary driver of both context bloat and per-request latency.",
       "Multi-agent systems route to larger models for subtasks, which carry higher per-token API costs.",
       "Agent communication protocols add substantial metadata overhead accounting for most of the observed scaling difference."
     ],
     "correct": 1,
-    "explanation": "The Manus team's finding \u2014 tool responses account for 67.6% of total tokens in agent runs \u2014 is the key mechanism. In a multi-agent system, tool responses from one agent become input context for the next, and accumulated conversational history travels through each agent junction. Coordination events (passing tasks, confirming completion, handling errors) generate additional token overhead. This is why tool surface minimization is a first-order efficiency concern: one team reduced from 175 tools (~26% of context) to 11 tools (~1.6%) and saw compounding benefits across every agent interaction."
+    "explanation": "The Manus team's finding — tool responses account for 67.6% of total tokens in agent runs — is the key mechanism. In a multi-agent system, tool responses from one agent become input context for the next, and accumulated conversational history travels through each agent junction. Coordination events (passing tasks, confirming completion, handling errors) generate additional token overhead. This is why tool surface minimization is a first-order efficiency concern: one team reduced from 175 tools (~26% of context) to 11 tools (~1.6%) and saw compounding benefits across every agent interaction."
   },
   {
     "id": "ahd-q10",
@@ -152,11 +152,11 @@
     "question": "The post notes that the harness-vs-context boundary 'should track model capability and be revisited as models improve.' What does this predict about how production harnesses will evolve?",
     "options": [
       "As models improve, harnesses become unnecessary and agents will reliably self-manage without external scaffolding.",
-      "Improved models may let some enforcement move into context guidelines \u2014 but kill switches",
+      "Improved models may let some enforcement move into context guidelines — but kill switches, output validators, and compute budget ceilings must remain in harness code, because no model is reliably trustworthy without structural enforcement independent of the model itself.",
       "Model improvements apply only to single-turn performance; harness requirements are fixed permanently by task type.",
       "Better models require larger and more complex harnesses to fully exploit their expanded capability range."
     ],
     "correct": 1,
-    "explanation": "The post gives a concrete example: Opus 4.5 required explicit context resets; Opus 4.6 improved enough that one continuous session with automatic compaction sufficed. The harness requirement evolved with model capability. But certain categories remain permanently in the harness: deterministic tool prohibitions, human approval gates, retry logic with hard-kill thresholds, and session persistence guarantees. These require behavioral guarantees that probabilistic generation cannot provide \u2014 a model told 'always ask for approval before irreversible actions' may still proceed in ambiguous situations."
+    "explanation": "The post gives a concrete example: Opus 4.5 required explicit context resets; Opus 4.6 improved enough that one continuous session with automatic compaction sufficed. The harness requirement evolved with model capability. But certain categories remain permanently in the harness: deterministic tool prohibitions, human approval gates, retry logic with hard-kill thresholds, and session persistence guarantees. These require behavioral guarantees that probabilistic generation cannot provide — a model told 'always ask for approval before irreversible actions' may still proceed in ambiguous situations."
   }
 ]

@@ -5,12 +5,12 @@
     "module": "gui-agents",
     "objective": "mechanism",
     "difficulty": 2,
-    "question": "The Universal Verifier found WebVoyager's native evaluator had a 60% false positive rate \u2014 credits 74.6% as successes where UV calls only 37.9%. Why does upgrading the backbone model from GPT-4o to GPT-5.2 fail to close this gap?",
+    "question": "The Universal Verifier found WebVoyager's native evaluator had a 60% false positive rate — credits 74.6% as successes where UV calls only 37.9%. Why does upgrading the backbone model from GPT-4o to GPT-5.2 fail to close this gap?",
     "options": [
-      "GPT-5.2 has a documented systematic bias toward marking GUI agent task outputs as failures, causing the false negative rate to rise precisely as much as the false positive rate falls",
-      "Upgrading the backbone redistributes errors rather than eliminating them \u2014 the UV's gains come from rubric quality, process/outcome separation, and screenshot focusing, not model intelligence",
-      "The false positive rate on GUI agent benchmarks cannot fall below 30% regardless of backbone capability, due to irreducible task ambiguity in natural-language instructions and partial success states",
-      "WebVoyager's native evaluator uses proprietary closed-source scoring logic that cannot be replicated or improved by swapping the underlying backbone model to a more capable version"
+      "GPT-5.2 has a documented systematic bias toward marking GUI agent task outputs as failures, causing the false negative rate to rise precisely as much as the false positive rate falls.",
+      "Upgrading the backbone redistributes errors rather than eliminating them — the UV's gains come from rubric quality, process/outcome separation, and screenshot focusing, not model intelligence.",
+      "The false positive rate on GUI agent benchmarks cannot fall below 30% regardless of backbone capability, due to irreducible task ambiguity in natural-language instructions and partial success states.",
+      "WebVoyager's native evaluator uses proprietary closed-source scoring logic that cannot be replicated or improved by swapping the underlying backbone model to a more capable version."
     ],
     "correct": 1,
     "explanation": "This is the post's central finding: the problem is not insufficient model intelligence, it's the wrong architecture. Upgrading the backbone while keeping the same approach (no task rubric, bulk screenshot assessment) shifts errors rather than eliminating them. The UV's improvements come from four architectural changes: generating rubrics before seeing agent output (preventing post-hoc rationalization), separating process from outcome scoring, controlling for uncontrollable failures, and using a relevance matrix to focus each screenshot against specific criteria. These are design decisions, not model capability."
@@ -21,15 +21,15 @@
     "module": "gui-agents",
     "objective": "distinction",
     "difficulty": 2,
-    "question": "The Universal Verifier reports two independent signals: a process score (0\u20131) and an outcome score (binary). A bank deploys a GUI agent for loan origination. How do these two signals map to different audit questions?",
+    "question": "The Universal Verifier reports two independent signals: a process score (0–1) and an outcome score (binary). A bank deploys a GUI agent for loan origination. How do these two signals map to different audit questions?",
     "options": [
-      "The process score feeds internal operational dashboards while the outcome score feeds external regulatory reporting \u2014 the two signals belong to different governance channels with different recipients and frequencies",
-      "Process ('follow the compliance workflow?') and outcome ('policy-correct output?') are separate audit questions \u2014 a system outage earns full process credit and zero outcome credit",
-      "Process and outcome scores are mathematically equivalent for well-defined loan origination tasks where every step has exactly one correct completion path and no environment variability",
-      "The process score primarily serves operational risk management while the outcome score serves customer service quality measurement \u2014 they track different populations of failure events"
+      "The process score feeds internal operational dashboards while the outcome score feeds external regulatory reporting — the two signals belong to different governance channels with different recipients and frequencies.",
+      "Process ('follow the compliance workflow?') and outcome ('policy-correct output?') are separate audit questions — a system outage earns full process credit and zero outcome credit.",
+      "Process and outcome scores are mathematically equivalent for well-defined loan origination tasks where every step has exactly one correct completion path and no environment variability.",
+      "The process score primarily serves operational risk management while the outcome score serves customer service quality measurement — they track different populations of failure events."
     ],
     "correct": 1,
-    "explanation": "The post makes this explicit: 'For banks deploying GUI agents on internal workflows (loan origination, regulatory reporting, trade reconciliation), this split isn't just a research contribution. Current evaluation frameworks for enterprise GUI deployments don't appear to make this distinction.' A process success with outcome failure (agent correctly completed every step but hit a CAPTCHA with no credentials) should not be attributed to agent error. An outcome success with process failure (agent reached the right answer via an unexpected path) should not be penalized for non-compliance. The two signals enable attribution of failure to agent error vs. environment error \u2014 essential for root cause analysis in regulated workflows."
+    "explanation": "The post makes this explicit: 'For banks deploying GUI agents on internal workflows (loan origination, regulatory reporting, trade reconciliation), this split isn't just a research contribution. Current evaluation frameworks for enterprise GUI deployments don't appear to make this distinction.' A process success with outcome failure (agent correctly completed every step but hit a CAPTCHA with no credentials) should not be attributed to agent error. An outcome success with process failure (agent reached the right answer via an unexpected path) should not be penalized for non-compliance. The two signals enable attribution of failure to agent error vs. environment error — essential for root cause analysis in regulated workflows."
   },
   {
     "id": "gav-q03",
@@ -39,13 +39,13 @@
     "difficulty": 2,
     "question": "Why does the Universal Verifier generate the task rubric from the task description alone, before seeing what the agent actually did?",
     "options": [
-      "Generating the rubric first is computationally cheaper because it avoids ingesting the full screenshot trajectory before the scoring criteria are established for that specific task",
-      "Generating and scoring together causes criteria to be tailored to what the agent did, not what the task required \u2014 post-hoc rationalization producing phantom criteria",
-      "Pre-generating rubrics enables parallel evaluation of multiple independent agent outputs against identical criteria simultaneously, substantially improving throughput in high-volume benchmark pipelines with many agent variants",
-      "Task descriptions contain all normatively required information to define correct completion, making agent output logically unnecessary as any input to the rubric-generation step of the evaluation"
+      "Generating the rubric first is computationally cheaper because it avoids ingesting the full screenshot trajectory before the scoring criteria are established for that specific task.",
+      "Generating and scoring together causes criteria to be tailored to what the agent did, not what the task required — post-hoc rationalization producing phantom criteria aligned to output rather than to the original task specification.",
+      "Pre-generating rubrics enables parallel evaluation of multiple independent agent outputs against identical criteria simultaneously, substantially improving throughput in high-volume benchmark pipelines with many agent variants.",
+      "Task descriptions contain all normatively required information to define correct completion, making agent output logically unnecessary as any input to the rubric-generation step of the evaluation."
     ],
     "correct": 1,
-    "explanation": "The post identifies the failure mode of combined rubric-generation-and-scoring: 'the model tailors criteria to what the agent actually did rather than what the task required \u2014 post-hoc rationalization at scale.' A rubric generated after seeing the agent's output will tend to define 'correct' in terms of what the agent did, producing phantom criteria that weren't in the original task and cascading errors where a single upstream decision multiplies into downstream criteria violations. The two-pass approach (generate rubric, then score independently) is the model risk management parallel: separating the criterion author from the criterion scorer."
+    "explanation": "The post identifies the failure mode of combined rubric-generation-and-scoring: 'the model tailors criteria to what the agent actually did rather than what the task required — post-hoc rationalization at scale.' A rubric generated after seeing the agent's output will tend to define 'correct' in terms of what the agent did, producing phantom criteria that weren't in the original task and cascading errors where a single upstream decision multiplies into downstream criteria violations. The two-pass approach (generate rubric, then score independently) is the model risk management parallel: separating the criterion author from the criterion scorer."
   },
   {
     "id": "gav-q04",
@@ -55,13 +55,13 @@
     "difficulty": 3,
     "question": "An auto-research agent using Claude Opus 4.6 reached ~70% of the human expert's verifier performance in one day vs. three weeks. But it 'struggled to encode the evaluative judgment behind the large structural changes that drove the expert-designed verifier's step-function improvements.' What does this reveal about AI-assisted research?",
     "options": [
-      "AI research agents are not reliable enough for verifier design tasks \u2014 the 30% performance gap shows that autonomous research agents remain too unreliable for high-stakes evaluation system development",
-      "The agent optimized well within an established architecture but couldn't recognize when the architecture needed redesigning \u2014 structural insight (rubric separation, process/outcome split) required the human expert",
-      "A more capable model than Claude Opus 4.6 would have matched the expert without needing the expert's initial structural configurations \u2014 the performance gap reflects model capability, not an architectural principle",
-      "Human researchers are irreplaceable across all phases of AI evaluation research and should never be fully augmented by autonomous AI research agents regardless of the task complexity involved"
+      "AI research agents are not reliable enough for verifier design tasks — the 30% performance gap shows that autonomous research agents remain too unreliable for high-stakes evaluation system development.",
+      "The agent optimized well within an established architecture but couldn't recognize when the architecture needed redesigning — structural insight (rubric separation, process/outcome split) required the human expert.",
+      "A more capable model than Claude Opus 4.6 would have matched the expert without needing the expert's initial structural configurations — the performance gap reflects model capability, not an architectural principle.",
+      "Human researchers are irreplaceable across all phases of AI evaluation research and should never be fully augmented by autonomous AI research agents regardless of the task complexity involved."
     ],
     "correct": 1,
-    "explanation": "The paper's finding establishes a complementary relationship: the auto-research agent reached 70% of expert performance independently, then surpassed the expert's peak on fine-grained tuning when initialized from the expert's best configuration. The human expert's advantage was structural visibility \u2014 recognizing that generating and scoring a rubric in one pass is a different epistemic act than generating it independently, and that process and outcome are different audit questions. The agent's strength was optimization within an established architecture. Neither alone was sufficient; the complementary partnership extracted the best of both."
+    "explanation": "The paper's finding establishes a complementary relationship: the auto-research agent reached 70% of expert performance independently, then surpassed the expert's peak on fine-grained tuning when initialized from the expert's best configuration. The human expert's advantage was structural visibility — recognizing that generating and scoring a rubric in one pass is a different epistemic act than generating it independently, and that process and outcome are different audit questions. The agent's strength was optimization within an established architecture. Neither alone was sufficient; the complementary partnership extracted the best of both."
   },
   {
     "id": "gav-q05",
@@ -71,10 +71,10 @@
     "difficulty": 1,
     "question": "The post describes the field's benchmark-chasing problem as: 'The field spent two years building better agents. This paper suggests it should have also been building better judges.' What is the core concern?",
     "options": [
-      "Research labs wasted GPU resources on benchmark optimization instead of investing in practically useful real-world applications that would generate commercial value and justify their compute budgets",
-      "If canonical verifiers have a 60% false positive rate, then performance comparisons and model selection decisions for two years were calibrated against a systematically distorted signal",
-      "The AI research community lacks sufficient domain expertise to design appropriate evaluation benchmarks for web navigation, requiring interdisciplinary collaboration with HCI and web engineering researchers",
-      "Current GUI agent benchmarks are too simple and need to be replaced with substantially harder multi-step tasks spanning more diverse domains and requiring longer multi-session planning horizons"
+      "Research labs wasted GPU resources on benchmark optimization instead of investing in practically useful real-world applications that would generate commercial value and justify their compute budgets.",
+      "If canonical verifiers have a 60% false positive rate, then performance comparisons and model selection decisions for two years were calibrated against a systematically distorted signal with unknown downstream consequences for which models were actually deployed.",
+      "The AI research community lacks sufficient domain expertise to design appropriate evaluation benchmarks for web navigation, requiring interdisciplinary collaboration with HCI and web engineering researchers.",
+      "Current GUI agent benchmarks are too simple and need to be replaced with substantially harder multi-step tasks spanning more diverse domains and requiring longer multi-session planning horizons."
     ],
     "correct": 1,
     "explanation": "A 60% false positive rate means more than half of the 'successful' runs that WebVoyager's native evaluator credited were actually failures by the Universal Verifier's standards. This is the signal on which the field has been comparing models, training new agents on 'successful' runs, and publishing progress claims for two years. Better agents trained on misclassified success signals may have learned to optimize for verifier quirks rather than genuine task completion. The judges shape the training signal; systematically wrong judges produce systematically wrong training."
@@ -87,13 +87,13 @@
     "difficulty": 2,
     "question": "The post identifies that the Universal Verifier's principles likely transfer to closed enterprise environments, but 'rubric generation becomes substantially harder.' Why?",
     "options": [
-      "Enterprise environments use proprietary file formats and closed application protocols that prevent LLMs from parsing page state or interpreting the semantic meaning of UI elements reliably",
-      "Enterprise tasks are often underspecified ('process like the Rodriguez case last month'), environments aren't publicly observable, and success may depend on downstream states not visible in any screenshot",
-      "Enterprise environments have stricter data privacy requirements that prohibit sharing agent screenshots with any external LLM-based evaluation service under any contractual arrangement",
-      "Enterprise tasks are inherently too complex for current LLM-based verifiers to evaluate with acceptable accuracy \u2014 they require human domain experts at every evaluation checkpoint regardless of rubric quality"
+      "Enterprise environments use proprietary file formats and closed application protocols that prevent LLMs from parsing page state or interpreting the semantic meaning of UI elements reliably.",
+      "Enterprise tasks are often underspecified ('process like the Rodriguez case last month'), environments aren't publicly observable, and success may depend on downstream states not visible in any screenshot — making lab benchmarks poor proxies for real deployment performance.",
+      "Enterprise environments have stricter data privacy requirements that prohibit sharing agent screenshots with any external LLM-based evaluation service under any contractual arrangement.",
+      "Enterprise tasks are inherently too complex for current LLM-based verifiers to evaluate with acceptable accuracy — they require human domain experts at every evaluation checkpoint regardless of rubric quality."
     ],
     "correct": 1,
-    "explanation": "For public web tasks (find the price of an AirTag, book a flight), ground truth is observable and rubric criteria can be validated against it. For enterprise banking tasks, the criteria are often context-dependent ('what would a senior analyst do with this exception?'), environments are authenticated and not externally observable, and success may depend on downstream system states not captured in any screenshot. The rubric generation step \u2014 defining what counts as correct before seeing what the agent did \u2014 requires domain expertise and access to ground truth that many enterprise tasks simply don't have in a verifiable form."
+    "explanation": "For public web tasks (find the price of an AirTag, book a flight), ground truth is observable and rubric criteria can be validated against it. For enterprise banking tasks, the criteria are often context-dependent ('what would a senior analyst do with this exception?'), environments are authenticated and not externally observable, and success may depend on downstream system states not captured in any screenshot. The rubric generation step — defining what counts as correct before seeing what the agent did — requires domain expertise and access to ground truth that many enterprise tasks simply don't have in a verifiable form."
   },
   {
     "id": "gav-q07",
@@ -103,10 +103,10 @@
     "difficulty": 2,
     "question": "SR 26-2 explicitly excludes GenAI and agentic systems from its scope. The post discusses verifier design principles as the closest concrete proposal for how to validate GUI agent deployments. What is the governance implication?",
     "options": [
-      "Banks should pause all GUI agent deployments until regulators issue explicit supervisory guidance specifying what 'adequate verification' means for agentic systems in regulated banking workflows",
-      "Without a formal framework specifying adequate verification, the Universal Verifier's design principles are the closest operational specification \u2014 from a research paper, no supervisory imprimatur",
-      "SR 26-2's exclusion creates a complete regulatory safe harbor allowing banks to deploy GUI agents without any formal performance verification or independent validation requirements whatsoever",
-      "Banks should apply SR 11-7's existing validation framework directly to GUI agents, since its conceptual soundness and outcomes analysis pillars apply to all models regardless of architecture or input modality"
+      "Banks should pause all GUI agent deployments until regulators issue explicit supervisory guidance specifying what 'adequate verification' means for agentic systems in regulated banking workflows.",
+      "Without a formal framework specifying adequate verification, the Universal Verifier's design principles are the closest operational specification — from a research paper, no supervisory imprimatur.",
+      "SR 26-2's exclusion creates a complete regulatory safe harbor allowing banks to deploy GUI agents without any formal performance verification or independent validation requirements whatsoever.",
+      "Banks should apply SR 11-7's existing validation framework directly to GUI agents, since its conceptual soundness and outcomes analysis pillars apply to all models regardless of architecture or input modality."
     ],
     "correct": 1,
     "explanation": "The post is direct: 'There is no formal framework specifying what adequate verification means in that context. The Universal Verifier's design principles are the closest thing to a concrete proposal, and they originate from a research paper, with no supervisory imprimatur behind them.' This creates a governance design problem: banks need to evaluate GUI agent performance, the regulatory framework gives them no specification for what 'adequate evaluation' looks like, and the best available operational guidance is a 2026 academic paper. Banks that want a defensible evaluation artifact must make judgment calls about which principles to adopt and how to document the rationale."
@@ -117,15 +117,15 @@
     "module": "gui-agents",
     "objective": "mechanism",
     "difficulty": 3,
-    "question": "The UV uses a relevance matrix \u2014 scoring each screenshot against every rubric criterion \u2014 rather than passing all screenshots in bulk or ranking the top-k by overall relevance. What problem does this solve?",
+    "question": "The UV uses a relevance matrix — scoring each screenshot against every rubric criterion — rather than passing all screenshots in bulk or ranking the top-k by overall relevance. What problem does this solve?",
     "options": [
-      "It substantially reduces the total number of LLM API calls needed to complete evaluation of a full task trajectory, making large-scale benchmark evaluation economically feasible for resource-constrained research teams",
-      "Different rubric criteria need evidence from different screenshots \u2014 the relevance matrix focuses attention by criterion, preventing critical mid-rollout state changes from getting lost in bulk context",
-      "It prevents the evaluating LLM from reading the same screenshot multiple times in a single context window and generating contradictory or internally inconsistent scoring outputs for the same criterion",
-      "It allows evaluation of task completion without requiring explicit knowledge of which specific navigation steps the agent chose to take en route to its final output state"
+      "It substantially reduces the total number of LLM API calls needed to complete evaluation of a full task trajectory, making large-scale benchmark evaluation economically feasible for resource-constrained research teams.",
+      "Different rubric criteria need evidence from different screenshots — the relevance matrix focuses attention by criterion, preventing critical mid-rollout state changes from getting lost in bulk context.",
+      "It prevents the evaluating LLM from reading the same screenshot multiple times in a single context window and generating contradictory or internally inconsistent scoring outputs for the same criterion.",
+      "It allows evaluation of task completion without requiring explicit knowledge of which specific navigation steps the agent chose to take en route to its final output state."
     ],
     "correct": 1,
-    "explanation": "The post identifies the needle-in-a-haystack problem: both WebVoyager (all screenshots) and WebJudge (top-50 by relevance) assess by passing screenshots in bulk. A critical state change at step 37 of an 80-step rollout gets lost in context. The UV's relevance matrix solves this by scoring each screenshot against every rubric criterion independently, then grouping the most relevant screenshots per criterion for focused analysis. For a rubric criterion about 'verified final price before checkout,' the most relevant screenshots are from the late checkout phase \u2014 the relevance matrix surfaces those specifically. This is why upgrading the backbone alone doesn't fix the FPR \u2014 the problem was attention, not intelligence."
+    "explanation": "The post identifies the needle-in-a-haystack problem: both WebVoyager (all screenshots) and WebJudge (top-50 by relevance) assess by passing screenshots in bulk. A critical state change at step 37 of an 80-step rollout gets lost in context. The UV's relevance matrix solves this by scoring each screenshot against every rubric criterion independently, then grouping the most relevant screenshots per criterion for focused analysis. For a rubric criterion about 'verified final price before checkout,' the most relevant screenshots are from the late checkout phase — the relevance matrix surfaces those specifically. This is why upgrading the backbone alone doesn't fix the FPR — the problem was attention, not intelligence."
   },
   {
     "id": "gav-q09",
@@ -135,10 +135,10 @@
     "difficulty": 3,
     "question": "A bank's internal model risk team is evaluating a GUI agent for trade reconciliation. They plan to run 100 tasks and have the agent's output reviewed by a human auditor. Based on the UV paper's findings, what risk does this evaluation design have?",
     "options": [
-      "A 100-task sample is too small to reach statistically valid conclusions about production-level agent performance for a use case as consequential as trade reconciliation in a regulated institution",
-      "Without pre-specified rubrics and a process/outcome split, the reviewer will rationalize the agent's approach post-hoc and miss process failures that reached correct outputs by wrong paths",
-      "Human auditors are too slow to complete 100-task evaluations within a standard model validation project timeline, making this design practically infeasible without additional resourcing or timeline extension",
-      "The evaluation needs at least 1,000 tasks to achieve statistical power sufficient for deployment decisions at a large bank operating at enterprise scale across multiple trading desks"
+      "A 100-task sample is too small to reach statistically valid conclusions about production-level agent performance for a use case as consequential as trade reconciliation in a regulated institution.",
+      "Without pre-specified rubrics and a process/outcome split, the reviewer will rationalize the agent's approach post-hoc and miss process failures that reached correct outputs by wrong paths.",
+      "Human auditors are too slow to complete 100-task evaluations within a standard model validation project timeline, making this design practically infeasible without additional resourcing or timeline extension.",
+      "The evaluation needs at least 1,000 tasks to achieve statistical power sufficient for deployment decisions at a large bank operating at enterprise scale across multiple trading desks."
     ],
     "correct": 1,
     "explanation": "The UV paper's key finding about rubric generation applies directly to human review: if the human reviewer sees the agent's output before defining what success looks like for this specific task, they risk defining success in terms of what the agent did. Pre-specifying rubrics (what should happen at each step, under what conditions the task counts as successfully completed vs. a partial success) before seeing agent output is the correct protocol, regardless of whether the 'judge' is an LLM or a human. Without the process/outcome split, a reviewer who sees the agent reach the correct final state may not notice that it took an incorrect path that happened to arrive at the right place."
@@ -151,12 +151,12 @@
     "difficulty": 3,
     "question": "The post spans three GUI agent posts: Part 1 (synthetic data outperforms human data), Part 2 (open-release gaps), Part 3 (verifier overcounting). What does this trilogy collectively argue about the state of GUI agent evaluation?",
     "options": [
-      "GUI agents are not ready for production use anywhere \u2014 the evaluation infrastructure is too unreliable to support any deployment decision with the confidence level regulated industries require",
-      "The evaluation stack has systematic errors at every layer \u2014 training data (structured noise), implementation (defaults mismatches), and measurement (60% false positives) \u2014 compounding in one direction",
-      "Only open-source GUI agents can be reliably evaluated because closed-weight commercial systems lack the code transparency needed for external validation of training pipelines and benchmark methodology",
-      "GUI agent evaluation requires human review at every stage, making it prohibitively expensive for the deployment velocity that regulated industries need to stay competitive with less-regulated peers"
+      "GUI agents are not ready for production use anywhere — the evaluation infrastructure is too unreliable to support any deployment decision with the confidence level regulated industries require.",
+      "The evaluation stack has systematic errors at every layer — training data (structured noise), implementation (defaults mismatches), and measurement (60% false positives) — all compounding in one direction toward systematically overestimated capability.",
+      "Only open-source GUI agents can be reliably evaluated because closed-weight commercial systems lack the code transparency needed for external validation of training pipelines and benchmark methodology.",
+      "GUI agent evaluation requires human review at every stage, making it prohibitively expensive for the deployment velocity that regulated industries need to stay competitive with less-regulated peers."
     ],
     "correct": 1,
-    "explanation": "The trilogy traces systematic errors across the entire evaluation stack. Part 1: the training signal was corrupted \u2014 human annotations contained structured noise that models learned to imitate. Part 2: the implementation was opaque \u2014 defaults mismatches, implicit contracts, and evaluation dataset overlaps mean the numbers in papers may not be reproducible even with released code. Part 3: the measurement was wrong \u2014 a 60% false positive rate means the benchmarks most teams use to claim progress were overcounting success for two years. Each layer of the evaluation stack had systematic errors pointing in the same direction (overclaiming capability), and they compounded."
+    "explanation": "The trilogy traces systematic errors across the entire evaluation stack. Part 1: the training signal was corrupted — human annotations contained structured noise that models learned to imitate. Part 2: the implementation was opaque — defaults mismatches, implicit contracts, and evaluation dataset overlaps mean the numbers in papers may not be reproducible even with released code. Part 3: the measurement was wrong — a 60% false positive rate means the benchmarks most teams use to claim progress were overcounting success for two years. Each layer of the evaluation stack had systematic errors pointing in the same direction (overclaiming capability), and they compounded."
   }
 ]

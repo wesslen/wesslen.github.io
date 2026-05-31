@@ -7,13 +7,13 @@
     "difficulty": 1,
     "question": "The author distinguishes two meanings of 'drift' at the start of the post. Which of the following best captures the broader meaning the course uses?",
     "options": [
-      "Statistical drift \u2014 the gradual degradation of model performance on live data over time",
-      "A general phenomenon where models, codebases, governance frameworks, and organizations diverge from their original intent",
-      "Regulatory drift \u2014 the lag between when new technology emerges and when formal guidance catches up",
-      "Concept drift \u2014 the shift in the statistical relationship between inputs and outputs in production ML systems"
+      "Statistical drift — the gradual degradation of model performance on live data over time.",
+      "A general phenomenon where models, codebases, governance frameworks, and organizations diverge from their original intent over time — not a property unique to ML model outputs but a structural feature of all designed systems.",
+      "Regulatory drift — the lag between when new technology emerges and when formal guidance catches up.",
+      "Concept drift — the shift in the statistical relationship between inputs and outputs in production ML systems."
     ],
     "correct": 1,
-    "explanation": "The post explicitly sets aside the technical definition ('not the technical kind \u2014 though that too') and uses drift to mean something broader: models drift from stated behavior, codebases drift from developers, governance frameworks drift from the systems they govern, and organizations drift. The course title holds all four in view simultaneously."
+    "explanation": "The post explicitly sets aside the technical definition ('not the technical kind — though that too') and uses drift to mean something broader: models drift from stated behavior, codebases drift from developers, governance frameworks drift from the systems they govern, and organizations drift. The course title holds all four in view simultaneously."
   },
   {
     "id": "ed-q02",
@@ -23,13 +23,13 @@
     "difficulty": 1,
     "question": "The author gives a specific reason for writing in public rather than keeping private notes. What is it?",
     "options": [
-      "Public writing forces a different kind of honesty \u2014 you cannot handwave past",
-      "Private notes lack the version control needed to track how arguments evolve over time",
-      "Public writing generates feedback that improves the quality of the underlying analysis",
-      "Writing for an audience increases the motivation to publish consistently"
+      "Public writing forces a different kind of honesty — you cannot handwave past imprecisions when any reader can follow up with a challenge in the comments or via email.",
+      "Private notes lack the version control needed to track how arguments evolve over time.",
+      "Public writing generates feedback that improves the quality of the underlying analysis.",
+      "Writing for an audience increases the motivation to publish consistently."
     ],
     "correct": 0,
-    "explanation": "The post is precise about this: 'private notes don't push back \u2014 they just sit there, agreeing with you.' Writing for an audience, even an imaginary one, forces you to say the thing clearly or admit you can't. The other answers may be true but are not the reason the author gives."
+    "explanation": "The post is precise about this: 'private notes don't push back — they just sit there, agreeing with you.' Writing for an audience, even an imaginary one, forces you to say the thing clearly or admit you can't. The other answers may be true but are not the reason the author gives."
   },
   {
     "id": "ed-q03",
@@ -39,13 +39,13 @@
     "difficulty": 2,
     "question": "The author describes the course as 'opinionated.' What does that word specifically mean in this context?",
     "options": [
-      "The course takes sides in active regulatory debates and advocates for specific policy positions",
-      "The course reflects the author's personal views about what is overbuilt, underbuilt, and where governance",
-      "The course prioritizes the author's own research findings over established academic literature",
-      "The course is written for a specialist audience and does not attempt to be accessible to generalists"
+      "The course takes sides in active regulatory debates and advocates for specific policy positions.",
+      "The course reflects the author's personal views about what is overbuilt, underbuilt, and where the most important governance and technical gaps remain unaddressed.",
+      "The course prioritizes the author's own research findings over established academic literature.",
+      "The course is written for a specialist audience and does not attempt to be accessible to generalists."
     ],
     "correct": 1,
-    "explanation": "'Opinionated because I'm not pretending to neutrality \u2014 I have views about what's overbuilt, what's underbuilt, and where the governance is theater.' This is narrower than taking sides in policy debates; it's a transparency claim about the author's standpoint, not a commitment to advocacy."
+    "explanation": "'Opinionated because I'm not pretending to neutrality — I have views about what's overbuilt, what's underbuilt, and where the governance is theater.' This is narrower than taking sides in policy debates; it's a transparency claim about the author's standpoint, not a commitment to advocacy."
   },
   {
     "id": "ed-q04",
@@ -55,10 +55,10 @@
     "difficulty": 2,
     "question": "The course arc runs from governance baseline through to economics. Which of the following is the most accurate description of the intended audience the author writes for?",
     "options": [
-      "Model risk and AI governance professionals who want technical depth on engineering topics",
-      "ML engineers who want an introduction to banking regulation and compliance",
-      "Both audiences simultaneously \u2014 model risk practitioners who need the technical posts",
-      "Banking executives who need a high-level overview of GenAI risk without technical details"
+      "Model risk and AI governance professionals who want technical depth on engineering topics.",
+      "ML engineers who want an introduction to banking regulation and compliance.",
+      "Both audiences simultaneously — model risk practitioners who need the technical posts and business leaders who need the strategy posts — because the blog's foundational premise is that these two conversations must happen in the same intellectual space.",
+      "Banking executives who need a high-level overview of GenAI risk without technical details."
     ],
     "correct": 2,
     "explanation": "The post is explicit: 'The blog sits at an intersection that doesn't have a lot of native coverage. If you work in model risk or AI governance, I hope the technical posts are readable. If you're an ML engineer, I hope the governance posts don't feel like compliance theater. I'm trying to write for both.' The author acknowledges this may mean occasionally failing both."
@@ -71,13 +71,13 @@
     "difficulty": 1,
     "question": "How does quiz progress work on this site?",
     "options": [
-      "Progress syncs across devices when you are logged into the same browser account",
-      "Progress is stored server-side and persists as long as your account is active",
-      "Progress is saved locally in your browser only \u2014 it does not",
-      "Progress resets after each session and must be re-earned on every visit"
+      "Progress syncs across devices when you are logged into the same browser account.",
+      "Progress is stored server-side and persists as long as your account is active.",
+      "Progress is saved locally in your browser only — it does not persist across devices or different browser sessions, making quiz progress session-scoped and device-specific rather than account-linked.",
+      "Progress resets after each session and must be re-earned on every visit."
     ],
     "correct": 2,
-    "explanation": "Quiz progress is stored in your browser's localStorage, which is browser-local by design. It persists across visits on the same browser but does not sync across devices, does not survive a browser history clear, and is not available in private/incognito mode. There is no account system \u2014 this is a static site with no backend."
+    "explanation": "Quiz progress is stored in your browser's localStorage, which is browser-local by design. It persists across visits on the same browser but does not sync across devices, does not survive a browser history clear, and is not available in private/incognito mode. There is no account system — this is a static site with no backend."
   },
   {
     "id": "ed-q06",
@@ -87,13 +87,13 @@
     "difficulty": 2,
     "question": "The post distinguishes between post quizzes and module tests. What is the key functional difference?",
     "options": [
-      "Post quizzes are graded; module tests are ungraded practice",
-      "Post quizzes draw from a single post's question pool; module tests draw",
-      "Post quizzes have 10 questions; module tests have 5",
-      "Module tests are only available after completing all post quizzes in the module"
+      "Post quizzes are graded; module tests are ungraded practice.",
+      "Post quizzes draw from a single post's question pool; module tests draw questions from all posts in the module, randomized each session to prevent memorization of a fixed item sequence.",
+      "Post quizzes have 10 questions; module tests have 5.",
+      "Module tests are only available after completing all post quizzes in the module."
     ],
     "correct": 1,
-    "explanation": "Post quizzes sample 5 questions from a single post's pool. Module tests sample 10 questions from across all posts in the module, specifically to test whether concepts from different posts are connecting \u2014 a cross-post synthesis function that individual post quizzes can't serve. Neither format gates the other; you can take a module test without having attempted any post quizzes."
+    "explanation": "Post quizzes sample 5 questions from a single post's pool. Module tests sample 10 questions from across all posts in the module, specifically to test whether concepts from different posts are connecting — a cross-post synthesis function that individual post quizzes can't serve. Neither format gates the other; you can take a module test without having attempted any post quizzes."
   },
   {
     "id": "ed-q07",
@@ -103,12 +103,12 @@
     "difficulty": 2,
     "question": "The author warns that the course 'documents a moving target.' What is the most important implication of this for how you should read it?",
     "options": [
-      "The course's conclusions are provisional \u2014 regulatory and technical developments may have overtaken specific",
-      "The course is incomplete and should not be used as a primary reference for professional work",
-      "Posts in the course are drafts and will be significantly revised before becoming final",
-      "The author will notify readers when posts become outdated through a mailing list"
+      "The course's conclusions are provisional — regulatory and technical developments may have overtaken specific posts since publication, and regulatory citations should be verified against current guidance before use.",
+      "The course is incomplete and should not be used as a primary reference for professional work.",
+      "Posts in the course are drafts and will be significantly revised before becoming final.",
+      "The author will notify readers when posts become outdated through a mailing list."
     ],
     "correct": 0,
-    "explanation": "The author says the course 'keeps going stale and getting rewritten' as a feature, not a bug \u2014 it's tracking drift in real time. The implication is that specific regulatory claims (like which guidance is current) or technical findings (like benchmark results) should be verified against primary sources, especially for anything time-sensitive. The course is honest about this limitation rather than papering over it."
+    "explanation": "The author says the course 'keeps going stale and getting rewritten' as a feature, not a bug — it's tracking drift in real time. The implication is that specific regulatory claims (like which guidance is current) or technical findings (like benchmark results) should be verified against primary sources, especially for anything time-sensitive. The course is honest about this limitation rather than papering over it."
   }
 ]

@@ -8,7 +8,7 @@
     "question": "The post frames HITL governance across three timing regimes. What is the fundamental error in treating runtime monitoring as a substitute for deploy-time validation?",
     "options": [
       "Runtime monitoring is significantly more expensive than deploy-time validation, creating a resource allocation problem that favors front-loaded governance investments.",
-      "Runtime monitoring assumes its own mechanisms work under load \u2014 deploy-time validation asks whether those mechanisms were designed to function under actual conditions.",
+      "Runtime monitoring assumes its own mechanisms work under load — deploy-time validation asks whether those mechanisms were designed to function under actual conditions, before those conditions materialize in a live production environment.",
       "Runtime monitoring produces more alert volume than analysts can process, generating the same alert-fatigue failure it was designed to prevent in the first place.",
       "Deploy-time validation is the only governance approach explicitly required by regulation; runtime monitoring satisfies no formal SR 11-7 or SR 26-2 obligation."
     ],
@@ -24,12 +24,12 @@
     "question": "Knight Capital's PMON monitoring tool received 97 'Power Peg disabled' alert emails before market open and still failed to catch the cascade. What specific deploy-time question would have caught this?",
     "options": [
       "Whether PMON's alert database could handle 97 concurrent inserts without performance degradation under peak August 1 trading volume conditions.",
-      "A systems-engineering validator needed to confirm that 97 emails in 89 minutes would surface as an actionable stop signal",
+      "A systems-engineering validator needed to confirm that 97 emails in 89 minutes would surface as an actionable stop signal.",
       "Whether the 97 alert emails were routed to the correct distribution list with appropriate escalation authority to halt live trading operations.",
       "Whether PMON had been regression-tested on actual trading data from the business day immediately prior to the August 1 deployment date."
     ],
     "correct": 1,
-    "explanation": "The post applies effective challenge's three legs to Knight Capital's failure. The competence question: 'whether anyone with the technical depth to evaluate the alert pipeline had confirmed that emails would surface as a stop signal at production volume.' The answer was that 97 emails in 89 minutes was a reasonable design assumption given normal trading volume. At the actual August 1 volume, it was not \u2014 operators couldn't process the volume of raw data PMON generated fast enough. Someone with the technical depth to model the pipeline under load should have evaluated this before deployment. That is a deploy-time question; runtime monitoring cannot answer it once the system is live."
+    "explanation": "The post applies effective challenge's three legs to Knight Capital's failure. The competence question: 'whether anyone with the technical depth to evaluate the alert pipeline had confirmed that emails would surface as a stop signal at production volume.' The answer was that 97 emails in 89 minutes was a reasonable design assumption given normal trading volume. At the actual August 1 volume, it was not — operators couldn't process the volume of raw data PMON generated fast enough. Someone with the technical depth to model the pipeline under load should have evaluated this before deployment. That is a deploy-time question; runtime monitoring cannot answer it once the system is live."
   },
   {
     "id": "hd-q03",
@@ -45,7 +45,7 @@
       "Design-time requirements are the most heavily regulated tier because architectural choices made at design time permanently determine all downstream model behavior."
     ],
     "correct": 1,
-    "explanation": "The post maps this asymmetry directly: 'Regulators primarily specify deploy-time expectations. ML engineers primarily build runtime mechanisms.' SR 11-7 and SR 26-2 address what validators do before deployment (effective challenge, conceptual soundness, ongoing monitoring). FINRA's 2026 Annual Regulatory Oversight Report asks about runtime HITL agent oversight protocols \u2014 but FINRA is an SRO with no prudential authority. NIST's February 2026 draft concept paper frames runtime HITL authorization binding as an open research question. The result: deploy-time governance is well-specified; runtime governance is under-specified; design-time labeling is unaddressed."
+    "explanation": "The post maps this asymmetry directly: 'Regulators primarily specify deploy-time expectations. ML engineers primarily build runtime mechanisms.' SR 11-7 and SR 26-2 address what validators do before deployment (effective challenge, conceptual soundness, ongoing monitoring). FINRA's 2026 Annual Regulatory Oversight Report asks about runtime HITL agent oversight protocols — but FINRA is an SRO with no prudential authority. NIST's February 2026 draft concept paper frames runtime HITL authorization binding as an open research question. The result: deploy-time governance is well-specified; runtime governance is under-specified; design-time labeling is unaddressed."
   },
   {
     "id": "hd-q04",
@@ -56,12 +56,12 @@
     "question": "The ACPR (2020) found that humans feel greater responsibility when contradicting an algorithm than when confirming it. How does this finding affect checkpoint design?",
     "options": [
       "Human reviewers should receive additional compensation per override to counterbalance the cognitive cost of contradicting an authoritative algorithmic recommendation.",
-      "A confident model recommendation creates asymmetric cognitive pressure \u2014 overriding requires active effort while approving requires none \u2014 producing a rubber stamp.",
+      "A confident model recommendation creates asymmetric cognitive pressure — overriding requires active effort while approving requires none — producing a rubber stamp that generates documentation of endorsement rather than evidence of genuine independent review.",
       "Checkpoints should hide the model's recommendation until the human has independently formed their own assessment, preventing anchoring before any evaluation.",
       "The ACPR finding only applies to consumer-facing decisions; internal operational decisions reviewed by trained analysts are not subject to the same asymmetric effect."
     ],
     "correct": 1,
-    "explanation": "The post connects this to the broader automation bias literature: 'Designing a runtime HITL gate without accounting for automation bias is designing a rubber stamp with better documentation.' If the human must actively choose to contradict the model (requiring cognitive effort and often informal justification to supervisors), while approving requires no action, the asymmetric pressure will produce systematic overreliance regardless of the reviewer's competence. The 21% commission-error rate persists even when reviewers are explicitly warned of the model's fallibility. Override-friction design \u2014 making approval require an active choice \u2014 partially addresses this by equalizing the cognitive costs."
+    "explanation": "The post connects this to the broader automation bias literature: 'Designing a runtime HITL gate without accounting for automation bias is designing a rubber stamp with better documentation.' If the human must actively choose to contradict the model (requiring cognitive effort and often informal justification to supervisors), while approving requires no action, the asymmetric pressure will produce systematic overreliance regardless of the reviewer's competence. The 21% commission-error rate persists even when reviewers are explicitly warned of the model's fallibility. Override-friction design — making approval require an active choice — partially addresses this by equalizing the cognitive costs."
   },
   {
     "id": "hd-q05",
@@ -72,12 +72,12 @@
     "question": "The post argues: 'A human checkpoint with a consistent 5% override rate is not providing independent oversight. It is providing the appearance of it, and the legal exposure is arguably worse than no checkpoint at all.' Why is the legal exposure worse?",
     "options": [
       "A very low override rate triggers automated regulatory scrutiny flags that no-checkpoint systems avoid, creating additional examination risk for the institution.",
-      "A rubber-stamp checkpoint generates 'human reviewed and confirmed' documentation \u2014 evidence of deliberate endorsement of a bad outcome, not a defense.",
+      "A rubber-stamp checkpoint generates 'human reviewed and confirmed' documentation — evidence of deliberate endorsement of a bad outcome, not a defense against liability for failing to prevent a foreseeable harm.",
       "Low override rates generate liability under emerging automation bias case law being developed in EU courts under AI Act Article 14(4)(b) enforcement.",
       "This claim is factually incorrect; checkpoints always reduce rather than increase legal exposure regardless of the override rate they actually produce."
     ],
     "correct": 1,
-    "explanation": "The post's liability argument is specific and counterintuitive: a checkpoint that produces 'human reviewed and confirmed' documentation at a 95% approval rate creates a paper trail showing the bank deliberately endorsed each AI decision \u2014 without providing the independent judgment that human review is supposed to contribute. In an adverse action dispute, 'the human approved this' is evidence against the bank if the AI decision was discriminatory or harmful. A system with no checkpoint at all might face liability for the underlying AI decision; a system with a rubber-stamp checkpoint faces liability for the underlying decision plus evidence of deliberate human endorsement."
+    "explanation": "The post's liability argument is specific and counterintuitive: a checkpoint that produces 'human reviewed and confirmed' documentation at a 95% approval rate creates a paper trail showing the bank deliberately endorsed each AI decision — without providing the independent judgment that human review is supposed to contribute. In an adverse action dispute, 'the human approved this' is evidence against the bank if the AI decision was discriminatory or harmful. A system with no checkpoint at all might face liability for the underlying AI decision; a system with a rubber-stamp checkpoint faces liability for the underlying decision plus evidence of deliberate human endorsement."
   },
   {
     "id": "hd-q06",
@@ -88,12 +88,12 @@
     "question": "A bank deploys a loan origination agent with a HITL checkpoint before final approval. Analysts override the AI's recommendation 8% of the time. Six months later, the override rate drops to 2%. What does the post's framework suggest this signals?",
     "options": [
       "The AI model has substantially improved and analysts are correctly increasing their trust based on observed decision quality over six months.",
-      "A declining override rate is a Bainbridge skill-atrophy signal \u2014 requires investigation to distinguish model improvement from analysts losing",
+      "A declining override rate is a Bainbridge skill-atrophy signal — requires investigation to distinguish model improvement from analysts losing.",
       "The lower rate reflects improved human-AI teaming and greater decision efficiency, which is the expected trajectory for mature production deployments.",
       "A 2% override rate is well within normal operating parameters and requires no governance investigation or management attention at this time."
     ],
     "correct": 1,
-    "explanation": "The post applies this precisely: 'A credit officer whose model-override rate falls below, say, 5% over a sustained period is exhibiting a skill-atrophy signal.' The decline from 8% to 2% is not interpretable in isolation \u2014 it could reflect a genuinely improved model or analysts who have developed rote-approval behavior. The governance response is investigation: compare the periods' outcomes data, review samples from each period to assess review quality, and track the types of decisions that are now approved without override. Treating a declining override rate purely as an efficiency metric \u2014 without asking whether judgment is degrading \u2014 is the Bainbridge irony in real time."
+    "explanation": "The post applies this precisely: 'A credit officer whose model-override rate falls below, say, 5% over a sustained period is exhibiting a skill-atrophy signal.' The decline from 8% to 2% is not interpretable in isolation — it could reflect a genuinely improved model or analysts who have developed rote-approval behavior. The governance response is investigation: compare the periods' outcomes data, review samples from each period to assess review quality, and track the types of decisions that are now approved without override. Treating a declining override rate purely as an efficiency metric — without asking whether judgment is degrading — is the Bainbridge irony in real time."
   },
   {
     "id": "hd-q07",
@@ -101,15 +101,15 @@
     "module": "human-in-the-loop",
     "objective": "mechanism",
     "difficulty": 3,
-    "question": "Air France 447's autopilot disconnected correctly according to its design \u2014 the HITL mechanism worked as specified. Why did the crew fail to control the aircraft anyway?",
+    "question": "Air France 447's autopilot disconnected correctly according to its design — the HITL mechanism worked as specified. Why did the crew fail to control the aircraft anyway?",
     "options": [
       "The autopilot provided inadequate warning time before disconnecting, leaving the crew insufficient opportunity to assess the situation before assuming manual control.",
-      "Years of automation had atrophied the crew's manual flying skills. The BEA found 'most crews were not prepared' despite",
+      "Years of automation had atrophied the crew's manual flying skills. The BEA found 'most crews were not prepared' despite.",
       "The cockpit physical design made manual attitude control impossible under the specific icing conditions that caused the initial autopilot disconnect event.",
       "Air France had not provided specific simulator training for autopilot disconnect scenarios at the altitude and airspeed combination the crew encountered."
     ],
     "correct": 1,
-    "explanation": "The post uses AF447 as the canonical example of Bainbridge's irony in a high-stakes setting. The autopilot disconnected exactly as designed when it encountered conditions outside its envelope. The HITL mechanism transferred control to the crew at the right moment. What failed was the human side of the HITL: years of automated flight had eroded the crew's ability to manually maintain aircraft attitude under unusual conditions. The BEA's finding \u2014 'most probably this crew and most crews were not prepared' \u2014 makes the structural observation that automation reliably creates the conditions for its own oversight failure. The same dynamic applies to banking AI reviewers who process automation output without practicing independent judgment."
+    "explanation": "The post uses AF447 as the canonical example of Bainbridge's irony in a high-stakes setting. The autopilot disconnected exactly as designed when it encountered conditions outside its envelope. The HITL mechanism transferred control to the crew at the right moment. What failed was the human side of the HITL: years of automated flight had eroded the crew's ability to manually maintain aircraft attitude under unusual conditions. The BEA's finding — 'most probably this crew and most crews were not prepared' — makes the structural observation that automation reliably creates the conditions for its own oversight failure. The same dynamic applies to banking AI reviewers who process automation output without practicing independent judgment."
   },
   {
     "id": "hd-q08",
@@ -120,8 +120,8 @@
     "question": "MAS's November 2025 consultation paper frames required human oversight as: quantum of oversight = f(autonomy, complexity, reliance). What does the variable 'reliance' specifically capture that autonomy alone does not?",
     "options": [
       "Reliance measures how heavily the AI system itself depends on external data sources, APIs, and third-party model providers during inference.",
-      "Reliance captures whether users depend on AI outputs without independent verification \u2014 two equal-autonomy systems may require different oversight intensity.",
-      "Reliance is the technical reliability metric \u2014 uptime, latency, and availability \u2014 that determines whether the system meets the bank's service-level agreements.",
+      "Reliance captures whether users depend on AI outputs without independent verification — two equal-autonomy systems may require different oversight intensity.",
+      "Reliance is the technical reliability metric — uptime, latency, and availability — that determines whether the system meets the bank's service-level agreements.",
       "Reliance is the regulatory term for the audit trail requirements that document how AI decisions were reached and reviewed for examiner inspection."
     ],
     "correct": 1,
@@ -136,12 +136,12 @@
     "question": "The counterargument to deploy-time validation argues for runtime-only governance: modern observability, runtime guardrails, and continuous evals can substitute for nine-month conceptual soundness reviews. The post grants significant force to this argument. Where specifically does it break down?",
     "options": [
       "Runtime-only governance is prohibitively expensive for mid-size institutions, making it viable only for the largest banks with dedicated MLOps infrastructure teams.",
-      "It breaks on action classes where decisions become irreversible before any monitoring flag fires \u2014 RTP and FedNow payments settle in seconds with no chargeback.",
+      "It breaks on action classes where decisions become irreversible before any monitoring flag fires — RTP and FedNow payments settle in seconds with no chargeback.",
       "SR 26-2 prohibits runtime-only governance for material models, explicitly requiring deploy-time effective challenge regardless of observability infrastructure quality.",
       "Runtime monitoring tools are not yet mature enough to replace deploy-time validation; the tooling gap will close within two to three years as the MLOps market matures."
     ],
     "correct": 1,
-    "explanation": "The post is explicit about where the runtime-only argument fails: 'It also breaks on action classes where individual decisions hit consumers and become irreversible before any monitoring flag fires.' Wire transfers and RTP/FedNow settle in seconds with no reversal mechanism. A runtime-only AI payment agent that misroutes a transaction has no recovery path, and the consumer protection gaps are worst on exactly these rails. The deploy-time question \u2014 'will this monitoring catch what it's supposed to catch under the conditions that actually occur?' \u2014 cannot be answered by the monitoring system about itself. That question requires design-time analysis and independent validation."
+    "explanation": "The post is explicit about where the runtime-only argument fails: 'It also breaks on action classes where individual decisions hit consumers and become irreversible before any monitoring flag fires.' Wire transfers and RTP/FedNow settle in seconds with no reversal mechanism. A runtime-only AI payment agent that misroutes a transaction has no recovery path, and the consumer protection gaps are worst on exactly these rails. The deploy-time question — 'will this monitoring catch what it's supposed to catch under the conditions that actually occur?' — cannot be answered by the monitoring system about itself. That question requires design-time analysis and independent validation."
   },
   {
     "id": "hd-q10",
@@ -154,9 +154,9 @@
       "Liability will be determined primarily by whether the institution had a written HITL policy and followed a documented review process at each decision point.",
       "Following the SEC's 'not reasonably designed' Knight Capital precedent, future liability will turn on whether oversight was substantive, not whether it formally existed.",
       "Liability for AI agent failures will be assigned to the AI vendor rather than the deploying bank once agentic AI matures into a regulated product category.",
-      "Courts will require documented 100% override-rate capability \u2014 evidence that humans could have stopped every output \u2014 as the standard of substantive AI governance."
+      "Courts will require documented 100% override-rate capability — evidence that humans could have stopped every output — as the standard of substantive AI governance."
     ],
     "correct": 1,
-    "explanation": "The post's prediction is built on the SEC Knight Capital precedent: 'not reasonably designed' despite formal presence of controls. The implication for AI governance liability: as examiners become more sophisticated about what effective oversight requires, the question shifts from 'do you have HITL?' to 'was your HITL designed to function under the conditions that actually triggered the failure?' A bank whose loan origination agent checkpoint was present but operating as a rubber stamp \u2014 consistently approving 98% of outputs without substantive review \u2014 may face liability not just for the underlying AI failure but for having designed a governance structure that it knew or should have known would not function as oversight."
+    "explanation": "The post's prediction is built on the SEC Knight Capital precedent: 'not reasonably designed' despite formal presence of controls. The implication for AI governance liability: as examiners become more sophisticated about what effective oversight requires, the question shifts from 'do you have HITL?' to 'was your HITL designed to function under the conditions that actually triggered the failure?' A bank whose loan origination agent checkpoint was present but operating as a rubber stamp — consistently approving 98% of outputs without substantive review — may face liability not just for the underlying AI failure but for having designed a governance structure that it knew or should have known would not function as oversight."
   }
 ]

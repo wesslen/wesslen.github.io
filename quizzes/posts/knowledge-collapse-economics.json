@@ -7,13 +7,13 @@
     "difficulty": 2,
     "question": "The Acemoglu et al. model establishes that AI recommendations and human learning are substitutes with a specific joint production property. What is the key economic mechanism that drives knowledge collapse?",
     "options": [
-      "Private learning simultaneously produces a personal signal and a public contribution to community knowledge \u2014 when AI substitutes for the learning incentive, it eliminates both",
-      "AI recommendations introduce systematic errors that accumulate over time, corrupting the community's shared knowledge stock faster than human learning can replenish it through normal professional practice",
-      "AI recommendations are accurate enough that they leave nothing genuinely uncertain for humans to learn from, eliminating the epistemic challenge that drives skill development and knowledge accumulation",
-      "Knowledge collapse occurs because AI systems progressively replace human instructors in professional training programs, severing the mentorship relationships that transmit tacit knowledge across career cohorts"
+      "Private learning simultaneously produces a personal signal and a public contribution to community knowledge — when AI substitutes for the learning incentive, it eliminates both.",
+      "AI recommendations introduce systematic errors that accumulate over time, corrupting the community's shared knowledge stock faster than human learning can replenish it through normal professional practice.",
+      "AI recommendations are accurate enough that they leave nothing genuinely uncertain for humans to learn from, eliminating the epistemic challenge that drives skill development and knowledge accumulation.",
+      "Knowledge collapse occurs because AI systems progressively replace human instructors in professional training programs, severing the mentorship relationships that transmit tacit knowledge across career cohorts."
     ],
     "correct": 0,
-    "explanation": "The model's key insight is economies of scope in learning: the private learning effort that produces your specific answer simultaneously contributes to the community's shared knowledge. You cannot separate the two \u2014 learning for yourself always generates some public benefit. When AI provides the recommendation directly, it eliminates the private reason to learn. Because private signal and public contribution share the same production function, eliminating the private incentive also eliminates the public contribution. Each individual's rational decision not to learn compounds into a structural loss at the community level that no single operator can observe or reverse."
+    "explanation": "The model's key insight is economies of scope in learning: the private learning effort that produces your specific answer simultaneously contributes to the community's shared knowledge. You cannot separate the two — learning for yourself always generates some public benefit. When AI provides the recommendation directly, it eliminates the private reason to learn. Because private signal and public contribution share the same production function, eliminating the private incentive also eliminates the public contribution. Each individual's rational decision not to learn compounds into a structural loss at the community level that no single operator can observe or reverse."
   },
   {
     "id": "kce-q02",
@@ -21,15 +21,15 @@
     "module": "ai-economy",
     "objective": "argument",
     "difficulty": 3,
-    "question": "The paper's most counterintuitive finding is that welfare is non-monotone in AI accuracy \u2014 past a threshold, a more precise model makes society worse off. What is the strongest version of this argument?",
+    "question": "The paper's most counterintuitive finding is that welfare is non-monotone in AI accuracy — past a threshold, a more precise model makes society worse off. What is the strongest version of this argument?",
     "options": [
-      "Past \u03c4*, each accuracy gain crowds out more learning effort than it adds in recommendation value",
-      "More accurate AI models cost substantially more to operate, crowding out organizational budget for other welfare-improving investments such as training programs that would otherwise maintain the community knowledge stock",
-      "Higher AI accuracy creates false confidence among practitioners who begin accepting recommendations in contexts where the model's training distribution does not adequately cover the decision situation",
-      "The welfare-accuracy relationship appears non-monotone only at extreme accuracy levels that current AI systems cannot yet achieve, making the garbling policy theoretically interesting but practically irrelevant today"
+      "Past τ*, each accuracy gain crowds out more learning effort than it adds in recommendation value.",
+      "More accurate AI models cost substantially more to operate, crowding out organizational budget for other welfare-improving investments such as training programs that would otherwise maintain the community knowledge stock.",
+      "Higher AI accuracy creates false confidence among practitioners who begin accepting recommendations in contexts where the model's training distribution does not adequately cover the decision situation.",
+      "The welfare-accuracy relationship appears non-monotone only at extreme accuracy levels that current AI systems cannot yet achieve, making the garbling policy theoretically interesting but practically irrelevant today."
     ],
     "correct": 0,
-    "explanation": "The paper's formalization is precise: up to \u03c4*, higher precision raises welfare because recommendation quality improves faster than learning-stock depletion. Past \u03c4*, the substitution effect dominates \u2014 more accurate AI makes each individual less likely to learn, compounding the public-good loss faster than the private gain from better recommendations. At \u03c4_A^c, the high-knowledge steady state disappears entirely: from a world of widespread institutional knowledge, sufficiently precise AI makes that world an unreachable future state. The governance implication: defaulting to the most accurate available AI model is not a neutral choice \u2014 it's a decision with structural long-run consequences that aggregate individual decisions cannot reveal."
+    "explanation": "The paper's formalization is precise: up to τ*, higher precision raises welfare because recommendation quality improves faster than learning-stock depletion. Past τ*, the substitution effect dominates — more accurate AI makes each individual less likely to learn, compounding the public-good loss faster than the private gain from better recommendations. At τ_A^c, the high-knowledge steady state disappears entirely: from a world of widespread institutional knowledge, sufficiently precise AI makes that world an unreachable future state. The governance implication: defaulting to the most accurate available AI model is not a neutral choice — it's a decision with structural long-run consequences that aggregate individual decisions cannot reveal."
   },
   {
     "id": "kce-q03",
@@ -37,15 +37,15 @@
     "module": "ai-economy",
     "objective": "scope",
     "difficulty": 1,
-    "question": "The paper establishes that 'garbling' \u2014 deliberately adding noise to AI recommendations \u2014 is the welfare-optimal information design policy. How does the paper classify this policy?",
+    "question": "The paper establishes that 'garbling' — deliberately adding noise to AI recommendations — is the welfare-optimal information design policy. How does the paper classify this policy?",
     "options": [
-      "A first-best policy \u2014 capping AI precision at \u03c4* even when higher accuracy is technically achievable is welfare-maximizing, not a concession to feasibility constraints",
-      "A second-best policy \u2014 inferior to full AI accuracy, but better than deploying no AI assistance given the tradeoff between learning incentives and recommendation quality",
-      "An emergency intervention to be deployed only after knowledge collapse is already actively occurring and the high-knowledge steady state has already become unreachable from current conditions",
-      "An experimental research direction without formal welfare proof, proposed as a theoretical possibility that requires empirical validation before it could inform any practical governance decision"
+      "A first-best policy — capping AI precision at τ* even when higher accuracy is technically achievable is welfare-maximizing, not a concession to feasibility constraints.",
+      "A second-best policy — inferior to full AI accuracy, but better than deploying no AI assistance given the tradeoff between learning incentives and recommendation quality.",
+      "An emergency intervention to be deployed only after knowledge collapse is already actively occurring and the high-knowledge steady state has already become unreachable from current conditions.",
+      "An experimental research direction without formal welfare proof, proposed as a theoretical possibility that requires empirical validation before it could inform any practical governance decision."
     ],
     "correct": 0,
-    "explanation": "The post is explicit: 'The paper establishes this as the first-best policy outcome. A governance committee that defaults to the more accurate vendor is making a mistake: accuracy beyond \u03c4* trades long-run community knowledge for short-run decision quality.' This is not a theoretical curiosity \u2014 it's a Pareto-optimal policy given the learning externality. The garbling result establishes that the welfare-maximizing AI governance policy is to cap precision below the technical maximum, not because of cost constraints or technical limitations, but because higher precision is actually worse for welfare when the learning externality is accounted for."
+    "explanation": "The post is explicit: 'The paper establishes this as the first-best policy outcome. A governance committee that defaults to the more accurate vendor is making a mistake: accuracy beyond τ* trades long-run community knowledge for short-run decision quality.' This is not a theoretical curiosity — it's a Pareto-optimal policy given the learning externality. The garbling result establishes that the welfare-maximizing AI governance policy is to cap precision below the technical maximum, not because of cost constraints or technical limitations, but because higher precision is actually worse for welfare when the learning externality is accounted for."
   },
   {
     "id": "kce-q04",
@@ -55,13 +55,13 @@
     "difficulty": 2,
     "question": "The model identifies one parameter that is 'unambiguously welfare-improving without any tradeoff.' What is it and why does it have no tradeoff?",
     "options": [
-      "Aggregation capacity \u2014 community size, documentation quality, mentorship structures \u2014 raises welfare without triggering the non-monotone dynamics that apply to AI accuracy; more is always unambiguously better",
-      "AI accuracy below \u03c4* is always beneficial up to the interior optimum, but carries the implicit tradeoff that practitioners must correctly identify \u03c4* to avoid inadvertently crossing the welfare-reducing threshold",
-      "Organizational AI budget investment consistently improves welfare outcomes by enabling better model selection, stronger governance infrastructure, and more comprehensive training programs for professional staff",
-      "Regulatory quality and specificity improve knowledge-stock outcomes by creating accountability structures that incentivize the learning behaviors the model identifies as essential to maintaining community knowledge"
+      "Aggregation capacity — community size, documentation quality, mentorship structures — raises welfare without triggering the non-monotone dynamics that apply to AI accuracy; more is always unambiguously better.",
+      "AI accuracy below τ* is always beneficial up to the interior optimum, but carries the implicit tradeoff that practitioners must correctly identify τ* to avoid inadvertently crossing the welfare-reducing threshold.",
+      "Organizational AI budget investment consistently improves welfare outcomes by enabling better model selection, stronger governance infrastructure, and more comprehensive training programs for professional staff.",
+      "Regulatory quality and specificity improve knowledge-stock outcomes by creating accountability structures that incentivize the learning behaviors the model identifies as essential to maintaining community knowledge."
     ],
     "correct": 0,
-    "explanation": "The post identifies this as the 'less glamorous' but actionable finding: 'The paper identifies one parameter that is unambiguously welfare-improving without any tradeoff: the size of the knowledge-sharing community. Larger communities, better documentation practices, stronger mentorship structures, and deliberate knowledge transfer all raise this parameter without triggering the non-monotone dynamics that apply to AI accuracy.' While AI accuracy has an optimal level (\u03c4*) beyond which welfare declines, aggregation capacity is monotonically beneficial \u2014 more of it is always better. This redirects governance attention from model procurement toward institutional practices that preserve and transmit knowledge."
+    "explanation": "The post identifies this as the 'less glamorous' but actionable finding: 'The paper identifies one parameter that is unambiguously welfare-improving without any tradeoff: the size of the knowledge-sharing community. Larger communities, better documentation practices, stronger mentorship structures, and deliberate knowledge transfer all raise this parameter without triggering the non-monotone dynamics that apply to AI accuracy.' While AI accuracy has an optimal level (τ*) beyond which welfare declines, aggregation capacity is monotonically beneficial — more of it is always better. This redirects governance attention from model procurement toward institutional practices that preserve and transmit knowledge."
   },
   {
     "id": "kce-q05",
@@ -71,13 +71,13 @@
     "difficulty": 2,
     "question": "The post applies the knowledge-collapse argument to junior analyst development in MRM shops. What is the specific mechanism by which AI-drafted model documentation creates a learning externality?",
     "options": [
-      "When AI drafts validation findings and flags statistical tests, the marginal return to working through model internals yourself falls",
-      "AI-drafted documentation is frequently inaccurate or incomplete, actively misleading junior analysts who rely on it and building false confidence about model behavior that senior reviewers must identify and correct",
-      "AI-generated validation documentation is too detailed and verbose for junior analysts to read efficiently, consuming review time that would otherwise be spent developing the hands-on modeling skills governance requires",
-      "Junior analysts who rely primarily on AI-generated documentation systematically fail professional certification examinations, creating talent pipeline problems for MRM functions at large financial institutions"
+      "When AI drafts validation findings and flags statistical tests, the marginal return to working through model internals yourself falls.",
+      "AI-drafted documentation is frequently inaccurate or incomplete, actively misleading junior analysts who rely on it and building false confidence about model behavior that senior reviewers must identify and correct.",
+      "AI-generated validation documentation is too detailed and verbose for junior analysts to read efficiently, consuming review time that would otherwise be spent developing the hands-on modeling skills governance requires.",
+      "Junior analysts who rely primarily on AI-generated documentation systematically fail professional certification examinations, creating talent pipeline problems for MRM functions at large financial institutions."
     ],
     "correct": 0,
-    "explanation": "The post applies the model's mechanism precisely: 'Agentic AI that drafts model documentation, flags statistical tests, and writes validation findings changes the marginal return to working through model internals yourself. The recommendation is there. You can sign off or push back. But push back on what basis? requires familiarity that accumulates from having done the work.' Each analyst who delegates validation work to AI is rationally productive. The external cost is that the community of practitioners who can mount genuine effective challenge \u2014 who have the competence to recognize when a model's assumptions are wrong \u2014 shrinks over time. Effective challenge requires competence that accumulates from practice."
+    "explanation": "The post applies the model's mechanism precisely: 'Agentic AI that drafts model documentation, flags statistical tests, and writes validation findings changes the marginal return to working through model internals yourself. The recommendation is there. You can sign off or push back. But push back on what basis? requires familiarity that accumulates from having done the work.' Each analyst who delegates validation work to AI is rationally productive. The external cost is that the community of practitioners who can mount genuine effective challenge — who have the competence to recognize when a model's assumptions are wrong — shrinks over time. Effective challenge requires competence that accumulates from practice."
   },
   {
     "id": "kce-q06",
@@ -87,13 +87,13 @@
     "difficulty": 2,
     "question": "The post distinguishes the knowledge-collapse argument from Bainbridge's automation irony. They reach similar practical conclusions but through different mechanisms. What is the key distinction?",
     "options": [
-      "Bainbridge's irony is about individual skill atrophy through disuse; knowledge collapse is a community-level externality where individual ability is held constant but shared knowledge stock declines",
-      "Bainbridge's argument applies to physical safety-critical systems where automation failures have immediate observable consequences, while knowledge collapse applies exclusively to abstract knowledge work with diffuse outcomes",
-      "Knowledge collapse is a purely theoretical model construct while Bainbridge's ironies are directly and extensively supported by empirical safety incident data from aviation and industrial control systems",
-      "Bainbridge applies to routine physical automation of manual tasks; knowledge collapse applies exclusively to AI-specific recommendation systems and does not generalize to other forms of decision support technology"
+      "Bainbridge's irony is about individual skill atrophy through disuse; knowledge collapse is a community-level externality where individual ability is held constant but shared knowledge stock declines.",
+      "Bainbridge's argument applies to physical safety-critical systems where automation failures have immediate observable consequences, while knowledge collapse applies exclusively to abstract knowledge work with diffuse outcomes.",
+      "Knowledge collapse is a purely theoretical model construct while Bainbridge's ironies are directly and extensively supported by empirical safety incident data from aviation and industrial control systems.",
+      "Bainbridge applies to routine physical automation of manual tasks; knowledge collapse applies exclusively to AI-specific recommendation systems and does not generalize to other forms of decision support technology."
     ],
     "correct": 0,
-    "explanation": "The post makes this distinction precise: 'One clarification: this is not a claim that AI makes individuals less capable. The model holds individual ability constant throughout. The collapse happens at the community level, through the externality on shared knowledge, which means the damage is diffuse and slow-moving, largely invisible until it has already happened.' Bainbridge documents a skills degradation in the specific operator who stops practicing \u2014 individual, observable (declining override rates), correctable in principle through forced practice. Knowledge collapse occurs without any individual losing capability \u2014 each person is as capable as before, but the community's collective knowledge stock shrinks because the public-good contribution that accompanied individual learning has disappeared."
+    "explanation": "The post makes this distinction precise: 'One clarification: this is not a claim that AI makes individuals less capable. The model holds individual ability constant throughout. The collapse happens at the community level, through the externality on shared knowledge, which means the damage is diffuse and slow-moving, largely invisible until it has already happened.' Bainbridge documents a skills degradation in the specific operator who stops practicing — individual, observable (declining override rates), correctable in principle through forced practice. Knowledge collapse occurs without any individual losing capability — each person is as capable as before, but the community's collective knowledge stock shrinks because the public-good contribution that accompanied individual learning has disappeared."
   },
   {
     "id": "kce-q07",
@@ -101,15 +101,15 @@
     "module": "ai-economy",
     "objective": "argument",
     "difficulty": 3,
-    "question": "The paper proposes a two-phase policy for organizations that have already crossed the collapse threshold: first suppress AI recommendations entirely, then restore precision capped at \u03c4*. Why does the recovery phase still cap precision below the technical maximum?",
+    "question": "The paper proposes a two-phase policy for organizations that have already crossed the collapse threshold: first suppress AI recommendations entirely, then restore precision capped at τ*. Why does the recovery phase still cap precision below the technical maximum?",
     "options": [
-      "The optimal steady-state policy is \u03c4* regardless of starting point \u2014 restoring to technical maximum would re-trigger the substitution dynamics that caused collapse; the cap maintains the rebuilt knowledge stock",
-      "Technical maximum precision may degrade or become unavailable after a sustained suppression period, making it pragmatically safer to restore only up to \u03c4* rather than targeting the full technical performance ceiling",
-      "The recovery phase requires a deliberate transitional period of reduced AI precision to ease practitioners back into independent thinking before full accuracy can safely be restored without triggering renewed displacement",
-      "Technical maximum precision is an unstable target that shifts with each model generation, making it an impractical policy anchor compared to the more stable \u03c4* which is defined by community-level learning parameters"
+      "The optimal steady-state policy is τ* regardless of starting point — restoring to technical maximum would re-trigger the substitution dynamics that caused collapse; the cap maintains the rebuilt knowledge stock.",
+      "Technical maximum precision may degrade or become unavailable after a sustained suppression period, making it pragmatically safer to restore only up to τ* rather than targeting the full technical performance ceiling.",
+      "The recovery phase requires a deliberate transitional period of reduced AI precision to ease practitioners back into independent thinking before full accuracy can safely be restored without triggering renewed displacement.",
+      "Technical maximum precision is an unstable target that shifts with each model generation, making it an impractical policy anchor compared to the more stable τ* which is defined by community-level learning parameters."
     ],
     "correct": 0,
-    "explanation": "The two-phase policy targets the same steady state as the preventive policy \u2014 \u03c4*. The recovery phase restores AI recommendations only up to the welfare-optimal precision, not the technical maximum. The logic: \u03c4* is the first-best policy regardless of whether you're arriving from a high-knowledge or a low-knowledge starting point. Restoring to technical maximum would initiate the same substitution dynamic that caused the collapse in the first place \u2014 just from a rebuilt knowledge stock, which would then be eroded again. The optimal path requires the inferior model in both phases: suppression to rebuild, and capping to maintain."
+    "explanation": "The two-phase policy targets the same steady state as the preventive policy — τ*. The recovery phase restores AI recommendations only up to the welfare-optimal precision, not the technical maximum. The logic: τ* is the first-best policy regardless of whether you're arriving from a high-knowledge or a low-knowledge starting point. Restoring to technical maximum would initiate the same substitution dynamic that caused the collapse in the first place — just from a rebuilt knowledge stock, which would then be eroded again. The optimal path requires the inferior model in both phases: suppression to rebuild, and capping to maintain."
   },
   {
     "id": "kce-q08",
@@ -117,15 +117,15 @@
     "module": "ai-economy",
     "objective": "misconception",
     "difficulty": 2,
-    "question": "The post notes: 'What I can't close is the empirical calibration. Where is \u03c4* for a credit model validation team?' What does this uncertainty mean for governance decisions?",
+    "question": "The post notes: 'What I can't close is the empirical calibration. Where is τ* for a credit model validation team?' What does this uncertainty mean for governance decisions?",
     "options": [
-      "\u03c4* is unobservable \u2014 this doesn't invalidate the structural insight, but governance should treat the non-monotone relationship as a real risk and monitor indicators the model predicts would signal",
-      "The theory is empirically invalid without calibration data and should not inform any practical governance decisions until rigorous field studies establish \u03c4* values for specific professional contexts",
-      "Banks should defer all AI governance decisions in this domain until empirical studies provide calibrated \u03c4* estimates for their specific institutional context, professional workforce, and model risk function",
-      "The absence of calibration data actually proves that maximum AI accuracy is the appropriate governance default, since the risk of under-deploying AI is more clearly established than the knowledge collapse risk"
+      "τ* is unobservable — this doesn't invalidate the structural insight, but governance should treat the non-monotone relationship as a real risk and monitor indicators the model predicts would signal.",
+      "The theory is empirically invalid without calibration data and should not inform any practical governance decisions until rigorous field studies establish τ* values for specific professional contexts.",
+      "Banks should defer all AI governance decisions in this domain until empirical studies provide calibrated τ* estimates for their specific institutional context, professional workforce, and model risk function.",
+      "The absence of calibration data actually proves that maximum AI accuracy is the appropriate governance default, since the risk of under-deploying AI is more clearly established than the knowledge collapse risk."
     ],
     "correct": 0,
-    "explanation": "The post's epistemic position: 'The model establishes a non-monotone relationship between AI precision and long-run welfare, and shows that the welfare-optimal policy caps precision below its technical maximum. I find this analytically credible... What I can't close is the empirical calibration.' This is an honest acknowledgment that the structural insight (non-monotone welfare) is established by the model, while the specific threshold (\u03c4*) requires empirical calibration that doesn't exist yet. The practical governance implication: don't treat maximum AI accuracy as the safe default just because \u03c4* is unknown. The theory establishes that a welfare-maximizing precision exists and is below the technical maximum; the exact location requires monitoring the indicators the model predicts."
+    "explanation": "The post's epistemic position: 'The model establishes a non-monotone relationship between AI precision and long-run welfare, and shows that the welfare-optimal policy caps precision below its technical maximum. I find this analytically credible... What I can't close is the empirical calibration.' This is an honest acknowledgment that the structural insight (non-monotone welfare) is established by the model, while the specific threshold (τ*) requires empirical calibration that doesn't exist yet. The practical governance implication: don't treat maximum AI accuracy as the safe default just because τ* is unknown. The theory establishes that a welfare-maximizing precision exists and is below the technical maximum; the exact location requires monitoring the indicators the model predicts."
   },
   {
     "id": "kce-q09",
@@ -135,13 +135,13 @@
     "difficulty": 3,
     "question": "The post connects knowledge collapse to the effective challenge framework: 'Effective challenge requires competence; competence accumulates through practice; the learning externality erodes the practice incentive.' How does SR 26-2's GenAI exclusion interact with this argument?",
     "options": [
-      "SR 26-2 excludes GenAI from formal MRM scope, removing the effective-challenge requirements that would otherwise create institutional incentives to maintain the practice-based competence the learning externality erodes",
-      "SR 26-2's exclusion means GenAI tools cannot be used in model validation under any regulatory interpretation, inadvertently protecting against knowledge collapse by limiting the AI deployment that would trigger it",
-      "The exclusion is irrelevant to knowledge collapse dynamics because the model's externality mechanism applies equally to all AI systems regardless of how they are classified by banking supervisory guidance",
-      "SR 26-2's exclusion reduces GenAI validation workload, freeing analyst time for the independent learning activities that the knowledge-collapse model identifies as essential for maintaining community knowledge stock"
+      "SR 26-2 excludes GenAI from formal MRM scope, removing the effective-challenge requirements that would otherwise create institutional incentives to maintain the practice-based competence the learning externality erodes.",
+      "SR 26-2's exclusion means GenAI tools cannot be used in model validation under any regulatory interpretation, inadvertently protecting against knowledge collapse by limiting the AI deployment that would trigger it.",
+      "The exclusion is irrelevant to knowledge collapse dynamics because the model's externality mechanism applies equally to all AI systems regardless of how they are classified by banking supervisory guidance.",
+      "SR 26-2's exclusion reduces GenAI validation workload, freeing analyst time for the independent learning activities that the knowledge-collapse model identifies as essential for maintaining community knowledge stock."
     ],
     "correct": 0,
-    "explanation": "The post frames this connection precisely: 'SR 26-2, which superseded SR 11-7 on April 17, 2026, explicitly excludes GenAI from scope, meaning the institutional knowledge effects described here currently fall outside the formal MRM perimeter. The governance gap and the knowledge externality are, in that sense, the same problem wearing different coats.' SR 11-7's effective challenge standard required validators to demonstrate competence in the models they reviewed \u2014 creating an institutional incentive to actually work through model internals. SR 26-2's GenAI exclusion eliminates that formal requirement precisely for the technology class most likely to generate the learning externality the Acemoglu model identifies."
+    "explanation": "The post frames this connection precisely: 'SR 26-2, which superseded SR 11-7 on April 17, 2026, explicitly excludes GenAI from scope, meaning the institutional knowledge effects described here currently fall outside the formal MRM perimeter. The governance gap and the knowledge externality are, in that sense, the same problem wearing different coats.' SR 11-7's effective challenge standard required validators to demonstrate competence in the models they reviewed — creating an institutional incentive to actually work through model internals. SR 26-2's GenAI exclusion eliminates that formal requirement precisely for the technology class most likely to generate the learning externality the Acemoglu model identifies."
   },
   {
     "id": "kce-q10",
@@ -151,12 +151,12 @@
     "difficulty": 3,
     "question": "The three Economics of AI posts (ai-econ-model, token-transfer-pricing, knowledge-collapse-economics) each identify a mechanism by which AI creates second-order economic effects that aggregate individual rationality cannot capture. What is the common structural insight?",
     "options": [
-      "Each post identifies a different externality: displacement where redistribution determines whether gains are shared; compute cross-subsidy where internal pricing is needed; and knowledge-stock erosion where rational AI use degrades",
-      "AI is broadly economically harmful across all three domains studied, and the posts collectively make a case for significantly heavier regulatory intervention in AI deployment than any existing framework currently provides",
-      "AI's second-order economic effects are too uncertain and context-dependent to model reliably, meaning the three posts should be read as illustrative possibilities rather than predictions applicable to specific institutional decisions",
-      "The three mechanisms identified cancel each other out in aggregate, meaning AI is approximately welfare-neutral overall once displacement costs, compute efficiency gains, and knowledge stock effects are properly accounted for"
+      "Each post identifies a different externality: displacement where redistribution determines whether gains are shared; compute cross-subsidy where internal pricing is needed; and knowledge-stock erosion where rational AI use degrades.",
+      "AI is broadly economically harmful across all three domains studied, and the posts collectively make a case for significantly heavier regulatory intervention in AI deployment than any existing framework currently provides.",
+      "AI's second-order economic effects are too uncertain and context-dependent to model reliably, meaning the three posts should be read as illustrative possibilities rather than predictions applicable to specific institutional decisions.",
+      "The three mechanisms identified cancel each other out in aggregate, meaning AI is approximately welfare-neutral overall once displacement costs, compute efficiency gains, and knowledge stock effects are properly accounted for."
     ],
     "correct": 0,
-    "explanation": "The trilogy's common structure: each post identifies a domain where individually rational AI decisions create negative externalities or public-good problems that aggregate individual choices cannot correct. AI-econ-model: individual firms rationally displace workers; collective demand loss is a macro externality requiring redistribution policy. Token-transfer-pricing: individual business units rationally use whatever model is available at zero marginal internal cost; the organization's aggregate compute allocation is irrational without internal pricing. Knowledge-collapse-economics: individual practitioners rationally delegate to AI; the community's shared knowledge stock is a public good that erodes without governance mechanisms that create incentives to maintain it. In each case, the market failure is structural \u2014 individually rational choices produce collectively suboptimal outcomes without appropriate institutions."
+    "explanation": "The trilogy's common structure: each post identifies a domain where individually rational AI decisions create negative externalities or public-good problems that aggregate individual choices cannot correct. AI-econ-model: individual firms rationally displace workers; collective demand loss is a macro externality requiring redistribution policy. Token-transfer-pricing: individual business units rationally use whatever model is available at zero marginal internal cost; the organization's aggregate compute allocation is irrational without internal pricing. Knowledge-collapse-economics: individual practitioners rationally delegate to AI; the community's shared knowledge stock is a public good that erodes without governance mechanisms that create incentives to maintain it. In each case, the market failure is structural — individually rational choices produce collectively suboptimal outcomes without appropriate institutions."
   }
 ]

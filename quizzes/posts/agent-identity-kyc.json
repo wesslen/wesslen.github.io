@@ -7,13 +7,13 @@
     "difficulty": 1,
     "question": "The Customer Identification Program (CIP) rule specifies minimum identity data for two entity types: natural persons and legal entities. Why does this create a structural problem for AI agent payments?",
     "options": [
-      "AI agents process transaction volumes too high for banks to maintain separate CIP records, so agent transactions get pooled under generic automation categories without individual identity tracking",
-      "An AI agent fits neither CIP category \u2014 no date of birth, no taxpayer ID, no legal standing \u2014 so the bank can only identify the account holder",
-      "AI agents operate simultaneously across multiple jurisdictions, making consistent CIP compliance impossible without a federal preemption rule establishing a single national identification standard for automated systems",
-      "CIP requirements apply exclusively to account-opening events and were never designed to apply at the transaction level, regardless of whether the initiating party is a human or an automated agent"
+      "AI agents process transaction volumes too high for banks to maintain separate CIP records, so agent transactions get pooled under generic automation categories without individual identity tracking.",
+      "An AI agent fits neither CIP category — no date of birth, no taxpayer ID, no legal standing — so the bank can only identify the account holder.",
+      "AI agents operate simultaneously across multiple jurisdictions, making consistent CIP compliance impossible without a federal preemption rule establishing a single national identification standard for automated systems.",
+      "CIP requirements apply exclusively to account-opening events and were never designed to apply at the transaction level, regardless of whether the initiating party is a human or an automated agent."
     ],
     "correct": 1,
-    "explanation": "The post is direct: 'An AI agent is neither a natural person nor a legal entity. It has no date of birth, no address, no taxpayer identification number in any conventional sense. No U.S. banking law has an AAI customer category. No regulatory guidance has created one.' This is why the liability problem from the payments post compounds here: when something goes wrong, the bank can only identify the account holder \u2014 not the specific agent or the scope under which it was authorized to act. The dispute pathway runs through the account holder regardless of whether they actually instructed the specific transaction."
+    "explanation": "The post is direct: 'An AI agent is neither a natural person nor a legal entity. It has no date of birth, no address, no taxpayer identification number in any conventional sense. No U.S. banking law has an AAI customer category. No regulatory guidance has created one.' This is why the liability problem from the payments post compounds here: when something goes wrong, the bank can only identify the account holder — not the specific agent or the scope under which it was authorized to act. The dispute pathway runs through the account holder regardless of whether they actually instructed the specific transaction."
   },
   {
     "id": "aik-q02",
@@ -23,10 +23,10 @@
     "difficulty": 2,
     "question": "Examiners are extending the FFIEC 2021 Authentication Guidance's 'applications and devices' category to cover AI agents without new formal guidance. What governance risk does this extension create?",
     "options": [
-      "Banks implementing agent authentication under the 2021 framework may fail technical standards written before AI agents existed, creating compliance gaps that examiners flag but cannot specify how to resolve",
-      "Without formal guidance, each examiner applies their own interpretation \u2014 materially similar agent deployments may receive different examination findings across districts, and banks cannot predict what will satisfy review",
-      "The informal extension creates duplicate regulatory obligations that increase compliance costs without any corresponding improvement in actual security outcomes or consumer protection for affected customers",
-      "The 2021 guidance was designed for consumer e-commerce platforms rather than financial services, and lacks the risk-tiering framework needed to appropriately govern AI agents operating on behalf of retail banking customers"
+      "Banks implementing agent authentication under the 2021 framework may fail technical standards written before AI agents existed, creating compliance gaps that examiners flag but cannot specify how to resolve.",
+      "Without formal guidance, each examiner applies their own interpretation — materially similar agent deployments may receive different examination findings across districts, and banks cannot predict what will satisfy review.",
+      "The informal extension creates duplicate regulatory obligations that increase compliance costs without any corresponding improvement in actual security outcomes or consumer protection for affected customers.",
+      "The 2021 guidance was designed for consumer e-commerce platforms rather than financial services, and lacks the risk-tiering framework needed to appropriately govern AI agents operating on behalf of retail banking customers."
     ],
     "correct": 1,
     "explanation": "The post identifies this as a supervisory consistency problem: 'the consistent finding across published comment letters and reported examiner communications is that examiners are extending this applications and devices category to cover AI agents without new formal guidance, without a rulemaking process, and without a comment period. Each examiner is applying their own interpretation.' This creates the worst of both worlds: banks face examination scrutiny on agent identity architecture, but without formal guidance they cannot predict what standard will be applied. FinCEN's November 2024 Alert FIN-2024-A004 on GenAI-enabled deepfakes raises the authentication bar further without clarifying what meets it."
@@ -39,10 +39,10 @@
     "difficulty": 2,
     "question": "Visa TAP takes an identity-first approach; Mastercard Verifiable Intent takes an intent-first approach. What does each approach prioritize, and what is each approach's key limitation?",
     "options": [
-      "TAP prioritizes cryptographic transaction security through hardware tokens; Verifiable Intent prioritizes processing speed through lighter-weight credential exchange; neither adequately handles cross-border agent transactions",
-      "TAP confirms who the agent is but doesn't constrain what it can do; Verifiable Intent scopes mandate but doesn't prevent impersonation",
-      "TAP prioritizes consumer enrollment convenience above all else; Verifiable Intent prioritizes merchant dispute protection; their different stakeholder orientations make them address incompatible aspects of the problem",
-      "TAP and Verifiable Intent are technically incompatible credential architectures that will force issuers, merchants, and vendors to choose one standard or maintain expensive parallel compliance programs indefinitely"
+      "TAP prioritizes cryptographic transaction security through hardware tokens; Verifiable Intent prioritizes processing speed through lighter-weight credential exchange; neither adequately handles cross-border agent transactions.",
+      "TAP confirms who the agent is but doesn't constrain what it can do; Verifiable Intent scopes mandate but doesn't prevent impersonation.",
+      "TAP prioritizes consumer enrollment convenience above all else; Verifiable Intent prioritizes merchant dispute protection; their different stakeholder orientations make them address incompatible aspects of the problem.",
+      "TAP and Verifiable Intent are technically incompatible credential architectures that will force issuers, merchants, and vendors to choose one standard or maintain expensive parallel compliance programs indefinitely."
     ],
     "correct": 1,
     "explanation": "The post describes this complementarity: 'Both questions matter. An authenticated agent can still exceed its mandate. A well-scoped mandate can be executed by an impersonator.' TAP's identity-first approach answers: this specific agent, recognized by this consumer, initiated this transaction. It doesn't say whether the agent was authorized to spend on this category or within this amount. Verifiable Intent's intent-first approach answers: an agent within these constraints initiated this transaction. It doesn't prevent a different agent from claiming to be the one with those credentials. The industry is building toward a stack where both are present, but as of April 2026 neither scheme alone is sufficient."
@@ -55,13 +55,13 @@
     "difficulty": 2,
     "question": "JPMorgan's CAO described 'access management and entitlements of agents' as 'an unsolved problem needing industry uplift' even at the most sophisticated institutions. What does this reveal about MCP as a banking infrastructure component?",
     "options": [
-      "MCP licensing costs are prohibitively high for most institutions, preventing widespread banking adoption even though the protocol's technical architecture is adequate for production financial services deployments",
-      "MCP's authorization model and documented vulnerabilities \u2014 confused deputy attacks, over-broad scope grants, token passthrough \u2014 fall short of production banking requirements even at the most",
-      "JPMorgan's CAO assessment reflects outdated information; major security improvements to MCP's authorization model were shipped after the statement and resolve the vulnerabilities identified in early deployments",
-      "The access management challenge is confined to open-source MCP implementations; commercial enterprise versions from major cloud providers have already resolved the authorization weaknesses that make open-source deployments unsuitable"
+      "MCP licensing costs are prohibitively high for most institutions, preventing widespread banking adoption even though the protocol's technical architecture is adequate for production financial services deployments.",
+      "MCP's authorization model and documented vulnerabilities — confused deputy attacks, over-broad scope grants, token passthrough — fall short of production banking requirements even at the most.",
+      "JPMorgan's CAO assessment reflects outdated information; major security improvements to MCP's authorization model were shipped after the statement and resolve the vulnerabilities identified in early deployments.",
+      "The access management challenge is confined to open-source MCP implementations; commercial enterprise versions from major cloud providers have already resolved the authorization weaknesses that make open-source deployments unsuitable."
     ],
     "correct": 1,
-    "explanation": "The post places JPMorgan's candid admission in context: the most technically sophisticated bank in the world, with dedicated AI teams and the resources to implement custom solutions, acknowledges that agent access management is 'an unsolved problem.' This is not a resource problem \u2014 it's an architectural problem. MCP's authorization model requires implementation-specific solutions and has documented vulnerability patterns (confused deputy attacks, token passthrough, session hijacking, over-broad scope grants) that are endemic to the protocol's current design. 'Widely adopted in fintech' and 'safe for core banking' are different standards."
+    "explanation": "The post places JPMorgan's candid admission in context: the most technically sophisticated bank in the world, with dedicated AI teams and the resources to implement custom solutions, acknowledges that agent access management is 'an unsolved problem.' This is not a resource problem — it's an architectural problem. MCP's authorization model requires implementation-specific solutions and has documented vulnerability patterns (confused deputy attacks, token passthrough, session hijacking, over-broad scope grants) that are endemic to the protocol's current design. 'Widely adopted in fintech' and 'safe for core banking' are different standards."
   },
   {
     "id": "aik-q05",
@@ -71,13 +71,13 @@
     "difficulty": 2,
     "question": "The UK Variable Recurring Payments (VRP) scheme is described as 'the closest existing production analog to agentic delegated payments.' It works because it has three elements. What are they, and why do US systems currently lack them?",
     "options": [
-      "Fast settlement, low fees, and wide merchant acceptance \u2014 absent because US payment infrastructure was built for batch processing and lacks the interoperability mandate that made VRP possible in the UK",
-      "Explicit consumer authorization, bounded scope constraints, and a bank-side revocation mechanism \u2014 absent because no US regulatory mandate has forced the coordination needed to implement all three together",
-      "Government backing, interbank clearing infrastructure, and federal deposit insurance \u2014 features available through the Federal Reserve system but not to third-party agentic payment providers operating commercially",
-      "Real-time processing, cryptographic agent credentials, and automated dispute arbitration \u2014 currently under joint development by US card networks but not yet available in any production payment environment"
+      "Fast settlement, low fees, and wide merchant acceptance — absent because US payment infrastructure was built for batch processing and lacks the interoperability mandate that made VRP possible in the UK.",
+      "Explicit consumer authorization, bounded scope constraints, and a bank-side revocation mechanism — absent because no US regulatory mandate has forced the coordination needed to implement all three together.",
+      "Government backing, interbank clearing infrastructure, and federal deposit insurance — features available through the Federal Reserve system but not to third-party agentic payment providers operating commercially.",
+      "Real-time processing, cryptographic agent credentials, and automated dispute arbitration — currently under joint development by US card networks but not yet available in any production payment environment."
     ],
     "correct": 1,
-    "explanation": "The post's VRP analysis: 'The UK Variable Recurring Payments scheme is the closest existing production analog to agentic delegated payments. It works because it has all three required elements: explicit consumer authorization, defined scope constraints, and a clear revocation mechanism at the originating bank.' US systems are trying to build equivalent functionality through private network rules (Visa TAP, Mastercard Verifiable Intent) without the regulatory foundation that mandated VRP's three elements in the UK. The barrier appears to be coordination costs combined with the absence of a regulatory mandate that forces coordination \u2014 each element individually is technically feasible; implementing all three systematically requires someone to require it."
+    "explanation": "The post's VRP analysis: 'The UK Variable Recurring Payments scheme is the closest existing production analog to agentic delegated payments. It works because it has all three required elements: explicit consumer authorization, defined scope constraints, and a clear revocation mechanism at the originating bank.' US systems are trying to build equivalent functionality through private network rules (Visa TAP, Mastercard Verifiable Intent) without the regulatory foundation that mandated VRP's three elements in the UK. The barrier appears to be coordination costs combined with the absence of a regulatory mandate that forces coordination — each element individually is technically feasible; implementing all three systematically requires someone to require it."
   },
   {
     "id": "aik-q06",
@@ -87,13 +87,13 @@
     "difficulty": 3,
     "question": "The post describes the EU's eIDAS 2.0 digital identity wallet mandate as establishing 'the infrastructure foundation for government-rooted agent credentials.' Why is this structurally different from the US private network approach?",
     "options": [
-      "Government-rooted credentials bind agent authority to a verified principal independent of any private actor's participation decisions",
-      "Government-rooted credentials use more sophisticated cryptographic algorithms than private card network systems support, providing meaningfully stronger guarantees for high-value financial transactions involving AI agents",
-      "The EU government-mandated approach deliberately moves more slowly and deliberately than the voluntary US card-network model, which can adapt faster to emerging agentic commerce patterns without waiting for legislative processes",
-      "Government-rooted credentials create significant privacy risks that well-designed private network credentials avoid by avoiding centralized government identity databases that are inherently vulnerable to state surveillance"
+      "Government-rooted credentials bind agent authority to a verified principal independent of any private actor's participation decisions.",
+      "Government-rooted credentials use more sophisticated cryptographic algorithms than private card network systems support, providing meaningfully stronger guarantees for high-value financial transactions involving AI agents.",
+      "The EU government-mandated approach deliberately moves more slowly and deliberately than the voluntary US card-network model, which can adapt faster to emerging agentic commerce patterns without waiting for legislative processes.",
+      "Government-rooted credentials create significant privacy risks that well-designed private network credentials avoid by avoiding centralized government identity databases that are inherently vulnerable to state surveillance."
     ],
     "correct": 0,
-    "explanation": "The structural difference is about what the system covers by default. Under eIDAS 2.0, every eligible EU citizen will have a government-verified digital identity wallet by December 2026, and private-sector acceptance is mandated by December 2027. An AI agent acting on behalf of that citizen can present a credential rooted in government verification. Under the US approach, an agent is only identifiable if it's enrolled in a private network scheme \u2014 which requires developer registration, issuer participation, and merchant acceptance. DIY consumer agents don't get enrolled. The US system covers registered enterprise agents; the EU approach covers any agent acting on behalf of a verified principal."
+    "explanation": "The structural difference is about what the system covers by default. Under eIDAS 2.0, every eligible EU citizen will have a government-verified digital identity wallet by December 2026, and private-sector acceptance is mandated by December 2027. An AI agent acting on behalf of that citizen can present a credential rooted in government verification. Under the US approach, an agent is only identifiable if it's enrolled in a private network scheme — which requires developer registration, issuer participation, and merchant acceptance. DIY consumer agents don't get enrolled. The US system covers registered enterprise agents; the EU approach covers any agent acting on behalf of a verified principal."
   },
   {
     "id": "aik-q07",
@@ -103,13 +103,13 @@
     "difficulty": 2,
     "question": "SMART on FHIR's scope syntax (`patient/Observation.read` etc.) is offered as a design template for banking agent authorization. What governance property does this approach provide that current agentic payment frameworks lack?",
     "options": [
-      "Faster implementation timelines because it reuses healthcare IT infrastructure already installed at large financial institutions, avoiding the need to build entirely new payment network integrations from scratch",
-      "Machine-readable, auditable permission grants at the resource level \u2014 each scope entry specifies resource type, action, and constraints, enabling automated dispute resolution against a specific",
-      "Stronger cryptographic primitives than credential systems deployed by payment networks, providing better resistance to identity spoofing and injection attacks at the authorization and authentication layers",
-      "Administrative regulatory cover from the healthcare precedent, making banking implementation politically easier to approve since regulators have already accepted the model in a comparably regulated adjacent industry"
+      "Faster implementation timelines because it reuses healthcare IT infrastructure already installed at large financial institutions, avoiding the need to build entirely new payment network integrations from scratch.",
+      "Machine-readable, auditable permission grants at the resource level — each scope entry specifies resource type, action, and constraints, enabling automated dispute resolution against a specific.",
+      "Stronger cryptographic primitives than credential systems deployed by payment networks, providing better resistance to identity spoofing and injection attacks at the authorization and authentication layers.",
+      "Administrative regulatory cover from the healthcare precedent, making banking implementation politically easier to approve since regulators have already accepted the model in a comparably regulated adjacent industry."
     ],
     "correct": 1,
-    "explanation": "The post identifies the governance property: 'The scope is specific, constrained, auditable, and revocable.' Current agentic payment frameworks either provide identity (TAP) or category-level constraints (Verifiable Intent). SMART on FHIR's granular scope syntax enables machine-readable authorization records at the level of individual actions on specific resource types \u2014 enabling a dispute resolver to automatically check whether a specific transaction was within scope, rather than relying on interpretation of general mandate terms. 'No US bank has published a production version of this architecture \u2014 the barrier appears to be coordination costs combined with the absence of a regulatory mandate.'"
+    "explanation": "The post identifies the governance property: 'The scope is specific, constrained, auditable, and revocable.' Current agentic payment frameworks either provide identity (TAP) or category-level constraints (Verifiable Intent). SMART on FHIR's granular scope syntax enables machine-readable authorization records at the level of individual actions on specific resource types — enabling a dispute resolver to automatically check whether a specific transaction was within scope, rather than relying on interpretation of general mandate terms. 'No US bank has published a production version of this architecture — the barrier appears to be coordination costs combined with the absence of a regulatory mandate.'"
   },
   {
     "id": "aik-q08",
@@ -119,13 +119,13 @@
     "difficulty": 2,
     "question": "The FDX Agentic AI initiative (launched April 2026, Call for Input due May 2026) is described as the 'live near-term process most likely to produce usable standards on agent identification and consent delegation.' What should practitioners understand about FDX's authority?",
     "options": [
-      "FDX is a federal regulatory body with independent legal authority to mandate compliance \u2014 its published specifications have the force of law for all covered institutions once formally adopted",
-      "FDX is CFPB-recognized under Section 1033 \u2014 specifications carry examination weight but are voluntary; participation quality signals whether self-regulation will converge before enforcement pressure forces it",
-      "FDX specifications become legally binding for all covered institutions automatically 180 days after formal publication, following the same administrative process as CFPB interpretive guidance under the CFPA",
-      "FDX authority extends only to banks subject to CFPB supervision; fintech companies, payment processors, and technology vendors are not subject to its standards and need not participate in its processes"
+      "FDX is a federal regulatory body with independent legal authority to mandate compliance — its published specifications have the force of law for all covered institutions once formally adopted.",
+      "FDX is CFPB-recognized under Section 1033 — specifications carry examination weight but are voluntary; participation quality signals whether self-regulation will converge before enforcement pressure forces it.",
+      "FDX specifications become legally binding for all covered institutions automatically 180 days after formal publication, following the same administrative process as CFPB interpretive guidance under the CFPA.",
+      "FDX authority extends only to banks subject to CFPB supervision; fintech companies, payment processors, and technology vendors are not subject to its standards and need not participate in its processes."
     ],
     "correct": 1,
-    "explanation": "The post is precise about FDX's authority: 'its outputs are voluntary, but as the CFPB-recognized standard-setting body, its specifications carry weight in examination.' FDX was approved as the first Section 1033 standard-setting body in January 2025 \u2014 meaning its specifications carry persuasive weight with CFPB examiners and will likely inform any eventual revised open banking rule. They are not mandated. The participation quality in the Call for Input \u2014 whether banks, fintechs, and technology companies submit substantive feedback \u2014 is a leading indicator of whether voluntary self-regulation will converge on workable standards before enforcement pressure forces it."
+    "explanation": "The post is precise about FDX's authority: 'its outputs are voluntary, but as the CFPB-recognized standard-setting body, its specifications carry weight in examination.' FDX was approved as the first Section 1033 standard-setting body in January 2025 — meaning its specifications carry persuasive weight with CFPB examiners and will likely inform any eventual revised open banking rule. They are not mandated. The participation quality in the Call for Input — whether banks, fintechs, and technology companies submit substantive feedback — is a leading indicator of whether voluntary self-regulation will converge on workable standards before enforcement pressure forces it."
   },
   {
     "id": "aik-q09",
@@ -135,10 +135,10 @@
     "difficulty": 3,
     "question": "The post describes the CIP gap as creating 'a specific downstream consequence for liability.' What is the chain from CIP gap to liability consequence?",
     "options": [
-      "CIP violations for agent transactions expose institutions to direct regulatory penalties and enforcement actions from FinCEN, compounding the consumer protection liability from the Regulation E furnished-access gap",
-      "Without an AAI customer category, the bank identifies only the account holder \u2014 when an agent-initiated transaction goes wrong, there is no agent scope record",
-      "The CIP gap enables fraudulent agents to open accounts that circumvent AML and sanctions screening controls, creating systemic financial crime exposure that dwarfs the individual consumer liability concerns",
-      "CIP violations in agent contexts transfer liability directly to the AI agent vendor rather than the processing bank, shifting financial exposure outside the regulated institution's balance sheet entirely"
+      "CIP violations for agent transactions expose institutions to direct regulatory penalties and enforcement actions from FinCEN, compounding the consumer protection liability from the Regulation E furnished-access gap.",
+      "Without an AAI customer category, the bank identifies only the account holder — when an agent-initiated transaction goes wrong, there is no agent scope record.",
+      "The CIP gap enables fraudulent agents to open accounts that circumvent AML and sanctions screening controls, creating systemic financial crime exposure that dwarfs the individual consumer liability concerns.",
+      "CIP violations in agent contexts transfer liability directly to the AI agent vendor rather than the processing bank, shifting financial exposure outside the regulated institution's balance sheet entirely."
     ],
     "correct": 1,
     "explanation": "The post traces this chain: 'If a bank cannot identify an AI agent as a distinct party to a transaction (with its own registered identity, scope of authority, and authorization record), then the only party the bank knows it's dealing with is the account holder. When something goes wrong, the entire dispute pathway runs through the account holder, regardless of whether the account holder actually instructed the specific transaction.' This is why the CIP gap compounds the Regulation E 'furnished access device' exception: the bank sees a transaction from a known account (CIP satisfied for the account holder), has no record of which agent initiated it or under what authorization (CIP gap for the agent), and the consumer bears the burden of proving the agent exceeded its scope when no scope record exists."
@@ -151,10 +151,10 @@
     "difficulty": 3,
     "question": "The payments-liability-gap, agent-identity-kyc, and agentic-commerce-gap posts collectively describe a three-layer problem. How do liability gaps, identity gaps, and market structure gaps compound each other?",
     "options": [
-      "Each layer is structurally independent \u2014 liability failures, identity gaps, and market structure problems each require separate regulatory solutions and do not interact or reinforce one another across the system",
-      "The liability gap is amplified by the identity gap (no evidence to resolve disputes), which is amplified by the market structure gap (Section 1033 injunction concentrates data advantage at Tier 1",
-      "The three gaps form a strict resolution sequence \u2014 fix identity infrastructure first, then liability framework, then market structure \u2014 and attempting to resolve them out of order produces unworkable partial solutions",
-      "Only the liability and identity gaps interact meaningfully; the market structure gap from the Section 1033 injunction is a separate commercial policy question structurally independent of consumer protection infrastructure"
+      "Each layer is structurally independent — liability failures, identity gaps, and market structure problems each require separate regulatory solutions and do not interact or reinforce one another across the system.",
+      "The liability gap is amplified by the identity gap (no evidence to resolve disputes), which is amplified by the market structure gap (Section 1033 injunction concentrates data advantage at Tier 1 banks), creating three compounding governance failures with no clear current regulatory resolution.",
+      "The three gaps form a strict resolution sequence — fix identity infrastructure first, then liability framework, then market structure — and attempting to resolve them out of order produces unworkable partial solutions.",
+      "Only the liability and identity gaps interact meaningfully; the market structure gap from the Section 1033 injunction is a separate commercial policy question structurally independent of consumer protection infrastructure."
     ],
     "correct": 1,
     "explanation": "The three-post series traces compounding gaps. The liability gap means that when something goes wrong, consumer protection may not apply. The identity gap means that even if protection applies, the evidence needed to establish the claim (what agent acted, under what scope, was the transaction within mandate) doesn't exist because no agent identity record was created. The market structure gap means that in this environment, larger banks can charge for the data access smaller agents need to function, creating barriers that concentrate the agentic commerce opportunity with the most technically sophisticated institutions. Each gap makes the others worse: identity gaps make liability disputes unresolvable; market structure gaps determine who can afford to build the identity infrastructure that would close the identity gap."
