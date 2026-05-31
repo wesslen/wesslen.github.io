@@ -2645,6 +2645,7 @@ img {
 
 /* ── Wide intro post card ─────────────────────────────── */
 .index-intro-feature {
+  display: block;
   border: 1px solid var(--accent);
   border-radius: var(--radius);
   background: var(--accent-dim);
@@ -2824,6 +2825,7 @@ img {
   padding-top: 0.15rem;
 }
 .scp-item {
+  position: relative;
   border-radius: 3px;
   transition: background 0.12s;
 }
@@ -2887,13 +2889,23 @@ img {
   opacity: 1;
 }
 .scp-expand {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.22s ease;
-  padding: 0 0.3rem;
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.65rem 0.75rem;
+  box-shadow: var(--shadow-md);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
 }
 .scp-item:hover .scp-expand {
-  max-height: 220px;
+  opacity: 1;
+  pointer-events: auto;
 }
 .scp-desc {
   font-size: 0.78rem;
