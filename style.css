@@ -2645,11 +2645,19 @@ img {
 
 /* ── Wide intro post card ─────────────────────────────── */
 .index-intro-feature {
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(auto, 220px) 1fr;
+  grid-template-areas:
+    "label desc"
+    "title desc"
+    "link  desc";
+  align-items: start;
+  column-gap: 2rem;
+  row-gap: 0.3rem;
   border: 1px solid var(--accent);
   border-radius: var(--radius);
   background: var(--accent-dim);
-  padding: 1.5rem 1.75rem 1.5rem 1.75rem;
+  padding: 1rem 1.5rem 1rem 1.75rem;
   margin-bottom: 2rem;
   position: relative;
   overflow: hidden;
@@ -2662,37 +2670,40 @@ img {
   background: var(--accent);
 }
 .intro-feature-label {
+  grid-area: label;
   font-family: var(--font-mono);
   font-size: 0.62rem;
   color: var(--accent);
   letter-spacing: 0.08em;
-  display: block;
-  margin-bottom: 0.5rem;
   opacity: 0.8;
+  align-self: end;
 }
 .intro-feature-title {
-  font-size: 1.05rem;
+  grid-area: title;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--accent);
   text-decoration: none;
   line-height: 1.3;
-  display: block;
-  margin-bottom: 0.5rem;
 }
 .intro-feature-title:hover {
   opacity: 0.8;
 }
 .intro-feature-desc {
+  grid-area: desc;
+  align-self: center;
   font-size: 0.875rem;
   color: var(--muted);
   line-height: 1.6;
-  margin: 0 0 0.75rem;
+  margin: 0;
 }
 .intro-feature-link {
+  grid-area: link;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--accent);
   text-decoration: none;
+  align-self: start;
 }
 .intro-feature-link:hover {
   opacity: 0.8;
@@ -2757,7 +2768,6 @@ img {
   font-size: 0.84rem;
   color: var(--muted);
   line-height: 1.55;
-  flex: 1;
   margin: 0;
 }
 .slide-card-actions {
