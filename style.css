@@ -2879,6 +2879,9 @@ img {
 }
 .scp-item:hover .scp-title {
   color: var(--accent);
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
 }
 .scp-date {
   display: block;
