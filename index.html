@@ -36,7 +36,7 @@
     <script src="./quizzes/quiz-engine.js"></script>
   </head>
   <body>
-    <!-- Reading progress bar (thin, on index page mostly decorative) -->
+    <!-- Reading progress bar -->
     <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
     <!-- ── Site Header ────────────────────────────────────── -->
@@ -58,7 +58,6 @@
             </svg>
           </button>
           <a href="./glossary.html" class="nav-link">glossary</a>
-          <a href="./slides.html" class="nav-link">modules</a>
           <a href="./about.html" class="nav-link">about</a>
           <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">&#9776;</button>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
@@ -69,7 +68,6 @@
     </header>
     <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
       <a href="./glossary.html" class="nav-link">glossary</a>
-      <a href="./slides.html" class="nav-link">modules</a>
       <a href="./about.html" class="nav-link">about</a>
     </nav>
 
@@ -92,28 +90,15 @@
       </div>
     </section>
 
-    <!-- ── Post List ──────────────────────────────────────── -->
-    <main class="posts-section" id="main-content">
-      <div id="intro-slot"></div>
-      <div class="posts-header">
-        <span class="section-label">// posts</span>
+    <!-- ── Modules ────────────────────────────────────────── -->
+    <section class="index-modules" id="main-content">
+      <div class="index-modules-inner">
+        <!-- Intro post feature card -->
+        <div id="intro-feature"></div>
+        <!-- Module grid -->
+        <div class="slides-grid" id="slides-grid" aria-label="Course modules"></div>
       </div>
-      <!-- Search box -->
-      <div id="search-wrap">
-        <input
-          type="search"
-          id="search-input"
-          placeholder="search posts…"
-          autocomplete="off"
-          spellcheck="false"
-          aria-label="Search posts"
-        />
-        <span id="search-clear" role="button" aria-label="Clear search" title="Clear search">✕</span>
-      </div>
-      <!-- Search results panel (shown while query is active) -->
-      <div id="search-results" aria-live="polite" aria-label="Search results"></div>
-      <div class="post-list-a" id="post-list" aria-label="Blog posts"></div>
-    </main>
+    </section>
 
     <!-- ── Footer ────────────────────────────────────────── -->
     <footer class="site-footer">
@@ -123,6 +108,24 @@
       </p>
       <p class="footer-disclaimer">Views expressed here are my own and do not represent those of my employer.</p>
     </footer>
+
+    <!-- ── Module quiz modal ─────────────────────────────── -->
+    <div
+      id="module-quiz-overlay"
+      class="module-quiz-overlay"
+      style="display: none"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="module-quiz-title"
+    >
+      <div class="module-quiz-dialog">
+        <div class="module-quiz-dialog-header">
+          <span class="module-quiz-dialog-title" id="module-quiz-title">// module test</span>
+          <button class="module-quiz-close" id="module-quiz-close" aria-label="Close quiz">✕</button>
+        </div>
+        <div class="module-quiz-dialog-body" id="module-quiz-body"></div>
+      </div>
+    </div>
 
     <script>
       (() => {
@@ -176,6 +179,7 @@
             if (!btn.contains(e.target) && !nav.contains(e.target)) closeMenu();
           });
         })();
+
         /* ── Reading Progress Bar ───────────────────────── */
         const bar = document.getElementById("progress-bar");
         function updateProgress() {
@@ -198,7 +202,6 @@
 
         function tagStyle(tag) {
           const hue = tagHue(tag);
-          // Use HSL with fixed saturation/lightness, adjust for theme
           const isDark = root.getAttribute("data-theme") === "dark";
           const bg = isDark ? `hsla(${hue},70%,60%,0.12)` : `hsla(${hue},60%,40%,0.10)`;
           const border = isDark ? `hsla(${hue},70%,60%,0.4)` : `hsla(${hue},60%,40%,0.35)`;
@@ -215,6 +218,7 @@
 
         /* ── Format Date ────────────────────────────────── */
         function fmtDate(iso) {
+          if (!iso) return "";
           const d = new Date(iso + "T00:00:00");
           return d.toLocaleDateString("en-US", {
             year: "numeric",
@@ -223,175 +227,168 @@
           });
         }
 
-        /* ── Series Definition ─────────────────────────────── */
-        const SERIES = [
-          {
-            id: "agentic-governance",
-            title: "Regulatory Drift",
-            slugs: ["sr11-7", "effective-challenge"],
-          },
-          {
-            id: "agentic-engineering",
-            title: "Agentic Engineering",
-            slugs: ["context", "agent-harness-design", "claude-code-harness", "skills-supply-chain"],
-          },
-          {
-            id: "multi-agent",
-            title: "Agent to Agent",
-            slugs: ["google-adk-a2a", "a2a-risks", "a2a-case-studies"],
-          },
-          {
-            id: "gui-agents",
-            title: "GUI Agents",
-            slugs: ["molmoweb-data-flywheel", "molmoweb-openness-gap", "gui-agents-verifier"],
-          },
-          {
-            id: "evaluations",
-            title: "The Eval Gap",
-            slugs: ["metrics-metrics-metrics", "nist-benchmark-evals", "benchmark-uncertainty"],
-          },
-          {
-            id: "adversarial-testing",
-            title: "Adversarial Testing",
-            slugs: ["adversarial-workflow", "deployment-gates", "adversarial-incompleteness"],
-          },
-          {
-            id: "human-in-the-loop",
-            title: "Human and the Loop",
-            slugs: ["guardrails", "hitl-vocabulary", "hitl-design"],
-          },
-          {
-            id: "bainbridge-debt",
-            title: "Bainbridge's Debt",
-            slugs: ["bainbridge-ironies", "automation-bias-banking", "hci-translation"],
-          },
-          {
-            id: "banking-ai",
-            title: "Banking AI",
-            slugs: ["payments-liability-gap", "agent-identity-kyc", "agentic-commerce-gap"],
-          },
-          {
-            id: "ai-economy",
-            title: "Economics of AI",
-            slugs: ["ai-econ-model", "token-transfer-pricing", "knowledge-collapse-economics"],
-          },
-        ];
-        function getSeriesForSlug(slug) {
-          return SERIES.find((s) => s.slugs.includes(slug));
-        }
+        /* ── Post URL ───────────────────────────────────── */
         function postUrl(slug, draft) {
           return draft
             ? `./post.html?slug=${encodeURIComponent(slug)}.draft`
             : `./post.html?slug=${encodeURIComponent(slug)}`;
         }
 
-        /* ── Layout A: Expandable Rows ──────────────────────── */
-        function renderA(manifest, bodies, slidesMap = {}) {
-          const container = document.getElementById("post-list");
-          const introSlot = document.getElementById("intro-slot");
+        /* ── Module quiz modal ──────────────────────────── */
+        let overlay, quizBody, quizTitle;
+
+        function openModuleQuiz(moduleId, moduleTitle) {
+          quizTitle.textContent = `// ${moduleTitle} — module test`;
+          overlay.style.display = "flex";
+          document.body.style.overflow = "hidden";
+          if (typeof window.initModuleQuiz === "function") {
+            window.initModuleQuiz(moduleId, quizBody, closeModuleQuiz);
+          }
+        }
+
+        function closeModuleQuiz() {
+          overlay.style.display = "none";
+          document.body.style.overflow = "";
+          quizBody.innerHTML = "";
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+          overlay = document.getElementById("module-quiz-overlay");
+          quizBody = document.getElementById("module-quiz-body");
+          quizTitle = document.getElementById("module-quiz-title");
+          const closeBtn = document.getElementById("module-quiz-close");
+          closeBtn.addEventListener("click", closeModuleQuiz);
+          overlay.addEventListener("click", (e) => {
+            if (e.target === overlay) closeModuleQuiz();
+          });
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && overlay && overlay.style.display !== "none") closeModuleQuiz();
+          });
+        });
+
+        /* ── Render intro feature card ──────────────────── */
+        function renderIntroFeature(manifest, bodies) {
+          const container = document.getElementById("intro-feature");
+          if (!container) return;
+          const introPost = manifest.find((p) => p.slug === "everything-drifts");
+          if (!introPost) return;
+          const idx = manifest.indexOf(introPost);
+          const body = bodies[idx] || introPost.description;
+          const rt = readTime(body);
+          container.innerHTML = `
+            <a href="${postUrl(introPost.slug)}" class="index-intro-feature" aria-label="Read intro post">
+              <span class="intro-feature-label">// intro</span>
+              <span class="intro-feature-title">${introPost.title}</span>
+              <p class="intro-feature-desc">${introPost.description}</p>
+              <span class="intro-feature-link">read → ${rt}</span>
+            </a>`;
+        }
+
+        /* ── Render module grid ─────────────────────────── */
+        function renderModuleGrid(decks, manifest, bodies) {
+          const grid = document.getElementById("slides-grid");
+          if (!grid) return;
+
           const bySlug = {};
           manifest.forEach((p, i) => {
             bySlug[p.slug] = { post: p, body: bodies[i] };
           });
 
-          const seriesSlugSet = new Set(SERIES.flatMap((s) => s.slugs));
-          const solos = manifest.filter((p) => !seriesSlugSet.has(p.slug) && p.slug !== "everything-drifts");
-          let html = "";
+          grid.innerHTML = decks
+            .map((deck, i) => {
+              const moduleNum = String(i + 1).padStart(2, "0");
+              const badgeClass = deck.published ? "published" : "soon";
+              const badgeLabel = deck.published ? "published" : "coming soon";
 
-          // Pinned intro card above // posts strip
-          const introPost = manifest.find((p) => p.slug === "everything-drifts");
-          if (introPost && introSlot) {
-            introSlot.innerHTML = `<a href="${postUrl(introPost.slug)}" class="intro-card-a">
-              <span class="intro-label-a">// intro</span>
-              <span class="intro-title-a">${introPost.title}</span>
-              <span class="intro-desc-a">${introPost.description}</span>
-            </a>`;
-          }
-
-          // Series groups
-          SERIES.forEach((series) => {
-            const posts = series.slugs
-              .map((s) => bySlug[s])
-              .filter(Boolean)
-              .sort((a, b) => a.post.date.localeCompare(b.post.date));
-            if (!posts.length) return;
-
-            const slidesDeck = slidesMap[series.id];
-            const slidesLink = slidesDeck
-              ? ` <a href="./${slidesDeck.dir}/index.html" class="series-slides-link" target="_blank" rel="noopener" title="View slide deck">slides ↗</a>`
-              : "";
-            html += `<div class="series-group-a" data-tags="${[...new Set(posts.flatMap((p) => p.post.tags || []))].join(" ")}">
-              <div class="series-header-a">⬡ ${series.title}<span class="series-count">${posts.length} posts</span>${slidesLink}</div>`;
-            posts.forEach(({ post, body }) => {
-              const rt = readTime(body);
-              const tags = (post.tags || [])
-                .slice(0, 3)
-                .map((t) => `<span class="row-a-tag" style="${tagStyle(t)}">${t}</span>`)
+              const postItems = (deck.posts || [])
+                .map((slug) => {
+                  const entry = bySlug[slug];
+                  if (!entry) return "";
+                  const { post, body } = entry;
+                  const rt = readTime(body);
+                  const tags = (post.tags || [])
+                    .slice(0, 3)
+                    .map((t) => `<span class="row-a-tag" style="${tagStyle(t)}">${t}</span>`)
+                    .join("");
+                  const draftBadge = post.draft
+                    ? ` <span class="draft-badge">draft</span>`
+                    : "";
+                  return `
+                  <div class="scp-item" data-slug="${slug}">
+                    <div class="scp-header">
+                      <span class="scp-chevron">▶</span>
+                      <div class="scp-title-row">
+                        <span class="row-a-title scp-title">${post.title}${draftBadge}</span>
+                        <span class="scp-date">${fmtDate(post.date)}</span>
+                      </div>
+                      <span class="scp-quiz-check">□</span>
+                    </div>
+                    <div class="scp-expand">
+                      <p class="scp-desc">${post.description}</p>
+                      <div class="scp-foot">
+                        <a href="${postUrl(slug, post.draft)}" class="scp-link">read → ${rt}</a>
+                        <span class="scp-tags">${tags}</span>
+                      </div>
+                    </div>
+                  </div>`;
+                })
                 .join("");
-              html += `
-              <div class="row-a${post.draft ? " row-a-draft" : ""}" data-slug="${post.slug}" data-tags="${(post.tags || []).join(" ")}">
-                <span class="row-a-chevron">▶</span>
-                <span class="row-a-title">${post.title}${post.draft ? ' <span class="draft-badge">draft</span>' : ""}</span>
-                <span class="row-a-meta"><span class="row-a-date">${fmtDate(post.date)}</span><span class="row-a-tags">${tags}</span></span>
-              </div>
-              <div class="row-a-expand" id="exp-${post.slug}">
-                <div class="row-a-desc">${post.description}</div>
-                <a href="${postUrl(post.slug, post.draft)}" class="row-a-link">read → ${rt}</a>
+
+              const quizBtn = deck.quiz
+                ? `<button class="slide-btn slide-btn-quiz" data-module-id="${deck.id}" data-module-title="${deck.title}">// test this module</button>`
+                : "";
+
+              const actions = deck.published
+                ? `<div class="slide-card-actions">
+                    <a href="./${deck.dir}/index.html" class="slide-btn slide-btn-html" target="_blank" rel="noopener">view slides ↗</a>
+                    <a href="./${deck.dir}/index.pdf" class="slide-btn slide-btn-pdf" download>download pdf ↓</a>
+                    ${quizBtn}
+                  </div>`
+                : quizBtn
+                  ? `<div class="slide-card-actions">${quizBtn}</div>`
+                  : "";
+
+              return `
+              <div class="slide-card"${deck.quiz ? ` data-module-posts="${(deck.posts || []).join(",")}"` : ""}>
+                <div class="slide-card-header">
+                  <p class="slide-card-title">
+                    <span style="color:var(--muted);font-size:0.78rem;font-family:var(--font-mono);margin-right:0.4rem">${moduleNum}</span>${deck.title}
+                  </p>
+                  <span class="slide-card-badge ${badgeClass}">${badgeLabel}</span>
+                </div>
+                <div class="slide-card-divider"></div>
+                <p class="slide-card-desc">${deck.description}</p>
+                ${postItems ? `<div class="scp-list">${postItems}</div>` : ""}
+                ${actions}
               </div>`;
-            });
-            html += `</div>`;
-          });
+            })
+            .join("");
+        }
 
-          // Standalone posts
-          if (solos.length) {
-            html += `<div class="standalone-divider-a">// standalone</div>`;
-            solos.forEach((post) => {
-              const body = bySlug[post.slug]?.body || post.description;
-              const rt = readTime(body);
-              const tags = (post.tags || [])
-                .slice(0, 3)
-                .map((t) => `<span class="row-a-tag" style="${tagStyle(t)}">${t}</span>`)
-                .join("");
-              html += `
-              <div class="row-a${post.draft ? " row-a-draft" : ""}" data-slug="${post.slug}" data-tags="${(post.tags || []).join(" ")}">
-                <span class="row-a-chevron">▶</span>
-                <span class="row-a-title">${post.title}${post.draft ? ' <span class="draft-badge">draft</span>' : ""}</span>
-                <span class="row-a-meta"><span class="row-a-date">${fmtDate(post.date)}</span><span class="row-a-tags">${tags}</span></span>
-              </div>
-              <div class="row-a-expand" id="exp-${post.slug}">
-                <div class="row-a-desc">${post.description}</div>
-                <a href="${postUrl(post.slug, post.draft)}" class="row-a-link">read → ${rt}</a>
-              </div>`;
-            });
-          }
-
-          container.innerHTML = html;
-
-          // Click-to-expand
-          container.addEventListener("click", (e) => {
-            const row = e.target.closest(".row-a");
-            if (!row) return;
-            const slug = row.dataset.slug;
-            const exp = document.getElementById("exp-" + slug);
-            const wasOpen = row.classList.contains("expanded");
-            document.querySelectorAll(".row-a.expanded").forEach((r) => r.classList.remove("expanded"));
-            document.querySelectorAll(".row-a-expand.open").forEach((r) => r.classList.remove("open"));
-            if (!wasOpen) {
-              row.classList.add("expanded");
-              exp.classList.add("open");
+        /* ── Update □/✓ quiz check indicators ──────────── */
+        function updateQuizChecks() {
+          document.querySelectorAll(".scp-item[data-slug]").forEach((item) => {
+            const check = item.querySelector(".scp-quiz-check");
+            if (!check) return;
+            // initQuizBadges appended a .quiz-done-badge to .row-a-title if quizzed
+            const badge = item.querySelector(".quiz-done-badge");
+            if (badge) {
+              check.textContent = "✓";
+              check.classList.add("scp-quiz-done");
+              badge.style.display = "none"; // hide duplicate; □/✓ in scp-quiz-check is the indicator
             }
           });
         }
 
-        /* ── Load Posts ─────────────────────────────────────── */
-        async function loadPosts() {
+        /* ── Load data and render ───────────────────────── */
+        async function loadContent() {
           try {
             const res = await fetch("./posts/index.json");
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const manifest = await res.json();
             manifest.sort((a, b) => b.date.localeCompare(a.date));
 
-            const [bodies, slidesMap] = await Promise.all([
+            const [bodies, decks] = await Promise.all([
               Promise.all(
                 manifest.map(async (post) => {
                   try {
@@ -405,161 +402,46 @@
               ),
               fetch("./slides/slides.json")
                 .then((r) => (r.ok ? r.json() : []))
-                .then((decks) => Object.fromEntries(decks.filter((d) => d.published).map((d) => [d.id, d])))
-                .catch(() => ({})),
+                .catch(() => []),
             ]);
 
-            renderA(manifest, bodies, slidesMap);
-            // Apply quiz completion badges to post cards
+            renderIntroFeature(manifest, bodies);
+            renderModuleGrid(decks, manifest, bodies);
+
+            // Quiz badges: ✓ on quizzed posts, update □ indicators
             if (typeof window.initQuizBadges === "function") {
               window.initQuizBadges();
-            }
-          } catch (err) {
-            document.getElementById("post-list").innerHTML =
-              `<div style="padding:2rem;color:var(--muted);font-family:var(--font-mono);font-size:0.8rem;">
-                ⚠ Could not load posts (${err.message})<br>
-                <span style="font-size:0.75rem">If local, serve with python -m http.server</span>
-              </div>`;
-          }
-        }
-
-        /* ── Search ─────────────────────────────────────────────── */
-        function initSearch() {
-          const input = document.getElementById("search-input");
-          const clearBtn = document.getElementById("search-clear");
-          const panel = document.getElementById("search-results");
-          const postList = document.getElementById("post-list");
-          const introSlot = document.getElementById("intro-slot");
-
-          let debounceTimer = null;
-          let focusIdx = -1;
-
-          function showNormal() {
-            panel.classList.remove("active");
-            panel.innerHTML = "";
-            clearBtn.style.display = "none";
-            postList.style.display = "";
-            introSlot.style.display = "";
-            focusIdx = -1;
-          }
-
-          function showResults(results, query) {
-            focusIdx = -1;
-            /* hide normal layout */
-            postList.style.display = "none";
-            introSlot.style.display = "none";
-            clearBtn.style.display = "block";
-
-            if (!results.length) {
-              panel.innerHTML = `<div class="sr-empty">no results for &ldquo;${query.trim()}&rdquo;</div>`;
-              panel.classList.add("active");
-              return;
+              updateQuizChecks();
             }
 
-            const plural = results.length !== 1 ? "s" : "";
-            let html = `<div class="sr-count">${results.length} result${plural}</div>`;
-            results.forEach((r, idx) => {
-              if (r.type === "glossary") {
-                const url = `./glossary.html#${encodeURIComponent(r.slug)}`;
-                html += `<a class="sr-item sr-item-glossary" href="${url}" data-idx="${idx}" tabindex="0">
-                  <div class="sr-item-header">
-                    <span class="sr-title">${r.title}</span>
-                    <span class="sr-glossary-badge">glossary</span>
-                    ${r.domain ? `<span class="sr-date">${r.domain}</span>` : ""}
-                  </div>
-                  <div class="sr-snippet">${r.snippetHtml}</div>
-                </a>`;
-              } else {
-                const url = postUrl(r.slug, r.draft);
-                const date = fmtDate(r.date);
-                const ser = r.series ? `<span class="sr-series">${r.series}</span>` : "";
-                const db = r.draft ? ` <span class="draft-badge">draft</span>` : "";
-                html += `<a class="sr-item" href="${url}" data-idx="${idx}" tabindex="0">
-                  <div class="sr-item-header">
-                    <span class="sr-title">${r.title}${db}</span>
-                    ${ser}
-                    <span class="sr-date">${date}</span>
-                  </div>
-                  <div class="sr-snippet">${r.snippetHtml}</div>
-                </a>`;
+            // Module progress indicators (e.g. "2/3 posts quizzed")
+            document.querySelectorAll("[data-module-posts]").forEach((card) => {
+              const slugs = card.dataset.modulePosts.split(",").filter(Boolean);
+              if (typeof window.initModuleProgress === "function") {
+                window.initModuleProgress(slugs, card);
               }
             });
-            panel.innerHTML = html;
-            panel.classList.add("active");
+
+            // Quiz button click handler
+            const grid = document.getElementById("slides-grid");
+            if (grid) {
+              grid.addEventListener("click", (e) => {
+                const btn = e.target.closest("[data-module-id]");
+                if (btn) openModuleQuiz(btn.dataset.moduleId, btn.dataset.moduleTitle);
+              });
+            }
+          } catch (err) {
+            const grid = document.getElementById("slides-grid");
+            if (grid) {
+              grid.innerHTML = `<div style="padding:2rem;color:var(--muted);font-family:var(--font-mono);font-size:0.8rem;">
+                ⚠ Could not load content (${err.message})<br>
+                <span style="font-size:0.75rem">If local, serve with python -m http.server</span>
+              </div>`;
+            }
           }
-
-          async function runSearch(q) {
-            if (!q.trim() || q.length < 2) {
-              showNormal();
-              return;
-            }
-            clearBtn.style.display = "block";
-            try {
-              const results = await window.BlogSearch.search(q);
-              showResults(results, q);
-            } catch (e) {
-              console.error("BlogSearch error:", e);
-            }
-          }
-
-          /* Debounced input handler */
-          input.addEventListener("input", () => {
-            clearTimeout(debounceTimer);
-            if (!input.value.trim()) {
-              showNormal();
-              return;
-            }
-            clearBtn.style.display = "block";
-            debounceTimer = setTimeout(() => runSearch(input.value), 220);
-          });
-
-          /* Clear button */
-          clearBtn.addEventListener("click", () => {
-            input.value = "";
-            showNormal();
-            input.focus();
-          });
-
-          /* Keyboard navigation */
-          input.addEventListener("keydown", (e) => {
-            const items = panel.querySelectorAll(".sr-item");
-            if (!items.length) {
-              if (e.key === "Escape") {
-                input.value = "";
-                showNormal();
-              }
-              return;
-            }
-            if (e.key === "Escape") {
-              input.value = "";
-              showNormal();
-            } else if (e.key === "ArrowDown") {
-              e.preventDefault();
-              focusIdx = Math.min(focusIdx + 1, items.length - 1);
-              items.forEach((el, i) => el.classList.toggle("sr-focused", i === focusIdx));
-              items[focusIdx].scrollIntoView({ block: "nearest" });
-            } else if (e.key === "ArrowUp") {
-              e.preventDefault();
-              focusIdx = Math.max(focusIdx - 1, 0);
-              items.forEach((el, i) => el.classList.toggle("sr-focused", i === focusIdx));
-              items[focusIdx].scrollIntoView({ block: "nearest" });
-            } else if (e.key === "Enter") {
-              const target = items[focusIdx] || items[0];
-              if (target) {
-                e.preventDefault();
-                target.click();
-              }
-            }
-          });
-
-          /* Warm up the index fetch when the user focuses the input */
-          input.addEventListener("focus", () => {
-            if (window.BlogSearch) window.BlogSearch.load();
-          });
         }
 
-        loadPosts();
-        initSearch();
+        loadContent();
       })();
     </script>
   </body>
