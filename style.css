@@ -2773,7 +2773,8 @@ img {
 .slide-card-actions {
   display: flex;
   gap: 0.6rem;
-  margin-top: 0.25rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
   flex-wrap: wrap;
 }
 .slide-btn {
