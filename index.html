@@ -316,7 +316,7 @@
                     <div class="scp-header">
                       <span class="scp-chevron">▶</span>
                       <div class="scp-title-row">
-                        <span class="row-a-title scp-title">${post.title}${draftBadge}</span>
+                        <a href="${postUrl(slug, post.draft)}" class="row-a-title scp-title">${post.title}${draftBadge}</a>
                         <span class="scp-date">${fmtDate(post.date)}</span>
                       </div>
                       <span class="scp-quiz-check">□</span>
