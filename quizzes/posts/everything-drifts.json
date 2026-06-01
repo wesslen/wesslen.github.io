@@ -5,7 +5,7 @@
     "module": "overture",
     "objective": "distinction",
     "difficulty": 1,
-    "question": "The author distinguishes two meanings of 'drift' at the start of the post. Which of the following best captures the broader meaning the course uses?",
+    "question": "The opening paragraph introduces three distinct senses of 'drift.' Which of the following best captures the broader organizational meaning the course is built around?",
     "options": [
       "Statistical drift — the gradual degradation of model performance on live data over time as input distributions shift.",
       "A general phenomenon where models, codebases, governance frameworks, and organizations diverge from their original intent over time.",
@@ -13,7 +13,7 @@
       "Concept drift — the shift in the statistical relationship between inputs and outputs in production ML systems."
     ],
     "correct": 1,
-    "explanation": "The post explicitly sets aside the technical definition ('not the technical kind — though that too') and uses drift to mean something broader: models drift from stated behavior, codebases drift from developers, governance frameworks drift from the systems they govern, and organizations drift. The course title holds all four in view simultaneously."
+    "explanation": "The post establishes three senses: the technical (statistical drift in model performance), the organizational (models, codebases, governance frameworks, and organizations diverging from their original intent), and the terminological (the word 'drift' itself being used as a catch-all for AI behavior that seems wrong, without a specified baseline). The course is built around the second — the broad organizational meaning — though the irony of the third recurs throughout. The first is explicitly set aside at the start: 'not the technical kind — though that too.'"
   },
   {
     "id": "ed-q02",
@@ -110,5 +110,21 @@
     ],
     "correct": 0,
     "explanation": "The author says the course 'keeps going stale and getting rewritten' as a feature, not a bug — it's tracking drift in real time. The implication is that specific regulatory claims (like which guidance is current) or technical findings (like benchmark results) should be verified against primary sources, especially for anything time-sensitive. The course is honest about this limitation rather than papering over it."
+  },
+  {
+    "id": "ed-q08",
+    "post": "everything-drifts",
+    "module": "overture",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "The post draws a parallel between how 'bias' was used in the ML era and how 'drift' is being used now. What is the shared failure mode the author identifies in both cases?",
+    "options": [
+      "Both terms have been corrupted by industry use to the point where they no longer retain their original technical definitions.",
+      "Both terms are used as catch-alls for AI behavior that seems wrong, without specifying the normative baseline against which the deviation is being measured.",
+      "Both terms originated in academic research but were adopted by industry with their statistical caveats stripped away.",
+      "Both terms conflate statistical measurement with value judgment, making them inappropriate as operational governance concepts."
+    ],
+    "correct": 1,
+    "explanation": "The author's specific critique is not that the terms are meaningless but that they're deployed without the necessary follow-up: 'biased compared to what?' and 'drifting from what?' Without a specified baseline, each term functions as a label rather than a measurement. The vocabulary shift (bias → drift) carries an additional irony: engineering teams prefer 'drift' precisely because it sounds quantifiable and scientific, yet the underlying epistemological gap — an absent normative baseline — is identical. The post uses the phrase 'theater of one' to describe risk-management rituals that invoke drift detection without this specificity."
   }
 ]
