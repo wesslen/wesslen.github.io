@@ -103,7 +103,6 @@ That vocabulary and those methods exist in the HCI literature. They have existed
 
 Banking's governance frameworks for agentic AI are being assembled right now, in model risk committees and vendor evaluations and SR 26-2 implementation working groups. The people doing that assembly are capable practitioners working in good faith. They are working without the research that most applies to what they are doing.
 
-
 > [!QUOTE]
 > Every governance framework built without a crosswalk to the HCI literature will reproduce, in a fourth variant, the ironies Bainbridge identified in the first. Reproducing them is a choice, made by default, by people who haven't been told the choice exists.
 
