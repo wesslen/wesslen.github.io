@@ -2830,6 +2830,45 @@ img {
   background: var(--accent2);
   color: #fff;
 }
+.slide-btn-quiz[aria-disabled="true"] {
+  opacity: 0.38;
+  cursor: not-allowed;
+  background: transparent;
+  border-color: var(--muted);
+  color: var(--muted);
+  pointer-events: auto;
+}
+.slide-btn-quiz[aria-disabled="true"]:hover {
+  background: transparent;
+  color: var(--muted);
+}
+/* tooltip wrapper for locked quiz button */
+.quiz-btn-wrap {
+  position: relative;
+  display: inline-block;
+}
+.quiz-btn-wrap[data-locked]::after {
+  content: attr(data-locked);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  white-space: nowrap;
+  padding: 0.3em 0.6em;
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 10;
+}
+.quiz-btn-wrap[data-locked]:hover::after {
+  opacity: 1;
+}
 .slide-card-divider {
   height: 1px;
   background: var(--border);
@@ -2902,10 +2941,10 @@ img {
 }
 .scp-quiz-check {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 1.0rem;
   color: var(--muted);
   flex-shrink: 0;
-  margin-top: 0.18rem;
+  margin-top: 0.05rem;
   opacity: 0.4;
   line-height: 1;
   user-select: none;
@@ -3116,4 +3155,198 @@ img {
   .slide-card {
     padding: 1rem 1rem 0.9rem;
   }
+}
+
+
+/* ── Dev mode banner ──────────────────────────────────── */
+.dev-mode-banner {
+  position: fixed;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  background: rgba(255, 200, 0, 0.12);
+  border: 1px solid rgba(255, 200, 0, 0.4);
+  color: rgba(255, 200, 0, 0.8);
+  padding: 0.25em 0.6em;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 9999;
+  letter-spacing: 0.06em;
+}
+
+/* ── Completion zone ──────────────────────────────────── */
+.completion-zone {
+  margin: 2rem auto 0;
+  max-width: 680px;
+  padding: 0 1rem;
+}
+.completion-zone-inner {
+  border: 1px solid var(--accent2);
+  border-radius: var(--radius);
+  background: rgba(124, 58, 237, 0.06);
+  padding: 1.5rem 2rem;
+  text-align: center;
+}
+.completion-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent2);
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.completion-desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 1.25rem;
+}
+.completion-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.completion-cert-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent2);
+  background: rgba(124, 58, 237, 0.08);
+  color: var(--accent2);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.15s, color 0.15s;
+}
+.completion-cert-btn:hover {
+  background: var(--accent2);
+  color: #fff;
+}
+.completion-exam-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  background: var(--accent-dim);
+  color: var(--accent);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.15s, color 0.15s;
+}
+.completion-exam-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ── Certificate overlay ──────────────────────────────── */
+.cert-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+.cert-dialog {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  max-width: 580px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+}
+.cert-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.25rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  gap: 0.75rem;
+}
+.cert-dialog-title {
+  font-size: 0.78rem;
+  color: var(--accent2);
+  letter-spacing: 0.06em;
+}
+.cert-header-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.cert-print-btn {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 0.2em 0.65em;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: color 0.12s, border-color 0.12s;
+}
+.cert-print-btn:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+.cert-close-btn {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0 0.2em;
+  line-height: 1;
+  transition: color 0.12s;
+}
+.cert-close-btn:hover {
+  color: var(--text);
+}
+.cert-body {
+  padding: 1.5rem 1.25rem 2rem;
+  text-align: center;
+}
+.cert-course-label {
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.cert-ascii {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--text);
+  white-space: pre;
+  text-align: left;
+  display: inline-block;
+  margin: 0 auto 1.25rem;
+  opacity: 0.88;
+}
+.cert-date {
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  margin-top: 0.25rem;
+}
+@media print {
+  .cert-overlay {
+    position: static;
+    background: none;
+    padding: 0;
+  }
+  .cert-dialog {
+    border: none;
+    max-height: none;
+  }
+  .cert-dialog-header { display: none; }
+  .cert-ascii { font-size: 0.8rem; }
 }

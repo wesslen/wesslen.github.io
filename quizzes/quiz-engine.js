@@ -27,15 +27,36 @@ if (typeof window === "undefined") { global.window = {}; }
     catch { /* storage quota or private mode — fail silently */ }
   }
 
-  function recordAttempt(slug) {
+  /* ── Dev mode ───────────────────────────────────────── */
+
+  function isDevMode() {
+    try {
+      const url = new URL(window.location.href);
+      const param = url.searchParams.get("dev");
+      if (param === "true")  { localStorage.setItem("drift-dev-mode", "true");  return true; }
+      if (param === "false") { localStorage.removeItem("drift-dev-mode");        return false; }
+      return localStorage.getItem("drift-dev-mode") === "true";
+    } catch { return false; }
+  }
+
+  window.isDevMode = isDevMode;
+
+  function recordAttempt(slug, score) {
     if (!slug) return;
     const data = readProgress();
-    const prev = data[slug] || { attempts: 0 };
+    const prev = data[slug] || { attempts: 0, bestScore: 0 };
     data[slug] = {
       lastAttempted: new Date().toISOString().slice(0, 10),
       attempts: prev.attempts + 1,
+      bestScore: Math.max(prev.bestScore || 0, score != null ? score : 0),
     };
     writeProgress(data);
+  }
+
+  function hasPerfectScore(slug) {
+    if (isDevMode()) return true;
+    const entry = readProgress()[slug];
+    return !!(entry && entry.bestScore >= POST_QUIZ_N);
   }
 
   function getAttempt(slug) {
@@ -45,6 +66,18 @@ if (typeof window === "undefined") { global.window = {}; }
   function daysSince(isoDate) {
     const ms = Date.now() - new Date(isoDate).getTime();
     return Math.floor(ms / 86400000);
+  }
+
+  function recordModuleAttempt(moduleId) {
+    if (!moduleId) return;
+    const data = readProgress();
+    const key = "module:" + moduleId;
+    const prev = data[key] || { attempts: 0 };
+    data[key] = {
+      lastAttempted: new Date().toISOString().slice(0, 10),
+      attempts: prev.attempts + 1,
+    };
+    writeProgress(data);
   }
 
   /* ── Utilities ───────────────────────────────────────── */
@@ -317,7 +350,8 @@ if (typeof window === "undefined") { global.window = {}; }
 
     const sampled = sample(allQuestions, POST_QUIZ_N).map(prepareQuestion);
     runFlow(body, sampled, 0, [], (results) => {
-      recordAttempt(slug);
+      const correct = results.filter((r) => r.wasCorrect).length;
+      recordAttempt(slug, correct);
       updateRevisitNudge(section, slug);
       renderPostEndScreen(body, results, () => startQuiz(section, allQuestions, slug));
     });
@@ -386,7 +420,7 @@ if (typeof window === "undefined") { global.window = {}; }
 
   /* ── Module quiz entry point ─────────────────────────── */
 
-  function startModuleQuiz(container, allQuestions, n, postTitles, onClose) {
+  function startModuleQuiz(container, allQuestions, n, postTitles, onClose, moduleId) {
     container.innerHTML = "";
 
     const body = document.createElement("div");
@@ -400,11 +434,12 @@ if (typeof window === "undefined") { global.window = {}; }
       0,
       [],
       (results) => {
+        recordModuleAttempt(moduleId);
         renderModuleEndScreen(
           body,
           results,
           postTitles,
-          () => startModuleQuiz(container, allQuestions, n, postTitles, onClose),
+          () => startModuleQuiz(container, allQuestions, n, postTitles, onClose, moduleId),
           onClose
         );
       },
@@ -451,7 +486,7 @@ if (typeof window === "undefined") { global.window = {}; }
       return;
     }
 
-    startModuleQuiz(containerEl, allQuestions, manifest.n || MODULE_QUIZ_N, postTitles, onClose);
+    startModuleQuiz(containerEl, allQuestions, manifest.n || MODULE_QUIZ_N, postTitles, onClose, moduleId);
   };
   /* ── Public: index page post badges ─────────────────── */
 
@@ -459,17 +494,31 @@ if (typeof window === "undefined") { global.window = {}; }
     const progress = readProgress();
     document.querySelectorAll("[data-slug]").forEach((el) => {
       const slug = el.dataset.slug;
-      if (!progress[slug]) return;
+      if (!hasPerfectScore(slug)) return;
       if (el.querySelector(".quiz-done-badge")) return; // already added
       const badge = document.createElement("span");
       badge.className = "quiz-done-badge";
-      const days = daysSince(progress[slug].lastAttempted);
+      const days = daysSince(progress[slug] ? progress[slug].lastAttempted : new Date().toISOString().slice(0,10));
       const label = days === 0 ? "quizzed today" : days === 1 ? "quizzed yesterday" : `quizzed ${days}d ago`;
       badge.title = label;
       badge.textContent = "✓";
       const title = el.querySelector(".row-a-title");
       if (title) title.appendChild(badge);
     });
+  };
+
+  /* ── Public: check if module test is unlocked ───────────── */
+
+  window.isModuleUnlocked = function (slugs) {
+    if (isDevMode()) return true;
+    return Array.isArray(slugs) && slugs.length > 0 && slugs.every(hasPerfectScore);
+  };
+
+  window.hasCompletedAllModules = function (moduleIds) {
+    if (isDevMode()) return true;
+    const data = readProgress();
+    return Array.isArray(moduleIds) && moduleIds.length > 0 &&
+      moduleIds.every((id) => !!data["module:" + id]);
   };
 
   /* ── Public: slides page module progress ─────────────── */
