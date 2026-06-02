@@ -72,7 +72,7 @@ The ACPR identified the behavioral mechanism in 2020: humans feel greater respon
 
 The Air France 447 crash (BEA final report, 2012) named the same dynamic in a different domain.[^5] The autopilot disconnected correctly; the HITL design worked as specified. The crew was incapable of using the manual control they'd been handed because years of reliable automation had eroded their diagnostic competence. The BEA's conclusion: "most probably this crew and most crews were not prepared to face such an event." Model validation teams that have never been required to challenge a well-performing model, never to reproduce its reasoning, never to override a conclusion, are accumulating the same deficit. When a novel distribution shift or adversarial input finally arrives, it comes in a system the validator has never practiced disagreeing with.
 
-A 2012 meta-analysis in JAMIA across 74 studies found automation bias robustly documented across experience levels and task types, with override rates rarely exceeding 10–15% even in research settings where participants knew they were being studied.[^6] A human checkpoint with a consistent 5% override rate is not providing independent oversight. It is providing the appearance of it, and the legal exposure is arguably worse than no checkpoint at all.
+A 2012 meta-analysis in JAMIA across 74 studies found automation bias robustly documented across experience levels and task types, with override rates rarely exceeding 10–15% even in research settings where participants knew they were being studied.[^6]
 
 > [!QUOTE]
 > A human checkpoint with a consistent 5% override rate is not providing independent oversight. It is providing the appearance of it, and the legal exposure is arguably worse than no checkpoint at all.

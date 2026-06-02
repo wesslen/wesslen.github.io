@@ -78,7 +78,6 @@ The [metrics post](post.html?slug=metrics-metrics-metrics) argued that measuring
 > [!QUOTE]
 > The question isn't whether your red-team program is finished. It can't be. The question is whether it's still running.
 
-The question isn't whether your red-team program is finished. It can't be. The question is whether it's still running.
 
 [^1]: Vassilev, A., *[Robust AI Security and Alignment: A Sisyphean Endeavor](https://www.nist.gov/publications/robust-ai-security-and-alignment-sisyphean-endeavor)*, NIST (2025, updated April 2026). Also available as [arXiv:2512.10100](https://arxiv.org/abs/2512.10100). The Sisyphean framing of the title is not rhetorical: the authors argue explicitly that AI security against adversarial inputs is, in the mathematical sense, an asymptotic pursuit. The NIST sponsorship matters for MRM practitioners because NIST publications carry weight with OCC examiners through the AI RMF citation chain, even when they are not formally binding on US banks.
 

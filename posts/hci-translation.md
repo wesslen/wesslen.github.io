@@ -29,17 +29,6 @@ The vocabulary gap is not incidental. MRM practitioners use "effective challenge
 
 The disciplines also don't share career ladders. Building the crosswalk requires credibility in both fields simultaneously, and institutional incentive structures have not historically rewarded that combination. The crosswalk's absence is partly an information-transfer failure and partly a structural one.
 
-## What a crosswalk would look like
-
-The mapping is unbuilt, but not particularly complicated.
-
-| HCI Concept | MRM Equivalent | Monitoring Implication | Owner |
-|---|---|---|---|
-| Skill atrophy (Bainbridge 1983) | Human override rate | Sustained low override rate in a high-error system flags loss of independent judgment; requires investigation before the next model cycle | Ongoing monitoring |
-| Levels of automation (Sheridan-Verplank) | SR 26-2 governance tiers | Each tier requires different controls: alert-fatigue management (LOA 2–3), override-rate tracking (LOA 4–5), full architecture review (LOA 9–10) | Initial validation + governance design |
-| Misuse / disuse / abuse (Parasuraman & Riley) | SR 26-2 risk categories | Misuse → model-use risk (§IV); disuse → operational risk; abuse → model-change risk | Three separate owners |
-| Automation bias without normative baseline | Human-factors behavioral monitoring | Absent normative baseline, the term identifies a concern the governance framework cannot measure | MRM documentation |
-
 [Bainbridge's skill-atrophy irony](post.html?slug=bainbridge-ironies) maps onto a specific monitoring metric: the human override rate. A credit officer whose model-override rate falls below, say, 5% over a sustained period is exhibiting a skill-atrophy signal. The threshold is illustrative; the underlying concern is a very low override rate in a system that makes consequential errors, which indicates the human is no longer performing independent judgment. The current MRM framework treats a low override rate as a sign the model is working. The human-factors framework treats it as a flag requiring investigation. No empirical baseline for this threshold currently exists in banking; establishing one is precisely what the crosswalk makes possible.
 
 The [Sheridan-Verplank levels of automation](post.html?slug=hitl-vocabulary) map onto SR 26-2 governance tiers. A Level 2–3 system (the computer presents; the human investigates) requires alert-fatigue management and false-positive-rate controls that are meaningless for a Level 4–5 system. At LOA 9–10, the required oversight architecture differs from anything SR 26-2 contemplated, which is why footnote 3 of SR 26-2 simply excludes those systems from scope.[^2]
@@ -114,7 +103,6 @@ That vocabulary and those methods exist in the HCI literature. They have existed
 
 Banking's governance frameworks for agentic AI are being assembled right now, in model risk committees and vendor evaluations and SR 26-2 implementation working groups. The people doing that assembly are capable practitioners working in good faith. They are working without the research that most applies to what they are doing.
 
-Every governance framework built without a crosswalk to the HCI literature will reproduce, in a fourth variant, the ironies Bainbridge identified in the first. Reproducing them is a choice, made by default, by people who haven't been told the choice exists.
 
 > [!QUOTE]
 > Every governance framework built without a crosswalk to the HCI literature will reproduce, in a fourth variant, the ironies Bainbridge identified in the first. Reproducing them is a choice, made by default, by people who haven't been told the choice exists.

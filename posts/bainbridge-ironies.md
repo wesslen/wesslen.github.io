@@ -13,16 +13,13 @@ Lisanne Bainbridge named this dynamic in 1983, and named it precisely: not as in
 
 This series, Bainbridge's Debt, is about that gap and what it costs.
 
-> [!NOTE]
-> HCI and Human Factors are academic disciplines studying the cognitive and organizational consequences of automation on human performance. The contemporary synthesis is Human-Centered AI (HCAI), advanced most prominently by [Ben Shneiderman](https://en.wikipedia.org/wiki/Ben_Shneiderman), whose [paper and book](https://arxiv.org/abs/2002.04087) on the field argue that AI should augment human capability and accountability rather than automate them away. Most of what banking governance calls "human oversight" is, without knowing it, an applied problem in this literature.
-
 ## What Bainbridge actually argued
 
 The paper is not a critique of automation. Bainbridge frames the argument carefully: these are structural properties of automated systems, predictable consequences rather than correctable design flaws.
 
 Her first irony, skill atrophy, gets repeated most often and understood least accurately. The claim is not that automation degrades skills through general disuse. It is that automation specifically removes the routine practice that maintains the skill needed for exceptional cases, while leaving humans responsible for exactly those exceptional cases. Bainbridge puts it precisely: as control systems advance, the operator's contribution grows more important. The more you automate the ordinary, the more you depend on human judgment for the extraordinary, and the less ready that judgment is when called.
 
-Her second irony, the training paradox, follows directly. Because manual intervention is needed only in unusual situations, operators need *more* skill than their manual-era predecessors. But because unusual situations are rare, it is harder to maintain that skill through practice. You cannot rehearse exception-handling at scale; that's what the automation is there to prevent.
+Her second irony, the training paradox, follows directly. Because manual intervention is needed only in unusual situations, operators need *more* skill than their manual-era predecessors. But because unusual situations are rare, it is harder to maintain that skill through practice. You cannot rehearse exception-handling at scale; that's what the automation is there to prevent. (The macro-level version of this dynamic — automation reducing the stock of human expertise as a learning externality — is formalized in the [knowledge collapse economics post](post.html?slug=knowledge-collapse-economics).)
 
 The third irony is less often cited and more urgent now. Operators cannot meaningfully intervene in a system they do not understand. Bainbridge's original formulation was about industrial control systems where automation obscured a process's internal state from the operator. The LLM opacity problem is a structural intensification of this: a 175-billion-parameter transformer does not have an "internal state" that can be made legible to a human reviewer in any practically useful sense, even with chain-of-thought output.
 

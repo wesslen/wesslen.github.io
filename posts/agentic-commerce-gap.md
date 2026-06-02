@@ -11,8 +11,6 @@ The five-word summary of where agentic AI in banking payments stands today is bo
 
 The technology half has been moving quickly and visibly. Visa TAP launched in October 2025. Mastercard Verifiable Intent shipped in March 2026. Google's Universal Commerce Protocol debuted at NRF in January 2026. Three prior posts in this series have documented what the law and identity infrastructure half looks like. This post is about the "narrowing merchants" half, and what it means for the competitive structure of the industry and the consumers moving through it.
 
-> [!QUOTE]
-> The right question before deployment isn't "is this product legal?" It's "when something goes wrong, and something will go wrong, do the people most exposed to the consequence have any meaningful recourse?"
 
 ## A three-tier market is forming, and regulation is the moat
 
@@ -86,7 +84,9 @@ The consumer protection infrastructure is not keeping pace. The liability gaps d
 
 The risk isn't evenly distributed. Tier 1 banks are positioned to benefit from regulatory uncertainty as a competitive moat. Tier 3 community banks and their customers are most exposed to the infrastructure gaps. And consumers who delegate payment authority to AI agents, on instant payment or stablecoin rails, are accepting risks that neither they nor the agents fully understand.
 
-The right question before deployment isn't "is this product legal?" It's "when something goes wrong, and something will go wrong, do the people most exposed to the consequence have any meaningful recourse?"
+
+> [!QUOTE]
+> The right question before deployment isn't "is this product legal?" It's "when something goes wrong, and something will go wrong, do the people most exposed to the consequence have any meaningful recourse?"
 
 Right now, on the newest rails, the answer is often no.
 

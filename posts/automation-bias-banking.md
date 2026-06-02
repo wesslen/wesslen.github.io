@@ -26,6 +26,11 @@ Banking is not operating at a single level. It is operating across the full rang
 | Credit underwriting (ML-assisted) | 4–5 | Computer suggests; human approves or rejects |
 | AML transaction monitoring | 2–3 | Computer presents ranked alerts; human investigates |
 
+<figure>
+  <img src="../img/loa-levels.svg" alt="Sheridan-Verplank Levels of Automation scale showing four banking use cases: AML monitoring at levels 2–3, credit underwriting at 4–5, fraud decisioning at 6–7, and HFT execution at 9–10. A note below states that SR 26-2 applies a single effective challenge expectation across the entire range." style="width:100%;max-width:760px;display:block;margin:1.25rem 0;">
+  <figcaption style="font-size:0.85em;color:#6b7280;">Levels of Automation (Sheridan-Verplank 1978 / Parasuraman et al. 2000). Banking operates across the full range; the same supervisory expectation applies to all of it.</figcaption>
+</figure>
+
 The governance problem is not that banks operate across this range. It is that "[effective challenge](post.html?slug=hitl-vocabulary)", the supervisory expectation SR 11-7 established and SR 26-2 retained, was designed for a Level 4–5 world where a human reviews the model's suggestion before a decision is made. At Level 2–3, where the analyst is principally triaging alerts the system selected and scored, the *disuse* failure mode dominates. Automation bias is a Level 4–5 problem. At Level 9–10, runtime effective challenge is structurally inapplicable: the machine acts before any human can intervene. The governance work shifts to [deploy-time](post.html?slug=hitl-design), where the question becomes whether this level of autonomy was appropriate to authorize and whether the post-hoc monitoring architecture is adequate to detect failure.
 
 The same phrase, applied to systems with completely different human-factors profiles, produces completely different governance outcomes depending on which level is actually running underneath it.

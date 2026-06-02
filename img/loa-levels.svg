@@ -1,0 +1,73 @@
+<svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg" font-family="'Inter', system-ui, sans-serif" role="img" aria-label="Levels of Automation scale showing banking use cases from Level 1 (full human control) to Level 10 (full machine autonomy)">
+  <title>Sheridan-Verplank Levels of Automation — Banking Use Cases</title>
+
+  <!-- Track -->
+  <line x1="40" y1="78" x2="720" y2="78" stroke="#d1d5db" stroke-width="2"/>
+
+  <!-- Tick marks and level numbers -->
+  <!-- We space 10 levels evenly: x = 40 + (i-1) * (680/9) -->
+  <!-- Level positions: 40, 116, 191, 267, 342, 418, 493, 569, 644, 720 -->
+
+  <g fill="#6b7280" font-size="11" text-anchor="middle">
+    <!-- Level circles -->
+    <circle cx="40"  cy="78" r="5" fill="#9ca3af"/>
+    <circle cx="116" cy="78" r="5" fill="#9ca3af"/>
+    <circle cx="191" cy="78" r="5" fill="#9ca3af"/>
+    <circle cx="267" cy="78" r="5" fill="#9ca3af"/>
+    <circle cx="342" cy="78" r="5" fill="#9ca3af"/>
+    <circle cx="418" cy="78" r="5" fill="#9ca3af"/>
+    <circle cx="493" cy="78" r="5" fill="#9ca3af"/>
+    <circle cx="569" cy="78" r="5" fill="#9ca3af"/>
+    <circle cx="644" cy="78" r="5" fill="#9ca3af"/>
+    <circle cx="720" cy="78" r="5" fill="#9ca3af"/>
+
+    <!-- Level numbers -->
+    <text x="40"  y="98">1</text>
+    <text x="116" y="98">2</text>
+    <text x="191" y="98">3</text>
+    <text x="267" y="98">4</text>
+    <text x="342" y="98">5</text>
+    <text x="418" y="98">6</text>
+    <text x="493" y="98">7</text>
+    <text x="569" y="98">8</text>
+    <text x="644" y="98">9</text>
+    <text x="720" y="98">10</text>
+  </g>
+
+  <!-- End labels -->
+  <text x="40"  y="118" font-size="10" fill="#6b7280" text-anchor="middle">Human</text>
+  <text x="40"  y="130" font-size="10" fill="#6b7280" text-anchor="middle">does all</text>
+  <text x="720" y="118" font-size="10" fill="#6b7280" text-anchor="middle">Machine</text>
+  <text x="720" y="130" font-size="10" fill="#6b7280" text-anchor="middle">acts alone</text>
+
+  <!-- Use-case annotations (above the line) -->
+
+  <!-- AML at 2–3, midpoint ~153 -->
+  <line x1="153" y1="30" x2="153" y2="72" stroke="#4b5563" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="86" y="8" width="134" height="22" rx="3" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+  <text x="153" y="23" font-size="10.5" fill="#111827" text-anchor="middle" font-weight="500">AML monitoring  (2–3)</text>
+
+  <!-- Credit at 4–5, midpoint ~304 -->
+  <line x1="304" y1="30" x2="304" y2="72" stroke="#4b5563" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="220" y="8" width="168" height="22" rx="3" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+  <text x="304" y="23" font-size="10.5" fill="#111827" text-anchor="middle" font-weight="500">Credit underwriting  (4–5)</text>
+
+  <!-- Fraud at 6–7, midpoint ~455 -->
+  <line x1="455" y1="30" x2="455" y2="72" stroke="#4b5563" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="374" y="8" width="162" height="22" rx="3" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+  <text x="455" y="23" font-size="10.5" fill="#111827" text-anchor="middle" font-weight="500">Fraud decisioning  (6–7)</text>
+
+  <!-- HFT at 9–10, midpoint ~682 -->
+  <line x1="682" y1="30" x2="682" y2="72" stroke="#4b5563" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="595" y="8" width="174" height="22" rx="3" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+  <text x="682" y="23" font-size="10.5" fill="#111827" text-anchor="middle" font-weight="500">HFT execution  (9–10)</text>
+
+  <!-- Human role labels (below) -->
+  <text x="153" y="152" font-size="9.5" fill="#6b7280" text-anchor="middle">Human investigates</text>
+  <text x="304" y="152" font-size="9.5" fill="#6b7280" text-anchor="middle">Human approves/rejects</text>
+  <text x="455" y="152" font-size="9.5" fill="#6b7280" text-anchor="middle">Human can override</text>
+  <text x="682" y="152" font-size="9.5" fill="#6b7280" text-anchor="middle">Post-hoc review only</text>
+
+  <!-- Governance note -->
+  <text x="380" y="185" font-size="9" fill="#9ca3af" text-anchor="middle">SR 26-2 applies a single "effective challenge" expectation across this entire range</text>
+</svg>

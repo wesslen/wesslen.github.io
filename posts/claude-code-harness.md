@@ -1,15 +1,13 @@
 ---
 title: "Inside the Claude Code Harness"
 date: 2026-04-04
-description: "Anthropic's source code leaked. Here's what it reveals about how a production-grade agent harness actually gets built — and how much of it looks like design versus survival."
+description: "A publicly reported architectural analysis of Claude Code reveals how a production-grade agent harness actually gets built — and how much of it looks like design versus survival."
 tags: [coding, harness]
 ---
 
-> **TL;DR:** Anthropic's Claude Code source recently leaked — about 1,900 TypeScript files. Walking through it is a study in the gap between how harnesses get described in theory and how they actually get built: four compaction layers where one would sound sufficient, a prompt cache split that amortizes cost across users, permission denials fed back to the model as tool results, and a comment in `query.ts` written in mock-medieval English to make sure nobody skims past it. The lesson isn't that Anthropic got everything right. It's that a production harness accumulates scars, and the scars are worth studying.
+> **TL;DR:** Publicly reported architectural analysis of Claude Code — about 1,900 TypeScript files — reveals the gap between how harnesses get described in theory and how they actually get built: four compaction layers where one would sound sufficient, a prompt cache split that amortizes cost across users, permission denials fed back to the model as tool results, and a comment in `query.ts` written in mock-medieval English to make sure nobody skims past it. The lesson isn't that Anthropic got everything right. It's that a production harness accumulates scars, and the scars are worth studying.
 
-In a [recent post on agent harness design](post.html?slug=agent-harness-design), I wrote about what makes a harness. Compaction strategies, checkpoint artifacts, error recovery, state persistence across sessions. What I couldn't answer was how much of that gets designed upfront versus discovered after years of production failures. Then [Anthropic's Claude Code source code leaked](https://www.bloomberg.com/news/articles/2026-04-01/anthropic-scrambles-to-address-leak-of-claude-code-source-code).
-
-About 1,900 files of TypeScript. Haseeb Qureshi read through the key modules and published a breakdown,[^1] and I went back through it looking specifically for what maps to harness design — and what the implementation choices reveal about where the hard problems actually live.
+In a [recent post on agent harness design](post.html?slug=agent-harness-design), I wrote about what makes a harness. Compaction strategies, checkpoint artifacts, error recovery, state persistence across sessions. What I couldn't answer was how much of that gets designed upfront versus discovered after years of production failures. Then Haseeb Qureshi published a detailed architectural breakdown of Claude Code's ~1,900-file TypeScript codebase.[^1] I went back through it looking specifically for what maps to harness design — and what the implementation choices reveal about where the hard problems actually live.
 
 ## The core loop is an async generator
 

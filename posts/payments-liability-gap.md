@@ -11,16 +11,13 @@ Say your AI assistant books a flight, and it books the wrong one — non-refunda
 
 This is the first post in a three-part series on agentic AI in banking payments. [When Agents Talk to Agents](post.html?slug=a2a-risks) covered the delegation and trust problems at the protocol layer — prompt injection, compromised tool calls, unauthorized scope expansion. This series covers what those problems mean downstream: in the consumer's bank account, and in the courtroom.
 
-> [!QUOTE]
-> The agents know how to route. The law doesn't know how to follow.
-
 ## The four words at the center of the problem
 
 Regulation E governs electronic fund transfers — the legal framework that says if someone steals your debit card and makes unauthorized purchases, your maximum loss is $50 if you report promptly. It's one of the most important consumer protections in the U.S. payments system. And it has an exception that was written for a specific scenario and now applies to a much broader one.
 
 The exception: Regulation E excludes from the definition of "unauthorized EFT" any transfer "initiated by a person to whom the consumer has furnished the access device."[^1]
 
-> [\!TIP]
+> [!TIP]
 > **What is Regulation E?** Regulation E implements the Electronic Fund Transfer Act (EFTA, 15 U.S.C. § 1693), the federal law governing electronic payments — debit cards, ACH transfers, ATM transactions, and most digital payment flows. Its most important consumer protection is the tiered liability cap for unauthorized transfers: \$ 50 if you report within two days, \$500 if you report within sixty days, unlimited liability after that. Regulation Z is the equivalent framework for credit cards. Both were written in the 1970s and 1980s.
 
 The exception was designed for a simple case: you hand your debit card to your spouse, your spouse makes purchases, you later claim you didn't authorize them. Congress said you can't use Regulation E to dispute transactions initiated by someone you gave your card to. That's reasonable. The problem is that the same language applies — or may apply — to AI agents.
@@ -47,7 +44,7 @@ Debit and ACH are more exposed. Regulation E's tiered liability caps assume you'
 
 Wires have historically offered consumers almost no protection — UCC 4A treats them as institutional instruments with very limited consumer recourse. The most important pending development is *New York v. Citibank* (S.D.N.Y. 2025), in which Judge Oetken held that EFTA can reach the customer-to-bank leg of online-initiated wire transfers.[^3] Citibank has appealed to the Second Circuit. That reasoning, if affirmed, would apply directly to agent-initiated pushes on the same infrastructure.
 
-> [\!WARNING]
+> [!WARNING]
 > RTP and FedNow instant payment networks are the worst structural fit for agentic errors. They were designed for speed and finality — transactions typically settle in seconds and are irrevocable. There is no true chargeback mechanism. A human who accidentally clicks "send" on a wire can sometimes call the bank within minutes. An agentic system that misroutes a payment may execute dozens of transactions before any monitoring flag fires. There is no undo button on a settled FedNow transaction, and the "furnished" exception still applies to the delegated authorization that initiated it.[^4]
 
 ## The GENIUS Act's consumer protection gap
@@ -80,7 +77,10 @@ The Consumer Bankers Association's January 2026 white paper proposes private net
 
 The most important near-term legal signal is the Second Circuit's ruling in *New York v. Citibank* — expected in late 2026. A ruling for EFTA coverage would significantly strengthen the consumer protection argument for agentic transactions on wire-like rails. A ruling for Citibank would leave the liability vacuum intact and potentially precedent-set the "existing law doesn't cover this" interpretation for agentic transactions broadly. That one ruling matters more than any pending rulemaking.
 
-The deeper structural problem is that consumer-protection gaps are concentrated on precisely the payment rails that agentic systems have the strongest incentives to use. Until that inversion is addressed — through statutory extension or enforceable network rules — consumers who delegate payment authority to AI agents are accepting risks they likely don't know they're taking. The agents know how to route. The law doesn't know how to follow.
+The deeper structural problem is that consumer-protection gaps are concentrated on precisely the payment rails that agentic systems have the strongest incentives to use. Until that inversion is addressed — through statutory extension or enforceable network rules — consumers who delegate payment authority to AI agents are accepting risks they likely don't know they're taking.
+
+> [!QUOTE]
+> The agents know how to route. The law doesn't know how to follow.
 
 *The [next post in this series](post.html?slug=agent-identity-kyc) examines the infrastructure problem underneath the liability gap: banks have no legal category for an AI agent as a party to a transaction, and no established framework for authenticating one.*
 
