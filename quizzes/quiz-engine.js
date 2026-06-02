@@ -11,6 +11,7 @@ if (typeof window === "undefined") { global.window = {}; }
 
   const POST_QUIZ_N   = 5;   // questions per post quiz
   const MODULE_QUIZ_N = 10;  // questions per module test
+  const MODULE_PASS_PCT = 0.9; // 90%+ required to pass a module test or final exam
 
 
   /* ── Progress tracking (localStorage) ────────────────── */
@@ -68,16 +69,25 @@ if (typeof window === "undefined") { global.window = {}; }
     return Math.floor(ms / 86400000);
   }
 
-  function recordModuleAttempt(moduleId) {
+  function recordModuleAttempt(moduleId, score, total) {
     if (!moduleId) return;
     const data = readProgress();
     const key = "module:" + moduleId;
-    const prev = data[key] || { attempts: 0 };
+    const prev = data[key] || { attempts: 0, bestScore: 0 };
+    const passed = total > 0 && (score / total) >= MODULE_PASS_PCT;
     data[key] = {
       lastAttempted: new Date().toISOString().slice(0, 10),
       attempts: prev.attempts + 1,
+      bestScore: Math.max(prev.bestScore || 0, score || 0),
+      passed: passed || !!(prev.passed), // once passed, stays passed
     };
     writeProgress(data);
+  }
+
+  function hasPassedModuleTest(moduleId) {
+    if (isDevMode()) return true;
+    const entry = readProgress()["module:" + moduleId];
+    return !!(entry && entry.passed);
   }
 
   /* ── Utilities ───────────────────────────────────────── */
@@ -273,12 +283,17 @@ if (typeof window === "undefined") { global.window = {}; }
     score.textContent = `${correct}/${total}`;
     end.appendChild(score);
 
+    const passBadge = document.createElement("div");
+    passBadge.className = pct >= 90 ? "quiz-module-pass" : "quiz-module-fail";
+    passBadge.textContent = pct >= 90 ? "// passed" : "// 90% required to pass";
+    end.appendChild(passBadge);
+
     const label = document.createElement("p");
     label.className = "quiz-score-label";
     label.textContent =
       pct === 100 ? "perfect — you know this module cold" :
-      pct >= 70   ? "solid grasp — review the explanations that caught you" :
-      pct >= 50   ? "good foundation — worth another pass through the posts" :
+      pct >= 90   ? "solid grasp — review the explanations that caught you" :
+      pct >= 70   ? "good foundation — worth another pass through the posts" :
                     "this module has more to give — re-read before retaking";
     end.appendChild(label);
 
@@ -434,7 +449,8 @@ if (typeof window === "undefined") { global.window = {}; }
       0,
       [],
       (results) => {
-        recordModuleAttempt(moduleId);
+        const mScore = results.filter((r) => r.wasCorrect).length;
+        recordModuleAttempt(moduleId, mScore, results.length);
         renderModuleEndScreen(
           body,
           results,
@@ -516,9 +532,8 @@ if (typeof window === "undefined") { global.window = {}; }
 
   window.hasCompletedAllModules = function (moduleIds) {
     if (isDevMode()) return true;
-    const data = readProgress();
     return Array.isArray(moduleIds) && moduleIds.length > 0 &&
-      moduleIds.every((id) => !!data["module:" + id]);
+      moduleIds.every(hasPassedModuleTest);
   };
 
   /* ── Public: slides page module progress ─────────────── */

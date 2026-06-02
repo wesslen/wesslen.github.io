@@ -77,7 +77,9 @@ Each post that has a question pool shows a **// check your understanding** secti
 
 The questions are designed to help you think through the material. Every answer, right or wrong, shows an explanation. The score at the end tells you where you stand, nothing more. The goal is that the explanation for a wrong answer is worth as much as getting it right.
 
-Each module also has a **module test**, accessible from the [course landing page](index.html). It draws ten questions from across all posts in the module, testing whether concepts from different posts are synthesizing rather than whether you recall any single argument.
+Each module also has a **module test**, accessible from the [course landing page](index.html). It draws ten questions from across all posts in the module, testing whether concepts from different posts are synthesizing rather than whether you recall any single argument. Module tests unlock only after you've scored a perfect 5/5 on every post quiz in that module — the ✓ badge on each post confirms you're there. A score of 90% or better on the module test counts as a pass.
+
+Pass all ten module tests and a final exam becomes available. It draws twenty questions from across the entire course, and also requires 90% to pass.
 
 Progress is saved in your browser. A small ✓ badge appears on the post list once you've attempted a quiz, and the module page shows how many posts in each module you've covered. If you clear your browser history, switch browsers, or open the site in a private window, the progress doesn't carry over. There's no account system. This is a static site, and that's a deliberate trade-off: nothing to log in to, nothing stored anywhere but your own machine.
 
