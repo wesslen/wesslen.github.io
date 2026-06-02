@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Drift: An opinionated course on banking AI risk</title>
+    <title>Drift: An opinionated course on banking GenAI risk</title>
     <meta
       name="description"
       content="An opinionated course on the risk of GenAI and agentic systems in banking — ten modules spanning governance, agent engineering, evals, adversarial testing, human oversight, and the economics of all of it, taught from the edges where the behavior is hardest to predict. Read it as a blog, or take it as a course."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Drift: An opinionated course on banking AI risk" />
-    <meta property="og:title" content="Drift: An opinionated course on banking AI risk" />
+    <meta property="og:site_name" content="Drift: An opinionated course on banking GenAI risk" />
+    <meta property="og:title" content="Drift: An opinionated course on banking GenAI risk" />
     <meta
       property="og:description"
       content="An opinionated course on the risk of GenAI and agentic systems in banking — governance, agent engineering, evals, adversarial testing, and human oversight, from the edges where the behavior is hardest to predict."
@@ -18,7 +18,7 @@
     <meta property="og:url" content="https://wesslen.github.io/" />
     <meta property="og:image" content="https://wesslen.github.io/og-default.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Drift: An opinionated course on banking AI risk" />
+    <meta name="twitter:title" content="Drift: An opinionated course on banking GenAI risk" />
     <meta
       name="twitter:description"
       content="An opinionated course on the risk of GenAI and agentic systems in banking — governance, agent engineering, evals, adversarial testing, and human oversight, from the edges where the behavior is hardest to predict."
@@ -79,7 +79,7 @@
           Drift
           <br />
           <span style="font-size: 0.55em; font-weight: 400; opacity: 0.75; letter-spacing: 0.01em">
-            An opinionated course on banking AI risk
+            An opinionated course on banking GenAI risk
           </span>
         </h1>
         <p class="hero-desc">
@@ -97,6 +97,16 @@
         <div id="intro-feature"></div>
         <!-- Module grid -->
         <div class="slides-grid" id="slides-grid" aria-label="Course modules"></div>
+        <div class="completion-zone" id="completion-zone" style="display:none" aria-label="Course complete">
+          <div class="completion-zone-inner">
+            <span class="completion-label">// course complete</span>
+            <p class="completion-desc">you've worked through all ten modules. that's rare.</p>
+            <div class="completion-actions">
+              <button class="completion-cert-btn" id="open-cert-btn">view certificate ✦</button>
+              <button class="completion-exam-btn" id="open-final-exam-btn">take the final exam →</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -108,6 +118,38 @@
       </p>
       <p class="footer-disclaimer">Views expressed here are my own and do not represent those of my employer.</p>
     </footer>
+
+    <!-- ── Certificate modal ─────────────────────────────── -->
+    <div
+      id="cert-overlay"
+      class="cert-overlay"
+      style="display:none"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cert-dialog-title"
+    >
+      <div class="cert-dialog">
+        <div class="cert-dialog-header">
+          <span class="cert-dialog-title" id="cert-dialog-title">// drift — certificate of completion</span>
+          <div class="cert-header-actions">
+            <button class="cert-print-btn" id="cert-print-btn">print ↗</button>
+            <button class="cert-close-btn" id="cert-close-btn" aria-label="Close certificate">✕</button>
+          </div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-course-label">banking genai risk · ten modules complete</div>
+          <pre class="cert-ascii">   ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~
+  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~
+ ~   I wish you the best in your    ~
+~    continual journey to learn     ~
+ ~   and improve yourself.         ~
+~                        — Ryan   ~
+  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~
+   ~  ~  ~  ~  ~  ~  ~  ~  ~  ~</pre>
+          <div class="cert-date" id="cert-date"></div>
+        </div>
+      </div>
+    </div>
 
     <!-- ── Module quiz modal ─────────────────────────────── -->
     <div
@@ -250,6 +292,61 @@
           overlay.style.display = "none";
           document.body.style.overflow = "";
           quizBody.innerHTML = "";
+          updateCompletionZone();
+        }
+
+        /* ── Certificate modal ──────────────────────────── */
+        let certOverlay;
+
+        function openCertificate() {
+          certOverlay = certOverlay || document.getElementById("cert-overlay");
+          const dateEl = document.getElementById("cert-date");
+          if (dateEl) {
+            dateEl.textContent = "completed " + new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+          }
+          certOverlay.style.display = "flex";
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeCertificate() {
+          if (certOverlay) certOverlay.style.display = "none";
+          document.body.style.overflow = "";
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+          const co = document.getElementById("cert-overlay");
+          const closeBtn = document.getElementById("cert-close-btn");
+          const printBtn = document.getElementById("cert-print-btn");
+          const certOpenBtn = document.getElementById("open-cert-btn");
+          const examOpenBtn = document.getElementById("open-final-exam-btn");
+          if (closeBtn) closeBtn.addEventListener("click", closeCertificate);
+          if (co) co.addEventListener("click", (e) => { if (e.target === co) closeCertificate(); });
+          if (printBtn) printBtn.addEventListener("click", () => window.print());
+          if (certOpenBtn) certOpenBtn.addEventListener("click", openCertificate);
+          if (examOpenBtn) examOpenBtn.addEventListener("click", () => openModuleQuiz("final-exam", "Final Exam"));
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && co && co.style.display !== "none") closeCertificate();
+          });
+
+          // Dev mode banner
+          if (typeof window.isDevMode === "function" && window.isDevMode()) {
+            const banner = document.createElement("div");
+            banner.className = "dev-mode-banner";
+            banner.textContent = "// dev mode — ?dev=false to exit";
+            document.body.appendChild(banner);
+          }
+        });
+
+        /* ── Completion zone visibility ─────────────────── */
+        let _allModuleIds = [];
+
+        function updateCompletionZone() {
+          const zone = document.getElementById("completion-zone");
+          if (!zone) return;
+          const complete =
+            typeof window.hasCompletedAllModules === "function" &&
+            window.hasCompletedAllModules(_allModuleIds);
+          zone.style.display = complete ? "block" : "none";
         }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -319,7 +416,7 @@
                         <a href="${postUrl(slug, post.draft)}" class="row-a-title scp-title">${post.title}${draftBadge}</a>
                         <span class="scp-date">${fmtDate(post.date)}</span>
                       </div>
-                      <span class="scp-quiz-check">□</span>
+                      <span class="scp-quiz-check" title="Quiz not complete">□</span>
                     </div>
                     <div class="scp-expand">
                       <p class="scp-desc">${post.description}</p>
@@ -333,7 +430,7 @@
                 .join("");
 
               const quizBtn = deck.quiz
-                ? `<button class="slide-btn slide-btn-quiz" data-module-id="${deck.id}" data-module-title="${deck.title}">// test this module</button>`
+                ? `<span class="quiz-btn-wrap"><button class="slide-btn slide-btn-quiz" data-module-id="${deck.id}" data-module-title="${deck.title}" data-module-posts-key="${deck.id}">// test this module</button></span>`
                 : "";
 
               const actions = deck.published
@@ -363,6 +460,29 @@
             .join("");
         }
 
+        /* ── Lock/unlock module test buttons ───────────── */
+        function updateModuleTestButtons() {
+          document.querySelectorAll("[data-module-posts]").forEach((card) => {
+            const slugs = card.dataset.modulePosts.split(",").filter(Boolean);
+            const wrap = card.querySelector(".quiz-btn-wrap");
+            const btn  = wrap && wrap.querySelector(".slide-btn-quiz");
+            if (!btn) return;
+            const unlocked =
+              typeof window.isModuleUnlocked === "function" &&
+              window.isModuleUnlocked(slugs);
+            if (unlocked) {
+              btn.removeAttribute("aria-disabled");
+              wrap.removeAttribute("data-locked");
+            } else {
+              btn.setAttribute("aria-disabled", "true");
+              wrap.setAttribute(
+                "data-locked",
+                `score 5/5 on all ${slugs.length} post quizzes to unlock`
+              );
+            }
+          });
+        }
+
         /* ── Update □/✓ quiz check indicators ──────────── */
         function updateQuizChecks() {
           document.querySelectorAll(".scp-item[data-slug]").forEach((item) => {
@@ -373,6 +493,7 @@
             if (badge) {
               check.textContent = "✓";
               check.classList.add("scp-quiz-done");
+              check.title = "Quiz complete";
               badge.style.display = "none"; // hide duplicate; □/✓ in scp-quiz-check is the indicator
             }
           });
@@ -406,11 +527,18 @@
             renderIntroFeature(manifest, bodies);
             renderModuleGrid(decks, manifest, bodies);
 
+            // Store module IDs for completion tracking
+            _allModuleIds = decks.filter((d) => d.quiz).map((d) => d.id);
+
             // Quiz badges: ✓ on quizzed posts, update □ indicators
             if (typeof window.initQuizBadges === "function") {
               window.initQuizBadges();
               updateQuizChecks();
+              updateModuleTestButtons();
             }
+
+            // Show completion zone if all modules done
+            updateCompletionZone();
 
             // Module progress indicators (e.g. "2/3 posts quizzed")
             document.querySelectorAll("[data-module-posts]").forEach((card) => {
@@ -425,7 +553,9 @@
             if (grid) {
               grid.addEventListener("click", (e) => {
                 const btn = e.target.closest("[data-module-id]");
-                if (btn) openModuleQuiz(btn.dataset.moduleId, btn.dataset.moduleTitle);
+                if (btn && btn.getAttribute("aria-disabled") !== "true") {
+                  openModuleQuiz(btn.dataset.moduleId, btn.dataset.moduleTitle);
+                }
               });
             }
           } catch (err) {
