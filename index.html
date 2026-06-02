@@ -97,7 +97,7 @@
         <div id="intro-feature"></div>
         <!-- Module grid -->
         <div class="slides-grid" id="slides-grid" aria-label="Course modules"></div>
-        <div class="completion-zone" id="completion-zone" style="display:none" aria-label="Course complete">
+        <div class="completion-zone" id="completion-zone" style="display: none" aria-label="Course complete">
           <div class="completion-zone-inner">
             <span class="completion-label">// course complete</span>
             <p class="completion-desc">you've worked through all ten modules. that's rare.</p>
@@ -123,7 +123,7 @@
     <div
       id="cert-overlay"
       class="cert-overlay"
-      style="display:none"
+      style="display: none"
       role="dialog"
       aria-modal="true"
       aria-labelledby="cert-dialog-title"
@@ -138,14 +138,16 @@
         </div>
         <div class="cert-body">
           <div class="cert-course-label">banking genai risk · ten modules complete</div>
-          <pre class="cert-ascii">   ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~
+          <pre class="cert-ascii">
+   ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~
   ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~
  ~   I wish you the best in your    ~
 ~    continual journey to learn     ~
  ~   and improve yourself.         ~
 ~                        — Ryan   ~
   ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~
-   ~  ~  ~  ~  ~  ~  ~  ~  ~  ~</pre>
+   ~  ~  ~  ~  ~  ~  ~  ~  ~  ~</pre
+          >
           <div class="cert-date" id="cert-date"></div>
         </div>
       </div>
@@ -302,7 +304,8 @@
           certOverlay = certOverlay || document.getElementById("cert-overlay");
           const dateEl = document.getElementById("cert-date");
           if (dateEl) {
-            dateEl.textContent = "completed " + new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+            dateEl.textContent =
+              "completed " + new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
           }
           certOverlay.style.display = "flex";
           document.body.style.overflow = "hidden";
@@ -320,7 +323,10 @@
           const certOpenBtn = document.getElementById("open-cert-btn");
           const examOpenBtn = document.getElementById("open-final-exam-btn");
           if (closeBtn) closeBtn.addEventListener("click", closeCertificate);
-          if (co) co.addEventListener("click", (e) => { if (e.target === co) closeCertificate(); });
+          if (co)
+            co.addEventListener("click", (e) => {
+              if (e.target === co) closeCertificate();
+            });
           if (printBtn) printBtn.addEventListener("click", () => window.print());
           if (certOpenBtn) certOpenBtn.addEventListener("click", openCertificate);
           if (examOpenBtn) examOpenBtn.addEventListener("click", () => openModuleQuiz("final-exam", "Final Exam"));
@@ -344,8 +350,7 @@
           const zone = document.getElementById("completion-zone");
           if (!zone) return;
           const complete =
-            typeof window.hasCompletedAllModules === "function" &&
-            window.hasCompletedAllModules(_allModuleIds);
+            typeof window.hasCompletedAllModules === "function" && window.hasCompletedAllModules(_allModuleIds);
           zone.style.display = complete ? "block" : "none";
         }
 
@@ -465,20 +470,15 @@
           document.querySelectorAll("[data-module-posts]").forEach((card) => {
             const slugs = card.dataset.modulePosts.split(",").filter(Boolean);
             const wrap = card.querySelector(".quiz-btn-wrap");
-            const btn  = wrap && wrap.querySelector(".slide-btn-quiz");
+            const btn = wrap && wrap.querySelector(".slide-btn-quiz");
             if (!btn) return;
-            const unlocked =
-              typeof window.isModuleUnlocked === "function" &&
-              window.isModuleUnlocked(slugs);
+            const unlocked = typeof window.isModuleUnlocked === "function" && window.isModuleUnlocked(slugs);
             if (unlocked) {
               btn.removeAttribute("aria-disabled");
               wrap.removeAttribute("data-locked");
             } else {
               btn.setAttribute("aria-disabled", "true");
-              wrap.setAttribute(
-                "data-locked",
-                `score 5/5 on all ${slugs.length} post quizzes to unlock`
-              );
+              wrap.setAttribute("data-locked", `score 5/5 on all ${slugs.length} post quizzes to unlock`);
             }
           });
         }

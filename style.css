@@ -2941,7 +2941,7 @@ img {
 }
 .scp-quiz-check {
   font-family: var(--font-mono);
-  font-size: 1.0rem;
+  font-size: 1rem;
   color: var(--muted);
   flex-shrink: 0;
   margin-top: 0.05rem;
@@ -3157,7 +3157,6 @@ img {
   }
 }
 
-
 /* ── Module pass/fail badge ──────────────────────────────── */
 .quiz-module-pass,
 .quiz-module-fail {
@@ -3166,8 +3165,12 @@ img {
   letter-spacing: 0.06em;
   margin-bottom: 0.5rem;
 }
-.quiz-module-pass { color: #2ea043; }
-.quiz-module-fail { color: var(--muted); }
+.quiz-module-pass {
+  color: #2ea043;
+}
+.quiz-module-fail {
+  color: var(--muted);
+}
 
 /* ── Dev mode banner ──────────────────────────────────── */
 .dev-mode-banner {
@@ -3228,7 +3231,9 @@ img {
   color: var(--accent2);
   cursor: pointer;
   letter-spacing: 0.04em;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 .completion-cert-btn:hover {
   background: var(--accent2);
@@ -3244,7 +3249,9 @@ img {
   color: var(--accent);
   cursor: pointer;
   letter-spacing: 0.04em;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 .completion-exam-btn:hover {
   background: var(--accent);
@@ -3300,7 +3307,9 @@ img {
   color: var(--muted);
   cursor: pointer;
   letter-spacing: 0.04em;
-  transition: color 0.12s, border-color 0.12s;
+  transition:
+    color 0.12s,
+    border-color 0.12s;
 }
 .cert-print-btn:hover {
   color: var(--text);
@@ -3358,6 +3367,10 @@ img {
     border: none;
     max-height: none;
   }
-  .cert-dialog-header { display: none; }
-  .cert-ascii { font-size: 0.8rem; }
+  .cert-dialog-header {
+    display: none;
+  }
+  .cert-ascii {
+    font-size: 0.8rem;
+  }
 }
