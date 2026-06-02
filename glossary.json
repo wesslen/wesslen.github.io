@@ -1215,7 +1215,8 @@
       "visual web agent",
       "browser agent",
       "CUA",
-      "GUI agents"
+      "GUI agents",
+      "GUI agent"
     ],
     "used_in": [
       "gui-agents-verifier",

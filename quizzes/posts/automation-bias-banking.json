@@ -40,7 +40,7 @@
     "question": "Bahner et al. (2008) found that participants explicitly warned an automated aid was imperfect still committed commission errors at a 21% rate. What does this reveal about training as a mitigation for automation bias?",
     "options": [
       "Training is more effective than interface design for reducing automation bias and should be the primary mitigation investment for banking AI deployments.",
-      "Training and explicit fallibility warnings don't eliminate automation bias — participants still followed wrong recommendations 21% of the time. 'The.",
+      "Training and explicit fallibility warnings don't eliminate automation bias — participants still followed wrong recommendations 21% of the time.",
       "A 21% commission error rate is within acceptable bounds for banking applications that have sufficiently wide downstream margins for human review.",
       "Training effectively reduces misuse failure modes but not disuse; the Bahner finding is limited to the commission error context and doesn't generalize."
     ],

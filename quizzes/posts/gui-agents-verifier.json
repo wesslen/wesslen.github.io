@@ -104,12 +104,12 @@
     "question": "SR 26-2 explicitly excludes GenAI and agentic systems from its scope. The post discusses verifier design principles as the closest concrete proposal for how to validate GUI agent deployments. What is the governance implication?",
     "options": [
       "Banks should pause all GUI agent deployments until regulators issue explicit supervisory guidance specifying what 'adequate verification' means for agentic systems in regulated banking workflows.",
-      "Without a formal framework specifying adequate verification, the Universal Verifier's design principles are the closest operational specification — from a research paper, no supervisory imprimatur.",
+      "Without a formal framework specifying adequate verification, the Universal Verifier's design principles are the closest operational specification — from a research paper, no supervisory guidance.",
       "SR 26-2's exclusion creates a complete regulatory safe harbor allowing banks to deploy GUI agents without any formal performance verification or independent validation requirements whatsoever.",
       "Banks should apply SR 11-7's existing validation framework directly to GUI agents, since its conceptual soundness and outcomes analysis pillars apply to all models regardless of architecture or input modality."
     ],
     "correct": 1,
-    "explanation": "The post is direct: 'There is no formal framework specifying what adequate verification means in that context. The Universal Verifier's design principles are the closest thing to a concrete proposal, and they originate from a research paper, with no supervisory imprimatur behind them.' This creates a governance design problem: banks need to evaluate GUI agent performance, the regulatory framework gives them no specification for what 'adequate evaluation' looks like, and the best available operational guidance is a 2026 academic paper. Banks that want a defensible evaluation artifact must make judgment calls about which principles to adopt and how to document the rationale."
+    "explanation": "The post is direct: 'There is no formal framework specifying what adequate verification means in that context. The Universal Verifier's design principles are the closest thing to a concrete proposal, and they originate from a research paper, with no supervisory guidance behind them.' This creates a governance design problem: banks need to evaluate GUI agent performance, the regulatory framework gives them no specification for what 'adequate evaluation' looks like, and the best available operational guidance is a 2026 academic paper. Banks that want a defensible evaluation artifact must make judgment calls about which principles to adopt and how to document the rationale."
   },
   {
     "id": "gav-q08",

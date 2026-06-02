@@ -19,7 +19,7 @@ The 1978 framework Sheridan and Verplank proposed — extended in 2000 into a tw
 
 Banking is not operating at a single level. It is operating across the full range, simultaneously, under the same regulatory vocabulary.
 
-| Use case | Approx. level | Human role |
+| Use case | Level | Human role |
 |---|---|---|
 | High-frequency / algo trading execution | 9–10 | Post-hoc review; intervention in real time is not possible |
 | Fraud decisioning (card transactions) | 6–7 | Computer decides; human can override within a constrained window |

@@ -40,7 +40,7 @@
     "question": "The post identifies indirect prompt injection (IPI), tool-call hijacking, and memory poisoning as 'the three classes that break traditional model-risk assumptions.' What assumption does each break?",
     "options": [
       "All three break the assumption that models cannot access or modify external systems during normal operation.",
-      "IPI breaks the assumption that retrieved documents are data not instructions; tool-call hijacking breaks secure tool boundaries;.",
+      "IPI breaks the assumption that retrieved documents are data not instructions; tool-call hijacking breaks the assumption that tool boundaries are secure in both directions; memory poisoning breaks the assumption that injection effects are session-scoped.",
       "All three break the assumption that system prompts remain immutable and cannot be overridden at runtime by any input.",
       "All three break the assumption that human review checkpoints can catch adversarial inputs before they reach the model."
     ],
