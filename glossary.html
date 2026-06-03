@@ -223,7 +223,6 @@
         color: var(--accent);
       }
 
-
       /* ── Drill mode ──────────────────────────────────── */
       .drill-toggle-wrap {
         margin-top: -0.75rem;
@@ -236,7 +235,7 @@
         font-family: var(--font-mono);
         font-size: 0.78rem;
         color: var(--accent2);
-        background: var(--accent2-dim, rgba(124,58,237,0.08));
+        background: var(--accent2-dim, rgba(124, 58, 237, 0.08));
         border: 1px solid var(--accent2);
         border-radius: 20px;
         padding: 0.3rem 0.9rem;
@@ -317,11 +316,11 @@
       }
       #drill-input.drill-correct {
         border-color: #22c55e;
-        background: rgba(34,197,94,0.06);
+        background: rgba(34, 197, 94, 0.06);
       }
       #drill-input.drill-wrong {
         border-color: #ef4444;
-        background: rgba(239,68,68,0.06);
+        background: rgba(239, 68, 68, 0.06);
       }
       .drill-btn {
         font-family: var(--font-mono);
@@ -338,7 +337,9 @@
         border-color: var(--accent2);
         color: #fff;
       }
-      #drill-check:hover { opacity: 0.88; }
+      #drill-check:hover {
+        opacity: 0.88;
+      }
       #drill-check:disabled {
         opacity: 0.4;
         cursor: default;
@@ -358,8 +359,12 @@
         font-size: 0.82rem;
         min-height: 1.3rem;
       }
-      .drill-feedback.correct { color: #22c55e; }
-      .drill-feedback.wrong   { color: #ef4444; }
+      .drill-feedback.correct {
+        color: #22c55e;
+      }
+      .drill-feedback.wrong {
+        color: #ef4444;
+      }
       .drill-feedback .drill-answer {
         color: var(--text);
         font-weight: 600;
@@ -398,7 +403,9 @@
         padding: 1.5rem 0;
         text-align: center;
       }
-      .drill-end-msg span { color: var(--accent); }
+      .drill-end-msg span {
+        color: var(--accent);
+      }
       .drill-hint-row {
         display: flex;
         align-items: center;
@@ -433,8 +440,13 @@
         font-weight: 700;
       }
       @media (max-width: 640px) {
-        .drill-input-row { flex-direction: column; align-items: stretch; }
-        #drill-input { width: 100%; }
+        .drill-input-row {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        #drill-input {
+          width: 100%;
+        }
       }
 
       /* ── Sticky domain nav ─────────────────────────────── */
@@ -595,7 +607,6 @@
       </div>
     </div>
 
-
     <div id="drill-panel" role="region" aria-label="Glossary drill">
       <div class="drill-card">
         <div class="drill-meta">
@@ -604,7 +615,14 @@
         </div>
         <div id="drill-definition" class="drill-definition"></div>
         <div class="drill-input-row">
-          <input type="text" id="drill-input" placeholder="type the term…" autocomplete="off" spellcheck="false" aria-label="Your answer" />
+          <input
+            type="text"
+            id="drill-input"
+            placeholder="type the term…"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Your answer"
+          />
           <button id="drill-check" class="drill-btn">check</button>
           <button id="drill-skip" class="drill-btn">skip →</button>
         </div>
@@ -1003,32 +1021,36 @@
         window.addEventListener("scroll", runScrollSpy, { passive: true });
 
         /* ── Drill mode ─────────────────────────────────── */
-        (function() {
-          const toggleBtn   = document.getElementById("drill-toggle");
-          const panel       = document.getElementById("drill-panel");
-          const scopeNote   = document.getElementById("drill-scope-note");
-          const domainTag   = document.getElementById("drill-domain-tag");
-          const progressEl  = document.getElementById("drill-progress");
-          const defEl       = document.getElementById("drill-definition");
-          const input       = document.getElementById("drill-input");
-          const checkBtn    = document.getElementById("drill-check");
-          const skipBtn     = document.getElementById("drill-skip");
-          const feedbackEl  = document.getElementById("drill-feedback");
-          const nextRow     = document.getElementById("drill-next-row");
-          const nextBtn     = document.getElementById("drill-next");
-          const revealBtn   = document.getElementById("drill-reveal");
-          const hintBtn     = document.getElementById("drill-hint-btn");
+        (function () {
+          const toggleBtn = document.getElementById("drill-toggle");
+          const panel = document.getElementById("drill-panel");
+          const scopeNote = document.getElementById("drill-scope-note");
+          const domainTag = document.getElementById("drill-domain-tag");
+          const progressEl = document.getElementById("drill-progress");
+          const defEl = document.getElementById("drill-definition");
+          const input = document.getElementById("drill-input");
+          const checkBtn = document.getElementById("drill-check");
+          const skipBtn = document.getElementById("drill-skip");
+          const feedbackEl = document.getElementById("drill-feedback");
+          const nextRow = document.getElementById("drill-next-row");
+          const nextBtn = document.getElementById("drill-next");
+          const revealBtn = document.getElementById("drill-reveal");
+          const hintBtn = document.getElementById("drill-hint-btn");
           const hintDisplay = document.getElementById("drill-hint-display");
 
           let hintLevel = 0;
 
           /* Build a crossword-style pattern: level 1 = first char, level 2 = first 3 chars */
           function makeHintPattern(term, revealN) {
-            return term.split(/\s+/).map(word =>
-              word.split('').map((ch, i) =>
-                i < revealN ? `<b>${ch}</b>` : '–'
-              ).join('\u202f')
-            ).join('\u2002\u2002');
+            return term
+              .split(/\s+/)
+              .map((word) =>
+                word
+                  .split("")
+                  .map((ch, i) => (i < revealN ? `<b>${ch}</b>` : "–"))
+                  .join("\u202f")
+              )
+              .join("\u2002\u2002");
           }
 
           hintBtn.addEventListener("click", () => {
@@ -1044,7 +1066,7 @@
           });
 
           let deck = [];
-          let idx  = 0;
+          let idx = 0;
           let revealed = false;
 
           function shuffleDeck(arr) {
@@ -1057,13 +1079,15 @@
           }
 
           function buildDeck() {
-            const terms = glossary.filter(e => {
+            const terms = glossary.filter((e) => {
               if (activeFilter !== "all" && e.domain !== activeFilter) return false;
               if (searchQuery) {
                 const q = searchQuery.toLowerCase();
-                return e.term.toLowerCase().includes(q) ||
-                       (e.full || "").toLowerCase().includes(q) ||
-                       e.definition.toLowerCase().includes(q);
+                return (
+                  e.term.toLowerCase().includes(q) ||
+                  (e.full || "").toLowerCase().includes(q) ||
+                  e.definition.toLowerCase().includes(q)
+                );
               }
               return true;
             });
@@ -1075,25 +1099,26 @@
           }
 
           function normalize(s) {
-            return s.trim().toLowerCase().replace(/[^a-z0-9\s]/g, "").replace(/\s+/g, " ");
+            return s
+              .trim()
+              .toLowerCase()
+              .replace(/[^a-z0-9\s]/g, "")
+              .replace(/\s+/g, " ");
           }
           /* loose: strip ALL spaces, hyphens, punctuation — "rollout" matches "Roll Out" */
           function normalizeLoose(s) {
-            return s.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+            return s
+              .trim()
+              .toLowerCase()
+              .replace(/[^a-z0-9]/g, "");
           }
 
           function isCorrect(entry, answer) {
-            const ans      = normalize(answer);
+            const ans = normalize(answer);
             const ansLoose = normalizeLoose(answer);
             if (!ans) return false;
-            const candidates = [
-              entry.term,
-              entry.full || "",
-              ...(entry.aliases || [])
-            ].filter(Boolean);
-            return candidates.some(c =>
-              normalize(c) === ans || normalizeLoose(c) === ansLoose
-            );
+            const candidates = [entry.term, entry.full || "", ...(entry.aliases || [])].filter(Boolean);
+            return candidates.some((c) => normalize(c) === ans || normalizeLoose(c) === ansLoose);
           }
 
           function showCard() {
@@ -1168,7 +1193,7 @@
           }
 
           checkBtn.addEventListener("click", submitAnswer);
-          input.addEventListener("keydown", e => {
+          input.addEventListener("keydown", (e) => {
             if (e.key === "Enter" && !checkBtn.disabled) submitAnswer();
           });
 
@@ -1195,9 +1220,8 @@
 
           function updateScopeNote() {
             const count = deck.length;
-            const scope = activeFilter === "all"
-              ? "all terms"
-              : (DOMAIN_LABELS[activeFilter] || activeFilter) + " terms";
+            const scope =
+              activeFilter === "all" ? "all terms" : (DOMAIN_LABELS[activeFilter] || activeFilter) + " terms";
             scopeNote.textContent = count > 0 ? `${count} ${scope}` : "";
           }
 
@@ -1229,7 +1253,6 @@
             }, 20);
           });
         })();
-
       })();
     </script>
     <script src="./scripts/search.js" defer></script>
