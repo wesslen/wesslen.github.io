@@ -1,5 +1,5 @@
 <svg viewBox="0 0 700 265" xmlns="http://www.w3.org/2000/svg" role="img"
-     font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace">
+     font-family="'JetBrains Mono', 'Fira Code', ui-monospace, monospace">
   <title>Three Adversarial Deployment Gates Pipeline</title>
   <desc>A left-to-right pipeline showing three sequential adversarial deployment gates. Gate 1 (Capability Non-Regression) checks champion-relative utility on the internal task suite. Gate 2 (Safety Non-Regression) runs StrongREJECT, HarmBench, and LlamaGuard within a tier-specific epsilon. Gate 3 (Robustness Ceiling) caps attack success rate at 2%, 5%, or 10% by tier. Failing any gate blocks deployment. Passing all three produces a documented, deploy-eligible system.</desc>
 

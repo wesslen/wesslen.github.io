@@ -1,5 +1,5 @@
 <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" role="img"
-     font-family="Georgia, 'Times New Roman', serif" font-size="13">
+     font-family="Georgia,'Times New Roman',serif" font-size="13">
   <title>Benchmark accuracy vs. generalized accuracy: two estimands, same point estimate, different confidence intervals</title>
   <desc>Two side-by-side panels. Left: benchmark accuracy — CI based only on LLM nondeterminism, item set is fixed, 75.3% ± 2.1% (wider than naive). Right: generalized accuracy — CI adds item-selection variance, 75.3% ± 3.8% (wider still, correctly capturing domain uncertainty). Both share the same naive ±1.4% reference. The naive formula is wrong in opposite directions for the two estimands.</desc>
 

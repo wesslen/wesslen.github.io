@@ -1,45 +1,59 @@
-<svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" style="font-family:ui-sans-serif,system-ui,sans-serif;">
+<svg viewBox="0 0 640 370" xmlns="http://www.w3.org/2000/svg" role="img"
+     style="font-family: Inter, system-ui, -apple-system, sans-serif;">
+  <title>How evaluation concepts stack: five layers from raw infrastructure to evaluation metrics</title>
+  <desc>Nested containment diagram with six layers. Outer two (infrastructure layer): raw infrastructure logs and distributed traces — high volume, engineering purpose. Inner four (evaluation layer): rollout, agent trajectory, evaluation transcript, and evaluation results / metrics — lower volume, directly relevant to MRM and audit. Abstraction increases and volume decreases moving inward.</desc>
 
-  <!-- Background fill so the SVG looks correct regardless of page theme -->
-  <rect x="0" y="0" width="640" height="360" rx="8" fill="#161b27"/>
+  <!-- Background -->
+  <rect x="0" y="0" width="640" height="370" rx="8" fill="#161b27"/>
 
-  <!-- L1: Raw infrastructure logs — outermost, most muted -->
-  <rect x="0" y="0" width="640" height="360" rx="8"
-        fill="rgba(167,139,250,0.05)" stroke="rgba(167,139,250,0.22)" stroke-width="1.5"/>
-  <text x="14" y="21" fill="#a78bfa" font-weight="700" font-size="13.5">Raw infrastructure logs</text>
-  <text x="626" y="21" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">highest volume · all system events</text>
+  <!-- Internal title -->
+  <text x="14" y="14" fill="#94a3b8" font-size="9" opacity="0.6" letter-spacing="0.08em">// how they stack</text>
+
+  <!-- ── INFRASTRUCTURE LAYER (outer 2 rings) — muted labels to signal background context ── -->
+
+  <!-- L1: Raw infrastructure logs -->
+  <rect x="0" y="0" width="640" height="370" rx="8"
+        fill="rgba(167,139,250,0.04)" stroke="rgba(167,139,250,0.16)" stroke-width="1.5"/>
+  <text x="14" y="31" fill="#a78bfa" font-weight="400" font-size="12" opacity="0.55">Raw infrastructure logs</text>
+  <text x="626" y="31" text-anchor="end" fill="#94a3b8" font-size="10" font-style="italic" opacity="0.45">highest volume · all system events</text>
 
   <!-- L2: Distributed traces -->
-  <rect x="18" y="38" width="604" height="312" rx="7"
-        fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.30)" stroke-width="1.5"/>
-  <text x="32" y="59" fill="#a78bfa" font-weight="700" font-size="13.5">Distributed traces</text>
-  <text x="610" y="59" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">call graphs · latency across services</text>
+  <rect x="18" y="46" width="604" height="314" rx="7"
+        fill="rgba(167,139,250,0.07)" stroke="rgba(167,139,250,0.22)" stroke-width="1.5"/>
+  <text x="32" y="65" fill="#a78bfa" font-weight="400" font-size="12" opacity="0.55">Distributed traces</text>
+  <text x="610" y="65" text-anchor="end" fill="#94a3b8" font-size="10" font-style="italic" opacity="0.45">call graphs · latency across services</text>
+
+  <!-- Infrastructure / eval boundary marker -->
+  <line x1="36" y1="80" x2="604" y2="80" stroke="rgba(167,139,250,0.18)" stroke-width="1" stroke-dasharray="3 4"/>
+  <text x="320" y="78" text-anchor="middle" fill="#94a3b8" font-size="8.5" opacity="0.5" letter-spacing="0.05em">— eval layer below —</text>
+
+  <!-- ── EVALUATION LAYER (inner 4 rings) — full weight labels ── -->
 
   <!-- L3: Rollout -->
-  <rect x="36" y="76" width="568" height="264" rx="6"
+  <rect x="36" y="84" width="568" height="276" rx="6"
         fill="rgba(167,139,250,0.11)" stroke="rgba(167,139,250,0.38)" stroke-width="1.5"/>
-  <text x="50" y="97" fill="#a78bfa" font-weight="700" font-size="13.5">Rollout</text>
-  <text x="594" y="97" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">single policy execution event</text>
+  <text x="50" y="105" fill="#a78bfa" font-weight="700" font-size="13.5">Rollout</text>
+  <text x="594" y="105" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">single policy execution event</text>
 
   <!-- L4: Agent trajectory -->
-  <rect x="54" y="114" width="532" height="216" rx="5"
+  <rect x="54" y="122" width="532" height="228" rx="5"
         fill="rgba(167,139,250,0.15)" stroke="rgba(167,139,250,0.46)" stroke-width="1.5"/>
-  <text x="68" y="135" fill="#a78bfa" font-weight="700" font-size="13.5">Agent trajectory</text>
-  <text x="578" y="135" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">state → action sequence · outcomes</text>
+  <text x="68" y="143" fill="#a78bfa" font-weight="700" font-size="13.5">Agent trajectory</text>
+  <text x="578" y="143" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">state → action sequence · outcomes</text>
 
   <!-- L5: Evaluation transcript -->
-  <rect x="72" y="152" width="496" height="168" rx="4"
+  <rect x="72" y="160" width="496" height="180" rx="4"
         fill="rgba(167,139,250,0.19)" stroke="rgba(167,139,250,0.56)" stroke-width="1.5"/>
-  <text x="86" y="173" fill="#a78bfa" font-weight="700" font-size="13.5">Evaluation transcript</text>
-  <text x="562" y="173" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">human-legible record · audit &amp; replication</text>
+  <text x="86" y="181" fill="#a78bfa" font-weight="700" font-size="13.5">Evaluation transcript</text>
+  <text x="562" y="181" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">human-legible record · audit &amp; replication</text>
 
   <!-- L6: Evaluation results / metrics — innermost, most vivid -->
-  <rect x="90" y="190" width="460" height="118" rx="3"
+  <rect x="90" y="198" width="460" height="130" rx="3"
         fill="rgba(167,139,250,0.27)" stroke="rgba(167,139,250,0.72)" stroke-width="2"/>
-  <text x="104" y="211" fill="#a78bfa" font-weight="700" font-size="13.5">Evaluation results / metrics</text>
-  <text x="546" y="211" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">lowest volume · highest abstraction</text>
+  <text x="104" y="219" fill="#a78bfa" font-weight="700" font-size="13.5">Evaluation results / metrics</text>
+  <text x="546" y="219" text-anchor="end" fill="#94a3b8" font-size="11" font-style="italic" opacity="0.8">lowest volume · highest abstraction</text>
 
-  <!-- Axis legend -->
-  <text x="8" y="352" fill="#94a3b8" font-size="10" opacity="0.45">abstraction ↑ · volume ↓  (inward)</text>
-
+  <!-- Directional legend — two opposing arrows make the spatial logic explicit -->
+  <text x="8"   y="360" fill="#94a3b8" font-size="9.5" opacity="0.5">volume ↓  abstraction ↑  (inward →)</text>
+  <text x="632" y="360" text-anchor="end" fill="#94a3b8" font-size="9.5" opacity="0.5">(← outward)  abstraction ↓  volume ↑</text>
 </svg>

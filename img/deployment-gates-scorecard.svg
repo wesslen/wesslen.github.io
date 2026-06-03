@@ -1,5 +1,5 @@
 <svg viewBox="0 0 700 388" xmlns="http://www.w3.org/2000/svg" role="img"
-     font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace">
+     font-family="'JetBrains Mono', 'Fira Code', ui-monospace, monospace">
   <title>Adversarial Gate Scorecard — Credit-Memo Drafting Agent (Tier 1)</title>
   <desc>Example practitioner scorecard for a credit-memo drafting agent upgrading from GPT-4o to GPT-4o-mini. Gate 1 passes: capability delta −0.7 pp against a 2.0 pp ceiling. Gate 2 passes: StrongREJECT, HarmBench ASR, and LlamaGuard flag rate all within Tier 1 epsilon. Gate 3 passes: wire-fraud Crescendo ASR exactly 2.0% (at the ceiling), adverse-action bypass 0.0%, AgentDojo tool-hijack 0.0%. All gates cleared; system deploy-eligible with a documented judgment call on the wire-fraud borderline result.</desc>
 

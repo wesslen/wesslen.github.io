@@ -1,5 +1,5 @@
 <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" role="img"
-     font-family="Georgia, 'Times New Roman', serif" font-size="13">
+     font-family="Georgia,'Times New Roman',serif" font-size="13">
   <title>GLMM two-level hierarchy: items sampled as random effects, LLM capabilities as fixed effects</title>
   <desc>Two-panel diagram. Left side: item superpopulation (dashed ellipse) samples n items, each with a random difficulty effect δⱼ ~ N(0,σ²). Trials within each (LLM, item) cell are shown for Item 1 — clustered and not independent. Right side: LLM capability fixed effects θ₁…θₘ shown as horizontal bars with partial pooling. Bottom right: the GLMM equation π(i,j) = σ(θᵢ − δⱼ), where LLM capability minus item difficulty gives the probability of success.</desc>
 

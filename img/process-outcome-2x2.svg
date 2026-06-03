@@ -1,5 +1,5 @@
 <svg viewBox="0 0 620 400" xmlns="http://www.w3.org/2000/svg" role="img"
-     font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace">
+     font-family="'JetBrains Mono', 'Fira Code', ui-monospace, monospace">
   <title>Process vs. Outcome: Four quadrants of verifier scoring</title>
   <desc>A 2x2 matrix showing four combinations of process score (high/low) and outcome score (pass/fail), with examples for each quadrant. High process + Pass outcome: standard success. High process + Fail outcome: environment blocked the agent. Low process + Pass outcome: unexpected path, goal achieved via shortcut. Low process + Fail outcome: standard failure.</desc>
 

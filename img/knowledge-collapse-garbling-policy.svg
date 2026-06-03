@@ -1,5 +1,5 @@
 <svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" role="img"
-     font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace">
+     font-family="'JetBrains Mono', 'Fira Code', ui-monospace, monospace">
   <title>Two-phase information design: suppression then optimal cap</title>
   <desc>Timeline showing two phases of the optimal garbling policy. Phase 1: AI precision is suppressed to zero; the general knowledge stock rebuilds rapidly. Phase 2: AI precision is restored and capped permanently at τ* (the interior optimum); the knowledge stock holds steady.</desc>
 
@@ -17,7 +17,7 @@
   <!-- X axis (time) -->
   <line x1="50" y1="205" x2="615" y2="205" stroke="#444c56" stroke-width="1"/>
   <polygon points="612,201 620,205 612,209" fill="#444c56"/>
-  <text x="335" y="230" text-anchor="middle" font-size="10" fill="#8b949e">Time  →</text>
+  <text x="335" y="230" text-anchor="middle" font-size="10" fill="#5f6368">Time  →</text>
 
   <!-- Y axis -->
   <line x1="50" y1="30" x2="50" y2="205" stroke="#444c56" stroke-width="1"/>
@@ -46,7 +46,7 @@
 
   <!-- Phase 1 annotations -->
   <!-- "Allowed AI precision = 0" label -->
-  <text x="185" y="197" text-anchor="middle" font-size="8.5" fill="#8b949e">allowed AI precision = 0</text>
+  <text x="185" y="197" text-anchor="middle" font-size="8.5" fill="#5f6368">allowed AI precision = 0</text>
   <!-- Rising arrow on knowledge curve -->
   <text x="135" y="100" text-anchor="middle" font-size="9" fill="#d4a843">knowledge stock ↑</text>
   <text x="135" y="111" text-anchor="middle" font-size="9" fill="#d4a843">rebuilds rapidly</text>
