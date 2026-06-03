@@ -1938,13 +1938,16 @@
   },
   {
     "id": "mrm",
-    "term": "MRM",
-    "full": "Model Risk Management",
-    "short": "The discipline of identifying, measuring, and managing risks from models used in decision-making.",
-    "definition": "Model Risk Management is the organizational function, codified by SR 11-7, responsible for ensuring models are developed soundly, validated independently, and governed with clear accountability. MRM functions sit in the second line of defense \u2014 structurally separated from the business to provide objective oversight. Key activities include model validation, ongoing monitoring, inventory management, and escalating model limitations to senior management and boards.",
+    "term": "Model Risk Management",
+    "full": "Model Risk Management (MRM)",
+    "short": "The independent organizational function in the second line of defense responsible for model validation and governance.",
+    "definition": "Model Risk Management (capitalized) refers to the independent organizational unit\u2014commonly abbreviated MRM\u2014codified by SR 11-7 as a second-line-of-defense function structurally separated from model developers. Its mandate is objective oversight: independently validating models, maintaining the model inventory, escalating model limitations to senior management and boards, and enforcing governance standards. When a bank says \u201cMRM approved the model,\u201d it means this unit signed off.",
     "domain": "banking",
     "aliases": [
-      "Model Risk Management"
+      "MRM",
+      "MRM function",
+      "MRM organization",
+      "second-line MRM"
     ],
     "used_in": [
       "adversarial-incompleteness",
@@ -1959,6 +1962,28 @@
       "hitl-design",
       "hitl-vocabulary",
       "knowledge-collapse-economics",
+      "sr11-7"
+    ]
+  },
+  {
+    "id": "model-risk-management-practice",
+    "term": "model risk management",
+    "full": "model risk management (practice)",
+    "short": "The ongoing practice of identifying, measuring, monitoring, and mitigating risks arising from model use.",
+    "definition": "model risk management (lowercase) refers to the broad discipline\u2014not a specific org unit\u2014of identifying, measuring, monitoring, and mitigating risks that arise from relying on models in decision-making. This practice spans the entire model lifecycle and is primarily owned by first-line model developers and business owners, though it operates under the governance standards set by the independent Model Risk Management function. Activities include risk tiering, ongoing performance monitoring, limitation tracking, and controls design.",
+    "domain": "banking",
+    "aliases": [
+      "model risk practices",
+      "model risk discipline"
+    ],
+    "used_in": [
+      "effective-challenge",
+      "gui-agents-verifier",
+      "hci-translation",
+      "knowledge-collapse-economics",
+      "metrics-metrics-metrics",
+      "molmoweb-data-flywheel",
+      "molmoweb-openness-gap",
       "sr11-7"
     ]
   },
@@ -2987,7 +3012,10 @@
     "short": "Behavioral gaming of AI usage metrics \u2014 redundant prompting, task inflation, delegation theater \u2014 that emerges when token consumption becomes a KPI rather than a cost tied to outcomes. Goodhart's Law at the compute layer.",
     "definition": "Token Maxing describes the pattern in which teams or individuals optimize AI usage metrics \u2014 prompts per day, tokens consumed, AI interactions logged \u2014 rather than the outcomes those metrics were intended to proxy. When AI-integration scores become performance targets, the rational response is to maximize the metric through redundant prompting, inflated task delegation, and other forms of usage theater. The fix is the same as in banking's FTP parallel: replace activity metrics with cost-per-outcome metrics, so that the denominator is outcome value, not consumption volume.",
     "domain": "banking",
-    "aliases": [],
+    "aliases": [
+      "tokenmaxxing",
+      "token maxing"
+    ],
     "used_in": [
       "token-transfer-pricing"
     ]

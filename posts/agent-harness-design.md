@@ -30,13 +30,21 @@ while not done:
         return response
 ```
 
-The engineering challenge is not the loop itself — that part is solved. It's the five subsystems that surround it: context management, tool routing, error recovery, human-in-the-loop checkpoints, and state persistence across sessions. Token scaling data makes clear why each matters: standard chat uses roughly 1x tokens; a single-agent loop uses ~4x; a multi-agent system uses ~15x.[^2]
+The engineering challenge is not the loop itself — that part is solved. It's the five subsystems that surround it:
+
+1. context management
+2. tool routing
+3. error recovery
+4. human-in-the-loop checkpoints
+5. state persistence across sessions
+
+Token scaling data makes clear why each matters: standard chat uses roughly 1x tokens; a single-agent loop uses ~4x; a multi-agent system uses ~15x.[^2]
 
 ## Context window management
 
-**The compaction problem** is where most teams get caught off guard. The November 2025 engineering post identifies a tension: even with rolling summarization, agents exhibited two failure modes — attempting to one-shot complex work and leaving half-implemented features when context ran out, and declaring the job done prematurely when they saw existing progress in a partially-compacted conversation.
+**The compaction problem** is where most teams get caught off guard. Anthropic's [November 2025 engineering post](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) identifies a tension: even with rolling summarization, agents exhibited two failure modes — attempting to one-shot complex work and leaving half-implemented features when context ran out, and declaring the job done prematurely when they saw existing progress in a partially-compacted conversation.
 
-The March 2026 follow-up draws a sharp distinction between two strategies. *Compaction* preserves continuity by summarizing earlier conversation in place, but can't fully eliminate "context anxiety" — the agent's tendency to rush or cut corners as the window fills. A full *context reset* provides a clean slate at the cost of requiring a rich handoff artifact for the incoming agent to orient itself.
+The [March 2026 follow-up](https://www.anthropic.com/engineering/harness-design-long-running-apps) draws a sharp distinction between two strategies. *Compaction* preserves continuity by summarizing earlier conversation in place, but can't fully eliminate "context anxiety" — the agent's tendency to rush or cut corners as the window fills. A full *context reset* provides a clean slate at the cost of requiring a rich handoff artifact for the incoming agent to orient itself.
 
 The lesson: compaction strategy is not a permanent architectural decision. It should track model capability and be revisited as models improve.[^3]
 

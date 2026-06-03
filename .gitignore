@@ -24,3 +24,6 @@ posts/*.draft.md
 
 # Local context — not for public repo
 CLAUDE.md
+
+# env
+.env

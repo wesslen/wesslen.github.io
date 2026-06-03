@@ -13,7 +13,7 @@
       "Atrophy only occurs without a proper automation transition training program; organizations that invest in structured handoff training can prevent it structurally."
     ],
     "correct": 1,
-    "explanation": "Bainbridge's formulation is precise: 'as control systems advance, the operator's contribution grows more important.' The irony is that automation increases the stakes of human intervention at the same time it decreases the practice opportunities. An AML analyst who processes 400 alerts per shift is maintaining some pattern recognition through routine interaction — but if that routine work is automated, the analyst's remaining role (exceptional cases) requires finer judgment than ever, practiced less than before. This is not a skills degradation that will fix itself with experience; it's structural, because the exceptional cases where judgment is needed are by definition rare."
+    "explanation": "Bainbridge's formulation is precise: 'as control systems advance, the operator's contribution grows more important.' The irony is that automation increases the stakes of human intervention at the same time it decreases the practice opportunities. An AML analyst who processes 400 alerts per shift is maintaining some pattern recognition through routine interaction \u2014 but if that routine work is automated, the analyst's remaining role (exceptional cases) requires finer judgment than ever, practiced less than before. This is not a skills degradation that will fix itself with experience; it's structural, because the exceptional cases where judgment is needed are by definition rare."
   },
   {
     "id": "bi-q02",
@@ -24,12 +24,12 @@
     "question": "Bainbridge's training paradox follows from the first irony. What makes it genuinely paradoxical rather than just difficult?",
     "options": [
       "Training programs for automation oversight are prohibitively expensive at the scale required to counteract atrophy across large operational banking workforces.",
-      "Rare exceptions require more skill than the automated baseline — but rarity makes practice impossible. You can't rehearse what automation was specifically deployed to prevent from occurring in normal operations.",
+      "Rare exceptions require more skill than the automated baseline \u2014 but rarity makes practice impossible. You can't rehearse what automation was specifically deployed to prevent from occurring in normal operations.",
       "The paradox arises from regulatory requirements that restrict the hours operators can spend in simulation environments during normal business working hours.",
       "Training budgets are set before deployment while operators still have practice opportunities; by the time atrophy is visible, retraining funding has been reallocated."
     ],
     "correct": 1,
-    "explanation": "The paradox is structural, not just logistical. The training goal — maintaining the skills needed for exceptional cases — requires practicing exceptional cases. But exceptional cases are exceptional precisely because the automation handles them. To create training situations that develop exception-handling skills, you'd need to recreate the very situations the automation was deployed to prevent from occurring in production. Simulation can partially address this, but Bainbridge notes that classroom instruction is insufficient: knowledge retrieved under pressure in novel situations requires having practiced under similar conditions, not just having read about them."
+    "explanation": "The paradox is structural, not just logistical. The training goal \u2014 maintaining the skills needed for exceptional cases \u2014 requires practicing exceptional cases. But exceptional cases are exceptional precisely because the automation handles them. To create training situations that develop exception-handling skills, you'd need to recreate the very situations the automation was deployed to prevent from occurring in production. Simulation can partially address this, but Bainbridge notes that classroom instruction is insufficient: knowledge retrieved under pressure in novel situations requires having practiced under similar conditions, not just having read about them."
   },
   {
     "id": "bi-q03",
@@ -40,7 +40,7 @@
     "question": "Bainbridge's 1983 paper 'Ironies of Automation' has been cited thousands of times in aviation, medicine, and industrial control, but the post found it uncited in US banking supervisory guidance. What does this gap reveal?",
     "options": [
       "Banking supervisors have reviewed Bainbridge's research and determined that aviation and nuclear findings do not transfer meaningfully to financial services operational contexts.",
-      "Two disciplines — HCI and banking model risk — have spent forty years solving the same problem without ever citing.",
+      "Two disciplines \u2014 HCI and banking model risk \u2014 have spent forty years solving the same problem without ever citing.",
       "Bainbridge's research is too technically specialized for incorporation into banking supervisory guidance written for non-specialist examiner and practitioner audiences.",
       "Banking supervisors intentionally exclude academic HCI research from formal guidance specifically to prevent regulatory capture by academic interests and industry researchers."
     ],
@@ -56,12 +56,12 @@
     "question": "The RPA wave in banking produced a specific version of Bainbridge's training paradox: operations analysts were left with the hard 20% of exception cases without daily practice on the easy 80%. A Fortune 500 stakeholder described generational knowledge transfer: 'the second successor often doesn't have a clue.' How does agentic AI intensify this pattern?",
     "options": [
       "Agentic AI generates more exception volume than RPA, overwhelming the human capacity available to handle the remaining non-automated exception workload.",
-      "Agentic AI moves faster with more complex failure modes than RPA — the required intervention skills are novel, arriving.",
+      "Agentic AI moves faster with more complex failure modes than RPA \u2014 the required intervention skills are novel, arriving.",
       "Agentic AI eliminates human roles entirely rather than repositioning them, making the generational knowledge transfer question moot for affected job categories.",
       "The training paradox doesn't apply to agentic AI because agents generate explicit reasoning traces that substitute for traditional institutional knowledge transfer."
     ],
     "correct": 1,
-    "explanation": "The post identifies what makes the fourth wave different: 'deployment velocity has outrun institutional learning cycles. Agentic AI reached enterprise deployment in under two years; the governance frameworks explicitly exclude it.' The RPA training paradox played out over a decade — enough time for at least some institutional learning. Agentic AI's skills-to-exception pattern is arriving simultaneously with deployment, before anyone has developed the skills to intervene, and before any successor has had time to build institutional knowledge of normal operation. The generational knowledge-transfer problem that took RPA a decade to produce is present from day one."
+    "explanation": "The post identifies what makes the fourth wave different: 'deployment velocity has outrun institutional learning cycles. Agentic AI reached enterprise deployment in under two years; the governance frameworks explicitly exclude it.' The RPA training paradox played out over a decade \u2014 enough time for at least some institutional learning. Agentic AI's skills-to-exception pattern is arriving simultaneously with deployment, before anyone has developed the skills to intervene, and before any successor has had time to build institutional knowledge of normal operation. The generational knowledge-transfer problem that took RPA a decade to produce is present from day one."
   },
   {
     "id": "bi-q05",
@@ -72,12 +72,12 @@
     "question": "Bainbridge's paper is not a critique of automation. How does she frame her argument that prevents it from being read as anti-automation?",
     "options": [
       "She recommends slower automation deployment timelines to give operators adequate time to adapt before their prior skills have fully atrophied.",
-      "The three ironies are structural consequences of automation — predictable outcomes that governance must account for even in well-designed systems, not correctable flaws.",
+      "The three ironies are structural consequences of automation \u2014 predictable outcomes that governance must account for even in well-designed systems, not correctable flaws.",
       "She argues automation is beneficial on net and the ironies are acceptable costs practitioners should tolerate without dedicated mitigation.",
       "She frames the argument as a call for better transition training programs, positioning atrophy as a solvable human resources problem rather than a structural property."
     ],
     "correct": 1,
-    "explanation": "The post emphasizes this framing: 'automation creates a human oversight role without designing for the human factors that oversight requires.' Bainbridge is not saying automation is bad — she's identifying what automation produces structurally that governance must account for. The ironies are inherent, not contingent on bad design choices. This framing is what makes the paper durable: it predicts failure modes that appear consistently across domains (aviation, nuclear, banking) regardless of how carefully each automation system was engineered. The lesson is not 'automate less' but 'design governance for what automation predictably produces.'"
+    "explanation": "The post emphasizes this framing: 'automation creates a human oversight role without designing for the human factors that oversight requires.' Bainbridge is not saying automation is bad \u2014 she's identifying what automation produces structurally that governance must account for. The ironies are inherent, not contingent on bad design choices. This framing is what makes the paper durable: it predicts failure modes that appear consistently across domains (aviation, nuclear, banking) regardless of how carefully each automation system was engineered. The lesson is not 'automate less' but 'design governance for what automation predictably produces.'"
   },
   {
     "id": "bi-q06",
@@ -87,13 +87,13 @@
     "difficulty": 3,
     "question": "Bainbridge's three prescriptions are: periodic manual engagement, training that develops adaptive reasoning rather than procedure-following, and automatic systems that fail obviously. Which prescription is most directly violated by LLM-based agentic AI, and why?",
     "options": [
-      "Periodic manual engagement — LLMs cannot be operated in a manual mode that lets operators maintain the underlying skills the automation has replaced.",
-      "Obvious failure — a confidently hallucinating LLM produces no failure signal, the structural inverse of Bainbridge's prescription that systems should fail obviously.",
-      "Training for adaptive reasoning — LLM deployments typically launch without formal operator training programs, creating a skills gap from the first production day.",
+      "Periodic manual engagement \u2014 LLMs cannot be operated in a manual mode that lets operators maintain the underlying skills the automation has replaced.",
+      "Obvious failure \u2014 a confidently hallucinating LLM produces no failure signal, the structural inverse of Bainbridge's prescription that systems should fail obviously.",
+      "Training for adaptive reasoning \u2014 LLM deployments typically launch without formal operator training programs, creating a skills gap from the first production day.",
       "All three prescriptions are violated equally by LLMs; none is more fundamentally violated than the others given the wide range of LLM failure modes."
     ],
     "correct": 1,
-    "explanation": "Bainbridge's third prescription — 'automatic systems should fail obviously rather than degrade gracefully' — is precisely inverted by LLM failure modes. A gauge that reads zero (physical system failure) alerts the operator. An LLM that produces confident-sounding but incorrect output provides no signal that anything has gone wrong. The CFPB's 'reason-code laundering' concern is exactly this: a chain-of-thought that explains a decision as if it were reasoned, while producing the result of a stochastic process, gives the appearance of intelligible reasoning without the substance. An operator reviewing this output cannot tell from the output alone that the system has failed in its reasoning rather than in its data access."
+    "explanation": "Bainbridge's third prescription \u2014 'automatic systems should fail obviously rather than degrade gracefully' \u2014 is precisely inverted by LLM failure modes. A gauge that reads zero (physical system failure) alerts the operator. An LLM that produces confident-sounding but incorrect output provides no signal that anything has gone wrong. The CFPB's 'reason-code laundering' concern is exactly this: a chain-of-thought that explains a decision as if it were reasoned, while producing the result of a stochastic process, gives the appearance of intelligible reasoning without the substance. An operator reviewing this output cannot tell from the output alone that the system has failed in its reasoning rather than in its data access."
   },
   {
     "id": "bi-q07",
@@ -101,15 +101,15 @@
     "module": "bainbridge-debt",
     "objective": "mechanism",
     "difficulty": 2,
-    "question": "The 1974 Atlanta ATM ('Tillie the All-Time Teller') used deliberate anthropomorphism — a smiling mascot and recorded voice — as its primary customer trust strategy. What Bainbridge irony does the subsequent teller repositioning produce?",
+    "question": "The 1974 Atlanta ATM ('Tillie the All-Time Teller') used deliberate anthropomorphism \u2014 a smiling mascot and recorded voice \u2014 as its primary customer trust strategy. What Bainbridge irony does the subsequent teller repositioning produce?",
     "options": [
-      "The training paradox — tellers trained on manual transaction workflows lacked the technical skills to operate and troubleshoot the new ATM hardware during failures.",
-      "The skill-atrophy irony — ATMs took over routine cash handling, so repositioned tellers lost daily practice that built their financial judgment.",
-      "The transparency irony — ATM transaction records were not accessible to tellers handling exceptions, creating an information gap that made override decisions impossible.",
-      "The trust irony — anthropomorphic ATM design created customer expectations of human-like reliability that the machines could not consistently deliver at scale."
+      "The training paradox \u2014 tellers trained on manual transaction workflows lacked the technical skills to operate and troubleshoot the new ATM hardware during failures.",
+      "The skill-atrophy irony \u2014 ATMs took over routine cash handling, so repositioned tellers lost daily practice that built their financial judgment.",
+      "The transparency irony \u2014 ATM transaction records were not accessible to tellers handling exceptions, creating an information gap that made override decisions impossible.",
+      "The trust irony \u2014 anthropomorphic ATM design created customer expectations of human-like reliability that the machines could not consistently deliver at scale."
     ],
     "correct": 1,
-    "explanation": "The post identifies the ATM wave as the first banking instance of Bainbridge's skill-atrophy irony, and notes it happened before the paper was published. Teller repositioning from routine transaction handling to advisory and exception roles removed the daily practice that built the judgment needed for the remaining work. The anthropomorphism detail is interesting for another reason: it reflects that customer trust in machine-mediated transactions was the binding constraint, and the solution was to simulate human presence rather than actually provide it — a pattern that recurs in every wave of banking automation."
+    "explanation": "The post identifies the ATM wave as the first banking instance of Bainbridge's skill-atrophy irony, and notes it happened before the paper was published. Teller repositioning from routine transaction handling to advisory and exception roles removed the daily practice that built the judgment needed for the remaining work. The anthropomorphism detail is interesting for another reason: it reflects that customer trust in machine-mediated transactions was the binding constraint, and the solution was to simulate human presence rather than actually provide it \u2014 a pattern that recurs in every wave of banking automation."
   },
   {
     "id": "bi-q08",
@@ -120,12 +120,12 @@
     "question": "The credit scoring wave (1985-1998) produced a specific failure documented in Skitka et al. (1999). What is the most common misconception about why participants with an automated aid performed worse than participants with no aid?",
     "options": [
       "Participants trusted the automated aid too much simply because it was accurate most of the time, and overreliance on correct outputs caused complacency on rare incorrect ones.",
-      "Commission errors are commonly cited, but the more consequential finding is omission errors — participants missed events the aid never flagged because automation changed attention.",
+      "Commission errors are commonly cited, but the more consequential finding is omission errors \u2014 participants missed events the aid never flagged because automation changed attention.",
       "The effect was caused by a specific interface design flaw in the 1999 study that does not generalize to modern banking AI systems with sophisticated display designs.",
       "Participants with aids performed worse purely because the aids were poorly calibrated in that study, not because of any structural automation bias mechanism."
     ],
     "correct": 1,
-    "explanation": "The post highlights this subtlety: 'The mechanism that banking assumed would catch model errors was, in controlled experimental conditions, making outcomes worse than no model at all.' The headline finding was commission errors (following wrong recommendations); the more consequential finding was omission errors — participants missed events the aid didn't flag because they had effectively delegated the monitoring function to the aid. With no aid, participants remained vigilant across the full task. With an aid, they attended to the aid's outputs and stopped actively monitoring the environment. This has direct implications for AML monitoring: a system that auto-ranks alerts may cause analysts to miss events the system didn't flag."
+    "explanation": "The post highlights this subtlety: 'The mechanism that banking assumed would catch model errors was, in controlled experimental conditions, making outcomes worse than no model at all.' The headline finding was commission errors (following wrong recommendations); the more consequential finding was omission errors \u2014 participants missed events the aid didn't flag because they had effectively delegated the monitoring function to the aid. With no aid, participants remained vigilant across the full task. With an aid, they attended to the aid's outputs and stopped actively monitoring the environment. This has direct implications for AML monitoring: a system that auto-ranks alerts may cause analysts to miss events the system didn't flag."
   },
   {
     "id": "bi-q09",
@@ -136,7 +136,7 @@
     "question": "The post states that SR 26-2 'explicitly excludes generative AI and agentic AI from its formal scope... leaving the governance question open.' What makes this exclusion particularly consequential given Bainbridge's argument?",
     "options": [
       "The exclusion leaves banks with no legal obligation to govern GenAI deployments, creating a regulatory vacuum that increases systemic risk without supervisory recourse.",
-      "Bainbridge predicts agentic AI produces all three ironies in their most severe form — yet SR 26-2 excluded precisely the technology most in need of governance from its scope, leaving a regulatory vacuum at the worst possible moment.",
+      "Bainbridge predicts agentic AI produces all three ironies in their most severe form \u2014 yet SR 26-2 excluded precisely the technology most in need of governance from its scope, leaving a regulatory vacuum at the worst possible moment.",
       "The exclusion is stated as temporary pending further study and will be corrected within six months by a supplemental guidance document from the Federal Reserve.",
       "The exclusion is justified because agentic AI is not yet mature enough for regulated banking deployment, so governance gaps carry minimal practical consequence."
     ],
@@ -157,6 +157,54 @@
       "Effective challenge applies only to traditional statistical models and the concept does not transfer to AI systems with opaque generative reasoning processes."
     ],
     "correct": 1,
-    "explanation": "The series connection is direct. Effective challenge requires that validators have the competence to probe what they're validating — FINMA's observation that 'some AI model results cannot be understood, explained or reproduced and therefore cannot be critically assessed' is Bainbridge's transparency irony stated in regulatory language. The adversarial testing framework provides a partial response: since you can't examine the reasoning, probe the behavior systematically. But adversarial testing establishes what the model does under specific probes, not why — the opacity persists. Bainbridge's debt is the missing link: the human factors research that banking governance was built without, now arriving in a technology whose most important properties are exactly the ones Bainbridge identified as sources of oversight failure."
+    "explanation": "The series connection is direct. Effective challenge requires that validators have the competence to probe what they're validating \u2014 FINMA's observation that 'some AI model results cannot be understood, explained or reproduced and therefore cannot be critically assessed' is Bainbridge's transparency irony stated in regulatory language. The adversarial testing framework provides a partial response: since you can't examine the reasoning, probe the behavior systematically. But adversarial testing establishes what the model does under specific probes, not why \u2014 the opacity persists. Bainbridge's debt is the missing link: the human factors research that banking governance was built without, now arriving in a technology whose most important properties are exactly the ones Bainbridge identified as sources of oversight failure."
+  },
+  {
+    "id": "bi-gloss-q01",
+    "post": "bainbridge-ironies",
+    "module": "bainbridge-debt",
+    "objective": "distinction",
+    "difficulty": 1,
+    "question": "Bainbridge's 1983 paper identified a paradox at the heart of automation design. Which statement best captures 'the ironies of automation'?",
+    "options": [
+      "Fully automated systems are more reliable than partially automated ones, so partial automation is paradoxically more dangerous.",
+      "The more tasks automation takes over, the less practiced humans become at exactly the manual interventions they must perform when automation fails.",
+      "Automation improves human skill over time by freeing operators to focus on complex, high-value decisions.",
+      "Automated systems eliminate the need for skill maintenance when they operate reliably \u2014 the irony is that operators train for failures that never come."
+    ],
+    "correct": 1,
+    "explanation": "Bainbridge's central observation was that automating routine tasks degrades human proficiency at those tasks \u2014 precisely the ones operators must fall back on when automation fails. The deepest irony: the most successful automated systems, operating without failures for years, produce the most skill-atrophied operators. When failure eventually occurs, the humans who must intervene are the least practiced they have ever been. The post applies this directly to banking automation waves (ATM, credit scoring, RPA, agentic AI)."
+  },
+  {
+    "id": "bi-gloss-q02",
+    "post": "bainbridge-ironies",
+    "module": "bainbridge-debt",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A bank trains new credit analysts using an AI-assisted review tool. After two years, the analysts have rarely seen a complex edge case without the AI's recommendation visible. When the system goes offline during a regulatory audit, analysts struggle with the cases unaided. Which Bainbridge irony does this most directly illustrate?",
+    "options": [
+      "The transparency irony \u2014 operators cannot understand what the automated system decided or why.",
+      "The skill atrophy irony \u2014 automation of routine tasks degrades the manual proficiency needed precisely when automation is unavailable.",
+      "The training paradox \u2014 the best way to teach exception handling is to train against real failures, but reliable systems rarely fail.",
+      "The oversight irony \u2014 the regulator can only audit human decisions, not automated ones."
+    ],
+    "correct": 2,
+    "explanation": "This scenario is the training paradox: the best trainers for exception handling are systems with real failures to demonstrate \u2014 but reliable systems rarely fail, so trainees never see the exceptions. Skill atrophy (the first irony) would manifest if experienced analysts lost skills they once had; the training paradox (the second irony) describes analysts who never developed those skills in the first place because the system was too reliable. The distinction is subtle but important: atrophy is loss of existing skill; the training paradox is failure to acquire it."
+  },
+  {
+    "id": "bi-gloss-q03",
+    "post": "bainbridge-ironies",
+    "module": "bainbridge-debt",
+    "objective": "scope",
+    "difficulty": 1,
+    "question": "The Sheridan-Verplank levels of automation place high-frequency trading near Level 9-10 and credit underwriting near Level 4-5. What is the governance implication of this difference?",
+    "options": [
+      "Credit underwriting needs more regulatory oversight than HFT because it affects more consumers.",
+      "HFT systems are safer because they operate at a level where human error cannot occur.",
+      "Systems near Level 10 have fewer or no meaningful human intervention points before actions complete \u2014 errors compound before any human can respond, and Bainbridge's ironies apply most severely.",
+      "The LOA level determines which regulatory framework applies: SR 26-2 for Level 10, SR 11-7 for lower levels."
+    ],
+    "correct": 2,
+    "explanation": "Levels of automation determine the practical availability of human intervention. At Level 4-5 (credit underwriting), a human is still reviewing and approving decisions \u2014 there are natural points where Bainbridge's skill-atrophy and training-paradox dynamics can be monitored and countered. At Level 9-10 (HFT), the action completes before any human could intervene regardless of intent. The governance implication: for high-LOA systems, the only effective controls are design-time and deploy-time \u2014 runtime human review is structurally impossible, which makes effective challenge before deployment critical."
   }
 ]

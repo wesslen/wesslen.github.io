@@ -56,7 +56,7 @@
     "question": "JPMorgan's CAO described 'access management and entitlements of agents' as 'an unsolved problem needing industry uplift' even at the most sophisticated institutions. What does this reveal about MCP as a banking infrastructure component?",
     "options": [
       "MCP licensing costs are prohibitively high for most institutions, preventing widespread banking adoption even though the protocol's technical architecture is adequate for production financial services deployments.",
-      "MCP's authorization model and documented vulnerabilities — confused deputy attacks, over-broad scope grants, token passthrough — fall short of production banking requirements even at the most.",
+      "MCP's authorization model and documented vulnerabilities — confused deputy attacks, over-broad scope grants, token passthrough — fall short of production banking requirements even at some of the most technically sophisticated banks.",
       "JPMorgan's CAO assessment reflects outdated information; major security improvements to MCP's authorization model were shipped after the statement and resolve the vulnerabilities identified in early deployments.",
       "The access management challenge is confined to open-source MCP implementations; commercial enterprise versions from major cloud providers have already resolved the authorization weaknesses that make open-source deployments unsuitable."
     ],
