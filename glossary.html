@@ -223,6 +223,220 @@
         color: var(--accent);
       }
 
+
+      /* ── Drill mode ──────────────────────────────────── */
+      .drill-toggle-wrap {
+        margin-top: -0.75rem;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      #drill-toggle {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: var(--accent2);
+        background: var(--accent2-dim, rgba(124,58,237,0.08));
+        border: 1px solid var(--accent2);
+        border-radius: 20px;
+        padding: 0.3rem 0.9rem;
+        cursor: pointer;
+        transition: all 0.15s;
+        user-select: none;
+      }
+      #drill-toggle:hover {
+        background: var(--accent2);
+        color: #fff;
+      }
+      #drill-scope-note {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--muted);
+      }
+
+      #drill-panel {
+        display: none;
+        max-width: 860px;
+        margin: 0 auto 2.5rem;
+        padding: 0 1.5rem;
+      }
+      #drill-panel.drill-active {
+        display: block;
+      }
+      .drill-card {
+        border: 1px solid var(--accent2);
+        border-radius: var(--radius);
+        background: var(--surface);
+        padding: 1.75rem 1.5rem 1.25rem;
+      }
+      .drill-meta {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--muted);
+        margin-bottom: 1rem;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+      .drill-domain-tag {
+        padding: 0.12rem 0.5rem;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+      }
+      .drill-progress {
+        margin-left: auto;
+      }
+      .drill-definition {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: var(--text);
+        margin-bottom: 1.5rem;
+      }
+      .drill-input-row {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      #drill-input {
+        flex: 1;
+        min-width: 12rem;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.15s;
+      }
+      #drill-input:focus {
+        border-color: var(--accent2);
+      }
+      #drill-input.drill-correct {
+        border-color: #22c55e;
+        background: rgba(34,197,94,0.06);
+      }
+      #drill-input.drill-wrong {
+        border-color: #ef4444;
+        background: rgba(239,68,68,0.06);
+      }
+      .drill-btn {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition: all 0.15s;
+        border: 1px solid;
+        white-space: nowrap;
+      }
+      #drill-check {
+        background: var(--accent2);
+        border-color: var(--accent2);
+        color: #fff;
+      }
+      #drill-check:hover { opacity: 0.88; }
+      #drill-check:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+      #drill-skip {
+        background: transparent;
+        border-color: var(--border);
+        color: var(--muted);
+      }
+      #drill-skip:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .drill-feedback {
+        margin-top: 0.9rem;
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        min-height: 1.3rem;
+      }
+      .drill-feedback.correct { color: #22c55e; }
+      .drill-feedback.wrong   { color: #ef4444; }
+      .drill-feedback .drill-answer {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .drill-next-row {
+        margin-top: 1rem;
+        display: none;
+        gap: 0.5rem;
+      }
+      .drill-next-row.visible {
+        display: flex;
+      }
+      #drill-next {
+        background: var(--surface);
+        border-color: var(--accent2);
+        color: var(--accent2);
+      }
+      #drill-next:hover {
+        background: var(--accent2);
+        color: #fff;
+      }
+      #drill-reveal {
+        background: transparent;
+        border-color: var(--border);
+        color: var(--muted);
+        font-size: 0.75rem;
+      }
+      #drill-reveal:hover {
+        border-color: var(--muted);
+        color: var(--text);
+      }
+      .drill-end-msg {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--muted);
+        padding: 1.5rem 0;
+        text-align: center;
+      }
+      .drill-end-msg span { color: var(--accent); }
+      .drill-hint-row {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-top: 0.55rem;
+      }
+      .drill-btn-hint {
+        background: transparent;
+        border-color: var(--border);
+        color: var(--muted);
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+        flex-shrink: 0;
+      }
+      .drill-btn-hint:hover:not(:disabled) {
+        border-color: var(--accent2);
+        color: var(--accent2);
+      }
+      .drill-btn-hint:disabled {
+        opacity: 0.3;
+        cursor: default;
+      }
+      .drill-hint-display {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: var(--muted);
+        letter-spacing: 0.05em;
+        word-break: break-word;
+      }
+      .drill-hint-display b {
+        color: var(--accent2);
+        font-weight: 700;
+      }
+      @media (max-width: 640px) {
+        .drill-input-row { flex-direction: column; align-items: stretch; }
+        #drill-input { width: 100%; }
+      }
+
       /* ── Sticky domain nav ─────────────────────────────── */
       #glos-sticky-nav {
         position: fixed;
@@ -373,6 +587,36 @@
 
       <div class="glossary-filters" id="glossary-filters" role="group" aria-label="Filter by domain">
         <!-- populated by JS -->
+      </div>
+
+      <div class="drill-toggle-wrap">
+        <button id="drill-toggle">// drill mode</button>
+        <span id="drill-scope-note"></span>
+      </div>
+    </div>
+
+
+    <div id="drill-panel" role="region" aria-label="Glossary drill">
+      <div class="drill-card">
+        <div class="drill-meta">
+          <span id="drill-domain-tag" class="drill-domain-tag"></span>
+          <span id="drill-progress" class="drill-progress"></span>
+        </div>
+        <div id="drill-definition" class="drill-definition"></div>
+        <div class="drill-input-row">
+          <input type="text" id="drill-input" placeholder="type the term…" autocomplete="off" spellcheck="false" aria-label="Your answer" />
+          <button id="drill-check" class="drill-btn">check</button>
+          <button id="drill-skip" class="drill-btn">skip →</button>
+        </div>
+        <div class="drill-hint-row">
+          <button id="drill-hint-btn" class="drill-btn drill-btn-hint">hint</button>
+          <span id="drill-hint-display" class="drill-hint-display"></span>
+        </div>
+        <div id="drill-feedback" class="drill-feedback"></div>
+        <div id="drill-next-row" class="drill-next-row">
+          <button id="drill-next" class="drill-btn">next →</button>
+          <button id="drill-reveal" class="drill-btn">show answer</button>
+        </div>
       </div>
     </div>
 
@@ -757,6 +1001,235 @@
 
         /* Attach scroll listener for spy */
         window.addEventListener("scroll", runScrollSpy, { passive: true });
+
+        /* ── Drill mode ─────────────────────────────────── */
+        (function() {
+          const toggleBtn   = document.getElementById("drill-toggle");
+          const panel       = document.getElementById("drill-panel");
+          const scopeNote   = document.getElementById("drill-scope-note");
+          const domainTag   = document.getElementById("drill-domain-tag");
+          const progressEl  = document.getElementById("drill-progress");
+          const defEl       = document.getElementById("drill-definition");
+          const input       = document.getElementById("drill-input");
+          const checkBtn    = document.getElementById("drill-check");
+          const skipBtn     = document.getElementById("drill-skip");
+          const feedbackEl  = document.getElementById("drill-feedback");
+          const nextRow     = document.getElementById("drill-next-row");
+          const nextBtn     = document.getElementById("drill-next");
+          const revealBtn   = document.getElementById("drill-reveal");
+          const hintBtn     = document.getElementById("drill-hint-btn");
+          const hintDisplay = document.getElementById("drill-hint-display");
+
+          let hintLevel = 0;
+
+          /* Build a crossword-style pattern: level 1 = first char, level 2 = first 3 chars */
+          function makeHintPattern(term, revealN) {
+            return term.split(/\s+/).map(word =>
+              word.split('').map((ch, i) =>
+                i < revealN ? `<b>${ch}</b>` : '–'
+              ).join('\u202f')
+            ).join('\u2002\u2002');
+          }
+
+          hintBtn.addEventListener("click", () => {
+            if (idx >= deck.length) return;
+            hintLevel++;
+            const entry = deck[idx];
+            const revealN = hintLevel === 1 ? 1 : 3;
+            hintDisplay.innerHTML = makeHintPattern(entry.term, revealN);
+            if (hintLevel >= 2) {
+              hintBtn.disabled = true;
+              hintBtn.textContent = "hint ✓";
+            }
+          });
+
+          let deck = [];
+          let idx  = 0;
+          let revealed = false;
+
+          function shuffleDeck(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+          }
+
+          function buildDeck() {
+            const terms = glossary.filter(e => {
+              if (activeFilter !== "all" && e.domain !== activeFilter) return false;
+              if (searchQuery) {
+                const q = searchQuery.toLowerCase();
+                return e.term.toLowerCase().includes(q) ||
+                       (e.full || "").toLowerCase().includes(q) ||
+                       e.definition.toLowerCase().includes(q);
+              }
+              return true;
+            });
+            return shuffleDeck(terms);
+          }
+
+          function getPrompt(entry) {
+            return entry.short || entry.definition.split(".")[0] + ".";
+          }
+
+          function normalize(s) {
+            return s.trim().toLowerCase().replace(/[^a-z0-9\s]/g, "").replace(/\s+/g, " ");
+          }
+          /* loose: strip ALL spaces, hyphens, punctuation — "rollout" matches "Roll Out" */
+          function normalizeLoose(s) {
+            return s.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+          }
+
+          function isCorrect(entry, answer) {
+            const ans      = normalize(answer);
+            const ansLoose = normalizeLoose(answer);
+            if (!ans) return false;
+            const candidates = [
+              entry.term,
+              entry.full || "",
+              ...(entry.aliases || [])
+            ].filter(Boolean);
+            return candidates.some(c =>
+              normalize(c) === ans || normalizeLoose(c) === ansLoose
+            );
+          }
+
+          function showCard() {
+            if (idx >= deck.length) {
+              defEl.innerHTML = `<div class="drill-end-msg">// <span>deck complete</span> — ${deck.length} terms drilled.</div>`;
+              domainTag.textContent = "";
+              progressEl.textContent = "";
+              input.style.display = "none";
+              checkBtn.style.display = "none";
+              skipBtn.style.display = "none";
+              feedbackEl.textContent = "";
+              nextRow.classList.add("visible");
+              nextBtn.textContent = "restart →";
+              revealBtn.style.display = "none";
+              return;
+            }
+            const entry = deck[idx];
+            domainTag.textContent = DOMAIN_LABELS[entry.domain] || entry.domain;
+            progressEl.textContent = `${idx + 1} / ${deck.length}`;
+            defEl.textContent = getPrompt(entry);
+            input.value = "";
+            input.className = "";
+            input.disabled = false;
+            input.style.display = "";
+            checkBtn.style.display = "";
+            checkBtn.disabled = false;
+            skipBtn.style.display = "";
+            feedbackEl.textContent = "";
+            feedbackEl.className = "drill-feedback";
+            nextRow.classList.remove("visible");
+            revealBtn.style.display = "";
+            revealBtn.textContent = "show answer";
+            revealed = false;
+            hintLevel = 0;
+            hintBtn.disabled = false;
+            hintBtn.textContent = "hint";
+            hintDisplay.textContent = "";
+            nextBtn.textContent = "next →";
+            setTimeout(() => input.focus(), 50);
+          }
+
+          function submitAnswer() {
+            const entry = deck[idx];
+            const answer = input.value;
+            if (!answer.trim()) return;
+            checkBtn.disabled = true;
+            input.disabled = true;
+            if (isCorrect(entry, answer)) {
+              input.classList.add("drill-correct");
+              feedbackEl.className = "drill-feedback correct";
+              feedbackEl.textContent = "✓ correct";
+            } else {
+              input.classList.add("drill-wrong");
+              feedbackEl.className = "drill-feedback wrong";
+              feedbackEl.innerHTML = `✗ the term is <span class="drill-answer">${entry.term}</span>`;
+            }
+            nextRow.classList.add("visible");
+          }
+
+          function advance() {
+            if (nextBtn.textContent === "restart →") {
+              deck = buildDeck();
+              idx = 0;
+              input.style.display = "";
+              checkBtn.style.display = "";
+              skipBtn.style.display = "";
+              showCard();
+              return;
+            }
+            idx++;
+            showCard();
+          }
+
+          checkBtn.addEventListener("click", submitAnswer);
+          input.addEventListener("keydown", e => {
+            if (e.key === "Enter" && !checkBtn.disabled) submitAnswer();
+          });
+
+          skipBtn.addEventListener("click", () => {
+            const entry = deck[idx];
+            feedbackEl.className = "drill-feedback wrong";
+            feedbackEl.innerHTML = `skipped — <span class="drill-answer">${entry.term}</span>`;
+            checkBtn.disabled = true;
+            input.disabled = true;
+            nextRow.classList.add("visible");
+            revealBtn.style.display = "none";
+          });
+
+          nextBtn.addEventListener("click", advance);
+
+          revealBtn.addEventListener("click", () => {
+            if (revealed) return;
+            revealed = true;
+            const entry = deck[idx];
+            feedbackEl.className = "drill-feedback";
+            feedbackEl.innerHTML = `answer: <span class="drill-answer">${entry.term}</span>`;
+            revealBtn.style.display = "none";
+          });
+
+          function updateScopeNote() {
+            const count = deck.length;
+            const scope = activeFilter === "all"
+              ? "all terms"
+              : (DOMAIN_LABELS[activeFilter] || activeFilter) + " terms";
+            scopeNote.textContent = count > 0 ? `${count} ${scope}` : "";
+          }
+
+          let drillOpen = false;
+          toggleBtn.addEventListener("click", () => {
+            drillOpen = !drillOpen;
+            panel.classList.toggle("drill-active", drillOpen);
+            toggleBtn.textContent = drillOpen ? "// exit drill" : "// drill mode";
+            if (drillOpen) {
+              deck = buildDeck();
+              idx = 0;
+              input.style.display = "";
+              checkBtn.style.display = "";
+              skipBtn.style.display = "";
+              updateScopeNote();
+              showCard();
+              panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }
+          });
+
+          /* Rebuild deck when domain filter changes while drill is open */
+          document.getElementById("glossary-filters").addEventListener("click", () => {
+            if (!drillOpen) return;
+            setTimeout(() => {
+              deck = buildDeck();
+              idx = 0;
+              updateScopeNote();
+              showCard();
+            }, 20);
+          });
+        })();
+
       })();
     </script>
     <script src="./scripts/search.js" defer></script>
