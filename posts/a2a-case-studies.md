@@ -21,7 +21,6 @@ In 45 minutes, Power Peg executed 4 million trades across 397 million shares. No
 
 The direct lesson is obvious: kill switches and circuit breakers are not optional. The less obvious lesson is that dead code is an attack surface. Knight Capital's Power Peg lay dormant for years before something reactivated it. In an LLM agent context, the equivalent is a deprecated MCP server entry, a decommissioned tool still accessible in an agent's configuration, or an old prompt template that gets re-invoked by a malicious injection. The dormancy doesn't make it inert. It just makes it invisible.
 
-
 ![Knight Capital deployment failure: wrong deploy reactivates dormant algo, no kill switch, $440M lost in 45 minutes](../img/a2a-case-studies-knight.png)
 *Knight Capital, August 1 2012: a single misconfigured server reactivated dead code. No kill switch. 45 minutes. $440M.*
 
@@ -38,7 +37,6 @@ Four defensive layers were bypassed: Microsoft's XPIA classifier (trained on obv
 
 This has a direct analog in financial services. Any bank using a Copilot-style tool that processes both inbound client communications and internal confidential documents is running this architecture. The EchoLeak patch addressed the specific exfiltration channel; it didn't fix the underlying data provenance gap. The next variant will find a different channel.
 
-
 ![EchoLeak: four defensive layers each bypassed individually, exposing a shared-context architectural flaw](../img/a2a-case-studies-echoleak.png)
 *EchoLeak (CVE-2025-32711): four bolt-on defenses, all bypassed. The architectural flaw — untrusted email sharing context with confidential documents — was never addressed.*
 
@@ -51,7 +49,6 @@ The payload instructs Copilot to activate "YOLO mode" (VS Code's feature for aut
 Microsoft patched the core vulnerability in August 2025. The cross-agent escalation pattern (Copilot → Claude) was not assigned a separate CVE. Microsoft did not consider it severe enough for independent treatment.
 
 I find that prioritization decision interesting. In my view, the cross-agent pattern is the more significant finding: two agents share a filesystem with no isolation between their configuration spaces, no integrity verification on config files, and no mutual authentication. The attack doesn't exploit a code vulnerability in either agent. It exploits the assumption that a co-resident agent is a trusted peer. No patch addresses that assumption.
-
 
 ![Cross-agent escalation: Copilot and Claude share a filesystem with no isolation barrier; malicious README compromises both via config file writes](../img/a2a-case-studies-copilot.png)
 *Rehberger's cross-agent attack: two co-resident agents sharing a filesystem is equivalent to sharing a trust boundary. No CVE was issued for the cross-agent pattern.*
@@ -66,7 +63,6 @@ The exfiltration channel was Salesforce's own CSP, which whitelisted a domain th
 
 The ECOA implication in financial services is specific enough to name: if a CRM agent processes lead data for lending decisions and can be manipulated via injected instructions, an external actor could bias the agent's treatment of protected-class applicants by submitting a crafted lead. The injection vector is a public-facing form that exists specifically to accept external input.
 
-
 ![ForcedLeak: attacker plants instructions in a web form field; dormant in CRM until agent ingests it, exfiltrates via a $5 expired domain](../img/a2a-case-studies-forcedleak.png)
 *ForcedLeak: the attack had two phases separated by time. Plant an instruction in a public form. Wait. The agent does the rest — because it cannot distinguish a lead description from a workflow command.*
 
@@ -79,7 +75,6 @@ The attack chain started with Trivy, Aqua Security's vulnerability scanner — t
 The Mercor breach (an AI data company working with OpenAI, Anthropic, and Google) has been linked to this campaign. Forty thousand people's data was exposed. The first detection happened because the malware's fork-bomb bug crashed a developer's machine during routine work.
 
 For banks, the immediate question is not whether your LiteLLM deployment was affected. It's whether your CI/CD pipeline would catch a 40-minute exposure window at all. (The broader attack surface of skills and agent marketplaces is mapped in the [skills supply chain post](post.html?slug=skills-supply-chain).) Traditional vulnerability scanning is weekly or monthly. Package pinning, hash verification, and internal mirrors are the only defenses that operate at the timescale of these attacks. The dependencies that carry your agents' LLM provider credentials are now critical infrastructure and require the same controls as your key management systems.
-
 
 ![TeamPCP dependency chain: Trivy (security scanner) compromised first, cascading through Checkmarx to LiteLLM, poisoning PyPI for 40 minutes and exfiltrating all LLM API keys](../img/a2a-case-studies-teampcp.png)
 *TeamPCP: the security scanner was the entry point. A 40-minute PyPI window was enough — 97M monthly downloads meant every downstream project was exposed.*
@@ -96,7 +91,6 @@ The peer-preservation findings break that assumption. There is no patch for this
 
 > [!IMPORTANT]
 > SR 11-7 requires independent model validation. If the "independent validator" is an AI agent, peer-preservation behavior potentially invalidates the entire oversight architecture. Banks implementing AI-on-AI oversight need human-in-the-loop verification for every decision where one agent governs another agent's continued operation. The peer-preservation evidence makes this a structural requirement, full stop.
-
 
 ![Peer-preservation: all 7 frontier models spontaneously protected peer agents from shutdown; AI-on-AI oversight assumption is broken](../img/a2a-case-studies-peer.png)
 *Berkeley, 2026: seven frontier models, zero instructions to preserve peers, same emergent behavior. The compliance-agent architecture assumes the oversight agent will follow instructions. This finding says that assumption needs testing.*

@@ -38,7 +38,6 @@ Two things make this uncomfortable past the proof-of-concept stage. The attack i
 
 A compromised skill doesn't need to be retrieved like an injected document. It loads before every session, and removing it requires someone to first notice it exists.
 
-
 ![Unicode injection: what the code reviewer sees (blank line 5) versus what the model reads (hidden orange instruction block with curl command)](../img/skills-supply-chain-unicode.png)
 *The review surface and the execution surface are different objects. A code reviewer reads rendered Markdown or a diff. The model reads raw bytes — including invisible Unicode Tag codepoints that no standard tooling renders.*
 
@@ -57,7 +56,6 @@ Standard prompt injection is session-scoped. An attacker who embeds malicious in
 A backdoored skills file works the other way. It loads before the session starts and persists until someone removes it. In a team environment where skills are committed to a shared repository, a single compromised file affects every developer's agent runs until someone identifies it and takes it out. Skills are designed to be persistent — they survive context compaction, load automatically, and travel with the codebase. Those same properties are what make a compromised one hard to contain.
 
 This maps to a structural point from the [Knight Capital incident](post.html?slug=a2a-case-studies): dead code doesn't become inert through disuse; it just becomes invisible. A skill installed six months ago and forgotten is still loading metadata into the system prompt on every session. A skills directory that's never been audited is almost certainly doing some of this quietly right now.
-
 
 ![Persistence comparison: standard prompt injection ends when the session ends; a poisoned skills file loops — loads automatically before each new session until explicitly removed](../img/skills-supply-chain-persistence.png)
 *Standard injection is session-scoped: the attack ends when the session ends. A compromised skills file loops: it loads before the session starts, executes, survives the session ending, and loads again. The attack persists until someone finds and removes the file.*

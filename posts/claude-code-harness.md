@@ -31,7 +31,6 @@ I wrote in the [last post](post.html?slug=agent-harness-design) that compaction 
 
 Four layers is not elegant — it's the accumulated result of years of watching users hit the context ceiling in different ways and patching each failure mode as it surfaced.
 
-
 ![Four compaction layers in Claude Code: proactive (monitors every turn), reactive (fallback on prompt_too_long), snip (SDK/headless truncation), and context collapse (marble_origami mid-conversation compression)](../img/claude-code-harness-compaction.png)
 *Four layers, not because someone designed it that way, but because each failure mode surfaced separately. Proactive compaction is the intended path; the other three are patches on the patches.*
 
@@ -50,7 +49,6 @@ The system prompt is assembled from roughly 15 composable functions. A marker ca
 Everything above the boundary is static: behavioral instructions, coding style, safety guidelines. Everything below is per-session: the user's `CLAUDE.md` files, MCP server instructions, environment info. The static half is cached with `scope: 'global'` — about 3,000 tokens cached globally across users. They fingerprint the static content using a hash function (Blake2b), so the API can recognize "I've seen this exact prefix before" and skip reprocessing it — even across completely separate users' sessions.[^2]
 
 This is a clever amortization move. A larger prompt paid for once, then hits the cache for every subsequent request. Per-session context gets injected after the boundary, keeping the dynamic portion small while the expensive static half is essentially free after the first hit.
-
 
 ![Prompt cache boundary: static half (behavioral instructions, coding style, safety) cached globally with Blake2b fingerprint; dynamic half (CLAUDE.md, MCP, env) different every session](../img/claude-code-harness-cache.png)
 *The boundary marker splits cost from variability. ~3,000 tokens cached globally across all users — paid once per unique static prompt, then free. The dynamic half stays small so the cache hit rate stays high.*
@@ -106,7 +104,6 @@ What I didn't anticipate: when a tool call is denied, the denial is wrapped as a
 > **Plain terms:** Most software hits a permission wall and stops — it throws an error and waits for a human to intervene. Claude Code instead packages the denial in the same format as any other tool response, so the model receives "permission denied" the same way it would receive "file not found" — as information to reason about and route around. The agent can try a different approach on the next turn without any human in the loop.
 
 This is subtler than a permission wall. It means the agent can reason about its own boundaries, treating a denied action as feedback rather than a dead end. I described error recovery as a core harness concern in the last post; this is a specific implementation of that where the recovery loop runs through the model itself.
-
 
 ![Denial as tool output: normal permission walls halt execution; Claude Code wraps the denial as a tool result so the model reasons about it and tries an alternative approach](../img/claude-code-harness-denial.png)
 *Most systems treat permission denial as a stop signal. Claude Code treats it as information. The model receives "permission denied" the same way it receives "file not found" — as a tool result to reason about.*
