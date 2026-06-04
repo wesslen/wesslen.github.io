@@ -47,6 +47,9 @@ Wires have historically offered consumers almost no protection — UCC 4A treats
 > [!WARNING]
 > RTP and FedNow instant payment networks are the worst structural fit for agentic errors. They were designed for speed and finality — transactions typically settle in seconds and are irrevocable. There is no true chargeback mechanism. A human who accidentally clicks "send" on a wire can sometimes call the bank within minutes. An agentic system that misroutes a payment may execute dozens of transactions before any monitoring flag fires. There is no undo button on a settled FedNow transaction, and the "furnished" exception still applies to the delegated authorization that initiated it.[^4]
 
+![The Protection Inversion: five payment rails arranged left to right from most to least protected. CREDIT CARD (green, $50 CAP + ZERO LIABILITY) → DEBIT/ACH (yellow, FURNISHED EXCEPTION RISK) → WIRE (orange, UCC 4A / LIMITED RECOURSE) → RTP/FEDNOW (red, IRREVOCABLE / NO CHARGEBACK) → STABLECOIN (thick red, NO FEDERAL FLOOR). A wide green arrow below points LEFT labeled 'CONSUMER PROTECTION DECREASES'. A wide orange arrow above points RIGHT labeled 'AI AGENT ECONOMIC INCENTIVES INCREASE'. Bottom annotation: 'THE RAILS AI AGENTS PREFER ARE THE RAILS CONSUMERS CANNOT DISPUTE.'](../img/payments-liability-matrix.png)
+*The structural inversion: lower interchange fees, faster settlement, and programmable conditions make the rightmost rails most attractive for agentic routing — exactly where consumer protection is weakest or absent.*
+
 ## The GENIUS Act's consumer protection gap
 
 The GENIUS Act (Public Law 119-27), signed July 18, 2025, is the first U.S. federal framework for payment stablecoins. On the reserve and chartering side it does real work: 100% reserves in cash or short-term Treasuries, monthly attestation requirements, dual federal-state chartering, and a first-priority bankruptcy claim for holders.[^5]

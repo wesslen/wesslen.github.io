@@ -30,7 +30,7 @@ NIST 800-3 formalizes a distinction that most benchmark reporting collapses: *be
 
 The biology exam analogy the paper uses is cleaner than any technical definition: benchmark accuracy is your average score on *this exam* given infinite reattempts; generalized accuracy is your average score on *all biology questions that could have been on the exam* given infinite reattempts. Neither is your single observed score. Both are defined in expectation.
 
-![Two-panel diagram comparing benchmark accuracy (fixed item set, only LLM nondeterminism as uncertainty source, CI narrower than generalized) and generalized accuracy (full superpopulation, adds item-selection variance, CI correctly wider than naive formula suggests). Both show the same 75.3% point estimate; the naive formula understates uncertainty for generalized accuracy and overstates it for benchmark accuracy.](../img/accuracy-estimands.svg)
+![Two-panel comparison: LEFT panel (BENCHMARK ACCURACY, blue) — horizontal number line with dot at 75.3%, NARROW CI bracket, uncertainty source: LLM nondeterminism only, fixed item set. RIGHT panel (GENERALIZED ACCURACY, orange) — same 75.3% dot, WIDE CI bracket, uncertainty source: LLM nondeterminism + item selection variance, full superpopulation of possible questions. Bottom annotation: SAME POINT ESTIMATE. DIFFERENT CLAIMS. DIFFERENT STANDARD ERRORS.](../img/accuracy-estimands.png)
 
 The practical consequence: generalized accuracy CIs are always wider than benchmark accuracy CIs, because they carry the additional uncertainty of item selection. NIST's evaluation of 22 frontier LLMs on GPQA-Diamond (198 items, 8 trials per item) found that some apparent model gaps disappear under generalized accuracy — Llama 3 (40B) and Phi 4, for example, are distinguishable at the 95% level under benchmark accuracy but not under generalized accuracy. The benchmark discriminated them; the domain doesn't. That distinction matters when the validation artifact is supposed to support claims about production performance generally, where the benchmark items are a sample rather than the target.
 
@@ -92,7 +92,7 @@ The regression-free formulas above are the correction for teams that cannot chan
 
 NIST 800-3 formalizes a **generalized linear mixed model (GLMM)** for benchmark evaluation[^8]:
 
-![GLMM two-level hierarchy: items sampled from a superpopulation as random effects δⱼ ~ N(0,σ²); LLM capabilities θᵢ as fixed effects; trials as Bernoulli draws conditional on (θᵢ − δⱼ)](../img/glmm-hierarchy.svg)
+![GLMM two-level hierarchy diagram: top level cloud shape SUPERPOPULATION OF ITEMS (all possible benchmark questions) with SAMPLE arrow down to middle level ITEM j (blue box, random effect delta-j ~ N(0, sigma-squared), item difficulty varies across draws). Separate orange box LLM i (fixed effect theta-i = capability we estimate). Both feed down to bottom green box TRIAL OUTCOME Y ~ Bernoulli(sigma(theta-i minus delta-j)). Right annotation: PARTIAL POOLING — items share variance estimate across benchmark.](../img/glmm-hierarchy.png)
 
 <details class="math-details">
 <summary>The GLMM specification</summary>

@@ -39,6 +39,9 @@ None of this is waiting for new research. The concepts exist. The empirical base
 
 Practitioners can start without one. Override rate tracking can be added to ongoing monitoring templates now. Documenting the automation tier (LOA 2–3 vs. 4–5 vs. 9–10) in the model inventory creates the prerequisite for tier-appropriate control selection. Classifying human-factors incidents using the misuse/disuse/abuse taxonomy assigns them to existing risk category owners rather than leaving them orphaned.
 
+![Two-column vocabulary gap diagram titled 'FORTY YEARS. NO CROSSWALK.' Left column (blue border, HCI / HUMAN FACTORS): four stacked boxes — SKILL ATROPHY, AUTOMATION BIAS, SUPERVISORY CONTROL, SITUATION AWARENESS — labeled 'aviation and industrial control journals'. Right column (grey border, BANKING MODEL RISK MGMT): four stacked boxes — ONGOING MONITORING, EFFECTIVE CHALLENGE, QUALIFIED PERSONNEL, HUMAN OVERSIGHT — labeled 'SR 11-7, SR 26-2'. In the center gap: a large orange double-headed arrow labeled VOCABULARY GAP. A confused stick figure stands in the gap looking both ways, speech bubble: 'ARE THESE THE SAME THING?' Bottom annotation: 'Same problem. Different terms. No translation layer.'](../img/hci-translation-crosswalk.png)
+*The field-boundary problem visualized. Both columns address the same governance question — when and how human oversight of automated systems fails. They have produced separate empirical bodies, separate vocabularies, and no bridge.*
+
 ## The crosswalk that could exist
 
 The mapping below is a working draft. Some cells represent judgment calls that would require empirical calibration to operationalize. The point is not precision — it is to demonstrate that the mapping is tractable, that it could be built, and that its absence reflects institutional inertia rather than conceptual difficulty.

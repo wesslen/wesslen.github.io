@@ -35,6 +35,10 @@ ADK's architecture revolves around six primitives. Everything else is built on t
 
 **Tool** is any function or capability an agent can invoke: custom Python functions, other agents, built-in tools (Google Search, code execution), MCP endpoints, or imported OpenAPI specs.
 
+
+![ADK six core primitives: Runner at center orchestrating Agent, Session, Artifact, Memory services, and Tool](../img/google-adk-a2a-primitives.png)
+*ADK's six primitives form a hub-and-spoke architecture. Runner is the execution center — Agent yields events into it, and it coordinates the three backend services. Everything else in the framework is built on these six.*
+
 ## Five agent types
 
 ADK ships with five agent types that cover the range from fully deterministic to fully LLM-driven.
@@ -65,6 +69,10 @@ The eight-step cycle:
 8. Cycle repeats until the generator is exhausted
 
 The critical implication is about ordering: **state changes are only guaranteed persisted after the carrying event has been yielded and processed by the Runner.** An agent that writes to state and then immediately reads that same key in the next line — before yielding — is reading its own unpercolated change. Events with `partial=True` (streaming tokens) are forwarded to callers but may not be committed to the session store.
+
+
+![ADK cooperative event loop: 8-step cycle with yield point at step 4-5 where state changes are guaranteed committed before the agent resumes](../img/google-adk-a2a-eventloop.png)
+*The yield point (steps 4–5) is the ordering guarantee. Agent yields an event → Runner commits it → Agent resumes. Reading your own state before yielding reads an uncommitted value.*
 
 > [!TIP]
 > **Plain terms:** "Cooperative" means agents voluntarily pause and hand back control at defined points — after yielding each event — rather than running until forcibly interrupted. It's the difference between colleagues who announce when they're done with a shared document versus people who just keep editing without signaling. That voluntary yield is what makes state changes predictable: when an agent resumes, it knows its previous writes have been committed and are safe to read. See [ADK's event loop documentation](https://adk.dev/runtime/event-loop/) for the full model.
@@ -194,6 +202,10 @@ The `input-required` state is one of the more thoughtful design choices in the p
 
 **Messages** within a task carry a `role` ("user" or "agent"), a unique `messageId`, and a list of `Part` objects. In v1.0 each `Part` uses a `oneof` structure: `text` (string), `raw` (base64 binary), `url` (URI reference), or `data` (structured JSON). Parts can also carry `mediaType`, `filename`, and `metadata`.
 
+
+![A2A Task state machine: submitted to working to completed (happy path), with input-required and auth-required branches that loop back, plus failed, rejected, and canceled terminal states](../img/google-adk-a2a-taskstate.png)
+*A2A's task lifecycle handles the awkward middle states most REST APIs pretend don't exist. `input-required` and `auth-required` pause legitimately rather than forcing clients to poll or reconnect.*
+
 ## Three communication modes
 
 | Mode | Mechanism | When to use |
@@ -236,6 +248,10 @@ orchestrator = LlmAgent(
 ```
 
 `RemoteA2aAgent` resolves the card, manages HTTP connections, and converts between A2A messages and ADK events. From the orchestrator's perspective, there's no difference between a local sub-agent and a remote one. That's the abstraction the integration is going for.
+
+
+![ADK + A2A integration bridge: orchestrator treats local ADK agent (wrapped with to_a2a) and remote RemoteA2aAgent identically via same sub_agents interface](../img/google-adk-a2a-bridge.png)
+*`to_a2a()` wraps a local agent into an A2A endpoint. `RemoteA2aAgent` unwraps a remote one into ADK. The orchestrator sees the same `sub_agents` interface either way — the seam is invisible.*
 
 ## A2A security
 

@@ -15,6 +15,9 @@ This series, Bainbridge's Debt, is about that gap and what it costs.
 
 ## What Bainbridge actually argued
 
+![Cycle diagram: automation eliminates routine practice, skill atrophies, humans remain responsible for exceptions, failures recur across all four banking waves](../img/bainbridge-ironies-header.png)
+*The Bainbridge irony cycle applied to banking: each wave of automation — ATMs, credit scoring, RPA, agentic AI — removes the routine practice that builds the exception-handling skill it then depends on.*
+
 The paper is not a critique of automation. Bainbridge frames the argument carefully: these are structural properties of automated systems, predictable consequences rather than correctable design flaws.
 
 Her first irony, skill atrophy, gets repeated most often and understood least accurately. The claim is not that automation degrades skills through general disuse. It is that automation specifically removes the routine practice that maintains the skill needed for exceptional cases, while leaving humans responsible for exactly those exceptional cases. Bainbridge puts it precisely: as control systems advance, the operator's contribution grows more important. The more you automate the ordinary, the more you depend on human judgment for the extraordinary, and the less ready that judgment is when called.
@@ -89,7 +92,7 @@ The third sits upstream of training entirely: automatic systems should fail *obv
 
 The automation designers Bainbridge was writing about assumed that if the automation failed, a human could take over. That assumption was wrong in 1983, when it was about industrial control rooms with readable gauges and trained operators. It is more wrong now, when the automation is a stochastic system whose intermediate states cannot be inspected, operating at machine speed, inside organizations whose model risk frameworks were designed for linear regressions.
 
-"Effective challenge," the human oversight control SR 26-2 requires for models within its scope, was designed for systems that can be examined. SR 26-2 explicitly excludes generative and agentic AI from that framework, [leaving the governance question open](post.html?slug=effective-challenge). Four decades of HCI research have documented what happens when you ask humans to supervise systems they cannot inspect, at speeds they cannot match, in domains where their skills have atrophied from disuse.
+"Effective challenge," the human oversight control SR 26-2 requires for models within its scope, was designed for systems that can be examined. SR 26-2 explicitly excludes generative and agentic AI from that framework, [leaving the governance question open](post.html?slug=effective-challenge). Four decades of HCI research have documented what happens when you ask humans to supervise systems they cannot inspect, at speeds they cannot match, in domains where their skills have atrophied from disuse. The economic structure that explains *why* routine tasks are the first to be automated — and what that sequencing does to the binding constraints that limit institutional performance — is developed in [Automating the Wrong Links](post.html?slug=weak-links-banking).
 
 The paper is six pages. It was published in 1983. That's the debt.[^6]
 

@@ -25,6 +25,9 @@ The three-tier structure describes the institutional market. But a fourth catego
 
 Whether this three-tier structure produces durable competitive advantage depends on what happens to the regulatory framework that could constrain it — which is where Section 1033 enters. (FDX — the Financial Data Exchange — is the CFPB-recognized standards body for open banking data sharing in the U.S.; building compliant APIs is trivial for Tier 1 banks and a real burden for community banks.)
 
+![Four-tier agentic payments market structure diagram. Three stacked boxes: Tier 1 MONEY-CENTER BANKS (blue/green border) — 'PROPRIETARY AAI + DATA FEES AS MOAT, $300M/yr data pricing'; Tier 2 FINTECHS/NEOBANKS (yellow border) — 'AAI-NATIVE INFRA — PAYS TIER 1 FOR DATA'; Tier 3 COMMUNITY BANKS (orange border) — '62% STRUGGLE WITH COMPLIANT APIS'. A separate dashed red box outside the stack: Tier 4 CONSUMER-BUILT AGENTS — 'NO FRAMEWORK / UNREGISTERABLE'.An orange bracket spans Tiers 2, 3, and 4 labeled REGULATORY GAP. A green arrow points at Tier 1 labeled REGULATION IS THE MOAT. ](../img/agentic-commerce-tiers.png)
+*The market structure forming around agentic AI payments. Tier 1 banks are positioned to benefit from regulatory uncertainty as a competitive moat; Tiers 2–4 absorb the gap. Consumer-built agents sit outside every existing framework entirely.*
+
 ## Section 1033: enjoined at the worst possible moment
 
 The CFPB's October 2024 Personal Financial Data Rights rule (the U.S. implementation of open banking rights under Section 1033 of the Dodd-Frank Act) was designed to give consumers and their authorized representatives a legal right to access their own financial data in machine-readable form. For agentic AI, this was the floor: without a clear data access right, an AI agent acting on a consumer's behalf has no guaranteed way to retrieve the account data it needs to function.

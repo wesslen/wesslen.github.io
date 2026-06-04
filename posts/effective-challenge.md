@@ -22,6 +22,9 @@ Which requires being precise about what effective challenge actually is, and wha
 
 ## What effective challenge actually means
 
+![Triangle diagram with three corners labeled Incentives (top), Competence (lower-left), Influence (lower-right), and Effective Challenge in the center; the Incentives leg is drawn in orange dashes with a London Whale annotation, showing what breaks when one leg is missing](../img/effective-challenge-header.png)
+*The effective challenge triad: all three legs must hold — remove any one and structural independence becomes compliance theater, as the London Whale demonstrated when the incentives leg failed despite formal separation being in place.*
+
 SR 11-7 defines effective challenge as "critical analysis by objective, informed parties who can identify model limitations and assumptions and produce appropriate changes." The definition sounds procedural, but the guidance is explicit that it rests on three qualities: **incentives** (separation from development, supported by compensation and culture), **competence** (technical knowledge to evaluate), and **influence** (organizational authority over model deployment, backed by senior management commitment).
 
 That triad is the concept's actual substance. Independent review (the term SR 11-7 replaced) only required structural separation. Effective challenge adds the claim that structural separation without the other two legs produces compliance theater. Validators can report to the CRO, publish findings, and still fail to force any change in a model's use if they lack the authority or standing to do so.

@@ -58,10 +58,8 @@ An outcome success, process failure: the agent reached the right answer through 
 
 Treating these as equivalent, as binary-outcome verifiers do, either credits agents for effort when users get nothing, or penalizes them for factors outside their control. Both are calibration failures.
 
-<figure style="margin: 1.5rem 0;">
-  <img src="../img/process-outcome-2x2.svg" alt="2×2 matrix: process score (high/low) by outcome score (pass/fail), showing four verifier scenarios with examples." style="width:100%;max-width:640px;display:block;"/>
-  <figcaption style="font-size:0.85em;color:var(--text-muted,#888);margin-top:0.5rem;">The four verifier scenarios. The top-right quadrant — high process, failed outcome — is what binary-outcome verifiers systematically misclassify as failure, penalising the agent for the environment's error.</figcaption>
-</figure>
+![2×2 verifier scenario matrix: Y-axis = PROCESS SCORE (high/low), X-axis = OUTCOME SCORE (pass/fail). Top-left (green): HIGH PROCESS / PASS OUTCOME — correct path, goal achieved. Top-right (orange, prominent): HIGH PROCESS / FAIL OUTCOME — correct path, environment blocked (CAPTCHA/timeout) — annotated BINARY VERIFIERS MISCLASSIFY THIS AS FAILURE. Bottom-left (blue): LOW PROCESS / PASS OUTCOME — unexpected shortcut, goal achieved. Bottom-right (red): LOW PROCESS / FAIL OUTCOME — genuine failure. Arrow along outcome axis: BINARY OUTCOME VERIFIERS ONLY SEE THIS AXIS.](../img/process-outcome-2x2.png)
+*The four verifier scenarios. The top-right quadrant — high process, failed outcome — is what binary-outcome verifiers systematically misclassify as failure, penalising the agent for the environment's error.*
 
 For banks deploying GUI agents on internal workflows (loan origination, regulatory reporting, trade reconciliation), this split isn't just a research contribution. "The agent correctly followed the compliance workflow" and "the downstream output was correct per policy" are different audit questions that need separate tracking.[^4] Current evaluation frameworks for enterprise GUI deployments don't appear to make this distinction, based on what's been published.
 

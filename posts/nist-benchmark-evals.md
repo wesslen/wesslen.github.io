@@ -14,6 +14,9 @@ I've been pointing at the psychometrics problem in LLM evaluation since [the met
 > [!NOTE]
 > NIST (National Institute of Standards and Technology) publishes voluntary guidelines that carry no regulatory force — but NIST voluntary standards have a consistent track record of becoming de facto requirements. Its AES encryption standard (2001) is now the global default for symmetric encryption; its Cybersecurity Framework (2014) appears in U.S. banking examination guidance despite never being mandatory law. The AI equivalents are following the same arc: the NIST AI RMF Generative AI Profile (600-1) is already appearing in examination conversations according to practitioner reports. AI 800-2 is a draft today; the pattern suggests it will matter in practice before it is ever required.
 
+![NIST AI 800-2 three-stage evaluation framework: three boxes connected by rightward arrows. Stage 1 DEFINE OBJECTIVES (blue): 'What construct are you measuring? Direct / proxy / predictive? Contamination check' — annotated with a red star 'MOST TEAMS FAIL HERE'. Stage 2 IMPLEMENT AND RUN (grey): 'Cost parity, Harness parity, 6 failure modes'. Stage 3 ANALYZE AND REPORT (green): 'Qualified claims, Uncertainty quantification, Transcript release'. Arrow labels: BENCHMARK SELECTION between Stage 1 and 2, SCORE INTERPRETATION between Stage 2 and 3.](../img/nist-benchmark-framework.png)
+*The NIST AI 800-2 pipeline. Most benchmark evaluation failures happen at Stage 1 — before any eval code is written — because teams haven't defined what they're actually trying to measure.*
+
 ## Stage 1: The construct definition problem
 
 The framework's first stage is defining evaluation objectives. That sounds obvious. It isn't.
@@ -124,7 +127,7 @@ NIST is doing something useful here: distinguishing between what they're comfort
 
 These five concepts form a containment hierarchy — infrastructure at the outermost layer, evaluation metrics at the innermost:
 
-<img src="../img/eval-stack-diagram.svg" alt="Nested containment diagram showing two outer infrastructure rings (raw logs, distributed traces) and four inner evaluation-layer rings (rollout, agent trajectory, evaluation transcript, evaluation results). Abstraction increases and volume decreases moving inward." style="width:100%;height:auto;display:block;margin:1.25rem 0 0.75rem;border-radius:6px;">
+![Nested containment diagram: five concentric rectangles from outermost to innermost — RAW LOGS (grey, machine-generated high volume), DISTRIBUTED TRACES (grey, causally-linked spans), ROLLOUT (blue, single policy execution episode), AGENT TRAJECTORY (blue, state-action sequence + outcomes), EVALUATION TRANSCRIPT (green, human-legible interaction record). Annotation: abstraction increases inward, volume decreases inward.](../img/eval-stack-diagram.png)
 
 For governance purposes, the layers map to different frameworks: SR 26-2 / MRM auditability concerns map most directly to transcripts and action-sequence records (what the model decided and why); operational resilience requirements like Basel and DORA map to logs and traces (what the system did and when); EU AI Act Article 12 record-keeping straddles both.
 

@@ -36,6 +36,9 @@ The problem isn't the absolute cost; it's the price variance across model tiers 
 | Standard Flagship (e.g., Claude Sonnet 4.6) | $3.00 | $15.00 | 37.5× |
 | Premium Reasoning (e.g., GPT-5.2 Pro) | $21.00 | $168.00 | 420× |
 
+![Vertical cost stack diagram showing four model tiers stacked bottom to top by increasing output cost: ULTRA-LOW COST at $0.40/1M output tokens (green, thin bar, batch/automation use case), BUDGET/MINI at $0.60/1M (blue), STANDARD FLAGSHIP at $15/1M (orange, customer-facing agents), and PREMIUM REASONING at $168/1M (red, tallest bar, complex analysis). A double-headed orange arrow on the right spans the full height labeled '420× OUTPUT SPREAD'. A stick figure labeled AI PLATFORM (TREASURY) points at the stack with the question 'WHICH WORKLOAD EARNS WHICH TIER?' Bottom annotation: 'A config setting is a capital allocation decision.'](../img/token-transfer-pricing-tiers.png)
+*420× output spread across model tiers as of mid-2026. The decision of which model handles which workload is a capital allocation decision dressed as a configuration setting.*
+
 In a high-throughput banking environment, the decision of which model handles which workload is a capital allocation decision dressed up as a configuration setting. The spread matters most for workloads where model tier is a genuine choice, not forced by capability constraints — and in banking, there are more of those than most teams realize.
 
 Cloud computing went through this same transition. The initial land-grab phase treated cloud spend as IT overhead until the bill got large enough that finance noticed. FinOps emerged as the discipline for governing cloud unit economics at the team and feature level. Token economics is following the same curve, except faster and with less visibility, because the cost driver is a behavior (how you prompt, what model you select, whether you cache) rather than a provisioned resource you can see in a dashboard.

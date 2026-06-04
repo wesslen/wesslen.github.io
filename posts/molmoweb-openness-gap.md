@@ -25,10 +25,8 @@ State is fully resent every step. There is no session ID, no KV-cache reuse, and
 
 There is a sharp coordinate-space edge the documentation doesn't flag. Training trajectories in HumanTrajs embed actions with absolute pixel coordinates. The PixMoPoints perception data uses 0–100 percent coordinates. Reconciling these requires knowing the screenshot resolution at every training step, which is plausible inside the data loader but not described in the README. At inference, the client defaults silently to Playwright's 1280×720 — a user running at 1920×1080 will shift the entire click distribution without warning.
 
-<figure>
-  <img src="../img/molmoweb-harness-loop.svg" alt="Flowchart of the MolmoWeb ReAct agent loop: assemble prompt from four components, POST to stateless model server, receive Thought and Action, execute via Playwright, capture screenshot, append to rolling history, check for [ANSWER] prefix — exit if yes, repeat if no." style="width:100%;max-width:680px;display:block;margin:1.5rem auto 0.5rem;">
-  <figcaption style="text-align:center;font-size:0.85rem;color:#6b7280;margin-bottom:1rem;">The MolmoWeb ReAct agent loop. State is fully re-encoded every step: no session ID, no KV-cache reuse. The <code>[ANSWER]</code> termination contract is implicit: it surfaces in the demo notebook but is absent from the README.</figcaption>
-</figure>
+![MolmoWeb ReAct agent loop flowchart: ASSEMBLE PROMPT (system + screenshot + history + task) → POST TO MODEL SERVER (stateless, no KV-cache reuse) → RECEIVE THOUGHT + ACTION → EXECUTE VIA PLAYWRIGHT (click coordinates normalized 0–100) → CAPTURE SCREENSHOT → APPEND TO ROLLING HISTORY (full state re-encoded every step) → diamond: STARTS WITH [ANSWER]? — YES exits to RETURN RESULT; NO loops back to top. Red annotation on the decision diamond: 'undocumented in README'.](../img/molmoweb-harness-loop.png)
+*The MolmoWeb ReAct agent loop. State is fully re-encoded every step: no session ID, no KV-cache reuse. The `[ANSWER]` termination contract is implicit — it surfaces in the demo notebook but is absent from the README.*
 
 ## The defaults that don't match the paper
 

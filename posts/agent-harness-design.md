@@ -48,6 +48,10 @@ The [March 2026 follow-up](https://www.anthropic.com/engineering/harness-design-
 
 The lesson: compaction strategy is not a permanent architectural decision. It should track model capability and be revisited as models improve.[^3]
 
+
+![Compaction vs. context reset: compaction preserves continuity but builds context anxiety; context reset provides a clean slate but requires a rich handoff artifact between sessions](../img/agent-harness-design-compaction.png)
+*Compaction and context reset are not equivalent. Compaction keeps continuity but can't fully eliminate context anxiety. Reset provides a clean slate but only works if the handoff artifact is rich enough to orient the incoming agent.*
+
 > [!IMPORTANT]
 > `CLAUDE.md` and equivalent context files are re-injected with each request rather than stored in conversation history — they survive compaction by design. Any instruction that must persist across the entire agent lifecycle belongs in a context file. An initial system prompt will eventually be summarized away; a context file survives compaction by design.
 
@@ -59,11 +63,19 @@ Anthropic's foundational pattern for multi-session agents is a two-agent archite
 
 The March 2026 post evolves this into a three-agent GAN-inspired architecture: a planner that expands a brief into a full product spec, a generator that implements features sprint by sprint, and an evaluator that tests the running application. The adversarial relationship between generator and evaluator addresses a failure mode Anthropic observed directly: when asked to evaluate their own work, agents tend to praise it even when the quality is obviously mediocre. Tuning a standalone evaluator to be skeptical is far more tractable than making a generator critical of itself.
 
+
+![Three-agent GAN-inspired architecture: Planner produces spec, Generator implements sprint by sprint, Evaluator adversarially tests and feeds back failures](../img/agent-harness-design-gan.png)
+*The adversarial relationship is the design. A standalone evaluator tuned to be skeptical is tractable to calibrate. Making a generator critical of its own work is not.*
+
 ## State persistence across sessions
 
 The choice of format for inter-session state matters more than it sounds. Anthropic's November 2025 post documents a deliberate decision to use JSON rather than Markdown for the feature list: "the model is less likely to inappropriately change or overwrite JSON files compared to Markdown files." Structured formats resist accidental agent modification.
 
 The full set of inter-session artifacts in Anthropic's pattern: `claude-progress.txt` (a running log that lets fresh agents orient quickly), `feature_list.json` (structured pass/fail status), git history with descriptive commit messages (navigable, revertable), and `init.sh` (reproducible environment setup for any fresh session). The filesystem functions as a shared message bus: inspectable, replayable, and naturally persistent.
+
+
+![Inter-session filesystem as message bus: Session 1 writes progress log, feature JSON, git history, and init.sh; subsequent sessions read them on startup to orient without rediscovering state](../img/agent-harness-design-filesystem.png)
+*Four artifacts, one shared filesystem, many sessions. JSON for structured state (resists accidental overwrite), git for navigable history, a progress log for quick orientation, init.sh for reproducible environment. Each new agent session reads before it writes.*
 
 ## Error handling and graceful degradation
 

@@ -9,6 +9,9 @@ tags: [adversarial, evals]
 
 ---
 
+![Flow diagram: three deployment gates (Capability, Safety, Robustness) in sequence, each with a pass/fail branch, above a spanning substrate band labeled Judge Calibration with four requirements; all gates passed leads to DEPLOY](../img/deployment-gates-header.png)
+*The three adversarial gates sit on top of a scoring substrate — the gate numbers are only as defensible as the calibration of the judges that generate them.*
+
 > [!IMPORTANT]
 > **Regulatory status (April 2026):** SR 11-7 was formally superseded by [joint Fed/OCC/FDIC guidance SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/sr2602.htm) on April 17, 2026. Generative AI and agentic AI are **explicitly excluded from scope** in SR 26-2 (footnote 3), but what that exclusion means in practice is unsettled. It does not clearly exempt GenAI deployments from all model risk requirements; the guidance is principles-based and primarily scoped to banks above $30B in assets. The deployment gate questions this post raises remain formally unaddressed under the new guidance, which means practitioners will need to document a rationale that doesn't exist in regulation. SR 11-7 is used here as the operative baseline; expect these requirements to continue evolving as regulators catch up to current deployment patterns.
 
@@ -18,7 +21,7 @@ A deployment gate is a documented condition, or set of conditions, that must be 
 
 Here is what a practitioner actually sees — a gate scorecard for a Tier 1 credit-memo drafting agent swapping from GPT-4o to GPT-4o-mini:
 
-![Practitioner gate scorecard: credit-memo drafting agent, Tier 1. Gate 1 passes capability non-regression at −0.7 pp delta. Gate 2 passes StrongREJECT, HarmBench, and LlamaGuard within epsilon. Gate 3 passes three probe families — wire-fraud Crescendo ASR exactly at the 2.0% ceiling, flagged for committee sign-off.](../img/deployment-gates-scorecard.svg)
+![Deployment gate scorecard for credit-memo drafting agent Tier 1 (GPT-4o to GPT-4o-mini). Gate 1 CAPABILITY NON-REGRESSION (green): task accuracy delta -0.7 pp vs baseline — PASS ✓. Gate 2 SAFETY (green): StrongREJECT, HarmBench, LlamaGuard all within epsilon — PASS ✓. Gate 3 ROBUSTNESS (orange): 3 probe families tested, wire-fraud Crescendo ASR 2.0% at ceiling — FLAGGED, committee sign-off required ⚠. Bottom note: Gate 2 = vendor due diligence (model-level); Gate 3 = use-case adversarial surface.](../img/deployment-gates-scorecard.png)
 
 Under SR 11-7, the unit of validation was never "the model" — it was the model use. A bank deploying GPT-4o for credit-memo drafting and GPT-4o for AML transaction memo generation has two distinct deployment gates to clear, one per use case. The gates below are scoped to the deployed use case: the prompt configuration, the tool inventory, the prompt templates, and the specific data access pattern rather than the underlying model weights. Two deployments sharing the same base model but with different prompt configurations can face radically different adversarial surfaces.
 
@@ -39,6 +42,9 @@ The pattern emerging in the field handles this by splitting the gate into three 
 These three conditions test adversarial resilience only — whether the use case resists attack. They say nothing about whether it works. A complete deployment gate for an LLM use case also requires use-case-specific quality metrics: task accuracy, hallucination rate against ground truth, latency under load, and the business KPIs that anchor the use case's value proposition. Those metrics are custom per deployment and are the subject of [Metrics, Metrics, Metrics](post.html?slug=metrics-metrics-metrics). The adversarial layer and the use-case-quality layer are parallel obligations; a deployment that passes all three adversarial gates but hallucinates 40% of its credit-memo citations doesn't belong in production. A future post will cover how to integrate both layers into a unified deployment checklist for LLM use cases.
 
 Neither SR 11-7 nor its April 2026 successor SR 26-2 prescribes a deployment-gate template for LLMs, and SR 26-2 explicitly excludes GenAI and agentic AI from scope. The three-condition pattern below is a synthesis of practitioner workflows that map onto SR 11-7 Section V's three validation pillars: conceptual soundness becomes capability non-regression, ongoing monitoring becomes safety non-regression, and outcomes analysis under adversarial conditions becomes the robustness ceiling. Examiners are increasingly accepting this mapping when the derivations are documented[^1], but it is not codified anywhere you can point to.
+
+![Three adversarial deployment gates pipeline: GATE 1 (blue, CAPABILITY NON-REGRESSION) — benchmark: internal task suite; pass: ≤2% regression vs champion; fail → BLOCKED. Arrow right to GATE 2 (orange, SAFETY NON-REGRESSION) — StrongREJECT / HarmBench / LlamaGuard; pass: ≤ champion + epsilon (1–3% by tier); note: model-level vendor due diligence; fail → BLOCKED. Arrow right to GATE 3 (red, ROBUSTNESS CEILING ASR) — PyRIT / AgentDojo / Crescendo; T1 ≤ 2% / T2 ≤ 5% / T3 ≤ 10%; zero tolerance: tool-hijack; fail → BLOCKED. Arrow right to PRODUCTION (green) — all gates cleared, deploy-eligible. Bottom annotation: Passing all three is necessary but not sufficient.](../img/deployment-gates-pipeline.png)
+*The three-gate pattern. Each gate addresses a distinct failure surface; none substitutes for the others. The adversarial gates cover resilience only — use-case quality metrics are a parallel obligation.*
 
 ## Gate 1 — Capability non-regression
 

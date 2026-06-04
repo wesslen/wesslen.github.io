@@ -1,0 +1,162 @@
+[
+  {
+    "id": "wlb-q01",
+    "post": "weak-links-banking",
+    "module": "ai-economy",
+    "objective": "mechanism",
+    "difficulty": 1,
+    "question": "Jones & Tonetti show that automating all tasks currently performed by software — with infinite productivity — would raise U.S. aggregate output by only approximately 2%. What produces this result?",
+    "options": [
+      "Software constitutes roughly 2% of GDP, and when tasks are complements (weak links), infinite productivity on a subset only raises output proportionally to that subset's share — the remaining tasks still bind.",
+      "Software automation creates large-scale unemployment whose demand destruction offsets the productivity gains, resulting in near-zero net impact on aggregate output.",
+      "Software tasks are already highly automated, so the marginal gain from infinite productivity is minimal regardless of the economy's production structure.",
+      "The 2% figure reflects transition and retraining costs that erode most of the productivity benefit in the short run."
+    ],
+    "correct": 0,
+    "explanation": "This is the weak links result applied directly. With an elasticity of substitution σ = 0.2, tasks are strong complements: making one input infinitely abundant doesn't free you from the constraint imposed by the others. Jones & Tonetti's equation (24) shows the output gain from infinitely automating tasks with GDP share s is approximately (σ/(1−σ)) × s = 0.25 × s at σ = 0.2. Software at 2% of GDP yields a ~0.5% gain, not the 2% naive linear projection would suggest. The remaining 98% of the economy — still organized around human judgment — keeps constraining output."
+  },
+  {
+    "id": "wlb-q02",
+    "post": "weak-links-banking",
+    "module": "ai-economy",
+    "objective": "distinction",
+    "difficulty": 1,
+    "question": "Jones & Tonetti find that interbank funds transfers are 99% automated. The post treats this as evidence of something other than banking productivity success. What does the weak links framework say about it?",
+    "options": [
+      "High automation of a non-binding task is irrelevant to institutional output — the binding constraints (credit judgment, effective challenge, regulatory interpretation) remain with humans and limit what the automation achieves.",
+      "The 99% figure is misleading because regulatory requirements mandate human authorization above certain transaction thresholds, so true automation is much lower for the high-value transfers where productivity gains are largest.",
+      "Interbank transfer automation reduces operational costs but generates no revenue, making it productivity-neutral from the perspective of institutional output and competitive positioning.",
+      "The automation rate is high because transfers are operationally simple, suggesting they contribute negligibly to bank profitability relative to the infrastructure cost of maintaining the automation."
+    ],
+    "correct": 0,
+    "explanation": "The post makes this point precisely: 'The binding constraint is what the institution decides to do with those funds, on what terms, to whom, under what risk parameters.' The weak links logic says you cannot route around a binding constraint by being excellent at everything else. Interbank transfer automation and grain threshing automation appear in the same Jones & Tonetti table at 99% — and neither is the binding constraint in its sector. Automating the transfer faster than you already have produces negligible aggregate output gains. The judgment tasks that limit performance are nowhere near the top of the automation distribution."
+  },
+  {
+    "id": "wlb-q03",
+    "post": "weak-links-banking",
+    "module": "ai-economy",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "The post introduces 'double jeopardy' to describe what happens when banks automate high-volume routine tasks first. What makes this a compound problem rather than a simple efficiency trade-off?",
+    "options": [
+      "The two dynamics are independent but reinforce each other: weak links cap the productivity gain from automating non-binding tasks, while Bainbridge skill atrophy simultaneously erodes human capital in the binding constraints that limit performance.",
+      "The double jeopardy refers to simultaneous operational risk from system failures and reputational risk from automation errors, both amplified when routine tasks are automated without adequate human oversight.",
+      "Automating routine tasks generates short-term efficiency gains that attract investment away from judgment-intensive functions, creating a resource allocation problem that compounds over multiple budget cycles.",
+      "Near-term efficiency gains from automation invite regulatory scrutiny earlier in the deployment cycle, when governance frameworks are least mature, exposing institutions to examination risk precisely when they are most vulnerable."
+    ],
+    "correct": 0,
+    "explanation": "The post states the compound logic directly: 'you automate the easy tasks, get productivity gains smaller than linear projections suggest, and simultaneously erode the human capital in the tasks that are actually limiting your performance.' The two mechanisms are analytically distinct — one comes from production theory (Jones & Tonetti), the other from human factors (Bainbridge) — but they interact: the automation that delivers the (already-bounded) efficiency gain is the same automation that removes the practice substrate for the binding-constraint tasks. Small gain. Accelerating atrophy. Both compound."
+  },
+  {
+    "id": "wlb-q04",
+    "post": "weak-links-banking",
+    "module": "ai-economy",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "A bank's commercial lending team is considering using AI to draft all initial credit memos. Applying the post's argument, what is the most significant institutional risk?",
+    "options": [
+      "Credit memo drafting is part of the practice curriculum that builds judgment for non-standard credit decisions — the binding constraint on lending quality. Automating it accelerates skill atrophy in the judgment tasks that actually limit performance, even as it generates measurable efficiency gains.",
+      "AI-drafted credit memos may contain factual errors or mischaracterize borrower financials in ways that are difficult to detect without independent verification, creating material credit risk from documentation failures.",
+      "Regulators may classify AI-drafted credit memos as model outputs subject to MRM validation requirements, creating a compliance burden that could exceed the efficiency gains from the automation.",
+      "The efficiency gains from automated memo drafting will be captured by borrowers through faster approvals and lower margins rather than by the institution, reducing the return on investment."
+    ],
+    "correct": 0,
+    "explanation": "The post uses credit memo drafting as a specific example of practice-task automation: 'Drafting credit memos teaches you what information is material to a credit decision, because you have to organize it and defend it.' The weak links argument says credit judgment — not credit documentation — is the binding constraint on lending performance. The Bainbridge argument says the documentation work is the curriculum that develops judgment. Automating the documentation is rational for efficiency; the compounding risk is that it removes the path by which junior analysts develop the skills the institution depends on for its hardest credit calls."
+  },
+  {
+    "id": "wlb-q05",
+    "post": "weak-links-banking",
+    "module": "ai-economy",
+    "objective": "misconception",
+    "difficulty": 2,
+    "question": "Many banking AI productivity projections multiply task efficiency improvements by the share of analyst time spent on that task to estimate aggregate gains. What does the weak links framework say about this method?",
+    "options": [
+      "Linear projections overstate gains because they ignore complementarity: efficiency improvements in non-binding tasks don't translate proportionally to institutional output, which remains bounded by the least-productive binding constraints.",
+      "Linear projections are accurate for task-level efficiency but understate aggregate gains because they miss compounding effects when multiple tasks are automated simultaneously in coordinated workflows.",
+      "Linear projections understate gains because they assume a static skill distribution — automation frees analyst time for higher-judgment tasks, raising overall output more than the direct task efficiency improvement suggests.",
+      "Linear projections are the appropriate method for banking AI analysis because banking tasks are more substitutable than in the general economy, with a higher elasticity of substitution than the Jones & Tonetti estimate."
+    ],
+    "correct": 0,
+    "explanation": "Jones & Tonetti's equation (24) makes the problem precise. With σ = 0.2, automating tasks worth s% of the economy produces a gain of approximately 0.25 × s%, not s%. Linear projections implicitly assume σ = 1 (or higher), where every efficiency gain translates directly to output. Below σ = 1, the complementary structure absorbs most of the gain — the remaining tasks still bind. A bank that projects 15% productivity improvement from automating tasks consuming 15% of analyst time is implicitly assuming substitutability the Jones & Tonetti evidence does not support."
+  },
+  {
+    "id": "wlb-q06",
+    "post": "weak-links-banking",
+    "module": "ai-economy",
+    "objective": "scope",
+    "difficulty": 2,
+    "question": "The post distinguishes between automating the 'binding-constraint tasks' versus automating the 'practice tasks.' Which of the following correctly identifies banking examples of each?",
+    "options": [
+      "Practice tasks (non-binding): AML alert triage, credit memo drafting, regulatory report generation. Binding constraints: credit underwriting judgment for non-standard borrowers, effective challenge of model assumptions, regulatory interpretation in ambiguous situations.",
+      "Practice tasks (non-binding): credit underwriting, effective challenge, relationship risk assessment. Binding constraints: AML alert triage, document review, report generation — because these create the throughput bottlenecks that limit analyst capacity.",
+      "Both categories contain the same tasks; the distinction is temporal — the same task is a binding constraint when volume is high and a practice task when volume is low, depending on staffing levels relative to demand.",
+      "The distinction is not applicable to banking because banking tasks are too interdependent to classify separately — AML triage cannot be meaningfully separated from the judgment it develops for credit risk assessment."
+    ],
+    "correct": 0,
+    "explanation": "The post is explicit about which banking tasks are which. The binding constraints are 'credit underwriting judgment for non-standard borrowers,' 'effective challenge of model assumptions when the data generating process has shifted,' 'regulatory interpretation in genuinely ambiguous situations,' and 'relationship-based risk assessment.' The practice tasks being automated are the high-volume routine ones: 'AML alert triage, loan document review, regulatory report generation, internal audit workpapers, credit memo drafting.' The crucial point is that the practice tasks are also the curriculum — working through 400 AML alerts teaches you which patterns require judgment, and that learning is what gets automated away."
+  },
+  {
+    "id": "wlb-q07",
+    "post": "weak-links-banking",
+    "module": "ai-economy",
+    "objective": "argument",
+    "difficulty": 2,
+    "question": "The post argues that 'the routine is the curriculum.' What is the argument, and what does it imply for the Bainbridge skill atrophy dynamic?",
+    "options": [
+      "Routine task practice is the mechanism by which judgment accumulates for exceptional cases — automating it removes not just the task but the developmental path to the binding-constraint skills, accelerating atrophy in exactly the tasks that limit performance.",
+      "The curriculum argument implies that banks should use AI only in training contexts, where analysts can observe the AI's reasoning process and extract educational value, before deploying it in live production workflows.",
+      "Routine tasks and exceptional judgment develop through separate cognitive pathways, so automating routine tasks does not impair exceptional judgment — the 'curriculum' framing conflates two distinct skill development processes.",
+      "The argument implies that junior analysts should rotate through automated workflows before promotion to judgment-intensive roles, so they understand the outputs they will be reviewing and approving in senior positions."
+    ],
+    "correct": 0,
+    "explanation": "The post uses this framing to connect the two bodies of literature: 'Working through four hundred AML alerts in a shift teaches you which patterns resolve easily and which ones require judgment. Drafting credit memos teaches you what information is material to a credit decision, because you have to organize it and defend it.' This is Bainbridge's training paradox applied at the curriculum level: the routine practice is not incidental to skill development — it IS the development process. The RPA wave already demonstrated this: 'analysts who inherited the hard twenty percent without the daily repetitions that built pattern recognition for it.' Automating the routine removes the ladder by which judgment climbs."
+  },
+  {
+    "id": "wlb-q08",
+    "post": "weak-links-banking",
+    "module": "ai-economy",
+    "objective": "boundary",
+    "difficulty": 2,
+    "question": "The post says the sequencing question is one 'current governance frameworks do not require.' What specifically is missing from SR 26-2 that would be needed to address it?",
+    "options": [
+      "SR 26-2 does not require identification of which tasks are binding constraints before deploying automation, assessment of human capital implications of automating practice tasks, or sequencing governance — and its footnote 3 explicitly excludes GenAI and agentic AI from scope entirely.",
+      "SR 26-2 lacks quantitative automation thresholds by task type, leaving institutions without regulatory guidance on when automation of judgment-adjacent tasks crosses into unsafe skill atrophy territory.",
+      "SR 26-2 does not require MRM coverage of the AI systems used to assist model validation, creating a gap where the tools used by validators are not subject to the standards they help apply.",
+      "SR 26-2 was finalized before the Jones & Tonetti framework was published, and guidance has not been updated to incorporate weak links implications for banking AI governance."
+    ],
+    "correct": 0,
+    "explanation": "The IMPORTANT callout in the post is direct: SR 26-2 'does not ask which tasks a bank is automating, in what sequence, or what the downstream effects on judgment-intensive work will be. The sequencing question — which tasks to automate first, and what the human capital implications are — is currently outside the regulatory perimeter.' The GenAI exclusion in footnote 3 compounds this: even the general MRM framework requirements don't apply to the AI systems most likely to create the sequencing dynamic. The current regulatory framework creates strong incentives for efficiency-first automation without requiring any assessment of the human capital consequences."
+  },
+  {
+    "id": "wlb-q09",
+    "post": "weak-links-banking",
+    "module": "ai-economy",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The post layers three compounding arguments: weak links (Jones & Tonetti), skill atrophy (Bainbridge), and knowledge collapse (Acemoglu et al.). What distinguishes knowledge collapse from the other two, and why does its addition make the problem structurally harder to govern?",
+    "options": [
+      "Bainbridge describes individual skill loss through disuse; weak links describes output bounds from production structure; knowledge collapse is a community-level externality where individually rational AI use depletes a shared knowledge stock that no individual observes or can reverse — making the damage diffuse, slow-moving, and invisible until it has already occurred.",
+      "Knowledge collapse is the only one of the three with formal empirical validation from banking institutions, making it the most actionable governance target while Bainbridge and weak links remain theoretical without banking-specific evidence.",
+      "Knowledge collapse applies exclusively to AI recommendation systems, while Bainbridge applies to all automation and weak links is a general production function property — so each requires a different regulatory instrument to address.",
+      "The addition of knowledge collapse makes the problem harder because it requires international coordination: unlike Bainbridge and weak links, which can be addressed by individual institutions, knowledge externalities are industry-wide and cannot be resolved without collective action across all banks simultaneously."
+    ],
+    "correct": 0,
+    "explanation": "The post distinguishes the three mechanisms precisely. Bainbridge is individual and observable: a specific operator loses the skills they stop practicing. Weak links is structural: the production function bounds aggregate gains from partial automation. Knowledge collapse is the hardest to govern because it operates at the community level through an externality: 'each analyst who defers to the AI recommendation rather than working through the problem is making a rational individual choice. The aggregate of those choices is a depreciation in the institutional knowledge stock that no single person observes or can reverse.' You cannot see knowledge collapse happening at the individual level — which is exactly why governance frameworks built around individual model validation and individual HITL checkpoints cannot fully address it."
+  },
+  {
+    "id": "wlb-q10",
+    "post": "weak-links-banking",
+    "module": "ai-economy",
+    "objective": "argument",
+    "difficulty": 3,
+    "question": "The post ends by asking: 'in which order are you automating your weak links, and what does that do to the ones that remain?' What is the strongest version of the case that this sequencing question matters more than the automation decision itself?",
+    "options": [
+      "Whether to automate is largely determined by cost efficiency; the sequencing question determines whether the automation preserves or destroys the human capital in the binding constraints — and that human capital is what the institution depends on when the remaining weak links are tested under stress.",
+      "The sequencing question matters primarily for regulatory compliance: automating binding-constraint tasks first exposes institutions to MRM requirements that automation of non-binding tasks avoids, making sequencing a legal strategy as much as an operational one.",
+      "The sequencing question is only relevant for large institutions with complex hierarchical structures; smaller banks with flatter organizational structures are not exposed to the skill atrophy dynamic because proximity between senior and junior staff compensates for practice-task automation.",
+      "The sequencing question matters because different automation sequences generate different short-term cost savings profiles, allowing institutions to optimize the timing of investments and returns across multi-year technology transformation programs."
+    ],
+    "correct": 0,
+    "explanation": "The post's final argument is about measurement asymmetry: 'We know how to measure efficiency gains from automating the easy tasks. We do not have the measurement infrastructure to track what that does to the human capital in the hard ones.' The automation decision — whether to deploy — is increasingly determined by competitive and cost pressures that leave little room for institutional discretion. The sequencing decision — which tasks first — is where genuine governance choices remain. And the sequencing choice determines whether the institution retains, or progressively hollows out, the judgment capabilities it depends on precisely in the situations where automation fails, judgment is disputed, or stress reveals what the routine was concealing."
+  }
+]

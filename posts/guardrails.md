@@ -19,7 +19,7 @@ The definitional confusion runs deep enough to surface in formal research. FinRe
 That conflation isn't merely imprecise; it's operationally consequential. If your security team thinks guardrails are tests and your model risk team thinks they're monitoring metrics, you end up with systems that look governed and aren't.
 
 > [!QUOTE]
-> The failure mode isn't that the model breaks the rules. It's that the rules are written to prove compliance, not to produce safety — and you end up with systems that look governed and aren't.
+> The failure mode isn't that the model breaks the rules. It's that the rules are written to prove compliance, not to produce safety. And you end up with systems that look governed and aren't.
 
 So what is a guardrail, actually — and what does it mean to design one for an autonomous agent operating inside a bank?
 
@@ -86,6 +86,9 @@ The cost of that layering is latency and money:
 | Reasoning-based (strong LLM) | 1–3s | High | Very high |
 
 For customer-facing applications with latency budgets under 500ms, using a strong reasoning model as a real-time monitor generally isn't viable.[^5] The practical solution is a cascade: a fast internal probe catches clear violations; a more expensive classifier activates only when the fast probe flags something ambiguous. That design is itself an orchestration problem — the same kind of [harness architecture challenge I've written about](post.html?slug=agent-harness-design), just applied to safety rather than task execution.
+
+![Guardrail stack vs. bypass attack surfaces: a horizontal flow from USER INPUT → INPUT GUARDRAIL (blue) → MODEL (grey) → OUTPUT GUARDRAIL (blue) → USER/DOWNSTREAM SYSTEM. Three orange bypass arrows evade the stack — MEMORY POISONING (persists across sessions, enters before input guardrail), A2A/XPIA (cross-agent injection, strikes directly into the model), and CASCADING FAILURE (machine-speed propagation, bypasses output guardrail entirely). Bottom annotation: 'BEHAVIORAL CONTROLS — NO SUPERVISORY GUIDANCE EXISTS.'](../img/guardrails-stack.png)
+*The three frontier attack surfaces each exploit a different layer of the guardrail stack. These three extend beyond the standard injection surface — and none has a supervisory guidance baseline.*
 
 ## What we don't know yet
 

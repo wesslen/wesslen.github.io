@@ -30,6 +30,9 @@ Consumers want a fixed basket — 8 computers for every 3 apples. The model find
 > [!TIP]
 > **Production possibilities frontier (PPF):** A PPF traces every combination of two goods an economy can produce given its resources and technology. Moving along the frontier means reallocating workers between sectors; expanding it means a productivity gain. The demand constraint — 8 computers per 3 apples — picks a single point on that frontier. When AI raises skilled productivity, the frontier expands outward, and the question becomes: how should the economy reorganize labor to reach the new optimal point?
 
+![Production Possibilities Frontier: baseline curve (blue) with point A where 40 unskilled workers are employed; advanced AI curve (orange) pushed outward with point B where unskilled employment drops to zero — same demand ratio, larger frontier, different workforce](../img/ai-econ-model-header.png)
+*The PPF shifts outward when AI quadruples skilled productivity — but the optimal point on the new frontier requires zero unskilled workers, because the supervision time they consume is now worth more in direct production.*
+
 In the baseline, the solution puts all 40 unskilled workers on apples, 10 skilled workers supervising them, 30 skilled workers also on apples, and 60 skilled workers on computers — yielding 720 apples and 1,920 computers.
 
 | | Baseline | Advanced AI (4×) | Net impact |

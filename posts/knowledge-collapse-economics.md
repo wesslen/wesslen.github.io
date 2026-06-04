@@ -15,6 +15,9 @@ The paper isn't primarily about Stack Overflow. It's a formal model of what happ
 > [!QUOTE]
 > What I think I know: the right answer is not to keep purchasing the most accurate model available.
 
+![Circular feedback loop diagram showing the knowledge collapse externality: four boxes connected by clockwise arrows — AI GIVES PRECISE RECOMMENDATIONS (blue, top) → INDIVIDUALS STOP LEARNING (orange, right, stick figure asking 'WHY BOTHER?') → COMMUNITY KNOWLEDGE STOCK FALLS (red, bottom) → AI MUST SUBSTITUTE MORE (orange, left) → back to top. Center label: KNOWLEDGE COLLAPSE. A dashed green arrow from outside the loop points inward labeled 'GARBLING POLICY: CAP PRECISION AT τ*' — the intervention that breaks the cycle. Bottom annotation: 'Each individual acts rationally. The community pays the external cost.' (Acemoglu, Kong & Ozdaglar 2026).](../img/knowledge-collapse-cycle.png)
+*The self-reinforcing mechanism. More precise AI crowds out individual learning effort; reduced learning erodes the community knowledge stock; a weaker knowledge stock increases dependence on AI. The garbling policy (capping precision at τ*) is the only intervention that breaks the loop.*
+
 ## Learning as a joint production problem
 
 The model's key insight is that human learning effort produces two things simultaneously: a private signal about your specific problem, and a thin contribution to the community's general knowledge stock. These share the same production function; you can't acquire one without the other. Economists call this economies of scope in learning.
@@ -36,10 +39,8 @@ The paper's most pointed result is that more accurate AI does not reliably produ
 
 The authors also identify a complete-collapse threshold $τ_A^c$. If AI accuracy exceeds this level, the high-knowledge steady state disappears entirely. Starting from a world where deep institutional knowledge is widespread, a sufficiently precise AI can make that world unreachable as a future state, regardless of where you begin. Initial conditions stop mattering.
 
-<figure style="margin:2rem 0 1.5rem;">
-  <img src="../img/knowledge-collapse-welfare-curve.svg" alt="Line chart showing social welfare rising with AI precision up to an interior optimum τ*, then falling below baseline past the collapse threshold $τ_A^c$. Three zones: welfare-improving, past optimum, and collapse. A callout at the peak marks it as the first-best policy cap." style="width:100%;max-width:640px;display:block;"/>
-  <figcaption style="font-size:0.8rem;color:var(--muted,#8b949e);margin-top:0.5rem;">Welfare as a function of AI precision. More accurate AI raises welfare up to τ*, then erodes it. Past $τ_A^c$, the high-knowledge steady state ceases to exist.</figcaption>
-</figure>
+![Welfare curve diagram: X-axis AI PRECISION, Y-axis SOCIAL WELFARE. A hand-drawn curve rises from left to a peak at tau-star (FIRST-BEST POLICY CAP, vertical dashed line), then falls back down past a horizontal dashed BASELINE WELFARE line. A second vertical dashed red line marks tau-A-c (HIGH-KNOWLEDGE STEADY STATE DISAPPEARS). Three zones labeled along the curve: WELFARE-IMPROVING (green, left of tau-star), PAST OPTIMUM (orange, between tau-star and tau-A-c), COLLAPSE (red, right of tau-A-c where curve falls below baseline).](../img/knowledge-collapse-welfare-curve.png)
+*Welfare as a function of AI precision. More accurate AI raises welfare up to τ*, then erodes it. Past τ_A^c, the high-knowledge steady state ceases to exist.*
 
 One clarification: this is not a claim that AI makes individuals less capable. The model holds individual ability constant throughout. The collapse happens at the community level, through the externality on shared knowledge, which means the damage is diffuse and slow-moving, largely invisible until it has already happened.
 
@@ -51,10 +52,8 @@ The paper establishes this as the first-best policy outcome. A governance commit
 
 The paper also prescribes a specific transition sequence if an organization has already crossed the collapse threshold: first suppress AI recommendations entirely to let the knowledge stock rebuild, then restore precision capped at τ*. The optimal path requires the inferior model for two reasons: the right steady-state design when below the collapse threshold, and the recovery mechanism when the organization has already crossed it.[^3]
 
-<figure style="margin:2rem 0 1.5rem;">
-  <img src="../img/knowledge-collapse-garbling-policy.svg" alt="Two-phase timeline. Phase 1 (suppression): AI precision held at zero while general knowledge stock rises. Phase 2 (steady state): AI precision restored and capped permanently at τ*, knowledge stock holds." style="width:100%;max-width:640px;display:block;"/>
-  <figcaption style="font-size:0.8rem;color:var(--muted,#8b949e);margin-top:0.5rem;">The optimal two-phase policy. Suppress AI precision entirely to rebuild the knowledge stock (Phase 1), then restore it permanently capped at τ* (Phase 2). Neither phase uses the most accurate available model.</figcaption>
-</figure>
+![Two-phase garbling policy timeline. Left phase (PHASE 1: SUPPRESSION, blue): AI PRECISION held at zero; KNOWLEDGE STOCK shows a rising curve labeled REBUILDS. Note: organization has crossed collapse threshold. Right phase (PHASE 2: STEADY STATE, green): AI PRECISION flat line labeled CAPPED AT tau-star PERMANENTLY; KNOWLEDGE STOCK flat stable line labeled HOLDS. Bottom annotation: ACCURACY BEYOND tau-star TRADES LONG-RUN KNOWLEDGE FOR SHORT-RUN QUALITY. Neither phase uses the most accurate model.](../img/knowledge-collapse-garbling-policy.png)
+*The optimal two-phase policy. Suppress AI precision entirely to rebuild the knowledge stock (Phase 1), then restore it permanently capped at τ* (Phase 2). Neither phase uses the most accurate available model.*
 
 ## The banking translation
 
@@ -69,7 +68,7 @@ Agentic AI that drafts model documentation, flags statistical tests, and writes 
 
 [Effective challenge](post.html?slug=effective-challenge), the third pillar of model governance, requires that reviewers have the competence to mount it. Competence is not static. It compounds when practitioners learn, and it depreciates when the learning incentive disappears.
 
-What the effective challenge framework demands of the organization is precisely the capacity that agentic AI, at high enough precision, systematically undermines.
+What the effective challenge framework demands of the organization is precisely the capacity that agentic AI, at high enough precision, systematically undermines. The economic argument for *which* tasks get automated first — and why that sequencing compounds the knowledge externality by removing the practice substrate for exactly the judgment tasks AI cannot yet replace — is developed in [Automating the Wrong Links](post.html?slug=weak-links-banking).
 
 SR 26-2 (which superseded SR 11-7 on April 17, 2026) explicitly excludes GenAI and agentic AI from its scope. The formal MRM framework does not speak to the systems creating the knowledge externality described here.
 

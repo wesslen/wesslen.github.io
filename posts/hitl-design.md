@@ -13,6 +13,9 @@ The [previous post in this series](post.html?slug=hitl-vocabulary) established t
 
 ## The Three Timing Regimes of Human Oversight
 
+![Two-row timeline comparison: top row shows full oversight with Design-Time, Deploy-Time, and Runtime stages connected by blue arrows; bottom row shows runtime-only with the Deploy-Time stage replaced by orange dashes labeled Skipped, and Runtime marked with a question mark labeled Works Under Load? with a Knight Capital annotation](../img/hitl-design-timing.png)
+*Skipping deploy-time governance doesn't eliminate the question of whether runtime mechanisms work under load — it just ensures nobody asked it before the system went live.*
+
 Human oversight happens at three distinct points in an AI system's lifecycle, each involving different humans, different controls, and different regulatory expectations. Conflating them is how governance frameworks pass an audit while covering only one of three actual risk surfaces.
 
 **Design-time HITL** is the labeling and preference-rating population behind RLHF and active learning, the humans whose judgments shape model behavior across all future deployments. That oversight is baked into the model before it touches a customer; it is not a substitute for an operator-level checkpoint at inference time.
@@ -39,6 +42,9 @@ It also breaks on action classes where individual decisions hit consumers and be
 The emerging supervisory template requires both regimes calibrated together. Calibration depends on the autonomy of the system and the irreversibility of its outputs; consumer-facing actions raise the bar further. One party designs the runtime checkpoint; another operates it. The runtime-only argument, like the deploy-time-only argument before it, was asking the wrong question.
 
 ## A Worked Case: Knight Capital's HITL Failure
+
+![Three-row diagram mapping the Knight Capital failure to the effective challenge triad: Competence row asks 'Did anyone test the alert pipeline at production volume?', Influence row asks 'Who could stop trading, and on what evidence?', Incentives row asks 'Was the uncomfortable feasibility question rewarded or suppressed?'](../img/hitl-design-knight.png)
+*Knight Capital had runtime monitoring in form; what it lacked were answers to three deploy-time questions that no runtime mechanism can answer after the fact.*
 
 Knight Capital appears in [the A2A case studies post](post.html?slug=a2a-case-studies) for what it reveals about kill switches and dead code as attack surfaces; that's a different lesson from the same event. The HITL failure deserves separate treatment here.
 
