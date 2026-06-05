@@ -158,5 +158,23 @@
     ],
     "correct": 0,
     "explanation": "The post identifies the pattern: 'Cloud computing went through this same transition. The initial land-grab phase treated cloud spend as IT overhead until the bill got large enough that finance noticed. FinOps emerged as the discipline for governing cloud unit economics at the team and feature level. Token economics is following the same curve, except faster and with less visibility, because the cost driver is a behavior (how you prompt, what model you select, whether you cache) rather than a provisioned resource you can see in a dashboard.' The prediction: the organizations that build token governance infrastructure before the bill gets large enough to force it will avoid the reactive cycle. The 420× spread makes the stakes higher and the curve steeper than cloud FinOps was."
+  },
+  {
+    "id": "ttp-visual-q01",
+    "post": "token-transfer-pricing",
+    "module": "ai-economy",
+    "objective": "transfer",
+    "difficulty": 2,
+    "image": "../img/token-transfer-pricing-tiers.png",
+    "imageAlt": "Vertical cost stack: ULTRA-LOW COST $0.40/1M output tokens (green), BUDGET/MINI $0.60/1M (blue), STANDARD FLAGSHIP $15/1M (orange), PREMIUM REASONING $168/1M (red). Orange double-headed arrow: 420x OUTPUT SPREAD. AI PLATFORM (TREASURY) stick figure asking WHICH WORKLOAD EARNS WHICH TIER? Bottom: A config setting is a capital allocation decision.",
+    "question": "The diagram annotates a 420x spread between the cheapest and most expensive tiers. What governance problem does the stick figure's question — 'Which workload earns which tier?' — expose?",
+    "options": [
+      "The question exposes a procurement problem — without clear tier assignment rules, different business lines will independently negotiate model contracts at different price points, eliminating the platform's ability to achieve volume discounts.",
+      "The question exposes a capital allocation decision disguised as a configuration choice — deploying a $168/1M model vs. a $0.40/1M model for the same workload is a financial decision, but it is made by whoever sets the model parameter, not by a capital committee.",
+      "The question exposes a model risk classification gap — the four tiers require different validation rigor, so without workload-to-tier assignment rules the MRM function cannot determine which models require full validation.",
+      "The question exposes a performance management problem — teams assigned premium reasoning models will show higher productivity metrics than teams on budget models, creating unfair comparisons across business units."
+    ],
+    "correct": 1,
+    "explanation": "The post's FTP analogy makes the governance failure explicit: in traditional fund transfer pricing, the decision to allocate capital at a given cost is made deliberately, with visibility into the cost. A developer choosing between `gpt-4o-mini` and `o1-pro` for a use case is making a decision with the same cost implications — potentially 420x — but that decision is typically made in a config file or a code comment, invisible to finance and risk committees. The bottom annotation 'A config setting is a capital allocation decision' is the post's thesis. The treasury question ('which workload earns which tier?') is the governance mechanism that doesn't yet exist: a framework that makes model tier assignment a deliberate, reviewed decision rather than an incidental engineering choice."
   }
 ]

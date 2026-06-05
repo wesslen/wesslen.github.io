@@ -158,5 +158,23 @@
     ],
     "correct": 1,
     "explanation": "The core agent loop — call LLM, execute tools, feed results back — takes perhaps a weekend to implement and is roughly the same across frameworks. What Claude Code's 500K lines represent is years of production failures: each one adding another compaction layer, another asymmetry in persistence guarantees, another failure mode turned into a handled edge case. Teams building agents without this investment will re-discover each failure mode in production. The estimate for 'building an agent' should include 'building the loop plus everything the harness does' — a categorically different scope than the core loop alone."
+  },
+  {
+    "id": "cch-visual-q01",
+    "post": "claude-code-harness",
+    "module": "agentic-engineering",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "image": "../img/claude-code-harness-denial.png",
+    "imageAlt": "Denial as tool output: normal permission walls halt execution; Claude Code wraps the denial as a tool result so the model reasons about it and tries an alternative approach",
+    "question": "The diagram contrasts a normal permission wall (execution halts) with Claude Code's behavior (denial wrapped as tool result). What capability does the tool-result wrapping enable that a hard halt does not?",
+    "options": [
+      "It enables the model to retry the same operation with different credentials — wrapping the denial as a tool result stores the error in the session so subsequent attempts can authenticate correctly.",
+      "It enables the model to reason about the denial and select an alternative path — the refusal becomes part of the information the model uses to solve the task rather than a terminal stop.",
+      "It enables human-in-the-loop escalation — wrapping the denial as a tool result triggers a notification to the operator, who can grant permissions without interrupting the agent's execution flow.",
+      "It enables audit logging of every denied operation — tool results are automatically written to the session log, which hard halts are not, creating a complete record for compliance review."
+    ],
+    "correct": 1,
+    "explanation": "The architectural difference is that a hard permission wall treats 'no access' as an exception that halts the program. Claude Code's tool-result wrapping treats it as information: the model receives 'I could not read /etc/passwd' the same way it receives any other tool output and can decide what to do next — try a different file, ask the user, or change approach. This is what the post calls agentic recovery: the model can reason across failure states rather than stopping at the first obstacle. The implication for harness design is that permission walls become part of the task-solving loop rather than escapes from it."
   }
 ]

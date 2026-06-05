@@ -158,5 +158,23 @@
     ],
     "correct": 1,
     "explanation": "The post makes this explicit: 'Examiners are increasingly accepting this mapping when the derivations are documented, but it is not codified anywhere you can point to.' The three-gate deployment pattern (capability non-regression → safety non-regression → robustness ceiling) maps directly onto SR 11-7's three validation pillars. What changes is the content: conceptual soundness now asks about attack surface and trust boundary soundness, not just model methodology; outcomes analysis requires adversarial performance evidence, not just backtesting. The structural logic of MRM validation carries over; the substance has to adapt to the new failure modes LLMs introduce."
+  },
+  {
+    "id": "adv-wf-visual-q01",
+    "post": "adversarial-workflow",
+    "module": "adversarial-testing",
+    "objective": "distinction",
+    "difficulty": 2,
+    "image": "../img/adversarial-workflow-header.png",
+    "imageAlt": "Five-phase pipeline: Scope, Attack Execution, Triage, Reporting, Retest. Orange loop-back arrow from Retest to Scope labeled Not a Certification. Independent tester figure above the pipeline, developer blocked by orange barrier on the left.",
+    "question": "The diagram labels the loop-back arrow from Retest to Scope 'Not a Certification.' What does this label communicate about what a completed adversarial testing cycle proves?",
+    "options": [
+      "It signals that the engagement is still in progress — the loop-back indicates the program has not yet produced a final report, and certification requires completing all five phases without looping.",
+      "It signals that passing all five phases with no findings is impossible — the loop always fires because retest always finds new issues, so the program runs indefinitely.",
+      "It signals that completing the cycle proves the tested attacks failed, not that untested attacks will fail — the scope boundary defines what was checked, not what is safe.",
+      "It signals that independent testers lack the authority to issue safety certifications — only a regulatory body can convert adversarial test results into a compliance attestation."
+    ],
+    "correct": 2,
+    "explanation": "The 'Not a Certification' label is a scope annotation: Retest confirms that the specific attacks in the Scope phase no longer succeed after fixes. It says nothing about attacks outside that scope. The loop-back from Retest to Scope acknowledges this — you can re-scope to cover more ground, but you will never exhaust the attack surface. This is the same point the adversarial-incompleteness post makes formally: a finite test set produces a finite guarantee. The developer-blocked barrier on the left reinforces the independence requirement: the loop's integrity depends on the tester not being the person whose fixes are being validated."
   }
 ]

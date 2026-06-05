@@ -85,6 +85,10 @@ NIST is doing something useful here: distinguishing between what they're comfort
 | Reporting costs alongside performance metrics | Economic analysis — basic since cost-benefit frameworks were formalized |
 | Evaluation awareness detection | Experimental blinding in medicine and psychology — standard practice since Randomized Control Trials (RCTs) |
 
+These five concepts form a containment hierarchy — infrastructure at the outermost layer, evaluation metrics at the innermost:
+
+![Nested containment diagram: five concentric rectangles from outermost to innermost — RAW LOGS (grey, machine-generated high volume), DISTRIBUTED TRACES (grey, causally-linked spans), ROLLOUT (blue, single policy execution episode), AGENT TRAJECTORY (blue, state-action sequence + outcomes), EVALUATION TRANSCRIPT (green, human-legible interaction record). Annotation: abstraction increases inward, volume decreases inward.](../img/eval-stack-diagram.png)
+
 <details style="margin:2rem 0;border:1px solid var(--accent2);border-radius:6px;background:var(--accent2-dim);">
 <summary style="cursor:pointer;padding:0.8rem 1.1rem;font-weight:600;color:var(--accent2);user-select:none;list-style:none;display:flex;align-items:center;gap:0.5rem;"><span>▶</span> Terminology: transcript vs. trajectory vs. rollout vs. log vs. trace</summary>
 <div style="padding:0.25rem 1.25rem 1.25rem;border-top:1px solid var(--accent2);margin-top:0;">
@@ -124,10 +128,6 @@ NIST is doing something useful here: distinguishing between what they're comfort
 
 </div>
 </details>
-
-These five concepts form a containment hierarchy — infrastructure at the outermost layer, evaluation metrics at the innermost:
-
-![Nested containment diagram: five concentric rectangles from outermost to innermost — RAW LOGS (grey, machine-generated high volume), DISTRIBUTED TRACES (grey, causally-linked spans), ROLLOUT (blue, single policy execution episode), AGENT TRAJECTORY (blue, state-action sequence + outcomes), EVALUATION TRANSCRIPT (green, human-legible interaction record). Annotation: abstraction increases inward, volume decreases inward.](../img/eval-stack-diagram.png)
 
 For governance purposes, the layers map to different frameworks: SR 26-2 / MRM auditability concerns map most directly to transcripts and action-sequence records (what the model decided and why); operational resilience requirements like Basel and DORA map to logs and traces (what the system did and when); EU AI Act Article 12 record-keeping straddles both.
 

@@ -158,5 +158,41 @@
     ],
     "correct": 1,
     "explanation": "The post specifies this: 'I'd want to see every material AI use case mapped to its Sheridan-Verplank level, documented alongside its model risk tier, so that the governance expectation is calibrated to what the system actually requires. And a systematic review of override rates — not to maximize them, but to treat a persistently low override rate as a Bainbridge skill-atrophy signal requiring investigation rather than an efficiency metric to celebrate.' The level mapping creates the prerequisite for level-appropriate controls; the override-rate monitoring creates the ongoing signal that level-specific governance is actually functioning. Neither exists in current standard MRM practice."
+  },
+  {
+    "id": "abb-visual-q01",
+    "post": "automation-bias-banking",
+    "module": "bainbridge-debt",
+    "objective": "distinction",
+    "difficulty": 2,
+    "image": "../img/automation-bias-banking-header.png",
+    "imageAlt": "Three-row diagnostic matrix: MISUSE (orange) shows overreliance producing commission errors — credit officer approves loan despite contradicting file; DISUSE (blue) shows underutilization producing omission errors — AML analyst in rote-rejection mode on 96%-false-positive queue; ABUSE (red) shows misapplication producing structural mismatch — GenAI deployed without level-appropriate governance. Bottom annotation: SR 26-2 applies one supervisory expectation to all three.",
+    "question": "The matrix shows three rows with different failure modes and different error types. What does the bottom annotation — 'SR 26-2 applies one supervisory expectation to all three' — imply about the adequacy of a single governance standard?",
+    "options": [
+      "It implies the supervisory standard is appropriately broad — a single expectation is more robust than three separate frameworks because it prevents institutions from gaming which category applies.",
+      "It implies the standard is well-calibrated — SR 26-2's principles-based approach is flexible enough to address misuse, disuse, and abuse through the same effective challenge and qualified personnel requirements.",
+      "It implies a governance gap: misuse, disuse, and abuse produce different error signatures and require different interventions, but the supervisory framework doesn't distinguish between them.",
+      "It implies regulators intentionally left the three rows unaddressed — GenAI is excluded from SR 26-2 scope, so the annotation is a reminder that no existing guidance covers these failure modes."
+    ],
+    "correct": 2,
+    "explanation": "The matrix's diagnostic value is precisely that the three rows are not interchangeable. Misuse (commission errors from overreliance) requires override-rate monitoring and independence controls. Disuse (omission errors from alert fatigue) requires workload calibration and queue design. Abuse (structural mismatch from deploying the wrong tool) requires governance at deployment, not runtime. SR 26-2's single 'qualified personnel' and 'effective challenge' standard was written for traditional quantitative models — it doesn't differentiate between a credit officer over-trusting a score and an institution deploying GenAI at the wrong level of automation. The post's argument is that each row needs a different diagnostic, not a uniform compliance checkbox."
+  },
+  {
+    "id": "abb-visual-q02",
+    "post": "automation-bias-banking",
+    "module": "bainbridge-debt",
+    "objective": "scope",
+    "difficulty": 2,
+    "image": "../img/loa-levels.png",
+    "imageAlt": "Levels of Automation in Banking AI: horizontal scale 1-10. AML Transaction Monitoring at levels 2-3 (human investigates alerts). Credit Underwriting at 4-5 (human approves or rejects). Fraud Decisioning at 6-7 (human can override). HFT Execution at 9-10 (post-hoc review only). Wide orange bracket spanning full range labeled: SR 26-2 ONE EFFECTIVE CHALLENGE EXPECTATION ACROSS ALL OF THIS.",
+    "question": "The diagram places four banking use cases across ten automation levels, then spans them with a single supervisory expectation bracket. What failure does this layout expose about applying one effective challenge standard uniformly?",
+    "options": [
+      "The four use cases require different licenses and charters, so a single supervisory standard creates jurisdictional confusion about which regulator is responsible for each automation level.",
+      "Effective challenge at Level 2 (human investigates every alert) and Level 9 (post-hoc review only) require fundamentally different competencies, timing, and authority — the same label doesn't describe the same governance requirement.",
+      "The layout shows that effective challenge is most critical at the low-automation end of the scale, where human error rates are highest, and progressively less important as automation handles more of the decision.",
+      "The uniform bracket is appropriate — effective challenge is a principles-based requirement that each institution operationalizes at the right level for their use case, making the bracket's width a feature, not a flaw."
+    ],
+    "correct": 1,
+    "explanation": "A Level 2-3 AML analyst reviewing alerts has direct access to case data, time to investigate, and clear authority to escalate or close. At Level 9-10 HFT, the human reviewer sees the outcome after the fact — the decision window has already closed. 'Effective challenge' means something categorically different at each end: it's prospective judgment at the low end and retrospective audit at the high end. The post's argument is that the same vocabulary applied across the full span creates the illusion of coverage without the substance — an institution can satisfy the effective challenge expectation nominally at Level 9 while the actual oversight function is structurally impossible at that automation speed."
   }
 ]

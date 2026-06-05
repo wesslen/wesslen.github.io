@@ -158,5 +158,23 @@
     ],
     "correct": 1,
     "explanation": "The post names the institutional discomfort precisely: 'running evaluations you might fail, reporting uncertainty you'd rather not quantify, releasing transcripts that expose your methodological choices.' None of these are technical limitations. A confidence interval is easy to compute; reporting it creates accountability for whether the model meets a threshold. Releasing transcripts enables external scrutiny of your evaluation design. These practices are uncomfortable because they constrain the range of conclusions you can claim — a well-specified evaluation with reported uncertainty is harder to spin than an aggregate score on a dashboard. The 'emerging' label captures institutional resistance, not technical immaturity."
+  },
+  {
+    "id": "nbe-visual-q01",
+    "post": "nist-benchmark-evals",
+    "module": "evaluations",
+    "objective": "distinction",
+    "difficulty": 2,
+    "image": "../img/nist-benchmark-framework.png",
+    "imageAlt": "NIST AI 800-2 three-stage evaluation framework diagram showing Stage 1 Define Objectives, Stage 2 Implement and Run, Stage 3 Analyze and Report, with a red star annotating Stage 1 as where most teams fail",
+    "question": "The diagram annotates one of the three NIST stages with a red star labeled 'MOST TEAMS FAIL HERE.' Based on what that stage requires, why is it the most common failure point?",
+    "options": [
+      "Stage 1 requires the most computational resources — running large benchmark suites is expensive, and most teams skip the define-objectives phase because the tooling to automate it doesn't exist yet.",
+      "Stage 1 requires defining what construct you're measuring before selecting a benchmark — most teams reverse this order, picking a convenient benchmark first and assuming it measures the right thing.",
+      "Stage 1 requires regulatory sign-off before evaluation can begin — the approval process is slow, so teams skip directly to Stage 2 to meet model deployment deadlines.",
+      "Stage 1 is the most technically complex stage because uncertainty quantification and transcript release must be designed upfront, which exceeds most teams' statistical expertise."
+    ],
+    "correct": 1,
+    "explanation": "NIST Stage 1 asks: what is the construct you're trying to measure, and what is the relationship between that construct and the benchmark you're considering? Most teams do the opposite — they pick a well-known benchmark (MMLU, GPQA, HellaSwag) because it's available, then assume coverage. That assumption is never checked. The diagram's red star marks Stage 1 because the validity problem is baked in before a single query is run: if you haven't defined the construct, you can't know whether your benchmark measures it directly, as a proxy, or merely predicts something downstream. Everything in Stages 2 and 3 inherits that unchecked assumption."
   }
 ]

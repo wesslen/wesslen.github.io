@@ -158,5 +158,23 @@
     ],
     "correct": 1,
     "explanation": "The principle the post illustrates is about the information structure of the learning problem. Human annotators and the trained model share the same information constraint (pixels only). The AxTree teacher has information the student won't — and that epistemic gap is what produces the 17-point quality difference. Scaling human annotation collects more examples of the same constrained-information decision process. The right investment is building teachers with access to the privileged information (structured semantics) that produces optimal trajectories, then training the student to approach that quality from its constrained (pixels only) perspective. This applies beyond web agents: in any domain where a more informed teacher can produce better demonstrations, the investment should go to teacher quality, not demonstration volume."
+  },
+  {
+    "id": "mdf-visual-q01",
+    "post": "molmoweb-data-flywheel",
+    "module": "gui-agents",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "image": "../img/molmoweb-asymmetry.png",
+    "imageAlt": "Two-column information asymmetry: Teacher (Gemini + AxTree) reads element semantics directly, 11 steps to correct answer. Student (MolmoWeb at inference) infers structure from pixels, 28 steps to wrong product. Orange double-headed arrow: INFORMATION ASYMMETRY. Blue box: +17 pts on WebVoyager. Bottom: The teacher had information the student will not have at runtime.",
+    "question": "The diagram shows the teacher taking 11 steps to the correct answer while the student takes 28 steps to the wrong product. Why does this gap in step count matter beyond just efficiency?",
+    "options": [
+      "The step count gap means the teacher's demonstrations are too efficient to be informative training signal — a student learning from 11-step traces has to extrapolate too much to reproduce them in 28-step environments.",
+      "The step count gap reveals that the teacher's demonstrations encode richer structured reasoning — the student's 28-step wrong path shows it is navigating by visual trial and error without the semantic understanding that made the teacher's path shorter and correct.",
+      "The step count gap indicates the teacher is cheating — AxTree access gives the teacher privileged information that reduces the search space unfairly, making teacher demonstrations invalid as training signal for a pixel-only student.",
+      "The step count gap is a dataset quality problem — demonstrations that reach the wrong product in 28 steps should be filtered from the training set, and the +17 pt improvement comes only from the correct 11-step traces."
+    ],
+    "correct": 1,
+    "explanation": "The step count and outcome together tell the story. The teacher's 11-step path isn't just faster — it's correct and semantically grounded, because AxTree gives direct access to element labels, prices, and structure. The student's 28-step wrong path shows what navigation looks like without that grounding: more probing clicks, more uncertainty about what each element means, more inference errors. This is why the +17 point improvement on WebVoyager is attributed to training signal quality, not just volume: the teacher's structured traces taught the student what deliberate, semantically-grounded navigation looks like, even though the student can never have AxTree access at runtime. The bottom annotation — 'The teacher had information the student will not have at runtime' — is the post's central irony: the asymmetry that generates better training data is itself the asymmetry the student must overcome."
   }
 ]

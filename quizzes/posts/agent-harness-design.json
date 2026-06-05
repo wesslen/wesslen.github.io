@@ -158,5 +158,23 @@
     ],
     "correct": 1,
     "explanation": "The post gives a concrete example: Opus 4.5 required explicit context resets; Opus 4.6 improved enough that one continuous session with automatic compaction sufficed. The harness requirement evolved with model capability. But certain categories remain permanently in the harness: deterministic tool prohibitions, human approval gates, retry logic with hard-kill thresholds, and session persistence guarantees. These require behavioral guarantees that probabilistic generation cannot provide — a model told 'always ask for approval before irreversible actions' may still proceed in ambiguous situations."
+  },
+  {
+    "id": "ahd-visual-q01",
+    "post": "agent-harness-design",
+    "module": "agentic-engineering",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "image": "../img/agent-harness-design-filesystem.png",
+    "imageAlt": "Inter-session filesystem as message bus: Session 1 writes progress log, feature JSON, git history, and init.sh; subsequent sessions read them on startup to orient without rediscovering state",
+    "question": "The diagram shows Session 1 writing four artifact types that subsequent sessions read on startup. What problem does this architecture solve that context compression alone cannot?",
+    "options": [
+      "It solves the token limit problem — writing state to disk removes it from the context window, allowing each session to start with a full context budget rather than a compressed one.",
+      "It solves the session-boundary amnesia problem — a new session with no prior context would otherwise spend its early turns rediscovering decisions already made, wasting tokens on orientation.",
+      "It solves the model version drift problem — by persisting state in filesystem artifacts, each session loads the same information regardless of which model version handles the task.",
+      "It solves the parallel execution problem — multiple agents can read the same filesystem artifacts simultaneously without context conflicts, enabling concurrent work on separate features."
+    ],
+    "correct": 1,
+    "explanation": "Context compression preserves information within a session but doesn't survive a session restart. The filesystem-as-message-bus pattern addresses the gap between sessions: a fresh context window has no memory of prior decisions, file structure, or in-progress work. By writing progress logs, feature JSON, git history, and init.sh to disk at the end of Session 1, the harness gives Session 2 everything it needs to orient without re-exploring. The diagram's four artifact types map to four orientation needs: what was done, what was decided, what changed, and how to set up the environment. It's a structured handoff, not compression."
   }
 ]

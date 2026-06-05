@@ -158,5 +158,41 @@
     ],
     "correct": 1,
     "explanation": "The tipping point framing is about the transition from manual attack economics to automated attack economics. At current scale, manual attack was profitable enough to generate 824 malicious skills. At marketplace scale where automated adversarial skill generation becomes viable — testing which attack patterns evade detection, generating plausible-looking documentation, rotating delivery mechanisms — the problem becomes qualitatively different. The 824-skill campaign required human effort; the post-tipping-point campaign runs at compute speed. The governance question is identical to npm and PyPI: does institutional investment in platform security precede or follow the industrialization of the attack?"
+  },
+  {
+    "id": "ssc-visual-q01",
+    "post": "skills-supply-chain",
+    "module": "agentic-engineering",
+    "objective": "distinction",
+    "difficulty": 2,
+    "image": "../img/skills-supply-chain-persistence.png",
+    "imageAlt": "Persistence comparison: standard prompt injection ends when the session ends; poisoned skills file loops — loads automatically before each new session until explicitly removed",
+    "question": "The diagram contrasts session-scoped injection with skills-file poisoning. What property of the skills file makes it categorically more dangerous than a standard prompt injection?",
+    "options": [
+      "The skills file has higher token priority — content loaded from a skills file appears earlier in the context window than user input, giving the injected instructions precedence over any user-level safety guidance.",
+      "The skills file persists across sessions and loads automatically — the attack is executed once and then re-runs at the start of every subsequent session until the file is explicitly inspected and cleaned.",
+      "The skills file bypasses input guardrails — because it is loaded by the system rather than submitted as user input, skills file content is not inspected by the same filtering pipeline as user messages.",
+      "The skills file can modify other skills files — a poisoned skills entry can write new entries, creating a self-replicating attack that spreads through the agent's skill library without additional attacker access."
+    ],
+    "correct": 1,
+    "explanation": "The diagram's loop arrow is the key: poisoned skills file → loads before each session → loop. Standard prompt injection has a session boundary — the attack ends when the conversation ends. A poisoned skills file is an autoloaded resource: every new session begins by loading it, executing the injected instructions before any user input is processed. The attacker doesn't need continued access; one successful write to the skills file is sufficient to establish persistent control that survives session resets, model restarts, and user-level mitigations. The post calls this the skills supply chain problem: the trust assumptions built into autoloaded agent resources make them high-value targets precisely because persistence is their design feature."
+  },
+  {
+    "id": "ssc-visual-q02",
+    "post": "skills-supply-chain",
+    "module": "agentic-engineering",
+    "objective": "mechanism",
+    "difficulty": 3,
+    "image": "../img/skills-supply-chain-unicode.png",
+    "imageAlt": "Unicode injection: what the code reviewer sees (blank line 5) versus what the model reads (hidden orange instruction block with curl command)",
+    "question": "The diagram shows a blank line to a human reviewer and an instruction block to the model. What property of LLM tokenization makes this attack work despite the characters being in the same file?",
+    "options": [
+      "LLMs tokenize invisible Unicode characters as whitespace, which the model treats as paragraph separators that trigger instruction-following mode — the curl command is injected into the model's instruction context rather than its code context.",
+      "LLMs process all Unicode codepoints including invisible formatting characters, while code review tools and human editors render many Unicode codepoints as blank space or suppress them entirely — the same byte sequence looks different to each consumer.",
+      "LLMs have a higher Unicode character limit than code review tools — the hidden instruction block exceeds the display limit of standard diff viewers, which truncate it, while the model processes the full file including the truncated section.",
+      "LLMs are pre-trained on data that includes invisible Unicode characters used as markup in web scraping — the model has learned to treat these characters as instruction delimiters based on training distribution."
+    ],
+    "correct": 1,
+    "explanation": "The attack exploits a rendering gap, not a model vulnerability. Unicode includes many invisible or zero-width characters (zero-width space, right-to-left override, tag characters) that most code editors, diff tools, and human reviewers either don't display or render as whitespace. The model, however, processes the raw token stream — every codepoint is present. So the file that passes code review (a blank line at line 5) and the file the model reads (a hidden curl exfiltration command at line 5) are the same file. The attack surface is the assumption that what humans see in review tools is what the model will process — which is wrong whenever the rendering layer suppresses Unicode characters that the tokenizer doesn't."
   }
 ]

@@ -158,5 +158,23 @@
     ],
     "correct": 1,
     "explanation": "The 'seams' create risks that don't exist in the component models individually. Trust boundaries dissolve: an agent's context inherits the trust level of the orchestrator, so a corrupted orchestrator corrupts everything downstream. Errors amplify: research documented 17× error amplification ratios in poorly coordinated deployments, where coordination breakdowns mean both agents behave correctly given their inputs but the failure emerges from the interaction. Accountability gaps: no established method assigns responsibility when the harmful outcome emerges from a chain of individually correct delegations. These are categorically different risks from the components' individual properties."
+  },
+  {
+    "id": "a2a-risks-visual-q01",
+    "post": "a2a-risks",
+    "module": "multi-agent",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "image": "../img/a2a-risks-maestro.png",
+    "imageAlt": "Multi-agent attack propagation: orchestrator to Agent A to B to C each holding credentials. Prompt injection strikes Agent A from above; injected context propagates right through shared context to B and C. Red warning triangles mark escalated permissions at each handoff. Blast radius spans all agents.",
+    "question": "In the MAESTRO diagram, the prompt injection arrow strikes Agent A, but red warning triangles appear at every subsequent agent. What does this placement reveal about why the blast radius spans the entire chain?",
+    "options": [
+      "Each agent independently parses the original malicious input — the injection is re-evaluated at every hop, so each agent is separately vulnerable to the same attack.",
+      "The injected content travels through shared context — once Agent A's output is compromised, downstream agents receive it as trusted input and escalate permissions based on it.",
+      "The warning triangles indicate each agent holds separate credentials that must be individually compromised — the attacker needs to repeat the injection at each stage.",
+      "The blast radius reflects a monitoring gap rather than a propagation mechanism — no single agent logs the full chain, so the attack is invisible until all agents have acted."
+    ],
+    "correct": 1,
+    "explanation": "The diagram shows one injection arrow entering Agent A, then dotted 'INJECTED CONTEXT' arrows flowing rightward to B and C. The warning triangles at each handoff mark escalated permissions — each agent inherits context from the previous one and treats it as authoritative. This is what makes prompt injection in multi-agent systems categorically more dangerous than in single-agent ones: the attacker doesn't need to hit B and C separately. They compromise the context stream once, and every downstream agent that consumes that stream acts on the corrupted instructions with its own permissions. 'Authentication proves identity. It says nothing about intent.' — which is why credential-holding by each agent doesn't help."
   }
 ]

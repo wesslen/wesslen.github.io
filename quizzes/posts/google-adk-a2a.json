@@ -158,5 +158,23 @@
     ],
     "correct": 1,
     "explanation": "The `output_key` parameter is ADK's mechanism for implicit data flow. An upstream agent's final response text is automatically written to `session.state[output_key]`. A downstream agent references it with `{output_key}` in its instructions — ADK templates in the value at prompt construction time. This enables pipeline composition through shared state: a `SequentialAgent` can chain a research agent into a synthesis agent into a formatting agent, each reading the previous agent's output from session state without any explicit message-passing code. The state scratchpad is the shared working memory; `output_key` is how agents write named slots into it."
+  },
+  {
+    "id": "ga2a-visual-q01",
+    "post": "google-adk-a2a",
+    "module": "multi-agent",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "image": "../img/google-adk-a2a-taskstate.png",
+    "imageAlt": "A2A Task state machine: submitted to working to completed (happy path), with input-required and auth-required branches that loop back, plus failed, rejected, and canceled terminal states",
+    "question": "The state machine shows 'auth-required' as a loop-back branch rather than a terminal state. What does this design choice reveal about how A2A handles authorization failures during agent execution?",
+    "options": [
+      "Authorization failures are treated as recoverable interruptions — the task pauses and returns to a waiting state where the orchestrator or user can supply credentials before execution resumes.",
+      "Authorization failures are expected to be rare enough to ignore — the loop-back is a placeholder that defaults to the failed terminal state in all practical implementations.",
+      "Authorization failures always escalate to the human-in-the-loop — the auth-required state mandates human intervention before any further execution, regardless of what credentials are available.",
+      "Authorization failures cause the task to be cloned — the original task enters auth-required while a duplicate task is created with the same parameters to attempt execution via a different credential path."
+    ],
+    "correct": 0,
+    "explanation": "The loop-back from 'auth-required' to the working state (rather than straight to 'failed') means the A2A protocol treats authorization challenges as part of normal execution flow, not as exceptions. The task is not abandoned — it pauses, signals that credentials or permissions are needed, and can resume once that requirement is satisfied. This is architecturally significant for agentic payment and data-access workflows: an agent attempting to initiate a wire transfer that requires step-up authentication doesn't fail; it pauses and requests the additional authorization. The failed, rejected, and canceled states exist as terminal exits, but auth-required is not one of them — it's a designed pause point."
   }
 ]

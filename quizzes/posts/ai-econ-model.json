@@ -158,5 +158,23 @@
     ],
     "correct": 0,
     "explanation": "The post's conclusion connects model mechanism to personal economics: 'The model's implicit finding — that skill diffusion is the lever that matters most for keeping this from turning into a macro problem — keeps pointing back at the same unglamorous answer. Maybe I just need to keep teaching.' But the footnote makes the economic constraint visible: 'I have taught as an adjunct, which means the economics of teaching — low per-course pay, no benefits, high preparation overhead — actively discourage sustained periods at the pace the model's implicit policy prescription would require.' The model identifies what needs to happen (skill diffusion); the footnote shows that the institutional economics of the activity most needed to produce it are misaligned. This is the level of analysis the model cannot reach."
+  },
+  {
+    "id": "aem-visual-q01",
+    "post": "ai-econ-model",
+    "module": "ai-economy",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "image": "../img/ai-econ-model-header.png",
+    "imageAlt": "Production Possibilities Frontier: baseline curve (blue) with point A (40 unskilled workers employed); AI-augmented curve (orange, pushed outward) with point B (unskilled employment drops to zero). Same demand ratio, larger frontier, different workforce.",
+    "question": "Both points A and B sit on their respective PPF curves at the same demand ratio — the slope is unchanged. What does this constraint reveal about why unskilled employment falls to zero at point B even though the economy is more productive?",
+    "options": [
+      "Point B reflects a preference shift in addition to the productivity gain — consumers choose differently when AI lowers prices, which changes the demand ratio and eliminates demand for unskilled labor entirely.",
+      "When the frontier expands but relative prices stay fixed, the economy produces more of both goods by substituting AI for the relatively more expensive input — unskilled labor — at the original cost ratio.",
+      "The PPF expansion eliminates unskilled employment because the AI model assumes full substitution — it is a simplifying assumption of the St. Louis Fed model, not a claim about real-world outcomes.",
+      "Point B shows that unskilled workers transition to skilled roles as productivity rises — the zero employment figure at B measures current unskilled jobs, not total employment, which is higher."
+    ],
+    "correct": 1,
+    "explanation": "The diagram holds the demand ratio (the slope of the tangent line) constant across both frontiers — this is the St. Louis Fed model's key structural assumption. With the same relative prices but a larger frontier, the economy moves to a point that maximizes output at that price ratio. On the expanded AI curve, the cost-minimizing combination at the original demand ratio uses no unskilled labor because AI performs those tasks at lower relative cost. The model isn't making a normative claim about what should happen; it's showing what a competitive economy with fixed relative prices and comparative advantage in AI does. The post's critique focuses on the three assumptions that could change this outcome: supervision rate, skill diffusion, and demand effects."
   }
 ]

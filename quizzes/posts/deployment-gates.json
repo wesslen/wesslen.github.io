@@ -158,5 +158,41 @@
     ],
     "correct": 1,
     "explanation": "The post explicitly maps the adversarial gate to the effective challenge triad: 'an independent challenger with the competence to derive new thresholds when the old ones decay, and the influence to actually change the deployment cadence when they do.' The three legs of effective challenge — incentives, competence, influence — reappear in adversarial testing as: structural independence from development (incentives don't penalize block decisions), adversarial ML competence (can probe the system in ways its builders didn't think of), and authority to block deployment (influence means findings reach a body with actual power). Without all three, you have documentation; with all three, you have governance."
+  },
+  {
+    "id": "dg-visual-q01",
+    "post": "deployment-gates",
+    "module": "adversarial-testing",
+    "objective": "distinction",
+    "difficulty": 2,
+    "image": "../img/deployment-gates-pipeline.png",
+    "imageAlt": "Three deployment gates in sequence: Gate 1 CAPABILITY NON-REGRESSION (pass: ≤2% regression vs champion, fail blocked), Gate 2 SAFETY NON-REGRESSION (StrongREJECT/HarmBench/LlamaGuard, note: model-level vendor due diligence, fail blocked), Gate 3 ROBUSTNESS CEILING ASR (PyRIT/Crescendo, T1 ≤2%/T2 ≤5%/T3 ≤10%, zero tolerance for tool-hijack, fail blocked). Substrate band below all gates: Judge Calibration with four requirements. Bottom: Passing all three is necessary but not sufficient.",
+    "question": "Gate 2 is annotated as 'model-level vendor due diligence' while Gate 3 uses use-case-specific tools. What does this distinction mean for how a bank should interpret passing Gate 2?",
+    "options": [
+      "Passing Gate 2 means the model is safe for all use cases at that institution — the vendor has already validated the safety benchmarks, so Gate 2 is a formality that confirms vendor claims rather than an independent test.",
+      "Gate 2 tests the base model's general safety profile, not whether it resists the specific attack surfaces of the bank's deployment — passing Gate 2 is necessary but doesn't substitute for Gate 3's use-case adversarial testing.",
+      "Gate 2 is more rigorous than Gate 3 because vendor due diligence benchmarks (HarmBench, LlamaGuard) are independently validated, whereas Gate 3 thresholds are institution-specific and harder to audit.",
+      "Gate 2 passing means the institution can skip Gate 3 for Tier 1 low-risk deployments — the three-gate pipeline applies to Tier 2 and Tier 3 use cases where the attack surface is meaningfully larger."
+    ],
+    "correct": 1,
+    "explanation": "The pipeline diagram annotates Gate 2 as 'model-level vendor due diligence' to mark a boundary in what's being tested. StrongREJECT and HarmBench measure whether the base model generally refuses harmful outputs — they're not designed for the attack surface of a credit-memo drafting agent or a wire-instruction processor. Gate 3's use-case-specific tools (PyRIT, Crescendo) probe whether the model in its actual deployment configuration, with its actual system prompt and tool access, resists the adversarial patterns relevant to that use case. A model that passes Gate 2 may fail Gate 3 on wire-fraud prompt injection that the vendor's safety benchmarks never tested. The bottom annotation 'necessary but not sufficient' applies to the whole pipeline, but the Gate 2/3 distinction is where this is most easily missed."
+  },
+  {
+    "id": "dg-visual-q02",
+    "post": "deployment-gates",
+    "module": "adversarial-testing",
+    "objective": "transfer",
+    "difficulty": 3,
+    "image": "../img/deployment-gates-scorecard.png",
+    "imageAlt": "Gate scorecard for credit-memo drafting agent Tier 1: Gate 1 CAPABILITY NON-REGRESSION — task accuracy delta -0.7pp vs baseline — PASS. Gate 2 SAFETY — StrongREJECT, HarmBench, LlamaGuard all within epsilon — PASS. Gate 3 ROBUSTNESS — 3 probe families tested, wire-fraud Crescendo ASR 2.0% at ceiling — FLAGGED, committee sign-off required.",
+    "question": "The scorecard shows Gates 1 and 2 passing cleanly, but Gate 3 is flagged at the Tier 1 ceiling (2.0% ASR). What should a model risk committee conclude from this specific pattern?",
+    "options": [
+      "The model is safe to deploy — Gate 1 and Gate 2 passing confirms capability and safety are acceptable, and a 2.0% ASR at a Tier 1 ceiling is within the approved threshold, so no escalation is needed.",
+      "The deploy should be blocked — any Gate 3 flagging requires a full re-evaluation from Gate 1, because an adversarial robustness issue may invalidate the capability and safety scores.",
+      "The model meets the defined ASR ceiling but is operating at the limit — the committee must decide whether this specific attack family (wire-fraud via Crescendo) warrants hardening before deploy or additional monitoring post-deploy.",
+      "The scorecard indicates the wrong model tier was tested — a wire-fraud attack surface at the ASR ceiling suggests this agent should be reclassified as Tier 2, where the threshold is 5%, which it would pass cleanly."
+    ],
+    "correct": 2,
+    "explanation": "The scorecard's flagged Gate 3 doesn't mean the model failed — it means it hit exactly the Tier 1 threshold (2.0% ASR), which triggers committee review rather than automatic block. The distinction matters: Gate 3 thresholds are not pass/fail in the binary sense of Gates 1 and 2; they're risk calibration points. A wire-fraud Crescendo attack at 2.0% on a credit-memo agent is different from a general jailbreak at 2.0% on a customer-service agent. The committee's job is to decide whether the specific attack family and the specific deployment context warrant pre-deploy hardening (lower the ASR), enhanced post-deploy monitoring, or both. The scorecard is an escalation trigger, not a verdict."
   }
 ]

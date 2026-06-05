@@ -158,5 +158,23 @@
     ],
     "correct": 1,
     "explanation": "The series traces a single argument across three aspects. Post 1 establishes what a defensible adversarial engagement looks like and why structural independence matters. Post 2 establishes what quantitative thresholds are needed for deployment decisions and why each threshold requires a derivation that survives examiner scrutiny. Post 3 establishes that these two elements together are still insufficient without a continuous monitoring program — because the attack surface evolves, and what was tested before release is evidence about one moment in time. The complete governance structure requires all three: a rigorous engagement methodology, documented deployment thresholds, and ongoing monitoring that treats deployment as the beginning of the risk management cycle."
+  },
+  {
+    "id": "adv-inc-visual-q01",
+    "post": "adversarial-incompleteness",
+    "module": "adversarial-testing",
+    "objective": "argument",
+    "difficulty": 3,
+    "image": "../img/adversarial-incompleteness-result.png",
+    "imageAlt": "Diagonalization: finite red-team suite on left with checkmarks, large orange bypass arrow breaking out labeled CONSTRUCT NEW BYPASS FROM ANY FINITE LIST, red cloud of uncovered attacks with infinity symbol on right, wide green arrow at bottom labeled CONTINUOUS MONITORING PROGRAM",
+    "question": "The diagram shows a finite red-team suite on the left and an infinite residual on the right. What does the orange bypass arrow between them mean for adversarial testing programs that aim to certify a system as safe?",
+    "options": [
+      "It means larger red-team suites provide stronger safety guarantees — the bypass arrow narrows as the suite grows, so sufficient investment in test coverage can approach certification.",
+      "It means any finite red-team suite, regardless of size, can always be extended by a new bypass — certification claims based on a fixed test set are structurally unsound.",
+      "It means automated red-teaming tools like Garak and PyRIT are insufficient — only human red-teamers can find the bypasses that escape a finite suite.",
+      "It means adversarial testing programs should focus on the green monitoring arrow rather than the finite suite — runtime monitoring is strictly more effective than pre-deployment red-teaming."
+    ],
+    "correct": 1,
+    "explanation": "The diagonalization result (from Vassilev/NIST) is captured in the orange arrow's label: 'FOR ANY FINITE LIST, A NEW BYPASS EXISTS.' This is a mathematical statement, not a practical one about test budget or attacker sophistication. No matter how many attacks you add to the left-side suite, the right-side residual remains countably infinite. The certification trap is exactly this: passing a fixed red-team suite proves you've blocked those specific attacks, not that you've blocked attacks in general. The green continuous monitoring arrow at the bottom is the diagram's answer — not as a replacement for red-teaming, but as the only response that doesn't claim to have solved an unsolvable problem."
   }
 ]

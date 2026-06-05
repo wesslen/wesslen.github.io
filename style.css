@@ -2418,6 +2418,15 @@ img {
   padding: 1.5rem;
 }
 
+.quiz-question-image {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid var(--border);
+  margin: 0 0 1rem 0;
+}
+
 .quiz-question {
   font-size: 0.975rem;
   line-height: 1.65;

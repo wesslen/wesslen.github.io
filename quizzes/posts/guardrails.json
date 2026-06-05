@@ -8,12 +8,12 @@
     "question": "FinRegLab's 2025 market scan defined guardrails as 'constraints to restrict function AND ongoing monitoring and troubleshooting.' The post argues this conflation is 'operationally consequential.' Why?",
     "options": [
       "Conflating the two causes teams to over-invest in monitoring tooling while under-investing in the runtime interception layer that actually stops harmful outputs.",
-      "If teams confuse guardrails with tests or metrics, systems look governed but lack actual runtime interception \u2014 the thing that stops.",
+      "If teams confuse guardrails with tests or metrics, systems look governed but lack actual runtime interception — the thing that stops.",
       "The conflation makes regulatory reporting more difficult because examiners expect separate line items for monitoring and interception in the model risk inventory.",
       "Teams that conflate the terms apply guardrails to the wrong risk tier, concentrating controls on low-risk use cases while leaving high-risk deployments exposed."
     ],
     "correct": 1,
-    "explanation": "The post's central definitional point: a guardrail is a runtime intervention mechanism that intercepts, evaluates, and passes or blocks model behavior while it's happening. Tests verify correctness in development. Metrics quantify aggregate performance for retraining or audit. In a RAG-based system, a metric tells you hallucination risk is elevated in 3% of responses; a guardrail is what actually stops that 3% from going out. Conflating them produces systems that are beautifully instrumented (metrics everywhere) but have no actual runtime interception \u2014 the metric describes a problem the guardrail would have prevented."
+    "explanation": "The post's central definitional point: a guardrail is a runtime intervention mechanism that intercepts, evaluates, and passes or blocks model behavior while it's happening. Tests verify correctness in development. Metrics quantify aggregate performance for retraining or audit. In a RAG-based system, a metric tells you hallucination risk is elevated in 3% of responses; a guardrail is what actually stops that 3% from going out. Conflating them produces systems that are beautifully instrumented (metrics everywhere) but have no actual runtime interception — the metric describes a problem the guardrail would have prevented."
   },
   {
     "id": "gr-q02",
@@ -24,12 +24,12 @@
     "question": "The post provides a taxonomy of guardrail types: input, output, tool, and structural. Which type is described as 'often undercounted'?",
     "options": [
       "Input guardrails, because prompt injection attack patterns are not yet well documented in standard banking threat libraries used for control design.",
-      "Structural guardrails \u2014 schema validation, format enforcement \u2014 are undercounted, though in agentic pipelines a malformed JSON is a production incident requiring the same monitoring rigor as semantic content violations.",
+      "Structural guardrails — schema validation, format enforcement — are undercounted, though in agentic pipelines a malformed JSON is a production incident requiring the same monitoring rigor as semantic content violations.",
       "Tool guardrails, because tool permissions are typically managed by a separate infrastructure team that does not coordinate with the model risk inventory.",
       "Output guardrails, because toxicity classifiers are computationally expensive at scale and teams routinely deprioritize them in latency-sensitive customer-facing deployments."
     ],
     "correct": 1,
-    "explanation": "The post flags this explicitly: 'The structural category tends to be undercounted. In financial workflows where an agent's output is consumed directly by downstream automated systems \u2014 payment gateways, credit scoring engines \u2014 a malformed JSON object isn't an edge case, it's a production incident.' Structural guardrails (schema validation, type checking, data integrity checks) are often treated as engineering hygiene rather than risk controls, even though they are the primary defense against agent outputs corrupting downstream systems that implicitly trust the format. In agentic pipelines where one agent's output is another's input, structural guardrails protect the entire chain."
+    "explanation": "The post flags this explicitly: 'The structural category tends to be undercounted. In financial workflows where an agent's output is consumed directly by downstream automated systems — payment gateways, credit scoring engines — a malformed JSON object isn't an edge case, it's a production incident.' Structural guardrails (schema validation, type checking, data integrity checks) are often treated as engineering hygiene rather than risk controls, even though they are the primary defense against agent outputs corrupting downstream systems that implicitly trust the format. In agentic pipelines where one agent's output is another's input, structural guardrails protect the entire chain."
   },
   {
     "id": "gr-q03",
@@ -40,7 +40,7 @@
     "question": "The post describes a 'cascade' design for real-time guardrail deployment: fast internal probe first, expensive classifier only when ambiguous. Why is this architecture necessary rather than simply using the most accurate classifier?",
     "options": [
       "Accurate classifiers are not yet commercially available for financial services use cases and will not reach sufficient maturity for several more years.",
-      "Sub-500ms latency budgets can't absorb a strong reasoning model as a real-time monitor \u2014 the cascade reserves the expensive path.",
+      "Sub-500ms latency budgets can't absorb a strong reasoning model as a real-time monitor — the cascade reserves the expensive path.",
       "Strong classifiers generate higher false-positive rates than fast deterministic probes, so routing all traffic through them increases unnecessary production blocks.",
       "Regulatory requirements explicitly limit security check latency to under 50ms, a standard that strong classifiers cannot consistently meet at production throughput."
     ],
@@ -93,7 +93,7 @@
       "Compliance theater only emerges in poorly aligned models; well-aligned foundation models handle safety generically without needing operationally specific behavioral rules."
     ],
     "correct": 1,
-    "explanation": "The post's closing argument frames the distinction as the harder problem: who owns the attack surface when behavioral guardrails don't cleanly belong to security or model risk. Compliance theater emerges when guardrails are designed to satisfy an auditor's checklist rather than to intercept the specific failure modes the deployment faces. 'Has an output guardrail' is different from 'has an output guardrail validated to catch the specific categories of harmful output this use case can generate.' The latter requires knowing what harmful output this deployment can produce \u2014 which requires the adversarial testing program the companion posts describe."
+    "explanation": "The post's closing argument frames the distinction as the harder problem: who owns the attack surface when behavioral guardrails don't cleanly belong to security or model risk. Compliance theater emerges when guardrails are designed to satisfy an auditor's checklist rather than to intercept the specific failure modes the deployment faces. 'Has an output guardrail' is different from 'has an output guardrail validated to catch the specific categories of harmful output this use case can generate.' The latter requires knowing what harmful output this deployment can produce — which requires the adversarial testing program the companion posts describe."
   },
   {
     "id": "gr-q07",
@@ -104,12 +104,12 @@
     "question": "A bank's credit underwriting agent generates adverse action letter drafts that a human loan officer reviews before sending. The guardrail taxonomy would classify this as 'HITL required' at the High tier. What guardrail problem does the post flag with the HITL column's Yes/No answer?",
     "options": [
       "The HITL column should specify whether the reviewer can modify the draft or only approve or reject it, because modification authority changes the risk profile.",
-      "A Yes/No HITL field doesn't reveal whether the loop is effective \u2014 what information the reviewer has, what authority, whether they can intervene.",
+      "A Yes/No HITL field doesn't reveal whether the loop is effective — what information the reviewer has, what authority, whether they can intervene.",
       "High-tier applications should require multi-person approval rather than a single reviewer, and the binary Yes/No field cannot capture this distinction.",
       "HITL requirements become unnecessary once output guardrail accuracy is sufficiently high, so the column should track guardrail precision rather than human presence."
     ],
     "correct": 1,
-    "explanation": "The post refers to its companion post (hitl-design) for exactly this problem: 'the HITL column deserves more scrutiny than a Yes/No answer implies.' Knight Capital had runtime HITL in form \u2014 monitoring tools and alert pipelines. What it lacked was deploy-time validation that those mechanisms would function under production conditions. The same risk applies to adverse action review: a human officer who receives 400 drafts per shift may be exhibiting the disuse failure mode \u2014 rote approval \u2014 long before anything goes wrong. The checklist says HITL: Yes. The effective challenge question is whether that HITL is substantive."
+    "explanation": "The post refers to its companion post (hitl-design) for exactly this problem: 'the HITL column deserves more scrutiny than a Yes/No answer implies.' Knight Capital had runtime HITL in form — monitoring tools and alert pipelines. What it lacked was deploy-time validation that those mechanisms would function under production conditions. The same risk applies to adverse action review: a human officer who receives 400 drafts per shift may be exhibiting the disuse failure mode — rote approval — long before anything goes wrong. The checklist says HITL: Yes. The effective challenge question is whether that HITL is substantive."
   },
   {
     "id": "gr-q08",
@@ -120,12 +120,12 @@
     "question": "The post's non-determinism section argues for layering deterministic guards as the 'final outer boundary' with probabilistic classifiers in the middle. What is the most common misconception about this layering strategy?",
     "options": [
       "Practitioners assume deterministic guards are more expensive to operate than probabilistic classifiers when the operational cost relationship is actually the reverse at scale.",
-      "Stronger probabilistic classifiers can't substitute for deterministic guards on hard limits \u2014 99.5% accuracy still fails non-deterministically at banking scale.",
+      "Stronger probabilistic classifiers can't substitute for deterministic guards on hard limits — 99.5% accuracy still fails non-deterministically at banking scale.",
       "Probabilistic classifiers should always be placed before deterministic guards in the pipeline sequence so that the cheaper probabilistic check fires first.",
       "Layering is only necessary for Tier 1 customer-facing applications; internal-only deployments can safely rely on a single probabilistic classifier for all cases."
     ],
     "correct": 1,
-    "explanation": "The post makes this distinction structural: 'A deterministic validation layer executes after the LLM proposes an action and has no flexibility. Either the data passes the check or the transaction stops. That boundary is non-negotiable for anything touching execution.' A probabilistic classifier at 99.5% accuracy generates ~1 error per 200 transactions \u2014 at banking scale, this is not an acceptable control for hard operational limits. Deterministic guards (schema validation, amount thresholds, recipient allowlists) are the appropriate control type for hard limits precisely because they fail predictably rather than probabilistically. Probabilistic classifiers belong in the middle of the stack, where some rate of incorrect decisions is acceptable."
+    "explanation": "The post makes this distinction structural: 'A deterministic validation layer executes after the LLM proposes an action and has no flexibility. Either the data passes the check or the transaction stops. That boundary is non-negotiable for anything touching execution.' A probabilistic classifier at 99.5% accuracy generates ~1 error per 200 transactions — at banking scale, this is not an acceptable control for hard operational limits. Deterministic guards (schema validation, amount thresholds, recipient allowlists) are the appropriate control type for hard limits precisely because they fail predictably rather than probabilistically. Probabilistic classifiers belong in the middle of the stack, where some rate of incorrect decisions is acceptable."
   },
   {
     "id": "gr-q09",
@@ -141,7 +141,7 @@
       "The framing determines the budget source: technical problems draw from IT capital, governance from compliance operating expense, creating a structural funding gap."
     ],
     "correct": 1,
-    "explanation": "The post closes with this observation explicitly: 'Across most institutions, neither team has claimed it \u2014 and so far, that's been fine. That won't stay true.' The governance implication is real: security teams know adversarial attack surfaces but don't know what SR 11-7's validation pillars require. Model risk teams know validation frameworks but may lack adversarial ML competence. A guardrail that neither team owns produces compliance theater from the risk side and incomplete coverage from the security side. The ownership question determines whose expertise gets applied and whose competency gap becomes the control's weakness."
+    "explanation": "The post closes with this observation explicitly: 'Across most institutions, neither team has claimed it — and so far, that's been fine. That won't stay true.' The governance implication is real: security teams know adversarial attack surfaces but don't know what SR 11-7's validation pillars require. Model risk teams know validation frameworks but may lack adversarial ML competence. A guardrail that neither team owns produces compliance theater from the risk side and incomplete coverage from the security side. The ownership question determines whose expertise gets applied and whose competency gap becomes the control's weakness."
   },
   {
     "id": "gr-q10",
@@ -165,7 +165,7 @@
     "module": "human-in-the-loop",
     "objective": "distinction",
     "difficulty": 1,
-    "question": "A bank's AI system intercepts every model response before it reaches the user, blocking outputs that match certain patterns. What is this mechanism called \u2014 and what distinguishes it from an evaluation metric?",
+    "question": "A bank's AI system intercepts every model response before it reaches the user, blocking outputs that match certain patterns. What is this mechanism called — and what distinguishes it from an evaluation metric?",
     "options": [
       "Red-teaming; the distinction is that red-teaming is adversarial while evaluation is observational.",
       "A guardrail; unlike an evaluation metric (which measures after the fact), a guardrail intervenes at runtime, passing or blocking behavior before it reaches a user or downstream system.",
@@ -173,7 +173,7 @@
       "RBAC; role-based access control restricts what systems can do, while evaluation metrics measure what they did."
     ],
     "correct": 1,
-    "explanation": "A guardrail is a runtime intervention mechanism \u2014 it intercepts, evaluates, and passes or blocks model behavior in real time. This is categorically different from a test or monitoring metric, both of which measure after output is produced. The distinction matters for governance: guardrails are operational controls, not measurement tools, and they can fail silently if not themselves validated."
+    "explanation": "A guardrail is a runtime intervention mechanism — it intercepts, evaluates, and passes or blocks model behavior in real time. This is categorically different from a test or monitoring metric, both of which measure after output is produced. The distinction matters for governance: guardrails are operational controls, not measurement tools, and they can fail silently if not themselves validated."
   },
   {
     "id": "gr-gloss-q02",
@@ -181,7 +181,7 @@
     "module": "human-in-the-loop",
     "objective": "distinction",
     "difficulty": 2,
-    "question": "An attacker embeds hidden instructions in a webpage that a bank's AI browsing agent reads, causing the agent to exfiltrate account data instead of completing the user's task. Which attack type does this illustrate \u2014 and how does it differ from jailbreaking?",
+    "question": "An attacker embeds hidden instructions in a webpage that a bank's AI browsing agent reads, causing the agent to exfiltrate account data instead of completing the user's task. Which attack type does this illustrate — and how does it differ from jailbreaking?",
     "options": [
       "Jailbreaking; the difference from prompt injection is that jailbreaking always originates from the user, not external content.",
       "Goal hijacking through memory poisoning; the agent's long-term memory was altered rather than its current context.",
@@ -189,7 +189,7 @@
       "RBAC misconfiguration; the agent accessed data it was not authorized to retrieve."
     ],
     "correct": 2,
-    "explanation": "Prompt injection exploits the LLM's inability to reliably separate trusted instructions from untrusted content. When an agent reads external content (a webpage, email, document) containing embedded instructions, those instructions can override the agent's original task \u2014 without the user ever crafting an adversarial input. Jailbreaking, by contrast, involves a user deliberately crafting inputs to bypass content policies. The attack surface is different: prompt injection targets agentic workflows that process external data."
+    "explanation": "Prompt injection exploits the LLM's inability to reliably separate trusted instructions from untrusted content. When an agent reads external content (a webpage, email, document) containing embedded instructions, those instructions can override the agent's original task — without the user ever crafting an adversarial input. Jailbreaking, by contrast, involves a user deliberately crafting inputs to bypass content policies. The attack surface is different: prompt injection targets agentic workflows that process external data."
   },
   {
     "id": "gr-gloss-q03",
@@ -199,12 +199,30 @@
     "difficulty": 1,
     "question": "After adversarial testing, a team reports that 23 of 100 harmful inputs successfully elicited prohibited outputs from the model. What does this figure directly measure?",
     "options": [
-      "False positive rate \u2014 the proportion of safe inputs incorrectly blocked by the guardrail.",
-      "Attack success rate (ASR) \u2014 the percentage of adversarial inputs that successfully compromised the model's intended behavior.",
-      "Cohen's kappa \u2014 the inter-rater agreement on whether outputs were harmful.",
-      "Construct validity \u2014 the degree to which the adversarial tests measure the actual risk they claim to measure."
+      "False positive rate — the proportion of safe inputs incorrectly blocked by the guardrail.",
+      "Attack success rate (ASR) — the percentage of adversarial inputs that successfully compromised the model's intended behavior.",
+      "Cohen's kappa — the inter-rater agreement on whether outputs were harmful.",
+      "Construct validity — the degree to which the adversarial tests measure the actual risk they claim to measure."
     ],
     "correct": 1,
-    "explanation": "Attack success rate (ASR) is the core metric for adversarial testing: of all attempted attacks, what fraction succeeded? An ASR of 23% means nearly one in four adversarial inputs bypassed the model's safety controls. The deployment-gates post uses ASR thresholds as a structured pass/fail criterion for different risk tiers \u2014 it's the operational analog of a defect rate for security controls."
+    "explanation": "Attack success rate (ASR) is the core metric for adversarial testing: of all attempted attacks, what fraction succeeded? An ASR of 23% means nearly one in four adversarial inputs bypassed the model's safety controls. The deployment-gates post uses ASR thresholds as a structured pass/fail criterion for different risk tiers — it's the operational analog of a defect rate for security controls."
+  },
+  {
+    "id": "gr-visual-q01",
+    "post": "guardrails",
+    "module": "agentic-engineering",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "image": "../img/guardrails-stack.png",
+    "imageAlt": "Horizontal flow: USER INPUT → INPUT GUARDRAIL (blue) → MODEL (grey) → OUTPUT GUARDRAIL (blue) → USER/DOWNSTREAM. Three orange bypass arrows: MEMORY POISONING (enters before input guardrail), A2A/XPIA (strikes directly into the model), CASCADING FAILURE (bypasses output guardrail entirely). Bottom: BEHAVIORAL CONTROLS — NO SUPERVISORY GUIDANCE EXISTS.",
+    "question": "Each of the three bypass arrows enters the stack at a different position. What does the positioning of the memory poisoning arrow — before the input guardrail — mean for how traditional guardrail architectures handle it?",
+    "options": [
+      "Memory poisoning is the least dangerous bypass because it enters before the guardrail — the input guardrail can inspect and filter poisoned content before it reaches the model, making this the most containable attack vector.",
+      "Memory poisoning bypasses the input guardrail entirely because it pre-loads malicious content into the model's context before the guardrail runs — the guardrail only sees the current request, not the poisoned memory already in context.",
+      "Memory poisoning enters before the input guardrail to signal that it requires a separate memory-scanning guardrail layer — the standard two-guardrail architecture needs to be extended with a third layer to address it.",
+      "Memory poisoning is the most detectable bypass because it leaves a trace in the input stream — the input guardrail can flag anomalous memory content even if it cannot block it directly."
+    ],
+    "correct": 1,
+    "explanation": "The bypass arrow for memory poisoning enters the flow before the USER INPUT box — meaning the malicious content is already present in the model's context (as a memory or persistent store) when the current conversation turn begins. The input guardrail inspects the incoming user message, but the poisoned memory was loaded before that inspection ran. Traditional guardrail architectures assume the context is clean and scrutinize the live input stream — they have no mechanism for inspecting the accumulated memory that carries forward across sessions. The post calls this a persistent cross-session attack surface: the poisoning happened in a prior session, and the current session inherits it without the guardrail seeing the original injection point."
   }
 ]

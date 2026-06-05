@@ -158,5 +158,41 @@
     ],
     "correct": 1,
     "explanation": "The three posts trace compounding measurement problems: metrics-metrics-metrics established that constructs can differ from indicators (a benchmark measuring distribution rather than the underlying capability), nist-benchmark-evals showed that most evaluation protocols miss basic scientific practices, and benchmark-uncertainty shows that the statistical mechanics of the reported numbers are wrong. A leaderboard position implicitly claims: 'this benchmark measures the construct I care about (validity), the protocol was sound (external validity), and the number reported is statistically correct (statistical validity).' All three can be wrong simultaneously. Practitioners should interrogate each claim separately rather than treating a published number as an authoritative capability statement."
+  },
+  {
+    "id": "bu-visual-q01",
+    "post": "benchmark-uncertainty",
+    "module": "evaluations",
+    "objective": "distinction",
+    "difficulty": 2,
+    "image": "../img/accuracy-estimands.png",
+    "imageAlt": "Two panels both at 75.3%. Left (BENCHMARK ACCURACY, blue): narrow CI, uncertainty from LLM nondeterminism only, fixed item set. Right (GENERALIZED ACCURACY, orange): wide CI, uncertainty from LLM nondeterminism plus item selection variance, full superpopulation. Bottom: SAME POINT ESTIMATE. DIFFERENT CLAIMS. DIFFERENT STANDARD ERRORS.",
+    "question": "Both panels show 75.3%, but the confidence intervals are dramatically different widths. What is the source of the extra uncertainty in the right panel that the left panel ignores?",
+    "options": [
+      "The right panel uses a larger test set, which paradoxically widens the interval because more samples reveal more variance in the model's behavior across different question types.",
+      "The right panel accounts for item selection variance — the benchmark's specific questions are a sample from all possible questions that could test the construct, and different samples would yield different scores.",
+      "The right panel applies a more conservative multiple-comparisons correction, which inflates the interval to account for the possibility that the reported result was selected from many evaluation runs.",
+      "The right panel includes human evaluator disagreement as an additional uncertainty source — the wider interval reflects rater variation on questions where the correct answer is contested."
+    ],
+    "correct": 1,
+    "explanation": "The narrow left-panel interval captures only the randomness from the LLM's nondeterminism on a fixed set of items. The wide right-panel interval adds item selection variance: the benchmark's questions are one draw from the superpopulation of all questions that could test the construct. A different draw of items — same difficulty, same topic distribution — would produce a different score. Standard error formulas for benchmark accuracy treat the items as the full population (no item variance), which is mathematically wrong for the claim 'this model has X% ability on this construct.' The post calls this reporting the wrong estimand: leaderboards compute benchmark accuracy SE but make generalized accuracy claims."
+  },
+  {
+    "id": "bu-visual-q02",
+    "post": "benchmark-uncertainty",
+    "module": "evaluations",
+    "objective": "mechanism",
+    "difficulty": 3,
+    "image": "../img/glmm-hierarchy.png",
+    "imageAlt": "GLMM two-level hierarchy: superpopulation of items (top cloud) with sample arrow down to Item j (random effect delta-j ~ N(0, sigma-squared)). Separate LLM i box (fixed effect theta-i). Both feed to trial outcome Y ~ Bernoulli(sigma(theta-i minus delta-j)). Right annotation: PARTIAL POOLING — items share variance estimate across benchmark.",
+    "question": "The GLMM diagram separates item difficulty (delta-j, random effect) from model capability (theta-i, fixed effect). Why does this separation matter for comparing two models on the same benchmark?",
+    "options": [
+      "It allows the benchmark to be scored without knowing item difficulty in advance — the random effect absorbs difficulty variation so both models are evaluated on the same effective scale even if they saw different items.",
+      "It prevents item difficulty from inflating one model's score if that model happened to receive easier items — fixed effects estimate capability independently of which specific items were sampled.",
+      "It allows model capability to be estimated even when some items have no correct answer — the random effect can absorb ambiguous items without contaminating the capability estimate.",
+      "It separates pre-training contamination (captured in theta-i) from genuine reasoning (captured in delta-j) — the fixed/random split is a contamination detection mechanism."
+    ],
+    "correct": 1,
+    "explanation": "If you compare two models on the same fixed benchmark, item difficulty is a constant and cancels out. But the GLMM matters most in multi-cycle evaluation: if you run a new benchmark version with different items, or compare across benchmarks, item difficulty is no longer constant. The random effect delta-j ~ N(0, σ²) estimates item difficulty from the data and partials it out via partial pooling — so theta-i is an estimate of capability on the construct, not on this particular set of items. This is the equating mechanism that makes benchmark scores comparable across versions. Without it, a harder item set makes all models look worse, and you can't tell whether a score dropped because models regressed or because the items were harder."
   }
 ]

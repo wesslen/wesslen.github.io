@@ -158,5 +158,23 @@
     ],
     "correct": 0,
     "explanation": "The post's final argument is about measurement asymmetry: 'We know how to measure efficiency gains from automating the easy tasks. We do not have the measurement infrastructure to track what that does to the human capital in the hard ones.' The automation decision — whether to deploy — is increasingly determined by competitive and cost pressures that leave little room for institutional discretion. The sequencing decision — which tasks first — is where genuine governance choices remain. And the sequencing choice determines whether the institution retains, or progressively hollows out, the judgment capabilities it depends on precisely in the situations where automation fails, judgment is disputed, or stress reveals what the routine was concealing."
+  },
+  {
+    "id": "wlb-visual-q01",
+    "post": "weak-links-banking",
+    "module": "ai-economy",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "image": "../img/weak-links-banking-header.png",
+    "imageAlt": "Two-panel diagram: left panel shows automated routine tasks (AML triage, credit memo, report generation) with small productivity gain box annotated weak links bound the gain. Right panel shows binding constraint tasks (credit judgment, effective challenge) in orange. Dashed arrow labeled also the practice curriculum drops from left panel, turns red with X, rises as skill atrophy into binding constraint boxes. Stick figure: I approved 400 of these. Never had to think about one.",
+    "question": "The dashed arrow from the left panel drops, turns red with an X, and rises into the right panel as 'skill atrophy.' What mechanism does this path illustrate that a standard productivity analysis of automation would miss?",
+    "options": [
+      "The path illustrates cost transfer — the productivity gain in the left panel is offset by increased error costs in the right panel, which standard automation ROI calculations don't include because they measure cost savings, not error rates.",
+      "The path illustrates that routine tasks are the practice substrate for judgment tasks — automating AML triage and credit memo drafting doesn't just change who does those tasks; it removes the repetitions that build the judgment capacity needed for credit underwriting and effective challenge.",
+      "The path illustrates the weak links theorem directly — output is bounded by the slowest step, and automating fast steps doesn't speed up the slow ones, so productivity gains are capped regardless of how much routine work is automated.",
+      "The path illustrates a staffing model failure — reducing headcount in routine task roles eliminates the pipeline of junior staff who would otherwise develop into senior judgment roles through years of routine work experience."
+    ],
+    "correct": 1,
+    "explanation": "The stick figure's caption is the mechanism: 'I approved 400 of these. Never had to think about one.' Routine tasks are not just work to be done — they are the repetitions that build pattern recognition, calibration, and judgment. A credit analyst who reviews 400 credit memos develops intuitions about what a good memo looks like, where risks hide, and how to spot when something is off. Automate those 400 reviews, and the analyst skips that learning entirely. When they reach the binding constraint tasks — credit underwriting, effective challenge, regulatory interpretation — they lack the calibration that routine volume builds. The dashed path with the red X is the learning that doesn't happen: the left panel doesn't just produce outputs, it produces the trained judgment that the right panel depends on."
   }
 ]

@@ -158,5 +158,23 @@
     ],
     "correct": 0,
     "explanation": "The series traces a single cumulative argument. Post 1 (bainbridge-ironies): Bainbridge identified the structural properties of automation that predict oversight failures across all domains, 43 years ago, in a paper uncited by US banking supervisors. Post 2 (automation-bias-banking): the empirical evidence since then — Skitka, Bahner, Bansal — quantifies how severely 'the analyst will catch it' governance fails. Post 3 (hci-translation): the crosswalk that would connect this research to MRM practice doesn't exist and hasn't been built. The prediction: every AI governance framework assembled without this connection will reproduce the same ironies in a new technological context, because the underlying human-factors mechanisms don't change across domains."
+  },
+  {
+    "id": "hci-visual-q01",
+    "post": "hci-translation",
+    "module": "bainbridge-debt",
+    "objective": "argument",
+    "difficulty": 2,
+    "image": "../img/hci-translation-crosswalk.png",
+    "imageAlt": "Two-column vocabulary gap: HCI/Human Factors (skill atrophy, automation bias, supervisory control, situation awareness) vs Banking MRM (ongoing monitoring, effective challenge, qualified personnel, human oversight). Orange double-headed arrow labeled VOCABULARY GAP in center. Stick figure asking ARE THESE THE SAME THING?",
+    "question": "The diagram places HCI and MRM vocabularies in separate columns with an unlabeled correspondence between them. What governance failure does the orange gap arrow represent, rather than simply a terminology difference?",
+    "options": [
+      "The gap arrow represents an organizational silo — HCI researchers and MRM practitioners work at different institutions and don't read each other's literature, so the vocabulary diverged by accident rather than design.",
+      "The gap arrow represents forty years of accumulated measurement infrastructure on the HCI side — banking MRM lacks validated instruments for skill atrophy and automation bias because the vocabulary gap prevented adoption of existing tools.",
+      "The gap arrow represents a regulatory translation problem — supervisors trained in MRM vocabulary cannot evaluate HCI-framed governance proposals, so well-designed interventions fail at the examination stage.",
+      "The gap arrow represents an opportunity — institutions that bridge the vocabulary gap first gain a competitive advantage in building governance frameworks that satisfy both MRM examiners and human factors practitioners."
+    ],
+    "correct": 1,
+    "explanation": "The post's argument is not that the terms are different labels for the same concept — it's that the vocabulary gap blocked technology transfer. HCI has validated measurement instruments for skill atrophy (override rates, task performance under degraded conditions), automation bias (commission error rates, alert response latency), and situation awareness (SAGAT, SART). Banking MRM has 'qualified personnel' and 'ongoing monitoring' with no specified metrics. Because the vocabulary gap prevented the fields from recognizing the correspondence, banking governance never adopted the measurement infrastructure that already existed. The crosswalk the post proposes is a remediation: 'override rate' → skill atrophy signal, LOA level → SR 26-2 tier, not as novel ideas but as translations of existing validated approaches."
   }
 ]

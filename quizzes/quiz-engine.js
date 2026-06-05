@@ -155,6 +155,14 @@ if (typeof window === "undefined") { global.window = {}; }
       card.appendChild(tag);
     }
 
+    if (question.image) {
+      const img = document.createElement("img");
+      img.src = question.image;
+      img.alt = question.imageAlt || "";
+      img.className = "quiz-question-image";
+      card.appendChild(img);
+    }
+
     const qText = document.createElement("p");
     qText.className = "quiz-question";
     qText.textContent = question.question;

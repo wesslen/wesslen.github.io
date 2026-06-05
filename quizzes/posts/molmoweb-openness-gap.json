@@ -158,5 +158,23 @@
     ],
     "correct": 1,
     "explanation": "The post's prediction is explicit: 'If these patterns appear in the most carefully documented open GUI agent release to date, I'd expect similar patterns to be common in regulated banking deployments moving faster and with less documentation discipline.' For closed-weight commercial API deployments, the code to audit doesn't exist — practitioners cannot find the defaults table. For internal banking builds under time pressure, the comparison of training conditions to paper conditions won't happen. The MRM challenge is building validation processes that catch these behavioral assumptions without source code access, using behavioral testing and documentation challenges instead."
+  },
+  {
+    "id": "mog-visual-q01",
+    "post": "molmoweb-openness-gap",
+    "module": "gui-agents",
+    "objective": "scope",
+    "difficulty": 2,
+    "image": "../img/molmoweb-harness-loop.png",
+    "imageAlt": "MolmoWeb ReAct agent loop: ASSEMBLE PROMPT (system + screenshot + history + task) → POST TO MODEL SERVER (stateless, no KV-cache reuse) → RECEIVE THOUGHT+ACTION → EXECUTE VIA PLAYWRIGHT → CAPTURE SCREENSHOT → APPEND TO ROLLING HISTORY → diamond STARTS WITH [ANSWER]? YES exits, NO loops. Red annotation on the decision diamond: undocumented in README.",
+    "question": "The diagram annotates the [ANSWER] termination check as 'undocumented in README.' Why does this omission matter for someone trying to reproduce MolmoWeb's published benchmark scores?",
+    "options": [
+      "Without knowing the termination condition, a reproducer cannot know when to stop the loop — the agent might run indefinitely or terminate too early, producing different scores than the published results.",
+      "The undocumented termination contract means the benchmark scores are invalid — any result dependent on an undocumented stopping rule cannot be considered a legitimate experimental finding.",
+      "The omission only matters for custom model adapters — the default Gemini integration handles [ANSWER] detection automatically, so reproducing with Gemini is unaffected by the documentation gap.",
+      "The undocumented condition inflates the benchmark scores — the [ANSWER] prefix forces a definitive output that makes the agent appear more decisive than it would be in open-ended deployment."
+    ],
+    "correct": 0,
+    "explanation": "The [ANSWER] prefix is the contract that tells the harness when to exit the ReAct loop. If you're building a compatible client against the /predict API, you need to know that a response beginning with [ANSWER] is the termination signal — otherwise your loop doesn't know when the task is complete. The post calls this the openness gap: the harness architecture is technically published (you can read the source), but the undocumented README means a practitioner building on MolmoWeb's framework would discover this termination behavior through code archaeology rather than documentation. For benchmark reproducibility, it means any implementation that handles termination differently — even slightly — is running a different experiment. The red annotation is the post's flag for where openness stops at the code and fails at the documentation layer."
   }
 ]

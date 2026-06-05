@@ -148,6 +148,18 @@ for (const file of postPoolFiles) {
     if (typeof q.difficulty !== 'number' || ![1,2,3].includes(q.difficulty))
       error(`${loc} — "difficulty" must be 1 (foundational), 2 (applied), or 3 (synthesis)`);
 
+    // Optional image field — check path resolves to a real file
+    if (q.image !== undefined) {
+      if (typeof q.image !== "string" || !q.image.trim())
+        error(`${loc} — "image" must be a non-empty string path`);
+      else {
+        // Resolve relative to post.html (one level above quizzes/posts/)
+        const imgPath = path.resolve(ROOT, q.image.replace(/^\.\.\//,""));
+        if (!exists(imgPath))
+          error(`${loc} — image file not found: ${q.image} (resolved: ${imgPath})`);
+      }
+    }
+
     // Duplicate ID check (global)
     if (q.id) {
       if (allQuestionIds.has(q.id))

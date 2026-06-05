@@ -158,5 +158,23 @@
     ],
     "correct": 0,
     "explanation": "The post's structural argument: credit cards have zero-liability policies, chargeback infrastructure, and dispute processes — but also 2-3% interchange fees and settlement delays that make them economically unattractive for high-volume agentic commerce. RTP, FedNow, and stablecoins offer near-zero fees, instant settlement, and programmable conditions — exactly what agentic commerce needs — but were designed (RTP, FedNow) or regulated (stablecoins under GENIUS Act) without consumer fraud recovery mechanisms suited to AI delegation. The result: the rails most economically suited to agentic commerce are those where consumers, when something goes wrong, have the least recourse. The inversion is structural, not accidental, and resolving it requires either extending consumer protection to new rails or accepting that agentic commerce will route through more expensive consumer-protected rails."
+  },
+  {
+    "id": "plg-visual-q01",
+    "post": "payments-liability-gap",
+    "module": "agentic-governance",
+    "objective": "argument",
+    "difficulty": 2,
+    "image": "../img/payments-liability-matrix.png",
+    "imageAlt": "Five payment rails left to right from most to least consumer protection: credit card ($50 CAP + ZERO LIABILITY) to stablecoin (NO FEDERAL FLOOR). Green arrow below pointing left: CONSUMER PROTECTION DECREASES. Orange arrow above pointing right: AI AGENT ECONOMIC INCENTIVES INCREASE. Bottom: THE RAILS AI AGENTS PREFER ARE THE RAILS CONSUMERS CANNOT DISPUTE.",
+    "question": "The diagram shows two arrows pointing in opposite directions across the same rails. What specific risk does the opposition of these two arrows create for consumers using AI agents to make payments?",
+    "options": [
+      "The opposing arrows create a pricing risk — AI agents optimizing for speed will route to RTP and stablecoin rails where processing fees are lower, increasing transaction costs for consumers who don't monitor routing decisions.",
+      "The opposing arrows create a liability inversion — agents have economic incentives to use rails (RTP, stablecoin) that are irreversible and have no federal consumer protection floor, concentrating liability on the consumer for any error or fraud.",
+      "The opposing arrows create a regulatory arbitrage opportunity for banks — institutions can route AI-initiated payments through stablecoin rails to avoid the $50 cap consumer liability rules that apply on credit card rails.",
+      "The opposing arrows create a competitive imbalance — banks that adopt AI agents early will route payment volume to higher-fee rails, while late adopters remain on credit card rails with lower unit economics."
+    ],
+    "correct": 1,
+    "explanation": "The diagram's tension is structural: the rails that AI agents have functional reasons to prefer (irreversibility is useful for completing agentic workflows; real-time finality is useful for commerce) are the rails where consumer protection is weakest or nonexistent. If an AI agent makes a wire transfer or stablecoin payment in error — or is manipulated into making one — EFTA's 60-day dispute window and the $50 cap don't apply. The consumer holds the loss. The bottom annotation is the diagram's thesis in one sentence: the technical and economic incentives of agentic payment systems point toward the rails where consumer dispute rights are most limited. This is not a coincidence; it's the post's liability gap argument."
   }
 ]

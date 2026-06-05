@@ -7,13 +7,13 @@
     "difficulty": 2,
     "question": "The post insists on distinguishing between 'metrics' and 'evaluation.' What is the practical significance of this distinction?",
     "options": [
-      "Metrics are quantitative while evaluation incorporates qualitative human judgment about system behavior in context \u2014 they serve fundamentally different organizational audiences and operate under different interpretive conventions across governance and engineering teams.",
+      "Metrics are quantitative while evaluation incorporates qualitative human judgment about system behavior in context — they serve fundamentally different organizational audiences and operate under different interpretive conventions across governance and engineering teams.",
       "Metrics are visible outputs like F1 or hallucination rates; evaluation is the full stack of test design, harness engineering, and failure taxonomy that gives those numbers meaning.",
       "Metrics are used operationally by engineers while evaluation is a governance artifact consumed by product managers, risk committees, and regulatory examiners in compliance reviews.",
       "Metrics capture point-in-time performance snapshots while evaluation is a longitudinal monitoring process conducted continuously across the full operational lifetime of a deployed system."
     ],
     "correct": 1,
-    "explanation": "Hamel Husain's framing is precise: LLM evaluation is fundamentally data science, and the test infrastructure is the hard part \u2014 not the metrics. Metrics are outputs of that infrastructure. Teams that reach for off-the-shelf eval frameworks and adopt their metrics wholesale, without first establishing which failure modes their specific application has, don't have an evaluation \u2014 they have numbers. A 4.2/5 helpfulness score is meaningless if the test cases weren't designed to probe the specific capabilities and failure modes of the deployed application."
+    "explanation": "Hamel Husain's framing is precise: LLM evaluation is fundamentally data science, and the test infrastructure is the hard part — not the metrics. Metrics are outputs of that infrastructure. Teams that reach for off-the-shelf eval frameworks and adopt their metrics wholesale, without first establishing which failure modes their specific application has, don't have an evaluation — they have numbers. A 4.2/5 helpfulness score is meaningless if the test cases weren't designed to probe the specific capabilities and failure modes of the deployed application."
   },
   {
     "id": "mmm-q02",
@@ -21,15 +21,15 @@
     "module": "evaluations",
     "objective": "mechanism",
     "difficulty": 2,
-    "question": "Nassim Taleb testified that VaR had a 'systematic side effect' \u2014 it increased risk-taking even among people who knew the measure was unreliable. Why does seeing a number produce this effect?",
+    "question": "Nassim Taleb testified that VaR had a 'systematic side effect' — it increased risk-taking even among people who knew the measure was unreliable. Why does seeing a number produce this effect?",
     "options": [
-      "People are naturally optimistic and will interpret any quantitative risk estimate favorably regardless of stated limitations \u2014 cognitive optimism bias systematically outweighs stated methodological caveats.",
-      "Numbers produce overconfidence through anchoring \u2014 knowing a metric is imperfect doesn't prevent anchoring on it, and the act of measurement creates a feeling of control that reduces vigilance.",
+      "People are naturally optimistic and will interpret any quantitative risk estimate favorably regardless of stated limitations — cognitive optimism bias systematically outweighs stated methodological caveats.",
+      "Numbers produce overconfidence through anchoring — knowing a metric is imperfect doesn't prevent anchoring on it, and the act of measurement creates a feeling of control that reduces vigilance.",
       "VaR values were structurally biased toward underestimating tail risk because they used normal distribution assumptions, so traders rationally took on more exposure than the number suggested was safe.",
-      "The effect was specific to VaR's formal regulatory status as a required capital adequacy measure \u2014 other risk metrics lacking mandatory reporting requirements don't produce the same behavioral anchoring effects."
+      "The effect was specific to VaR's formal regulatory status as a required capital adequacy measure — other risk metrics lacking mandatory reporting requirements don't produce the same behavioral anchoring effects."
     ],
     "correct": 1,
-    "explanation": "Taleb's testimony is the post's central cautionary anchor: 'Risk measurement and prediction \u2014 any prediction \u2014 has side effects of increasing risk-taking, even by those who know that they are not reliable. We have ample evidence of so-called anchoring in the calibration of decisions.' The VaR lesson for GenAI eval is that a 3% aggregate hallucination rate, once it appears on a dashboard, will anchor decision-making even if everyone in the room knows it's measured by a miscalibrated judge on unrepresentative test cases. The number colonizes the goal."
+    "explanation": "Taleb's testimony is the post's central cautionary anchor: 'Risk measurement and prediction — any prediction — has side effects of increasing risk-taking, even by those who know that they are not reliable. We have ample evidence of so-called anchoring in the calibration of decisions.' The VaR lesson for GenAI eval is that a 3% aggregate hallucination rate, once it appears on a dashboard, will anchor decision-making even if everyone in the room knows it's measured by a miscalibrated judge on unrepresentative test cases. The number colonizes the goal."
   },
   {
     "id": "mmm-q03",
@@ -37,15 +37,15 @@
     "module": "evaluations",
     "objective": "scope",
     "difficulty": 1,
-    "question": "The post argues that 'the field practitioners most need to read isn't ML engineering literature \u2014 it's psychometrics.' What does psychometrics offer that ML evaluation frameworks don't?",
+    "question": "The post argues that 'the field practitioners most need to read isn't ML engineering literature — it's psychometrics.' What does psychometrics offer that ML evaluation frameworks don't?",
     "options": [
       "Psychometrics provides access to far larger benchmark datasets than any existing ML evaluation framework, enabling more statistically reliable capability estimates across the full range of task domains that practitioners actually care about.",
-      "A century of tools for measuring latent constructs through observable proxies \u2014 construct validity, IRT, reliability coefficients \u2014 the infrastructure for verifying that indicators measure what you claim.",
+      "A century of tools for measuring latent constructs through observable proxies — construct validity, IRT, reliability coefficients — the infrastructure for verifying that indicators measure what you claim.",
       "Psychometric methods are faster and more cost-effective than current automated ML evaluation approaches because they were developed under severe resource constraints in academic research settings.",
       "Psychometrics relies entirely on human judges rather than automated evaluators, which are more reliable for subjective quality dimensions that current LLM judges systematically misrate."
     ],
     "correct": 1,
-    "explanation": "Psychometrics spent roughly a century on the same fundamental problem GenAI evaluation faces: measuring things you can't observe directly (reasoning ability, safety, faithfulness) through observable indicators (specific tasks, outputs, responses), under conditions where the measurement instrument affects what it measures. Construct validity \u2014 verifying that your indicators actually measure the underlying construct \u2014 is the hard problem psychometricians address rigorously. ML teams tend to assume that if you can run the test, you're measuring what you want. Social scientists know you have to verify that assumption separately."
+    "explanation": "Psychometrics spent roughly a century on the same fundamental problem GenAI evaluation faces: measuring things you can't observe directly (reasoning ability, safety, faithfulness) through observable indicators (specific tasks, outputs, responses), under conditions where the measurement instrument affects what it measures. Construct validity — verifying that your indicators actually measure the underlying construct — is the hard problem psychometricians address rigorously. ML teams tend to assume that if you can run the test, you're measuring what you want. Social scientists know you have to verify that assumption separately."
   },
   {
     "id": "mmm-q04",
@@ -56,12 +56,12 @@
     "question": "IRT's guessing floor parameter (c) in the 3-parameter logistic model is described as a 'hallucination proxy.' What is the mechanism connecting them?",
     "options": [
       "The guessing floor directly measures how often a model produces factually false statements in response to domain-specific questions, providing a lower bound on hallucination rate across capability levels.",
-      "As ability approaches zero, correct-answer probability asymptotes to c \u2014 representing answers produced through pattern matching rather than domain reasoning, structurally indistinguishable from hallucinations at the output level.",
+      "As ability approaches zero, correct-answer probability asymptotes to c — representing answers produced through pattern matching rather than domain reasoning, structurally indistinguishable from hallucinations at the output level.",
       "The guessing floor quantifies the probability that any given evaluation item is genuinely ambiguous, with multiple defensible correct answers that a domain expert would accept as valid responses.",
       "The c parameter controls how many answer options are displayed to the model, affecting the base probability of guessing correctly and thereby setting the floor for minimum observed accuracy."
     ],
     "correct": 1,
-    "explanation": "The 3-parameter logistic model's c parameter represents the lower asymptote: even as model ability drops arbitrarily low, the probability of a correct answer never falls below c. In the hallucination framing: these are correct answers that don't reflect domain understanding \u2014 the model produced them through pattern matching against its training distribution, not through reasoning about the question. Model B in the post's simulation has a 35% guessing floor: 83% of its hard-item correct answers are from this floor, indistinguishable from hallucinations at the output level. A 68% raw accuracy and a 73% raw accuracy can have completely different structural reliability profiles."
+    "explanation": "The 3-parameter logistic model's c parameter represents the lower asymptote: even as model ability drops arbitrarily low, the probability of a correct answer never falls below c. In the hallucination framing: these are correct answers that don't reflect domain understanding — the model produced them through pattern matching against its training distribution, not through reasoning about the question. Model B in the post's simulation has a 35% guessing floor: 83% of its hard-item correct answers are from this floor, indistinguishable from hallucinations at the output level. A 68% raw accuracy and a 73% raw accuracy can have completely different structural reliability profiles."
   },
   {
     "id": "mmm-q05",
@@ -71,13 +71,13 @@
     "difficulty": 2,
     "question": "Chess-playing frontier models achieve near-optimal accuracy on standard board positions but error rates jump 600% when the board is rotated or mirrored. How does this illustrate construct validity failure?",
     "options": [
-      "It shows that current AI chess models are not yet competitive with skilled human players \u2014 the 600% error spike proves that benchmark accuracy on standard positions overstates true chess-playing capability.",
+      "It shows that current AI chess models are not yet competitive with skilled human players — the 600% error spike proves that benchmark accuracy on standard positions overstates true chess-playing capability.",
       "The metric (accuracy on standard positions) looked like chess proficiency; the 600% error spike on rotated boards revealed the model had learned a positional distribution, not the game itself.",
       "This demonstrates that AI models need more diverse training data including rotated and mirrored positions to achieve robust generalization across all board orientations and positional configurations.",
-      "The failure mode is specific to chess and does not generalize \u2014 other game-playing AI systems trained on diverse data successfully avoid this particular class of distributional overfitting problem."
+      "The failure mode is specific to chess and does not generalize — other game-playing AI systems trained on diverse data successfully avoid this particular class of distributional overfitting problem."
     ],
     "correct": 1,
-    "explanation": "The chess example is precisely what construct validity failure looks like. Standard benchmark accuracy was near-optimal, so the benchmark was 'solved' in the field's framing. But rotation/mirroring tests probe whether the model has learned the underlying construct (spatial reasoning about piece relationships and strategic positions) vs. a statistical mapping from standard positions to known moves. The 600% error rate increase reveals that the model had the latter, not the former. The metric measured the training distribution; it reported the result as capability. This is the same structure as the mARC-QA clinical reasoning failure \u2014 high scores on standard conditions, collapse on structurally equivalent but distribution-shifted conditions."
+    "explanation": "The chess example is precisely what construct validity failure looks like. Standard benchmark accuracy was near-optimal, so the benchmark was 'solved' in the field's framing. But rotation/mirroring tests probe whether the model has learned the underlying construct (spatial reasoning about piece relationships and strategic positions) vs. a statistical mapping from standard positions to known moves. The 600% error rate increase reveals that the model had the latter, not the former. The metric measured the training distribution; it reported the result as capability. This is the same structure as the mARC-QA clinical reasoning failure — high scores on standard conditions, collapse on structurally equivalent but distribution-shifted conditions."
   },
   {
     "id": "mmm-q06",
@@ -85,15 +85,15 @@
     "module": "evaluations",
     "objective": "argument",
     "difficulty": 3,
-    "question": "The post argues that 'greedy evals' \u2014 optimizing for the next sprint with whatever scores look reasonable \u2014 risk 'missing the cliff.' What specifically is the cliff?",
+    "question": "The post argues that 'greedy evals' — optimizing for the next sprint with whatever scores look reasonable — risk 'missing the cliff.' What specifically is the cliff?",
     "options": [
       "The cost inflection point at which evaluation infrastructure spending exceeds the business value of the information it produces, creating a negative ROI that finance teams will flag in quarterly budget reviews.",
-      "A production failure the metrics looked fine predicting \u2014 eval debt compounds silently, dashboards stay green, and then something fails that the test suite was never designed to catch.",
+      "A production failure the metrics looked fine predicting — eval debt compounds silently, dashboards stay green, and then something fails that the test suite was never designed to catch.",
       "The benchmark saturation point at which top models become statistically indistinguishable, making the benchmark useless for procurement decisions and forcing teams to develop new evaluation criteria.",
       "A regulatory enforcement action triggered when deployed AI systems fail in production in ways that pre-deployment evaluation programs were specifically designed to prevent but inadvertently missed."
     ],
     "correct": 1,
-    "explanation": "The post closes with this framing explicitly: 'Greedy evals \u2014 optimizing for the next sprint, shipping whatever scores look reasonable \u2014 are the local-optimum solution to a global problem. Every greedy algorithm risks missing the cliff. Eval debt compounds like technical debt, but the failure mode is harder to see coming: the metrics look fine, the dashboard looks fine, and then something in production doesn't.' The cliff is the production failure that the evaluation apparatus was miscalibrated to catch \u2014 not a visible threshold, but a category of failures that the test suite was never designed to probe."
+    "explanation": "The post closes with this framing explicitly: 'Greedy evals — optimizing for the next sprint, shipping whatever scores look reasonable — are the local-optimum solution to a global problem. Every greedy algorithm risks missing the cliff. Eval debt compounds like technical debt, but the failure mode is harder to see coming: the metrics look fine, the dashboard looks fine, and then something in production doesn't.' The cliff is the production failure that the evaluation apparatus was miscalibrated to catch — not a visible threshold, but a category of failures that the test suite was never designed to probe."
   },
   {
     "id": "mmm-q07",
@@ -103,13 +103,13 @@
     "difficulty": 2,
     "question": "Research documents at least 12 systematic biases in LLM-as-judge systems, including verbosity bias, positional bias, and self-preference bias. What is the most dangerous misconception practitioners hold about automated LLM judges?",
     "options": [
-      "That LLM judges are more expensive to operate than equivalent human annotator panels \u2014 this misconception causes teams to underinvest in automated evaluation and over-rely on sparse human review cycles.",
-      "That an unverified automated judge is a measurement instrument \u2014 when it's a noise generator that produces numbers shaped like measurements without the calibration needed to make them meaningful.",
-      "That LLM judges must use the same model architecture as the system being evaluated \u2014 causing teams to deploy mismatched judges that introduce unnecessary model-family-level confounds into their evaluation results.",
-      "That positional bias can be reliably eliminated by always presenting options in alphabetical order \u2014 a folk remedy that reduces but does not eliminate systematic ordering effects in pairwise evaluation comparisons."
+      "That LLM judges are more expensive to operate than equivalent human annotator panels — this misconception causes teams to underinvest in automated evaluation and over-rely on sparse human review cycles.",
+      "That an unverified automated judge is a measurement instrument — when it's a noise generator that produces numbers shaped like measurements without the calibration needed to make them meaningful.",
+      "That LLM judges must use the same model architecture as the system being evaluated — causing teams to deploy mismatched judges that introduce unnecessary model-family-level confounds into their evaluation results.",
+      "That positional bias can be reliably eliminated by always presenting options in alphabetical order — a folk remedy that reduces but does not eliminate systematic ordering effects in pairwise evaluation comparisons."
     ],
     "correct": 1,
-    "explanation": "The post quotes a Wells Fargo research paper's title \u2014 'Who Judges the Judge?' \u2014 as capturing the core issue. Verbosity bias (longer responses score higher regardless of quality), positional bias (20-40% flip rate in pairwise comparisons when option order changes), and self-preference bias (judges score outputs similar to their own training distribution higher) mean an unverified judge is systematically distorting results. Verifying your judge requires the same approach as validating a classifier: get human labels, partition into train/dev/test, measure precision and recall, check for calibration drift. Skipping this produces numbers that look authoritative and measure something other than what you intended."
+    "explanation": "The post quotes a Wells Fargo research paper's title — 'Who Judges the Judge?' — as capturing the core issue. Verbosity bias (longer responses score higher regardless of quality), positional bias (20-40% flip rate in pairwise comparisons when option order changes), and self-preference bias (judges score outputs similar to their own training distribution higher) mean an unverified judge is systematically distorting results. Verifying your judge requires the same approach as validating a classifier: get human labels, partition into train/dev/test, measure precision and recall, check for calibration drift. Skipping this produces numbers that look authoritative and measure something other than what you intended."
   },
   {
     "id": "mmm-q08",
@@ -120,12 +120,12 @@
     "question": "Benchmark saturation analysis found that nearly half of 60 widely used benchmarks show top models becoming statistically indistinguishable on aging benchmarks. What does this reveal about Goodhart's Law as applied to AI benchmarks?",
     "options": [
       "Benchmarks have a natural expiration cycle of roughly three years and should be replaced on a fixed schedule regardless of current score distributions or whether scores have actually converged at the top.",
-      "When benchmark scores appear in procurement conversations, they stop being measurements and become targets \u2014 models train toward specific items, scores converge, and the benchmark decouples from underlying capability.",
+      "When benchmark scores appear in procurement conversations, they stop being measurements and become targets — models train toward specific items, scores converge, and the benchmark decouples from underlying capability.",
       "Score convergence proves that AI systems have genuinely solved the capabilities those benchmarks measure and that the field should simply move on to harder evaluation tasks without nostalgia.",
       "Goodhart's saturation effect only applies to multiple-choice benchmarks and does not occur in open-ended generation tasks where models must produce novel output rather than select from fixed options."
     ],
     "correct": 1,
-    "explanation": "The post traces the Goodhart dynamic precisely: 'When MMLU scores appear in model announcements and procurement conversations, they stop being measurements and become targets.' The saturation pattern \u2014 top models becoming statistically indistinguishable on aging benchmarks \u2014 reflects models that have learned to solve the specific items rather than the underlying skill the items were meant to probe. This is the benchmark version of VaR: a number that was a reasonable proxy when introduced becomes the optimization target, and in becoming the target, ceases to measure the underlying thing. The 47% saturation rate across 60 benchmarks shows this is not an edge case."
+    "explanation": "The post traces the Goodhart dynamic precisely: 'When MMLU scores appear in model announcements and procurement conversations, they stop being measurements and become targets.' The saturation pattern — top models becoming statistically indistinguishable on aging benchmarks — reflects models that have learned to solve the specific items rather than the underlying skill the items were meant to probe. This is the benchmark version of VaR: a number that was a reasonable proxy when introduced becomes the optimization target, and in becoming the target, ceases to measure the underlying thing. The 47% saturation rate across 60 benchmarks shows this is not an edge case."
   },
   {
     "id": "mmm-q09",
@@ -133,15 +133,15 @@
     "module": "evaluations",
     "objective": "mechanism",
     "difficulty": 3,
-    "question": "Classical Test Theory's concept of 'true score' \u2014 expected performance across infinite replications \u2014 is specifically useful for LLM evaluation. Why?",
+    "question": "Classical Test Theory's concept of 'true score' — expected performance across infinite replications — is specifically useful for LLM evaluation. Why?",
     "options": [
       "It allows researchers to compute valid confidence intervals from a single evaluation run without collecting additional trials, reducing the compute cost of statistically rigorous capability estimation to near zero.",
-      "Since LLM outputs are non-deterministic, a single evaluation run conflates genuine capability (true score) with sampling noise \u2014 CTT provides a principled framework for separating the two signals.",
+      "Since LLM outputs are non-deterministic, a single evaluation run conflates genuine capability (true score) with sampling noise — CTT provides a principled framework for separating the two signals.",
       "True scores are stable across model version updates, enabling direct apples-to-apples capability comparison across sequential major releases without needing to re-run the full benchmark evaluation.",
       "CTT eliminates the need for human judges in any portion of the evaluation pipeline, reducing cost while improving statistical consistency in capability estimates across evaluation runs."
     ],
     "correct": 1,
-    "explanation": "LLM non-determinism means a single evaluation run is measuring a combination of the model's underlying capability and the particular random seed that produced those outputs. CTT's 'true score' is the expected value across infinite replications \u2014 the stable underlying capability without sampling noise. For evaluation purposes, this means single-run performance estimates are systematically noisier than they appear: the confidence interval around an observed performance number needs to account for within-model variance across replications, not just across-model variance. This is why the NIST 800-3 framework insists on multiple trials per item and derives the correct standard error formula."
+    "explanation": "LLM non-determinism means a single evaluation run is measuring a combination of the model's underlying capability and the particular random seed that produced those outputs. CTT's 'true score' is the expected value across infinite replications — the stable underlying capability without sampling noise. For evaluation purposes, this means single-run performance estimates are systematically noisier than they appear: the confidence interval around an observed performance number needs to account for within-model variance across replications, not just across-model variance. This is why the NIST 800-3 framework insists on multiple trials per item and derives the correct standard error formula."
   },
   {
     "id": "mmm-q10",
@@ -152,12 +152,12 @@
     "question": "The post argues that GenAI evaluation in financial services is failing partly because 'GenAI is arriving through product and engineering channels rather than model development and risk management ones.' What is the specific consequence of this channel difference?",
     "options": [
       "Product and engineering teams have substantially smaller budgets than dedicated model risk groups, causing systematic underinvestment in evaluation infrastructure that compounds over time into significant capability blind spots.",
-      "MRM has fifteen years of SR 11-7 culture asking 'are we measuring what we think we're measuring?' \u2014 GenAI through Technology channels bypasses that culture entirely.",
+      "MRM has fifteen years of SR 11-7 culture asking 'are we measuring what we think we're measuring?' — GenAI through Technology channels bypasses that culture entirely.",
       "Product teams systematically prioritize user experience metrics over accuracy and reliability, producing evaluations that optimize for engagement at the expense of the measurement validity risk teams require.",
       "Agile development methods used in engineering channels are structurally incompatible with the sequential independent validation process that SR 11-7 envisions for model development and deployment approval."
     ],
     "correct": 1,
-    "explanation": "The post makes this explicit: 'GenAI is arriving through product and engineering channels rather than model development and risk management ones, and partly because the dashboards look authoritative enough that nobody asks what they're actually measuring.' MRM teams trained in SR 11-7's framework ask about conceptual soundness, construct validity, and outcomes analysis by instinct. SDLC governance asks about correctness, reliability, and latency. Both are necessary; neither alone is sufficient. The channel difference means that the measurement-validity question \u2014 which psychometric tradition has developed tools to answer \u2014 is often never asked in the first place."
+    "explanation": "The post makes this explicit: 'GenAI is arriving through product and engineering channels rather than model development and risk management ones, and partly because the dashboards look authoritative enough that nobody asks what they're actually measuring.' MRM teams trained in SR 11-7's framework ask about conceptual soundness, construct validity, and outcomes analysis by instinct. SDLC governance asks about correctness, reliability, and latency. Both are necessary; neither alone is sufficient. The channel difference means that the measurement-validity question — which psychometric tradition has developed tools to answer — is often never asked in the first place."
   },
   {
     "id": "mmm-gloss-q01",
@@ -167,13 +167,13 @@
     "difficulty": 2,
     "question": "A bank measures its credit memo LLM's quality by response length, reasoning that longer answers signal thoroughness. After six months, the model produces verbose, unhelpful responses that score well but provide no additional value. Which principle best names this failure?",
     "options": [
-      "Construct validity gap \u2014 response length is not a valid proxy for thoroughness.",
-      "Goodhart's Law \u2014 when a measure becomes a target, it ceases to be a good measure; the model optimized for the metric rather than the underlying quality.",
-      "IRT difficulty inflation \u2014 easy metrics become harder to satisfy as models improve.",
-      "LLM-as-judge verbosity bias \u2014 the judge model preferred longer answers."
+      "Construct validity gap — response length is not a valid proxy for thoroughness.",
+      "Goodhart's Law — when a measure becomes a target, it ceases to be a good measure; the model optimized for the metric rather than the underlying quality.",
+      "IRT difficulty inflation — easy metrics become harder to satisfy as models improve.",
+      "LLM-as-judge verbosity bias — the judge model preferred longer answers."
     ],
     "correct": 1,
-    "explanation": "Goodhart's Law (in Strathern's 1997 generalization) states that when a measure becomes a target, it ceases to be a good measure. The model learned to optimize for the observable proxy (length) rather than the underlying construct (helpfulness). This is a foundational risk in any metric-driven eval system: the moment you score by X, you create pressure to maximize X independent of what X was supposed to measure. The construct validity issue and Goodhart's Law are related but distinct \u2014 construct validity is about whether the measure was ever valid; Goodhart's Law is about what happens after a valid measure becomes a target."
+    "explanation": "Goodhart's Law (in Strathern's 1997 generalization) states that when a measure becomes a target, it ceases to be a good measure. The model learned to optimize for the observable proxy (length) rather than the underlying construct (helpfulness). This is a foundational risk in any metric-driven eval system: the moment you score by X, you create pressure to maximize X independent of what X was supposed to measure. The construct validity issue and Goodhart's Law are related but distinct — construct validity is about whether the measure was ever valid; Goodhart's Law is about what happens after a valid measure becomes a target."
   },
   {
     "id": "mmm-gloss-q02",
@@ -185,11 +185,11 @@
     "options": [
       "IRT weights questions by the recency of the content they test.",
       "IRT uses larger question banks than classical test theory, making scores more reliable.",
-      "IRT simultaneously estimates each item's difficulty, discrimination, and guessing probability alongside the test-taker's underlying ability \u2014 allowing you to diagnose why scores differ, not just that they do.",
+      "IRT simultaneously estimates each item's difficulty, discrimination, and guessing probability alongside the test-taker's underlying ability — allowing you to diagnose why scores differ, not just that they do.",
       "IRT measures inter-rater agreement rather than individual item characteristics."
     ],
     "correct": 2,
-    "explanation": "Classical test theory aggregates scores without distinguishing easy items from hard ones. IRT models each item separately, estimating: how difficult it is (difficulty parameter \u03b4), how well it separates high- and low-ability test-takers (discrimination \u03b1), and the probability of correct guessing (pseudoguessing \u03b3). For LLM evaluation, this matters because two models with identical raw scores can have very different profiles \u2014 one may be a genuine reasoner that struggles on hard items, the other a pattern-matcher that guesses well on easy items."
+    "explanation": "Classical test theory aggregates scores without distinguishing easy items from hard ones. IRT models each item separately, estimating: how difficult it is (difficulty parameter δ), how well it separates high- and low-ability test-takers (discrimination α), and the probability of correct guessing (pseudoguessing γ). For LLM evaluation, this matters because two models with identical raw scores can have very different profiles — one may be a genuine reasoner that struggles on hard items, the other a pattern-matcher that guesses well on easy items."
   },
   {
     "id": "mmm-gloss-q03",
@@ -201,10 +201,28 @@
     "options": [
       "Red-teaming; the failure mode is that adversarial inputs are not representative of production traffic.",
       "Construct validity testing; the failure mode is that the test items do not measure the intended skill.",
-      "LLM-as-judge; the primary failure mode is systematic bias \u2014 including verbosity preference, self-preference, and positional effects \u2014 that inflates scores without reflecting genuine output quality.",
+      "LLM-as-judge; the primary failure mode is systematic bias — including verbosity preference, self-preference, and positional effects — that inflates scores without reflecting genuine output quality.",
       "Psychometric calibration; the failure mode is poor inter-rater agreement between the judge model and human raters."
     ],
     "correct": 2,
-    "explanation": "LLM-as-judge is the practice of using one language model to evaluate another. It is scalable and often well-correlated with human judgment in aggregate, but Ye et al. (2024) documented 12 distinct bias types \u2014 including a 20\u201340% positional flip rate, verbosity preference, and self-preference when the judge and evaluated model share a provider. For MRM purposes, the implication is that LLM-as-judge scores may not be defensible as objective assessments without bias correction and inter-rater validation against human evaluators."
+    "explanation": "LLM-as-judge is the practice of using one language model to evaluate another. It is scalable and often well-correlated with human judgment in aggregate, but Ye et al. (2024) documented 12 distinct bias types — including a 20–40% positional flip rate, verbosity preference, and self-preference when the judge and evaluated model share a provider. For MRM purposes, the implication is that LLM-as-judge scores may not be defensible as objective assessments without bias correction and inter-rater validation against human evaluators."
+  },
+  {
+    "id": "mmm-visual-q01",
+    "post": "metrics-metrics-metrics",
+    "module": "evaluations",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "image": "../img/irt-3pl-annotated.png",
+    "imageAlt": "3PL IRT equation hand-drawn and annotated: P(theta) = c + (1-c) * sigma(a*(theta-b)). Four annotation arrows: c=GUESSING FLOOR, theta=MODEL ABILITY, a=DISCRIMINATION, b=ITEM DIFFICULTY, sigma=LOGISTIC FUNCTION. Bottom: RAW ACCURACY COLLAPSES ALL FOUR PARAMETERS INTO ONE NUMBER.",
+    "question": "The diagram annotates four parameters in the 3PL equation but only one appears in the denominator of raw accuracy. What specifically does collapsing all four into raw accuracy hide about two models that score identically?",
+    "options": [
+      "Raw accuracy hides which benchmark items were used — two models can score identically on different item sets, making the scores incomparable across benchmarks even if the raw numbers match.",
+      "Raw accuracy hides whether the models got correct answers via genuine reasoning or via the guessing floor — two models at the same raw score may have very different ability levels if one has a higher guessing floor on the items it answered correctly.",
+      "Raw accuracy hides the cost of inference — a model with higher discrimination (a) requires more compute to produce the same accuracy as a model with lower discrimination, making raw accuracy an incomplete performance metric.",
+      "Raw accuracy hides item difficulty variation — if both models were tested on easy items, their identical score overstates their true ability relative to models tested on harder items, but this is corrected by test-form equating rather than IRT."
+    ],
+    "correct": 1,
+    "explanation": "The guessing floor parameter c is what raw accuracy can't recover. Consider two models at 75% raw accuracy on a 4-option MCQ benchmark. Model A answers 75% correctly because it has the ability level that makes those items informative. Model B gets 25% right by ability and another ~18% by chance (guessing floor c ≈ 0.25), for a combined 75% raw accuracy. These models have very different ability levels, but raw accuracy reports them identically. The bottom annotation — 'RAW ACCURACY COLLAPSES ALL FOUR PARAMETERS INTO ONE NUMBER' — means you can't back-calculate ability from accuracy without also knowing c, a, and b. The diagram's value is showing that the thing evaluation teams measure (P) bundles together what they actually want to know (theta) with three confounders they ignore."
   }
 ]

@@ -158,5 +158,41 @@
     ],
     "correct": 0,
     "explanation": "The trilogy's common structure: each post identifies a domain where individually rational AI decisions create negative externalities or public-good problems that aggregate individual choices cannot correct. AI-econ-model: individual firms rationally displace workers; collective demand loss is a macro externality requiring redistribution policy. Token-transfer-pricing: individual business units rationally use whatever model is available at zero marginal internal cost; the organization's aggregate compute allocation is irrational without internal pricing. Knowledge-collapse-economics: individual practitioners rationally delegate to AI; the community's shared knowledge stock is a public good that erodes without governance mechanisms that create incentives to maintain it. In each case, the market failure is structural — individually rational choices produce collectively suboptimal outcomes without appropriate institutions."
+  },
+  {
+    "id": "kce-visual-q01",
+    "post": "knowledge-collapse-economics",
+    "module": "ai-economy",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "image": "../img/knowledge-collapse-welfare-curve.png",
+    "imageAlt": "Welfare curve: X-axis AI PRECISION, Y-axis SOCIAL WELFARE. Curve rises to peak at tau-star (FIRST-BEST POLICY CAP, vertical dashed line), then falls back below BASELINE WELFARE at tau-A-c (HIGH-KNOWLEDGE STEADY STATE DISAPPEARS). Three zones: WELFARE-IMPROVING (left), PAST OPTIMUM (middle), COLLAPSE (right).",
+    "question": "The welfare curve peaks at tau-star and then falls — eventually dropping below the baseline. What makes the region between tau-star and tau-A-c particularly dangerous for institutions that don't know where they are on this curve?",
+    "options": [
+      "The region between tau-star and tau-A-c is where model accuracy is highest — institutions in this zone are getting the best AI output while unknowingly crossing the threshold where knowledge begins to collapse.",
+      "The region between tau-star and tau-A-c shows declining welfare but still above baseline — institutions in this zone see degrading outcomes but not yet catastrophic ones, creating no signal that they have passed the optimum.",
+      "The region between tau-star and tau-A-c is where AI precision is lowest — the model is accurate enough to replace junior analysts but not reliable enough for senior decisions, creating a quality vacuum.",
+      "The region between tau-star and tau-A-c requires regulatory intervention to enforce — without a policy cap at tau-star, institutions will naturally converge to tau-A-c because that is where individual firm incentives align."
+    ],
+    "correct": 1,
+    "explanation": "The dangerous zone is the middle region: welfare is declining (the curve is falling from the tau-star peak) but it's still above the baseline. This means an institution operating in this zone has measurably worse outcomes than if it had capped AI precision at tau-star, but the harm isn't yet catastrophic enough to be obviously attributable to knowledge collapse. There's no alarm. The curve continues falling until tau-A-c, where the high-knowledge steady state disappears and welfare falls below baseline — by which point the knowledge atrophy that drove the decline may be irreversible. The model's insight is that the harm accumulates quietly across the middle zone, making it appear to be a smooth decline in performance rather than a crossing of a structural threshold."
+  },
+  {
+    "id": "kce-visual-q02",
+    "post": "knowledge-collapse-economics",
+    "module": "ai-economy",
+    "objective": "argument",
+    "difficulty": 3,
+    "image": "../img/knowledge-collapse-garbling-policy.png",
+    "imageAlt": "Two-phase garbling policy timeline. Phase 1 SUPPRESSION (blue): AI PRECISION held at zero, KNOWLEDGE STOCK shows rising curve labeled REBUILDS. Phase 2 STEADY STATE (green): AI PRECISION flat line labeled CAPPED AT tau-star PERMANENTLY, KNOWLEDGE STOCK flat stable line labeled HOLDS. Bottom: ACCURACY BEYOND tau-star TRADES LONG-RUN KNOWLEDGE FOR SHORT-RUN QUALITY. Neither phase uses the most accurate model.",
+    "question": "The diagram shows that the garbling policy's steady state permanently caps AI precision below maximum accuracy. What is the welfare argument for why this is the first-best policy rather than a second-best compromise?",
+    "options": [
+      "Capping at tau-star is first-best because it maximizes short-run output quality — the model at tau-star produces better predictions than models above or below it, making it both the accuracy optimum and the welfare optimum.",
+      "Capping at tau-star is first-best because it internalizes the knowledge externality — without a cap, each individual rationally uses the most accurate model while the community bears the cost of aggregate knowledge loss, which no individual actor can correct.",
+      "Capping at tau-star is first-best because it satisfies regulatory requirements — models above tau-star exceed the precision threshold that SR 26-2 permits for high-stakes decisions, making lower-precision models the only compliant option.",
+      "Capping at tau-star is first-best because it minimizes model risk — less precise models fail more visibly than highly precise ones, making errors easier to detect and correct, which lowers the expected cost of model failure over time."
+    ],
+    "correct": 1,
+    "explanation": "The bottom annotation is the key: 'ACCURACY BEYOND tau-star TRADES LONG-RUN KNOWLEDGE FOR SHORT-RUN QUALITY.' The welfare argument is about externalities, not accuracy optimization. Each firm that uses a more precise model than tau-star gains a marginal output quality improvement but contributes to the aggregate reduction in community knowledge — the learning effect that would otherwise have built human expertise. No individual firm bears the cost of that loss; it falls on the community as reduced capacity to supervise, challenge, and improve AI systems. A cap at tau-star internalizes this externality: it gives up the short-run precision gain to preserve the knowledge stock that makes the long-run AI deployment sustainable. That's the first-best claim — not that tau-star maximizes accuracy, but that it maximizes welfare once the externality is accounted for."
   }
 ]

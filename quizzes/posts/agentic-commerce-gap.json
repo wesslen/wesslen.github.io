@@ -158,5 +158,23 @@
     ],
     "correct": 1,
     "explanation": "The post closes with this framing precisely: 'The right question before deployment isn't whether this product is legal. It's when something goes wrong, and something will go wrong, do the people most exposed to the consequence have any meaningful recourse? Right now, on the newest rails, the answer is often no.' This frames a practitioner's decision not as legal compliance (the current US approach allows many of these deployments) but as whether the product design accounts for the distributional reality: sophisticated institutional actors and large banks benefit from regulatory flexibility; ordinary consumers who delegate to DIY agents on instant payment rails may absorb losses with no recovery path. The ethical dimension is visible even when the legal dimension is satisfied."
+  },
+  {
+    "id": "acg-visual-q01",
+    "post": "agentic-commerce-gap",
+    "module": "agentic-governance",
+    "objective": "argument",
+    "difficulty": 2,
+    "image": "../img/agentic-commerce-tiers.png",
+    "imageAlt": "Four-tier market structure: Tier 1 money-center banks (regulation as moat, $300M/yr data pricing), Tier 2 fintechs (AAI-native, pays Tier 1 for data), Tier 3 community banks (62% struggle with compliant APIs), Tier 4 consumer-built agents (no framework, unregisterable). Orange bracket spans Tiers 2-4 labeled REGULATORY GAP. Green arrow at Tier 1 labeled REGULATION IS THE MOAT.",
+    "question": "The diagram annotates Tier 1 with 'REGULATION IS THE MOAT' and brackets Tiers 2–4 as the REGULATORY GAP. What specific competitive dynamic does this layout illustrate?",
+    "options": [
+      "Regulation disadvantages all tiers equally — the gap shows that compliance costs are highest at Tier 1, which is why money-center banks invest most heavily in lobbying for lighter rules.",
+      "Regulation that money-center banks helped design creates compliance infrastructure they already have, raising barriers for tiers that lack the data and engineering to meet the same standard.",
+      "The regulatory gap reflects different supervisory frameworks across agency lines — the OCC supervises Tier 1, state regulators supervise Tier 3, and no regulator covers Tier 4.",
+      "Tier 1 uses regulation as a competitive signal rather than a real constraint — their AAI programs are exempt from the same rules applied to fintechs at Tier 2."
+    ],
+    "correct": 1,
+    "explanation": "The diagram's key tension is the green 'REGULATION IS THE MOAT' annotation at Tier 1. Money-center banks have the compliance infrastructure, legal teams, and data assets to meet whatever framework emerges for agentic AI. If that framework requires registered agent identities, compliant APIs, and auditable payment rails, Tier 1 is already positioned — Tier 3's '62% struggle with compliant APIs' shows the gap. Tier 4 consumer-built agents are unregisterable under any current framework. The regulatory gap isn't just a compliance problem; it's a structural advantage for incumbents that built their moat partly through the compliance infrastructure smaller players can't replicate."
   }
 ]

@@ -13,8 +13,8 @@ The honest answer is that we don't have a reliable way to tell. That interpretab
 
 I've written about [guardrails for individual agents](post.html?slug=guardrails) and about [how SR 11-7 strains under agentic AI](post.html?slug=sr11-7). Multi-agent systems take both problems and turn them sideways. The attack surfaces multiply, the delegation chains hide accountability, and the error amplification is nonlinear. None of the existing frameworks quite fit, because they were designed for systems where a human decision sits somewhere in the loop and can absorb blame.
 
-![Sample conceptual architecture for an AAI system showing user interface, orchestration layer, individual agents, tools, and MCP server](../img/finreglab-fig1-aai-system.jpg)
-*Figure 1: Sample conceptual architecture for an AAI system. Source: FinRegLab, [The Next Wave Arrives: Agentic AI in Financial Services](https://finreglab.org/research/the-next-wave-arrives-agentic-ai-in-financial-services/) (September 2025). The diagram illustrates the layered structure — orchestration above, specialized agents in the middle, tools and data sources below — that creates the compounding trust and authorization problems this post examines.*
+![Sample conceptual architecture for an AAI system showing user interface, orchestration layer, individual agents, tools, and MCP server](../img/finreglab-fig1-aai-system.png)
+*Sample conceptual architecture for an AAI system. Recreated from similar image from FinRegLab, [The Next Wave Arrives: Agentic AI in Financial Services](https://finreglab.org/research/the-next-wave-arrives-agentic-ai-in-financial-services/) (September 2025). The diagram illustrates the layered structure — orchestration above, specialized agents in the middle, tools and data sources below — that creates the compounding trust and authorization problems this post examines.*
 
 ## The trust problem is not what you think it is
 

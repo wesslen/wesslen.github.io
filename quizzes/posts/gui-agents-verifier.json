@@ -158,5 +158,23 @@
     ],
     "correct": 1,
     "explanation": "The trilogy traces systematic errors across the entire evaluation stack. Part 1: the training signal was corrupted — human annotations contained structured noise that models learned to imitate. Part 2: the implementation was opaque — defaults mismatches, implicit contracts, and evaluation dataset overlaps mean the numbers in papers may not be reproducible even with released code. Part 3: the measurement was wrong — a 60% false positive rate means the benchmarks most teams use to claim progress were overcounting success for two years. Each layer of the evaluation stack had systematic errors pointing in the same direction (overclaiming capability), and they compounded."
+  },
+  {
+    "id": "guiv-visual-q01",
+    "post": "gui-agents-verifier",
+    "module": "gui-agents",
+    "objective": "distinction",
+    "difficulty": 2,
+    "image": "../img/process-outcome-2x2.png",
+    "imageAlt": "2x2 matrix: Y-axis PROCESS SCORE (high/low), X-axis OUTCOME SCORE (pass/fail). Top-left (green): HIGH PROCESS / PASS — correct path, goal achieved. Top-right (orange, prominent): HIGH PROCESS / FAIL — correct path, environment blocked (CAPTCHA/timeout) — annotated BINARY VERIFIERS MISCLASSIFY THIS AS FAILURE. Bottom-left (blue): LOW PROCESS / PASS — unexpected shortcut, goal achieved. Bottom-right (red): LOW PROCESS / FAIL — genuine failure.",
+    "question": "The top-right quadrant (high process score, fail outcome) is highlighted as the cell where binary verifiers misclassify. Why does this cell represent an evaluation problem rather than simply an agent failure?",
+    "options": [
+      "Binary verifiers misclassify this cell because outcome-only scoring penalizes the agent for environment failures it couldn't control — a correct execution path blocked by a CAPTCHA or timeout reflects infrastructure, not agent capability.",
+      "Binary verifiers misclassify this cell because agents learn to fake high process scores — a high process score paired with failure is the signature of an agent gaming the rubric rather than genuinely attempting the task.",
+      "Binary verifiers misclassify this cell because outcome scoring is too lenient — a failed outcome should always override a high process score, and binary verifiers that don't do this are measuring the wrong thing.",
+      "Binary verifiers misclassify this cell because process scoring is unreliable — human raters disagree on what constitutes a correct path, so high process scores in the fail outcome column reflect rater error rather than genuine agent quality."
+    ],
+    "correct": 0,
+    "explanation": "The top-right cell is an agent that navigated correctly but encountered an environmental obstacle (CAPTCHA, page timeout, broken element) that prevented task completion. A binary outcome verifier sees only 'task not completed' and scores it as failure — identical to the bottom-right cell where the agent genuinely failed. But these are different situations: in the top-right, the agent's behavior was correct and reproducible; in the bottom-right, it wasn't. The evaluation problem is that binary scoring can't distinguish between 'agent failed' and 'environment failed,' which means training on binary outcome labels punishes correct behavior when the environment breaks. The UV paper's process/outcome separation is designed specifically to recover the top-right cell from the failure bucket."
   }
 ]

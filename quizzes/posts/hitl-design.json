@@ -158,5 +158,41 @@
     ],
     "correct": 1,
     "explanation": "The post's prediction is built on the SEC Knight Capital precedent: 'not reasonably designed' despite formal presence of controls. The implication for AI governance liability: as examiners become more sophisticated about what effective oversight requires, the question shifts from 'do you have HITL?' to 'was your HITL designed to function under the conditions that actually triggered the failure?' A bank whose loan origination agent checkpoint was present but operating as a rubber stamp — consistently approving 98% of outputs without substantive review — may face liability not just for the underlying AI failure but for having designed a governance structure that it knew or should have known would not function as oversight."
+  },
+  {
+    "id": "hitld-visual-q01",
+    "post": "hitl-design",
+    "module": "human-in-the-loop",
+    "objective": "distinction",
+    "difficulty": 2,
+    "image": "../img/hitl-design-timing.png",
+    "imageAlt": "Two-row comparison: top row shows full oversight (Design-Time, Deploy-Time, Runtime in sequence). Bottom row shows runtime-only: Deploy-Time replaced by orange dashes labeled Skipped, Runtime marked with question mark labeled Works Under Load? with Knight Capital annotation.",
+    "question": "The bottom row annotates the skipped deploy-time stage and questions whether runtime monitoring 'works under load.' What does the Knight Capital annotation on that question mark communicate?",
+    "options": [
+      "Knight Capital is cited as a success case — their runtime monitoring caught the erroneous deployment, confirming that runtime-only oversight can work even without a deploy-time stage.",
+      "Knight Capital is cited to show that the question was already answered empirically — a runtime-only oversight structure couldn't stop $440M in losses in 45 minutes once the deploy error was live.",
+      "Knight Capital is cited as an extreme case that doesn't generalize — Knight's 45-minute window was unusually short, so the runtime-only question mark applies only to HFT-speed systems, not to typical banking AI deployments.",
+      "Knight Capital is cited to support the case for runtime-only monitoring — the lesson from Knight is that better real-time dashboards would have caught the issue faster, making runtime monitoring the correct investment."
+    ],
+    "correct": 1,
+    "explanation": "The question mark on 'Works Under Load?' isn't rhetorical — it points directly at Knight Capital as the empirical answer: no, runtime monitoring without deploy-time effective challenge does not reliably work under the load conditions where it matters most. Knight Capital had humans watching dashboards in real time. They saw the anomaly. They couldn't stop it because there was no kill switch (the deploy-time question they never asked: what happens if this algo misbehaves at production volume?). The diagram's point is that runtime monitoring assumes the monitoring infrastructure works as designed under adverse conditions — Knight Capital shows that assumption can be exactly wrong at the moment it's most needed."
+  },
+  {
+    "id": "hitld-visual-q02",
+    "post": "hitl-design",
+    "module": "human-in-the-loop",
+    "objective": "transfer",
+    "difficulty": 3,
+    "image": "../img/hitl-design-knight.png",
+    "imageAlt": "Three-row mapping of Knight Capital to effective challenge triad: Competence row asks Did anyone test the alert pipeline at production volume?; Influence row asks Who could stop trading, and on what evidence?; Incentives row asks Was the uncomfortable feasibility question rewarded or suppressed?",
+    "question": "The diagram maps Knight Capital's failure onto the effective challenge triad. Which row's question — if answered 'yes' — would most likely have prevented the failure, and why?",
+    "options": [
+      "Incentives — if the team asking uncomfortable feasibility questions had been rewarded rather than suppressed, the deploy-time risks would have been surfaced before the production push.",
+      "Competence — if anyone had tested the alert pipeline at production volume, the team would have known the system couldn't halt execution fast enough, and the deploy would have been blocked.",
+      "Influence — if someone with authority to stop trading had a clear escalation path and evidence threshold, they could have halted execution within minutes of the anomaly appearing.",
+      "All three equally — the triad is designed so that no single leg is sufficient; only all three together constitute effective challenge, and any one of them failing makes the other two irrelevant."
+    ],
+    "correct": 2,
+    "explanation": "All three legs failed at Knight Capital, but the post's argument is that the failure that converted 'bad deploy' into '$440M loss' was the Influence gap. The Competence failure explains why the problem wasn't caught at deploy time. The Incentives failure explains why no one pushed back on the feasibility question. But once the algo was live, neither competence nor incentives could stop the clock — only someone with authority to halt trading, a clear evidence threshold, and an actual kill switch could have done that. The 45-minute runtime is the window between the Influence failure and the market close that stopped trading for them. The effective challenge triad is sequential in crisis: at runtime, Influence is the only lever left."
   }
 ]
