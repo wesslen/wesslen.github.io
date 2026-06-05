@@ -26,7 +26,7 @@ The direct lesson is obvious: kill switches and circuit breakers are not optiona
 
 ## EchoLeak: zero clicks, unlimited scope
 
-In January 2025, researchers at Aim Labs reported a vulnerability to Microsoft. In June 2025, it was patched and published as CVE-2025-32711 (CVSS 9.3). During the roughly five months in between, every Microsoft 365 Copilot deployment was vulnerable to zero-click, persistent data exfiltration.
+In January 2025, researchers at Aim Labs reported a vulnerability to Microsoft. In June 2025, it was patched and published as CVE-2025-32711 (CVSS 9.3). During the roughly five months in between, every Microsoft 365 Copilot deployment was vulnerable to zero-click, persistent data exfiltration. [This arXiv paper](https://arxiv.org/abs/2509.10540) outlines the incident.
 
 The attack chain is worth understanding in sequence. An attacker sends an email to the target. The email looks normal. When the target later asks Copilot *any* business question, Copilot's RAG pipeline retrieves the email alongside internal documents and feeds everything into the LLM context. The embedded instructions silently exfiltrate the target's internal data to an attacker-controlled domain — then instruct Copilot to never mention the email, so the response looks completely normal.
 

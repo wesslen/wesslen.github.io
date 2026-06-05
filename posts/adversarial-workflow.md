@@ -102,7 +102,7 @@ python3 -m garak \
 [I've argued that effective challenge is the load-bearing concept in SR 11-7](post.html?slug=effective-challenge) and that its three legs — incentives, competence, influence — are each under acute stress for GenAI. Red-teaming is the operational activity that most directly stresses the competence leg. There are four practical requirements for a defensible engagement[^6]:
 
 1. Red-team personnel cannot also be prompt-engineering developers of the target agent.
-2. They must demonstrate competence in adversarial ML, prompt-injection engineering, and tool-chain security — a skill set rarely present in traditional MRM teams.
+2. They must demonstrate competence in adversarial ML, prompt-injection engineering, and tool-chain security — a skill set rarely present in SR 11-7 era model development teams.
 3. Findings must route to a governance body with authority to block deployment.
 4. Documentation must survive examiner scrutiny.
 
