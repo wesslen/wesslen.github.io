@@ -97,15 +97,44 @@
         <div id="intro-feature"></div>
         <!-- Module grid -->
         <div class="slides-grid" id="slides-grid" aria-label="Course modules"></div>
-        <div class="completion-zone" id="completion-zone" style="display: none" aria-label="Course complete">
+        <div class="completion-zone completion-zone--locked" id="completion-zone" aria-label="Course complete">
           <div class="completion-zone-inner">
-            <span class="completion-label">// course complete</span>
-            <p class="completion-desc">you've worked through all ten modules. that's rare.</p>
+            <span class="completion-label completion-label--locked">// course in progress</span>
+            <span class="completion-label completion-label--done">// course complete</span>
+            <p class="completion-desc completion-desc--locked">
+              pass all ten module tests to unlock the certificate and final exam
+            </p>
+            <p class="completion-desc completion-desc--done">you've worked through all ten modules. that's rare.</p>
             <div class="completion-actions">
               <button class="completion-cert-btn" id="open-cert-btn">view certificate ✦</button>
               <button class="completion-exam-btn" id="open-final-exam-btn">take the final exam →</button>
             </div>
           </div>
+        </div>
+
+        <!-- ── Progress backup / restore ─────────────────── -->
+        <div class="quiz-backup-zone" id="quiz-backup-zone">
+          <span class="quiz-backup-label">// progress backup</span>
+          <div class="quiz-backup-actions">
+            <button class="quiz-backup-btn" id="save-progress-btn">save progress ↓</button>
+            <label class="quiz-backup-btn quiz-backup-btn-upload" id="load-progress-label" tabindex="0" role="button">
+              upload progress ↑
+              <input
+                type="file"
+                id="progress-file-input"
+                accept=".json,.txt"
+                aria-label="Upload progress file"
+                tabindex="-1"
+              />
+            </label>
+          </div>
+          <p class="quiz-backup-note">
+            Progress lives in this browser only — save a backup to restore it later or continue on another device. The
+            file is plain JSON you can inspect; the
+            <code>sig</code>
+            field verifies integrity, so editing progress values will break the import.
+          </p>
+          <div id="quiz-backup-status" class="quiz-backup-status" aria-live="polite"></div>
         </div>
       </div>
     </section>
@@ -351,7 +380,11 @@
           if (!zone) return;
           const complete =
             typeof window.hasCompletedAllModules === "function" && window.hasCompletedAllModules(_allModuleIds);
-          zone.style.display = complete ? "block" : "none";
+          zone.classList.toggle("completion-zone--locked", !complete);
+          // Disable action buttons when locked so they can't be clicked through
+          zone.querySelectorAll("button").forEach((btn) => {
+            btn.disabled = !complete;
+          });
         }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -366,6 +399,79 @@
           document.addEventListener("keydown", (e) => {
             if (e.key === "Escape" && overlay && overlay.style.display !== "none") closeModuleQuiz();
           });
+
+          /* ── Progress backup / restore handlers ─────── */
+          const saveBtn = document.getElementById("save-progress-btn");
+          const fileInput = document.getElementById("progress-file-input");
+          const uploadLabel = document.getElementById("load-progress-label");
+
+          function showBackupStatus(msg, type) {
+            const el = document.getElementById("quiz-backup-status");
+            if (!el) return;
+            el.textContent = msg;
+            el.className =
+              "quiz-backup-status " + (type === "error" ? "quiz-backup-status-error" : "quiz-backup-status-ok");
+            setTimeout(() => {
+              el.textContent = "";
+              el.className = "quiz-backup-status";
+            }, 6000);
+          }
+
+          if (saveBtn) {
+            saveBtn.addEventListener("click", async () => {
+              if (saveBtn.disabled) return;
+              saveBtn.disabled = true;
+              const orig = saveBtn.textContent;
+              saveBtn.textContent = "saving…";
+              try {
+                await window.exportProgress();
+                saveBtn.textContent = "saved ✓";
+                setTimeout(() => {
+                  saveBtn.disabled = false;
+                  saveBtn.textContent = orig;
+                }, 2000);
+              } catch (err) {
+                saveBtn.disabled = false;
+                saveBtn.textContent = orig;
+                showBackupStatus("Export failed: " + err.message, "error");
+              }
+            });
+          }
+
+          if (fileInput) {
+            // Allow keyboard activation of the label
+            if (uploadLabel) {
+              uploadLabel.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  fileInput.click();
+                }
+              });
+            }
+            fileInput.addEventListener("change", async () => {
+              const file = fileInput.files && fileInput.files[0];
+              if (!file) return;
+              if (uploadLabel) uploadLabel.setAttribute("aria-disabled", "true");
+              try {
+                await window.importProgress(file);
+                showBackupStatus("Progress restored — reloading page…", "ok");
+                setTimeout(() => window.location.reload(), 1400);
+              } catch (err) {
+                const msg =
+                  err.message === "invalid-signature"
+                    ? "Verification failed — the file may have been edited or is from a different version."
+                    : err.message === "corrupt"
+                      ? "The file doesn't look like a valid progress backup."
+                      : err.message === "version-mismatch"
+                        ? "Backup version not compatible with this site."
+                        : "Import failed: " + err.message;
+                showBackupStatus(msg, "error");
+              } finally {
+                fileInput.value = "";
+                if (uploadLabel) uploadLabel.removeAttribute("aria-disabled");
+              }
+            });
+          }
         });
 
         /* ── Render intro feature card ──────────────────── */

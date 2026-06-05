@@ -3210,6 +3210,44 @@ img {
   background: rgba(124, 58, 237, 0.06);
   padding: 1.5rem 2rem;
   text-align: center;
+  transition:
+    opacity 0.3s,
+    filter 0.3s;
+}
+/* Locked state: visible but greyed out until all module tests are passed */
+.completion-zone--locked .completion-zone-inner {
+  border-color: var(--border);
+  background: var(--surface);
+  opacity: 0.45;
+  filter: grayscale(0.6);
+}
+.completion-zone--locked .completion-label {
+  color: var(--muted);
+}
+/* Show locked/done message variants based on state */
+.completion-label--done,
+.completion-desc--done {
+  display: none;
+}
+.completion-zone--locked .completion-label--locked,
+.completion-zone--locked .completion-desc--locked {
+  display: block;
+}
+.completion-zone--locked .completion-label--done,
+.completion-zone--locked .completion-desc--done {
+  display: none;
+}
+.completion-label--locked,
+.completion-desc--locked {
+  display: none;
+}
+.completion-zone--locked .completion-cert-btn,
+.completion-zone--locked .completion-exam-btn {
+  border-color: var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: not-allowed;
+  pointer-events: none;
 }
 .completion-label {
   font-family: var(--font-mono);
@@ -3265,6 +3303,90 @@ img {
 .completion-exam-btn:hover {
   background: var(--accent);
   color: var(--bg);
+}
+
+/* ── Progress backup zone ─────────────────────────────── */
+.quiz-backup-zone {
+  margin: 2rem auto 0;
+  max-width: 680px;
+  padding: 1.25rem 1rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.quiz-backup-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 0.7rem;
+}
+
+.quiz-backup-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+  align-items: center;
+}
+
+.quiz-backup-btn {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+  display: inline-block;
+  line-height: 1.4;
+  user-select: none;
+}
+
+.quiz-backup-btn:hover,
+label.quiz-backup-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.quiz-backup-btn:disabled,
+.quiz-backup-btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+label.quiz-backup-btn-upload input[type="file"] {
+  display: none;
+}
+
+.quiz-backup-note {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--muted);
+  opacity: 0.7;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.quiz-backup-status {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  margin-top: 0.5rem;
+  min-height: 1.1rem;
+}
+
+.quiz-backup-status-ok {
+  color: #16a34a;
+}
+.quiz-backup-status-error {
+  color: #dc2626;
 }
 
 /* ── Certificate overlay ──────────────────────────────── */

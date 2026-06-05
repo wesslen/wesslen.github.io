@@ -558,6 +558,141 @@ if (typeof window === "undefined") { global.window = {}; }
     targetEl.appendChild(indicator);
   };
 
+  /* ── Progress backup / restore ───────────────────────── */
+  //
+  // Export: signs the progress object with HMAC-SHA256 (Web Crypto API),
+  // wraps it in a base64 envelope, and downloads as a .txt file.
+  // Import: decodes the envelope, verifies the signature, then merges with
+  // existing localStorage progress (always taking the best score per entry).
+  //
+  // All operations stay in the browser — no network calls, no server.
+  // Works behind corporate firewalls and in offline contexts.
+  // The HMAC signature prevents trivial hand-editing (academic integrity
+  // guard), but the key is embedded in this script so a determined reader
+  // of the source could reproduce it.
+
+  const _BACKUP_KEY = "drift-course-v1-progress-integrity-2026";
+  const _BACKUP_VER = 1;
+
+  async function _hmacKey() {
+    return crypto.subtle.importKey(
+      "raw",
+      new TextEncoder().encode(_BACKUP_KEY),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign", "verify"]
+    );
+  }
+
+  async function _sign(str) {
+    const key = await _hmacKey();
+    const buf = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf))
+      .map((b) => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  async function _verify(str, sigHex) {
+    try {
+      const key = await _hmacKey();
+      const sigBytes = new Uint8Array(
+        sigHex.match(/.{2}/g).map((b) => parseInt(b, 16))
+      );
+      return crypto.subtle.verify("HMAC", key, sigBytes, new TextEncoder().encode(str));
+    } catch { return false; }
+  }
+
+  /**
+   * exportProgress()
+   * Downloads a signed base64 progress backup as drift-progress.txt.
+   * Returns a Promise that resolves when the download is triggered.
+   */
+  window.exportProgress = async function () {
+    const exported = new Date().toISOString();
+    const progress = readProgress();
+    // Sign a canonical JSON string with fixed key order so the sig is stable.
+    // The signed string is the inner data only (v + exported + progress).
+    const canonical = JSON.stringify({ v: _BACKUP_VER, exported, progress });
+    const sig = await _sign(canonical);
+    // The saved file is plain, human-readable JSON. The sig field is what
+    // prevents hand-editing — any change to v/exported/progress breaks it.
+    const fileContent = JSON.stringify({ v: _BACKUP_VER, exported, sig, progress }, null, 2);
+    const blob = new Blob([fileContent], { type: "application/json" });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement("a");
+    a.href     = url;
+    a.download = "drift-progress.json";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 200);
+  };
+
+  /**
+   * importProgress(file)
+   * Accepts a File object, verifies the HMAC, then merges the imported
+   * progress into localStorage (always taking the most favorable outcome
+   * for each key — best score, passed status, and latest attempt date).
+   * Resolves with the merged progress object, or rejects with one of:
+   *   "corrupt"            — not a valid backup
+   *   "invalid-signature"  — HMAC check failed (file was edited)
+   *   "version-mismatch"   — incompatible backup version
+   *   "read-error"         — FileReader failed
+   */
+  window.importProgress = async function (file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error("read-error"));
+      reader.onload = async (e) => {
+        try {
+          // 1. Parse the plain JSON backup file
+          let parsed;
+          try { parsed = JSON.parse(e.target.result.trim()); }
+          catch { reject(new Error("corrupt")); return; }
+
+          const { v, exported, sig, progress: imported } = parsed;
+          if (typeof sig !== "string" || !imported || typeof imported !== "object") {
+            reject(new Error("corrupt")); return;
+          }
+
+          // 2. Verify HMAC over the same canonical string used at export time
+          const canonical = JSON.stringify({ v, exported, progress: imported });
+          const valid = await _verify(canonical, sig);
+          if (!valid) { reject(new Error("invalid-signature")); return; }
+
+          // 3. Check version
+          if (v !== _BACKUP_VER) { reject(new Error("version-mismatch")); return; }
+
+          // 4. Merge: always take the most favorable outcome per key
+          const current = readProgress();
+          const merged  = { ...current };
+          Object.entries(imported).forEach(([key, val]) => {
+            if (!val || typeof val !== "object") return;
+            const ex = merged[key];
+            if (!ex) {
+              merged[key] = val;
+            } else {
+              const m = {
+                lastAttempted:
+                  ex.lastAttempted && val.lastAttempted
+                    ? (ex.lastAttempted > val.lastAttempted ? ex.lastAttempted : val.lastAttempted)
+                    : (ex.lastAttempted || val.lastAttempted),
+                attempts: (ex.attempts || 0) + (val.attempts || 0),
+                bestScore: Math.max(ex.bestScore || 0, val.bestScore || 0),
+              };
+              if (val.passed !== undefined || ex.passed !== undefined) {
+                m.passed = !!(ex.passed || val.passed);
+              }
+              merged[key] = m;
+            }
+          });
+
+          writeProgress(merged);
+          resolve(merged);
+        } catch (err) { reject(err); }
+      };
+      reader.readAsText(file);
+    });
+  };
+
   /* ── CommonJS export shim (for Node.js tests) ───────── */
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = { shuffle, sample, prepareQuestion, letterFor };
