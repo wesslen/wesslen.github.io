@@ -17,7 +17,7 @@ ADK is a code-first framework for building, evaluating, and deploying AI agents.
 
 It's model-agnostic in practice. Optimized for Gemini, but you can route through Claude, Ollama, and most other providers via LiteLLM or the `BaseLlm` interface. It's deployment-agnostic too — same code runs locally, on Cloud Run, on GKE, or in Vertex AI Agent Engine.
 
-The design philosophy Google has landed on is worth quoting directly: **build with ADK, equip with MCP, communicate with A2A.** That's the intended stack. ADK as the construction framework, MCP for connecting agents to tools and data sources, A2A for connecting agents to each other.
+The design philosophy Google has landed on is worth quoting directly: build with ADK, equip with MCP, communicate with A2A. That's the intended stack. ADK as the construction framework, MCP for connecting agents to tools and data sources, A2A for connecting agents to each other.
 
 ## Six core primitives
 
@@ -67,7 +67,7 @@ The eight-step cycle:
 7. Agent resumes — it can now reliably read any state it just wrote
 8. Cycle repeats until the generator is exhausted
 
-The critical implication is about ordering: **state changes are only guaranteed persisted after the carrying event has been yielded and processed by the Runner.** An agent that writes to state and then immediately reads that same key in the next line — before yielding — is reading its own unpercolated change. Events with `partial=True` (streaming tokens) are forwarded to callers but may not be committed to the session store.
+The critical implication is about ordering: state changes are only guaranteed persisted after the carrying event has been yielded and processed by the Runner. An agent that writes to state and then immediately reads that same key in the next line — before yielding — is reading its own unpercolated change. Events with `partial=True` (streaming tokens) are forwarded to callers but may not be committed to the session store.
 
 ![ADK cooperative event loop: 8-step cycle with yield point at step 4-5 where state changes are guaranteed committed before the agent resumes](../img/google-adk-a2a-eventloop.png)
 *The yield point (steps 4–5) is the ordering guarantee. Agent yields an event → Runner commits it → Agent resumes. Reading your own state before yielding reads an uncommitted value.*

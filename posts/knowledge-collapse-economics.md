@@ -68,7 +68,7 @@ Agentic AI that drafts model documentation, flags statistical tests, and writes 
 
 [Effective challenge](post.html?slug=effective-challenge), the third pillar of model governance, requires that reviewers have the competence to mount it. Competence is not static. It compounds when practitioners learn, and it depreciates when the learning incentive disappears.
 
-What the effective challenge framework demands of the organization is precisely the capacity that agentic AI, at high enough precision, systematically undermines. The economic argument for *which* tasks get automated first — and why that sequencing compounds the knowledge externality by removing the practice substrate for exactly the judgment tasks AI cannot yet replace — is developed in [Automating the Wrong Links](post.html?slug=weak-links-banking).
+What the effective challenge framework demands of the organization is precisely the capacity that agentic AI, at high enough precision, systematically undermines. The economic argument for which tasks get automated first — and why that sequencing compounds the knowledge externality by removing the practice substrate for exactly the judgment tasks AI cannot yet replace — is developed in [Automating the Wrong Links](post.html?slug=weak-links-banking).
 
 SR 26-2 (which superseded SR 11-7 on April 17, 2026) explicitly excludes GenAI and agentic AI from its scope. The formal MRM framework does not speak to the systems creating the knowledge externality described here.
 

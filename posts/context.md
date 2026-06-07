@@ -23,7 +23,7 @@ The fundamental problem is cold start: every new agent session begins with a bla
 
 Beyond factual project knowledge, context files shape what the agent does and doesn't do. Claude Code's *auto-memory* system takes this further: the agent automatically saves useful discoveries — successful build commands, debugging insights — to a `MEMORY.md` that grows across sessions. Agent Skills extend the concept to on-demand capabilities that load only when relevant, rather than consuming window space permanently.[^2]
 
-The distinction between the two trips people up, because both are often Markdown files that shape agent behavior. The difference is in *when* they load and *what kind* of instruction they carry:
+The distinction between the two trips people up, because both are often Markdown files that shape agent behavior. The difference is in when they load and what kind of instruction they carry:
 
 | | Context Files | Skills |
 |---|---|---|
@@ -104,7 +104,7 @@ One thing that doesn't show up enough: security instructions. [Analysis of real-
 
 ## What the research actually found
 
-The most useful evaluation comes from an ETH Zurich study that tested whether context files actually improve agent performance across 138 real-world repositories.[^5] The headline finding surprised me: LLM-generated context files *reduced* success rates by ~2% while increasing costs by 20–23%. The problem wasn't disobedience. Agents followed instructions faithfully, but following unnecessary instructions (style guides, sprawling directory overviews) consumed tokens and thinking time without benefit.
+The most useful evaluation comes from an ETH Zurich study that tested whether context files actually improve agent performance across 138 real-world repositories.[^5] The headline finding surprised me: LLM-generated context files reduced success rates by ~2% while increasing costs by 20–23%. The problem wasn't disobedience. Agents followed instructions faithfully, but following unnecessary instructions (style guides, sprawling directory overviews) consumed tokens and thinking time without benefit.
 
 The same obedience that makes guardrails effective also creates brittleness. When a context file mentions the `uv` package manager, agents use it 160 times more frequently than without the instruction. The mechanism works — which means bad instructions work just as reliably as good ones.
 

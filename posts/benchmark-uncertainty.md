@@ -21,14 +21,14 @@ The [NIST 800-2 post](post.html?slug=nist-benchmark-evals) covered Stage 1 of th
 
 NIST 800-3 formalizes a distinction that most benchmark reporting collapses: *benchmark accuracy* and *generalized accuracy* are related but different quantities.
 
-**Benchmark accuracy** is conditional on the specific items drawn into the benchmark. It answers: how well did this model perform on *these 198 questions*? The uncertainty here reflects only LLM nondeterminism: the randomness from sampling at generation time. It's the right estimand when the question is whether a specific validation run produced a passing score.
+**Benchmark accuracy** is conditional on the specific items drawn into the benchmark. It answers: how well did this model perform on these 198 questions? The uncertainty here reflects only LLM nondeterminism: the randomness from sampling at generation time. It's the right estimand when the question is whether a specific validation run produced a passing score.
 
-**Generalized accuracy** asks the harder question: how well would this model perform on the full *superpopulation* of items the benchmark represents? The uncertainty here includes both LLM nondeterminism *and* the variance from having drawn a finite sample of items from a larger domain. It's what you actually care about when deciding whether to deploy — you're not deploying to answer GPQA-Diamond questions specifically, you're deploying to handle the domain those questions represent.
+**Generalized accuracy** asks the harder question: how well would this model perform on the full *superpopulation* of items the benchmark represents? The uncertainty here includes both LLM nondeterminism and the variance from having drawn a finite sample of items from a larger domain. It's what you actually care about when deciding whether to deploy — you're not deploying to answer GPQA-Diamond questions specifically, you're deploying to handle the domain those questions represent.
 
 > [!QUOTE]
 > For teams whose evaluation results feed directly into deployment decisions or model risk documentation, the question is whether to keep reporting the number that's convenient to compute or the number that's correct. NIST 800-3 has formalized which is which.
 
-The biology exam analogy the paper uses is cleaner than any technical definition: benchmark accuracy is your average score on *this exam* given infinite reattempts; generalized accuracy is your average score on *all biology questions that could have been on the exam* given infinite reattempts. Neither is your single observed score. Both are defined in expectation.
+The biology exam analogy the paper uses is cleaner than any technical definition: benchmark accuracy is your average score on this exam given infinite reattempts; generalized accuracy is your average score on all biology questions that could have been on the exam given infinite reattempts. Neither is your single observed score. Both are defined in expectation.
 
 ![Two-panel comparison: LEFT panel (BENCHMARK ACCURACY, blue) — horizontal number line with dot at 75.3%, NARROW CI bracket, uncertainty source: LLM nondeterminism only, fixed item set. RIGHT panel (GENERALIZED ACCURACY, orange) — same 75.3% dot, WIDE CI bracket, uncertainty source: LLM nondeterminism + item selection variance, full superpopulation of possible questions. Bottom annotation: SAME POINT ESTIMATE. DIFFERENT CLAIMS. DIFFERENT STANDARD ERRORS.](../img/accuracy-estimands.png)
 

@@ -11,7 +11,7 @@ In March 2026, Jensen Huang told the audience at Nvidia's GPU Technology Confere
 
 It's a genuine insight into the allocation problem. Tokens are scarce and increasingly valuable — a premium reasoning model's output tokens can run more than 400 times the cost of an ultra-low-cost model's. Individuals with their own allocation tend to use it more deliberately than when drawing from a pooled budget with no visible price tag. Ownership changes behavior.
 
-But Huang's model is individual-level governance. It addresses how to motivate *this engineer* to use AI well. It doesn't address how the institution allocates its total token pool across business units, which use cases justify which model tiers, or what happens when an API price shock makes the entire organizational pool more expensive overnight. Those are organizational-level questions — and they require a different framework.
+But Huang's model is individual-level governance. It addresses how to motivate this engineer to use AI well. It doesn't address how the institution allocates its total token pool across business units, which use cases justify which model tiers, or what happens when an API price shock makes the entire organizational pool more expensive overnight. Those are organizational-level questions — and they require a different framework.
 
 Imagine a regional bank, mid-cycle, when the wholesale funding market tightens overnight. Repo rates spike. The cost of short-term funding jumps 80 basis points in a session. The treasury's FTP model reprices automatically — internal charges on long-duration assets move with the funding curve. By the next morning, the mortgage desk's spread on 30-year originations has compressed enough that the product is barely worth booking.
 
