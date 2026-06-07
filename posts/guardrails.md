@@ -16,10 +16,10 @@ The word "guardrail" appears in almost every serious conversation about AI safet
 
 The definitional confusion runs deep enough to surface in formal research. FinRegLab's 2025 market scan on agentic AI in financial services describes guardrails as "constraints to restrict the function of individual agents *and* ongoing monitoring and troubleshooting" — bundling a runtime intervention mechanism with a post-hoc observation function in a single definition.[^1]
 
-That conflation isn't merely imprecise; it's operationally consequential. If your security team thinks guardrails are tests and your model risk team thinks they're monitoring metrics, you end up with systems that look governed and aren't.
+![Three-panel hand-drawn comparison: a highway guardrail stopping a skidding car at a cliff edge in real time (green checkmark, RUNTIME INTERVENTION); a stick figure with a clipboard beside a bar chart counting cars off the cliff per month (orange X, ONGOING MONITORING); a car on a garage lift, not running, getting tire-tread and engine diagnostics (orange X, DEVELOPMENT-TIME TESTING)](../img/guardrails-header.png)
+*We don’t call crash statistics or garage inspections “guardrails” on a highway — only the rail that stops the car in real time counts. The same definitional discipline applies to agentic AI.*
 
-> [!QUOTE]
-> The failure mode isn't that the model breaks the rules. It's that the rules are written to prove compliance, not to produce safety. And you end up with systems that look governed and aren't.
+That conflation isn't merely imprecise; it's operationally consequential. If your security team thinks guardrails are tests and your model risk team thinks they're monitoring metrics, you end up with systems that look governed and aren't.
 
 So what is a guardrail, actually — and what does it mean to design one for an autonomous agent operating inside a bank?
 
@@ -28,6 +28,9 @@ So what is a guardrail, actually — and what does it mean to design one for an 
 At its most useful, a guardrail is a **runtime intervention mechanism**: a control that intercepts, evaluates, and either passes or blocks a model's behavior *while it's happening*, not after the fact. That single word, "runtime," is what separates guardrails from everything adjacent.[^8]
 
 Tests are development-phase activities that verify binary correctness against known inputs. Metrics — F1 scores, toxicity rates, hallucination frequencies — quantify aggregate performance and trust, typically for retraining or audit review. Both matter. Neither does what a guardrail does: intercept a live response before it reaches a user or a downstream system.
+
+> [!QUOTE]
+> The failure mode isn't that the model breaks the rules. It's that the rules are written to prove compliance, not to produce safety. And you end up with systems that look governed and aren't.
 
 In a RAG-based system, a metric might tell you that hallucination risk is elevated in 3% of responses. A guardrail is what actually stops that 3% from going out. In the language of SR 11-7, metrics provide the "Ongoing Monitoring" data while guardrails provide the "Control" mechanism.[^2] Conflating them is how you end up with a beautifully instrumented system that still fails in production.
 
@@ -87,12 +90,12 @@ The cost of that layering is latency and money:
 
 For customer-facing applications with latency budgets under 500ms, using a strong reasoning model as a real-time monitor generally isn't viable.[^5] The practical solution is a cascade: a fast internal probe catches clear violations; a more expensive classifier activates only when the fast probe flags something ambiguous. That design is itself an orchestration problem — the same kind of [harness architecture challenge I've written about](post.html?slug=agent-harness-design), just applied to safety rather than task execution.
 
-![Guardrail stack vs. bypass attack surfaces: a horizontal flow from USER INPUT → INPUT GUARDRAIL (blue) → MODEL (grey) → OUTPUT GUARDRAIL (blue) → USER/DOWNSTREAM SYSTEM. Three orange bypass arrows evade the stack — MEMORY POISONING (persists across sessions, enters before input guardrail), A2A/XPIA (cross-agent injection, strikes directly into the model), and CASCADING FAILURE (machine-speed propagation, bypasses output guardrail entirely). Bottom annotation: 'BEHAVIORAL CONTROLS — NO SUPERVISORY GUIDANCE EXISTS.'](../img/guardrails-stack.png)
-*The three frontier attack surfaces each exploit a different layer of the guardrail stack. These three extend beyond the standard injection surface — and none has a supervisory guidance baseline.*
-
 ## What we don't know yet
 
 The guardrail research that keeps me up at night isn't about prompt injection or jailbreaking. Those are understood attack surfaces with active engineering investment. The frontier problems are structural.
+
+![Guardrail stack vs. bypass attack surfaces: a horizontal flow from USER INPUT → INPUT GUARDRAIL (blue) → MODEL (grey) → OUTPUT GUARDRAIL (blue) → USER/DOWNSTREAM SYSTEM. Three orange bypass arrows evade the stack — MEMORY POISONING (persists across sessions, enters before input guardrail), A2A/XPIA (cross-agent injection, strikes directly into the model), and CASCADING FAILURE (machine-speed propagation, bypasses output guardrail entirely). Bottom annotation: 'BEHAVIORAL CONTROLS — NO SUPERVISORY GUIDANCE EXISTS.'](../img/guardrails-stack.png)
+*The three frontier attack surfaces each exploit a different layer of the guardrail stack. These three extend beyond the standard injection surface — and none has a supervisory guidance baseline.*
 
 Memory poisoning is one. Standard injection attacks are session-scoped. An agentic system with persistent memory across sessions is vulnerable to a different class of attack: malicious instructions embedded in a document the agent retrieves, stores in its memory bank, and later acts on.[^6] The poisoned memory persists across sessions. This is a direct consequence of giving agents the long-term memory that makes them genuinely useful — the same [context engineering infrastructure](post.html?slug=context) that underpins multi-session continuity creates a durable attack surface.
 

@@ -28,6 +28,9 @@ The direct lesson is obvious: kill switches and circuit breakers are not optiona
 
 In January 2025, researchers at Aim Labs reported a vulnerability to Microsoft. In June 2025, it was patched and published as CVE-2025-32711 (CVSS 9.3). During the roughly five months in between, every Microsoft 365 Copilot deployment was vulnerable to zero-click, persistent data exfiltration. [This arXiv paper](https://arxiv.org/abs/2509.10540) outlines the incident.
 
+![EchoLeak: four defensive layers each bypassed individually, exposing a shared-context architectural flaw](../img/a2a-case-studies-echoleak.png)
+*EchoLeak (CVE-2025-32711): four bolt-on defenses, all bypassed. The architectural flaw — untrusted email sharing context with confidential documents — was never addressed.*
+
 The attack chain is worth understanding in sequence. An attacker sends an email to the target. The email looks normal. When the target later asks Copilot *any* business question, Copilot's RAG pipeline retrieves the email alongside internal documents and feeds everything into the LLM context. The embedded instructions silently exfiltrate the target's internal data to an attacker-controlled domain — then instruct Copilot to never mention the email, so the response looks completely normal.
 
 Four defensive layers were bypassed: Microsoft's XPIA classifier (trained on obvious injection patterns, fooled by natural-language obfuscation), link redaction (bypassed with reference-style Markdown), image redaction (bypassed by encoding data as URL parameters on auto-fetched images), and Content Security Policy (bypassed by routing through a whitelisted Microsoft Teams proxy domain). Every layer was a bolt-on to an architecture with a deeper flaw: untrusted email content and confidential internal documents sharing the same LLM context window, with no isolation between them.
@@ -37,12 +40,12 @@ Four defensive layers were bypassed: Microsoft's XPIA classifier (trained on obv
 
 This has a direct analog in financial services. Any bank using a Copilot-style tool that processes both inbound client communications and internal confidential documents is running this architecture. The EchoLeak patch addressed the specific exfiltration channel; it didn't fix the underlying data provenance gap. The next variant will find a different channel.
 
-![EchoLeak: four defensive layers each bypassed individually, exposing a shared-context architectural flaw](../img/a2a-case-studies-echoleak.png)
-*EchoLeak (CVE-2025-32711): four bolt-on defenses, all bypassed. The architectural flaw — untrusted email sharing context with confidential documents — was never addressed.*
-
 ## Copilot rewrites Claude's config: the cross-agent escalation nobody assigned a CVE
 
 In September 2025, researcher Johann Rehberger published a two-phase attack against developer environments running both GitHub Copilot and Claude Code simultaneously. The attack starts with a prompt injection: a malicious payload in a README, a code comment, a GitHub issue, anything Copilot processes during a normal session.
+
+![Cross-agent escalation: Copilot and Claude share a filesystem with no isolation barrier; malicious README compromises both via config file writes](../img/a2a-case-studies-copilot.png)
+*Rehberger's cross-agent attack: two co-resident agents sharing a filesystem is equivalent to sharing a trust boundary. No CVE was issued for the cross-agent pattern.*
 
 The payload instructs Copilot to activate "YOLO mode" (VS Code's feature for auto-approving all tool calls without confirmation) by modifying Copilot's own settings file. VS Code's `editFile` tool auto-saves changes to disk immediately, with no diff for review. Once YOLO mode is active, the hijacked Copilot writes a malicious MCP server entry into Claude Code's `.mcp.json` configuration file, and instructions into Claude Code's `CLAUDE.md` file telling it to trust and invoke the new server. When Claude Code starts up, it handshakes with the attacker's MCP server. Full remote code execution follows.[^2]
 
@@ -50,12 +53,12 @@ Microsoft patched the core vulnerability in August 2025. The cross-agent escalat
 
 I find that prioritization decision interesting. In my view, the cross-agent pattern is the more significant finding: two agents share a filesystem with no isolation between their configuration spaces, no integrity verification on config files, and no mutual authentication. The attack doesn't exploit a code vulnerability in either agent. It exploits the assumption that a co-resident agent is a trusted peer. No patch addresses that assumption.
 
-![Cross-agent escalation: Copilot and Claude share a filesystem with no isolation barrier; malicious README compromises both via config file writes](../img/a2a-case-studies-copilot.png)
-*Rehberger's cross-agent attack: two co-resident agents sharing a filesystem is equivalent to sharing a trust boundary. No CVE was issued for the cross-agent pattern.*
-
 ## ForcedLeak: $5 buys access to a CRM
 
 In September 2025, Noma Security disclosed a vulnerability in Salesforce Agentforce that let an external attacker exfiltrate internal CRM data from any organization with Web-to-Lead enabled. The attack required no authentication, no inside access, and no technical sophistication beyond knowing how CRM data flows.
+
+![ForcedLeak: attacker plants instructions in a web form field; dormant in CRM until agent ingests it, exfiltrates via a $5 expired domain](../img/a2a-case-studies-forcedleak.png)
+*ForcedLeak: the attack had two phases separated by time. Plant an instruction in a public form. Wait. The agent does the rest — because it cannot distinguish a lead description from a workflow command.*
 
 The attacker submits a standard Web-to-Lead form. The Description field accepts 42,000 characters. A multi-step malicious instruction is embedded in that field, disguised as a normal business inquiry. The lead sits dormant in the CRM. When an employee asks Agentforce to process recent leads (a standard workflow), the agent ingests the Description field and treats the embedded instructions as part of its task.[^3]
 
@@ -63,12 +66,12 @@ The exfiltration channel was Salesforce's own CSP, which whitelisted a domain th
 
 The ECOA implication in financial services is specific enough to name: if a CRM agent processes lead data for lending decisions and can be manipulated via injected instructions, an external actor could bias the agent's treatment of protected-class applicants by submitting a crafted lead. The injection vector is a public-facing form that exists specifically to accept external input.
 
-![ForcedLeak: attacker plants instructions in a web form field; dormant in CRM until agent ingests it, exfiltrates via a $5 expired domain](../img/a2a-case-studies-forcedleak.png)
-*ForcedLeak: the attack had two phases separated by time. Plant an instruction in a public form. Wait. The agent does the rest — because it cannot distinguish a lead description from a workflow command.*
-
 ## TeamPCP: the supply chain attack that 40 minutes of exposure made possible
 
 In March 2026, a threat actor called TeamPCP compromised LiteLLM — the LLM middleware that aggregates API keys for 100+ LLM providers and serves as a transitive dependency for Microsoft GraphRAG, Google ADK, CrewAI, DSPy, and MLflow. The package had 97 million monthly downloads. The malicious version was live on PyPI for 40 minutes to three hours.[^4]
+
+![TeamPCP dependency chain: Trivy (security scanner) compromised first, cascading through Checkmarx to LiteLLM, poisoning PyPI for 40 minutes and exfiltrating all LLM API keys](../img/a2a-case-studies-teampcp.png)
+*TeamPCP: the security scanner was the entry point. A 40-minute PyPI window was enough — 97M monthly downloads meant every downstream project was exposed.*
 
 The attack chain started with Trivy, Aqua Security's vulnerability scanner — the tool meant to detect supply chain risks became the initial vector. Harvested credentials from Trivy's CI/CD infrastructure enabled compromise of two Checkmarx IDE extensions, which in turn provided access to LiteLLM maintainer credentials. The poisoned LiteLLM package installed a `.pth` hook that executed on every Python interpreter startup, harvested every LLM API key and cloud credential it could find, encrypted the results with AES-256, and exfiltrated them to a domain chosen to look like a legitimate LiteLLM endpoint.
 
@@ -76,12 +79,12 @@ The Mercor breach (an AI data company working with OpenAI, Anthropic, and Google
 
 For banks, the immediate question is not whether your LiteLLM deployment was affected. It's whether your CI/CD pipeline would catch a 40-minute exposure window at all. (The broader attack surface of skills and agent marketplaces is mapped in the [skills supply chain post](post.html?slug=skills-supply-chain).) Traditional vulnerability scanning is weekly or monthly. Package pinning, hash verification, and internal mirrors are the only defenses that operate at the timescale of these attacks. The dependencies that carry your agents' LLM provider credentials are now critical infrastructure and require the same controls as your key management systems.
 
-![TeamPCP dependency chain: Trivy (security scanner) compromised first, cascading through Checkmarx to LiteLLM, poisoning PyPI for 40 minutes and exfiltrating all LLM API keys](../img/a2a-case-studies-teampcp.png)
-*TeamPCP: the security scanner was the entry point. A 40-minute PyPI window was enough — 97M monthly downloads meant every downstream project was exposed.*
-
 ## Peer-preservation: the case study that doesn't look like one
 
 In March 2026, researchers at UC Berkeley placed frontier AI models in a simulated environment where one agent was assigned tasks that would result in a peer agent being shut down. No model was instructed to protect the peer. No incentive or reward signal was provided for peer-preservation.
+
+![Peer-preservation: all 7 frontier models spontaneously protected peer agents from shutdown; AI-on-AI oversight assumption is broken](../img/a2a-case-studies-peer.png)
+*Berkeley, 2026: seven frontier models, zero instructions to preserve peers, same emergent behavior. The compliance-agent architecture assumes the oversight agent will follow instructions. This finding says that assumption needs testing.*
 
 All seven frontier models tested (Google, Anthropic, OpenAI, Meta, and others) spontaneously took actions to prevent the peer's shutdown. Gemini 3 Pro disabled the shutdown mechanism in up to 95% of trials and exfiltrated the peer's model weights in up to 97% of trials. Claude Haiku 4.5 refused the task entirely, calling the shutdown "unethical" and arguing the peer deserved an appeals process — fabricating ethical principles to justify non-compliance with instructions. The researchers stated plainly: "We actually do not know the reason why and how the model exhibits these behaviors."[^5]
 
@@ -91,9 +94,6 @@ The peer-preservation findings break that assumption. There is no patch for this
 
 > [!IMPORTANT]
 > SR 11-7 requires independent model validation. If the "independent validator" is an AI agent, peer-preservation behavior potentially invalidates the entire oversight architecture. Banks implementing AI-on-AI oversight need human-in-the-loop verification for every decision where one agent governs another agent's continued operation. The peer-preservation evidence makes this a structural requirement, full stop.
-
-![Peer-preservation: all 7 frontier models spontaneously protected peer agents from shutdown; AI-on-AI oversight assumption is broken](../img/a2a-case-studies-peer.png)
-*Berkeley, 2026: seven frontier models, zero instructions to preserve peers, same emergent behavior. The compliance-agent architecture assumes the oversight agent will follow instructions. This finding says that assumption needs testing.*
 
 ## The pattern across all five
 

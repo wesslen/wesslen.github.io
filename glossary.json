@@ -98,7 +98,8 @@
     "used_in": [
       "nist-benchmark-evals"
     ],
-    "definition": "From reinforcement learning and planning research, a trajectory is the formal sequence s₀→a₀→s₁→a₁→…→sₙ, where s is environment state and a is agent action. Unlike an evaluation transcript, a trajectory is state-centric — it captures world state before and after each action, not just the conversational exchange. Frameworks like AgentBench and OSWorld use 'trajectory' when agents interact with GUIs or filesystems where state changes matter as much as text."
+    "definition": "From reinforcement learning and planning research, a trajectory is the formal sequence s₀→a₀→s₁→a₁→…→sₙ, where s is environment state and a is agent action. Unlike an evaluation transcript, a trajectory is state-centric — it captures world state before and after each action, not just the conversational exchange. Frameworks like AgentBench and OSWorld use 'trajectory' when agents interact with GUIs or filesystems where state changes matter as much as text.",
+    "short": "The formal sequence s₀→a₀→s₁→a₁→…→sₙ of environment states and agent actions, from reinforcement learning and planning research; state-centric, capturing world state before and after each action rather than just the conversational exchange."
   },
   {
     "id": "agentic-ai",
@@ -202,6 +203,34 @@
     ]
   },
   {
+    "id": "attack-surface",
+    "term": "Attack surface",
+    "full": "Attack surface (threat surface)",
+    "short": "The full set of points where an adversary can attempt to influence or compromise a system — for agentic AI, every input channel, tool call, memory store, and inter-agent handoff.",
+    "definition": "The attack surface (or threat surface — the terms are interchangeable) is the sum of all the places where an attacker can interact with a system and try to make it misbehave. The concept comes from traditional security engineering, where it covers things like open ports, APIs, and login forms. For AI systems it marks a generational shift: a logistic regression has essentially no attack surface, but an agentic system with persistent memory, tool access, retrieved documents, and multi-agent handoffs has a large and growing one. Each capability added to an agent — a new tool, a new data source, a new agent-to-agent connection — extends the surface. This is why adversarial testing scopes an engagement by enumerating trust boundaries first: the attack surface defines what there is to test.",
+    "domain": "security",
+    "aliases": [
+      "attack surfaces",
+      "threat surface",
+      "threat surfaces"
+    ],
+    "used_in": [
+      "guardrails",
+      "skills-supply-chain",
+      "adversarial-workflow",
+      "adversarial-incompleteness",
+      "a2a-risks",
+      "a2a-case-studies",
+      "context",
+      "google-adk-a2a",
+      "nist-benchmark-evals",
+      "molmoweb-openness-gap",
+      "hitl-design",
+      "agent-identity-kyc",
+      "everything-drifts"
+    ]
+  },
+  {
     "id": "automation-bias",
     "term": "automation bias",
     "full": "",
@@ -235,7 +264,7 @@
     "id": "basis-risk",
     "term": "Basis Risk",
     "full": "Basis Risk",
-    "short": "The risk that two correlated financial instruments move at different rates, leaving a residual exposure even after an apparently hedged position. In FTP, the treasury absorbs basis risk so business units can plan against stable internal rates.",
+    "short": "The risk that two correlated financial instruments move at different rates, leaving a residual exposure even after an apparently hedged position. In FTP, the treasury absorbs it so business units can plan against stable internal rates.",
     "definition": "Basis risk arises when a hedging instrument does not move in perfect lockstep with the underlying exposure — for example, when the rate used to fund a loan drifts relative to the rate earned on that loan. In the context of bank treasury operations and FTP, the treasury function absorbs basis risk from external market volatility, offering business units stable internal transfer prices. In the token context, the central AI platform absorbs basis risk from external API price changes so that internal departments face predictable internal charges.",
     "domain": "banking",
     "aliases": [],
@@ -260,7 +289,7 @@
   {
     "id": "binding-constraint",
     "term": "Binding constraint",
-    "short": "The single input or process step that limits overall output; improving anything else leaves total performance unchanged until the binding constraint is addressed.",
+    "short": "The single input or process step that limits overall output; improving anything else leaves total performance unchanged until that limiting step is addressed.",
     "definition": "A binding constraint is the limiting factor that determines a system's total output — the weakest link in a chain where every link matters. In a bank's credit operation, if the binding constraint is senior credit officer judgment time, automating document preparation increases efficiency at a non-binding step without improving overall credit throughput or quality. The concept connects to the Theory of Constraints in operations management (Goldratt) and to the weak links model in macroeconomics (Kremer; Jones & Tonetti): when tasks are complements, the binding constraint is the least-productive task, and improving others has limited aggregate effect. Identifying which tasks are binding constraints before deploying automation is the sequencing question that the weak links framework surfaces — and that current bank AI governance frameworks do not require institutions to ask.",
     "domain": "banking",
     "aliases": [
@@ -319,7 +348,7 @@
     "id": "caisi",
     "term": "CAISI",
     "full": "Center for AI Standards and Innovation",
-    "short": "NIST unit for AI standards, pre-deployment testing, and industry partnerships; renamed from the U.S. AI Safety Institute in 2025.",
+    "short": "NIST unit for AI standards, pre-deployment testing, and industry partnerships; refocused and renamed in 2025 from its safety-branded predecessor.",
     "definition": "The Center for AI Standards and Innovation is the unit within NIST responsible for AI standards development, pre-deployment testing of frontier AI models, and industry collaboration on AI security. Renamed from the U.S. AI Safety Institute (USAISI) in 2025 under the Trump administration, CAISI's mandate was refocused from general AI safety toward standards, innovation, and national security capabilities evaluation. CAISI has signed voluntary pre-deployment evaluation agreements with major AI labs — including Google DeepMind, Microsoft, and xAI — and in January 2026 issued a public RFI on AI agent security naming prompt injection, identity, and authorization as explicit concern areas. In February 2026 it co-launched the AI Agent Standards Initiative with NIST, designating finance, healthcare, and education as priority sectors.",
     "domain": "regulatory",
     "aliases": [
@@ -548,7 +577,7 @@
     "id": "context-engineering",
     "term": "context engineering",
     "full": "Context engineering",
-    "short": "The practice of designing and maintaining persistent, version-controlled files (CLAUDE.md, AGENTS.md) that inject project knowledge into every agent session, replacing repetitive prompting.",
+    "short": "The practice of designing and maintaining persistent, version-controlled instruction files that inject project knowledge into every agent session, replacing repetitive prompting.",
     "definition": "Context engineering solves the cold-start problem — where new agent sessions begin with no knowledge of the project, conventions, or prior decisions — by encoding that knowledge in version-controlled Markdown files. Key failure modes: staleness (projects change faster than context files), context window bloat (lost-in-the-middle effects from oversized files), and conflicting instructions across multi-tool setups. ETH Zurich research found LLM-generated context files can reduce task success rates by ~2% while increasing costs 20–23%, because agents follow bad instructions as faithfully as good ones.",
     "domain": "agentic",
     "aliases": [
@@ -587,7 +616,7 @@
     "id": "cve",
     "term": "CVE",
     "full": "Common Vulnerabilities and Exposures",
-    "short": "A public catalog of known cybersecurity vulnerabilities maintained by MITRE, searchable at cve.org.",
+    "short": "A public catalog of known cybersecurity vulnerabilities maintained by MITRE, each assigned a standardized identifier.",
     "definition": "CVE identifiers (e.g., CVE-2025-32711) provide a standardized reference for tracking and discussing publicly disclosed security vulnerabilities. In the LLM context, the 2024–2025 CVE record documents prompt injection attacks escalating to SQL injection, OS command execution, and OAuth-scoped data exfiltration — providing an empirical baseline for adversarial testing scope.",
     "domain": "security",
     "aliases": [
@@ -753,10 +782,26 @@
     ]
   },
   {
+    "id": "dsl",
+    "term": "DSL",
+    "full": "Domain-Specific Language",
+    "short": "A small programming or configuration language built for one narrow purpose — agent frameworks sometimes invent one for wiring agents together, trading general-purpose flexibility for a constrained vocabulary.",
+    "definition": "A domain-specific language is a mini-language designed for a single problem domain, in contrast to a general-purpose language like Python. Examples include SQL (queries), regex (pattern matching), and YAML-based pipeline configs. Some agent-building platforms define a proprietary DSL for declaring agents, tools, and workflows — which means agent logic lives in a format only that vendor's tooling can parse, version, or test. A 'code-first' framework like Google's ADK is the deliberate opposite: agents are plain Python classes, so standard code review, diffing, unit testing, and CI apply without translation. For model risk purposes, the distinction matters because a proprietary DSL adds an interpretation layer between what is documented and what executes.",
+    "domain": "engineering",
+    "aliases": [
+      "DSLs",
+      "domain-specific language",
+      "domain-specific languages"
+    ],
+    "used_in": [
+      "google-adk-a2a"
+    ]
+  },
+  {
     "id": "duration",
     "term": "duration",
     "full": "Interest Rate Duration",
-    "short": "A measure of a bond or loan's sensitivity to interest rate changes, expressed in years; longer-duration assets carry greater interest rate risk because their cash flows are locked in further into the future.",
+    "short": "A measure of a bond or loan's sensitivity to interest rate changes, expressed in years; the longer the figure, the greater the interest rate risk because cash flows are locked in further into the future.",
     "definition": "Duration quantifies how much the price of a fixed-income instrument changes for a given change in interest rates. A 10-year mortgage has far higher duration than a 30-day repo — meaning the bank holding it is exposed to much larger mark-to-market losses if rates rise. In Funds Transfer Pricing, duration is the key dimension used to match each loan or deposit to the correct point on the internal funding curve, ensuring the business unit pays — or receives credit for — the full term premium embedded in its product.",
     "domain": "banking",
     "aliases": [
@@ -875,7 +920,8 @@
     "used_in": [
       "nist-benchmark-evals"
     ],
-    "definition": "In NIST AI 800-2, a transcript is the human-legible record of an evaluation interaction — ordered inputs, outputs, tool calls, and model responses for a single test item. It is evaluation-scoped and designed for sharing, auditing, and replication. Distinct from agent trajectories (which track world state), logs (machine-generated infrastructure records), and traces (distributed system call graphs)."
+    "definition": "In NIST AI 800-2, a transcript is the human-legible record of an evaluation interaction — ordered inputs, outputs, tool calls, and model responses for a single test item. It is evaluation-scoped and designed for sharing, auditing, and replication. Distinct from agent trajectories (which track world state), logs (machine-generated infrastructure records), and traces (distributed system call graphs).",
+    "short": "The human-legible record of an evaluation interaction — ordered inputs, outputs, tool calls, and model responses for a single test item; evaluation-scoped and designed for sharing, auditing, and replication (per NIST AI 800-2)."
   },
   {
     "id": "fdic",
@@ -968,7 +1014,7 @@
     "id": "finops",
     "term": "FinOps",
     "full": "Cloud Financial Operations (FinOps)",
-    "short": "A cloud financial management discipline that allocates and optimizes infrastructure spend at the team and feature level, rather than treating it as undifferentiated IT overhead.",
+    "short": "A discipline that allocates and optimizes cloud infrastructure spend at the team and feature level, rather than treating it as undifferentiated IT overhead.",
     "definition": "FinOps emerged as a practice when cloud spend grew large enough that pooled IT overhead accounting became inadequate. It applies unit economics thinking to cloud infrastructure: which team consumed which resources, which features drove cost, and whether the spend was justified by the value produced. The FinOps Foundation formalized the practice, and it is now a standard function at organizations with significant cloud workloads. Token economics for LLMs is following a similar trajectory, with the key difference that the cost driver is behavioral (prompt design, model selection, caching choices) rather than provisioned resource allocation.",
     "domain": "engineering",
     "aliases": [
@@ -1654,7 +1700,7 @@
   {
     "id": "kv-cache",
     "term": "KV-cache",
-    "short": "Key-value cache: an inference optimization that stores intermediate attention computations across tokens so they need not be recomputed on each new generation step; absence of KV-cache reuse across agent steps means full re-encoding every step.",
+    "short": "An inference optimization that stores intermediate attention computations across tokens so they need not be recomputed on each generation step; without reuse across agent steps, every step re-encodes the full context from scratch.",
     "domain": "engineering",
     "aliases": [
       "KV cache",
@@ -1662,7 +1708,7 @@
       "attention cache",
       "KV-cache reuse"
     ],
-    "definition": "Key-value cache: an inference optimization that stores intermediate attention computations across tokens so they need not be recomputed on each new generation step; absence of KV-cache reuse across agent steps means full re-encoding every step.",
+    "definition": "An inference optimization that stores intermediate attention computations across tokens so they need not be recomputed on each generation step. When an agent harness does not reuse this stored state across steps, every step re-encodes the full context from scratch — a major hidden cost in multi-step agent workflows.",
     "used_in": [
       "molmoweb-openness-gap"
     ]
@@ -1789,7 +1835,7 @@
     "id": "loa",
     "term": "LOA",
     "full": "Level of Automation",
-    "short": "The Sheridan-Verplank 10-level scale describing how much decision authority a system retains versus delegates to a human, from fully manual to fully autonomous.",
+    "short": "A 10-level scale describing how much decision authority a system retains versus delegates to a human, from fully manual to fully autonomous.",
     "definition": "Levels of Automation (LOA) is a 10-point scale proposed by Sheridan and Verplank (1978) and extended by Parasuraman, Sheridan & Wickens (2000) into a two-dimensional model crossing automation level with four functional stages (information acquisition, analysis, decision selection, action implementation). Level 1 is fully manual; Level 10 is fully autonomous with no human involvement. The scale was originally designed for remotely operated underwater vehicles but maps precisely onto banking AI governance: fraud scoring (Level 6–7), credit decisioning (Level 4–5), AML alert triage (Level 2–3), and HFT (Level 9–10). The key governance insight is that the appropriate oversight mechanism — and the dominant human-factors failure mode — differs substantially by level. Automation bias is primarily a Level 4–5 phenomenon. Skill atrophy dominates at Level 2–3. At Level 9–10, runtime effective challenge is structurally inapplicable.",
     "domain": "ai",
     "aliases": [
@@ -1945,7 +1991,7 @@
     "id": "misuse",
     "term": "misuse",
     "full": "Automation misuse",
-    "short": "Overreliance on automation — following incorrect system recommendations when contradictory information is available.",
+    "short": "Excessive trust in automation — following incorrect system recommendations even when contradictory information is available.",
     "definition": "Misuse is one of three automation failure modes in Parasuraman and Riley's (1997) taxonomy (alongside disuse and abuse). It occurs when operators over-rely on automated recommendations, accepting incorrect outputs without independent verification even when contradictory information is accessible. Misuse is the primary mechanism of automation bias, and it produces commission errors. It is distinct from disuse (underutilization) and abuse (deploying automation outside its validated envelope). The EU AI Act Article 14 names this failure mode explicitly as 'automation bias' and requires that oversight persons for high-risk AI systems be able to detect and address it. US banking supervision under SR 26-2 does not use this term. See also: automation bias, commission error, disuse, abuse.",
     "domain": "ai",
     "aliases": [
@@ -2261,14 +2307,14 @@
   {
     "id": "odc-by",
     "term": "ODC-BY 1.0",
-    "short": "Open Data Commons Attribution License: a permissive open data license requiring attribution, commonly used for releasing machine learning datasets alongside Apache-licensed code.",
+    "short": "A permissive open data license requiring credit to the data source, commonly used for releasing machine learning datasets alongside Apache-licensed code.",
     "domain": "engineering",
     "aliases": [
       "ODC-BY",
       "Open Data Commons Attribution",
       "ODC Attribution"
     ],
-    "definition": "Open Data Commons Attribution License: a permissive open data license requiring attribution, commonly used for releasing machine learning datasets alongside Apache-licensed code.",
+    "definition": "A permissive open data license requiring credit to the data source, commonly used for releasing machine learning datasets alongside Apache-licensed code.",
     "used_in": [
       "molmoweb-openness-gap"
     ],
@@ -2387,7 +2433,7 @@
     "id": "owasp-agentic-top10",
     "term": "OWASP Agentic Top 10",
     "full": "OWASP Top 10 for Agentic Applications",
-    "short": "OWASP's 2026 taxonomy of the ten highest-risk attack classes for agentic AI systems (ASI01–ASI10): Agent Goal Hijack, Tool Misuse, Identity & Privilege Abuse, Supply Chain, Code Execution, Memory Poisoning, Inter-Agent Communication, Cascading Failures, Human-Agent Trust Exploitation, and Rogue Agents.",
+    "short": "OWASP's 2026 taxonomy of the ten highest-risk attack classes for agentic AI systems: Agent Goal Hijack, Tool Misuse, Identity & Privilege Abuse, Supply Chain, Code Execution, Memory Poisoning, Inter-Agent Communication, Cascading Failures, Human-Agent Trust Exploitation, and Rogue Agents.",
     "definition": "Distinct from the OWASP LLM Top 10 (which covers language-model-specific risks), the Agentic Top 10 addresses risks that emerge when LLMs act as orchestrators or sub-agents with tool access. The ten categories: ASI01 Agent Goal Hijack (the primary vehicle for indirect prompt injection), ASI02 Tool Misuse & Exploitation, ASI03 Identity & Privilege Abuse, ASI04 Agentic Supply Chain Vulnerabilities, ASI05 Unexpected Code Execution, ASI06 Memory & Context Poisoning, ASI07 Insecure Inter-Agent Communication, ASI08 Cascading Failures, ASI09 Human-Agent Trust Exploitation, ASI10 Rogue Agents. The taxonomy is designed to cross-reference with MITRE ATLAS technique IDs for examiner-facing documentation.",
     "domain": "security",
     "aliases": [
@@ -2438,7 +2484,7 @@
   {
     "id": "pass-at-k",
     "term": "pass@k",
-    "short": "An evaluation metric measuring the probability that at least one of k model attempts at a task succeeds; often reported as pass@1 (single attempt) or pass@4 (best of four parallel rollouts).",
+    "short": "An evaluation metric measuring the probability that at least one of k model attempts at a task succeeds; commonly reported for a single attempt (k=1) or the best of several parallel rollouts (k=4).",
     "domain": "evals",
     "aliases": [
       "pass@1",
@@ -2446,7 +2492,7 @@
       "pass at k",
       "best-of-N"
     ],
-    "definition": "An evaluation metric measuring the probability that at least one of k model attempts at a task succeeds; often reported as pass@1 (single attempt) or pass@4 (best of four parallel rollouts).",
+    "definition": "An evaluation metric measuring the probability that at least one of k model attempts at a task succeeds; commonly reported for a single attempt (k=1) or the best of several parallel rollouts (k=4).",
     "used_in": [
       "molmoweb-openness-gap"
     ]
@@ -2698,7 +2744,7 @@
     "id": "red-team-engagement",
     "term": "engagement",
     "full": "red-team engagement",
-    "short": "A bounded, structured adversarial testing exercise with defined scope, phases, and deliverables. Security-industry term; MRM practitioners often call the same activity a red-team exercise or adversarial review.",
+    "short": "A bounded, scoped, time-boxed adversarial project with defined phases and deliverables — the security-industry analogue of an audit or model validation cycle.",
     "definition": "In security consulting, an engagement is a scoped, time-boxed project — analogous to an audit or model validation cycle — in which a team systematically attempts to break a system within agreed rules of engagement. Applied to LLMs, a red-team engagement typically traverses five phases: scope and threat modeling, attack execution, triage, reporting, and retest. Each phase produces artifacts (architecture diagrams, findings logs, ASR dashboards, residual-risk statements) that map directly onto model risk documentation requirements. The term originates in penetration testing practice; model risk and validation teams more familiar with SR 11-7 vocabulary may prefer red-team exercise or adversarial review — these are functionally equivalent.",
     "domain": "security",
     "aliases": [
@@ -2717,7 +2763,7 @@
     "id": "red-teaming",
     "term": "Red-teaming",
     "full": "",
-    "short": "Structured adversarial testing in which an independent team systematically attempts to find failures, vulnerabilities, or unsafe behaviors in a system before or during deployment.",
+    "short": "A structured practice in which an independent team systematically attacks a system to find failures, vulnerabilities, or unsafe behaviors before or during deployment.",
     "definition": "Red-teaming is a structured adversarial testing practice originating in military and intelligence contexts, where an independent team ('red team') attempts to defeat, exploit, or find failures in a system using techniques an adversary would employ. In AI/ML contexts, red-teaming includes manual adversarial prompting, automated attack frameworks (Garak, PyRIT, promptfoo), and structured elicitation of harmful or unsafe model behaviors. Under SR 11-7's effective challenge standard, red-teaming for behavioral controls (prompt injection, jailbreaking, goal hijacking) maps onto the competence leg — the challenge team must have the specific expertise to probe failure modes that traditional validation has no way to test.",
     "domain": "evals",
     "aliases": [
@@ -2986,7 +3032,7 @@
     "id": "sro",
     "term": "SRO",
     "full": "Self-Regulatory Organization",
-    "short": "A non-governmental body authorized to regulate its own members; FINRA is the primary SRO for U.S. broker-dealers. SRO guidance does not constitute prudential banking regulation.",
+    "short": "A non-governmental body authorized to regulate its own members — FINRA plays this role for U.S. broker-dealers; its guidance does not constitute prudential banking regulation.",
     "definition": "A Self-Regulatory Organization (SRO) is a non-governmental entity authorized by statute to regulate the conduct of its own members, with rules enforceable against members who agree to abide by them as a condition of membership. FINRA is the primary SRO for U.S. broker-dealers. SRO guidance is important for securities firms but does not constitute prudential banking supervision — a distinction that matters when interpreting statements like FINRA's 2026 Annual Oversight Report reference to human-in-the-loop agent protocols, which applies to broker-dealer deployments and not to bank-regulated entities.",
     "domain": "regulatory",
     "aliases": [
@@ -3160,6 +3206,20 @@
     ]
   },
   {
+    "id": "typed-object",
+    "term": "Typed object",
+    "full": "Typed object (statically declared data structure)",
+    "short": "A data structure whose fields and field types are declared up front, so malformed data is rejected at the boundary instead of propagating silently.",
+    "definition": "A typed object is a data structure — like a Python dataclass or Pydantic model — whose shape is declared explicitly: which fields exist, what type each holds, which are required. The alternative is passing loosely structured dictionaries or raw strings and hoping each consumer parses them correctly. In agent frameworks, typed objects at the seams (tool inputs, agent events, inter-agent messages) mean a malformed payload fails loudly at the boundary rather than producing a silent downstream error. This is the same principle as structural guardrails: schema validation at runtime catches what code review can't, because the data is generated by a model, not written by a developer.",
+    "domain": "engineering",
+    "aliases": [
+      "typed objects"
+    ],
+    "used_in": [
+      "google-adk-a2a"
+    ]
+  },
+  {
     "id": "ucc-4a",
     "term": "UCC 4A",
     "full": "Uniform Commercial Code Article 4A",
@@ -3175,7 +3235,7 @@
     "id": "udaap",
     "term": "UDAAP",
     "full": "Unfair, Deceptive, or Abusive Acts or Practices",
-    "short": "Dodd-Frank consumer protection standard enforced by the CFPB prohibiting unfair, deceptive, or abusive conduct — adding the 'abusive' prong to the older two-prong UDAP (FTC Act) standard.",
+    "short": "Dodd-Frank consumer protection standard enforced by the CFPB prohibiting unfair, deceptive, or abusive conduct — adding the 'abusive' prong to the FTC Act's older two-prong standard.",
     "definition": "UDAAP (Unfair, Deceptive, or Abusive Acts or Practices) is the consumer protection standard introduced by the Dodd-Frank Act (2010) that prohibits financial institutions from engaging in conduct that is unfair, deceptive, or abusive. The critical Dodd-Frank innovation was the third prong — 'abusive' — defined as taking unreasonable advantage of a consumer's lack of understanding, inability to protect their interests, or reasonable reliance on the institution. The older UDAP standard (Unfair or Deceptive Acts or Practices, derived from Section 5 of the FTC Act) covered only two prongs; banks are largely exempt from direct FTC enforcement, and state regulators enforce state-level UDAP equivalents. The CFPB enforces UDAAP under Dodd-Frank. In agentic payment contexts, UDAAP may provide residual consumer protection coverage in jurisdictions where no specific AI agent payment statute exists.",
     "domain": "regulatory",
     "aliases": [
@@ -3238,7 +3298,7 @@
   {
     "id": "vlm",
     "term": "VLM",
-    "short": "Vision-Language Model: a foundation model capable of processing both images and text as input, enabling visual reasoning, screenshot understanding, and GUI agent behavior.",
+    "short": "A foundation model capable of processing both images and text as input, enabling visual reasoning, screenshot understanding, and GUI agent behavior.",
     "domain": "ai",
     "aliases": [
       "Vision-Language Model",
@@ -3247,7 +3307,7 @@
       "multimodal LLM",
       "multimodal model"
     ],
-    "definition": "Vision-Language Model: a foundation model capable of processing both images and text as input, enabling visual reasoning, screenshot understanding, and GUI agent behavior.",
+    "definition": "A foundation model capable of processing both images and text as input, enabling visual reasoning, screenshot understanding, and GUI agent behavior. The model class behind screenshot-based GUI agents, which must infer element semantics from pixels alone.",
     "used_in": [
       "molmoweb-openness-gap"
     ],
