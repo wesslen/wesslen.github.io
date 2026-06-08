@@ -51,8 +51,8 @@
       "molmoweb-openness-gap",
       "gui-agents-verifier"
     ],
-    "published": false,
-    "date": null,
+    "published": true,
+    "date": "2026-06-08",
     "quiz": true
   },
   {
@@ -65,8 +65,8 @@
       "nist-benchmark-evals",
       "benchmark-uncertainty"
     ],
-    "published": false,
-    "date": null,
+    "published": true,
+    "date": "2026-06-08",
     "quiz": true
   },
   {
@@ -107,8 +107,8 @@
       "automation-bias-banking",
       "hci-translation"
     ],
-    "published": false,
-    "date": null,
+    "published": true,
+    "date": "2026-06-08",
     "quiz": true
   },
   {
