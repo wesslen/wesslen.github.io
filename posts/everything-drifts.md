@@ -11,36 +11,15 @@ Not the technical kind — though that too. I mean something broader. Models dri
 
 This blog — called Drift, for reasons that should be obvious by now — is my attempt to document that drift from the edges where it's most visible.
 
-## Why Write in Public?
-
-I've kept plenty of private notes: Google docs, Apple Notes, markdown files scattered across three different machines. The problem with private notes is that they don't push back. They just sit there, agreeing with you.
-
-Writing for an audience (even a small one, even an imaginary one) forces a different kind of honesty. You can't handwave past the part you don't quite understand. You can't leave a vague bullet point and promise yourself you'll come back to it. You have to say the thing, or admit you can't.
-
-> [!QUOTE]
-> The best way to understand something is to teach it to someone else. The second-best way is to try to write it down as if you were. So here I am.
-
-I'm also motivated by a quiet frustration with how GenAI gets discussed publicly. The coverage tends to oscillate between breathless hype and breathless doom, with very little in the middle: the messy, technically real middle where the actual work happens. I'd like to contribute something from that middle, and specifically from its edges: the places where the frameworks haven't caught up, where the behavior is hardest to predict, where the governance questions are still open.
-
-## What I Actually Do
-
-My day-to-day involves a mix of things: building and evaluating language models, thinking about the organizational infrastructure for governing them, and lately working out what it means to design agents that are reliable enough to trust with real decisions. A lot of it is less glamorous than the demos suggest, and a lot of it sits at an uncomfortable intersection between technical engineering and institutional risk management that neither field has fully claimed.
-
-The drift shows up here too. A question I keep running into is how you apply fifteen-year-old governance frameworks to AI systems that barely existed five years ago. In financial services, banks are actively trying to apply [model risk guidance written for linear regression models](post.html?slug=sr11-7) to large language models making underwriting recommendations. The question is not rhetorical. The technical and organizational problems are both real, and they compound each other in ways that don't get discussed much outside of narrow specialist audiences.
-
-That edge — between what the frameworks cover and what the systems actually do — is what I want to write about. The people who understand the engineering often don't spend much time in governance conversations, and vice versa. I'm interested in what happens when you try to hold both at once.
-
 ## On the Speed of the Drift
 
-I want to be careful not to be too knowing about all of this. It's easy to fall into a pose of world-weary expertise when you work with these systems every day — to treat the genuinely strange as mundane because you've seen a lot of model outputs.
+I want to be careful not to be too knowing about all of this. It's easy to fall into a pose of world-weary expertise when you work with these systems every day — to treat the genuinely strange as mundane because you've seen a lot of model outputs. But something real is happening. The models I work with today are qualitatively different from the ones I worked with two years ago, and the ones two years from now will almost certainly be different again in ways I can't predict. That's exciting and disorienting in roughly equal measure.
 
-But something real is happening. The models I work with today are qualitatively different from the ones I worked with two years ago, and the ones two years from now will almost certainly be different again in ways I can't predict. That's exciting and disorienting in roughly equal measure. The drift is real, and so is the uncertainty about where it's taking us.
-
-There's also a certain irony embedded in the name. Drift is a useful shorthand, but it's starting to be used the way "bias" was a decade ago: as a catch-all for AI behavior that seems off, without specifying what it's drifting from or measured against what baseline. In the ML era, "this model is biased" too often meant "this model is bad" without the obvious follow-up: biased compared to what? The same problem is showing up with drift. Engineers and startups will invoke drift detection as a risk-management ritual, without specifying the reference distribution, the detection threshold, or the failure mode they're worried about. The invocation does the work of measurement without the substance.
-
-The vocabulary shift is revealing too. "Bias" carries social science overtones that engineering teams tend to distrust; "drift" sounds quantifiable and scientific. But the epistemological problem is the same either way: an absent normative baseline. What you're actually looking for depends entirely on the system, the institution, and the specific failure mode you're trying to prevent. That gap between the clean general concept and the messy particular reality is one of the things I keep coming back to.
+There's also a certain irony embedded in the name. Drift is starting to be used the way "bias" was a decade ago: a catch-all for AI behavior that seems off, without specifying what it's drifting from or measured against what baseline. Engineers invoke drift detection as a risk-management ritual without specifying the reference distribution, the detection threshold, or the failure mode they're worried about. The word sounds quantifiable and scientific in a way "bias" never did — but the epistemological problem is the same either way: an absent normative baseline. What you're actually looking for depends entirely on the system, the institution, and the specific failure mode you're trying to prevent.
 
 ## From Notes to a Course
+
+I've kept private notes for years. The problem with private notes is that they don't push back — you can handwave past the parts you don't fully understand, leave a vague bullet point, promise yourself you'll come back to it. Writing for an audience forces a different kind of honesty: you have to say the thing, or admit you can't. I'm also motivated by a quiet frustration with how GenAI gets discussed publicly. The coverage tends to oscillate between breathless hype and breathless doom, with very little in the messy, technically real middle where the actual work happens. I'd like to contribute something from that middle.
 
 When I started, I said I'd write about four things. That number didn't survive contact with the subject. What began as scattered notes has turned into something with a shape: ten series, around thirty posts, each series roughly a lecture's worth of argument. Somewhere along the way it stopped being a blog I was adding to and started being a curriculum I was, apparently, writing.
 
@@ -65,7 +44,7 @@ Here's what each module is designed to let you do:
 
 I built it so it can be taught more than one way — a ten-week lunch-and-learn, a semester, or read at your own pace. Each series stands on its own; together they're the course.
 
-The blog sits at an intersection that doesn't have a lot of native coverage. If you work in model risk or AI governance, I hope the technical posts are readable. If you're an ML engineer, I hope the governance posts don't feel like compliance theater. I'm trying to write for both — which may mean occasionally failing both.
+If you work in model risk or AI governance, I hope the technical posts are readable. If you're an ML engineer, I hope the governance posts don't feel like compliance theater. I'm trying to write for both — which may mean occasionally failing both.
 
 Posts will vary in length and formality. Some are close to polished essays. Others are working notes — me thinking through a problem in real time, with no guarantee I've resolved it by the end. That's true of the course, too: it documents a moving target, which means part of its job is to keep going stale and getting rewritten.
 
@@ -73,16 +52,23 @@ If that sounds useful to you, I'm glad you're here.
 
 ## How the Quizzes Work
 
-Each post that has a question pool shows a **// check your understanding** section at the bottom, just above the "more posts" links. It draws five questions at random from a larger pool and randomizes the option order every time, so retaking gives you a genuinely different pass through the material rather than a memory test for answer positions.
+The course has a three-tier quiz system:
 
-The questions are designed to help you think through the material. Every answer, right or wrong, shows an explanation. The score at the end tells you where you stand, nothing more. The goal is that the explanation for a wrong answer is worth as much as getting it right.
+<img src="../img/everything-drifts-quiz.png" alt="Quiz progression: post quizzes unlock module tests, which unlock the final exam" style="max-width:100%; margin: 1.5rem 0;">
 
-Each module also has a **module test**, accessible from the [course landing page](index.html). It draws ten questions from across all posts in the module, testing whether concepts from different posts are synthesizing rather than whether you recall any single argument. Module tests unlock only after you've scored a perfect 5/5 on every post quiz in that module — the ✓ badge on each post confirms you're there. A score of 90% or better on the module test counts as a pass.
+- **Post quizzes** — Every post with a question pool shows a _// check your understanding_ section at the bottom. Five questions are drawn at random from a larger pool, with options randomized each time — retaking gives a genuinely different pass through the material, not a memory test for answer positions. Every answer (right or wrong) shows an explanation; the explanation for a wrong answer is worth as much as getting it right.
+- **Module tests** — Accessible from the [course landing page](index.html). Ten questions from across all posts in the module. Unlocks only after you've scored 5/5 on every post quiz in that module (the ✓ badge on each post confirms it). A score of 90%+ counts as a pass.
+- **Final exam** — Twenty questions from across the entire course. Unlocks after passing all ten module tests. Also requires 90%+.
+- **Glossary drill** — A separate study tool on the [glossary page](../glossary.html). Click _// drill mode_ to practice term recall from definition — fill-in-the-blank, no multiple-choice options. No score requirement; respects whatever domain filter you've set, so you can drill only regulatory terms or only evals terms before a module test.
 
-Pass all ten module tests and a final exam becomes available. It draws twenty questions from across the entire course, and also requires 90% to pass.
+Progress is saved in your browser's local storage — it won't carry over across browsers or private windows. No account system, by design.
 
-The [glossary](../glossary.html) has a separate study tool that works differently. Click **// drill mode** on the glossary page and it pulls from the same 197-term vocabulary list, shows you the definition, and asks you to type the term from memory — no multiple-choice options to recognize, just recall. It respects whatever domain filter you've set, so you can drill only regulatory terms, or only evals terms, before a module test. There's no score, no progress tracking, and no unlock requirement. It's closer to flashcards than a test.
+The quizzes test the argument each post makes (why something is true, what a framework implies, where a concept breaks down) rather than trivia. If you find a question that seems to test the wrong thing, the [GitHub repo](https://github.com/wesslen/wesslen.github.io) is the right place to flag it.
 
-Progress is saved in your browser. A small ✓ badge appears on the post list once you've attempted a quiz, and the module page shows how many posts in each module you've covered. If you clear your browser history, switch browsers, or open the site in a private window, the progress doesn't carry over. There's no account system. This is a static site, and that's a deliberate trade-off: nothing to log in to, nothing stored anywhere but your own machine.
+## What I Actually Do
 
-A few things worth knowing before you start. The quizzes cover the argument each post makes (why something is true, what a framework implies, where a concept breaks down) rather than trivia. If a question asks about the London Whale, the right answer won't depend on the dollar figure; it'll depend on which failure mode the case study illustrates. If you find a question that seems to test the wrong thing, or an explanation that misses the point, the [GitHub repo](https://github.com/wesslen/wesslen.github.io) is the right place to flag it.
+My day-to-day involves building and evaluating language models, thinking about the organizational infrastructure for governing them, and working out what it means to design agents that are reliable enough to trust with real decisions. A lot of it is less glamorous than the demos suggest, and it sits at an uncomfortable intersection between technical engineering and institutional risk management that neither field has fully claimed.
+
+The drift shows up here too. A question I keep running into is how you apply fifteen-year-old governance frameworks to AI systems that barely existed five years ago. In financial services, banks are actively trying to apply [model risk guidance written for linear regression models](post.html?slug=sr11-7) to large language models making underwriting recommendations. The question is not rhetorical. The technical and organizational problems are both real, and they compound each other in ways that don't get discussed much outside of narrow specialist audiences.
+
+That edge — between what the frameworks cover and what the systems actually do — is what I want to write about. The people who understand the engineering often don't spend much time in governance conversations, and vice versa. I'm interested in what happens when you try to hold both at once.
