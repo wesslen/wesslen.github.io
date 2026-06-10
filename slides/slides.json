@@ -72,7 +72,7 @@
   {
     "id": "adversarial-testing",
     "title": "Adversarial Testing",
-    "description": "Five-phase red-teaming, three deployment gates, and why adversarial completeness is provably unachievable \u2014 and why you still need the program.",
+    "description": "Five-phase red-teaming, three deployment gates, and why adversarial completeness is provably unachievable — and why you still need the program.",
     "dir": "slides/adversarial-testing",
     "posts": [
       "adversarial-workflow",
@@ -128,7 +128,7 @@
   {
     "id": "ai-economy",
     "title": "Economics of AI",
-    "description": "Comparative advantage models, token transfer pricing, and knowledge collapse \u2014 the macro and institutional economics of AI adoption.",
+    "description": "Comparative advantage models, token transfer pricing, and knowledge collapse — the macro and institutional economics of AI adoption.",
     "dir": "slides/ai-economy",
     "posts": [
       "ai-econ-model",
@@ -136,8 +136,8 @@
       "knowledge-collapse-economics",
       "weak-links-banking"
     ],
-    "published": false,
-    "date": null,
+    "published": true,
+    "date": "2026-06-10",
     "quiz": true
   }
 ]

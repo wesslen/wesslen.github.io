@@ -27,6 +27,9 @@ What happens next? A memo. An approval workflow requiring sign-off on new API in
 
 Most enterprise AI spending today is governed the way mainframe time was governed in 1975: as a centralized overhead cost pooled across the organization and allocated loosely or not at all. The business unit that builds a customer-facing agent on a reasoning model and the business unit that runs batch compliance summarization on a budget model both draw from the same undifferentiated pool. When the bill arrives, nobody is accountable for the spread between those choices.
 
+![Vertical cost stack diagram showing four model tiers stacked bottom to top by increasing output cost: ULTRA-LOW COST at $0.40/1M output tokens (green, thin bar, batch/automation use case), BUDGET/MINI at $0.60/1M (blue), STANDARD FLAGSHIP at $15/1M (orange, customer-facing agents), and PREMIUM REASONING at $168/1M (red, tallest bar, complex analysis). A double-headed orange arrow on the right spans the full height labeled '420× OUTPUT SPREAD'. A stick figure labeled AI PLATFORM (TREASURY) points at the stack with the question 'WHICH WORKLOAD EARNS WHICH TIER?' Bottom annotation: 'A config setting is a capital allocation decision.'](../img/token-transfer-pricing-tiers.png)
+*420× output spread across model tiers as of mid-2026. The decision of which model handles which workload is a capital allocation decision dressed as a configuration setting.*
+
 The problem isn't the absolute cost; it's the price variance across model tiers that makes the pooling incoherent. As of mid-2026, that spread runs to 420x on output tokens:[^2]
 
 | Model Tier | Input (per 1M tokens) | Output (per 1M tokens) | Output ratio |
@@ -35,9 +38,6 @@ The problem isn't the absolute cost; it's the price variance across model tiers 
 | Budget / Mini (e.g., GPT-4o Mini) | $0.15 | $0.60 | 1.5× |
 | Standard Flagship (e.g., Claude Sonnet 4.6) | $3.00 | $15.00 | 37.5× |
 | Premium Reasoning (e.g., GPT-5.2 Pro) | $21.00 | $168.00 | 420× |
-
-![Vertical cost stack diagram showing four model tiers stacked bottom to top by increasing output cost: ULTRA-LOW COST at $0.40/1M output tokens (green, thin bar, batch/automation use case), BUDGET/MINI at $0.60/1M (blue), STANDARD FLAGSHIP at $15/1M (orange, customer-facing agents), and PREMIUM REASONING at $168/1M (red, tallest bar, complex analysis). A double-headed orange arrow on the right spans the full height labeled '420× OUTPUT SPREAD'. A stick figure labeled AI PLATFORM (TREASURY) points at the stack with the question 'WHICH WORKLOAD EARNS WHICH TIER?' Bottom annotation: 'A config setting is a capital allocation decision.'](../img/token-transfer-pricing-tiers.png)
-*420× output spread across model tiers as of mid-2026. The decision of which model handles which workload is a capital allocation decision dressed as a configuration setting.*
 
 In a high-throughput banking environment, the decision of which model handles which workload is a capital allocation decision dressed up as a configuration setting. The spread matters most for workloads where model tier is a genuine choice, not forced by capability constraints — and in banking, there are more of those than most teams realize.
 
