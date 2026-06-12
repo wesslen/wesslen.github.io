@@ -87,7 +87,7 @@ The obvious counterargument is that vocabulary is incidental — that “effecti
 > [!QUOTE]
 > A governance committee built around "HITL checkpoints" and one built around "effective challenge with qualified validators" will allocate both responsibility and accountability differently when something goes wrong.
 
-The convergence across jurisdictions is on a core set of expectations: board-level accountability, independent validation, override capability, human review of material or customer-facing decisions, and the principle that AI deployment does not dilute human accountability. The convergent term is "human oversight." A compliance program drafted around the former without grounding it in the vocabulary of the latter cannot satisfy a regulatory examination.
+The convergence across jurisdictions is on a core set of expectations: board-level accountability, independent validation, override capability, human review of material or customer-facing decisions, and the principle that AI deployment does not dilute human accountability. The convergent term is "human oversight." A compliance program drafted around the former without grounding it in the vocabulary of the latter is unlikely to satisfy a regulatory examination.
 
 ## What's categorically different now
 

@@ -56,7 +56,7 @@ The structural category tends to be undercounted. In financial workflows where a
 
 Conceptual Soundness governs the choice of guardrail mechanism. Using a second LLM as a real-time safety classifier is a fundamentally different design decision than a deterministic rule-based filter — different risk profile, different training data documentation, different threshold logic. Both are subject to validation, which means the guardrail system itself needs to go through the same MRM process as the model it's guarding.
 
-Ongoing Monitoring is where guardrail KPIs live: frequency of intercepted jailbreak attempts, PII detection F1 scores, drift in hallucination interception rates over time. These aren't the guardrail — they're the evidence that the guardrail is working, which is what regulators actually want to see in an audit.
+Ongoing Monitoring is where guardrail KPIs live: frequency of intercepted jailbreak attempts, PII detection F1 scores, drift in hallucination interception rates over time. These aren't the guardrail — they're the evidence that the guardrail is working, which is what regulators likely want to see in an audit.
 
 Outcomes Analysis is the hardest translation. Backtesting a fraud detection agent means validating that guardrails didn't inadvertently suppress true positives or inflate false positives to a level that disrupts legitimate transactions. That's a materially different exercise than backtesting a point-estimate credit model, and nobody has fully worked out the methodology yet.
 
