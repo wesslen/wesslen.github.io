@@ -37,6 +37,29 @@ jobs:
       - name: Check formatting
         run: npx prettier --check "*.html" "*.css"
 
+  quiz-check:
+    name: Quiz Validate & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ── Quiz schema validation + engine unit tests ─────────
+      # validate:quiz checks schema + cross-references;
+      # test:quiz runs the engine unit tests + pool round-trips.
+      - name: Validate & test quizzes
+        run: npm run build:quiz
+
   slop-check:
     name: Prose Slop Guard
     runs-on: ubuntu-latest
