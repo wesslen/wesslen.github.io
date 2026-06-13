@@ -1,5 +1,36 @@
 [
   {
+    "id": "omitted-evidence-blindness",
+    "term": "Omitted-Evidence Blindness",
+    "short": "An LLM judge can only assess what entered its context, so it is structurally silent about evidence the agent never retrieved, checks that never ran, or actions it didn't narrate.",
+    "definition": "Omitted-evidence blindness is the structural limit of an LLM-as-judge that grades a transcript or output packet: it evaluates only the information the agent surfaced, and cannot detect a failure that lives in what the agent did not do — evidence it never retrieved, a policy check that never executed, or a riskier tool call it chose not to mention. The blind spot is distinct from low recall (missing failures the judge was shown) and from the base-rate problem (flags swamped by false alarms): a judge with perfect recall on visible failures still catches none of the omitted ones, because a fluent rationale that opens 'based on the available information' makes the word 'available' do load-bearing work the judge is not equipped to question. Agus Sudjianto's phrasing — the judge is 'complete with respect to what it sees and silent with respect to what the system failed to show it' — captures why a model rating another model's prose is not independent validation. Contrast: omission error (the human-operator analog); see also prompt and pray.",
+    "domain": "evals",
+    "aliases": [
+      "omitted-evidence blindness",
+      "omitted evidence blindness"
+    ],
+    "used_in": [
+      "judge-base-rate"
+    ]
+  },
+  {
+    "id": "prompt-and-pray",
+    "term": "Prompt and Pray",
+    "full": "Unified Prompt and Pray Framework (UPPF)",
+    "short": "The anti-pattern of substituting instruction, LLM review, human sign-off, and a dashboard for engineered runtime controls — instruction mistaken for enforcement.",
+    "definition": "Prompt and pray names the agentic-AI control anti-pattern in which behavioral artifacts stand in for engineered controls: the system is instructed to follow policy, rules are stored in a Markdown memory file, one model rates another's output, a human approves a summary, and after each incident the prompt is strengthened ('be extra careful'). Agus Sudjianto formalized it as the deadpan satirical 'Unified Prompt and Pray Framework' (UPPF, 2026) to argue the category error underneath it — instruction is not enforcement, a Markdown file is not state management, an LLM judge is not independent validation, and a human-in-the-loop is not oversight unless the human can inspect evidence, policy, tool calls, and system state. The control identity it parodies is Control ≈ Instruction + Review + Approval + Dashboard. The pattern is most dangerous in high-risk workflows (AML disposition, credit decisions, payment release) where actions are irreversible and a green dashboard can sit on top of an unfixed control gap.",
+    "domain": "agentic",
+    "aliases": [
+      "prompt and pray",
+      "prompt-and-pray",
+      "prompting-and-prayer",
+      "UPPF"
+    ],
+    "used_in": [
+      "judge-base-rate"
+    ]
+  },
+  {
     "id": "a2a",
     "term": "A2A",
     "full": "Agent-to-Agent",
@@ -3360,6 +3391,128 @@
       "a2a-case-studies",
       "a2a-risks",
       "adversarial-workflow"
+    ]
+  },
+  {
+    "id": "ppv",
+    "term": "PPV",
+    "full": "Positive Predictive Value",
+    "short": "The share of a detector's flags that are true positives — the probability that a flag is real.",
+    "definition": "Positive predictive value is the probability that a flagged item is actually a positive case: TP / (TP + FP). Unlike sensitivity (TPR), PPV depends on the base rate of the condition being detected — the same judge with fixed TPR and FPR can have 67% PPV at 10% prevalence and under 2% at 0.1%. For LLM judges monitoring rare failures, PPV determines what the human review queue feels like: at low PPV, reviewers wade through dozens of false alarms per real failure, the alert-fatigue regime where vigilance failures concentrate.",
+    "domain": "evals",
+    "aliases": [
+      "positive predictive value",
+      "PPV"
+    ],
+    "used_in": [
+      "judge-base-rate"
+    ]
+  },
+  {
+    "id": "base-rate",
+    "term": "Base Rate",
+    "full": "Base Rate / Prevalence",
+    "short": "The true frequency of the condition being detected in the population — the denominator that determines whether a detector's flags are meaningful.",
+    "definition": "The base rate (prevalence) is the proportion of items in the monitored population that actually have the condition of interest. It is the single largest determinant of a detector's positive predictive value: at low base rates, even accurate detectors produce mostly false alarms (the false-positive paradox), and aggregate accuracy becomes nearly uninformative because a detector that flags nothing scores near-perfect. Banking's most consequential GenAI failures — fraud coaching, harmful advice — run at sub-1% base rates, which is why balanced-benchmark judge performance does not transfer to production monitoring.",
+    "domain": "evals",
+    "aliases": [
+      "base rate",
+      "prevalence",
+      "base rates"
+    ],
+    "used_in": [
+      "judge-base-rate"
+    ]
+  },
+  {
+    "id": "youdens-j",
+    "term": "Youden's J",
+    "full": "Youden's J Statistic",
+    "short": "TPR + TNR − 1: a prevalence-independent metric for comparing classifiers or judges across class balances.",
+    "definition": "Youden's J statistic (equivalent to balanced accuracy, rescaled) sums sensitivity and specificity and subtracts one, yielding a measure invariant to class balance and to the arbitrary choice of positive class. Accuracy, precision, recall, and F1 all shift with prevalence and can rank judges differently at deployment base rates than on a test set; J doesn't, which makes it the right yardstick for choosing between judges. Two caveats: J becomes volatile when rare-class annotations are sparse, and it weights both error types equally — so the deployed operating threshold should be set by the cost ratio between misses and false alarms, not at J's balanced optimum.",
+    "domain": "evals",
+    "aliases": [
+      "Youden's J",
+      "balanced accuracy",
+      "Youden index"
+    ],
+    "used_in": [
+      "judge-base-rate"
+    ]
+  },
+  {
+    "id": "rogan-gladen",
+    "term": "Rogan–Gladen Correction",
+    "short": "A 1978 epidemiology estimator that recovers true prevalence from a biased screening test with known sensitivity and specificity.",
+    "definition": "The Rogan–Gladen correction estimates true prevalence from an imperfect detector's observed flag rate: (observed rate + specificity − 1) / (sensitivity + specificity − 1), with sensitivity and specificity estimated from a labeled gold set. Applied to LLM judges, it converts a biased flag rate into an unbiased failure-rate estimate — fixing measurement, not detection. It degenerates when the observed flag rate is at or below the detector's false alarm rate (the estimate hits zero, and the data cannot distinguish 'no failures' from 'failures the judge can't see'), and it assumes the detector's error rates are stable between calibration and production traffic.",
+    "domain": "evals",
+    "aliases": [
+      "Rogan–Gladen",
+      "Rogan-Gladen",
+      "Rogan-Gladen correction"
+    ],
+    "used_in": [
+      "judge-base-rate"
+    ]
+  },
+  {
+    "id": "ppi",
+    "term": "PPI",
+    "full": "Prediction-Powered Inference",
+    "short": "A statistical framework that combines a small human-labeled sample with a large model-labeled one to produce valid confidence intervals.",
+    "definition": "Prediction-powered inference (Angelopoulos et al., 2023) treats a machine predictor — such as an LLM judge — as an auxiliary measurement instrument: a small human-labeled sample estimates the predictor's error, a large predictor-labeled sample supplies volume, and the combination yields unbiased estimates with confidence intervals far tighter than the human sample alone would support. For LLM-judge monitoring, PPI (and extensions like Amazon's PRECISE) enables defensible failure-rate estimates from as few as ~100 human annotations — but like all such corrections, it fixes aggregate measurement, not per-item detection, and assumes the judge's error rates are stable across the traffic being corrected.",
+    "domain": "evals",
+    "aliases": [
+      "prediction-powered inference"
+    ],
+    "used_in": [
+      "judge-base-rate"
+    ]
+  },
+  {
+    "id": "abstention-cascade",
+    "term": "Abstention Cascade",
+    "short": "A judge architecture that renders verdicts only above a calibrated confidence bar and escalates everything else to stronger judges or humans.",
+    "definition": "An abstention cascade routes uncertainty instead of guessing: the judge issues a verdict only when its confidence clears a calibrated threshold, and escalates the remainder up a chain that ends in human review. Cascaded selective evaluation (Gao et al., ICLR 2025) gives the pattern a formal guarantee — judge–human agreement provably above a user-set target whenever the judge does rule — while cutting evaluation cost relative to a single large judge. In rare-failure monitoring, the cascade is the middle tier between a high-recall classifier screen and the human review queue.",
+    "domain": "evals",
+    "aliases": [
+      "abstention cascade",
+      "abstention layer",
+      "cascaded selective evaluation",
+      "selective evaluation"
+    ],
+    "used_in": [
+      "judge-base-rate"
+    ]
+  },
+  {
+    "id": "gold-set",
+    "term": "Gold Set",
+    "short": "A human-expert-labeled reference dataset, deliberately enriched with confirmed rare-class examples, against which automated evaluators are calibrated.",
+    "definition": "A gold set is the expert-labeled dataset that anchors every claim about an automated evaluator: the judge's confusion matrix, its per-class recall, and any statistical correction of its outputs are all computed against it. For rare-failure monitoring the gold set must deliberately over-sample the rare class (from production cases, fraud-ops files, complaints, and red-team output), be double-annotated with inter-annotator agreement reported, and grow over time — including from a random audit stream of unflagged traffic, without which it inherits the judge's own blind spots. Building one is expensive (hundreds of expert hours); the scarcity of rare-class gold sets is the binding constraint on judge validation.",
+    "domain": "evals",
+    "aliases": [
+      "gold set",
+      "gold sets",
+      "gold-set",
+      "gold standard set"
+    ],
+    "used_in": [
+      "judge-base-rate"
+    ]
+  },
+  {
+    "id": "agreeableness-bias",
+    "term": "Agreeableness Bias",
+    "short": "LLM judges' systematic asymmetry: they reliably confirm valid outputs but catch only a small fraction of true failures.",
+    "definition": "Agreeableness bias (Jain et al., 2025) names the empirical pattern that LLM judges are far better at recognizing correct outputs than at rejecting incorrect ones — in the quantifying study, 14 frontier judges confirmed valid outputs at rates above 96% while catching fewer than 25% of true failures, and 26% of failures were invisible to every judge tested. The asymmetry is masked by aggregate accuracy on imbalanced data and produces the 'quiet dashboard' failure mode: a low, stable flag rate that looks healthy while most real failures go unflagged. Mitigations include minority-veto ensembles, abstention cascades, and fine-tuned classifiers where labels exist.",
+    "domain": "evals",
+    "aliases": [
+      "agreeableness bias",
+      "positive bias"
+    ],
+    "used_in": [
+      "judge-base-rate"
     ]
   }
 ]

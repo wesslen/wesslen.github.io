@@ -554,19 +554,25 @@
             const meta = ALERT_META[type];
             if (!meta) return;
 
-            // Remaining content after the [!TYPE] token
-            let rest = (match[3] || "").trim();
+            // Remaining content after the [!TYPE] token (inline HTML of first paragraph)
+            const rest = (match[3] || "").trim();
 
-            // Collect any additional sibling paragraphs
-            const extraParas = [...bq.querySelectorAll("p")].slice(1);
-            const extraHtml = extraParas.map((p) => `<p>${p.innerHTML}</p>`).join("");
+            // Preserve every block after the first paragraph in document order —
+            // paragraphs, but also lists (<ul>/<ol>), which the old <p>-only
+            // collection silently dropped. This lets alerts contain bullet lists.
+            const bodyParts = [];
+            if (rest) bodyParts.push(`<p>${rest}</p>`);
+            let sib = firstP.nextElementSibling;
+            while (sib) {
+              bodyParts.push(sib.outerHTML);
+              sib = sib.nextElementSibling;
+            }
 
             const div = document.createElement("div");
             div.className = `gh-alert gh-alert-${type.toLowerCase()}`;
             div.innerHTML = `
           <div class="gh-alert-title"><span>${meta.icon}</span> ${meta.label}</div>
-          ${rest ? `<p>${rest}</p>` : ""}
-          ${extraHtml}
+          ${bodyParts.join("\n")}
         `.trim();
 
             bq.replaceWith(div);

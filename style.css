@@ -809,6 +809,20 @@ img {
 .prose .gh-alert p:last-child {
   margin-bottom: 0;
 }
+.prose .gh-alert ul,
+.prose .gh-alert ol {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+}
+.prose .gh-alert li {
+  margin-bottom: 0.3rem;
+}
+.prose .gh-alert li:last-child {
+  margin-bottom: 0;
+}
+.prose .gh-alert > :last-child {
+  margin-bottom: 0;
+}
 .prose .gh-alert-title {
   display: flex;
   align-items: center;

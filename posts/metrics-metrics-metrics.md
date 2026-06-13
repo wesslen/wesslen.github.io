@@ -107,7 +107,7 @@ This is where the social science parallel really bites. Psychometricians don't j
 
 Automated LLM judges — increasingly the default for scalability — introduce their own construct validity problems. Research has documented at least 12 systematic biases in LLM-as-judge systems, among them verbosity bias (longer responses score higher regardless of quality), positional bias (swapping the order of pairwise comparisons can flip the winner 20–40% of the time), and self-preference bias (judges score outputs that "sound like" them higher due to lower perplexity).[^8] An unverified judge isn't a measurement instrument — it's a noise generator with high-end branding.
 
-The practical implication is that verifying your judge should be treated like validating a classifier: get human labels, partition into train/dev/test, measure precision and recall, check for calibration drift. This is boring work. It's also the work that determines whether your eval system is telling you anything true.[^9]
+The practical implication is that verifying your judge should be treated like validating a classifier: get human labels, partition into train/dev/test, measure precision and recall, check for calibration drift. This is boring work. It's also the work that determines whether your eval system is telling you anything true.[^9] And it matters most where it's hardest: when the failure the judge monitors is rare, base-rate arithmetic makes an unverified judge worse than useless — [a later post](post.html?slug=judge-base-rate) works through that math.
 
 ## What I Keep Coming Back To
 

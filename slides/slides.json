@@ -58,12 +58,13 @@
   {
     "id": "evaluations",
     "title": "The Eval Gap",
-    "description": "Measurement theory, NIST benchmark frameworks, psychometrics, and why most LLM eval pipelines report the wrong uncertainty estimate.",
+    "description": "Measurement theory, NIST benchmark frameworks, psychometrics, judge reliability at rare-failure base rates, and why most LLM eval pipelines report the wrong uncertainty estimate.",
     "dir": "slides/evaluations",
     "posts": [
       "metrics-metrics-metrics",
       "nist-benchmark-evals",
-      "benchmark-uncertainty"
+      "benchmark-uncertainty",
+      "judge-base-rate"
     ],
     "published": true,
     "date": "2026-06-08",

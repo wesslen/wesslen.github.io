@@ -38,7 +38,7 @@ The engineering challenge is not the loop itself — that part is solved. It's t
 4. human-in-the-loop checkpoints
 5. state persistence across sessions
 
-Token scaling data makes clear why each matters: standard chat uses roughly 1x tokens; a single-agent loop uses ~4x; a multi-agent system uses ~15x.[^2]
+Token scaling data makes clear why each matters: standard chat uses roughly 1x tokens; a single-agent loop uses ≈4x; a multi-agent system uses ≈15x.[^2]
 
 ## Context window management
 
@@ -54,7 +54,7 @@ The lesson: compaction strategy is not a permanent architectural decision. It sh
 > [!IMPORTANT]
 > `CLAUDE.md` and equivalent context files are re-injected with each request rather than stored in conversation history — they survive compaction by design. Any instruction that must persist across the entire agent lifecycle belongs in a context file. An initial system prompt will eventually be summarized away; a context file survives compaction by design.
 
-**The lost-in-the-middle problem** affects everything else. Research measured a 30%+ accuracy drop when critical information moved from position 1 to position 10 in a 20-document context — models attend strongly to context boundaries and weakly to the middle. The harness-level responses: place critical instructions at prompt boundaries, minimize the tool surface (one team reduced from 175 tools consuming ~26% of context to 11 consuming ~1.6%), and use sub-agents with fresh context windows for discrete tasks.[^4]
+**The lost-in-the-middle problem** affects everything else. Research measured a 30%+ accuracy drop when critical information moved from position 1 to position 10 in a 20-document context — models attend strongly to context boundaries and weakly to the middle. The harness-level responses: place critical instructions at prompt boundaries, minimize the tool surface (one team reduced from 175 tools consuming ≈26% of context to 11 consuming ≈1.6%), and use sub-agents with fresh context windows for discrete tasks.[^4]
 
 ## Checkpoint and resume patterns
 

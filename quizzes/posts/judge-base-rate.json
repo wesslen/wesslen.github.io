@@ -1,0 +1,178 @@
+[
+  {
+    "id": "jbr-q01",
+    "post": "judge-base-rate",
+    "module": "evaluations",
+    "objective": "distinction",
+    "difficulty": 1,
+    "question": "An LLM judge monitors a payments agent for rare failures. What does the judge's positive predictive value (PPV) measure, as distinct from its true positive rate (TPR)?",
+    "options": [
+      "PPV is the share of the judge's flags that are real failures; TPR is the share of real failures the judge flags. PPV depends on the base rate, TPR does not.",
+      "PPV is the judge's accuracy on the positive class only, while TPR averages accuracy across both classes — PPV is therefore always the more conservative of the two reported numbers.",
+      "PPV measures the judge's calibration (whether its confidence scores match its correctness rates), while TPR measures raw detection ability independent of confidence.",
+      "PPV and TPR are algebraically equivalent at any fixed threshold — the distinction only matters when the judge emits probability scores rather than binary verdicts."
+    ],
+    "correct": 0,
+    "explanation": "TPR (sensitivity) is a property of the judge alone: of the failures that occurred, how many did it flag? PPV is a property of the judge *and* the traffic: of the flags it raised, how many were real? The same judge with fixed TPR and FPR can have 67% PPV at 10% prevalence and under 2% PPV at 0.1% prevalence. Conflating the two is how a judge that 'looks accurate' produces a review queue that is mostly noise."
+  },
+  {
+    "id": "jbr-q02",
+    "post": "judge-base-rate",
+    "module": "evaluations",
+    "objective": "mechanism",
+    "difficulty": 2,
+    "question": "A judge has a 90% true positive rate on failures and a 5% false positive rate on normal traffic. At a 1% true failure rate, approximately what share of its flags are real failures?",
+    "options": [
+      "About 90% — the judge's sensitivity carries over to its flags as long as the false positive rate stays in single digits.",
+      "About 50% — at this operating point the false positives and true positives roughly balance out, so each flag is effectively a coin flip between a real failure and noise.",
+      "About 15% — false positives from the 99% of normal traffic swamp the true positives from the 1% of failures.",
+      "About 5% — PPV converges to the false positive rate itself whenever prevalence falls below the judge's error rate."
+    ],
+    "correct": 2,
+    "explanation": "PPV = (0.90 × 0.01) / (0.90 × 0.01 + 0.05 × 0.99) ≈ 15%. Six out of seven flags are false alarms — the classic false-positive paradox. Nothing about the judge changed; the base rate did. This is why a judge that performs well on a balanced test set can still produce a review queue that is overwhelmingly noise in production, and why no amount of prompt engineering moves the result."
+  },
+  {
+    "id": "jbr-q03",
+    "post": "judge-base-rate",
+    "module": "evaluations",
+    "objective": "misconception",
+    "difficulty": 2,
+    "question": "A vendor reports that its LLM judge is '95% accurate' on a held-out test set. What is the core problem with treating that figure as evidence the judge can detect rare failures in production?",
+    "options": [
+      "Accuracy figures from vendors are unaudited and typically inflated by curated test sets, so real-world accuracy is likely closer to 85% — which would still be adequate for most production monitoring purposes if the evaluation protocol were independently reproduced.",
+      "At low prevalence, aggregate accuracy mostly measures how often the judge says 'fine' — a judge that flags nothing scores ~99% at 1% prevalence, so the figure says almost nothing about rare-failure recall.",
+      "Accuracy is measured at the item level while production failures occur at the conversation level, so the figure needs to be re-aggregated before it can support any deployment claim.",
+      "The 95% figure conflates the judge's performance with the underlying model's performance — judge and target model must come from different families before the number is meaningful."
+    ],
+    "correct": 1,
+    "explanation": "Aggregate accuracy is dominated by the majority class. At 1% prevalence, a judge that never flags anything is 99% accurate and 0% useful. The decision-relevant numbers are the per-class ones — TPR on the rare class, FPR on normal traffic — measured on a gold set that actually contains the rare class. This is the same reason the post (and the deployment-gates substrate requirements) insist on class-weighted metrics over aggregate accuracy for imbalanced data."
+  },
+  {
+    "id": "jbr-q04",
+    "post": "judge-base-rate",
+    "module": "evaluations",
+    "objective": "distinction",
+    "difficulty": 2,
+    "question": "The post argues that statistical corrections like Rogan–Gladen and prediction-powered inference (PPI) solve one of two problems with biased judges. Which one, and why not the other?",
+    "options": [
+      "They solve detection but not measurement: correcting individual judge verdicts item-by-item is straightforward once TPR and FPR are known, but aggregate failure rates remain biased because the corrections implicitly assume balanced classes in the calibration data.",
+      "They solve both, provided the gold set is large enough — with 1,000–2,000 labeled items, corrected judge verdicts approach human-level reliability at the item level.",
+      "They solve measurement but not detection: a known confusion matrix recovers an unbiased aggregate prevalence estimate, but no correction can identify which specific conversation was the failure.",
+      "They solve neither in the rare-failure regime: both corrections require prevalence above roughly 5% before their confidence intervals achieve nominal coverage."
+    ],
+    "correct": 2,
+    "explanation": "Correction adjusts the aggregate, not the item. If you know the judge's TPR and FPR from a gold set, Rogan–Gladen recovers an unbiased estimate of the true failure *rate* — but it cannot tell you *which* of the 50,000 transcripts was the scam. A corrected prevalence estimate is a monitoring metric; catching the individual failure before harm is a control. The post maps this onto the guardrails post's metric-versus-guardrail distinction: the statistics respect the same boundary."
+  },
+  {
+    "id": "jbr-q05",
+    "post": "judge-base-rate",
+    "module": "evaluations",
+    "objective": "mechanism",
+    "difficulty": 3,
+    "question": "Why does the post's kicker — 'zero flags isn't zero failures; at these base rates, it isn't even evidence of it' — hold statistically, when 100 independent missed failures would be vanishingly unlikely?",
+    "options": [
+      "Because the Rogan–Gladen correction degenerates when the observed flag rate is at or below the judge's false alarm rate, and because misses are structured rather than independent — a judge blind to a failure class misses all of it.",
+      "Because at low prevalence the judge's confidence intervals widen faster than its point estimates shift, so any monthly flag count below roughly 30 is statistically indistinguishable from zero under the binomial approximation most monitoring dashboards use.",
+      "Because zero flags implies the judge is operating in its high-precision regime, where false negatives are bounded above by the false positive rate — making the true failure count unknowable but small.",
+      "Because LLM judges are nondeterministic, so a zero-flag month is expected to occur by chance roughly once a year even for a well-calibrated judge with high sensitivity."
+    ],
+    "correct": 0,
+    "explanation": "Two mechanisms combine. Statistically, when the observed flag rate is no higher than the judge's own FPR, the corrected prevalence estimate hits zero and the data cannot distinguish 'no failures' from 'failures the judge can't see.' Empirically, misses are correlated, not independent coin flips: the production case study found blind spots clustered in defect categories the rubric had no language for, and 26% of failures in the 14-judge study were invisible to every judge tested. A judge that can't see a failure class flags none of it, no matter how much traffic flows past."
+  },
+  {
+    "id": "jbr-q06",
+    "post": "judge-base-rate",
+    "module": "evaluations",
+    "objective": "transfer",
+    "difficulty": 2,
+    "question": "The agreeableness bias literature finds LLM judges confirm valid outputs reliably but catch fewer than a quarter of true failures, while flagging little normal traffic. Which production symptom does this failure mode produce?",
+    "options": [
+      "A flooded review queue: the judge's high confirmation rate on valid outputs generates thousands of low-quality flags that bury the real failures under false alarms.",
+      "A quiet dashboard: a low, stable flag rate that looks like evidence of a healthy system while most real failures never appear in the queue at all.",
+      "Oscillating flag volumes: the judge alternates between flooding and silence as its context window fills, producing a sawtooth pattern in the monitoring metrics.",
+      "Systematic over-refusal: the judge's bias transfers to the monitored agent through the feedback loop, making the agent itself decline more transactions over time."
+    ],
+    "correct": 1,
+    "explanation": "Agreeableness bias produces the *empty-queue* regime, which the post argues is the seductive one: the flooded queue announces itself through reviewer complaints and budget lines, but the quiet dashboard looks like success. A 0.2% flag rate is consistent with both 'failures are rare' and 'the judge is blind,' and the dashboard alone cannot tell you which. That ambiguity is only resolved by measuring the judge against a gold set that contains the rare class."
+  },
+  {
+    "id": "jbr-q07",
+    "post": "judge-base-rate",
+    "module": "evaluations",
+    "objective": "scope",
+    "difficulty": 2,
+    "question": "The post recommends Youden's J (TPR + TNR − 1) for comparing candidate judges, but says the deployed threshold should be set differently. What is the division of labor?",
+    "options": [
+      "J selects between judges because it is invariant to class balance; the deployed threshold should then be cost-weighted, which at banking severity ratios sits far to the recall side of J's balanced optimum.",
+      "J sets the deployed threshold because it balances both error types symmetrically; judge selection should instead use F1, which remains more stable than J when rare-class annotations in the gold set are sparse or noisy.",
+      "J applies only to fine-tuned classifiers that emit probability scores; zero-shot judges must be compared on aggregate accuracy because they produce no thresholdable output.",
+      "J is appropriate for both selection and thresholding, provided the gold set is rebalanced to 50/50 before the confusion matrix is computed."
+    ],
+    "correct": 0,
+    "explanation": "Accuracy, precision, recall, and F1 all shift with class balance and can rank judges differently at deployment prevalence than on your test set; Youden's J doesn't, which makes it the right yardstick for *choosing between* judges. But J weights both error types equally, and a missed scam costs orders of magnitude more than a false alarm — so the *operating* threshold belongs where the expected-cost ratio puts it, far toward recall. Two different questions, two different tools."
+  },
+  {
+    "id": "jbr-q08",
+    "post": "judge-base-rate",
+    "module": "evaluations",
+    "objective": "transfer",
+    "difficulty": 3,
+    "question": "A bank builds the post's tiered pipeline and grows its gold set exclusively from human-confirmed cases that the classifier or judge flagged. What is the structural flaw?",
+    "options": [
+      "The gold set grows too quickly, and stale confirmed cases from last year's tactics crowd out the signal from the current quarter's tactics.",
+      "Survivorship bias: failures the judge cannot see never get flagged, never reach human review, and never enter the gold set — without a random audit stream, the pipeline's blind spots become self-confirming.",
+      "Label leakage: using production cases for both calibration and ongoing monitoring means the judge's measured TPR is inflated by items it has effectively already seen, overstating its sensitivity on every subsequent revalidation cycle.",
+      "Cost asymmetry: human confirmation of flagged cases consumes the entire labeling budget, leaving nothing for the periodic re-annotation that drift tracking requires."
+    ],
+    "correct": 1,
+    "explanation": "If new labels only come from flagged items, the gold set inherits every blind spot the judge has — the 26% of failures invisible to all 14 judges in the agreeableness study would never enter it. A fixed random sample of unflagged traffic, expert-labeled on a schedule, is the only input that can surface what the whole pipeline misses. It is also the cold-start answer: it's where the first confirmed failures come from before any enriched gold set exists."
+  },
+  {
+    "id": "jbr-q09",
+    "post": "judge-base-rate",
+    "module": "evaluations",
+    "objective": "synthesis",
+    "difficulty": 3,
+    "question": "The post argues the judge's review queue is a runtime HITL checkpoint that inherits the lessons of the HITL design post. At PPV ~3.5%, why is 'a human reviews every flag' an unreliable control on its own?",
+    "options": [
+      "Because human reviewers lack the technical depth to evaluate LLM outputs, so the checkpoint fails the effective-challenge competence test regardless of queue volume.",
+      "Because at 29 false alarms per real failure the reviewer is in the alert fatigue regime — effective sensitivity is judge TPR times reviewer hit rate, and that multiplier degrades as queue noise rises. Knight's 97 unread alerts are the canonical case.",
+      "Because review queues are post-hoc by construction, and no post-hoc control can satisfy a supervisory examiner once the agent's actions are irreversible — the checkpoint must therefore be moved inline before execution or abandoned as a control entirely.",
+      "Because Regulation E requires reviews to complete within ten business days, and a queue of 120 daily flags makes that deadline structurally unmeetable for a three-analyst team."
+    ],
+    "correct": 1,
+    "explanation": "Queue load is a deterministic function of FPR × volume × prevalence, and PPV determines what each review feels like. A reviewer clearing dozens of flags per real failure is in the documented alert-fatigue regime where override and vigilance failures concentrate; a monitoring channel whose PPV trains its recipients to ignore it is Knight Capital's failure mode restated. The deploy-time questions follow directly: did anyone test the queue at production volume, who can halt the agent on judge evidence, and who is rewarded for asking the PPV question before launch. Staffing buys capacity — not, by itself, vigilance."
+  },
+  {
+    "id": "jbr-q10",
+    "post": "judge-base-rate",
+    "module": "evaluations",
+    "objective": "boundary",
+    "difficulty": 1,
+    "question": "What is the relationship between SR 26-2 and the post's recommended MRM documentation for an LLM judge (confusion matrix, estimand declaration, operating-point rationale)?",
+    "options": [
+      "SR 26-2 mandates all of it: the April 2026 joint guidance extended model risk management expectations to every AI system a bank operates above the $30B asset threshold, explicitly including monitoring instruments such as automated judges.",
+      "SR 26-2 excludes generative and agentic AI from formal scope, so none of it is a formal supervisory expectation under that guidance — though safety-and-soundness and third-party risk expectations still reach the deployment.",
+      "SR 26-2 requires the confusion matrix and estimand declaration but leaves the operating-point rationale to each institution's risk appetite statement.",
+      "SR 26-2 delegates LLM judge standards to NIST AI 800-3, which carries the regulatory force of the guidance through incorporation by reference."
+    ],
+    "correct": 1,
+    "explanation": "SR 26-2 explicitly excludes generative and agentic AI from scope (footnote 3), so the post's documentation list is not a formal supervisory expectation under it — it is ordinary measurement discipline applied to an instrument banks already run in production. The exclusion doesn't create a vacuum: general safety-and-soundness and third-party risk-management expectations still reach the deployment, and institutions applying effective challenge to GenAI by analogy will find the judge's confusion matrix is where a validator's challenge has the most leverage."
+  },
+  {
+    "id": "jbr-q11",
+    "post": "judge-base-rate",
+    "module": "evaluations",
+    "objective": "distinction",
+    "difficulty": 3,
+    "question": "The post argues that even a judge with perfect recall on the failures it sees would still miss failures in production. What distinct blind spot does this name, beyond the base-rate and agreeableness problems?",
+    "options": [
+      "The judge grades only what entered its context, so it is silent about evidence the agent never retrieved, a policy check that never ran, or a riskier tool call the agent chose not to narrate.",
+      "At low prevalence its flags are mostly false alarms, so each real failure is buried under noise in the review queue regardless of how sensitive the judge is.",
+      "It confirms valid outputs far more reliably than it rejects invalid ones, so a large share of the true failures it does see still go unflagged.",
+      "Its measured recall is only an upper bound, because adversaries adapt their tactics faster than the rubric can be revised, so whatever sensitivity was observed at calibration begins eroding from the moment it is recorded against fresh attacks."
+    ],
+    "correct": 0,
+    "explanation": "This is omitted-evidence blindness, and it is a property of the judge's *inputs*, not its sensitivity: a judge reviewing a transcript can only assess what the agent surfaced, so it cannot catch a failure that lives in what the agent never did — evidence it didn't retrieve, a check that didn't run, a tool call it didn't mention. A fluent rationale opening 'based on the available information' sails through, with the word 'available' doing load-bearing work the judge can't question. Sudjianto's phrase is that the judge is 'complete with respect to what it sees and silent with respect to what the system failed to show it' — which is why a model rating another model's prose is not independent validation. Option B is the base-rate (PPV) problem; option C is agreeableness bias (low recall on visible failures); option D is tactic drift. All three are real and covered in the post, but each concerns failures the judge was at least shown."
+  }
+]

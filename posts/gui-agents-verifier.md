@@ -24,7 +24,7 @@ The Universal Verifier (UV) rescores three benchmarks (WebVoyager, Online-Mind2W
 
 A 60-point false positive rate is the basis on which the field has been comparing models, training new agents on those "successful" runs, and publishing progress claims.
 
-The architectural finding compounds this. Upgrading WebVoyager's backbone from GPT-4o to GPT-5.2 shifts the FPR from 45% to 10% — but the false negative rate rises from 24% to 44%, and Cohen's κ improves only modestly. The errors redistribute rather than resolve. The Universal Verifier's gains come from architectural redesign.
+The architectural finding compounds this. Upgrading WebVoyager's backbone from GPT-4o to GPT-5.2 shifts the FPR from 45% to 10% — but the false negative rate rises from 24% to 44%, and Cohen's κ improves only modestly. The errors redistribute rather than resolve. The Universal Verifier's gains come from architectural redesign. That redistribution is the general pattern for LLM judges, and it gets expensive when the class being judged is rare — [the judge base-rate post](post.html?slug=judge-base-rate) works out what trading false alarms for misses costs at sub-1% prevalence.
 
 The three verifiers differ in exactly the ways that produce this gap:
 
