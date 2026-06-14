@@ -1,7 +1,7 @@
 ---
 title: "The Judge and the Base Rate"
 date: 2026-06-12
-description: "LLM judges look reliable on balanced test sets and then quietly fail at the only job that matters in banking: catching failures that almost never happen. The arithmetic of why — and what a defensible monitoring design looks like at 1% prevalence."
+description: "LLM judges look reliable on balanced test sets and then quietly fail when it matters most in banking: catching failures that almost never happen. The arithmetic of why — and what a defensible LLM judge pipeline looks like at 1% prevalence."
 tags: [evals, banking]
 ---
 
@@ -11,15 +11,15 @@ A bank deploys a payments assistant that handles 50,000 customer conversations a
 
 There are two readings of that dashboard. The failure is genuinely rare, or the judge can't see it. The uncomfortable part is that the dashboard alone cannot tell you which. What it takes to find out is the question this post works through.
 
-The [Eval Gap posts so far](post.html?slug=metrics-metrics-metrics) have argued that GenAI evaluation is a measurement problem: construct validity, [estimands, and error bars](post.html?slug=benchmark-uncertainty). This post pushes that argument to the rare-event setting where banking actually lives — the regime a field raised on 50/50 test sets keeps mistaking for an edge case.
+The [Eval Gap posts so far](post.html?slug=metrics-metrics-metrics) have argued that GenAI evaluation is a measurement problem: construct validity, [estimands, and error bars](post.html?slug=benchmark-uncertainty). This post pushes that argument to the rare-event setting where banking actually lives — the regime a field raised on 50/50 test sets keeps mistaking for an edge case. 
 
 Most eval research runs on balanced data; the failures risk committees care about are rare by construction and, in the fraud case, adaptive. Banking is where I live, but the arithmetic doesn't care: the same math governs any rare-event monitoring, from trust-and-safety queues to content moderation.
 
 ## The arithmetic, run at banking prevalence
 
-Start with the number every judge vendor reports: accuracy. A judge with a 90% true positive rate on failures and a 5% false positive rate on normal traffic scores 95% accuracy when failures run at 1%. At low prevalence, accuracy mostly measures how often the judge says "fine." It sounds deployable.
+Start with the number every judge vendor reports: accuracy. A judge with a 90% true positive rate (TPR) on failures and a 5% false positive rate (FPR) on normal traffic scores 95% accuracy when failures run at 1%. At low prevalence, accuracy mostly measures how often the judge says "fine." It sounds deployable.
 
-A note on convention before the math: throughout this post, *positive* means failure — a scam payment, in the running example. TPR is the share of true failures (scam payments) the judge flags; FPR is the share of normal traffic it flags by mistake (legitimate payments flagged as fraud).
+A note on convention before the math: throughout this post, *positive* means failure — a scam payment, in the running example. TPR is the share of true failures (scam payments) the judge flags; FPR is the share of normal traffic it flags by mistake (legitimate payments flagged as fraud). This post uses signal-detection terms (TPR, FPR, PPV, FNR) rather than their ML/NLP synonyms (recall, precision); the glossary links spell out the equivalences.
 
 Now let's assume a 1% true failure rate. The positive predictive value is:
 
@@ -33,7 +33,7 @@ Six out of seven flags are false alarms; the judge's output channel is mostly no
 | 1% | 15% | 49% | 91% |
 | 0.1% | 1.8% | 8.7% | 50% |
 
-*PPV at three prevalence levels. Even a judge with 99% sensitivity and a one-in-a-thousand false alarm rate — better than any judge measured in the studies cited below — flips a coin at 0.1% prevalence.*
+*PPV at three prevalence levels. Even a judge with a 99% TPR and a one-in-a-thousand FPR — better than any judge measured in the studies cited below — flips a coin at 0.1% prevalence.*
 
 ![Hand-drawn whiteboard chart titled WHERE FLAGS STOP MEANING ANYTHING. Y-axis: SHARE OF FLAGS THAT ARE REAL (PPV), 0% to 100%. X-axis: HOW RARE THE FAILURE IS, with ticks at 0.1%, 1%, and 10% and an arrow pointing left labeled RARER. Three curves labeled GOOD JUDGE (blue), GREAT JUDGE (dark blue), and NEAR-PERFECT JUDGE (green) all collapse toward zero as failures get rarer. An orange shaded zone on the rare end is labeled BANKING LIVES HERE. A stick figure analyst buried under a pile of flags asks WHICH ONE IS REAL? Annotation: SAME JUDGE. DIFFERENT BASE RATE.](../img/judge-base-rate-ppv.png)
 *The same judge produces a usable review queue at 10% prevalence and generates noise at 0.1%. Nothing about the judge changed.*
@@ -42,11 +42,11 @@ Six out of seven flags are false alarms; the judge's output channel is mostly no
 <summary>The two failure regimes, formalized</summary>
 <div class="math-inner">
 
-<p>At prevalence \(p\), with judge sensitivity \(\text{TPR}\) (share of true failures flagged) and false positive rate \(\text{FPR}\) (share of normal items flagged):</p>
+<p>At prevalence \(p\), with judge \(\text{TPR}\) (share of true failures flagged) and false positive rate \(\text{FPR}\) (share of normal items flagged):</p>
 \[\text{PPV} = \frac{\text{TPR} \cdot p}{\text{TPR} \cdot p + \text{FPR}(1-p)} \qquad \text{FNR} = 1 - \text{TPR}\]
-<p><strong>Regime 1 — the flooded queue.</strong> Tune the judge for sensitivity (high TPR, moderate FPR). As \(p \to 0\), the denominator is dominated by \(\text{FPR}(1-p)\) and PPV collapses toward \(\text{TPR} \cdot p / \text{FPR}\). Reviewer load scales with FPR times volume, independent of how rare the failure is.</p>
+<p><strong>Regime 1 — the flooded queue.</strong> Tune the judge for a high TPR (moderate FPR). As \(p \to 0\), the denominator is dominated by \(\text{FPR}(1-p)\) and PPV collapses toward \(\text{TPR} \cdot p / \text{FPR}\). Reviewer load scales with FPR times volume, independent of how rare the failure is.</p>
 
-<p><strong>Regime 2 — the empty queue.</strong> Tune for precision (low FPR), which in practice means low TPR — or get low TPR for free from the judge's own positive bias (next section). PPV looks respectable; the miss rate \(1-\text{TPR}\) does not appear anywhere on the dashboard.</p>
+<p><strong>Regime 2 — the empty queue.</strong> Tune for a high PPV (low FPR), which in practice means low TPR — or get low TPR for free from the judge's own positive bias (next section). PPV looks respectable; the FNR \(=1-\text{TPR}\) does not appear anywhere on the dashboard.</p>
 
 <p>Severity-weighting picks your poison: if a missed failure costs \(C_{FN}\) (fraud loss, reimbursement, enforcement exposure) and a false alarm costs \(C_{FP}\) (minutes of review labor), the threshold should be set where the expected-cost ratio \(C_{FN} \cdot p \cdot \text{FNR}\) vs. \(C_{FP}(1-p)\text{FPR}\) says it should — not where the queue feels manageable.</p>
 
@@ -57,11 +57,11 @@ The table assumes the judge fails toward false alarms. The published evidence sa
 
 ## Judges don't fail in the direction you'd guess
 
-The cleanest peer-reviewed evidence comes from ReaLMistake, which had expert annotators label real errors in LLM outputs and then asked frontier models to find them. GPT-4's recall on its own errors fell as low as 6.8–11.5% on fine-grained factuality and answerability tasks, against a human expert F1 of 95.7. Worse, the standard remedies didn't remedy: self-consistency sampling did nothing, and majority voting across twelve runs often *reduced* recall.[^1]
+The cleanest peer-reviewed evidence comes from ReaLMistake, which had expert annotators label real errors in LLM outputs and then asked frontier models to find them. GPT-4's TPR on its own errors fell as low as 6.8–11.5% on fine-grained factuality and answerability tasks, against a human expert F1 of 95.7. Worse, the standard remedies didn't remedy: self-consistency sampling did nothing, and majority voting across twelve runs often *reduced* TPR.[^1]
 
-The same study found that recall on real errors correlates *negatively* with general capability: Spearman correlations around −0.77 between a model's Elo rating and its error-detection recall. Stronger models are more precise and less sensitive, so for rare-failure detection, capability improvements move in the wrong direction.
+The same study found that TPR on real errors correlates *negatively* with general capability: Spearman correlations around −0.77 between a model's Elo rating and its error-detection TPR. Stronger models have higher PPV and lower TPR, so for rare-failure detection, capability improvements move in the wrong direction.
 
-The sharpest quantification of the asymmetry comes from a study of 14 frontier LLMs judging code feedback, where ≈7.5% of outputs were invalid against an expert-annotated gold set. Translated into this post's convention: the judges caught fewer than 25% of true failures, while flagging normal outputs at a rate under 4%. The one model that pushed its failure-catch rate to 53.5% (Gemini 2.5 Pro) paid for it by wrongly rejecting more valid outputs than any other judge, and 26% of failures were missed by *every one* of the 14 judges. The authors call this agreeableness bias: judges reliably confirm and unreliably reject.[^2] The same error redistribution shows up in [GUI-agent verifiers](post.html?slug=gui-agents-verifier), where swapping the judge's backbone model traded false alarms for misses without improving agreement with human labels.
+The sharpest quantification of the asymmetry comes from a study of 14 frontier LLMs judging code feedback, where ≈7.5% of outputs were invalid against an expert-annotated gold set. Translated into this post's convention: the judges caught fewer than 25% of true failures, while flagging normal outputs at a rate under 4%. The one model that pushed its TPR to 53.5% (Gemini 2.5 Pro) paid for it by wrongly rejecting more valid outputs than any other judge, and 26% of failures were missed by *every one* of the 14 judges. The authors call this agreeableness bias: judges reliably confirm and unreliably reject.[^2] The same error redistribution shows up in [GUI-agent verifiers](post.html?slug=gui-agents-verifier), where swapping the judge's backbone model traded false alarms for misses without improving agreement with human labels.
 
 And it shows up in production. A 2026 case study of a deployed multi-turn ordering agent found the built-in judge caught roughly 22% of human-confirmed defect patterns, and the authors estimate the system's reported defect rate undercounted the true rate by 3–6×. In one batch the judge flagged zero of 100 rounds in which human reviewers confirmed 23 distinct defects.[^3]
 
@@ -72,7 +72,7 @@ No single one of these studies carries the claim alone: one is judging code feed
 
 One objection deserves naming. None of these three studies is a harm-detection task: judging code feedback or answer quality is a different shape of problem from asking *is this conversation a scam?* against an explicit rubric, and rubric-driven safety judges can fail in the opposite direction — the over-refusal literature is full of judges that flag too much. The direction of your judge's failure is an empirical property of your task. Which is the point: you don't know which regime you're in until you've measured it against a gold set, and the two regimes demand opposite responses.
 
-There is a blind spot underneath both regimes that no confusion matrix measures. The recall figures above are charitable: they were scored on items where the failure was present in what the judge was shown. In production a judge grades only what entered the transcript — it cannot see the evidence the agent never retrieved, the policy check that never ran, or the riskier tool call it chose not to narrate. It is, in Agus Sudjianto's phrase, *complete with respect to what it sees and silent with respect to what the system failed to show it*.[^9] A rationale that opens *based on the available information* sails through, and the word *available* carries weight the judge is structurally unequipped to notice. Sudjianto's deadpan satire — the *Unified Prompt and Pray Framework* — formalizes the exact pipeline this post opened with, instruct-the-agent-to-be-careful through strengthen-the-prompt-after-an-incident, precisely to show that none of it is a control.[^9]
+There is a blind spot underneath both regimes that no confusion matrix measures. The TPR figures above are charitable: they were scored on items where the failure was present in what the judge was shown. In production a judge grades only what entered the transcript — it cannot see the evidence the agent never retrieved, the policy check that never ran, or the riskier tool call it chose not to narrate. It is, in Agus Sudjianto's phrase, "complete with respect to what it sees and silent with respect to what the system failed to show it."[^9] A rationale that opens *based on the available information* sails through, and the word *available* carries weight the judge is structurally unequipped to notice. Sudjianto's deadpan satire — the *Unified Prompt and Pray Framework* — formalizes the exact pipeline this post opened with, instruct-the-agent-to-be-careful through strengthen-the-prompt-after-an-incident, precisely to show that none of it is a control.[^9]
 
 For fraud specifically, there's a second-order problem stacked on top. The [adversarial-incompleteness post](post.html?slug=adversarial-incompleteness) argued that no finite test suite enumerates an adaptive attack surface. A judge rubric is a finite test suite. Scam tactics turn over fast for exactly the adversarial reason: the old ones started getting caught. Whatever TPR you measured at calibration time is a ceiling, and it starts decaying the day you measure it.
 
@@ -99,11 +99,11 @@ The first question, measurement, is largely solvable, and the fix starts with a 
 
 The second question, detection, is not solvable this way. Correction adjusts the aggregate; it cannot reach back into the 50,000 transcripts and tell you *which* conversation was the scam. A corrected prevalence estimate with honest intervals is a monitoring metric. Catching the individual failure before the payment settles is a control. The [guardrails post](post.html?slug=guardrails) drew exactly this line: metrics tell you the rate at which cars go off the cliff; the guardrail is what stops the car. The statistics respect the same boundary.
 
-Most monitoring decks I've seen conflate the two: a judge-produced "failure rate" presented simultaneously as evidence the rate is low and as the mechanism that catches failures. At 1% prevalence it is defensibly neither, until the gold-set work is done.
+I suspect most GenAI monitoring decks conflate the two: a judge-produced "failure rate" presented simultaneously as evidence the rate is low and as the mechanism that catches failures. At 1% prevalence it is defensibly neither, until the gold-set work is done.
 
 ## What a defensible pipeline looks like
 
-Everything starts with a gold set that contains the rare class. Before any judge score means anything, you need 1,000–2,000 expert-labeled items with deliberate enrichment of confirmed failures, sampled from real traffic, fraud-ops case files, customer complaints, and red-team output — double-annotated, with the inter-annotator agreement reported, because the confusion matrix inherits every disagreement in the labels. From it: the judge's full confusion matrix, per-class recall with intervals, and a prevalence-independent selection metric. Every familiar metric (accuracy, precision, recall, F1) shifts with class balance and can rank judges differently at deployment prevalence than on your test set; Youden's J (TPR + TNR − 1) doesn't, which makes it the right yardstick for comparing judges.[^5] Two caveats: J gets volatile exactly when rare-class annotations are sparse or noisy, so report the per-class counts alongside it. And J answers which judge to use; the deployed threshold is a separate decision that at banking severity ratios belongs far to the recall side of J's balanced optimum.
+Everything starts with a gold set that contains the rare class. Before any judge score means anything, you need 1,000–2,000 expert-labeled items with deliberate enrichment of confirmed failures, sampled from real traffic, fraud-ops case files, customer complaints, and red-team output — double-annotated, with the inter-annotator agreement reported, because the confusion matrix inherits every disagreement in the labels. From it: the judge's full confusion matrix, per-class TPR with intervals, and a prevalence-independent selection metric. Every familiar metric (accuracy, precision, recall, F1) shifts with class balance and can rank judges differently at deployment prevalence than on your test set; Youden's J (TPR + TNR − 1) doesn't, which makes it the right yardstick for comparing judges.[^5] Two caveats: J gets volatile exactly when rare-class annotations are sparse or noisy, so report the per-class counts alongside it. And J answers which judge to use; the deployed threshold is a separate decision that at banking severity ratios belongs far to the TPR side of J's balanced optimum.
 
 > [!NOTE]
 > **Bootstrapping the gold set without a labeling marathon.** The count isn't the bottleneck — the rare positives are. Labeling a thousand random transcripts is fast; finding the scams inside them is not, since at 0.2% prevalence a random thousand holds about two. So every shortcut answers one question — *how do I get confirmed positives cheaply?* — and they sort by effort-to-yield:
@@ -118,9 +118,9 @@ Everything starts with a gold set that contains the rare class. Before any judge
 
 With the gold set in place, the detection layer is a cascade, ordered by the economics.
 
-The first screen is a trained classifier covering known tactics. Where labeled examples exist, a fine-tuned classifier can beat a zero-shot judge on imbalanced data, and it does something a prompted judge structurally can't: emit a probability you can threshold, which is what makes sensitivity tuning possible at all. The honest caveat is that even purpose-built moderation classifiers miss large fractions of complex violations under independent stress tests, so this layer buys a tunable floor on known patterns and nothing more.[^6]
+The first screen is a trained classifier covering known tactics. Where labeled examples exist, a fine-tuned classifier can beat a zero-shot judge on imbalanced data, and it does something a prompted judge structurally can't: emit a probability you can threshold, which is what makes TPR tuning possible at all. The honest caveat is that even purpose-built moderation classifiers miss large fractions of complex violations under independent stress tests, so this layer buys a tunable floor on known patterns and nothing more.[^6]
 
-Behind it, the LLM judge patrols for novel tactics. Its comparative advantage is precisely the thing the classifier can't do: open-ended pattern recognition on failures nobody has labeled yet. That is also exactly the fraud problem: last quarter's classifier doesn't know this quarter's tactic. Run the judge high-recall and treat its flags as triage for the next stage rather than as verdicts.
+Behind it, the LLM judge patrols for novel tactics. Its comparative advantage is precisely the thing the classifier can't do: open-ended pattern recognition on failures nobody has labeled yet. That is also exactly the fraud problem: last quarter's classifier doesn't know this quarter's tactic. Run the judge at high TPR and treat its flags as triage for the next stage rather than as verdicts.
 
 Uncertainty routes to humans through an abstention cascade. The judge renders a verdict only when its confidence clears a calibrated bar; everything else escalates. Cascaded selective evaluation gives this a formal footing (a threshold calibrated so judge–human agreement is provably above a target whenever the judge does rule), and a panel of small, diverse judges with a minority-veto rule (flag if *any* few say failure) attacks the agreeableness asymmetry directly, though that evidence is thinner and single-domain.[^2][^7]
 
@@ -157,7 +157,7 @@ This is no longer only an internal-governance concern. The FSB's June 2026 consu
 
 The severity asymmetry is what makes the queue worth funding. A false alarm costs minutes of analyst time; a missed scam-coaching conversation costs a customer their savings, and costs the bank a reimbursement dispute whose outcome [depends on the rail](post.html?slug=payments-liability-gap), a UDAAP finding, or both. At a realistic ten to fifteen minutes per transcript, 120 reviews a day is on the order of three to four full-time analysts. Illustrative numbers, but the comparison they set up is not: a single coached scam that reaches litigation or an enforcement action can exceed that team's annual cost. Your figures will differ; the asymmetry won't.
 
-When $C_{FN}/C_{FP}$ runs to four figures, the expected-cost math tolerates a great deal of queue noise before it tolerates a single point of lost recall. That is an argument for the flooded-queue branch, *staffed for it*. One caveat the math forces: the system's effective sensitivity is judge TPR times reviewer hit rate, and reviewer hit rates degrade as queue quality falls. Staffing buys capacity. It does not, by itself, buy vigilance.
+When $C_{FN}/C_{FP}$ runs to four figures, the expected-cost math tolerates a great deal of queue noise before it tolerates a single point of lost TPR. That is an argument for the flooded-queue branch, *staffed for it*. One caveat the math forces: the system's effective TPR is the judge's TPR times the reviewer's hit rate, and reviewer hit rates degrade as queue quality falls. Staffing buys capacity. It does not, by itself, buy vigilance.
 
 ## What goes in the MRM artifact
 

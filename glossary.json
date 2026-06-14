@@ -1,5 +1,52 @@
 [
   {
+    "id": "tpr",
+    "term": "TPR",
+    "full": "True Positive Rate",
+    "short": "The share of true failures the judge flags. Also called sensitivity (signal detection) or recall (ML/NLP).",
+    "definition": "True positive rate (TPR) is the proportion of actual failures a detector flags — in this blog's running example, the share of real scam payments the judge catches. It is the same quantity that other fields call sensitivity (epidemiology, signal detection) and recall (machine learning, information retrieval). This blog standardizes on 'TPR'; sources cited in footnotes may write 'recall' or 'sensitivity' for the identical measure. TPR is a property of the detector alone and is independent of the base rate, which is why a high TPR on a balanced test set says nothing about whether flags can be trusted at low prevalence (see PPV, base rate).",
+    "domain": "evals",
+    "aliases": [
+      "true positive rate",
+      "TPR"
+    ],
+    "used_in": [
+      "judge-base-rate"
+    ]
+  },
+  {
+    "id": "fpr",
+    "term": "FPR",
+    "full": "False Positive Rate",
+    "short": "The share of normal traffic the judge flags by mistake. Also called the false-alarm rate; its complement is specificity.",
+    "definition": "False positive rate (FPR) is the proportion of normal, non-failure items a detector flags — legitimate payments wrongly flagged as fraud, in the running example. It is also called the false-alarm rate, and one minus FPR is specificity (the true negative rate). At low prevalence the FPR, multiplied by the large volume of normal traffic, is what floods a review queue with false alarms and drives positive predictive value toward zero (see PPV, base rate). Like TPR, FPR is a property of the detector and does not depend on the base rate.",
+    "domain": "evals",
+    "aliases": [
+      "false positive rate",
+      "false-positive rate",
+      "FPR"
+    ],
+    "used_in": [
+      "judge-base-rate"
+    ]
+  },
+  {
+    "id": "fnr",
+    "term": "FNR",
+    "full": "False Negative Rate",
+    "short": "The share of true failures the judge misses (1 − TPR). Also called the miss rate.",
+    "definition": "False negative rate (FNR) is the proportion of actual failures a detector fails to flag, equal to one minus TPR; it is also called the miss rate. It is the quantity that never appears on a monitoring dashboard: a judge tuned for few false alarms can show a low, stable flag rate while its FNR — the failures it never surfaces — stays high and invisible. In severity-weighted decisions a missed failure (a false negative) carries cost C_FN, and at banking severity ratios the FNR is the term that should dominate the threshold choice (see TPR, PPV).",
+    "domain": "evals",
+    "aliases": [
+      "false negative rate",
+      "false-negative rate",
+      "FNR"
+    ],
+    "used_in": [
+      "judge-base-rate"
+    ]
+  },
+  {
     "id": "omitted-evidence-blindness",
     "term": "Omitted-Evidence Blindness",
     "short": "An LLM judge can only assess what entered its context, so it is structurally silent about evidence the agent never retrieved, checks that never ran, or actions it didn't narrate.",
@@ -3397,8 +3444,8 @@
     "id": "ppv",
     "term": "PPV",
     "full": "Positive Predictive Value",
-    "short": "The share of a detector's flags that are true positives — the probability that a flag is real.",
-    "definition": "Positive predictive value is the probability that a flagged item is actually a positive case: TP / (TP + FP). Unlike sensitivity (TPR), PPV depends on the base rate of the condition being detected — the same judge with fixed TPR and FPR can have 67% PPV at 10% prevalence and under 2% at 0.1%. For LLM judges monitoring rare failures, PPV determines what the human review queue feels like: at low PPV, reviewers wade through dozens of false alarms per real failure, the alert-fatigue regime where vigilance failures concentrate.",
+    "short": "The share of a detector's flags that are true positives — the probability that a flag is real. Also called precision (ML/NLP).",
+    "definition": "Positive predictive value is the probability that a flagged item is actually a positive case: TP / (TP + FP); machine learning calls this same quantity precision. Unlike sensitivity (TPR), PPV depends on the base rate of the condition being detected — the same judge with fixed TPR and FPR can have 67% PPV at 10% prevalence and under 2% at 0.1%. For LLM judges monitoring rare failures, PPV determines what the human review queue feels like: at low PPV, reviewers wade through dozens of false alarms per real failure, the alert-fatigue regime where vigilance failures concentrate.",
     "domain": "evals",
     "aliases": [
       "positive predictive value",

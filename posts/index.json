@@ -325,7 +325,7 @@
     "slug": "judge-base-rate",
     "title": "The Judge and the Base Rate",
     "date": "2026-06-12",
-    "description": "LLM judges look reliable on balanced test sets and then quietly fail when it matters most in banking: catching failures that almost never happen. The arithmetic of why — and what a defensible monitoring design looks like at 1% prevalence.",
+    "description": "LLM judges look reliable on balanced test sets and then quietly fail when it matters most in banking: catching failures that almost never happen. The arithmetic of why — and what a defensible LLM judge pipeline looks like at 1% prevalence.",
     "tags": [
       "evals",
       "banking"
