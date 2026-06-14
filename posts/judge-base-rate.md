@@ -11,7 +11,7 @@ A bank deploys a payments assistant that handles 50,000 customer conversations a
 
 There are two readings of that dashboard. The failure is genuinely rare, or the judge can't see it. The uncomfortable part is that the dashboard alone cannot tell you which. What it takes to find out is the question this post works through.
 
-The [Eval Gap posts so far](post.html?slug=metrics-metrics-metrics) have argued that GenAI evaluation is a measurement problem: construct validity, [estimands, and error bars](post.html?slug=benchmark-uncertainty). This post pushes that argument to the rare-event setting where banking actually lives — the regime a field raised on 50/50 test sets keeps mistaking for an edge case. 
+The [Eval Gap posts so far](post.html?slug=metrics-metrics-metrics) have argued that GenAI evaluation is a measurement problem: construct validity, [estimands, and error bars](post.html?slug=benchmark-uncertainty). This post pushes that argument to the rare-event setting where banking actually lives — the regime a field raised on 50/50 test sets keeps mistaking for an edge case.
 
 Most eval research runs on balanced data; the failures risk committees care about are rare by construction and, in the fraud case, adaptive. Banking is where I live, but the arithmetic doesn't care: the same math governs any rare-event monitoring, from trust-and-safety queues to content moderation.
 
