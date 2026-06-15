@@ -12,11 +12,8 @@ Stack Overflow's question volume has been declining since 2022, and the decline 
 
 The paper isn't primarily about Stack Overflow. It's a formal model of what happens when agentic AI provides context-specific recommendations that substitute for individual learning effort. The central result is uncomfortable: in equilibrium, the knowledge stock can collapse to zero. The mechanism is counterintuitive: the AI gives good enough answers that people stop building the base that would let them ask better questions.
 
-> [!QUOTE]
-> What I think I know: the right answer is not to keep purchasing the most accurate model available.
-
 ![Circular feedback loop diagram showing the knowledge collapse externality: four boxes connected by clockwise arrows — AI GIVES PRECISE RECOMMENDATIONS (blue, top) → INDIVIDUALS STOP LEARNING (orange, right, stick figure asking 'WHY BOTHER?') → COMMUNITY KNOWLEDGE STOCK FALLS (red, bottom) → AI MUST SUBSTITUTE MORE (orange, left) → back to top. Center label: KNOWLEDGE COLLAPSE. A dashed green arrow from outside the loop points inward labeled 'GARBLING POLICY: CAP PRECISION AT τ*' — the intervention that breaks the cycle. Bottom annotation: 'Each individual acts rationally. The community pays the external cost.' (Acemoglu, Kong & Ozdaglar 2026).](../img/knowledge-collapse-cycle.png)
-*The self-reinforcing mechanism. More precise AI crowds out individual learning effort; reduced learning erodes the community knowledge stock; a weaker knowledge stock increases dependence on AI. The garbling policy (capping precision at τ*) is the only intervention that breaks the loop.*
+*The self-reinforcing mechanism. More precise AI crowds out individual learning effort; reduced learning erodes the community knowledge stock; a weaker knowledge stock increases dependence on AI. The garbling policy (capping precision at $τ*$) is the only intervention that breaks the loop.*
 
 ## Learning as a joint production problem
 
@@ -35,25 +32,25 @@ The substitution is the trap. AI perfectly replaces the private incentive to lea
 
 ## The welfare trap
 
-The paper's most pointed result is that more accurate AI does not reliably produce better outcomes for society. An agentic model that provides more precise recommendations crowds out more learning effort. Up to some interior optimum — call it τ*— higher precision raises welfare because the quality of recommendations increases faster than the knowledge lost to reduced learning. Past τ*, the substitution effect dominates: more accurate AI erodes the knowledge stock faster than it adds decision-support value, and welfare falls.
+The paper's most pointed result is that more accurate AI does not reliably produce better outcomes for society. An agentic model that provides more precise recommendations crowds out more learning effort. Up to some interior optimum — call it $τ*$— higher precision raises welfare because the quality of recommendations increases faster than the knowledge lost to reduced learning. Past $τ*$, the substitution effect dominates: more accurate AI erodes the knowledge stock faster than it adds decision-support value, and welfare falls.
 
 The authors also identify a complete-collapse threshold $τ_A^c$. If AI accuracy exceeds this level, the high-knowledge steady state disappears entirely. Starting from a world where deep institutional knowledge is widespread, a sufficiently precise AI can make that world unreachable as a future state, regardless of where you begin. Initial conditions stop mattering.
 
 ![Welfare curve diagram: X-axis AI PRECISION, Y-axis SOCIAL WELFARE. A hand-drawn curve rises from left to a peak at tau-star (FIRST-BEST POLICY CAP, vertical dashed line), then falls back down past a horizontal dashed BASELINE WELFARE line. A second vertical dashed red line marks tau-A-c (HIGH-KNOWLEDGE STEADY STATE DISAPPEARS). Three zones labeled along the curve: WELFARE-IMPROVING (green, left of tau-star), PAST OPTIMUM (orange, between tau-star and tau-A-c), COLLAPSE (red, right of tau-A-c where curve falls below baseline).](../img/knowledge-collapse-welfare-curve.png)
-*Welfare as a function of AI precision. More accurate AI raises welfare up to τ*, then erodes it. Past τ_A^c, the high-knowledge steady state ceases to exist.*
+*Welfare as a function of AI precision. More accurate AI raises welfare up to $τ*$, then erodes it. Past $τ_A^c$, the high-knowledge steady state ceases to exist.*
 
 One clarification: this is not a claim that AI makes individuals less capable. The model holds individual ability constant throughout. The collapse happens at the community level, through the externality on shared knowledge, which means the damage is diffuse and slow-moving, largely invisible until it has already happened.
 
 ## The inferior model as first-best policy
 
-Here is where the paper arrives somewhere I didn't expect. The welfare-optimal information design policy is to deliberately add noise to AI recommendations. The authors call this garbling. Constraining the AI's effective precision to τ* — even when the underlying model could achieve higher accuracy — preserves the learning incentives that keep the knowledge stock alive.
+Here is where the paper arrives somewhere I didn't expect. The welfare-optimal information design policy is to deliberately add noise to AI recommendations. The authors call this garbling. Constraining the AI's effective precision to $τ*$ — even when the underlying model could achieve higher accuracy — preserves the learning incentives that keep the knowledge stock alive.
 
-The paper establishes this as the first-best policy outcome. A governance committee that defaults to the more accurate vendor is making a mistake: accuracy beyond τ* trades long-run community knowledge for short-run decision quality. The tradeoff only becomes visible at the community level, and only over time. The more accurate model wins the procurement scorecard and loses the institutional capability race.
+The paper establishes this as the first-best policy outcome. A governance committee that defaults to the more accurate vendor is making a mistake: accuracy beyond $τ*$ trades long-run community knowledge for short-run decision quality. The tradeoff only becomes visible at the community level, and only over time. The more accurate model wins the procurement scorecard and loses the institutional capability race.
 
-The paper also prescribes a specific transition sequence if an organization has already crossed the collapse threshold: first suppress AI recommendations entirely to let the knowledge stock rebuild, then restore precision capped at τ*. The optimal path requires the inferior model for two reasons: the right steady-state design when below the collapse threshold, and the recovery mechanism when the organization has already crossed it.[^3]
+The paper also prescribes a specific transition sequence if an organization has already crossed the collapse threshold: first suppress AI recommendations entirely to let the knowledge stock rebuild, then restore precision capped at $τ*$. The optimal path requires the inferior model for two reasons: the right steady-state design when below the collapse threshold, and the recovery mechanism when the organization has already crossed it.[^3]
 
 ![Two-phase garbling policy timeline. Left phase (PHASE 1: SUPPRESSION, blue): AI PRECISION held at zero; KNOWLEDGE STOCK shows a rising curve labeled REBUILDS. Note: organization has crossed collapse threshold. Right phase (PHASE 2: STEADY STATE, green): AI PRECISION flat line labeled CAPPED AT tau-star PERMANENTLY; KNOWLEDGE STOCK flat stable line labeled HOLDS. Bottom annotation: ACCURACY BEYOND tau-star TRADES LONG-RUN KNOWLEDGE FOR SHORT-RUN QUALITY. Neither phase uses the most accurate model.](../img/knowledge-collapse-garbling-policy.png)
-*The optimal two-phase policy. Suppress AI precision entirely to rebuild the knowledge stock (Phase 1), then restore it permanently capped at τ* (Phase 2). Neither phase uses the most accurate available model.*
+*The optimal two-phase policy. Suppress AI precision entirely to rebuild the knowledge stock (Phase 1), then restore it permanently capped at $τ*$ (Phase 2). Neither phase uses the most accurate available model.*
 
 ## The banking translation
 
@@ -78,7 +75,7 @@ The governance gap and the knowledge externality are, in that sense, the same pr
 
 | Parameter | Welfare effect | Tradeoff? | Controllable by org? |
 |---|---|---|---|
-| AI precision (τ) | ↑ up to τ*, then ↓ | Yes — non-monotone | Partially: vendor selection, garbling policy |
+| AI precision (τ) | ↑ up to $τ*$, then ↓ | Yes — non-monotone | Partially: vendor selection, garbling policy |
 | Aggregation capacity (I) | ↑ always | None | Yes: mentorship, documentation, review practices |
 
 The paper identifies one parameter that is unambiguously welfare-improving without any tradeoff: the size of the knowledge-sharing community. The authors call this aggregation capacity — roughly, how effectively practitioners pool and transmit general knowledge across time and context. Larger communities, better documentation practices, stronger mentorship structures, and deliberate knowledge transfer all raise this parameter without triggering the non-monotone dynamics that apply to AI accuracy.
@@ -91,7 +88,7 @@ The [HITL checkpoint](post.html?slug=hitl-design) that felt like compliance over
 
 The model establishes a non-monotone relationship between AI precision and long-run welfare, and shows that the welfare-optimal policy caps precision below its technical maximum. I find this analytically credible. The economies-of-scope insight (that private learning and public knowledge contribution share the same production function) is the kind of structural observation that doesn't depend on the numerical specifics.
 
-What I can't close is the empirical calibration.[^6] Where is τ* for a credit model validation team? The paper derives it as a function of learning effort elasticity, community size, and how quickly general knowledge depreciates. None of those parameters are observable in the way that asset yields or default rates are. The model tells you the right question to ask without giving you the instrument to measure the answer.
+What I can't close is the empirical calibration.[^6] Where is $τ*$ for a credit model validation team? The paper derives it as a function of learning effort elasticity, community size, and how quickly general knowledge depreciates. None of those parameters are observable in the way that asset yields or default rates are. The model tells you the right question to ask without giving you the instrument to measure the answer.
 
 The Stack Overflow evidence is real and the Wikipedia patterns are accumulating. Whether banking institutions are still in the welfare-improving range or have already crossed toward the interior optimum: that I genuinely don't know. What I think I know: the right answer is not to keep purchasing the most accurate model available.
 

@@ -38,7 +38,7 @@ The interbank funds transfer entry is the banking entry on that list. It is near
 The weak links logic says: automating the interbank transfer faster than you already have produces negligible aggregate gains, because it is not what is constraining output. The gains are bounded by the tasks that remain.
 
 > [!QUOTE]
-> "In a world of weak links, the benefits of A.I. may arrive slowly while the dangers can arrive quickly."
+> In a world of weak links, the benefits of A.I. may arrive slowly while the dangers can arrive quickly.
 > — Jones & Tonetti (2026)
 
 ## The banking weak links

@@ -5,7 +5,7 @@ description: "Everyone in GenAI wants a dashboard. The problem is that generic m
 tags: [psychometrics, evals]
 ---
 
-> **TL;DR:** Generic GenAI metrics — helpfulness scores, coherence percentages, hallucination rates — produce the feeling of measurement without the reality of it. Finance learned this the hard way with VaR: even people who know a metric is imperfect anchor on it anyway, and the act of seeing a number tends to increase risk-taking rather than reduce it. The field practitioners most need to read isn't ML engineering literature — it's psychometrics, where social scientists spent a century developing tools for measuring latent constructs you can't observe directly, in contexts where the measurement instrument affects what it measures. That is also, vocabulary aside, an exact description of what GenAI evaluation is trying to do.
+> **TL;DR:** Generic GenAI metrics — helpfulness scores, coherence percentages, hallucination rates — produce the feeling of measurement without the reality of it. Finance learned this the hard way with VaR: even people who know a metric is imperfect anchor on it anyway, and the act of seeing a number tends to increase risk-taking rather than reduce it. The field practitioners most need to read isn't AI engineering literature — it's psychometrics, where social scientists spent a century developing tools for measuring latent constructs you can't observe directly, in contexts where the measurement instrument affects what it measures. That is also, vocabulary aside, an exact description of what GenAI evaluation is trying to do.
 
 If you've worked on evaluating a GenAI application and sat in a meeting where someone asked "can we just get a dashboard for this?" — you've met the instinct I want to write about. There's a particular kind of managerial comfort that comes from seeing a number. Helpfulness: 4.2 out of 5. Coherence: 87%. Hallucination rate: 3%. It feels like understanding. It often isn't.
 
@@ -37,10 +37,10 @@ GenAI benchmark-chasing is the same dynamic. When MMLU scores appear in model an
 
 ## Social Scientists Know Something About This
 
-Here's the part most ML practitioners skip: social scientists have been thinking about [measurement theory](https://books.google.com/books/about/Measurement_Theory_and_Applications_for.html?id=caxCDwAAQBAJ) for over a century, and they've developed real tools for it.
+Here's the part most AI practitioners skip: social scientists have been thinking about [measurement theory](https://books.google.com/books/about/Measurement_Theory_and_Applications_for.html?id=caxCDwAAQBAJ) for over a century, and they've developed real tools for it.
 
 > [!QUOTE]
-> The field I think GenAI practitioners most need to read isn't ML engineering literature. It's psychometrics.
+> The field I think GenAI practitioners most need to read isn't AI engineering literature. It's psychometrics.
 
 Psychometrics — the field that gave us standardized testing, survey design, and educational measurement — is fundamentally in the business of measuring things you can't see directly. You can't observe "reasoning ability" or "mathematical aptitude" any more than you can observe "safety" or "faithfulness" in a language model. What you observe are *indicators* — specific items, tasks, outputs. The hard question, the one psychometricians have been wrestling with since the 1950s, is whether your indicators actually measure the underlying construct.
 
@@ -115,7 +115,7 @@ I've watched this play out in financial services, which has had formal [model ri
 
 Taleb's observation about VaR is worth sitting with: even people who know a metric is imperfect anchor on it anyway. The solution isn't to remove the number — it's to surround the number with the infrastructure that makes it meaningful. In finance, that meant stress testing, scenario analysis, and actual model validation. In GenAI, it means the same thing: test design, eval pipeline engineering, judge calibration, and an honest account of what your metrics can and can't tell you.
 
-The field I think GenAI practitioners most need to read isn't ML engineering literature. It's psychometrics. Social scientists spent the better part of the 20th century developing tools for measuring things you can't observe directly, under conditions where your measurement instrument affects what it measures, in contexts where the constructs themselves are contested. That is also, with slight vocabulary changes, an exact description of what we're trying to do with GenAI evaluation.
+The field I think GenAI practitioners most need to read isn't AI engineering literature. It's psychometrics. Social scientists spent the better part of the 20th century developing tools for measuring things you can't observe directly, under conditions where your measurement instrument affects what it measures, in contexts where the constructs themselves are contested. That is also, with slight vocabulary changes, an exact description of what we're trying to do with GenAI evaluation.
 
 The framing I'd offer skeptical engineers: this isn't an academic detour. Greedy evals — optimizing for the next sprint, shipping whatever scores look reasonable — are the local-optimum solution to a global problem. Every greedy algorithm risks missing the cliff. Eval debt compounds like technical debt, but the failure mode is harder to see coming: the metrics look fine, the dashboard looks fine, and then something in production doesn't. Thinking holistically about what your evals actually measure is faster than explaining in a postmortem why they didn't catch it.
 
