@@ -7,13 +7,13 @@
     "difficulty": 1,
     "question": "NIST AI 800-4 found that human factors was the category practitioners found hardest to work with. What specifically did they report difficulty with?",
     "options": [
-      "Procuring specialized sensor hardware for continuous behavioral monitoring — most organizations lacked the budget cycle to justify the acquisition, especially for indirect-cost centers like oversight.",
-      "Collecting and gauging feedback on human factors performance — not the most costly category, but the one with no established metrics or baselines.",
+      "Procuring specialized sensor hardware for continuous behavioral monitoring \u2014 most organizations lacked the budget cycle to justify the acquisition, especially for indirect-cost centers like oversight.",
+      "Collecting and gauging feedback on human factors performance \u2014 not the most costly category, but the one with no established metrics or baselines.",
       "Funding human factors training, which cost substantially more per analyst than technical AI skills programs did at comparable institutions with similar governance structures.",
       "Reconciling behavioral data collection with privacy regulations, since the continuous observation needed for valid human factors monitoring conflicted with employee consent frameworks."
     ],
     "correct": 1,
-    "explanation": "The post quotes NIST AI 800-4 directly: human factors was 'the category with the highest practitioner-reported difficulty in collecting and gauging feedback.' This is significant because it's not a resource problem or a technical problem — it's an institutional and measurement problem. Organizations don't know what to measure (no normative baselines for override rates, automation bias indicators, or skill-atrophy signals), how to measure it (no established instruments adapted from the HCI literature), or how to interpret what they observe. NIST acknowledges the field 'doesn't yet have guidance ready for publication' on how to conduct human factors monitoring."
+    "explanation": "The post quotes NIST AI 800-4 directly: human factors was 'the category with the highest practitioner-reported difficulty in collecting and gauging feedback.' This is significant because it's not a resource problem or a technical problem \u2014 it's an institutional and measurement problem. Organizations don't know what to measure (no normative baselines for override rates, automation bias indicators, or skill-atrophy signals), how to measure it (no established instruments adapted from the HCI literature), or how to interpret what they observe. NIST acknowledges the field 'doesn't yet have guidance ready for publication' on how to conduct human factors monitoring."
   },
   {
     "id": "hct-q02",
@@ -39,13 +39,13 @@
     "difficulty": 2,
     "question": "The proposed crosswalk maps Bainbridge's skill atrophy onto a specific MRM monitoring metric. What metric, and what does a persistently low rate signal?",
     "options": [
-      "Human override rate — a sustained low rate in a high-error system signals skill atrophy rather than model quality, and requires investigation before.",
+      "Human override rate \u2014 a sustained low rate in a high-error system signals skill atrophy rather than model quality, and requires investigation before the next model cycle.",
       "Holdout accuracy, where persistently low model performance on the validation sample triggers mandatory revalidation procedures under the institution's model risk governance framework.",
       "Daily analyst throughput, where low review volume per staff member indicates understaffing that prevents adequate coverage of the model portfolio under SR 11-7 governance standards.",
-      "Formal escalation frequency to senior model risk committees — a widely used governance indicator for tracking the quality of human engagement across supervised model deployments."
+      "Formal escalation frequency to senior model risk committees \u2014 a widely used governance indicator for tracking the quality of human engagement across supervised model deployments."
     ],
     "correct": 0,
-    "explanation": "The crosswalk translation is direct: 'HCI Concept: Skill atrophy (Bainbridge 1983) → MRM Equivalent: Human override rate → Monitoring Implication: Sustained low override rate in a high-error system flags loss of independent judgment; requires investigation before the next model cycle → Owner: Ongoing monitoring.' The signal is not 'low override rate = bad' — it's 'low override rate in a system with known error rates, without a corresponding improvement in model quality = potential disuse signal.' Current MRM practice treats a low override rate as evidence the model is working; the HCI framework treats it as a question requiring investigation."
+    "explanation": "The crosswalk translation is direct: 'HCI Concept: Skill atrophy (Bainbridge 1983) \u2192 MRM Equivalent: Human override rate \u2192 Monitoring Implication: Sustained low override rate in a high-error system flags loss of independent judgment; requires investigation before the next model cycle \u2192 Owner: Ongoing monitoring.' The signal is not 'low override rate = bad' \u2014 it's 'low override rate in a system with known error rates, without a corresponding improvement in model quality = potential disuse signal.' Current MRM practice treats a low override rate as evidence the model is working; the HCI framework treats it as a question requiring investigation."
   },
   {
     "id": "hct-q04",
@@ -55,13 +55,13 @@
     "difficulty": 3,
     "question": "The crosswalk table has 10 HCI concepts mapped to MRM equivalents. Ten of twelve rows are gaps. The post argues the crosswalk's absence is 'institutional inertia rather than conceptual difficulty.' What evidence supports this?",
     "options": [
-      "The underlying practices are standard elsewhere — uncertainty quantification, version control, randomized trials — and the gap reflects career incentives that never rewarded joint HCI-MRM credibility.",
-      "The HCI concepts require specialized training that governance practitioners lack — without formal human factors credentials, the translation work is technically inaccessible to model risk professionals.",
+      "The underlying practices are standard elsewhere \u2014 uncertainty quantification, version control, randomized trials \u2014 and the gap reflects career incentives that never rewarded joint HCI-MRM credibility.",
+      "The HCI concepts require specialized training that governance practitioners lack \u2014 without formal human factors credentials, the translation work is technically inaccessible to model risk professionals.",
       "The HCI research base has not yet matured sufficiently; its empirical findings cannot yet be translated into the specific, auditable, examiner-ready governance specifications that model risk practice demands.",
       "Implementing the crosswalk requires formal regulatory authorization from US banking supervisors, an approval that no institution has yet sought or received despite the governance gap being widely acknowledged."
     ],
     "correct": 0,
-    "explanation": "The post's argument is institutional, not technical: 'The crosswalk doesn't exist because building it requires credibility in both fields simultaneously, and institutional incentive structures have not historically rewarded that combination.' The mapping is tractable — the post demonstrates it in a table without access to any specialized resources. What hasn't happened is an institution or regulatory body deciding to commission it. The crosswalk's absence from the NIST AI RMF crosswalk library (which covers ISO, Singapore's IMDA, Korea, Japan, and industry frameworks) confirms it's not a technical barrier; it's a field-boundary problem that nobody has been incentivized to cross."
+    "explanation": "The post's argument is institutional, not technical: 'The crosswalk doesn't exist because building it requires credibility in both fields simultaneously, and institutional incentive structures have not historically rewarded that combination.' The mapping is tractable \u2014 the post demonstrates it in a table without access to any specialized resources. What hasn't happened is an institution or regulatory body deciding to commission it. The crosswalk's absence from the NIST AI RMF crosswalk library (which covers ISO, Singapore's IMDA, Korea, Japan, and industry frameworks) confirms it's not a technical barrier; it's a field-boundary problem that nobody has been incentivized to cross."
   },
   {
     "id": "hct-q05",
@@ -71,13 +71,13 @@
     "difficulty": 2,
     "question": "The crosswalk maps Parasuraman-Riley's misuse/disuse/abuse taxonomy to three different MRM risk category owners. What is the significance of each falling under a different owner?",
     "options": [
-      "Each risk type routes to a natural owner — misuse to ongoing monitoring, disuse to outcomes analysis, abuse to change management — creating accountability rather than.",
+      "Each risk type routes to a natural owner \u2014 misuse to ongoing monitoring, disuse to outcomes analysis, abuse to change management \u2014 creating accountability rather than leaving human-factors problems orphaned in a governance structure that has no category for them.",
       "Distributed ownership dilutes accountability because no single governance team can be held responsible when human oversight gaps contribute to a material model failure or supervisory finding.",
       "Multiple owners provide coverage that no single team could deliver alone, since each team brings specialized authority and institutional knowledge to a different dimension of human oversight risk.",
       "The three owners must convene a formal joint working group before any remedial governance action is authorized, ensuring cross-functional review of every human oversight finding before escalation."
     ],
     "correct": 0,
-    "explanation": "The routing function is the crosswalk's practical value. 'Misuse → model-use risk belongs in ongoing monitoring under SR 26-2 Section IV. Disuse → operational risk belongs in outcomes analysis. Abuse → model-change risk belongs in change management.' The governance infrastructure for this translation already exists; what's missing is the vocabulary bridge. Without it, an analyst reporting 'the team seems to be approving outputs without checking' doesn't know where that concern belongs — is it a model risk issue? An operational risk issue? A compliance issue? The crosswalk creates a routing mechanism that assigns responsibility rather than leaving human-factors problems orphaned in a governance structure that has no category for them."
+    "explanation": "The routing function is the crosswalk's practical value. 'Misuse \u2192 model-use risk belongs in ongoing monitoring under SR 26-2 Section IV. Disuse \u2192 operational risk belongs in outcomes analysis. Abuse \u2192 model-change risk belongs in change management.' The governance infrastructure for this translation already exists; what's missing is the vocabulary bridge. Without it, an analyst reporting 'the team seems to be approving outputs without checking' doesn't know where that concern belongs \u2014 is it a model risk issue? An operational risk issue? A compliance issue? The crosswalk creates a routing mechanism that assigns responsibility rather than leaving human-factors problems orphaned in a governance structure that has no category for them."
   },
   {
     "id": "hct-q06",
@@ -93,7 +93,7 @@
       "Behavioral benchmarks must receive formal examiner pre-approval before a bank can reference them as performance standards in model risk assessments, creating a regulatory bottleneck."
     ],
     "correct": 0,
-    "explanation": "The crosswalk table row for automation bias has '✗ Gap: no US supervisory guidance specifies a behavioral baseline.' The implication: a bank that commits to 'monitoring automation bias' without specifying a baseline has committed to monitoring deviation from an undefined standard. The resource rationality framework suggests the baseline must be specified per-task and per-automation-level — optimal behavior differs when the false-positive rate is 96% (rote dismissal may be locally rational) versus 10% (each flag deserves genuine investigation). Establishing these baselines requires combining domain expertise (what does expert trade-offs look like here?) with empirical data (what does actual expert behavior look like?)."
+    "explanation": "The crosswalk table row for automation bias has '\u2717 Gap: no US supervisory guidance specifies a behavioral baseline.' The implication: a bank that commits to 'monitoring automation bias' without specifying a baseline has committed to monitoring deviation from an undefined standard. The resource rationality framework suggests the baseline must be specified per-task and per-automation-level \u2014 optimal behavior differs when the false-positive rate is 96% (rote dismissal may be locally rational) versus 10% (each flag deserves genuine investigation). Establishing these baselines requires combining domain expertise (what does expert trade-offs look like here?) with empirical data (what does actual expert behavior look like?)."
   },
   {
     "id": "hct-q07",
@@ -105,11 +105,11 @@
     "options": [
       "US banks can adopt Veritas human oversight assessment frameworks now, without waiting for equivalent US regulatory requirements to be developed.",
       "Legal validity is confined to MAS-supervised institutions; US banks applying the toolkit outside Singapore would be operating without recognized regulatory standing.",
-      "US banks should await a domestically developed equivalent — adopting a framework designed for Singapore's institutional and supervisory context imports assumptions that don't translate cleanly to US practice.",
+      "US banks should await a domestically developed equivalent \u2014 adopting a framework designed for Singapore's institutional and supervisory context imports assumptions that don't translate cleanly to US practice.",
       "The toolkit requires extensive customization to account for differences between US and Singapore banking law before it can be meaningfully deployed in a US governance program."
     ],
     "correct": 0,
-    "explanation": "The post's international comparison is actionable in this direction: 'Nothing in [the Veritas toolkit] is specific to Singaporean banking regulation.' MAS developed it with major international banks (BNY Mellon, HSBC, DBS, Standard Chartered) specifically to produce portability. The toolkit includes operational assessment methodologies for fairness, ethics, accountability, and transparency in AI — including human oversight assessment. US banks facing a governance vacuum under SR 26-2's GenAI exclusion have an operational resource available now, without waiting for US regulatory equivalents."
+    "explanation": "The post's international comparison is actionable in this direction: 'Nothing in [the Veritas toolkit] is specific to Singaporean banking regulation.' MAS developed it with major international banks (BNY Mellon, HSBC, DBS, Standard Chartered) specifically to produce portability. The toolkit includes operational assessment methodologies for fairness, ethics, accountability, and transparency in AI \u2014 including human oversight assessment. US banks facing a governance vacuum under SR 26-2's GenAI exclusion have an operational resource available now, without waiting for US regulatory equivalents."
   },
   {
     "id": "hct-q08",
@@ -119,13 +119,13 @@
     "difficulty": 2,
     "question": "The post argues that 'every governance framework built without a crosswalk to the HCI literature will reproduce the ironies Bainbridge identified.' What is the most common misconception that leads to this reproduction?",
     "options": [
-      "That defining the organizational structure of oversight — who approves what, under what authority — is sufficient without engaging the mechanisms by which those structures fail under real.",
+      "That defining the organizational structure of oversight \u2014 who approves what, under what authority \u2014 is sufficient without engaging the mechanisms by which those structures fail under real operating conditions.",
       "That HCI findings from aviation and industrial control settings cannot transfer to financial services, since the stakes, timescales, and analyst workflows in banking are too different from safety-critical domains.",
       "That structured human oversight adds more cost to AI deployments than it recovers in model risk reduction, making the investment difficult to justify to senior management and boards of directors.",
       "That banking AI differs so fundamentally from other automated systems that adapting existing HCI literature is impractical without commissioning entirely new empirical research in financial services contexts."
     ],
     "correct": 0,
-    "explanation": "The post closes on this precisely: 'Banking's governance frameworks for agentic AI are being assembled right now. The people doing that assembly are capable practitioners working in good faith. They are working without the research that most applies to what they are doing.' The misconception is that governance design ends at organizational structure — specifying who approves, what their authority is, what they produce. The HCI research shows that these structures fail through specific, empirically documented mechanisms (automation bias, skill atrophy, situation awareness degradation) that organizational structure alone cannot address. Without the crosswalk, practitioners can't know what they don't know."
+    "explanation": "The post closes on this precisely: 'Banking's governance frameworks for agentic AI are being assembled right now. The people doing that assembly are capable practitioners working in good faith. They are working without the research that most applies to what they are doing.' The misconception is that governance design ends at organizational structure \u2014 specifying who approves, what their authority is, what they produce. The HCI research shows that these structures fail through specific, empirically documented mechanisms (automation bias, skill atrophy, situation awareness degradation) that organizational structure alone cannot address. Without the crosswalk, practitioners can't know what they don't know."
   },
   {
     "id": "hct-q09",
@@ -135,13 +135,13 @@
     "difficulty": 3,
     "question": "Endsley's situation awareness model distinguishes three levels: perception (Level 1), comprehension (Level 2), and projection (Level 3). The crosswalk maps these to specific MRM gaps. What does the gap for SA Level 3 (projection) specifically identify?",
     "options": [
-      "Agentic systems need pre-action oversight before irreversible commitments; by the time outcomes are observable the action has occurred — SR 26-2 excluded agentic oversight from scope.",
-      "Analysts need additional economic modeling training to project financial outcomes from AI outputs — projection skills are not reliably developed through standard credit risk or model validation certification programs.",
+      "Agentic systems need pre-action oversight before irreversible commitments; by the time outcomes are observable the action has occurred \u2014 SR 26-2 excluded agentic oversight from scope.",
+      "Analysts need additional economic modeling training to project financial outcomes from AI outputs \u2014 projection skills are not reliably developed through standard credit risk or model validation certification programs.",
       "SA Level 3 demands complex scenario planning training that most bank analyst populations have not received, creating a competency gap that standard model risk governance programs do not address.",
       "Projection-level awareness applies only to high-frequency trading environments where decisions occur in milliseconds, not to the longer-cycle AI deployments typical in retail or commercial banking supervision."
     ],
     "correct": 0,
-    "explanation": "The crosswalk row for SA Level 3 shows: 'Observable Metric: Pre-action checkpoint rate for irreversible actions → US Supervision Coverage: ✗ Gap: agentic oversight standard absent from US banking supervision.' Projection-level situation awareness is the ability to anticipate what the system will do before it does it — the oversight function that matters for irreversible actions. Traditional model validation is SA Level 1 and 2: perceiving what the model output is, comprehending whether it's correct. Agentic systems that commit irreversible actions (payments, trades, communications) before any human sees them require SA Level 3 governance: oversight at the planning stage, not the execution stage."
+    "explanation": "The crosswalk row for SA Level 3 shows: 'Observable Metric: Pre-action checkpoint rate for irreversible actions \u2192 US Supervision Coverage: \u2717 Gap: agentic oversight standard absent from US banking supervision.' Projection-level situation awareness is the ability to anticipate what the system will do before it does it \u2014 the oversight function that matters for irreversible actions. Traditional model validation is SA Level 1 and 2: perceiving what the model output is, comprehending whether it's correct. Agentic systems that commit irreversible actions (payments, trades, communications) before any human sees them require SA Level 3 governance: oversight at the planning stage, not the execution stage."
   },
   {
     "id": "hct-q10",
@@ -151,13 +151,13 @@
     "difficulty": 3,
     "question": "The Bainbridge's Debt series (bainbridge-ironies, automation-bias-banking, hci-translation) makes a cumulative argument about why AI governance in banking is systematically missing something. What is the core synthesis?",
     "options": [
-      "Banking governance frameworks were built without HCI research — skill atrophy, automation bias, misuse/disuse/abuse, SA degradation — that documents how oversight fails despite good.",
+      "Banking governance frameworks were built without HCI research \u2014 skill atrophy, automation bias, misuse/disuse/abuse, SA degradation \u2014 that documents how oversight fails despite good intentions and qualified practitioners.",
       "Banking AI governance over-focuses on regulatory compliance and needs to shift toward technical engineering judgment backed by operational performance data from live production deployments.",
-      "Banking AI governance is chronically under-resourced — without substantially more dedicated staff and executive sponsorship, even well-designed frameworks will fail to function effectively at scale.",
+      "Banking AI governance is chronically under-resourced \u2014 without substantially more dedicated staff and executive sponsorship, even well-designed frameworks will fail to function effectively at scale.",
       "The HCI literature is rooted in academic abstraction and industrial control settings, making direct translation to financial services governance workflows impractical without major domain-specific adaptation work."
     ],
     "correct": 0,
-    "explanation": "The series traces a single cumulative argument. Post 1 (bainbridge-ironies): Bainbridge identified the structural properties of automation that predict oversight failures across all domains, 43 years ago, in a paper uncited by US banking supervisors. Post 2 (automation-bias-banking): the empirical evidence since then — Skitka, Bahner, Bansal — quantifies how severely 'the analyst will catch it' governance fails. Post 3 (hci-translation): the crosswalk that would connect this research to MRM practice doesn't exist and hasn't been built. The prediction: every AI governance framework assembled without this connection will reproduce the same ironies in a new technological context, because the underlying human-factors mechanisms don't change across domains."
+    "explanation": "The series traces a single cumulative argument. Post 1 (bainbridge-ironies): Bainbridge identified the structural properties of automation that predict oversight failures across all domains, 43 years ago, in a paper uncited by US banking supervisors. Post 2 (automation-bias-banking): the empirical evidence since then \u2014 Skitka, Bahner, Bansal \u2014 quantifies how severely 'the analyst will catch it' governance fails. Post 3 (hci-translation): the crosswalk that would connect this research to MRM practice doesn't exist and hasn't been built. The prediction: every AI governance framework assembled without this connection will reproduce the same ironies in a new technological context, because the underlying human-factors mechanisms don't change across domains."
   },
   {
     "id": "hci-visual-q01",
@@ -169,12 +169,12 @@
     "imageAlt": "Two-column vocabulary gap: HCI/Human Factors (skill atrophy, automation bias, supervisory control, situation awareness) vs Banking MRM (ongoing monitoring, effective challenge, qualified personnel, human oversight). Orange double-headed arrow labeled VOCABULARY GAP in center. Stick figure asking ARE THESE THE SAME THING?",
     "question": "The diagram places HCI and MRM vocabularies in separate columns with an unlabeled correspondence between them. What governance failure does the orange gap arrow represent, rather than simply a terminology difference?",
     "options": [
-      "The gap arrow represents an organizational silo — HCI researchers and MRM practitioners work at different institutions and don't read each other's literature, so the vocabulary diverged by accident rather than design.",
-      "The gap arrow represents forty years of accumulated measurement infrastructure on the HCI side — banking MRM lacks validated instruments for skill atrophy and automation bias because the vocabulary gap prevented adoption of existing tools.",
-      "The gap arrow represents a regulatory translation problem — supervisors trained in MRM vocabulary cannot evaluate HCI-framed governance proposals, so well-designed interventions fail at the examination stage.",
-      "The gap arrow represents an opportunity — institutions that bridge the vocabulary gap first gain a competitive advantage in building governance frameworks that satisfy both MRM examiners and human factors practitioners."
+      "The gap arrow represents an organizational silo \u2014 HCI researchers and MRM practitioners work at different institutions and don't read each other's literature, so the vocabulary diverged by accident rather than design.",
+      "The gap arrow represents forty years of accumulated measurement infrastructure on the HCI side \u2014 banking MRM lacks validated instruments for skill atrophy and automation bias because the vocabulary gap prevented adoption of existing tools.",
+      "The gap arrow represents a regulatory translation problem \u2014 supervisors trained in MRM vocabulary cannot evaluate HCI-framed governance proposals, so well-designed interventions fail at the examination stage.",
+      "The gap arrow represents an opportunity \u2014 institutions that bridge the vocabulary gap first gain a competitive advantage in building governance frameworks that satisfy both MRM examiners and human factors practitioners."
     ],
     "correct": 1,
-    "explanation": "The post's argument is not that the terms are different labels for the same concept — it's that the vocabulary gap blocked technology transfer. HCI has validated measurement instruments for skill atrophy (override rates, task performance under degraded conditions), automation bias (commission error rates, alert response latency), and situation awareness (SAGAT, SART). Banking MRM has 'qualified personnel' and 'ongoing monitoring' with no specified metrics. Because the vocabulary gap prevented the fields from recognizing the correspondence, banking governance never adopted the measurement infrastructure that already existed. The crosswalk the post proposes is a remediation: 'override rate' → skill atrophy signal, LOA level → SR 26-2 tier, not as novel ideas but as translations of existing validated approaches."
+    "explanation": "The post's argument is not that the terms are different labels for the same concept \u2014 it's that the vocabulary gap blocked technology transfer. HCI has validated measurement instruments for skill atrophy (override rates, task performance under degraded conditions), automation bias (commission error rates, alert response latency), and situation awareness (SAGAT, SART). Banking MRM has 'qualified personnel' and 'ongoing monitoring' with no specified metrics. Because the vocabulary gap prevented the fields from recognizing the correspondence, banking governance never adopted the measurement infrastructure that already existed. The crosswalk the post proposes is a remediation: 'override rate' \u2192 skill atrophy signal, LOA level \u2192 SR 26-2 tier, not as novel ideas but as translations of existing validated approaches."
   }
 ]
