@@ -6,13 +6,13 @@
     "objective": "distinction",
     "question": "SR 11-7 replaced the concept of 'independent review' from OCC 2000-16 with 'effective challenge.' What is the critical distinction?",
     "options": [
-      "Effective challenge requires annual validation rather than periodic review.",
+      "Effective challenge requires annual validation rather than periodic review, establishing a calendar-based schedule that applies uniformly regardless of model complexity, materiality, or whether the model has changed since the prior review cycle.",
       "Independent review required only structural separation; effective challenge added that separation without competence, and competence without influence, are each insufficient and independently addressable failure modes within the same governance framework.",
-      "Effective challenge applies only to credit models, while independent review covered all quantitative methods.",
-      "Effective challenge was adopted from UK PRA SS1/23, which predates SR 11-7."
+      "Effective challenge applies only to credit models and consumer-facing scoring tools, while independent review under OCC 2000-16 covered all quantitative methods \u2014 including market risk models, operational risk estimates, and stress-testing projections across the full model portfolio.",
+      "Effective challenge was adapted from UK regulatory practice \u2014 specifically PRA SS1/23 \u2014 which predates SR 11-7 and established a three-part independence framework the Federal Reserve later incorporated into the 2011 US model risk management guidance."
     ],
     "correct": 1,
-    "explanation": "Independent review asked whether validators reported to a different org than model developers. Effective challenge recognized this was necessary but not sufficient — a validator can be structurally separate and still fail to produce risk reduction if they lack the technical competence to probe the model or the organizational standing to force change. The OCC's 2021 Comptroller's Handbook formalized this as 'credible challenge,' distinguishing performative challenge from substantive challenge.",
+    "explanation": "Independent review asked whether validators reported to a different org than model developers. Effective challenge recognized this was necessary but not sufficient \u2014 a validator can be structurally separate and still fail to produce risk reduction if they lack the technical competence to probe the model or the organizational standing to force change. The OCC's 2021 Comptroller's Handbook formalized this as 'credible challenge,' distinguishing performative challenge from substantive challenge.",
     "difficulty": 2
   },
   {
@@ -22,13 +22,13 @@
     "objective": "mechanism",
     "question": "The post calls the influence leg 'the hardest leg in 2011 and harder now.' Why is influence harder to preserve for foundation models than for traditional credit scorecards?",
     "options": [
-      "Foundation models require more validators than banks can realistically hire.",
-      "Banks cannot retire or remediate a vendor-controlled foundation model the way they can an in-house model — the vendor's update schedule and deprecation decisions are entirely outside the bank's governance perimeter.",
-      "Foundation models are explicitly exempt from SR 11-7's influence requirements under the GenAI exclusion.",
-      "First-line teams no longer report through board-level Model Risk Committees."
+      "Foundation models require substantially more validators than most banks can realistically hire or retain \u2014 the supply of professionals who understand both transformer architecture and model risk governance is too thin to staff enterprise-scale MRM teams.",
+      "Banks cannot retire or remediate a vendor-controlled foundation model the way they can an in-house model \u2014 the vendor's update schedule and deprecation decisions are entirely outside the bank's governance perimeter.",
+      "Foundation models are explicitly exempt from SR 11-7's influence requirements under SR 26-2's GenAI exclusion, which means banks have no formal obligation to exercise challenge authority over vendor-provided foundation models used in production.",
+      "First-line AI teams no longer route decisions through board-level Model Risk Committees in most large banks \u2014 the shift toward agile product governance has decentralized AI decision-making in ways that structurally reduce second-line visibility."
     ],
     "correct": 1,
-    "explanation": "Influence assumed a model with a clear owner, a clear lifecycle, and the possibility of retirement or remediation. A bank can tell its internal modeling team to fix a failing scorecard. It cannot force Anthropic or OpenAI to modify a foundation model — and when the model is updated on the vendor's schedule, the bank's validation of the prior version may be immediately invalidated. Agentic systems compound this by introducing emergent behaviors that cross ownership lines.",
+    "explanation": "Influence assumed a model with a clear owner, a clear lifecycle, and the possibility of retirement or remediation. A bank can tell its internal modeling team to fix a failing scorecard. It cannot force Anthropic or OpenAI to modify a foundation model \u2014 and when the model is updated on the vendor's schedule, the bank's validation of the prior version may be immediately invalidated. Agentic systems compound this by introducing emergent behaviors that cross ownership lines.",
     "difficulty": 2
   },
   {
@@ -38,13 +38,13 @@
     "objective": "boundary",
     "question": "A bank's validation team conducts a thorough technical review of an LLM, publishes findings identifying significant limitations, and escalates to senior management. Senior management acknowledges the findings and continues deployment without remediation. Has effective challenge occurred?",
     "options": [
-      "Yes — effective challenge requires only that findings be identified and published.",
-      "Yes — once findings are formally escalated, the influence leg is satisfied regardless of the response.",
-      "No — SR 11-7 requires that identified limitations can 'produce appropriate changes,' which didn't happen here, because escalated findings were overridden rather than incorporated into the model's deployment decision.",
-      "No — because LLMs are excluded from SR 26-2's scope, any challenge is voluntary and cannot satisfy formal requirements."
+      "Yes \u2014 effective challenge is satisfied once validation findings are formally identified and published in a model risk report, because SR 11-7's documentation requirements focus on the quality of analysis rather than whether management ultimately acts on its conclusions.",
+      "Yes \u2014 once findings are formally escalated through the appropriate governance channel, the influence leg is satisfied regardless of how senior management responds, because the validator's obligation ends at escalation rather than at remediation.",
+      "No \u2014 SR 11-7 requires that identified limitations can 'produce appropriate changes,' which didn't happen here, because escalated findings were overridden rather than incorporated into the model's deployment decision.",
+      "No \u2014 because LLMs fall outside SR 26-2's formal scope under the GenAI exclusion, any validation activity is voluntary and cannot satisfy mandatory MRM requirements, making the effective challenge question moot for LLM deployments under current guidance."
     ],
     "correct": 2,
-    "explanation": "SR 11-7's definition is precise: 'critical analysis by objective, informed parties who can identify model limitations and assumptions and produce appropriate changes.' Publication of findings without resulting action satisfies the competence leg but fails the influence leg. The OCC's 2021 update explicitly distinguished performative challenge — going through the motions — from substantive challenge that actually produces risk reduction.",
+    "explanation": "SR 11-7's definition is precise: 'critical analysis by objective, informed parties who can identify model limitations and assumptions and produce appropriate changes.' Publication of findings without resulting action satisfies the competence leg but fails the influence leg. The OCC's 2021 update explicitly distinguished performative challenge \u2014 going through the motions \u2014 from substantive challenge that actually produces risk reduction.",
     "difficulty": 2
   },
   {
@@ -54,13 +54,13 @@
     "objective": "argument",
     "question": "The post steelmans BPI's repeal argument. Which element is most directly supported by evidence cited in the post?",
     "options": [
-      "MRM functions are staffed by people who don't understand modern AI systems.",
+      "MRM functions are predominantly staffed by people who understand traditional statistical models but lack direct experience with transformer architectures, making it structurally difficult to probe the assumptions of modern AI systems during formal validation.",
       "COVID-era failures went through MRM functions that approved all those models, demonstrating that the three-lines-of-defense structure existed but failed to deliver effective challenge when it was actually needed.",
-      "The three-lines-of-defense structure was designed for financial crisis scenarios, not AI deployments.",
-      "Effective challenge has never been operationally defined by any major banking regulator in binding guidance."
+      "The three-lines-of-defense structure was designed around financial crisis scenarios \u2014 credit risk, market risk, liquidity \u2014 and its assumptions about model complexity and governance timelines don't map cleanly onto modern AI development and deployment cycles.",
+      "Effective challenge has never been operationally defined in binding regulatory guidance \u2014 SR 11-7's articulation is principles-based, and no US banking supervisor has issued examination procedures that specify what 'producing appropriate changes' concretely requires."
     ],
     "correct": 1,
-    "explanation": "The EY/GARP white paper cited in the post makes this argument directly: MRM has 'inadvertently been transformed into a process-driven activity,' and COVID-era MRM functions 'approved all those models' that later failed. This is the strongest empirical counterweight to the triad — it suggests the apparatus can satisfy procedural requirements while missing material model problems. The counterargument is that this is a failure of the apparatus, not the underlying concept.",
+    "explanation": "The EY/GARP white paper cited in the post makes this argument directly: MRM has 'inadvertently been transformed into a process-driven activity,' and COVID-era MRM functions 'approved all those models' that later failed. This is the strongest empirical counterweight to the triad \u2014 it suggests the apparatus can satisfy procedural requirements while missing material model problems. The counterargument is that this is a failure of the apparatus, not the underlying concept.",
     "difficulty": 3
   },
   {
@@ -70,13 +70,13 @@
     "objective": "transfer",
     "question": "A bank's GenAI system is deployed by the Technology organization as a vendor API feature, bypassing the standard model risk management intake process. Which leg of the effective challenge triad is most directly threatened?",
     "options": [
-      "Competence — Technology teams typically don't have MRM training to evaluate LLMs.",
-      "Influence — MRM's authority to challenge deployment depends on being part of the approval process, and vendor API integrations that arrive outside that process bypass effective challenge structurally, not just incidentally.",
-      "Incentives — Technology teams are compensated more than MRM teams, creating asymmetric pressure.",
-      "All three legs equally — the Technology deployment model undermines the entire framework simultaneously."
+      "Competence \u2014 Technology teams typically lack MRM training and validation experience, so when they own a GenAI deployment they cannot assess model limitations the way a trained second-line validator would, regardless of their effort or good intentions.",
+      "Influence \u2014 MRM's authority to challenge deployment depends on being part of the approval process, and vendor API integrations that arrive outside that process bypass effective challenge structurally, not just incidentally.",
+      "Incentives \u2014 Technology teams are typically compensated substantially more than second-line MRM staff and evaluated on deployment velocity rather than governance quality, creating asymmetric pressure that structurally disfavors challenge even when both parties mean well.",
+      "All three legs simultaneously \u2014 Technology deployments bring misaligned incentives, technical competence optimized for speed over rigor, and absent influence because MRM was never included in the approval chain to begin with, making this a whole-triad failure."
     ],
     "correct": 1,
-    "explanation": "The post identifies this explicitly: Technology organizations 'historically operated under software development lifecycle governance rather than model risk management' and have 'not absorbed the expectation of being challenged.' When GenAI arrives as a vendor API feature rather than a model development project, MRM's gatekeeping authority is structurally bypassed. That's an influence failure — the authority exists on paper but is never invoked because the process never reaches MRM.",
+    "explanation": "The post identifies this explicitly: Technology organizations 'historically operated under software development lifecycle governance rather than model risk management' and have 'not absorbed the expectation of being challenged.' When GenAI arrives as a vendor API feature rather than a model development project, MRM's gatekeeping authority is structurally bypassed. That's an influence failure \u2014 the authority exists on paper but is never invoked because the process never reaches MRM.",
     "difficulty": 3
   },
   {
@@ -86,13 +86,13 @@
     "objective": "misconception",
     "question": "The post argues that repealing SR 11-7 'removes the framework's conceptual spine to deal with scar tissue from how the spine has been applied.' What does this mean?",
     "options": [
-      "Repeal would eliminate all model risk management requirements at US banks entirely.",
-      "Repeal conflates the effective challenge triad — the core insight — with the compliance machinery built around it, discarding a valuable governance framework along with the bureaucratic overhead.",
-      "Repeal would make US banks subject to EU AI Act requirements by default.",
-      "The scar tissue metaphor refers specifically to the Excel errors that caused the London Whale loss."
+      "Repeal would eliminate all model risk management requirements, since SR 11-7 is the foundational guidance \u2014 without it, no regulatory basis remains for requiring independent validation, model inventories, or conceptual soundness review.",
+      "Repeal conflates the effective challenge triad \u2014 the core insight \u2014 with the compliance machinery built around it, discarding a valuable governance framework along with the bureaucratic overhead.",
+      "Repeal would expose US banks to EU AI Act extraterritorial requirements by default, since no domestic MRM framework would remain to demonstrate equivalent governance standards to European regulators.",
+      "The scar tissue metaphor refers to the Excel formula errors and VaR failures behind the London Whale \u2014 the 'spine' is JPMorgan's governance structure and the 'scar tissue' is the controls layered on in the loss's aftermath."
     ],
     "correct": 1,
-    "explanation": "The argument against repeal isn't that the apparatus is good — the post grants that nine-month delays, examiner inconsistency, and over-application to low-risk models are real problems. The argument is that dismantling the triad to fix the apparatus solves the second problem while creating a larger first one. The triad and the apparatus are different things; the repeal debate frequently conflates them, which is why the post insists on precision about what effective challenge actually is.",
+    "explanation": "The argument against repeal isn't that the apparatus is good \u2014 the post grants that nine-month delays, examiner inconsistency, and over-application to low-risk models are real problems. The argument is that dismantling the triad to fix the apparatus solves the second problem while creating a larger first one. The triad and the apparatus are different things; the repeal debate frequently conflates them, which is why the post insists on precision about what effective challenge actually is.",
     "difficulty": 2
   },
   {
@@ -102,13 +102,13 @@
     "objective": "scope",
     "question": "SR 26-2's exclusion of GenAI from scope means, in the post's framing, that:",
     "options": [
-      "Banks can freely deploy GenAI without any model risk oversight obligations.",
+      "Banks can freely deploy GenAI without any model risk oversight obligations, since SR 26-2's explicit exclusion of GenAI from scope removes the regulatory basis for applying MRM requirements to LLM deployments, API integrations, or agentic systems.",
       "The formal regulatory framework stepped back from the hardest governance question, leaving effective challenge as the most operationally relevant organizing concept for GenAI governance precisely because formal guidance declined to address it.",
-      "SR 26-2 was a temporary measure, with AI-specific guidance expected within 90 days.",
-      "GenAI is exempt from effective challenge requirements but remains subject to all other SR 11-7 validation obligations."
+      "SR 26-2 was explicitly framed as a temporary bridging measure, with a formal regulatory commitment from the Fed, OCC, and FDIC to issue AI-specific MRM guidance within 90 days covering GenAI and agentic systems excluded from the initial release.",
+      "GenAI is specifically exempt from effective challenge requirements but remains subject to all other SR 11-7 validation obligations \u2014 inventory, conceptual soundness, and outcomes analysis \u2014 because SR 26-2's footnote 3 exclusion is narrowly scoped to the challenge function."
     ],
     "correct": 1,
-    "explanation": "The post frames SR 26-2's exclusion as a 'deferral' — the regulatory apparatus stepped back from the hardest question rather than working through it. The triad remains the most relevant organizing concept for GenAI governance precisely because the new guidance doesn't address it. But it now lacks formal regulatory backing, and something — a high-profile failure, foreign regulatory developments, or a quiet enforcement action — will eventually supply the pressure SR 26-2 deferred.",
+    "explanation": "The post frames SR 26-2's exclusion as a 'deferral' \u2014 the regulatory apparatus stepped back from the hardest question rather than working through it. The triad remains the most relevant organizing concept for GenAI governance precisely because the new guidance doesn't address it. But it now lacks formal regulatory backing, and something \u2014 a high-profile failure, foreign regulatory developments, or a quiet enforcement action \u2014 will eventually supply the pressure SR 26-2 deferred.",
     "difficulty": 2
   },
   {
@@ -116,15 +116,15 @@
     "post": "effective-challenge",
     "module": "regulatory-drift",
     "objective": "mechanism",
-    "question": "The post calls AI-augmented oversight — using LLMs to monitor other LLMs — 'intellectually the most interesting and operationally the most fragile.' What is the specific fragility?",
+    "question": "The post calls AI-augmented oversight \u2014 using LLMs to monitor other LLMs \u2014 'intellectually the most interesting and operationally the most fragile.' What is the specific fragility?",
     "options": [
-      "LLM monitoring systems are too expensive to run at the scale required for enterprise banking.",
-      "The monitoring LLM is itself a model subject to MRM requirements, creating a governance recursion — who validates the validator — that lacks any clean stopping point under current regulatory frameworks.",
-      "LLMs cannot monitor other LLMs because models trained on similar data share the same blind spots.",
-      "Regulatory guidance explicitly prohibits using AI systems to review other AI systems."
+      "LLM monitoring systems are too expensive to run at enterprise banking scale \u2014 continuously scoring every model output with a second LLM judge roughly doubles inference compute costs and introduces latency that most production banking workflows cannot absorb.",
+      "The monitoring LLM is itself a model subject to MRM requirements, creating a governance recursion \u2014 who validates the validator \u2014 that lacks any clean stopping point under current regulatory frameworks.",
+      "LLMs cannot effectively monitor other LLMs because models trained on overlapping data share systematic blind spots \u2014 a monitoring LLM fails to catch exactly the errors a production model makes consistently, since both have learned the same incorrect patterns.",
+      "Regulatory guidance explicitly prohibits using AI systems to review other AI systems in high-risk applications \u2014 SR 26-2's oversight provisions require human review as the primary control, with AI-assisted monitoring permitted only as a supplementary layer."
     ],
     "correct": 1,
-    "explanation": "If you use an LLM to monitor another LLM for compliance assertions, the monitoring LLM is itself a model — with its own limitations, biases, and validation requirements. This creates a recursive governance problem SR 11-7 wasn't designed to handle: who validates the validator when the validator is also an LLM? The adaptation reproduces the original problem in a new medium rather than resolving it.",
+    "explanation": "If you use an LLM to monitor another LLM for compliance assertions, the monitoring LLM is itself a model \u2014 with its own limitations, biases, and validation requirements. This creates a recursive governance problem SR 11-7 wasn't designed to handle: who validates the validator when the validator is also an LLM? The adaptation reproduces the original problem in a new medium rather than resolving it.",
     "difficulty": 3
   },
   {
@@ -134,13 +134,13 @@
     "objective": "boundary",
     "question": "The post identifies C-suite mandates for rapid agentic deployment as a threat to the influence leg. What is the mechanism of that threat?",
     "options": [
-      "C-suite executives can directly overrule MRM findings by invoking executive authority.",
+      "C-suite executives can directly overrule MRM findings by invoking deployment authority \u2014 SR 11-7 requires senior management to support independent validation but does not prohibit overrides, leaving the influence leg contingent on leadership culture.",
       "Rapid deployment mandates signal that second-line authority is subordinate to adoption velocity, undermining senior management's attestation that model risk management is genuinely independent of business pressure.",
-      "Agentic systems operate faster than MRM review processes can keep pace with, making sequential review structurally impossible.",
-      "C-suite mandates change compensation structures in ways that create incentive failures in second-line teams."
+      "Agentic systems execute tasks at speeds sequential MRM review cannot match \u2014 by the time a validator completes a formal assessment, the system may have completed hundreds of cycles and accumulated material behavioral drift.",
+      "C-suite adoption mandates reshape compensation and performance metrics in ways that create incentive failures \u2014 validators evaluated on throughput have financial reasons to expedite rather than rigorously challenge executive-sponsored deployments."
     ],
     "correct": 1,
-    "explanation": "Structural independence doesn't substitute for senior management's willingness to actually invoke it. A C-suite mandate for rapid adoption doesn't explicitly eliminate MRM authority — but it signals to everyone in the organization that business objectives take priority over governance friction. Validators who are technically empowered to block a deployment may face enormous informal pressure not to. Influence depends on senior management actively defending validator authority when a business owner pushes back.",
+    "explanation": "Structural independence doesn't substitute for senior management's willingness to actually invoke it. A C-suite mandate for rapid adoption doesn't explicitly eliminate MRM authority \u2014 but it signals to everyone in the organization that business objectives take priority over governance friction. Validators who are technically empowered to block a deployment may face enormous informal pressure not to. Influence depends on senior management actively defending validator authority when a business owner pushes back.",
     "difficulty": 3
   },
   {
@@ -150,10 +150,10 @@
     "objective": "synthesis",
     "question": "The post's 'what I think holds, and what I don't' section makes an explicit admission of uncertainty. Which of the following captures what the author is genuinely uncertain about?",
     "options": [
-      "Whether effective challenge was ever an effective governance mechanism for traditional models.",
-      "Whether any of the proposed adaptations — continuous monitoring, red-teaming, champion-challenger — can deliver genuine effective challenge without SR 11-7's formal institutional backing remains the open question the post deliberately leaves unresolved.",
-      "Whether SR 26-2 will be superseded by a more comprehensive AI governance framework before 2028.",
-      "Whether the London Whale case was actually an influence failure or primarily a competence failure."
+      "Whether effective challenge was ever a genuinely effective governance mechanism for traditional statistical models \u2014 or whether its track record on credit scorecards, VaR models, and DFAST projections is as mixed as its track record on COVID-era AI deployments.",
+      "Whether any of the proposed adaptations \u2014 continuous monitoring, red-teaming, champion-challenger \u2014 can deliver genuine effective challenge without SR 11-7's formal institutional backing remains the open question the post deliberately leaves unresolved.",
+      "Whether SR 26-2 will be superseded by a more comprehensive AI governance framework before 2028, and whether that framework will adopt the triad directly, adapt it for GenAI-specific failure modes, or replace it with a substantially different oversight paradigm.",
+      "Whether the London Whale trading loss was actually an influence failure \u2014 as the post argues \u2014 or primarily a competence failure, given that later disclosures suggest the VaR model's mathematical errors may have been more consequential than previously understood."
     ],
     "correct": 1,
     "explanation": "The post is explicit: it holds that the triad is load-bearing and that removing it creates a larger problem than the apparatus it's attached to. What it doesn't know is whether the proposed adaptations will deliver real challenge or reproduce the same calibration problem in new forms. Continuous monitoring can become a dashboard with no escalation path. Red-teaming can default to known-blocked attack patterns. Champion-challenger can be maintained by the same team. Each adaptation risks becoming the new version of procedure mistaken for principle.",
@@ -167,13 +167,13 @@
     "difficulty": 1,
     "question": "SR 11-7's effective challenge requirement identifies three conditions that must all be present for independent validation to actually reduce model risk. Which answer names all three correctly?",
     "options": [
-      "Documentation, transparency, and auditability.",
-      "Independence, timeliness, and scope coverage.",
+      "Documentation, transparency, and auditability \u2014 the three artifacts SR 11-7 requires validation teams to maintain as evidence of an adequate model risk management program.",
+      "Independence, timeliness, and scope coverage \u2014 the three criteria the OCC's 2021 Comptroller's Handbook identified as hallmarks of credible model challenge.",
       "Incentives (absence of perverse ones), competence (ability to probe the model), and influence (organizational authority to force change).",
-      "Resources, access, and regulatory mandate."
+      "Resources, access, and regulatory mandate \u2014 the three preconditions SR 11-7 requires banks to establish before second-line teams can conduct independent model validation."
     ],
     "correct": 2,
-    "explanation": "Effective challenge under SR 11-7 requires all three legs: incentives (validators must not be rewarded for approving models that benefit the first line), competence (validators must have the technical depth to actually probe the model, not just review documentation), and influence (validators must have the organizational standing to compel remediation, not just record concerns). Structural independence — being on a different org chart — addresses none of these directly. The London Whale case is the canonical illustration: structural independence was present; influence failed."
+    "explanation": "Effective challenge under SR 11-7 requires all three legs: incentives (validators must not be rewarded for approving models that benefit the first line), competence (validators must have the technical depth to actually probe the model, not just review documentation), and influence (validators must have the organizational standing to compel remediation, not just record concerns). Structural independence \u2014 being on a different org chart \u2014 addresses none of these directly. The London Whale case is the canonical illustration: structural independence was present; influence failed."
   },
   {
     "id": "ec-gloss-q02",
@@ -183,13 +183,13 @@
     "difficulty": 2,
     "question": "A bank's model risk team files a formal concern about a high-revenue trading model's VaR methodology. Senior management overrides the concern without remediation. The model later generates unexpected losses. Which failure mode of effective challenge does this illustrate?",
     "options": [
-      "Competence failure — the validators did not understand the model well enough to probe its assumptions.",
-      "Incentive failure — validators were compensated based on the business unit's revenue performance.",
-      "Influence failure — validators had the competence to identify the problem but lacked the organizational authority to compel change.",
-      "Scope failure — the model was not included in the model inventory and therefore not subject to MRM review."
+      "Competence failure \u2014 validators lacked the technical depth to probe the VaR methodology's assumptions and identify the flaw before material losses occurred.",
+      "Incentive failure \u2014 validators were compensated partly on business unit revenue, discouraging them from raising concerns about a high-margin trading model.",
+      "Influence failure \u2014 validators had the competence to identify the problem but lacked the organizational authority to compel change.",
+      "Scope failure \u2014 the model was not in the model inventory and therefore received no independent MRM review before the trading position grew to scale."
     ],
     "correct": 2,
-    "explanation": "When validators identify a problem correctly but management can override without remediation, that's an influence failure. Competence and incentives were not the binding constraint — the validator saw the issue. What failed was the organizational mechanism that would force the first line to respond. This is the pattern the post traces through the London Whale case: the risk managers had concerns, structural separation was present on the org chart, but the influence leg was absent when it was actually needed."
+    "explanation": "When validators identify a problem correctly but management can override without remediation, that's an influence failure. Competence and incentives were not the binding constraint \u2014 the validator saw the issue. What failed was the organizational mechanism that would force the first line to respond. This is the pattern the post traces through the London Whale case: the risk managers had concerns, structural separation was present on the org chart, but the influence leg was absent when it was actually needed."
   },
   {
     "id": "ec-gloss-q03",
@@ -199,13 +199,13 @@
     "difficulty": 2,
     "question": "Model Risk Management (MRM) sits in the second line of defense. What distinguishes a strong MRM function from one that passes compliance audits but fails at effective challenge?",
     "options": [
-      "A strong MRM function validates more models per year and has more staff than a weak one.",
-      "A strong MRM function is located outside the business unit — a weak one is co-located with first-line developers.",
-      "A strong MRM function combines genuine technical competence with organizational influence — it can both probe models deeply and compel remediation; a compliant-but-weak function has structural independence but neither.",
-      "A strong MRM function uses external validators for all high-risk models; a weak one relies only on internal staff."
+      "A strong MRM function validates more models per year and maintains a larger, better-credentialed staff \u2014 model coverage rate and validator headcount are the primary metrics used in supervisory assessments of MRM program adequacy under SR 11-7.",
+      "A strong MRM function is located outside the business unit on the org chart, with dedicated reporting lines to the CRO or Chief Model Risk Officer \u2014 a weak one is co-located with first-line developers in ways that erode informal independence over time.",
+      "A strong MRM function combines genuine technical competence with organizational influence \u2014 it can both probe models deeply and compel remediation; a compliant-but-weak function has structural independence but neither.",
+      "A strong MRM function uses qualified external validators for all high-risk and complex models, supplementing internal staff whose technical depth may not match that of first-line model developers \u2014 a weak one relies solely on internal staff regardless of model complexity."
     ],
     "correct": 2,
-    "explanation": "MRM passes audits when it has the right org-chart position and follows the right procedures. It fails at effective challenge when validators lack the technical depth to probe model assumptions (competence gap) or when management can override concerns without consequence (influence gap). The post's argument is that these gaps are structural — they persist across institutions and become more severe with GenAI, where opacity makes competence harder to achieve and vendor relationships make influence harder to exercise."
+    "explanation": "MRM passes audits when it has the right org-chart position and follows the right procedures. It fails at effective challenge when validators lack the technical depth to probe model assumptions (competence gap) or when management can override concerns without consequence (influence gap). The post's argument is that these gaps are structural \u2014 they persist across institutions and become more severe with GenAI, where opacity makes competence harder to achieve and vendor relationships make influence harder to exercise."
   },
   {
     "id": "ec-visual-q01",
@@ -217,12 +217,12 @@
     "imageAlt": "Triangle with Incentives (top), Competence (lower-left), Influence (lower-right), Effective Challenge in center. The Incentives leg is drawn in orange dashes with a London Whale annotation showing what breaks when one leg is missing.",
     "question": "The triangle's Incentives leg is drawn in orange dashes rather than solid lines, with the London Whale annotation. What does the dashed line mean for the Effective Challenge concept in the center?",
     "options": [
-      "The dashed Incentives leg means that incentives are the most important of the three pillars — it is drawn separately to signal that it should be weighted more heavily in governance frameworks than competence or influence.",
-      "The dashed leg represents the leg that failed at London Whale — when Incentives break, the triangle loses structural integrity and Effective Challenge collapses even if Competence and Influence are intact.",
-      "The dashed line indicates that the Incentives pillar is the most difficult to measure — unlike Competence and Influence, which have observable proxies, Incentive misalignment is only visible after a failure occurs.",
-      "The dashed Incentives leg marks the pillar that SR 26-2 explicitly addresses — the solid legs (Competence and Influence) are governed by existing MRM requirements while Incentives remain in regulatory gap territory."
+      "The dashed Incentives leg means that incentives are the most important of the three pillars \u2014 it is drawn separately to signal that it should be weighted more heavily in governance frameworks than competence or influence.",
+      "The dashed leg represents the leg that failed at London Whale \u2014 when Incentives break, the triangle loses structural integrity and Effective Challenge collapses even if Competence and Influence are intact.",
+      "The dashed line indicates that the Incentives pillar is the most difficult to measure \u2014 unlike Competence and Influence, which have observable proxies, Incentive misalignment is only visible after a failure occurs.",
+      "The dashed Incentives leg marks the pillar that SR 26-2 explicitly addresses \u2014 the solid legs (Competence and Influence) are governed by existing MRM requirements while Incentives remain in regulatory gap territory."
     ],
     "correct": 1,
-    "explanation": "The triangle represents a three-legged stool: all three legs — Incentives, Competence, Influence — must hold for Effective Challenge to function. The London Whale case study in the post shows what happens when the Incentives leg breaks: the risk managers had the competence to see the problem and the positional influence to escalate, but the incentive structure rewarded not escalating. The dashed orange line visualizes the broken leg: the triangle can't hold with a structural gap in one side. This is the post's core claim — effective challenge isn't just about having qualified reviewers; it's about ensuring those reviewers have genuine incentive to challenge rather than ratify."
+    "explanation": "The triangle represents a three-legged stool: all three legs \u2014 Incentives, Competence, Influence \u2014 must hold for Effective Challenge to function. The London Whale case study in the post shows what happens when the Incentives leg breaks: the risk managers had the competence to see the problem and the positional influence to escalate, but the incentive structure rewarded not escalating. The dashed orange line visualizes the broken leg: the triangle can't hold with a structural gap in one side. This is the post's core claim \u2014 effective challenge isn't just about having qualified reviewers; it's about ensuring those reviewers have genuine incentive to challenge rather than ratify."
   }
 ]
