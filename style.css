@@ -3519,3 +3519,8 @@ label.quiz-backup-btn-upload input[type="file"] {
     font-size: 0.8rem;
   }
 }
+
+/* sister-course card hover (cross-course link) */
+.sister-course-card:hover {
+  border-color: var(--accent) !important;
+}
