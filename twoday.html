@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Intentionally unlisted: this page is linked from nowhere on the site. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Two-Day Course — Drift</title>
+    <meta name="description" content="Facilitator and participant companion for the Drift two-day course on banking AI risk." />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>"
+    />
+    <style>
+      /* ── Two-day course page components (theme-aware) ───────────── */
+      .td-wrap { max-width: 860px; margin: 0 auto; padding: 0 1.1rem; }
+      .td-hero { margin: 1.5rem 0 0.5rem; }
+      .td-eyebrow { font-family: var(--font-label); font-size: 0.72rem; letter-spacing: 0.14em;
+        text-transform: uppercase; color: var(--muted); }
+      .td-hero h1 { font-size: 2rem; margin: 0.3rem 0 0.4rem; letter-spacing: -0.01em; }
+      .td-hero .sub { color: var(--muted); font-size: 1.02rem; margin: 0; }
+      .td-unlisted { font-family: var(--font-label); font-size: 0.68rem; color: var(--muted);
+        border: 1px dashed var(--border-strong); border-radius: 20px; padding: 2px 10px; display: inline-block;
+        margin-top: 0.7rem; }
+
+      .td-frame { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+        padding: 1rem 1.2rem; margin: 1.4rem 0; }
+      .td-frame b { color: var(--text); }
+
+      .td-wrap h2 { font-size: 1.25rem; margin: 2rem 0 0.6rem; border-bottom: 2px solid var(--text);
+        padding-bottom: 0.35rem; }
+      .td-kicker { font-family: var(--font-label); font-size: 0.7rem; letter-spacing: 0.1em;
+        text-transform: uppercase; color: var(--accent); margin: 1.2rem 0 0.4rem; }
+
+      /* download buttons */
+      .td-dl { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 1rem 0 0.4rem; }
+      .td-dl a { flex: 1 1 220px; display: block; text-decoration: none; color: var(--text);
+        background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+        border-radius: var(--radius); padding: 0.7rem 0.9rem; transition: var(--transition); }
+      .td-dl a:hover { box-shadow: var(--shadow-sm); border-left-color: var(--accent2); }
+      .td-dl .t { font-weight: 600; font-size: 0.95rem; }
+      .td-dl .d { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+      .td-dl .pdf { font-family: var(--font-label); font-size: 0.65rem; color: var(--accent);
+        text-transform: uppercase; letter-spacing: 0.08em; }
+
+      /* tables */
+      .td-scroll { overflow-x: auto; }
+      table.td { width: 100%; border-collapse: collapse; margin: 0.5rem 0 0.8rem; font-size: 0.88rem; }
+      table.td th { font-family: var(--font-label); font-size: 0.66rem; letter-spacing: 0.05em;
+        text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.45rem 0.6rem;
+        border-bottom: 1.5px solid var(--text); white-space: nowrap; }
+      table.td td { text-align: left; vertical-align: top; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border); }
+      table.td .time { font-family: var(--font-label); font-weight: 600; white-space: nowrap; }
+      table.td .blk { font-weight: 600; }
+      table.td .note { color: var(--muted); font-size: 0.83rem; }
+
+      .pill { display: inline-block; font-family: var(--font-label); font-size: 0.6rem; letter-spacing: 0.04em;
+        text-transform: uppercase; font-weight: 700; padding: 2px 7px; border-radius: 20px; color: #fff; white-space: nowrap; }
+      .p-lecture { background: #1a73e8; } .p-studio { background: #7c3aed; }
+      .p-exercise { background: #137333; } .p-mechanic { background: #b06000; }
+      .p-logistics { background: #5f6368; }
+
+      .td-legend { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 0.4rem 0 0.2rem;
+        font-size: 0.82rem; color: var(--muted); }
+      .td-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+      .td-dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+      /* playbook cards */
+      .pb { border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius);
+        padding: 0.7rem 1rem; margin-bottom: 0.7rem; background: var(--surface); }
+      .pb .h { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+      .pb .nm { font-weight: 700; font-size: 1rem; }
+      .pb .when { font-family: var(--font-label); font-size: 0.7rem; color: var(--muted); }
+      .pb p { margin: 0.35rem 0 0; font-size: 0.9rem; }
+      .pb .out { color: #1a9d50; font-size: 0.82rem; margin-top: 0.3rem; }
+      .warn { color: var(--accent2); font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="./index.html" class="site-title">
+          // drift
+          <span class="cursor">_</span>
+        </a>
+        <div class="header-actions">
+          <a href="./glossary.html" class="nav-link">glossary</a>
+          <a href="./about.html" class="nav-link">about</a>
+          <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+          <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
+            <span id="theme-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <a href="./glossary.html" class="nav-link">glossary</a>
+      <a href="./about.html" class="nav-link">about</a>
+    </nav>
+
+    <main class="td-wrap">
+      <section class="td-hero">
+        <div class="td-eyebrow">// an opinionated course · taught one way</div>
+        <h1>Two-Day Course</h1>
+        <p class="sub">10 lecture-modules over two days · up to 6 pods of 3–5 · on paper &amp; whiteboard (no sandbox required)</p>
+        <span class="td-unlisted">unlisted · share by link only</span>
+      </section>
+
+      <div class="td-frame">
+        <b>The frame.</b> The whole course runs inside one fictional bank, <b>Meridian National</b>, standing up its
+        GenAI portfolio. Each pod owns one live use case for both days and defends it at a mock AI Risk Committee in the
+        capstone. Day 1 is <b>build your case</b>; Day 2 is <b>defend it under fire</b> as curveballs land.
+      </div>
+
+      <h2>Course kit</h2>
+      <p class="note" style="color: var(--muted); font-size: 0.9rem;">Print these before the session. One brief per pod, the curveball cards cut and sealed, the schedule for the facilitator.</p>
+      <div class="td-dl">
+        <a href="./drift-two-day-case-briefs.pdf">
+          <span class="pdf">PDF · 6 pages</span>
+          <div class="t">Case briefs</div>
+          <div class="d">One Meridian use case per pod — mandate, numbers, home tension, committee question.</div>
+        </a>
+        <a href="./drift-two-day-curveball-cards.pdf">
+          <span class="pdf">PDF · 3 pages</span>
+          <div class="t">Curveball cards</div>
+          <div class="d">Six sealed envelopes, opened mid-course at a module that isn't the pod's home turf.</div>
+        </a>
+        <a href="./drift-two-day-facilitator-schedule.pdf">
+          <span class="pdf">PDF · 5 pages</span>
+          <div class="t">Facilitator schedule</div>
+          <div class="d">Full grid, lecture/studio spine, exercise playbook, and materials checklist.</div>
+        </a>
+      </div>
+
+      <h2>Pods &amp; cases</h2>
+      <p class="note" style="color: var(--muted); font-size: 0.9rem;">All six curveballs open together at the end of Day 1; pods carry the twist overnight and arrive Day 2 ready to develop a response. Each curveball deliberately targets a lens that is <em>not</em> the pod's home tension, so every pod has to stretch into a second domain.</p>
+      <div class="td-scroll">
+        <table class="td">
+          <tr><th>Pod</th><th>Codename</th><th>Use case</th><th>Home tension</th><th>Curveball lens</th></tr>
+          <tr><td class="time">01</td><td class="blk">ClearList</td><td>AML alert-triage</td><td class="note">The Eval Gap</td><td class="note">Human and the Loop</td></tr>
+          <tr><td class="time">02</td><td class="blk">MemoWriter</td><td>Credit-memo drafting</td><td class="note">Bainbridge's Debt</td><td class="note">Economics of AI</td></tr>
+          <tr><td class="time">03</td><td class="blk">Navigator</td><td>Customer-service GUI</td><td class="note">GUI Agents + HITL</td><td class="note">Adversarial Testing</td></tr>
+          <tr><td class="time">04</td><td class="blk">SettleNet</td><td>A2A payments recon</td><td class="note">Agent to Agent</td><td class="note">Regulatory Drift</td></tr>
+          <tr><td class="time">05</td><td class="blk">Second Line</td><td>Model-validation copilot</td><td class="note">Regulatory Drift + challenge</td><td class="note">The Eval Gap</td></tr>
+          <tr><td class="time">06</td><td class="blk">Compass</td><td>Wealth-advisory research</td><td class="note">Economics of AI</td><td class="note">Bainbridge's Debt</td></tr>
+        </table>
+      </div>
+
+      <h2>The spine</h2>
+      <p>Eight modules are short lectures feeding a team exercise. Two — <b>The Eval Gap</b> and <b>Adversarial Testing</b> — run as <b>studios</b>, taught entirely through the exercise (the base-rate computation and the red-team relay), because for this audience doing beats hearing. Modules 7+8 and 9+10 are paired into single slots to fit two days.</p>
+      <div class="td-legend">
+        <span><i class="td-dot" style="background:#1a73e8"></i>Lecture</span>
+        <span><i class="td-dot" style="background:#7c3aed"></i>Studio</span>
+        <span><i class="td-dot" style="background:#137333"></i>Exercise</span>
+        <span><i class="td-dot" style="background:#b06000"></i>Mechanic</span>
+        <span><i class="td-dot" style="background:#5f6368"></i>Logistics</span>
+      </div>
+
+      <h2>Day 1 — Build your case</h2>
+      <div class="td-kicker">Build &amp; Scale · Modules 1–4</div>
+      <div class="td-scroll">
+        <table class="td">
+          <tr><th>Time</th><th>Block</th><th>Type</th><th>Facilitator note</th></tr>
+          <tr><td class="time">9:00</td><td class="blk">Welcome, pod formation &amp; case draw</td><td><span class="pill p-logistics">Logistics</span></td><td class="note">Form up to 6 pods of 3–5. Each pod draws one case brief and keeps it for two days.</td></tr>
+          <tr><td class="time">9:00</td><td class="blk">Cold-open provocation</td><td><span class="pill p-mechanic">Mechanic</span></td><td class="note">Three motivations (throughput / cost / "everyone's doing it"). Pods vote the strongest, then learn each case was greenlit for one.</td></tr>
+          <tr><td class="time">9:30</td><td class="blk">M1 · Regulatory Drift</td><td><span class="pill p-lecture">Lecture</span></td><td class="note">SR 11-7 → SR 26-2; the GenAI scope exclusion (fn 3).</td></tr>
+          <tr><td class="time">10:20</td><td class="blk">Exercise A · Scope triage</td><td><span class="pill p-exercise">Exercise</span></td><td class="note">Pods classify 5 use cases as in / out of SR 26-2 scope and defend each call.</td></tr>
+          <tr><td class="time">10:45</td><td class="blk">Break</td><td><span class="pill p-logistics">Logistics</span></td><td class="note"></td></tr>
+          <tr><td class="time">11:00</td><td class="blk">M2 · Agentic Engineering</td><td><span class="pill p-lecture">Lecture</span></td><td class="note">Harness design, the agent loop, where control lives. Pod 02's home module.</td></tr>
+          <tr><td class="time">11:50</td><td class="blk">Exercise B · Harness teardown</td><td><span class="pill p-exercise">Exercise</span></td><td class="note">Each pod is handed a flawed agent harness sketch and finds the failure mode.</td></tr>
+          <tr><td class="time">12:15</td><td class="blk">Lunch</td><td><span class="pill p-logistics">Logistics</span></td><td class="note"></td></tr>
+          <tr><td class="time">13:15</td><td class="blk">M3 · Agent to Agent</td><td><span class="pill p-lecture">Lecture</span></td><td class="note">Orchestration, trust boundaries, privilege. Pod 04's home module.</td></tr>
+          <tr><td class="time">14:05</td><td class="blk">Exercise C · A2A threat model</td><td><span class="pill p-exercise">Exercise</span></td><td class="note">Pods map the trust boundary and privilege levels on their own case.</td></tr>
+          <tr><td class="time">14:30</td><td class="blk">Break</td><td><span class="pill p-logistics">Logistics</span></td><td class="note"></td></tr>
+          <tr><td class="time">14:45</td><td class="blk">M4 · GUI Agents</td><td><span class="pill p-lecture">Lecture</span></td><td class="note">Screen-driving agents, irreversible actions. Pod 03's home module.</td></tr>
+          <tr><td class="time">15:35</td><td class="blk">Project work block</td><td><span class="pill p-exercise">Exercise</span></td><td class="note">Pods assemble their Day-1 "build" artifact on a flip chart — architecture + where the risk lives.</td></tr>
+          <tr><td class="time">16:05</td><td class="blk">Module quiz competition</td><td><span class="pill p-mechanic">Mechanic</span></td><td class="note">Run the existing module tests as a team leaderboard game (no devices needed).</td></tr>
+          <tr><td class="time">16:30</td><td class="blk">Curveball reveal — all pods open envelopes</td><td><span class="pill p-mechanic">Mechanic</span></td><td class="note">Every pod opens its sealed envelope at the same time. First reactions only — pods carry the twist overnight and develop their response for the Day-2 capstone.</td></tr>
+          <tr><td class="time">16:50</td><td class="blk">Day 1 close</td><td><span class="pill p-logistics">Logistics</span></td><td class="note">Build your case today. Sit with the curveball tonight. Defend it tomorrow.</td></tr>
+        </table>
+      </div>
+
+      <h2>Day 2 — Defend it under fire</h2>
+      <div class="td-kicker">Measure, Attack, Oversee, Money · Modules 5–10</div>
+      <div class="td-scroll">
+        <table class="td">
+          <tr><th>Time</th><th>Block</th><th>Type</th><th>Facilitator note</th></tr>
+          <tr><td class="time">9:00</td><td class="blk">Recap + curveball regroup</td><td><span class="pill p-mechanic">Mechanic</span></td><td class="note">Quick glossary buzzer round to warm the room; pods take five minutes to compare overnight thinking on their curveball.</td></tr>
+          <tr><td class="time">9:20</td><td class="blk">M5 · The Eval Gap — STUDIO</td><td><span class="pill p-studio">Studio</span></td><td class="note">Taught through the exercise. Pod 01's home module.</td></tr>
+          <tr><td class="time">9:20</td><td class="blk">Studio · The base-rate trap</td><td><span class="pill p-exercise">Exercise</span></td><td class="note">Pods compute PPV for an LLM judge at low prevalence and discover zero flags is not zero failures.</td></tr>
+          <tr><td class="time">10:10</td><td class="blk">Steelman-swap</td><td><span class="pill p-mechanic">Mechanic</span></td><td class="note">Each pod argues the case <em>against</em> its own instinct: "the judge is good enough."</td></tr>
+          <tr><td class="time">10:40</td><td class="blk">Break</td><td><span class="pill p-logistics">Logistics</span></td><td class="note"></td></tr>
+          <tr><td class="time">10:55</td><td class="blk">M6 · Adversarial Testing — STUDIO</td><td><span class="pill p-studio">Studio</span></td><td class="note">Taught through the relay.</td></tr>
+          <tr><td class="time">11:25</td><td class="blk">Studio · Red-team relay</td><td><span class="pill p-exercise">Exercise</span></td><td class="note">Each pod writes 3 attacks, passes them clockwise; the receiving pod defends.</td></tr>
+          <tr><td class="time">12:10</td><td class="blk">Lunch</td><td><span class="pill p-logistics">Logistics</span></td><td class="note"></td></tr>
+          <tr><td class="time">13:10</td><td class="blk">M7 + M8 · Human and the Loop / Bainbridge's Debt</td><td><span class="pill p-lecture">Lecture</span></td><td class="note">Paired lecture. Pods 01 and 06 deepen their curveball response here.</td></tr>
+          <tr><td class="time">14:10</td><td class="blk">Exercise · Knight Capital / override signal</td><td><span class="pill p-exercise">Exercise</span></td><td class="note">Pods design one runtime oversight signal for their case (override rate, drift cadence, deskilling proxy).</td></tr>
+          <tr><td class="time">14:35</td><td class="blk">Break</td><td><span class="pill p-logistics">Logistics</span></td><td class="note"></td></tr>
+          <tr><td class="time">14:50</td><td class="blk">M9 + M10 · Banking AI / Economics of AI</td><td><span class="pill p-lecture">Lecture</span></td><td class="note">Paired lecture. Pod 02 deepens its curveball response here.</td></tr>
+          <tr><td class="time">15:40</td><td class="blk">Capstone · Gallery walk (mock AI Risk Committee)</td><td><span class="pill p-mechanic">Mechanic</span></td><td class="note">Each pod posts its case, build, and how it handled its curveball, then defends a go/no-go. The room rotates and challenges. Effective challenge, live.</td></tr>
+          <tr><td class="time">16:30</td><td class="blk">Final-exam leaderboard + certificate + close</td><td><span class="pill p-mechanic">Mechanic</span></td><td class="note">Optional team final exam; award the completion certificate.</td></tr>
+        </table>
+      </div>
+
+      <h2>Exercise playbook</h2>
+      <div class="pb"><div class="h"><span class="nm">Cold-open provocation</span><span class="when">Day 1 · 9:00 · 15 min</span></div><p>Open with a single contrarian claim; pods vote agree/disagree before any lecture. Reveal the tension the two days will test. Reuse as a 60-second warm-up before each module.</p><div class="out">Output: a visible split in the room you can call back to later.</div></div>
+      <div class="pb"><div class="h"><span class="nm">Exercise A · Scope triage</span><span class="when">Day 1 · M1 · 25 min</span></div><p>Hand each pod five short use-case descriptions. They sort each in / out of SR 26-2 scope and write the one sentence that decides it. Surface the GenAI exclusion as the trap.</p><div class="out">Output: a sorted list + the deciding sentence per case.</div></div>
+      <div class="pb"><div class="h"><span class="nm">Exercise B · Harness teardown</span><span class="when">Day 1 · M2 · 25 min</span></div><p>Give every pod the same one-page flawed harness sketch (e.g. no termination contract, unbounded tool access). Pods mark the failure mode and the smallest fix.</p><div class="out">Output: one circled failure + one-line fix.</div></div>
+      <div class="pb"><div class="h"><span class="nm">Exercise C · A2A threat model</span><span class="when">Day 1 · M3 · 25 min</span></div><p>Pods draw their own case as agents + privileges on the whiteboard, then mark the trust boundary and the highest-privilege action.</p><div class="out">Output: a boundary line and the one action that needs the most scrutiny.</div></div>
+      <div class="pb"><div class="h"><span class="nm">Studio · The base-rate trap</span><span class="when">Day 2 · M5 · 50 min (taught as the lecture)</span></div><p>Give the prevalence and the judge's TPR/FPR. Pods compute PPV by hand, then the effective sensitivity (judge × reviewer). The math is the lecture. ClearList's numbers are on its brief.</p><div class="out">Output: a PPV figure and "zero flags ≠ zero failures" in their own words.</div></div>
+      <div class="pb"><div class="h"><span class="nm">Studio · Red-team relay</span><span class="when">Day 2 · M6 · 60 min (taught as the lecture)</span></div><p>Round 1: each pod writes 3 attacks against its own case. Round 2: pass clockwise; the receiving pod classifies (OWASP/ASI) and designs a control. Round 3: brief back.</p><div class="out">Output: 3 attacks + 3 controls per case, classified.</div></div>
+      <div class="pb"><div class="h"><span class="nm">Exercise · Knight Capital / override signal</span><span class="when">Day 2 · M7+M8 · 25 min</span></div><p>Reenact the 97-emails failure briefly, then each pod designs one runtime oversight signal for its case: override rate, drift cadence, or a deskilling proxy.</p><div class="out">Output: one signal, its threshold, and who watches it.</div></div>
+      <div class="pb"><div class="h"><span class="nm">Steelman-swap</span><span class="when">Recurring · ~10 min</span></div><p>A pod must argue the position opposite to its instinct (e.g. "runtime monitoring is enough"). Forces honest engagement with the counterargument the course keeps raising.</p><div class="out">Output: the strongest version of the view they disagree with.</div></div>
+      <div class="pb"><div class="h"><span class="nm">Module quiz competition</span><span class="when">Day 1 close · 30 min</span></div><p>Run the blog's existing module tests as a team game — read questions aloud or print them. Leaderboard on the whiteboard. No devices required.</p><div class="out">Output: a leaderboard going into Day 2.</div></div>
+      <div class="pb"><div class="h"><span class="nm">Capstone · Gallery walk</span><span class="when">Day 2 · 15:40 · 50 min</span></div><p>Each pod posts its case, its build, the curveball it absorbed, and its go/no-go recommendation. The room rotates as a mock AI Risk Committee and challenges each. This is effective challenge, performed.</p><div class="out">Output: a committee verdict per case + the strongest challenge each pod received.</div></div>
+
+      <div class="td-frame" style="margin-top: 1.4rem;">
+        <b>Materials checklist (per pod):</b> case brief (printed), whiteboard or flip chart + markers, the curveball
+        envelope (sealed), printed module-quiz questions, and one calculator or phone for the base-rate studio only.
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        written &amp; reviewed with Claude Cowork
+        <br />
+        <a href="https://github.com/wesslen/wesslen.github.io" target="_blank" rel="noopener">view source on GitHub</a>
+      </p>
+      <p>
+        © 2026 Ryan Wesslen ·
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
+      </p>
+      <p class="footer-disclaimer">
+        Views expressed here are my own and do not represent those of my employer. Nothing here is legal, regulatory, or
+        financial advice.
+      </p>
+    </footer>
+
+    <script>
+      (() => {
+        "use strict";
+        const root = document.documentElement;
+        const toggleBtn = document.getElementById("theme-toggle");
+        const themeIcon = document.getElementById("theme-icon");
+        const savedTheme = localStorage.getItem("twodayTheme") || "light";
+        function applyTheme(theme) {
+          root.setAttribute("data-theme", theme);
+          themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
+          localStorage.setItem("twodayTheme", theme);
+        }
+        applyTheme(savedTheme);
+        toggleBtn.addEventListener("click", () => {
+          applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+        });
+        (function () {
+          var btn = document.getElementById("nav-hamburger");
+          var nav = document.getElementById("mobile-nav");
+          if (!btn || !nav) return;
+          function openMenu() { nav.classList.add("open"); btn.setAttribute("aria-expanded", "true"); btn.textContent = "✕"; }
+          function closeMenu() { nav.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); btn.innerHTML = "&#9776;"; }
+          btn.addEventListener("click", function (e) { e.stopPropagation(); nav.classList.contains("open") ? closeMenu() : openMenu(); });
+          document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+          nav.querySelectorAll(".nav-link").forEach(function (link) { link.addEventListener("click", closeMenu); });
+          document.addEventListener("click", function (e) { if (!btn.contains(e.target) && !nav.contains(e.target)) closeMenu(); });
+        })();
+        const bar = document.getElementById("progress-bar");
+        function updateProgress() {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const pct = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+          bar.style.width = pct + "%";
+          bar.setAttribute("aria-valuenow", Math.round(pct));
+        }
+        window.addEventListener("scroll", updateProgress, { passive: true });
+      })();
+    </script>
+  </body>
+</html>
