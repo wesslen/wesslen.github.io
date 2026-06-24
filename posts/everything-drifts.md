@@ -7,7 +7,7 @@ tags: []
 
 There's a word that keeps surfacing when I try to describe what I'm watching happen in AI right now: drift.
 
-Not the technical kind — though that too. I mean something broader. Models drift from their stated behavior. Codebases drift from the developers who wrote them, as agents take on more of the work. Governance frameworks drift from the systems they were designed to govern. Organizations drift, sometimes gradually and sometimes all at once. And the word itself drifts: used the way "bias" was a decade ago, as shorthand for AI behavior that seems wrong, without the follow-up question that would make it precise.
+Not the technical kind — though that too. I mean something broader. *Models* drift from their stated behavior. *Codebases* drift from the developers who wrote them, as agents take on more of the work. *Governance frameworks* drift from the systems they were designed to govern. *Organizations* drift, sometimes gradually and sometimes all at once. And the *word itself* drifts: used the way "bias" was a decade ago, as shorthand for AI behavior that seems wrong, without the follow-up question that would make it precise.
 
 This blog — called Drift, for reasons that should be obvious by now — is my attempt to document that drift from the edges where it's most visible.
 
