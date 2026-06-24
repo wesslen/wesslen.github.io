@@ -10,6 +10,8 @@ tags: [evals, banking]
 A bank deploys a payments assistant that handles 50,000 customer conversations a month. An LLM judge reviews every transcript for the failure the bank fears most: the agent waving through a payment that is actually a scam. The monitoring dashboard reads 0.2% flagged (n=100), and the number has been stable for three months.
 
 There are two readings of that dashboard. The failure is genuinely rare, or the judge can't see it. The uncomfortable part is that the dashboard alone cannot tell you which. What it takes to find out is the question this post works through.
+![Hand-drawn whiteboard diagram titled TWO READINGS OF THE SAME DASHBOARD. A monitoring dashboard reads 0.2% FLAGGED, n=100, STABLE 3 MONTHS. A puzzled risk analyst stick figure asks WHICH IS IT? An arrow forks to a blue box FAILURE IS GENUINELY RARE and an orange box JUDGE CANNOT SEE IT, split by a large question mark. Banner: THE DASHBOARD ALONE CANNOT TELL YOU WHICH.](../img/judge-base-rate-header.png)
+*The same flat 0.2% admits two readings — a rare failure or a blind judge — and the dashboard carries no information that separates them.*
 
 The [Eval Gap posts so far](post.html?slug=metrics-metrics-metrics) have argued that GenAI evaluation is a measurement problem: construct validity, [estimands, and error bars](post.html?slug=benchmark-uncertainty). This post pushes that argument to the rare-event setting where banking actually lives — the regime a field raised on 50/50 test sets keeps mistaking for an edge case.
 
