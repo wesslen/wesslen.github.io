@@ -13,13 +13,20 @@ This blog — called Drift, for reasons that should be obvious by now — is my 
 
 ## On the Speed of the Drift
 
-I want to be careful not to be too knowing about all of this. It's easy to fall into a pose of world-weary expertise when you work with these systems every day — to treat the genuinely strange as mundane because you've seen a lot of model outputs. But something real is happening. The models I work with today are qualitatively different from the ones I worked with two years ago, and the ones two years from now will almost certainly be different again in ways I can't predict. That's exciting and disorienting in roughly equal measure.
+I want to be careful not to be too knowing about all of this. It's easy to fall into a pose of world-weary expertise when you work with these systems every day — to treat the genuinely strange as mundane because you've seen a lot of model outputs. 
 
-There's also a certain irony embedded in the name. Drift is starting to be used the way "bias" was a decade ago: a catch-all for AI behavior that seems off, without specifying what it's drifting from or measured against what baseline. Engineers invoke drift detection as a risk-management ritual without specifying the reference distribution, the detection threshold, or the failure mode they're worried about. The word sounds quantifiable and scientific in a way "bias" never did — but the epistemological problem is the same either way: an absent normative baseline. What you're actually looking for depends entirely on the system, the institution, and the specific failure mode you're trying to prevent.
+> [!QUOTE]
+> But something real is happening. The models I work with today are qualitatively different from the ones I worked with two years ago, and the ones two years from now will almost certainly be different again in ways I can't predict. That's exciting and disorienting in roughly equal measure.
+
+There's also a certain irony embedded in the name. Drift is starting to be used the way "bias" was a decade ago: a catch-all for AI behavior that seems off, without specifying what it's drifting from or measured against what baseline. 
+
+Engineers invoke drift detection as a risk-management ritual without specifying the reference distribution, the detection threshold, or the failure mode they're worried about. The word sounds quantifiable and scientific in a way "bias" never did — but the epistemological problem is the same either way: an absent normative baseline. What you're actually looking for depends entirely on the system, the institution, and the specific failure mode you're trying to prevent.
 
 ## From Notes to a Course
 
-I've kept private notes for years. The problem with private notes is that they don't push back — you can handwave past the parts you don't fully understand, leave a vague bullet point, promise yourself you'll come back to it. Writing for an audience forces a different kind of honesty: you have to say the thing, or admit you can't. I'm also motivated by a quiet frustration with how GenAI gets discussed publicly. The coverage tends to oscillate between breathless hype and breathless doom, with very little in the messy, technically real middle where the actual work happens. I'd like to contribute something from that middle.
+I've kept private notes for years. The problem with private notes is that they don't push back — you can handwave past the parts you don't fully understand, leave a vague bullet point, promise yourself you'll come back to it. Writing for an audience forces a different kind of honesty: you have to say the thing, or admit you can't. 
+
+I'm also motivated by a quiet frustration with how GenAI gets discussed publicly. The coverage tends to oscillate between breathless hype and breathless doom, with very little in the messy, technically real middle where the actual work happens. I'd like to contribute something from that middle.
 
 When I started, I said I'd write about four things. That number didn't survive contact with the subject. What began as scattered notes has turned into something with a shape: ten series, around thirty posts, each series roughly a lecture's worth of argument. Somewhere along the way it stopped being a blog I was adding to and started being a curriculum I was, apparently, writing.
 
