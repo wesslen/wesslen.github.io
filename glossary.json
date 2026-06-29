@@ -777,6 +777,7 @@
     "domain": "security",
     "aliases": [
       "direct injection",
+      "Direct prompt injection",
       "prompt override"
     ],
     "used_in": [
@@ -915,7 +916,9 @@
     "short": "SR 11-7 requirement that models be critically analyzed by objective, informed parties with real authority to push back.",
     "definition": "Effective challenge, as defined in SR 11-7, requires critical analysis of models by objective, informed parties who can identify limitations and effect change. It has three necessary conditions: appropriate incentives (validators rewarded for finding problems, not approving them), relevant competence (validators who understand the model well enough to critique it), and organizational influence (validators with real authority to escalate and block deployment). In the GenAI era, all three conditions are under pressure from explainability gaps, talent scarcity, and diffuse accountability.",
     "domain": "banking",
-    "aliases": [],
+    "aliases": [
+      "Effective challenge"
+    ],
     "used_in": [
       "adversarial-workflow",
       "automation-bias-banking",
@@ -1659,6 +1662,7 @@
     "domain": "security",
     "aliases": [
       "IPI",
+      "Indirect prompt injection",
       "indirect injection",
       "retrieval injection",
       "data-plane injection"
@@ -2828,6 +2832,7 @@
     "aliases": [
       "red-team engagement",
       "red-team exercise",
+      "Adversarial testing",
       "adversarial review",
       "adversarial testing engagement"
     ],
